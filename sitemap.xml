@@ -4,8 +4,44 @@
 
   <url>
        <loc>https://digitalallies.net/</loc>
-       <lastmod>2026-02-23T15:25:21+00:00</lastmod>
-       <changefreq>daily</changefreq>
+       <lastmod>2026-05-19T00:00:00+00:00</lastmod>
+       <changefreq>weekly</changefreq>
        <priority>1.0000</priority>
   </url>
+
+  <url>
+       <loc>https://digitalallies.net/video-training.html</loc>
+       <lastmod>2026-05-19T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.8000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/privacy.html</loc>
+       <lastmod>2026-02-23T00:00:00+00:00</lastmod>
+       <changefreq>yearly</changefreq>
+       <priority>0.3000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/terms.html</loc>
+       <lastmod>2026-02-23T00:00:00+00:00</lastmod>
+       <changefreq>yearly</changefreq>
+       <priority>0.3000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/cookies.html</loc>
+       <lastmod>2026-02-23T00:00:00+00:00</lastmod>
+       <changefreq>yearly</changefreq>
+       <priority>0.3000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/sitemap.html</loc>
+       <lastmod>2026-05-19T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.2000</priority>
+  </url>
+
 </urlset>

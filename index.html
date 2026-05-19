@@ -1219,17 +1219,29 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": "ProfessionalService",
         "name": "Digital Allies",
         "description": "Technological solutions for people with better things to do. Integrations, automation, and support based in Kingman, AZ.",
         "url": "https://digitalallies.net",
         "telephone": "+1-928-228-5769",
         "email": "contact@digitalallies.net",
+        "image": "https://digitalallies.net/favicon.png",
+        "logo": "https://digitalallies.net/favicon.svg",
+        "founder": {
+            "@type": "Person",
+            "name": "Anthony Cassella"
+        },
+        "foundingDate": "2024",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Kingman",
             "addressRegion": "AZ",
             "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 35.1894,
+            "longitude": -114.053
         },
         "areaServed": [
             {
@@ -1242,37 +1254,65 @@
                 "name": "United States"
             }
         ],
-        "serviceType": ["Website Design", "Graphic Design", "Brand Discovery", "Web Development", "Automation", "Integrations", "SEO", "AEO", "Tech Support", "AI Consulting", "ADA Compliance"],
-        "priceRange": "$50-$100+",
         "knowsLanguage": ["en", "es"],
         "slogan": "Technological Solutions for People with Better Things to Do.",
+        "priceRange": "$60–$800+",
+        "currenciesAccepted": "USD",
+        "paymentAccepted": "Cash, Credit Card, Invoice",
+        "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "08:00",
+            "closes": "18:00"
+        },
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
             "name": "Digital Allies Services",
             "itemListElement": [
                 {
                     "@type": "Offer",
-                    "itemOffered": { "@type": "Service", "name": "Tech Consulting" },
+                    "itemOffered": { "@type": "Service", "name": "Tech Consulting", "description": "Free technology consulting for small businesses and nonprofits." },
                     "price": "0",
                     "priceCurrency": "USD"
                 },
                 {
                     "@type": "Offer",
-                    "itemOffered": { "@type": "Service", "name": "AI Consulting" },
+                    "itemOffered": { "@type": "Service", "name": "AI Consulting", "description": "Free AI strategy and implementation consulting." },
                     "price": "0",
                     "priceCurrency": "USD"
                 },
                 {
                     "@type": "Offer",
-                    "itemOffered": { "@type": "Service", "name": "Execution (Single Task)" },
-                    "price": "75",
+                    "itemOffered": { "@type": "Service", "name": "Brand Discovery", "description": "Free brand discovery sessions to define visual identity and direction." },
+                    "price": "0",
                     "priceCurrency": "USD"
                 },
                 {
                     "@type": "Offer",
-                    "itemOffered": { "@type": "Service", "name": "Monthly Maintenance" },
-                    "price": "50",
+                    "itemOffered": { "@type": "Service", "name": "AEO & SEO Review", "description": "Free review of search engine and answer engine optimization." },
+                    "price": "0",
                     "priceCurrency": "USD"
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Website Design", "description": "Custom website design and development for small businesses." },
+                    "price": "800",
+                    "priceCurrency": "USD",
+                    "priceSpecification": { "@type": "PriceSpecification", "minPrice": "800", "priceCurrency": "USD" }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Graphic Design", "description": "Menus, signage, pitch decks, social graphics, and brand identity assets." },
+                    "price": "100",
+                    "priceCurrency": "USD",
+                    "priceSpecification": { "@type": "PriceSpecification", "minPrice": "100", "priceCurrency": "USD" }
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": { "@type": "Service", "name": "Monthly Maintenance", "description": "Ongoing website and systems maintenance and support." },
+                    "price": "60",
+                    "priceCurrency": "USD",
+                    "priceSpecification": { "@type": "PriceSpecification", "minPrice": "60", "priceCurrency": "USD" }
                 }
             ]
         }
@@ -1286,7 +1326,52 @@
         "name": "Digital Allies",
         "url": "https://digitalallies.net",
         "description": "Technological solutions for people with better things to do.",
-        "inLanguage": ["en", "es"]
+        "inLanguage": ["en", "es"],
+        "publisher": {
+            "@type": "Organization",
+            "name": "Digital Allies",
+            "url": "https://digitalallies.net"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Service",
+                "name": "The Design Bureau",
+                "serviceType": "Design & Brand",
+                "description": "Websites, graphic design, menus, signage, pitch decks — polished visuals that look like you meant it. Brand discovery included.",
+                "provider": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "name": "Dept. of Cooperation",
+                "serviceType": "Integrations",
+                "description": "Your apps talk to each other without arguing. Clean handoffs so you stop copying and pasting between platforms.",
+                "provider": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "name": "The Self-Governing Bureau",
+                "serviceType": "Automation",
+                "description": "Repetitive tasks are for machines. Small automations that save hours — not grand speeches about disruption.",
+                "provider": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            },
+            {
+                "@type": "Service",
+                "name": "The Permanent Observation Post",
+                "serviceType": "Support",
+                "description": "Direct help over text or call. No maze. No ticket limbo. No chatbot. Server monitoring and ongoing technical support.",
+                "provider": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
+                "areaServed": { "@type": "Country", "name": "United States" }
+            }
+        ]
     }
     </script>
 
