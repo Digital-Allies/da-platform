@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BST Digital Support — Director Review</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #118d7f;
+    --teal-dark: #0d6e63;
+    --teal-light: #e6f5f3;
+    --ink: #1a1a1a;
+    --mid: #555;
+    --light: #f4f4f2;
+    --border: #d5d5d0;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .header {
+    background: var(--ink);
+    color: var(--white);
+    padding: 48px 40px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: var(--teal);
+    opacity: 0.15;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: 30%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--teal);
+    opacity: 0.1;
+  }
+
+  .header-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header p {
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-body {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.1s; }
+  .section:nth-child(3) { animation-delay: 0.15s; }
+  .section:nth-child(4) { animation-delay: 0.2s; }
+  .section:nth-child(5) { animation-delay: 0.25s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-number {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+
+  .section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    color: var(--mid);
+    margin-bottom: 22px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .option:hover {
+    border-color: var(--teal);
+    background: var(--teal-light);
+  }
+
+  .option input[type="radio"],
+  .option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--teal);
+    margin-top: 2px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  .option-content {}
+
+  .option-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .option-sub {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .option input:checked ~ .option-content .option-label {
+    color: var(--teal-dark);
+  }
+
+  label.option:has(input:checked) {
+    border-color: var(--teal);
+    background: var(--teal-light);
+  }
+
+  textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    resize: vertical;
+    min-height: 110px;
+    transition: border-color 0.2s;
+    background: var(--white);
+    line-height: 1.6;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+
+  textarea::placeholder {
+    color: #bbb;
+    font-weight: 300;
+  }
+
+  .submit-wrap {
+    text-align: center;
+    padding-top: 8px;
+  }
+
+  .submit-btn {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .submit-btn:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 16px;
+    font-weight: 300;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 36px 24px 32px; }
+    .section { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">Beale Street Theater — Digital Allies</div>
+  <h1>Digital Support<br>Director Review</h1>
+  <p>April 2026 — For Kristina Michelson, Executive Director</p>
+</div>
+
+<div class="form-body">
+
+  <form action="https://formsubmit.co/contact@digitalallies.net" method="POST">
+
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_subject" value="BST Support Proposal — Director Response">
+    <input type="hidden" name="_next" value="https://digitalallies.net">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+
+    <!-- Section 1 -->
+    <div class="section">
+      <span class="section-number">Section 1</span>
+      <h2>Support Tier</h2>
+      <p class="section-desc">Which level of support fits BST right now?</p>
+
+      <label class="option">
+        <input type="radio" name="tier" value="Option 1 — Essential (15 hrs/mo)" required>
+        <div class="option-content">
+          <span class="option-label">Option 1 — Essential</span>
+          <span class="option-sub">15 hrs/mo — Remote support, monthly health checks, software syncing, foundational department workflows</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="tier" value="Option 2 — Comprehensive (25 hrs/mo)">
+        <div class="option-content">
+          <span class="option-label">Option 2 — Comprehensive</span>
+          <span class="option-sub">25 hrs/mo — Everything in Option 1 plus on-site coordination, pre-event sweeps, vendor management, and AI chatbot development</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="tier" value="Not sure — needs discussion">
+        <div class="option-content">
+          <span class="option-label">Not sure — let's discuss</span>
+          <span class="option-sub">I'd like to talk through the options before deciding</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+      <span class="section-number">Section 2</span>
+      <h2>Billing Preference</h2>
+      <p class="section-desc">How would you prefer to be billed each month?</p>
+
+      <label class="option">
+        <input type="radio" name="billing" value="Hourly — pay for what's used ($30/hr, overages possible)" required>
+        <div class="option-content">
+          <span class="option-label">Hourly</span>
+          <span class="option-sub">$30/hr — Pay for what's used. Invoice may vary month to month based on active needs.</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="billing" value="Set Retainer — fixed monthly cost ($40/hr, guaranteed availability)">
+        <div class="option-content">
+          <span class="option-label">Set Retainer</span>
+          <span class="option-sub">$40/hr — Fixed monthly cost. No fluctuating invoices, guaranteed availability.</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="billing" value="Not sure — needs discussion">
+        <div class="option-content">
+          <span class="option-label">Not sure — let's discuss</span>
+          <span class="option-sub">I'd like to talk through the billing structure first</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+      <span class="section-number">Section 3</span>
+      <h2>Priority Services</h2>
+      <p class="section-desc">Which of these feels most urgent right now? Select all that apply.</p>
+
+      <label class="option">
+        <input type="checkbox" name="priority_ticketing" value="Ticketing system stability (Ludus syncing)">
+        <div class="option-content">
+          <span class="option-label">Ticketing system stability</span>
+          <span class="option-sub">Ludus syncing, widget accuracy, display errors</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="checkbox" name="priority_network" value="Network and hardware reliability">
+        <div class="option-content">
+          <span class="option-label">Network and hardware reliability</span>
+          <span class="option-sub">Box office terminals, scanners, internet uptime</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="checkbox" name="priority_training" value="Staff training and documentation">
+        <div class="option-content">
+          <span class="option-label">Staff training</span>
+          <span class="option-sub">Quarterly refreshers for new staff and volunteers</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="checkbox" name="priority_departments" value="Department tools (marketing, education, production)">
+        <div class="option-content">
+          <span class="option-label">Department tools</span>
+          <span class="option-sub">Marketing automation, education calendars, production dashboards</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="checkbox" name="priority_chatbot" value="AI patron chatbot">
+        <div class="option-content">
+          <span class="option-label">AI patron chatbot</span>
+          <span class="option-sub">24/7 automated customer service and ticketing assistance</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section">
+      <span class="section-number">Section 4</span>
+      <h2>Open Questions</h2>
+      <p class="section-desc">Anything you'd like clarified before moving forward?</p>
+      <textarea name="open_questions" placeholder="Ask anything — scope, timeline, contract terms, or anything else on your mind..."></textarea>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section">
+      <span class="section-number">Section 5</span>
+      <h2>Next Step</h2>
+      <p class="section-desc">Where do you want to go from here?</p>
+
+      <label class="option">
+        <input type="radio" name="next_step" value="Ready to move forward — let's schedule a start date" required>
+        <div class="option-content">
+          <span class="option-label">Ready to move forward</span>
+          <span class="option-sub">Let's schedule a start date and get things going</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="next_step" value="Would like a call to discuss first">
+        <div class="option-content">
+          <span class="option-label">I'd like a call first</span>
+          <span class="option-sub">I have questions or want to talk through the options</span>
+        </div>
+      </label>
+
+      <label class="option">
+        <input type="radio" name="next_step" value="Need more time to review">
+        <div class="option-content">
+          <span class="option-label">Need more time to review</span>
+          <span class="option-sub">I'll be back with a response soon</span>
+        </div>
+      </label>
+
+      <div class="divider"></div>
+
+      <label style="display:block; font-size:13px; font-weight:500; margin-bottom:8px; color:var(--ink);">Your name</label>
+      <input type="text" name="director_name" placeholder="Kristina Michelson" value="Kristina Michelson"
+        style="width:100%; border:1.5px solid var(--border); border-radius:10px; padding:12px 16px;
+               font-family:'DM Sans',sans-serif; font-size:14px; color:var(--ink); background:var(--white);
+               transition:border-color 0.2s; margin-bottom:16px;">
+    </div>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn">Submit Response</button>
+      <p class="footer-note">Your response goes directly to Anthony at Digital Allies.</p>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // Highlight selected radio options visually
+  document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const name = radio.name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+        r.closest('.option').style.borderColor = '';
+        r.closest('.option').style.background = '';
+      });
+      radio.closest('.option').style.borderColor = 'var(--teal)';
+      radio.closest('.option').style.background = 'var(--teal-light)';
+    });
+  });
+</script>
+
+</body>
+</html>
