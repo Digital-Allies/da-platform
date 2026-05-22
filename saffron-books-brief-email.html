@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Books — Project Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: #EFEFEC;
+    font-family: 'Lexend Deca', Arial, sans-serif;
+    color: #2D2D2D;
+    padding: 32px 16px;
+  }
+
+  .wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #F9F6F0;
+    border: 1px solid #E0DDD5;
+  }
+
+  /* Header */
+  .header {
+    padding: 36px 40px 28px;
+    border-bottom: 1px solid #E0DDD5;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #438eff;
+    margin-bottom: 8px;
+  }
+
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2D2D2D;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .meta-row {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #999;
+    line-height: 1.9;
+  }
+
+  .live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #D9381E;
+    border-radius: 50%;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+    animation: blink 1.4s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .preview-link {
+    display: block;
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #E0DDD5;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #438eff;
+    text-decoration: none;
+    word-break: break-all;
+    line-height: 1.6;
+  }
+
+  .preview-link span {
+    display: block;
+    color: #999;
+    font-size: 8px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Body */
+  .body {
+    padding: 0 40px;
+  }
+
+  .section {
+    padding: 24px 0 0;
+    border-top: 1px solid #E0DDD5;
+    margin-top: 24px;
+  }
+
+  .section:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 28px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #438eff;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2D2D2D;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #2D2D2D;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 8px 0 10px;
+  }
+
+  ul li {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #2D2D2D;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+
+  ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: #438eff;
+  }
+
+  .step {
+    margin-bottom: 14px;
+  }
+
+  .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: #438eff;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .callout {
+    background: #FADEEB;
+    border: 1px solid #E0DDD5;
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  /* Two-col */
+  .two-col {
+    display: table;
+    width: 100%;
+    border-top: 1px solid #E0DDD5;
+    border-collapse: collapse;
+  }
+
+  .col {
+    display: table-cell;
+    width: 50%;
+    padding: 16px 16px 16px 0;
+    vertical-align: top;
+  }
+
+  .col + .col {
+    padding-left: 20px;
+    border-left: 1px solid #E0DDD5;
+  }
+
+  .col h3 {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2D2D2D;
+    margin-bottom: 10px;
+  }
+
+  /* Tools table */
+  .tools-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 12px;
+  }
+
+  .tools-table thead tr {
+    background: #2D2D2D;
+    color: #F9F6F0;
+  }
+
+  .tools-table thead th {
+    padding: 8px 10px;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .tools-table tbody tr:nth-child(odd) {
+    background: #F9F6F0;
+  }
+
+  .tools-table tbody tr:nth-child(even) {
+    background: #fff;
+  }
+
+  .tools-table td {
+    padding: 8px 10px;
+    border: 1px solid #E0DDD5;
+    vertical-align: top;
+    line-height: 1.5;
+    color: #2D2D2D;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 32px;
+    padding: 20px 40px;
+    border-top: 1px solid #E0DDD5;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #bbb;
+    text-align: center;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="eyebrow">Project Brief</div>
+    <div class="title">Saffron Books — Digital Presence Build</div>
+    <div class="meta-row">
+      Prepared by: Digital Allies<br>
+      Project Type: Website Build — Digital Allies Hosting with Shopify POS/Inventory<br>
+      <span class="live-dot"></span>Status: Discovery / Pre-Contact
+    </div>
+    <a class="preview-link" href="https://my.digitalallies.net/preview/c03b150e?t=1779481258089">
+      <span>Preview Site</span>
+      https://my.digitalallies.net/preview/c03b150e?t=1779481258089
+    </a>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <div class="section" style="border-top:none; margin-top:0;">
+      <div class="section-label">Overview</div>
+      <p>Melissa owns Saffron Books, a local bookstore on Route 66 in Kingman, AZ. She already runs Shopify for inventory, and it's hard-synced to her physical register. The goal is to build a public-facing website that connects to her existing Shopify setup — without disrupting what's already working or adding recurring software costs.</p>
+      <p>The preview site linked above shows the design direction and layout built for this proposal.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The Problem</div>
+      <p>Melissa's store has real character. A generic website won't reflect that — and rebuilding her inventory system from scratch would break the sync she already depends on at the register.</p>
+      <p>She needs a site that:</p>
+      <ul>
+        <li>Pulls her live Shopify inventory without API middleware or subscription tools</li>
+        <li>Feels like a neighborhood bookstore, not a dropshipping template</li>
+        <li>Supports local search visibility and long-term customer retention</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">The Approach</div>
+      <h2>No-API Shopify Bridge</h2>
+      <p>We connect her Shopify inventory to the site using Shopify's free Buy Button sales channel — no third-party sync tools, no ongoing API costs.</p>
+
+      <div class="step">
+        <span class="step-label">Step 1 — Enable the Buy Button in Shopify</span>
+        <p>Inside Shopify Admin, we activate the free Buy Button sales channel. We generate a Collection Buy Button embed for an entire category (e.g., Staff Picks) rather than per-product codes. One embed covers the whole collection.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-label">Step 2 — Style it to match the site</span>
+        <p>We configure the embed to use matching typography and colors. Checkout is set to open as a pop-up cart so customers never leave the page and land on a shopify.com subdomain.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-label">Step 3 — Drop it into the site</span>
+        <p>We place the embed inside an HTML widget on the site. Container padding is set to 0px so Shopify's responsive grid aligns cleanly with the page layout. Paste, save, done.</p>
+      </div>
+
+      <div class="callout">
+        <strong>Why this works:</strong> Her brick-and-mortar register stays the single source of truth for stock. No sync lag, no middleware, no added monthly cost.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">What the Site Includes</div>
+      <p><strong>Header</strong> — Clean navigation with an EN/ES language toggle and a live inventory status indicator.</p>
+      <p><strong>Hero</strong> — Direct headline copy positioned around her Route 66 location and hand-picked inventory.</p>
+      <p><strong>Live Inventory Section</strong> — Structured layout where the Shopify Buy Button embeds render, organized by collection. Updates automatically when Shopify updates.</p>
+      <p><strong>Curator's Notebook</strong> — A minimal blog/review grid for short staff recommendations — two sentences per book, no filler.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Beyond the Website</div>
+      <div class="step">
+        <span class="step-label">Phase 1 — Local Search</span>
+        <p>We clean up her Google Business Profile so it accurately reflects her hours and location. We add a direct link pointing to her live inventory page rather than just the homepage. We also inject BookStore schema markup into the site header with geo-coordinates for Kingman — so voice assistants and AI search tools surface her physical location accurately.</p>
+      </div>
+      <div class="step">
+        <span class="step-label">Phase 2 — Email and In-Store Retention</span>
+        <p>We set up a single-field newsletter signup through MailerLite or Shopify Email. The format is a bi-weekly dispatch — three book picks, no sales pressure. We also design a simple printed bookmark with a QR code pointing to her Staff Picks page, bridging foot traffic into digital without asking anyone to follow anything.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="two-col">
+        <div class="col">
+          <h3>What the Client Keeps</h3>
+          <ul>
+            <li>Shopify POS stays exactly as-is</li>
+            <li>Inventory managed in one place</li>
+            <li>No new recurring software costs</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h3>What Digital Allies Delivers</h3>
+          <ul>
+            <li>Full website build on Digital Allies platform</li>
+            <li>Shopify Buy Button setup and embed config</li>
+            <li>BookStore schema + Google Business cleanup</li>
+            <li>Newsletter setup and welcome sequence</li>
+            <li>Bookmark template with QR code</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Key Considerations</div>
+      <ul>
+        <li>Melissa needs to grant Buy Button access inside Shopify Admin — one-time setup</li>
+        <li>Checkout experience is Shopify-hosted; the cart pop-up keeps customers on-site but the final checkout page is Shopify's</li>
+        <li>A fully custom checkout UI would expand the scope considerably</li>
+        <li>Inventory sync is real-time through the embed — no scheduled jobs needed</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Tools Involved</div>
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Shopify Buy Button (free)</td><td>Embeds live inventory on the site</td></tr>
+          <tr><td>Digital Allies Platform</td><td>Site hosting and page building</td></tr>
+          <tr><td>Digital Allies Dynamic Collections</td><td>Structured content (blog, staff picks)</td></tr>
+          <tr><td>MailerLite or Shopify Email</td><td>Newsletter and email retention</td></tr>
+          <tr><td>Google Business Profile</td><td>Local search and voice assistant visibility</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="footer">Digital Allies &nbsp;&mdash;&nbsp; digitalallies.net</div>
+
+</div><!-- /wrapper -->
+
+</body>
+</html>
