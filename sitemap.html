@@ -128,6 +128,12 @@
             align-items: center;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
         .nav-links a {
             font-size: 0.75rem;
             font-weight: 700;
@@ -146,7 +152,6 @@
             border: 1px solid #2D2D2D;
             overflow: hidden;
             flex-shrink: 0;
-            margin-left: 0.5rem;
         }
 
         .lang-btn {
@@ -386,12 +391,43 @@
         .footer-credits a {
             color: rgba(255, 255, 255, 0.35);
         }
-        
-        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
-        .lang-switcher { display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; }
-        .lang-btn { background: none; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 0.75rem; }
-        .lang-active { color: white; font-weight: 700; }
-        .lang-divider { width: 1px; height: 10px; background: rgba(255,255,255,0.3); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .lang-active {
+            color: white;
+            font-weight: 700;
+        }
+
+        .lang-divider {
+            width: 1px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+        }
     </style>
 </head>
 
@@ -407,13 +443,15 @@
                 <div class="pulse-dot"></div>
                 <span>Digital Allies</span>
             </a>
-            <div class="nav-links">
-                <a href="/index.html#departments" data-en="Services" data-es="Servicios">Services</a>
-                <a href="/index.html#pricing" data-en="Pricing" data-es="Precios">Pricing</a>
-                <a href="/index.html#field-notes" data-en="Reviews" data-es="Reseñas">Reviews</a>
-                <a href="/index.html#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
-                <a href="/learn/" data-en="Learn" data-es="Aprender">Learn</a>
-                <a href="/index.html#contact" data-en="Contact" data-es="Contacto">Contact</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/index.html#departments" data-en="Services" data-es="Servicios">Services</a>
+                    <a href="/index.html#pricing" data-en="Pricing" data-es="Precios">Pricing</a>
+                    <a href="/index.html#field-notes" data-en="Reviews" data-es="Reseñas">Reviews</a>
+                    <a href="/index.html#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+                    <a href="/learn/" data-en="Learn" data-es="Aprender">Learn</a>
+                    <a href="/index.html#contact" data-en="Contact" data-es="Contacto">Contact</a>
+                </div>
                 <div class="lang-switcher" role="group">
                     <button id="lang-en" onclick="LC.toggleLanguage('en')" class="lang-btn lang-active">EN</button>
                     <div class="lang-divider"></div>
@@ -428,11 +466,11 @@
         <p class="tag" data-en="Index · All Pages" data-es="Índice · Todas las Páginas">Index · All Pages</p>
         <h1 data-en="Site Map" data-es="Mapa del Sitio">Site Map</h1>
         <p class="meta">
-            <span data-en="Last updated: 2026, May 24" data-es="Última actualización: 24 de mayo de 2026">Last updated: 2026, May 24</span> &middot;
-            <a href="https://digitalallies.net/"
-                style="color: #3A7BD5; text-decoration: none; font-weight: 600;"
-                data-en="digitalallies.net Homepage"
-                data-es="Página de Inicio de digitalallies.net">digitalallies.net Homepage</a>
+            <span data-en="Last updated: 2026, May 24" data-es="Última actualización: 24 de mayo de 2026">Last updated:
+                2026, May 24</span> &middot;
+            <a href="https://digitalallies.net/" style="color: #3A7BD5; text-decoration: none; font-weight: 600;"
+                data-en="digitalallies.net Homepage" data-es="Página de Inicio de digitalallies.net">digitalallies.net
+                Homepage</a>
         </p>
     </div>
 
@@ -451,72 +489,93 @@
                             <a href="https://digitalallies.net/"
                                 data-en="Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ"
                                 data-es="Digital Allies | Soluciones Tecnológicas para Personas con Mejores Cosas que Hacer — Kingman, AZ"
-                                title="Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ">Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ</a>
-                            <br /><small data-en="Digital Allies — Technological solutions for people with better things to do. Integrations, automation, and support based in Kingman, AZ. Free consulting. No ghosting guarantee."
-                                         data-es="Digital Allies — Soluciones tecnológicas para personas con mejores cosas que hacer. Integraciones, automatización y soporte con sede en Kingman, AZ. Consultoría gratuita. Garantía de no abandono.">Digital Allies — Technological solutions for people with better things to do. Integrations, automation, and support based in Kingman, AZ. Free consulting. No ghosting guarantee.</small>
+                                title="Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ">Digital
+                                Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ</a>
+                            <br /><small
+                                data-en="Digital Allies — Technological solutions for people with better things to do. Integrations, automation, and support based in Kingman, AZ. Free consulting. No ghosting guarantee."
+                                data-es="Digital Allies — Soluciones tecnológicas para personas con mejores cosas que hacer. Integraciones, automatización y soporte con sede en Kingman, AZ. Consultoría gratuita. Garantía de no abandono.">Digital
+                                Allies — Technological solutions for people with better things to do. Integrations,
+                                automation, and support based in Kingman, AZ. Free consulting. No ghosting
+                                guarantee.</small>
                         </li>
 
                         <li class="lpage">
                             <a href="https://digitalallies.net/learn/"
                                 data-en="Learn Hub &amp; DIY Guides — Digital Allies"
                                 data-es="Centro de Aprendizaje y Guías DIY — Digital Allies"
-                                title="Learn Hub &amp; DIY Guides — Digital Allies">Learn Hub &amp; DIY Guides — Digital Allies</a>
-                            <br /><small data-en="Free guides, tools, and video tutorials for small business owners. SEO, AEO, accessibility, and more — explained without the jargon. From Digital Allies in Kingman, AZ."
-                                         data-es="Guías, herramientas y video tutoriales gratuitos para propietarios de pequeños negocios. SEO, AEO, accesibilidad y más, explicados sin tecnicismos. De Digital Allies en Kingman, AZ.">Free guides, tools, and video tutorials for small business owners. SEO, AEO, accessibility, and more — explained without the jargon. From Digital Allies in Kingman, AZ.</small>
+                                title="Learn Hub &amp; DIY Guides — Digital Allies">Learn Hub &amp; DIY Guides — Digital
+                                Allies</a>
+                            <br /><small
+                                data-en="Free guides, tools, and video tutorials for small business owners. SEO, AEO, accessibility, and more — explained without the jargon. From Digital Allies in Kingman, AZ."
+                                data-es="Guías, herramientas y video tutoriales gratuitos para propietarios de pequeños negocios. SEO, AEO, accesibilidad y más, explicados sin tecnicismos. De Digital Allies en Kingman, AZ.">Free
+                                guides, tools, and video tutorials for small business owners. SEO, AEO, accessibility,
+                                and more — explained without the jargon. From Digital Allies in Kingman, AZ.</small>
                         </li>
 
                         <li class="lpage">
                             <a href="https://digitalallies.net/learn/seo-aeo"
                                 data-en="SEO vs AEO: Make Your Business Visible to AI Search"
                                 data-es="SEO vs AEO: Haz tu Negocio Visible para la Búsqueda de IA"
-                                title="SEO vs AEO: Make Your Business Visible to AI Search">SEO vs AEO: Make Your Business Visible to AI Search</a>
-                            <br /><small data-en="What AI actually reads when it recommends businesses. Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps you showing up. Free tools included."
-                                         data-es="Lo que la IA realmente lee cuando recomienda empresas. Marcado de esquema, consistencia de directorios, formato de respuestas y el ritmo de mantenimiento que te mantiene visible. Herramientas gratuitas incluidas.">What AI actually reads when it recommends businesses. Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps you showing up. Free tools included.</small>
+                                title="SEO vs AEO: Make Your Business Visible to AI Search">SEO vs AEO: Make Your
+                                Business Visible to AI Search</a>
+                            <br /><small
+                                data-en="What AI actually reads when it recommends businesses. Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps you showing up. Free tools included."
+                                data-es="Lo que la IA realmente lee cuando recomienda empresas. Marcado de esquema, consistencia de directorios, formato de respuestas y el ritmo de mantenimiento que te mantiene visible. Herramientas gratuitas incluidas.">What
+                                AI actually reads when it recommends businesses. Schema markup, directory consistency,
+                                answer formatting, and the maintenance rhythm that keeps you showing up. Free tools
+                                included.</small>
                         </li>
 
                         <li class="lpage">
                             <a href="https://digitalallies.net/learn/alttext"
                                 data-en="Mastering Alt-Text: Good vs. Bad &amp; Why It Matters"
                                 data-es="Dominando el Texto Alternativo: Bueno vs. Malo y Por Qué Importa"
-                                title="Mastering Alt-Text: Good vs. Bad &amp; Why It Matters">Mastering Alt-Text: Good vs. Bad &amp; Why It Matters</a>
-                            <br /><small data-en="Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker. From Digital Allies in Kingman, AZ."
-                                         data-es="El texto alternativo no es opcional: es cómo sirves a toda tu comunidad. Aprende cómo es un buen texto alternativo, qué evitar y prueba el tuyo con un verificador en vivo. De Digital Allies en Kingman, AZ.">Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker. From Digital Allies in Kingman, AZ.</small>
+                                title="Mastering Alt-Text: Good vs. Bad &amp; Why It Matters">Mastering Alt-Text: Good
+                                vs. Bad &amp; Why It Matters</a>
+                            <br /><small
+                                data-en="Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker. From Digital Allies in Kingman, AZ."
+                                data-es="El texto alternativo no es opcional: es cómo sirves a toda tu comunidad. Aprende cómo es un buen texto alternativo, qué evitar y prueba el tuyo con un verificador en vivo. De Digital Allies en Kingman, AZ.">Alt-text
+                                isn't optional — it's how you serve your whole community. Learn what good alt-text looks
+                                like, what to avoid, and test yours with a live checker. From Digital Allies in Kingman,
+                                AZ.</small>
                         </li>
 
                         <li class="lpage">
                             <a href="https://digitalallies.net/learn/video-training"
-                                data-en="Digital Allies — Video Training"
-                                data-es="Digital Allies — Videoentrenamiento"
+                                data-en="Digital Allies — Video Training" data-es="Digital Allies — Videoentrenamiento"
                                 title="Digital Allies — Video Training">Digital Allies — Video Training</a>
-                            <br /><small data-en="Quick tutorials to help you manage your website without the jargon. Bilingual instructions for Bookings, eCommerce, and Design."
-                                         data-es="Tutoriales rápidos para ayudarte a administrar tu sitio web sin tecnicismos. Instrucciones bilingües para Reservas, Comercio Electrónico y Diseño.">Quick tutorials to help you manage your website without the jargon. Bilingual instructions for Bookings, eCommerce, and Design.</small>
+                            <br /><small
+                                data-en="Quick tutorials to help you manage your website without the jargon. Bilingual instructions for Bookings, eCommerce, and Design."
+                                data-es="Tutoriales rápidos para ayudarte a administrar tu sitio web sin tecnicismos. Instrucciones bilingües para Reservas, Comercio Electrónico y Diseño.">Quick
+                                tutorials to help you manage your website without the jargon. Bilingual instructions for
+                                Bookings, eCommerce, and Design.</small>
                         </li>
 
                         <li class="lpage">
-                            <a href="https://digitalallies.net/privacy.html"
-                                data-en="Privacy Policy — Digital Allies"
+                            <a href="https://digitalallies.net/privacy.html" data-en="Privacy Policy — Digital Allies"
                                 data-es="Política de Privacidad — Digital Allies"
                                 title="Privacy Policy — Digital Allies">Privacy Policy</a>
                             <br /><small data-en="Privacy policy for Digital Allies website and services."
-                                         data-es="Política de privacidad para el sitio web y los servicios de Digital Allies.">Privacy policy for Digital Allies website and services.</small>
+                                data-es="Política de privacidad para el sitio web y los servicios de Digital Allies.">Privacy
+                                policy for Digital Allies website and services.</small>
                         </li>
 
                         <li class="lpage">
-                            <a href="https://digitalallies.net/terms.html"
-                                data-en="Terms of Service — Digital Allies"
+                            <a href="https://digitalallies.net/terms.html" data-en="Terms of Service — Digital Allies"
                                 data-es="Términos de Servicio — Digital Allies"
                                 title="Terms of Service — Digital Allies">Terms of Service</a>
                             <br /><small data-en="Terms and conditions for Digital Allies services."
-                                         data-es="Términos y condiciones para los servicios de Digital Allies.">Terms and conditions for Digital Allies services.</small>
+                                data-es="Términos y condiciones para los servicios de Digital Allies.">Terms and
+                                conditions for Digital Allies services.</small>
                         </li>
 
                         <li class="lpage">
-                            <a href="https://digitalallies.net/cookies.html"
-                                data-en="Cookie Policy — Digital Allies"
+                            <a href="https://digitalallies.net/cookies.html" data-en="Cookie Policy — Digital Allies"
                                 data-es="Política de Cookies — Digital Allies"
                                 title="Cookie Policy — Digital Allies">Cookie Policy</a>
                             <br /><small data-en="Cookie usage and preferences for digitalallies.net."
-                                         data-es="Uso de cookies y preferencias para digitalallies.net.">Cookie usage and preferences for digitalallies.net.</small>
+                                data-es="Uso de cookies y preferencias para digitalallies.net.">Cookie usage and
+                                preferences for digitalallies.net.</small>
                         </li>
 
                     </ul>
@@ -536,7 +595,8 @@
                         <span class="font-headers" style="color: white;">Digital Allies</span>
                     </a>
                     <p data-en="Technological solutions for people with better things to do."
-                       data-es="Soluciones tecnológicas para personas con mejores cosas que hacer.">Technological solutions for people with better things to do.</p>
+                        data-es="Soluciones tecnológicas para personas con mejores cosas que hacer.">Technological
+                        solutions for people with better things to do.</p>
                 </div>
                 <div class="footer-links">
                     <a href="/index.html" data-en="Home" data-es="Inicio">Home</a>
@@ -549,9 +609,10 @@
             </div>
             <div class="footer-bottom">
                 <p data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
-                   data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">&copy; 2026 Digital Allies. Based in Kingman, AZ.</p>
+                    data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">&copy; 2026 Digital Allies. Based in
+                    Kingman, AZ.</p>
                 <p class="footer-credits" data-en="Sitemap generated with Google Antigravity IDE"
-                   data-es="Mapa del sitio generado con Google Antigravity IDE">Sitemap generated with <a
+                    data-es="Mapa del sitio generado con Google Antigravity IDE">Sitemap generated with <a
                         href="https://antigravity.google/blog/introducing-google-antigravity">Google Antigravity IDE</a>
                 </p>
             </div>
