@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Allies — Kingman, AZ | Website Platform Video Training </title>
+    <title>Digital Allies — Video Training | Kingman, AZ</title>
     <meta name="description"
         content="Digital Allies Video Training — Quick tutorials to help you manage your website without the jargon. Bilingual instructions for Bookings, eCommerce, and Design.">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +39,6 @@
     </script>
 
     <style>
-        /* Technical Lace Canvas synced with index.html */
         body {
             background-color: #F9F6F0;
             background-image:
@@ -51,7 +50,6 @@
         }
 
         h1, h2, h3, h4 { font-family: 'Lexend Deca', sans-serif; }
-
         .structural-border { border: 1px solid #2D2D2D; }
 
         .brand-pulse { animation: brand-pulse 3s ease-in-out infinite; }
@@ -69,11 +67,12 @@
         .lang-active { background-color: #2D2D2D !important; color: #F9F6F0 !important; }
 
         .video-card {
-            background-color: #FCFAED; /* Pinned note color */
-            transition: transform 0.2s ease;
+            background-color: #FCFAED;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .video-card:hover {
             transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 45, 45, 0.08);
         }
 
         .video-container {
@@ -85,10 +84,8 @@
         }
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             border: 0;
         }
 
@@ -113,12 +110,12 @@
     <div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
     <!-- ============================================================
-         NAVIGATION (Fixed Spacing & Home Anchors)
+         NAVIGATION
     ============================================================= -->
     <nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            
-            <a href="index.html" class="flex items-center space-x-3">
+
+            <a href="/index.html" class="flex items-center space-x-3" aria-label="Digital Allies Home">
                 <div class="relative flex items-center justify-center w-5 h-5">
                     <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
                     <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
@@ -128,27 +125,47 @@
 
             <div class="flex items-center space-x-4 lg:space-x-8">
                 <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
-                    <a href="index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Services" data-es="Servicios">Services</a>
-                    <a href="index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Pricing" data-es="Precios">Pricing</a>
-                    <a href="index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Reviews" data-es="Reseñas">Reviews</a>
-                    <a href="index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ" data-es="FAQ">FAQ</a>
-                    <a href="video-training.html" class="text-signal-red transition whitespace-nowrap underline underline-offset-4" data-en="Video Training" data-es="Video-Tutoriales">Video Training</a>
-                    <a href="index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Contact" data-es="Contacto">Contact</a>
+                    <a href="/index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Services" data-es="Servicios">Services</a>
+                    <a href="/index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Pricing" data-es="Precios">Pricing</a>
+                    <a href="/index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Reviews" data-es="Reseñas">Reviews</a>
+                    <a href="/index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ" data-es="FAQ">FAQ</a>
+                    <!-- Learn Hub — new top-level nav item -->
+                    <a href="/learn/" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Learn" data-es="Aprender">Learn</a>
+                    <a href="/index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Contact" data-es="Contacto">Contact</a>
                 </div>
 
-                <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group">
-                    <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active">EN</button>
-                    <div class="w-px h-5 bg-gray-dark"></div>
-                    <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink">ES</button>
+                <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group" aria-label="Language selector">
+                    <button id="lang-en" onclick="LC.toggleLanguage('en')"
+                        class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active"
+                        aria-pressed="true">EN</button>
+                    <div class="w-px h-5 bg-gray-dark" aria-hidden="true"></div>
+                    <button id="lang-es" onclick="LC.toggleLanguage('es')"
+                        class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink"
+                        aria-pressed="false">ES</button>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- ============================================================
-         HERO SECTION
+         BREADCRUMB
     ============================================================= -->
-    <header class="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center">
+    <div class="max-w-7xl mx-auto px-6 pt-6">
+        <nav aria-label="Breadcrumb" class="text-xs font-bold tracking-widest uppercase">
+            <ol class="flex items-center gap-2 text-gray-dark/50">
+                <li><a href="/index.html" class="hover:text-primary-blue transition" data-en="Home" data-es="Inicio">Home</a></li>
+                <li aria-hidden="true">·</li>
+                <li><a href="/learn/" class="hover:text-primary-blue transition" data-en="Learn" data-es="Aprender">Learn</a></li>
+                <li aria-hidden="true">·</li>
+                <li class="text-signal-red" data-en="Video Training" data-es="Video-Tutoriales">Video Training</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+         HERO
+    ============================================================= -->
+    <header class="max-w-5xl mx-auto px-6 pt-16 pb-16 text-center">
         <p class="text-xs font-bold tracking-widest uppercase mb-6 text-signal-red"
             data-en="Knowledge Base &middot; Field Manuals"
             data-es="Base de Conocimientos &middot; Manuales de Campo">
@@ -159,23 +176,39 @@
             data-es="Soluciones Tecnológicas (Instrucciones Incluidas).">
             Technological Solutions (Instructions Included).
         </h1>
-        <p class="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-12"
+        <p class="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-6"
             data-en="I build systems that don't require a master's degree to operate. These quick tutorials will help you make simple changes to your website without the jargon jar."
             data-es="Construyo sistemas que no requieren una maestría para operar. Estos tutoriales rápidos te ayudarán a realizar cambios simples en tu sitio web sin complicaciones.">
             I build systems that don't require a master's degree to operate. These quick tutorials will help you make simple changes to your website without the jargon jar.
         </p>
+        <!-- Back to Learn Hub link -->
+        <a href="/learn/"
+            class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-primary-blue hover:text-signal-red transition mb-12"
+            data-en="← Back to the Learn Hub" data-es="← Volver al Centro de Aprendizaje">
+            ← Back to the Learn Hub
+        </a>
     </header>
 
     <!-- ============================================================
          CATEGORY FILTER
     ============================================================= -->
-    <section class="max-w-7xl mx-auto px-6 mb-12">
+    <section class="max-w-7xl mx-auto px-6 mb-12" aria-label="Filter video modules">
         <div class="flex flex-wrap gap-3 justify-center" id="filter-container">
-            <button class="category-pill active structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider" onclick="LC.filterVideos('all')" data-category="all" data-en="All Modules" data-es="Todos los Módulos">All Modules</button>
-            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider" onclick="LC.filterVideos('bookings')" data-category="bookings" data-en="Bookings" data-es="Reservas">Bookings</button>
-            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider" onclick="LC.filterVideos('editor')" data-category="editor" data-en="Editor Basics" data-es="Básicos del Editor">Editor Basics</button>
-            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider" onclick="LC.filterVideos('ecommerce')" data-category="ecommerce" data-en="eCommerce" data-es="eCommerce">eCommerce</button>
-            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider" onclick="LC.filterVideos('widgets')" data-category="widgets" data-en="Widgets" data-es="Widgets">Widgets</button>
+            <button class="category-pill active structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider"
+                onclick="LC.filterVideos('all')" data-category="all"
+                data-en="All Modules" data-es="Todos los Módulos">All Modules</button>
+            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider"
+                onclick="LC.filterVideos('bookings')" data-category="bookings"
+                data-en="Bookings" data-es="Reservas">Bookings</button>
+            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider"
+                onclick="LC.filterVideos('editor')" data-category="editor"
+                data-en="Editor Basics" data-es="Básicos del Editor">Editor Basics</button>
+            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider"
+                onclick="LC.filterVideos('ecommerce')" data-category="ecommerce"
+                data-en="eCommerce" data-es="eCommerce">eCommerce</button>
+            <button class="category-pill structural-border px-4 py-2 text-xs font-bold uppercase tracking-wider"
+                onclick="LC.filterVideos('widgets')" data-category="widgets"
+                data-en="Widgets" data-es="Widgets">Widgets</button>
         </div>
     </section>
 
@@ -184,55 +217,100 @@
     ============================================================= -->
     <main class="max-w-7xl mx-auto px-6 pb-32">
         <div id="video-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Videos will be dynamically injected here -->
+            <!-- Injected by JS -->
         </div>
     </main>
 
     <!-- ============================================================
-         FOOTER (Synced)
+         FOOTER
     ============================================================= -->
-    <footer id="contact" class="bg-gray-dark text-white py-24 px-6">
+    <footer id="contact" class="bg-gray-dark text-white py-24 px-6" aria-label="Site footer">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
             <div>
-                <a href="index.html" class="flex items-center space-x-3 mb-10">
+                <a href="/index.html" class="flex items-center space-x-3 mb-10" aria-label="Digital Allies Home">
                     <div class="relative flex items-center justify-center w-5 h-5">
                         <div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div>
                         <div class="w-3 h-3 bg-white rounded-full brand-pulse" style="border: 1px solid rgba(255,255,255,0.4);"></div>
                     </div>
                     <span class="font-headers font-bold text-2xl tracking-wide text-white">Digital Allies</span>
                 </a>
-                <h2 class="font-headers text-3xl font-bold mb-5" data-en="The Command Center" data-es="El Centro de Mando">The Command Center</h2>
-                <div class="mt-12 pt-6 border-t border-white/10 text-xs text-white/50">
-                    <p data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ." data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ." class="mb-3">&copy; 2026 Digital Allies. Based in Kingman, AZ.</p>
+
+                <h2 class="font-headers text-3xl font-bold mb-5"
+                    data-en="The Command Center" data-es="El Centro de Mando">The Command Center</h2>
+
+                <div class="space-y-3 text-sm mb-10">
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3"
+                            data-en="Location" data-es="Ubicación">Location</span>
+                        Kingman, Arizona
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3"
+                            data-en="Direct Line" data-es="Línea Directa">Direct Line</span>
+                        <a href="tel:9282285769" class="text-primary-blue hover:underline">(928) 228-5769</a>
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3">Email</span>
+                        <a href="mailto:contact@digitalallies.net" class="text-primary-blue hover:underline">contact@digitalallies.net</a>
+                    </p>
+                </div>
+
+                <div class="mt-12 pt-6 border-t border-white/10">
+                    <p class="text-xs text-white/50 mb-3"
+                        data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
+                        data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">
+                        &copy; 2026 Digital Allies. Based in Kingman, AZ.
+                    </p>
                     <div class="flex flex-wrap gap-4 text-xs">
-                        <a href="index.html" class="text-white/60 hover:text-white transition">Home</a>
-                        <a href="privacy.html" class="text-white/60 hover:text-white transition" data-en="Privacy" data-es="Privacidad">Privacy</a>
-                        <a href="terms.html" class="text-white/60 hover:text-white transition" data-en="Terms" data-es="Términos">Terms</a>
-                        <a href="cookies.html" class="text-white/60 hover:text-white transition" data-en="Cookies" data-es="Cookies">Cookies</a>
-                        <a href="sitemap.xml" class="text-white/60 hover:text-white transition">Sitemap</a>
+                        <a href="/index.html" class="text-white/60 hover:text-white transition"
+                            data-en="Home" data-es="Inicio">Home</a>
+                        <a href="/learn/" class="text-white/60 hover:text-white transition"
+                            data-en="Learn" data-es="Aprender">Learn</a>
+                        <a href="/privacy.html" class="text-white/60 hover:text-white transition"
+                            data-en="Privacy" data-es="Privacidad">Privacy</a>
+                        <a href="/terms.html" class="text-white/60 hover:text-white transition"
+                            data-en="Terms" data-es="Términos">Terms</a>
+                        <a href="/sitemap.xml" class="text-white/60 hover:text-white transition">Sitemap</a>
                     </div>
                 </div>
             </div>
+
             <div class="bg-bone-white p-8 structural-border text-gray-dark self-start">
-                <h3 class="font-headers font-bold text-xl mb-6" data-en="Stuck on a step?" data-es="¿Atascado en un paso?">Stuck on a step?</h3>
-                <p class="text-sm mb-6" data-en="Call or text me directly. I don't use ticket queues." data-es="Llámame o envíame un mensaje directo. No uso colas de tickets.">Call or text me directly. I don't use ticket queues.</p>
-                <a href="tel:9282285769" class="block w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-center text-sm tracking-wide">
+                <h3 class="font-headers font-bold text-xl mb-4"
+                    data-en="Stuck on a step?" data-es="¿Atascado en un paso?">Stuck on a step?</h3>
+                <p class="text-sm mb-6"
+                    data-en="Call or text me directly. No ticket queues."
+                    data-es="Llámame o envíame un mensaje. Sin colas de tickets.">
+                    Call or text me directly. No ticket queues.
+                </p>
+                <a href="tel:9282285769"
+                    class="block w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-center text-sm tracking-wide">
                     (928) 228-5769
+                </a>
+                <a href="/learn/"
+                    class="block w-full mt-3 bg-bone-white text-gray-dark font-headers font-bold py-3 hover:bg-light-pink transition structural-border text-center text-sm tracking-wide"
+                    data-en="← Back to Learn Hub" data-es="← Volver al Centro de Aprendizaje">
+                    ← Back to Learn Hub
                 </a>
             </div>
         </div>
     </footer>
 
     <!-- FAB -->
-    <a href="index.html#contact" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition">
-        <span class="text-xs font-bold" data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">Need a strategic ally?</span>
+    <a href="/index.html#contact"
+        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition"
+        aria-label="Contact Digital Allies">
+        <span class="text-xs font-bold"
+            data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">Need a strategic ally?</span>
         <div class="relative flex items-center justify-center w-4 h-4 flex-shrink-0">
             <div class="absolute w-4 h-4 bg-signal-red rounded-full opacity-30 fab-ring"></div>
             <div class="w-2.5 h-2.5 bg-signal-red rounded-full brand-pulse"></div>
         </div>
     </a>
 
-    <!-- LANGUAGE & FILTER CONTROLLER -->
+    <!-- ============================================================
+         LANGUAGE & FILTER CONTROLLER
+    ============================================================= -->
     <script>
         const videoData = [
             // Editor Basics
@@ -240,17 +318,25 @@
             { id: '1138592684', cat: 'editor', en: 'Page Management', es: 'Gestión de Páginas', dEn: 'Add, hide, or remove pages.', dEs: 'Añadir o quitar páginas.' },
             { id: '1166132372', cat: 'editor', en: 'Header Customization', es: 'Personalizar Encabezado', dEn: 'Nav and logo settings.', dEs: 'Navegación y logo.' },
             { id: '1166132361', cat: 'editor', en: 'Footer Branding', es: 'Marca de Pie de Página', dEn: 'Contact and copyright info.', dEs: 'Contacto y copyright.' },
-            
+            { id: '1166132161', cat: 'editor', en: 'Blog Integration', es: 'Integración de Blog', dEn: 'Publishing regular content.', dEs: 'Publicación de contenido.' },
+            { id: '1166132126', cat: 'editor', en: 'SEO Fundamentals', es: 'Fundamentos de SEO', dEn: 'Search ranking basics.', dEs: 'Básicos de búsqueda.' },
+            { id: '1164464066', cat: 'editor', en: 'Responsive Design', es: 'Diseño Responsivo', dEn: 'Mobile-first adjustments.', dEs: 'Ajustes para móviles.' },
+
             // Widgets
             { id: '1166132330', cat: 'widgets', en: 'Contact Forms', es: 'Formularios de Contacto', dEn: 'Lead capture mechanics.', dEs: 'Captura de prospectos.' },
             { id: '1166132251', cat: 'widgets', en: 'Image Sliders', es: 'Sliders de Imagen', dEn: 'Creating visual motion.', dEs: 'Crear movimiento visual.' },
             { id: '1166132235', cat: 'widgets', en: 'Business Hours', es: 'Horas de Negocio', dEn: 'Setting availability info.', dEs: 'Info de disponibilidad.' },
+            { id: '1166132219', cat: 'widgets', en: 'Lottie Animations', es: 'Animaciones Lottie', dEn: 'Lightweight animations.', dEs: 'Animaciones ligeras.' },
+            { id: '1166132189', cat: 'widgets', en: 'Before & After', es: 'Antes y Después', dEn: 'Showcase your results.', dEs: 'Muestra tus resultados.' },
 
-           // eCommerce
+            // eCommerce
             { id: '1165824245', cat: 'ecommerce', en: 'Native Store Setup', es: 'Configurar Tienda Nativa', dEn: 'Launch your first store.', dEs: 'Lanza tu primera tienda.' },
             { id: '1138290003', cat: 'ecommerce', en: 'Product Management', es: 'Gestión de Productos', dEn: 'Upload and edit items.', dEs: 'Sube y edita artículos.' },
             { id: '1138286579', cat: 'ecommerce', en: 'Payment Gateways', es: 'Pasarelas de Pago', dEn: 'Connect Stripe or PayPal.', dEs: 'Conectar Stripe o PayPal.' },
-            
+            { id: '1165824219', cat: 'ecommerce', en: 'Shipping Rules', es: 'Reglas de Envío', dEn: 'Delivery configurations.', dEs: 'Configuración de envíos.' },
+            { id: '1165824209', cat: 'ecommerce', en: 'Tax Calculation', es: 'Cálculo de Impuestos', dEn: 'Setting up VAT/Sales Tax.', dEs: 'IVA e impuestos.' },
+            { id: '1165824198', cat: 'ecommerce', en: 'Customer Accounts', es: 'Cuentas de Cliente', dEn: 'Managing user logins.', dEs: 'Gestión de usuarios.' },
+
             // Bookings
             { id: '1166427885', cat: 'bookings', en: 'Add and Configure Bookings', es: 'Agregar y Configurar Reservas', dEn: 'Foundational scheduling setup.', dEs: 'Configuración de reservas básica.' },
             { id: '1166426741', cat: 'bookings', en: 'Customize Questions', es: 'Personalizar Preguntas', dEn: 'Ask the right info first.', dEs: 'Solicitar información clave primero.' },
@@ -259,26 +345,20 @@
             { id: '1166132311', cat: 'bookings', en: 'Scheduling Types', es: 'Tipos de Programación', dEn: 'Round Robin & Fixed Hosts.', dEs: 'Round Robin y Anfitriones Fijos.' },
             { id: '1166132285', cat: 'bookings', en: 'Require Confirmation', es: 'Requerir Confirmación', dEn: 'Approve manual requests.', dEs: 'Aprobar solicitudes manuales.' },
             { id: '1166132263', cat: 'bookings', en: 'Event Names', es: 'Nombres de Eventos', dEn: 'How names show on calendar.', dEs: 'Cómo aparecen en el calendario.' },
-            
-            // Archive / The rest
-            { id: '1166132219', cat: 'widgets', en: 'Lottie Animations', es: 'Animaciones Lottie', dEn: 'Lightweight animations.', dEs: 'Animaciones ligeras.' },
-            { id: '1166132189', cat: 'widgets', en: 'Before & After', es: 'Antes y Después', dEn: 'Showcase your results.', dEs: 'Muestra tus resultados.' },
-            { id: '1166132161', cat: 'editor', en: 'Blog Integration', es: 'Integración de Blog', dEn: 'Publishing regular content.', dEs: 'Publicación de contenido.' },
-            { id: '1166132126', cat: 'editor', en: 'SEO Fundamentals', es: 'Fundamentos de SEO', dEn: 'Search ranking basics.', dEs: 'Básicos de búsqueda.' },
-            { id: '1165824219', cat: 'ecommerce', en: 'Shipping Rules', es: 'Reglas de Envío', dEn: 'Delivery configurations.', dEs: 'Configuración de envíos.' },
-            { id: '1165824209', cat: 'ecommerce', en: 'Tax Calculation', es: 'Cálculo de Impuestos', dEn: 'Setting up VAT/Sales Tax.', dEs: 'IVA e impuestos.' },
-            { id: '1165824198', cat: 'ecommerce', en: 'Customer Accounts', es: 'Cuentas de Cliente', dEn: 'Managing user logins.', dEs: 'Gestión de usuarios.' },
-            { id: '1164464066', cat: 'editor', en: 'Responsive Design', es: 'Diseño Responsivo', dEn: 'Mobile-first adjustments.', dEs: 'Ajustes para móviles.' }
         ];
 
-        // Add placeholders for the remainder of the 108 IDs
+        // Fill remaining IDs as archive placeholders
         const allIds = [
-            '1166427885','1166426741','1166426148','1166132372','1166132361','1166132348','1166132330','1166132311','1166132285','1166132263','1166132251','1166132235','1166132219','1166132189','1166132161','1166132126','1165824245','1165824219','1165824209','1165824198','1164464066','1138710958','1138592684','1138290003','1138286579','1138283006','1138277739','1138265689','1138258398','1138233471','1137868297','1137835887','1137778869','1137761613','1137067683','1136986046','1130328767','1104519900','1097678234','1097654410','1097587403','1081578684','1078005292','1077319616','1073371862','1073363806','1073354903','1073348779','1073317842','1073288675','1065579476','1062533826','1062118654','1062118578','1062118508','1062118436','1061433095','1061047749','1061047717','1058338925','1056177564','1035370789','1035370601','1035370131','1035369559','1035368487','1029745508','1029745466','1026603116','1017640327','1015798751','1015773318','1015773301','1015773275','1015773259','1015773236','1015773210','1015773163','1015773133','1015773103','1015772986','1015772928','1015772751','1015772681','1015772633','1015772569','1015772551','1015772533','1015772447','1015768613','1015768557','1015768477','1015768455','1015768315','752640376','718880330','718880263','718880209','718880152','718880098','716959537','716959498','716959459','716959403','716959244','716959106','716958994'
+            '1138283006','1138277739','1138265689','1138258398','1138233471','1137868297','1137835887','1137778869','1137761613','1137067683','1136986046','1130328767','1104519900','1097678234','1097654410','1097587403','1081578684','1078005292','1077319616','1073371862','1073363806','1073354903','1073348779','1073317842','1073288675','1065579476','1062533826','1062118654','1062118578','1062118508','1062118436','1061433095','1061047749','1061047717','1058338925','1056177564','1035370789','1035370601','1035370131','1035369559','1035368487','1029745508','1029745466','1026603116','1017640327','1015798751','1015773318','1015773301','1015773275','1015773259','1015773236','1015773210','1015773163','1015773133','1015773103','1015772986','1015772928','1015772751','1015772681','1015772633','1015772569','1015772551','1015772533','1015772447','1015768613','1015768557','1015768477','1015768455','1015768315','752640376','718880330','718880263','718880209','718880152','718880098','716959537','716959498','716959459','716959403','716959244','716959106','716958994'
         ];
 
         allIds.forEach(id => {
             if (!videoData.find(v => v.id === id)) {
-                videoData.push({ id, cat: 'widgets', en: `Module ${id}`, es: `Módulo ${id}`, dEn: 'Advanced Tooling Tutorial.', dEs: 'Tutorial de herramienta avanzada.' });
+                videoData.push({
+                    id, cat: 'widgets',
+                    en: `Module ${id}`, es: `Módulo ${id}`,
+                    dEn: 'Platform tutorial module.', dEs: 'Módulo de tutorial de plataforma.'
+                });
             }
         });
 
@@ -312,17 +392,25 @@
 
             renderGrid() {
                 const grid = document.getElementById('video-grid');
-                const filtered = this.currentCat === 'all' 
-                    ? videoData 
+                const filtered = this.currentCat === 'all'
+                    ? videoData
                     : videoData.filter(v => v.cat === this.currentCat);
 
                 grid.innerHTML = filtered.map(v => `
                     <div class="video-card structural-border p-5">
                         <div class="video-container structural-border mb-4">
-                            <iframe src="https://player.vimeo.com/video/${v.id}" allow="fullscreen"></iframe>
+                            <iframe
+                                src="https://player.vimeo.com/video/${v.id}"
+                                allow="fullscreen"
+                                title="${this.currentLang === 'en' ? v.en : v.es}">
+                            </iframe>
                         </div>
-                        <h4 class="font-headers font-bold text-sm mb-2">${this.currentLang === 'en' ? v.en : v.es}</h4>
-                        <p class="text-xs leading-relaxed text-gray-600">${this.currentLang === 'en' ? v.dEn : v.dEs}</p>
+                        <h4 class="font-headers font-bold text-sm mb-2">
+                            ${this.currentLang === 'en' ? v.en : v.es}
+                        </h4>
+                        <p class="text-xs leading-relaxed" style="color: #555;">
+                            ${this.currentLang === 'en' ? v.dEn : v.dEs}
+                        </p>
                     </div>
                 `).join('');
             }
@@ -338,7 +426,11 @@
                 document.querySelectorAll('[data-en][data-es]').forEach(el => {
                     const val = el.getAttribute('data-' + lang);
                     if (!val) return;
-                    el.innerHTML = val;
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = val;
+                    } else {
+                        el.innerHTML = val;
+                    }
                 });
                 if (typeof lucide !== 'undefined') lucide.createIcons();
             }
@@ -347,8 +439,8 @@
                 ['en', 'es'].forEach(l => {
                     const btn = document.getElementById('lang-' + l);
                     if (!btn) return;
-                    const active = l === lang;
-                    btn.classList.toggle('lang-active', active);
+                    btn.classList.toggle('lang-active', l === lang);
+                    btn.setAttribute('aria-pressed', String(l === lang));
                 });
             }
 
