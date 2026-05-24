@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Icon System — Artifacts</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .label { font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+    .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .ic { border: 1px solid var(--charcoal); padding: 12px 6px 8px; background: var(--bg); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .ic img { width: 56px; height: 56px; object-fit: contain; background: transparent; }
+    .ic span { font-family: var(--font-details); font-size: 9px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.08em; text-align: center; }
+    .foot { font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); line-height: 1.5; margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--grid-line-strong); }
+    .foot strong { font-family: var(--font-headers); font-weight: 700; color: var(--signal); }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <span class="label">The Artifact Icons — 1 px line-art, optional red focal dot</span>
+    <div class="grid">
+      <div class="ic"><img src="../assets/icon-topo.png" alt=""><span>Topo</span></div>
+      <div class="ic"><img src="../assets/icon-compass.png" alt=""><span>Compass</span></div>
+      <div class="ic"><img src="../assets/icon-phone.png" alt=""><span>Rotary</span></div>
+      <div class="ic"><img src="../assets/icon-metronome.png" alt=""><span>Metronome</span></div>
+      <div class="ic"><img src="../assets/icon-engine.png" alt=""><span>Engine</span></div>
+      <div class="ic"><img src="../assets/icon-route66.png" alt=""><span>Route 66</span></div>
+    </div>
+    <p class="foot"><strong>Hard rule:</strong> abstract tech shapes (clouds, gears, generic nodes) are forbidden. Replace with literal vintage artifacts. Lucide is the sanctioned CDN fallback for utility UI.</p>
+  </div>
+</body>
+</html>

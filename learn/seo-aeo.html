@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO vs AEO: Make Your Business Visible to AI Search — Digital Allies</title>
+    <meta name="description"
+        content="What AI actually reads when it recommends businesses. Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps you showing up. Free tools included.">
+    <link rel="canonical" href="https://digitalallies.net/learn/seo-aeo.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SEO vs AEO: Make Your Business Visible to AI Search">
+    <meta property="og:description" content="Schema markup, directory consistency, answer formatting — what AI actually reads when it recommends businesses.">
+    <meta property="og:url" content="https://digitalallies.net/learn/seo-aeo.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bone-white': '#F9F6F0',
+                        'gray-dark': '#2D2D2D',
+                        'primary-blue': '#3A7BD5',
+                        'light-pink': '#FADEEB',
+                        'signal-red': '#C5301A'
+                    },
+                    fontFamily: {
+                        headers: ['"Lexend Deca"', 'sans-serif'],
+                        details: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45,45,45,0.07) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45,45,45,0.07) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #2D2D2D;
+        }
+        h1,h2,h3,h4 { font-family: 'Lexend Deca', sans-serif; }
+        .structural-border { border: 1px solid #2D2D2D; }
+        .brand-pulse { animation: brand-pulse 3s ease-in-out infinite; }
+        @keyframes brand-pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.5; transform:scale(1.25); }
+        }
+        .fab-ring { animation: fab-ring 2.2s ease-out infinite; }
+        @keyframes fab-ring {
+            0% { transform:scale(1); opacity:0.55; }
+            100% { transform:scale(2.4); opacity:0; }
+        }
+        .lang-active { background-color: #2D2D2D !important; color: #F9F6F0 !important; }
+
+        /* Prose */
+        .prose-da p { font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.85; color: #2D2D2D; margin-bottom: 1.25rem; }
+        .prose-da strong { font-weight: 600; }
+
+        /* Layer cards */
+        .layer-card { border-left: 3px solid #2D2D2D; }
+        .layer-card.blue { border-left-color: #3A7BD5; }
+        .layer-card.red { border-left-color: #C5301A; }
+
+        /* Checklist */
+        .check-row { border-bottom: 1px solid #E0DDD5; cursor: pointer; transition: background 0.15s; }
+        .check-row:last-child { border-bottom: none; }
+        .check-row:hover { background: #FADEEB; }
+
+        /* Schema output */
+        .schema-output {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: #2D2D2D;
+            color: #F9F6F0;
+            padding: 20px;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.6;
+            border: 1px solid #2D2D2D;
+        }
+
+        /* Progress bar */
+        .progress-bar { height: 8px; background: #E0DDD5; border: 1px solid #2D2D2D; overflow: hidden; }
+        .progress-fill { height: 100%; background: #3A7BD5; transition: width 0.3s; }
+
+        /* Pinned note */
+        .pinned-note { background-color: #FCFAED; position: relative; padding-top: 2.5rem; }
+        .red-pin { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; background-color: #C5301A; border-radius: 50%; border: 1px solid #2D2D2D; }
+
+        /* Rhythm table */
+        .rhythm-row { border-bottom: 1px dashed rgba(45,45,45,0.15); padding-bottom: 12px; margin-bottom: 12px; }
+        .rhythm-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0; }
+        html { scroll-behavior: smooth; }
+
+        /* Copy button flash */
+        .copy-flash { animation: flash 0.4s ease; }
+        @keyframes flash { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+        input.field, textarea.field, select.field {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #2D2D2D;
+            padding: 10px 14px;
+            width: 100%;
+            outline: none;
+            color: #2D2D2D;
+            transition: border-color 0.15s;
+        }
+        input.field:focus, textarea.field:focus, select.field:focus {
+            border-color: #3A7BD5;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+<div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<!-- NAV -->
+<nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/index.html" class="flex items-center space-x-3" aria-label="Digital Allies Home">
+            <div class="relative flex items-center justify-center w-5 h-5">
+                <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
+                <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
+            </div>
+            <span class="font-headers font-bold text-xl tracking-wide">Digital Allies</span>
+        </a>
+        <div class="flex items-center space-x-4 lg:space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Services" data-es="Servicios">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Pricing" data-es="Precios">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Reviews" data-es="Reseñas">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ"
+                    data-es="FAQ">FAQ</a>
+                <a href="/learn/" class="text-signal-red underline underline-offset-4 whitespace-nowrap"
+                    data-en="Learn" data-es="Aprender">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Contact" data-es="Contacto">Contact</a>
+            </div>
+            <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group">
+                <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active" aria-pressed="true">EN</button>
+                <div class="w-px h-5 bg-gray-dark" aria-hidden="true"></div>
+                <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink" aria-pressed="false">ES</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="max-w-5xl mx-auto px-6 pt-6">
+    <nav aria-label="Breadcrumb" class="text-xs font-bold tracking-widest uppercase">
+        <ol class="flex items-center gap-2 text-gray-dark/50">
+            <li><a href="/index.html" class="hover:text-primary-blue transition">Home</a></li>
+            <li aria-hidden="true">·</li>
+            <li><a href="/learn/" class="hover:text-primary-blue transition">Learn</a></li>
+            <li aria-hidden="true">·</li>
+            <li class="text-signal-red">SEO vs AEO</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- HERO -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-12">
+    <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4">Search Visibility · Interactive Guide</p>
+    <h1 class="font-headers font-bold text-4xl md:text-5xl leading-tight mb-6">
+        What AI Actually Reads When It<br class="hidden md:block"> Recommends Businesses
+    </h1>
+    <div class="flex flex-wrap gap-4 items-center text-xs text-gray-dark/50 font-bold tracking-widest uppercase">
+        <span>By Anthony · Digital Allies</span>
+        <span aria-hidden="true">·</span>
+        <span>Kingman, AZ</span>
+        <span aria-hidden="true">·</span>
+        <span>Updated 2026</span>
+    </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<article class="max-w-5xl mx-auto px-6" aria-label="SEO vs AEO guide">
+
+    <!-- INTRO -->
+    <section class="mb-16 prose-da max-w-3xl">
+        <p>When someone asks "best coffee shop in Kingman" or "where should I get my car fixed near me," AI assistants don't browse your website the way humans do. They're looking for structured signals they can parse quickly.</p>
+        <p>Think of it like this: AI reads your digital presence the way a screen reader interprets a website for someone with visual impairment. If the structure isn't there, the meaning gets lost — no matter how good your content is.</p>
+        <p>The good news is the fix isn't complicated. It's just tedious. And tedious is exactly the kind of work most businesses skip — which is why doing it gives you a real edge.</p>
+        <p>Below are the four layers that determine whether AI recommends you or skips you. Each section includes a plain-language explanation and a working tool to help you actually implement it.</p>
+    </section>
+
+    <!-- SEO vs AEO COMPARISON -->
+    <section class="mb-16" aria-labelledby="comparison-heading">
+        <h2 id="comparison-heading" class="font-headers font-bold text-2xl mb-6">The Difference, Plainly Stated</h2>
+        <div class="grid md:grid-cols-2 gap-px structural-border overflow-hidden mb-6">
+            <div class="bg-bone-white p-8 border-r border-gray-dark">
+                <div class="font-headers font-bold text-3xl mb-2">SEO</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4">Search Engine Optimization</div>
+                <p class="text-sm leading-relaxed mb-4">Gets you ranked in Google search results. Someone types a query, a list of links appears, yours is one of them. The job is the same as it's been for 20 years: be the link someone clicks first.</p>
+                <div class="border-t border-gray-dark/10 pt-4 text-xs text-gray-dark/60 italic">"Mexican restaurant in Kingman" → list of results</div>
+            </div>
+            <div class="bg-gray-dark p-8">
+                <div class="font-headers font-bold text-3xl text-primary-blue mb-2">AEO</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4">Answer Engine Optimization</div>
+                <p class="text-sm leading-relaxed text-bone-white mb-4">Gets you featured when AI assistants answer questions. No list. No clicking. The AI gives one answer — and your business is it.</p>
+                <div class="border-t border-bone-white/10 pt-4 text-xs text-bone-white/50 italic">"Best Mexican near me?" → AI says your name</div>
+            </div>
+        </div>
+        <!-- Symmetry break -->
+        <div class="border-l-4 border-signal-red pl-5 py-1 ml-1">
+            <p class="text-sm font-bold leading-relaxed">The businesses that adapt now gain visibility. The ones that wait stay invisible to the next generation of search — even when they're exactly what the customer is looking for.</p>
+        </div>
+    </section>
+
+    <!-- LAYER 1: SCHEMA -->
+    <section class="mb-16" id="schema" aria-labelledby="schema-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-primary-blue leading-none">01</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-1">Layer One</div>
+                <h2 id="schema-heading" class="font-headers font-bold text-2xl">Schema Markup — Your Digital Foundation</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p>Schema markup is structured data that lives in your website's code. It explicitly labels what things are — so AI doesn't have to guess. Without it, an AI might know you have a website. With it, the AI knows you're a restaurant, you're open until 9pm on Fridays, you accept credit cards, and you're on Stockton Hill Rd.</p>
+            <p>That's the difference between being read and being understood.</p>
+            <p>For a local business, you need <strong>LocalBusiness schema</strong> at minimum. If you have services, add Service schema for each one. If you publish articles, use Article schema. If you have FAQs — and you should — implement FAQPage schema.</p>
+            <p class="text-xs text-gray-dark/60 border-l-2 border-signal-red pl-3">Note: Google stopped showing FAQ rich results in search listings as of May 2026. But AI platforms like ChatGPT, Perplexity, and Google's AI Overviews still actively use FAQ schema to extract and cite information. So while it won't make your Google listing bigger, it absolutely helps you get cited when AI answers questions about your industry.</p>
+        </div>
+
+        <!-- SCHEMA GENERATOR -->
+        <div class="structural-border bg-bone-white" id="schema-generator">
+            <div class="border-b border-gray-dark px-8 py-5 flex justify-between items-center">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1">Interactive Tool</div>
+                    <h3 class="font-headers font-bold text-lg">LocalBusiness Schema Generator</h3>
+                </div>
+                <div class="text-xs text-gray-dark/40 font-bold tracking-widest uppercase hidden md:block">JSON-LD Output</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-0">
+                <!-- Inputs -->
+                <div class="p-8 border-r border-gray-dark space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Business Name</label>
+                        <input id="sg-name" class="field" type="text" placeholder="El Palacio Kingman" oninput="SG.generate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Business Type</label>
+                        <select id="sg-type" class="field" onchange="SG.generate()">
+                            <option value="LocalBusiness">Local Business (General)</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="AutoRepair">Auto Repair</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Attorney">Attorney</option>
+                            <option value="HVACBusiness">HVAC</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="RealEstateAgent">Real Estate</option>
+                            <option value="BeautySalon">Beauty Salon / Barber</option>
+                            <option value="MedicalBusiness">Medical / Health</option>
+                            <option value="ProfessionalService">Professional Services</option>
+                            <option value="Store">Retail Store</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Street Address</label>
+                        <input id="sg-address" class="field" type="text" placeholder="1234 Stockton Hill Rd" oninput="SG.generate()">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase mb-2">City</label>
+                            <input id="sg-city" class="field" type="text" placeholder="Kingman" oninput="SG.generate()">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold tracking-widest uppercase mb-2">State</label>
+                            <input id="sg-state" class="field" type="text" placeholder="AZ" oninput="SG.generate()">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Phone</label>
+                        <input id="sg-phone" class="field" type="tel" placeholder="+1-928-555-0100" oninput="SG.generate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Website URL</label>
+                        <input id="sg-url" class="field" type="url" placeholder="https://yoursite.com" oninput="SG.generate()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Description (1–2 sentences)</label>
+                        <textarea id="sg-desc" class="field" rows="2" placeholder="Family-owned restaurant serving Sonoran-style Mexican food in Kingman, AZ since 1998." oninput="SG.generate()"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Price Range</label>
+                        <select id="sg-price" class="field" onchange="SG.generate()">
+                            <option value="$">$ — Inexpensive</option>
+                            <option value="$$" selected>$$ — Moderate</option>
+                            <option value="$$$">$$$ — Upscale</option>
+                            <option value="$$$$">$$$$ — Fine Dining / Premium</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Hours (Mon–Fri)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input id="sg-open" class="field" type="time" value="09:00" oninput="SG.generate()">
+                            <input id="sg-close" class="field" type="time" value="17:00" oninput="SG.generate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output -->
+                <div class="p-8 flex flex-col gap-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold tracking-widest uppercase text-gray-dark/50">Generated Schema</span>
+                        <button onclick="SG.copy()" id="sg-copy-btn"
+                            class="text-xs font-bold tracking-widest uppercase bg-gray-dark text-bone-white px-4 py-2 hover:bg-signal-red transition structural-border">
+                            Copy JSON-LD
+                        </button>
+                    </div>
+                    <div class="schema-output flex-1 min-h-64" id="sg-output"><!-- generated --></div>
+                    <div class="text-xs text-gray-dark/50 leading-relaxed border-t border-gray-dark/10 pt-4">
+                        Paste this inside a <code>&lt;script type="application/ld+json"&gt;</code> tag in your page's <code>&lt;head&gt;</code>. Then validate at <a href="https://validator.schema.org" target="_blank" rel="noopener" class="text-primary-blue hover:underline">validator.schema.org</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYER 2: DIRECTORY CONSISTENCY -->
+    <section class="mb-16" id="directories" aria-labelledby="directory-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-signal-red leading-none">02</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1">Layer Two</div>
+                <h2 id="directory-heading" class="font-headers font-bold text-2xl">Directory Consistency — Building AI Confidence</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p>AI pulls business information from multiple sources to cross-reference accuracy. When your name, address, phone number, and hours match across platforms, that builds confidence. When they conflict, AI either skips you or serves outdated information.</p>
+            <p>Even small variations create friction. "St." vs "Street." Different phone formats. An old address from three years ago sitting on a directory you forgot about. These aren't cosmetic problems — they're credibility problems.</p>
+            <p>The five platforms below are the ones that matter most for AI recommendations. Verify each one. Update your hours for holidays, temporary closures, and seasonal changes. Outdated hours kill trust faster than almost anything else.</p>
+        </div>
+
+        <!-- DIRECTORY CHECKLIST -->
+        <div class="structural-border bg-bone-white">
+            <div class="border-b border-gray-dark px-8 py-5">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1">Self-Audit Checklist</div>
+                <h3 class="font-headers font-bold text-lg">Directory Consistency Check</h3>
+            </div>
+            <div id="dir-list" class="px-8 py-4">
+                <!-- injected by JS -->
+            </div>
+            <div class="px-8 py-6 border-t border-gray-dark/10">
+                <div class="flex items-center gap-4 mb-3">
+                    <div class="font-headers font-bold text-2xl" id="dir-score">0%</div>
+                    <div class="flex-1 progress-bar">
+                        <div class="progress-fill" id="dir-bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-dark/50" id="dir-label">Check off each platform once verified.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYER 3: ANSWER FORMATTING -->
+    <section class="mb-16" id="formatting" aria-labelledby="formatting-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-primary-blue leading-none">03</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-1">Layer Three</div>
+                <h2 id="formatting-heading" class="font-headers font-bold text-2xl">Clear Answer Formatting — Making Your Expertise Extractable</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p>AI doesn't interpret subtle expertise well. It looks for clear, direct answers to questions people actually ask. If your site buries the answer in three paragraphs, AI moves on to the next source that answers it in one sentence.</p>
+            <p>The best format for this is FAQ sections with proper heading structure. Not because FAQ pages are interesting — they aren't — but because they're the most efficient way to structure content that AI can extract and cite.</p>
+            <p><strong>The structure that works:</strong> Use H2 or H3 headings for each question. Answer the question in the first sentence, directly. Add supporting detail in the next two or three sentences. Implement FAQPage schema so AI knows this is question-and-answer content.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4">What AI Can't Use</div>
+                <div class="text-xs leading-relaxed bg-gray-dark/5 p-4 border-l-2 border-gray-dark/20 mb-3 italic">
+                    "At our family-owned establishment, we pride ourselves on providing exceptional service to the Kingman community. Our team of dedicated professionals has years of experience helping customers find the solutions they need..."
+                </div>
+                <p class="text-xs text-gray-dark/60">No answer. No specifics. Nothing to cite.</p>
+            </div>
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">What AI Can Use</div>
+                <div class="text-xs leading-relaxed bg-light-pink p-4 border-l-2 border-primary-blue mb-3">
+                    <strong>Do you offer same-day repair?</strong><br><br>
+                    Yes, we offer same-day appliance repair in Kingman when you call before noon. We stock parts for most major brands. Emergency service is available 24/7 for refrigerator failure.
+                </div>
+                <p class="text-xs text-gray-dark/60">Direct answer. Specific. Citable. AI can pull this and attribute it to you.</p>
+            </div>
+        </div>
+
+        <!-- AEO READINESS CHECKLIST -->
+        <div class="structural-border bg-bone-white">
+            <div class="border-b border-gray-dark px-8 py-5">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1">Self-Assessment</div>
+                <h3 class="font-headers font-bold text-lg">AEO Content Readiness Check</h3>
+            </div>
+            <div id="aeo-list" class="px-8 py-4"><!-- injected --></div>
+            <div class="px-8 py-6 border-t border-gray-dark/10">
+                <div class="flex items-center gap-4 mb-3">
+                    <div class="font-headers font-bold text-2xl" id="aeo-score">0%</div>
+                    <div class="flex-1 progress-bar">
+                        <div class="progress-fill" id="aeo-bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="text-xs p-3 border structural-border" id="aeo-label" style="background:#E0DDD5;">
+                    Check off what you've implemented.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYER 4: FRESH CONTENT -->
+    <section class="mb-16" id="content" aria-labelledby="content-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-signal-red leading-none">04</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1">Layer Four</div>
+                <h2 id="content-heading" class="font-headers font-bold text-2xl">Fresh, Specific Content — Showing You're Actively Operating</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p>AI prioritizes recent content because it signals an active, current business. Roughly 65% of AI bot crawls target content published within the past year. You don't need to publish daily — but you do need to update your site regularly with content that demonstrates current expertise.</p>
+            <p>The key word is <strong>specific</strong>. AI cites content that provides concrete data, real examples, and detailed explanations — not generic advice. "We provide excellent customer service" tells AI nothing. "We respond to all service requests within 2 hours and provide a 30-minute arrival window" gives AI something to cite when someone asks about responsive local service providers.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Content Types That Work</div>
+                <div class="space-y-3">
+                    <div class="rhythm-row">
+                        <div class="font-headers font-bold text-sm mb-1">Case Studies</div>
+                        <div class="text-xs text-gray-dark/70">Specific results for real clients. Before/after. Numbers.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="font-headers font-bold text-sm mb-1">Seasonal Guides</div>
+                        <div class="text-xs text-gray-dark/70">"Preparing your HVAC for Arizona summer." Locally relevant, current.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="font-headers font-bold text-sm mb-1">Problem Breakdowns</div>
+                        <div class="text-xs text-gray-dark/70">"Why your dishwasher isn't draining." Specific problem, clear answer.</div>
+                    </div>
+                    <div>
+                        <div class="font-headers font-bold text-sm mb-1">Local Area Content</div>
+                        <div class="text-xs text-gray-dark/70">Community connection. Demonstrates you're actually here.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="structural-border pinned-note p-8">
+                <div class="red-pin" aria-hidden="true"></div>
+                <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4 text-center">The Specificity Test</p>
+                <p class="text-sm leading-relaxed italic mb-4">"We provide excellent customer service."</p>
+                <p class="text-xs text-gray-dark/50 mb-6">AI can't cite this. It's not information. It's a promise.</p>
+                <div class="border-t border-gray-dark/10 pt-5">
+                    <p class="text-sm leading-relaxed italic mb-3">"We respond to all requests within 2 hours during business hours and provide a 30-minute arrival window."</p>
+                    <p class="text-xs text-primary-blue font-bold">Now AI has something to work with.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAINTENANCE RHYTHM -->
+    <section class="mb-16" id="maintenance" aria-labelledby="maintenance-heading">
+        <h2 id="maintenance-heading" class="font-headers font-bold text-2xl mb-6">The Maintenance Rhythm That Actually Works</h2>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p>This isn't set-and-forget infrastructure. It needs periodic maintenance to stay effective. The good news: the rhythm isn't demanding. A few focused hours a month keeps everything current.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-px structural-border overflow-hidden">
+            <div class="bg-bone-white p-8">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Monthly</div>
+                <div class="space-y-4">
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Verify GBP info</div>
+                        <div class="text-xs text-gray-dark/60">Still correct? Hours, address, phone.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Check directory hours</div>
+                        <div class="text-xs text-gray-dark/60">Holidays, seasonal changes, closures.</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold mb-1">Respond to new reviews</div>
+                        <div class="text-xs text-gray-dark/60">Signals active management to AI.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-bone-white p-8 border-t md:border-t-0 md:border-l border-gray-dark">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4">Quarterly</div>
+                <div class="space-y-4">
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Publish new content</div>
+                        <div class="text-xs text-gray-dark/60">One specific, detailed piece minimum.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Update FAQ sections</div>
+                        <div class="text-xs text-gray-dark/60">Add new questions you've received.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Test AI search results</div>
+                        <div class="text-xs text-gray-dark/60">Ask ChatGPT and Perplexity about your category.</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold mb-1">Validate schema</div>
+                        <div class="text-xs text-gray-dark/60">Check it's still passing at validator.schema.org.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-bone-white p-8 border-t md:border-t-0 md:border-l border-gray-dark">
+                <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-4">Annually</div>
+                <div class="space-y-4">
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Full directory audit</div>
+                        <div class="text-xs text-gray-dark/60">Comprehensive consistency check across all platforms.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Refresh service descriptions</div>
+                        <div class="text-xs text-gray-dark/60">Update pricing ranges, offerings.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1">Update case studies</div>
+                        <div class="text-xs text-gray-dark/60">Feature recent work, retire old examples.</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold mb-1">Expand schema coverage</div>
+                        <div class="text-xs text-gray-dark/60">New services, new offerings, new schema types.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO TEST -->
+    <section class="mb-16" aria-labelledby="test-heading">
+        <h2 id="test-heading" class="font-headers font-bold text-2xl mb-4">How to Test What AI Sees</h2>
+        <div class="prose-da max-w-3xl mb-6">
+            <p>Once you've implemented these layers, test how AI actually represents your business. Don't wait for customers to tell you something's wrong.</p>
+        </div>
+        <div class="structural-border bg-gray-dark text-bone-white p-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">What to Ask</div>
+                    <div class="space-y-3 text-sm">
+                        <div class="border-b border-bone-white/10 pb-3 font-details italic">"What are the best [your business type] in [your city]?"</div>
+                        <div class="border-b border-bone-white/10 pb-3 font-details italic">"Where should I go for [your service] near [your location]?"</div>
+                        <div class="border-b border-bone-white/10 pb-3 font-details italic">"Hey Siri, find me a [your type] nearby."</div>
+                        <div class="font-details italic">"Who does [your specific service] in Kingman?"</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4">Where to Ask It</div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 border-b border-bone-white/10 pb-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm">ChatGPT — general AI recommendations</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-b border-bone-white/10 pb-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm">Perplexity — cites sources, shows what it's pulling</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-b border-bone-white/10 pb-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm">Siri / voice search — local intent queries</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm">Google AI Overviews — check your category queries</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mb-20">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="structural-border bg-bone-white p-8 md:col-span-2">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3">The Bottom Line</div>
+                <h2 class="font-headers font-bold text-2xl mb-4">The setup work is tedious. Do it anyway.</h2>
+                <p class="text-sm leading-relaxed text-gray-dark/75 mb-0">Schema markup, directory audits, FAQ structuring, content updates — this boring operational work is what creates sustainable visibility. Build it right once, maintain it consistently, and you'll show up when it matters.</p>
+            </div>
+            <div class="structural-border bg-gray-dark text-bone-white p-8 flex flex-col justify-between">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3">Free Audit</div>
+                    <p class="text-sm leading-relaxed opacity-70 mb-6">Not sure where you stand? I'll map what's already working and what needs attention. No phases, no upsells.</p>
+                </div>
+                <a href="/index.html#contact"
+                    class="block text-center bg-signal-red text-bone-white font-headers font-bold py-3 structural-border hover:bg-bone-white hover:text-gray-dark transition text-sm tracking-wide">
+                    [ Book a Free Audit ]
+                </a>
+            </div>
+        </div>
+    </section>
+
+</article>
+
+<!-- SCRIPTS -->
+<script>
+// ── SCHEMA GENERATOR ─────────────────────────────────────────────
+const SG = {
+    generate() {
+        const name = document.getElementById('sg-name').value || 'Your Business Name';
+        const type = document.getElementById('sg-type').value;
+        const address = document.getElementById('sg-address').value || '123 Main St';
+        const city = document.getElementById('sg-city').value || 'Kingman';
+        const state = document.getElementById('sg-state').value || 'AZ';
+        const phone = document.getElementById('sg-phone').value || '+1-928-555-0000';
+        const url = document.getElementById('sg-url').value || 'https://yoursite.com';
+        const desc = document.getElementById('sg-desc').value || 'Local business serving the Kingman, AZ area.';
+        const price = document.getElementById('sg-price').value;
+        const open = document.getElementById('sg-open').value || '09:00';
+        const close = document.getElementById('sg-close').value || '17:00';
+
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": type,
+            "name": name,
+            "description": desc,
+            "url": url,
+            "telephone": phone,
+            "priceRange": price,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": address,
+                "addressLocality": city,
+                "addressRegion": state,
+                "addressCountry": "US"
+            },
+            "areaServed": {
+                "@type": "City",
+                "name": city
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+                    "opens": open,
+                    "closes": close
+                }
+            ]
+        };
+
+        document.getElementById('sg-output').textContent =
+            '<script type="application/ld+json">\n' +
+            JSON.stringify(schema, null, 2) +
+            '\n<\/script>';
+    },
+    copy() {
+        const text = document.getElementById('sg-output').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('sg-copy-btn');
+            btn.textContent = 'Copied!';
+            btn.classList.add('copy-flash');
+            setTimeout(() => { btn.textContent = 'Copy JSON-LD'; btn.classList.remove('copy-flash'); }, 2000);
+        });
+    }
+};
+SG.generate();
+
+// ── DIRECTORY CHECKLIST ───────────────────────────────────────────
+const dirItems = [
+    { id: 'gbp',   label: 'Google Business Profile', note: 'Most important for local visibility and AI recommendations.' },
+    { id: 'bing',  label: 'Bing Places for Business', note: 'Powers ChatGPT local recommendations.' },
+    { id: 'apple', label: 'Apple Maps', note: 'Powers Siri and all Apple device searches.' },
+    { id: 'yelp',  label: 'Yelp', note: 'Cited heavily by AI for reviews and recommendations.' },
+    { id: 'fb',    label: 'Facebook Business Page', note: 'Another cross-reference source for AI.' },
+];
+const dirState = {};
+function renderDir() {
+    const list = document.getElementById('dir-list');
+    list.innerHTML = dirItems.map(item => `
+        <div class="check-row flex items-start gap-4 py-4 px-2" onclick="toggleDir('${item.id}')">
+            <div style="width:20px;height:20px;border:1.5px solid ${dirState[item.id] ? '#2D2D2D' : '#E0DDD5'};background:${dirState[item.id] ? '#2D2D2D' : 'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;border-radius:2px;color:#F9F6F0;font-size:11px;font-weight:700;">
+                ${dirState[item.id] ? '✓' : ''}
+            </div>
+            <div>
+                <div style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:14px;margin-bottom:3px;">${item.label}</div>
+                <div style="font-size:12px;opacity:0.6;line-height:1.5;">${item.note}</div>
+            </div>
+        </div>
+    `).join('');
+    const count = Object.values(dirState).filter(Boolean).length;
+    const pct = Math.round((count / dirItems.length) * 100);
+    document.getElementById('dir-score').textContent = pct + '%';
+    document.getElementById('dir-bar').style.width = pct + '%';
+    const labels = ['Check off each platform once you\'ve verified the info matches.', 'Getting there — keep checking.', 'Solid. Almost there.', 'Almost done.', 'Fully verified. AI confidence is high.', 'All platforms verified. Your NAP data is consistent.'];
+    document.getElementById('dir-label').textContent = labels[count] || labels[0];
+}
+function toggleDir(id) { dirState[id] = !dirState[id]; renderDir(); }
+renderDir();
+
+// ── AEO READINESS CHECKLIST ───────────────────────────────────────
+const aeoItems = [
+    { id: 'schema_added',  label: 'Schema markup added to site pages' },
+    { id: 'faq_section',   label: 'FAQ section with structured headings' },
+    { id: 'faq_schema',    label: 'FAQPage schema implemented' },
+    { id: 'direct_ans',    label: 'Content answers common questions directly in the first sentence' },
+    { id: 'no_fluff',      label: 'No filler paragraphs that bury the actual answer' },
+    { id: 'case_studies',  label: 'Case studies or success stories published' },
+    { id: 'reviews_vis',   label: 'Customer reviews and testimonials visible on site' },
+    { id: 'mobile_fast',   label: 'Site is mobile-friendly and loads quickly' },
+];
+const aeoState = {};
+function renderAeo() {
+    const list = document.getElementById('aeo-list');
+    list.innerHTML = aeoItems.map(item => `
+        <div class="check-row flex items-center gap-4 py-4 px-2" onclick="toggleAeo('${item.id}')">
+            <div style="width:20px;height:20px;border:1.5px solid ${aeoState[item.id] ? '#2D2D2D' : '#E0DDD5'};background:${aeoState[item.id] ? '#2D2D2D' : 'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:2px;color:#F9F6F0;font-size:11px;font-weight:700;">
+                ${aeoState[item.id] ? '✓' : ''}
+            </div>
+            <span style="font-size:13px;font-weight:${aeoState[item.id] ? '600' : '400'};">${item.label}</span>
+        </div>
+    `).join('');
+    const count = Object.values(aeoState).filter(Boolean).length;
+    const pct = Math.round((count / aeoItems.length) * 100);
+    document.getElementById('aeo-score').textContent = pct + '%';
+    document.getElementById('aeo-bar').style.width = pct + '%';
+    const lbl = document.getElementById('aeo-label');
+    if (count >= 7) {
+        lbl.textContent = 'AEO-ready. Your content structure gives AI clear signals to work with.';
+        lbl.style.background = '#FADEEB';
+        lbl.style.borderColor = '#2D2D2D';
+    } else if (count >= 4) {
+        lbl.textContent = 'Getting there. Schema markup and FAQ structure are your next priority.';
+        lbl.style.background = '#F9F6F0';
+    } else {
+        lbl.textContent = 'Start with schema markup and one solid FAQ section. That\'s the highest leverage move.';
+        lbl.style.background = '#E0DDD5';
+    }
+}
+function toggleAeo(id) { aeoState[id] = !aeoState[id]; renderAeo(); }
+renderAeo();
+</script>
+
+    <!-- ============================================================
+         THE COMMAND CENTER (FOOTER)
+    ============================================================= -->
+    <footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+
+            <!-- Left: Info -->
+            <div>
+                <!-- Inverted logo -->
+                <a href="/" class="flex items-center space-x-3 mb-10" aria-label="Digital Allies">
+                    <div class="relative flex items-center justify-center w-5 h-5">
+                        <div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div>
+                        <div class="w-3 h-3 bg-white rounded-full brand-pulse"
+                            style="border: 1px solid rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <span class="font-headers font-bold text-2xl tracking-wide text-white">Digital Allies</span>
+                </a>
+
+                <h2 id="footer-heading" class="font-headers text-3xl font-bold mb-5" data-en="The Command Center"
+                    data-es="El Centro de Mando">The Command Center</h2>
+
+                <p class="text-sm leading-relaxed mb-8 text-white/75"
+                    data-en="Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three."
+                    data-es="Dime qué intentas hacer. Responderé con próximos pasos, un rango de costos o una pregunta rápida. Generalmente las tres.">
+                    Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question.
+                    Usually all three.
+                </p>
+
+                <div class="space-y-3 text-sm mb-10">
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Location"
+                            data-es="Ubicación">Location</span>
+                        Kingman, Arizona
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Direct Line"
+                            data-es="Línea Directa">Direct Line</span>
+                        <a href="tel:9282285769" class="text-primary-blue hover:underline">(928) 228-5769</a>
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3">Email</span>
+                        <a href="mailto:contact@digitalallies.net"
+                            class="text-primary-blue hover:underline">contact@digitalallies.net</a>
+                    </p>
+                </div>
+
+                <p class="text-xs border-l-4 border-signal-red pl-4 text-white/65 leading-relaxed"
+                    data-en="I am historically easy to reach. I live in Kingman. If you call, I answer."
+                    data-es="Soy históricamente fácil de contactar. Vivo en Kingman. Si llamas, contesto.">
+                    I am historically easy to reach. I live in Kingman. If you call, I answer.
+                </p>
+
+                <div class="mt-12 pt-6 border-t border-white/10">
+                    <p class="text-xs text-white/50" data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
+                        data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">
+                        &copy; 2026 Digital Allies. Based in Kingman, AZ.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-3 text-xs">
+                        <a href="/privacy.html" class="text-white/50 hover:text-white transition" data-en="Privacy" data-es="Privacidad">Privacy</a>
+                        <a href="/terms.html" class="text-white/50 hover:text-white transition" data-en="Terms" data-es="Términos">Terms</a>
+                        <a href="/cookies.html" class="text-white/50 hover:text-white transition" data-en="Cookies" data-es="Cookies">Cookies</a>
+                        <a href="/sitemap.html" class="text-white/50 hover:text-white transition" data-en="Sitemap" data-es="Mapa del Sitio">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="bg-bone-white p-8 structural-border text-gray-dark self-start">
+                <h3 class="font-headers font-bold text-xl mb-6" data-en="Send a Transmission"
+                    data-es="Enviar una Transmisión">Send a Transmission</h3>
+
+                <form action="https://formsubmit.co/contact@digitalallies.net" method="POST" class="space-y-4"
+                    novalidate>
+                    <input type="hidden" name="_subject" value="New inquiry from Digital Allies">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://digitalallies.net/">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_autoresponse"
+                        value="Thanks for reaching out to Digital Allies! I received your message and will reply with next steps shortly. — Anthony">
+                    <!-- Honeypot -->
+                    <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off">
+
+                    <div>
+                        <label for="f-name" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="Name" data-es="Nombre">Name</label>
+                        <input id="f-name" type="text" name="name" required aria-required="true" autocomplete="name"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition"
+                            placeholder="Your name">
+                    </div>
+
+                    <div>
+                        <label for="f-email" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="Email" data-es="Correo Electrónico">Email</label>
+                        <input id="f-email" type="email" name="email" required aria-required="true" autocomplete="email"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition"
+                            placeholder="your@email.com">
+                    </div>
+
+                    <div>
+                        <label for="f-message" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="What are you trying to do?" data-es="¿Qué intentas hacer?">What are you trying to
+                            do?</label>
+                        <textarea id="f-message" name="message" rows="4" required aria-required="true"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition resize-y"
+                            placeholder="Give me the short version. We can fill in details later."></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-sm tracking-wide"
+                        data-en="Submit Transmission" data-es="Enviar Transmisión">
+                        Submit Transmission
+                    </button>
+
+                    <p class="text-xs text-center text-gray-500 mt-1"
+                        data-en="I do not share your details. I use your message to reply. That is it."
+                        data-es="No comparto tus datos. Uso tu mensaje para responder. Eso es todo.">
+                        I do not share your details. I use your message to reply. That is it.
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ============================================================
+         FLOATING ACTION BUTTON
+    ============================================================= -->
+    <a href="#contact"
+        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition"
+        aria-label="Need a strategic ally? Contact us">
+        <span class="text-xs font-bold" data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">
+            Need a strategic ally?
+        </span>
+        <div class="relative flex items-center justify-center w-4 h-4 flex-shrink-0">
+            <div class="absolute w-4 h-4 bg-signal-red rounded-full opacity-30 fab-ring"></div>
+            <div class="w-2.5 h-2.5 bg-signal-red rounded-full brand-pulse"></div>
+        </div>
+    </a>
+
+
+    <!-- ============================================================
+         LANGUAGE CONTROLLER
+    ============================================================= -->
+    <script>
+        class LanguageController {
+            constructor() {
+                this.currentLang = localStorage.getItem('da-language') || 'en';
+                this.init();
+            }
+
+            init() {
+                this.applyLanguage(this.currentLang, false);
+            }
+
+            toggleLanguage(lang) {
+                if (lang === this.currentLang) return;
+                this.currentLang = lang;
+                localStorage.setItem('da-language', lang);
+                this.applyLanguage(lang, true);
+            }
+
+            applyLanguage(lang, announce) {
+                this.updateContent(lang);
+                this.updateButtons(lang);
+                document.documentElement.lang = lang;
+                if (announce) this.announceLanguageChange(lang);
+            }
+
+            updateContent(lang) {
+                document.querySelectorAll('[data-en][data-es]').forEach(el => {
+                    const val = el.getAttribute('data-' + lang);
+                    if (!val) return;
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = val;
+                    } else {
+                        // Preserve child elements that don't have data-en/data-es (like icons)
+                        const preservedChildren = [];
+                        el.querySelectorAll('[data-lucide], .transition-transform').forEach(child => {
+                            preservedChildren.push(child.cloneNode(true));
+                        });
+                        el.innerHTML = val;
+                        preservedChildren.forEach(child => {
+                            if (child.classList.contains('transition-transform')) {
+                                el.appendChild(child);
+                            } else {
+                                el.insertBefore(child, el.firstChild);
+                            }
+                        });
+                    }
+                });
+                // Re-initialize Lucide icons after content update
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
+            updateButtons(lang) {
+                ['en', 'es'].forEach(l => {
+                    const btn = document.getElementById('lang-' + l);
+                    if (!btn) return;
+                    const active = l === lang;
+                    btn.classList.toggle('lang-active', active);
+                    btn.setAttribute('aria-pressed', String(active));
+                });
+            }
+
+            announceLanguageChange(lang) {
+                const msg = lang === 'es'
+                    ? 'Idioma cambiado a español'
+                    : 'Language changed to English';
+                const announcer = document.getElementById('lang-announcer');
+                if (!announcer) return;
+                announcer.textContent = '';
+                setTimeout(() => { announcer.textContent = msg; }, 60);
+            }
+        }
+
+        const LC = new LanguageController();
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+
+    <!-- STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "SEO vs AEO: What AI Actually Reads When It Recommends Businesses",
+        "description": "Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps local businesses visible to AI search.",
+        "url": "https://digitalallies.net/learn/seo-aeo.html",
+        "author": { "@type": "Person", "name": "Anthony", "worksFor": { "@type": "Organization", "name": "Digital Allies" } },
+        "publisher": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
+        "dateModified": "2026-05-01",
+        "mainEntityOfPage": "https://digitalallies.net/learn/seo-aeo.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            { "@type": "Question", "name": "What is AEO?", "acceptedAnswer": { "@type": "Answer", "text": "AEO stands for Answer Engine Optimization. It structures your content so AI assistants like ChatGPT, Google AI Overviews, and Siri can find and recommend your business directly in their answers — not just in a list of search results." } },
+            { "@type": "Question", "name": "What is schema markup?", "acceptedAnswer": { "@type": "Answer", "text": "Schema markup is structured data in your website's code that explicitly labels what your business is — type, location, hours, services, prices. It tells AI exactly what you offer without requiring it to interpret your content." } },
+            { "@type": "Question", "name": "Does FAQ schema still matter after Google's 2026 update?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Google stopped showing FAQ rich results in search listings as of May 2026, but AI platforms including ChatGPT, Perplexity, and Google's AI Overviews still actively use FAQ schema to extract and cite information from business websites." } },
+            { "@type": "Question", "name": "How often should I update my site for AEO?", "acceptedAnswer": { "@type": "Answer", "text": "Monthly: verify directory listings and respond to reviews. Quarterly: publish new content and test AI search results. Annually: comprehensive directory audit and schema expansion." } }
+        ]
+    }
+    </script>
+
+</body>
+</html>

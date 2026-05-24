@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — Design System</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <style>
+    body { padding: 0; }
+    .hero { padding: 80px 40px 60px; max-width: 1100px; margin: 0 auto; }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+    .brand-name { font-family: var(--font-headers); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; }
+    .eb { font-family: var(--font-details); font-size: 11px; color: var(--signal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+    h1 { font-size: clamp(40px, 4.5vw, 56px); margin: 16px 0 20px; max-width: 880px; line-height: 1.05; letter-spacing: -0.012em; }
+    .lede { font-family: var(--font-body); font-size: 16px; line-height: 1.7; max-width: 640px; color: var(--fg); }
+    .section { padding: 32px 40px; max-width: 1100px; margin: 0 auto; }
+    .section h2 { font-family: var(--font-headers); font-weight: 700; font-size: 24px; margin: 0 0 4px; }
+    .section .cap { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); letter-spacing: 0.05em; margin-bottom: 26px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
+    .tile { border: 1px solid var(--charcoal); background: var(--bg); padding: 22px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; min-height: 116px; transition: all 0.2s var(--ease-snap); }
+    .tile:hover { background: var(--bg-alt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .tile .t-tag { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; }
+    .tile .t-name { font-family: var(--font-headers); font-weight: 700; font-size: 17px; }
+    .tile .t-desc { font-family: var(--font-body); font-size: 12px; line-height: 1.55; color: var(--fg-muted); margin-top: 4px; }
+    .pinned-row { margin: 40px 0 20px; }
+    footer { padding: 60px 40px; text-align: center; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); border-top: 1px solid var(--hairline); margin-top: 60px; }
+    footer .sep { color: var(--signal); }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="brand">
+      <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+      <span class="brand-name">Digital Allies</span>
+    </div>
+    <div class="eb">Identity · Style Manual · Spec Sheet</div>
+    <h1>The Digital Allies Design System.</h1>
+    <p class="lede">Voice rules, color and type tokens, icon and logo assets, a UI kit recreating <code style="background: var(--bg-alt); padding: 1px 6px; font-family: var(--font-details); font-size: 13px; border: 1px solid var(--hairline);">digitalallies.net</code>, and brand-correct slide templates — everything you need to design on-brand for Anthony's shop in Kingman, AZ.</p>
+
+    <div class="pinned-row">
+      <div class="da-pinned" style="max-width: 540px;">
+        <p style="margin:0; font-style: italic; font-size: 13px; line-height: 1.65;">
+          "Clean engineering, clear communication, and follow-through that won't require follow up."
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Foundations</h2>
+    <div class="cap">Read these first.</div>
+    <div class="grid">
+      <a class="tile" href="README.md">
+        <span class="t-tag">README</span>
+        <span class="t-name">The brand book</span>
+        <span class="t-desc">Voice, content fundamentals, visual foundations, iconography, sample copy.</span>
+      </a>
+      <a class="tile" href="colors_and_type.css">
+        <span class="t-tag">CSS Tokens</span>
+        <span class="t-name">colors_and_type.css</span>
+        <span class="t-desc">All design tokens — colors, type scale, spacing, motion. Import this into anything you build.</span>
+      </a>
+      <a class="tile" href="SKILL.md">
+        <span class="t-tag">Skill</span>
+        <span class="t-name">SKILL.md</span>
+        <span class="t-desc">Cross-compatible skill manifest for use as a Claude Code skill or design-agent context.</span>
+      </a>
+    </div>
+
+    <h2>Build Kits</h2>
+    <div class="cap">Composable artifacts.</div>
+    <div class="grid">
+      <a class="tile" href="ui_kits/website/index.html">
+        <span class="t-tag">UI Kit · Website</span>
+        <span class="t-name">digitalallies.net</span>
+        <span class="t-desc">Nav, hero, jargon jar, departments, diagrams, pricing, reliability, field notes, footer — as JSX components.</span>
+      </a>
+      <a class="tile" href="slides/index.html">
+        <span class="t-tag">Slides · 16:9</span>
+        <span class="t-name">Slide templates</span>
+        <span class="t-desc">Seven brand-correct slides: title, section, content, comparison, quote, stats, end card.</span>
+      </a>
+      <a class="tile" href="preview/colors-core.html">
+        <span class="t-tag">Preview cards</span>
+        <span class="t-name">/preview/*</span>
+        <span class="t-desc">~25 single-purpose specimens — palette, type, spacing, components, brand assets.</span>
+      </a>
+    </div>
+
+    <h2>Assets</h2>
+    <div class="cap">Drop-in files.</div>
+    <div class="grid">
+      <a class="tile" href="assets/logo-banner-blue.png">
+        <span class="t-tag">Logos</span>
+        <span class="t-name">/assets/logo-*</span>
+        <span class="t-desc">Pulse-dot lockups (blue + vermilion), wordmark, monogram, favicon.</span>
+      </a>
+      <a class="tile" href="assets/icon-compass.png">
+        <span class="t-tag">Icons</span>
+        <span class="t-name">/assets/icon-*</span>
+        <span class="t-desc">The Artifact Icons — topo, compass, rotary phone, metronome, engine, Route 66.</span>
+      </a>
+      <a class="tile" href="assets/photo-kingman-highway.png">
+        <span class="t-tag">Imagery</span>
+        <span class="t-name">/assets/photo-* · brand-art-*</span>
+        <span class="t-desc">Kingman highway photo, abstract wavy-line banners, luminous-blue-dot tiles, suspension bridge.</span>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Digital Allies · Est. 2024 · Kingman, AZ</span>
+    <span class="sep" style="margin: 0 14px">·</span>
+    <span>contact@digitalallies.net</span>
+    <span class="sep" style="margin: 0 14px">·</span>
+    <span>(928) 228-5769</span>
+  </footer>
+</body>
+</html>
