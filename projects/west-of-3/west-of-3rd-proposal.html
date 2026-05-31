@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>West of 3rd — Website Proposal</title>
+  <style>
+    @import url('<https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap>');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body { background-color: #EBEBDE; font-family: 'Lexend Deca', Arial, sans-serif; color: #1E2420; padding: 32px 16px; }
+
+    .wrapper { max-width: 640px; margin: 0 auto; background: #F6F4EE; border: 1px solid #D8D4C4; }
+
+    .header { padding: 36px 40px 28px; border-bottom: 1px solid #D8D4C4; background: #274b3a; color: #F6F4EE; }
+
+    .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #A8C8A0; margin-bottom: 8px; }
+
+    .title { font-size: 22px; font-weight: 600; color: #F6F4EE; line-height: 1.2; margin-bottom: 16px; }
+
+    .meta-row { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #8aaa92; line-height: 1.9; }
+
+    .preview-link { display: block; margin-top: 14px; padding: 10px 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #A8C8A0; text-decoration: none; word-break: break-all; line-height: 1.6; }
+
+    .preview-link span { display: block; color: #8aaa92; font-size: 8px; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .body { padding: 0 40px; }
+
+    .section { padding: 24px 0 0; border-top: 1px solid #D8D4C4; margin-top: 24px; }
+
+    .section:first-child { border-top: none; margin-top: 0; padding-top: 28px; }
+
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #1a3d2b; font-weight: 600; margin-bottom: 8px; }
+
+    h2 { font-size: 14px; font-weight: 600; color: #1E2420; margin-bottom: 10px; line-height: 1.3; }
+
+    p { font-size: 13px; line-height: 1.75; color: #1E2420; margin-bottom: 10px; }
+
+    ul { list-style: none; margin: 8px 0 10px; }
+
+    ul li { font-size: 13px; line-height: 1.75; color: #1E2420; padding-left: 14px; position: relative; margin-bottom: 4px; }
+
+    ul li::before { content: "—"; position: absolute; left: 0; color: #274b3a; }
+
+    .step { margin-bottom: 14px; }
+
+    .step-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; color: #274b3a; margin-bottom: 4px; display: block; }
+
+    .callout { background: #E8F0E4; border: 1px solid #C5D9C0; padding: 14px 16px; margin: 14px 0; font-size: 13px; line-height: 1.7; }
+
+    .callout strong { color: #274b3a; }
+
+    .callout-warm { background: #F5EDE3; border: 1px solid #D9C9B5; padding: 14px 16px; margin: 14px 0; font-size: 13px; line-height: 1.7; }
+
+    .network-block { background: #274b3a; color: #F6F4EE; padding: 20px; margin: 14px 0; }
+
+    .network-block .nb-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: #A8C8A0; margin-bottom: 10px; }
+
+    .network-block .nb-stat { font-size: 28px; font-weight: 600; line-height: 1.1; margin-bottom: 4px; }
+
+    .network-block .nb-desc { font-size: 12px; color: #8aaa92; line-height: 1.6; }
+
+    .network-row { display: flex; gap: 1px; background: #3d6b52; margin-top: 14px; }
+
+    .network-cell { flex: 1; background: #274b3a; padding: 12px; }
+
+    .network-cell .nc-name { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #A8C8A0; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+
+    .network-cell .nc-desc { font-size: 11px; color: #8aaa92; line-height: 1.5; }
+
+    .business-tag { display: inline-block; background: #274b3a; color: #A8C8A0; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; margin: 2px 2px 2px 0; }
+
+    .two-col { display: table; width: 100%; border-top: 1px solid #D8D4C4; border-collapse: collapse; }
+
+    .col { display: table-cell; width: 50%; padding: 16px 16px 16px 0; vertical-align: top; }
+
+    .col+.col { padding-left: 20px; border-left: 1px solid #D8D4C4; }
+
+    .col h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #1E2420; margin-bottom: 10px; }
+
+    .tools-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+
+    .tools-table thead tr { background: #274b3a; color: #F6F4EE; }
+
+    .tools-table thead th { padding: 8px 10px; text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
+
+    .tools-table tbody tr:nth-child(odd) { background: #F6F4EE; }
+
+    .tools-table tbody tr:nth-child(even) { background: #fff; }
+
+    .tools-table td { padding: 8px 10px; border: 1px solid #D8D4C4; vertical-align: top; line-height: 1.5; color: #1E2420; }
+
+    .tools-table .total-row td { background: #274b3a; color: #F6F4EE; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+    .price { font-family: 'JetBrains Mono', monospace; }
+
+    .note { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #888; margin-top: 8px; line-height: 1.7; }
+
+    .footer { margin-top: 32px; padding: 20px 40px; border-top: 1px solid #D8D4C4; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #aaa; text-align: center; letter-spacing: 0.06em; }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <div class="header">
+      <div class="eyebrow">Digital Allies — Proposal</div>
+      <div class="title">Website Proposal — West of 3rd</div>
+      <div class="meta-row">
+        Here's what I can build for you.<br>
+        Prepared by: Digital Allies &nbsp;·&nbsp; <digitalallies.net><br>
+        Project: Website Build + Digital Presence<br>
+        For: West of 3rd — 224 E Beale St, Downtown Kingman, AZ
+      </div>
+      <a class="preview-link" href="<https://digitalallies.net/projects/west-of-3/west-of-3rd-demo.html>" target="_blank">
+        <span>Live Site Demo</span>
+        <https://digitalallies.net/projects/west-of-3/west-of-3rd-demo.html>
+      </a>
+    </div>
+
+    <div class="body">
+
+      <div class="section" style="border-top:none; padding-top:28px;">
+        <div class="section-label">Context</div>
+        <h2>About West of 3rd</h2>
+        <p>West of 3rd is one of the most distinctive stops on Beale Street — a women-owned cooperative market at 224 E Beale St that brings together three in-house brands under one roof:</p>
+        <div style="margin: 12px 0;">
+          <span class="business-tag">Southwest Trading Co.</span>
+          <span class="business-tag">Wet Dirt.</span>
+          <span class="business-tag">Rosebird Farms</span>
+        </div>
+        <p>Together they offer handcrafted jewelry, herbal body care, an apothecary, locally sourced produce, raw milk, pasture-raised meat, and a curated selection of artisan goods — most sourced directly from local makers, gardeners, and creators. It's a 4.9-star operation with a deeply loyal following.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">What I Can Add</div>
+        <h2>A Site That Tells the Full Story</h2>
+        <p>West of 3rd's cooperative model — three distinct brands sharing a single space — gives you something worth showing online. I can build a site that brings Southwest Trading Co., Wet Dirt., and Rosebird Farms together under one roof digitally the same way you've done it in person.</p>
+        <p>Square POS stays exactly as-is. The site I build sits alongside it — a public-facing presence for discovery, browsing, and connection, while your existing tools keep running the store.</p>
+        <div class="callout-warm">
+          Three complementary brands under one address is a story worth telling. I build each one its own space on the site while keeping the West of 3rd identity front and center.
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Route 66 Visibility</div>
+        <h2>Reaching Visitors Before They Arrive</h2>
+        <p>Kingman sees a steady stream of Route 66 travelers making quick decisions about where to stop. I can make sure West of 3rd shows up for those searches — with your photos, your words, and your three-brand story — so visitors already know what to expect before they walk through the door.</p>
+        <p>I handle the local search setup: Google Business Profile, schema markup with your address and geo-coordinates, and category tagging for artisan market, apothecary, and local foods. The goal is for West of 3rd to appear accurately and completely wherever people are searching.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Digital Allies Co-Marketing Initiative</div>
+        <h2>The Downtown Kingman Collaborative</h2>
+        <p>I'm Anthony — based right here in Kingman. Part of what I do is connect downtown businesses so they show up collectively, not in isolation. I'm building a coordinated digital presence for Beale Street and surrounding corridor businesses, and West of 3rd fits naturally into that network.</p>
+        <p>This isn't a membership or an extra fee. It's built into how I structure your site from day one: proper cross-linking, shared category pages for Route 66 travel content, and schema markup that connects West of 3rd to the broader Kingman destination story. Each business keeps its own identity — I just make sure they point toward each other online the way they already do in person.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Deliverables</div>
+        <h2>What the Site Includes</h2>
+        <div class="step">
+          <span class="step-label">Homepage</span>
+          A visual-first layout that leads with what makes West of 3rd different — the cooperative model, the local sourcing, and the artisan aesthetic.
+        </div>
+        <div class="step">
+          <span class="step-label">Brand Sections for Each Imprint</span>
+          Short dedicated sections for Southwest Trading Co., Wet Dirt., and Rosebird Farms — each with its own voice and visual identity, unified under the West of 3rd header.
+        </div>
+        <div class="step">
+          <span class="step-label">Makers Directory</span>
+          A rotating grid of the local artisans, gardeners, and creators whose work is on the shelves.
+        </div>
+        <div class="step">
+          <span class="step-label">Local Search Optimization</span>
+          Google Business Profile update, local schema with address and geo-coordinates, and category markup for artisan market, apothecary, and local foods.
+        </div>
+        <div class="step">
+          <span class="step-label">Square Integration (Read-Only Display)</span>
+          I pull your existing Square product listings into a styled display — no changes to how you manage inventory. Square stays your source of truth.
+        </div>
+        <div class="step">
+          <span class="step-label">Email Capture + Welcome Flow</span>
+          A newsletter signup tied to a welcome sequence. Tone matches your brand — no salesy copy, just a sense of what's new in the market, who's making it, and when to visit.
+        </div>
+        <div class="two-col" style="margin-top: 16px;">
+          <div class="col">
+            <h3>What Stays the Same</h3>
+            <ul>
+              <li>Square POS — no changes at the register</li>
+              <li>Your existing Square Online stays live during the build</li>
+              <li>Inventory managed as you do it today</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>What I Add</h3>
+            <ul>
+              <li>A public-facing site that showcases all three brands</li>
+              <li>Local search presence for voice assistants and map platforms</li>
+              <li>A Makers Directory for the artisans and creators you carry</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin: 18px 0; padding: 14px 16px; background: #E8F0E4; border-left: 4px solid #274b3a; font-size: 12.5px; line-height: 1.7; color: #1E2420;">
+        <strong style="font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #274b3a;">Included on every Digital Allies website</strong><br><br>
+        Every site I build comes with bilingual tools — English and Spanish built in. Need another language? Just say the word. Every site also includes full accessibility in line with modern web standards (WCAG 2.1 AA) and a published accessibility statement.
+      </div>
+
+      <div class="section">
+        <div class="section-label">Tools Involved</div>
+        <table class="tools-table">
+          <thead><tr><th>Tool</th><th>What It Does</th></tr></thead>
+          <tbody>
+            <tr><td>Square (existing)</td><td>Inventory source of truth — no changes to your setup</td></tr>
+            <tr><td>Digital Allies Platform</td><td>Site hosting, page building, and network integration</td></tr>
+            <tr><td>Digital Allies Dynamic Collections</td><td>Makers directory and brand story content</td></tr>
+            <tr><td>MailerLite</td><td>Newsletter signup and email welcome sequence</td></tr>
+            <tr><td>Maps &amp; Content Sync</td><td>Google, Bing, and Apple Maps + automated on-brand posting</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Investment</div>
+        <h2>Pricing</h2>
+        <p>Everything is itemized — no surprises.</p>
+        <table class="tools-table">
+          <thead><tr><th>Item</th><th>Cost</th><th>Details</th></tr></thead>
+          <tbody>
+            <tr><td>Website Build</td><td class="price">$900</td><td>One-time. Full site build on the Digital Allies platform, three brand sections, Makers Directory, Square display integration, and local schema markup.</td></tr>
+            <tr><td>Hosting &amp; Site Monitoring</td><td class="price">$60 / mo</td><td>Ongoing. Covers hosting, uptime monitoring, and regular check-ins.</td></tr>
+            <tr><td>Local Search Setup</td><td class="price">$150</td><td>One-time. Google Business Profile, Bing Maps / Microsoft Places, and Apple Maps / Apple Business Connect — all three platforms claimed and optimized. Includes content sync: automated on-brand post scheduling so each of your three brands stays visible without extra effort.</td></tr>
+            <tr><td>Email Retention Setup</td><td class="price">$150</td><td>One-time. Newsletter signup, a 3-part welcome sequence, and a QR card template for in-store signage.</td></tr>
+            <tr><td>Square Display Integration</td><td class="price">$0 added</td><td>Uses your existing Square account — read-only product display, no new Square fees.</td></tr>
+            <tr class="total-row"><td>Full Launch</td><td class="price">$1,200 + $60 / mo</td><td>Everything above — website, local search, email retention, and hosting.</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Items can be added independently. The website build and hosting are the core — local search and email can follow.<br><br>I'm happy to phase this to align with your renovation timeline. The site build can start now and launch when the storefront is ready.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Timing</div>
+        <h2>I Can Work Around Your Schedule</h2>
+        <p>If a storefront renovation is in progress, I can time the site launch to align with it — or start the build now and go live whenever feels right. There's no pressure on the timeline.</p>
+        <p>Happy to walk through the demo and talk through how the Makers Directory would work for your specific roster of creators whenever that's useful.</p>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      Digital Allies &nbsp;&mdash;&nbsp; <digitalallies.net> &nbsp;&mdash;&nbsp; Kingman, AZ
+    </div>
+
+  </div>
+</body>
+</html>
