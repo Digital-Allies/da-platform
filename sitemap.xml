@@ -65,4 +65,39 @@
        <priority>0.2000</priority>
   </url>
 
+
+  <url>
+       <loc>https://digitalallies.net/learn/ada-compliance</loc>
+       <lastmod>2026-06-03T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.8000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/learn/bilingual-web</loc>
+       <lastmod>2026-06-03T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.8000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/learn/dept-cooperation</loc>
+       <lastmod>2026-06-03T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.8000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/learn/design-bureau</loc>
+       <lastmod>2026-06-03T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.8000</priority>
+  </url>
+
+  <url>
+       <loc>https://digitalallies.net/learn/self-governing-bureau</loc>
+       <lastmod>2026-06-03T00:00:00+00:00</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.8000</priority>
+  </url>
 </urlset>
