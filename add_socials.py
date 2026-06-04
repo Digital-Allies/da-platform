@@ -1,5 +1,4 @@
 import re
-import glob
 
 socials_html_index = """
                 <div class="mt-8 flex flex-wrap gap-4 text-xs font-bold tracking-widest uppercase">
