@@ -1,4 +1,6 @@
 
+import json
+
 pages_data = {
     'learn/dept-cooperation.html': {
         'name': 'System Integrations',
@@ -34,14 +36,19 @@ for filepath, data in pages_data.items():
     if '<script type="application/ld+json">' in content:
         continue # Already has schema
 
+    name_json = json.dumps(data['name'])
+    service_type_json = json.dumps(data['serviceType'])
+    description_json = json.dumps(data['description'])
+    url_json = json.dumps(f"https://digitalallies.net/{filepath}")
+
     schema_json = f"""
     <script type="application/ld+json">
     {{
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "{data['name']}",
-        "serviceType": "{data['serviceType']}",
-        "description": "{data['description']}",
+        "name": {name_json},
+        "serviceType": {service_type_json},
+        "description": {description_json},
         "provider": {{
             "@type": "LocalBusiness",
             "@id": "https://digitalallies.net/#business",
@@ -58,12 +65,12 @@ for filepath, data in pages_data.items():
             "@type": "Country",
             "name": "United States"
         }},
-        "url": "https://digitalallies.net/{filepath.replace('.html', '')}"
+        "url": {url_json}
     }}
     </script>
 """
-    # Insert schema before </head>
-    content = content.replace('</head>', schema_json + '</head>')
+    # Insert schema before the first </head> only
+    content = content.replace('</head>', schema_json + '</head>', 1)
 
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)

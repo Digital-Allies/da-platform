@@ -1,4 +1,5 @@
 import re
+import html
 
 # Learn pages to add
 pages = [
@@ -37,6 +38,7 @@ with open('sitemap.html', 'r', encoding='utf-8') as f:
     html_content = f.read()
 
 html_insert = ""
+inserted_pages = 0
 for page in pages:
     url_path = page.replace('.html', '')
     if url_path not in html_content:
@@ -48,6 +50,9 @@ for page in pages:
         
         desc_match = re.search(r'<meta name="description" content="(.*?)">', page_content)
         desc = desc_match.group(1) if desc_match else ""
+
+        safe_title = html.escape(title, quote=True)
+        safe_desc = html.escape(desc, quote=True)
         
         # En and Es are roughly the same for simplicity since the existing ones use same or translation.
         # We'll just put the english in both data-en and data-es for the sitemap since we don't have the explicit translations for these new pages unless we parse them.
@@ -55,14 +60,15 @@ for page in pages:
         html_insert += f"""
                         <li class="lpage">
                             <a href="https://digitalallies.net/{url_path}"
-                                data-en="{title}"
-                                data-es="{title}"
-                                title="{title}">{title}</a>
+                                data-en="{safe_title}"
+                                data-es="{safe_title}"
+                                title="{safe_title}">{safe_title}</a>
                             <br /><small
-                                data-en="{desc}"
-                                data-es="{desc}">{desc}</small>
+                                data-en="{safe_desc}"
+                                data-es="{safe_desc}">{safe_desc}</small>
                         </li>
 """
+        inserted_pages += 1
 
 if html_insert:
     # Insert right before the last </ul> of the pagelist
@@ -74,7 +80,7 @@ if html_insert:
         count_match = re.search(r'<span class="lcount">(\d+) pages</span>', html_content)
         if count_match:
             current_count = int(count_match.group(1))
-            new_count = current_count + len(pages)
+            new_count = current_count + inserted_pages
             html_content = html_content.replace(f'<span class="lcount">{current_count} pages</span>', f'<span class="lcount">{new_count} pages</span>')
             
         with open('sitemap.html', 'w', encoding='utf-8') as f:
