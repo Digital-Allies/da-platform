@@ -1,5 +1,4 @@
 import re
-import os
 
 # Learn pages to add
 pages = [
