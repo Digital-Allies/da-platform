@@ -1,5 +1,4 @@
 import re
-import glob
 
 # Learn pages to add
 pages = [
