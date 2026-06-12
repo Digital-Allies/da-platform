@@ -19,21 +19,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/lucide-da.js"></script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -427,8 +423,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                 });
                 // Re-initialize Lucide icons after content update
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-            }
+                }
 
             updateButtons(lang) {
                 ['en', 'es'].forEach(l => {

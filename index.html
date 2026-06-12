@@ -33,21 +33,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="twitter:description" content="Web design, systems integration, business automation, and tech support for small businesses in Kingman, AZ. Free initial consult. No ghosting guarantee.">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/lucide-da.js"></script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -561,7 +557,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div
                 class="dept-card bg-bone-white p-10 text-center transition-all duration-300 border-t-4 border-t-transparent hover:border-t-signal-red hover:bg-light-pink/20 border-b lg:border-b-0 lg:border-r border-gray-dark">
                 <div class="flex justify-center mb-6">
-                    <img src="assets/departments/design-icon.webp" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
+                    <img src="assets/design-icon.png" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
                         style="background: transparent;">
                 </div>
                 <h3 class="font-headers font-bold text-lg mb-1" data-en="The Design Bureau" data-es="El Buró de Diseño">
@@ -580,7 +576,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div
                 class="dept-card bg-bone-white p-10 text-center transition-all duration-300 border-t-4 border-t-transparent hover:border-t-primary-blue hover:bg-light-pink/20 border-b lg:border-b-0 lg:border-r border-gray-dark">
                 <div class="flex justify-center mb-6">
-                    <img src="assets/departments/integrations-icon.webp" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
+                    <img src="assets/integrations-icon.png" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
                         style="background: transparent;">
                 </div>
                 <h3 class="font-headers font-bold text-lg mb-1" data-en="Dept. of Cooperation"
@@ -599,7 +595,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div
                 class="dept-card bg-bone-white p-10 text-center transition-all duration-300 border-t-4 border-t-transparent hover:border-t-signal-red hover:bg-light-pink/20 border-b lg:border-b-0 lg:border-r border-gray-dark">
                 <div class="flex justify-center mb-6">
-                    <img src="assets/departments/automation-icon.webp" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
+                    <img src="assets/automation-icon.png" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
                         style="background: transparent;">
                 </div>
                 <h3 class="font-headers font-bold text-lg mb-1" data-en="The Self-Governing Bureau"
@@ -616,7 +612,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <!-- Support -->
             <div class="dept-card bg-bone-white p-10 text-center transition-all duration-300 border-t-4 border-t-transparent hover:border-t-primary-blue hover:bg-light-pink/20">
                 <div class="flex justify-center mb-6">
-                    <img src="assets/departments/support-icon.webp" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
+                    <img src="assets/support-icon.png" alt="" aria-hidden="true" class="w-28 h-28 object-contain"
                         style="background: transparent;">
                 </div>
                 <h3 class="font-headers font-bold text-lg mb-1" data-en="The Permanent Observation Post"
@@ -662,8 +658,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="px-6 pb-8 md:px-12 md:pb-12 border-t border-gray-dark/10 pt-6">
                     <div class="flex flex-col items-center text-center">
                         <picture class="w-full max-w-5xl mb-8">
-                            <source media="(min-width: 768px)" srcset="assets/diagrams/aeo-seo-overview.webp">
-                            <img src="assets/diagrams/aeo-seo-overview-mobile.webp"
+                            <source media="(min-width: 768px)" srcset="diagrams/aeo-seo-overview.png">
+                            <img src="diagrams/aeo-seo-overview-mobile.png"
                                 alt="AEO and SEO search process diagram showing how user search queries flow through traditional SEO (Google, Bing) and AI-driven AEO (ChatGPT, AI assistants) to reach your business platform"
                                 class="w-full object-contain rounded-lg">
                         </picture>
@@ -675,8 +671,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             and fix the parts that keep you invisible.
                         </p>
                         <picture class="w-full max-w-5xl">
-                            <source media="(min-width: 768px)" srcset="assets/diagrams/aeo-seo-detail.webp">
-                            <img src="assets/diagrams/aeo-seo-detail-mobile.webp"
+                            <source media="(min-width: 768px)" srcset="diagrams/aeo-seo-detail.png">
+                            <img src="diagrams/aeo-seo-detail-mobile.png"
                                 alt="AEO and SEO technical architecture detail showing SEO components (Schema Markup, Structured Data, Meta Tags, Semantic HTML) and AEO components (Conversational Content, Entity Recognition, Knowledge Graph, Featured Snippets)"
                                 class="w-full object-contain rounded-lg">
                         </picture>
@@ -696,8 +692,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="px-6 pb-8 md:px-12 md:pb-12 border-t border-gray-dark/10 pt-6">
                     <div class="flex flex-col items-center text-center">
                         <picture class="w-full max-w-5xl mb-8">
-                            <source media="(min-width: 768px)" srcset="assets/diagrams/process.webp">
-                            <img src="assets/diagrams/process-mobile.webp"
+                            <source media="(min-width: 768px)" srcset="diagrams/process.png">
+                            <img src="diagrams/process-mobile.png"
                                 alt="Four-step process flowchart: Step 1 Discover (learn about your business), Step 2 Design (plan the solution), Step 3 Build (develop and implement), Step 4 Maintain (ongoing support and optimization)"
                                 class="w-full object-contain rounded-lg">
                         </picture>
@@ -724,8 +720,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="px-6 pb-8 md:px-12 md:pb-12 border-t border-gray-dark/10 pt-6">
                     <div class="flex flex-col items-center text-center">
                         <picture class="w-full max-w-5xl mb-8">
-                            <source media="(min-width: 768px)" srcset="assets/diagrams/language-overview.webp">
-                            <img src="assets/diagrams/language-overview-mobile.webp"
+                            <source media="(min-width: 768px)" srcset="diagrams/language-overview.png">
+                            <img src="diagrams/language-overview-mobile.png"
                                 alt="Language and Accessibility architecture overview showing Website Hub branching to Bilingual Support, WCAG Compliance, Keyboard Navigation, Screen Reader Compatibility, and Inclusive Design"
                                 class="w-full object-contain rounded-lg">
                         </picture>
@@ -737,8 +733,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             Every toggle is screen-reader friendly.
                         </p>
                         <picture class="w-full max-w-5xl">
-                            <source media="(min-width: 768px)" srcset="assets/diagrams/language-detail.webp">
-                            <img src="assets/diagrams/language-detail-mobile.webp"
+                            <source media="(min-width: 768px)" srcset="diagrams/language-detail.png">
+                            <img src="diagrams/language-detail-mobile.png"
                                 alt="Language and Accessibility technical implementation detail showing three layers: User Interface (language toggle, font controls, contrast modes), Implementation (data attributes, ARIA labels, semantic HTML5), and Standards (WCAG 2.1 AA, ADA Section 508, i18n)"
                                 class="w-full object-contain rounded-lg">
                         </picture>
@@ -991,9 +987,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- Full landscape suspension bridge -->
         <div class="mt-20 px-6 max-w-7xl mx-auto">
             <picture>
-                <source srcset="assets/suspension-bridge/suspension-bridge.svg" type="image/svg+xml">
-                <source srcset="assets/suspension-bridge/suspension-bridge-desktop.webp" type="image/webp">
-                <img src="assets/suspension-bridge/suspension-bridge-desktop.webp"
+                <source srcset="suspension bridge.svg" type="image/svg+xml">
+                <source srcset="suspension bridge.webp" type="image/webp">
+                <img src="suspension bridge.png"
                     alt="Suspension bridge illustration symbolizing reliability and connection"
                     class="w-full object-contain bridge-image" style="max-height: 400px;">
             </picture>
@@ -1408,8 +1404,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     }
                 });
                 // Re-initialize Lucide icons after content update
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-            }
+                }
 
             updateButtons(lang) {
                 ['en', 'es'].forEach(l => {
