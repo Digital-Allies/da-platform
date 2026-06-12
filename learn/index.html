@@ -661,11 +661,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <a href="/learn/video-training"
                 class="video-thumb-card structural-border p-5 no-underline text-gray-dark block">
-                <div
-                    class="aspect-video bg-gray-dark structural-border mb-4 flex items-center justify-center relative overflow-hidden">
-                    <iframe src="https://player.vimeo.com/video/1138710958" class="absolute inset-0 w-full h-full"
-                        allow="fullscreen" title="Editor 2.0 Overview"></iframe>
-                </div>
+                <div class="da-vimeo-facade aspect-video bg-gray-dark structural-border mb-4 flex items-center justify-center relative overflow-hidden cursor-pointer" data-vid="1138710958" data-title="Editor 2.0 Overview">
+    <img src="https://vumbnail.com/1138710958.jpg" alt="Editor 2.0 Overview thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-80" loading="lazy" onerror="this.style.display='none'">
+    <button class="da-play-btn relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-white/90 shadow-lg hover:bg-white transition" aria-label="Play video: Editor 2.0 Overview">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="#2D2D2D" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg>
+    </button>
+</div>
                 <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1" data-en="Editor Basics"
                     data-es="Básicos del Editor">Editor Basics</div>
                 <h4 class="font-headers font-bold text-sm" data-en="Editor 2.0 Overview"
@@ -674,11 +675,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <a href="/learn/video-training"
                 class="video-thumb-card structural-border p-5 no-underline text-gray-dark block">
-                <div
-                    class="aspect-video bg-gray-dark structural-border mb-4 flex items-center justify-center relative overflow-hidden">
-                    <iframe src="https://player.vimeo.com/video/1166427885" class="absolute inset-0 w-full h-full"
-                        allow="fullscreen" title="Add and Configure Bookings"></iframe>
-                </div>
+                <div class="da-vimeo-facade aspect-video bg-gray-dark structural-border mb-4 flex items-center justify-center relative overflow-hidden cursor-pointer" data-vid="1166427885" data-title="Add and Configure Bookings">
+    <img src="https://vumbnail.com/1166427885.jpg" alt="Add and Configure Bookings thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-80" loading="lazy" onerror="this.style.display='none'">
+    <button class="da-play-btn relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-white/90 shadow-lg hover:bg-white transition" aria-label="Play video: Add and Configure Bookings">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="#2D2D2D" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg>
+    </button>
+</div>
                 <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1" data-en="Bookings"
                     data-es="Reservas">Bookings</div>
                 <h4 class="font-headers font-bold text-sm" data-en="Add and Configure Bookings"
@@ -687,11 +689,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <a href="/learn/video-training"
                 class="video-thumb-card structural-border p-5 no-underline text-gray-dark block">
-                <div
-                    class="aspect-video bg-gray-dark structural-border mb-4 flex items-center justify-center relative overflow-hidden">
-                    <iframe src="https://player.vimeo.com/video/1165824245" class="absolute inset-0 w-full h-full"
-                        allow="fullscreen" title="Native Store Setup"></iframe>
-                </div>
+                <div class="da-vimeo-facade aspect-video bg-gray-dark structural-border mb-4 flex items-center justify-center relative overflow-hidden cursor-pointer" data-vid="1165824245" data-title="Native Store Setup">
+    <img src="https://vumbnail.com/1165824245.jpg" alt="Native Store Setup thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-80" loading="lazy" onerror="this.style.display='none'">
+    <button class="da-play-btn relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-white/90 shadow-lg hover:bg-white transition" aria-label="Play video: Native Store Setup">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="#2D2D2D" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg>
+    </button>
+</div>
                 <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1" data-en="eCommerce"
                     data-es="eCommerce">eCommerce</div>
                 <h4 class="font-headers font-bold text-sm" data-en="Native Store Setup"
@@ -953,6 +956,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
     </script>
 
+
+<script>
+(function () {
+  document.querySelectorAll('.da-vimeo-facade').forEach(function (el) {
+    el.querySelector('.da-play-btn').addEventListener('click', function () {
+      var vid = el.dataset.vid;
+      var title = el.dataset.title || 'Video';
+      el.innerHTML =
+        '<iframe src="https://player.vimeo.com/video/' + vid +
+        '?autoplay=1&dnt=1" class="absolute inset-0 w-full h-full"' +
+        ' allow="autoplay; fullscreen" allowfullscreen title="' + title +
+        '"></iframe>';
+    });
+  });
+}());
+</script>
 </body>
 
 </html>
