@@ -18,11 +18,11 @@
     <meta property="og:description" content="24.1% of Kingman residents are over 65. Alt-text isn't optional — it's how you serve your whole community.">
     <meta property="og:url" content="https://digitalallies.net/learn/alttext">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="../assets/css/a11y.css">
+
+    <script src="../assets/js/lucide-da.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -134,21 +134,21 @@
   "provider": {
     "@type": "LocalBusiness",
     "@id": "https://digitalallies.net/#business",
-    "name": "Digital Allies"
-  ,
-  "telephone": "+1-928-228-5769",
-  "sameAs": [
-    "https://www.instagram.com/digitalallies__",
-    "https://www.facebook.com/digitalallies",
-    "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
-  ]
+    "name": "Digital Allies",
+    "telephone": "+1-928-228-5769",
+    "sameAs": [
+      "https://www.instagram.com/digitalallies__",
+      "https://www.facebook.com/digitalallies",
+      "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+    ]
   },
   "areaServed": {
     "@type": "Place",
     "name": "Kingman, AZ"
   },
   "serviceType": "ADA Compliance, Web Accessibility, WCAG 2.1",
-  "url": "https://digitalallies.net/learn/alttext"
+  "url": "https://digitalallies.net/learn/alttext",
+  "dateModified": "2026-06-01"
 }
 </script>
 </head>
@@ -221,6 +221,8 @@
             <li class="text-signal-red">Alt-Text Guide</li>
         </ol>
     </nav>
+<main id="main-content" tabindex="-1">
+
 </div>
 
 <!-- HERO -->
@@ -868,7 +870,8 @@ renderAcc();
     <!-- ============================================================
          THE COMMAND CENTER (FOOTER)
     ============================================================= -->
-    <footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+    </main>
+<footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
 
             <!-- Left: Info -->
@@ -1058,8 +1061,7 @@ renderAcc();
                     }
                 });
                 // Re-initialize Lucide icons after content update
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-            }
+                }
 
             updateButtons(lang) {
                 ['en', 'es'].forEach(l => {
@@ -1089,38 +1091,84 @@ renderAcc();
 
     <!-- STRUCTURED DATA -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "Mastering Alt-Text: Good vs. Bad & Why It Matters",
-        "description": "Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker.",
-        "url": "https://digitalallies.net/learn/alttext",
-        "author": { "@type": "Person", "name": "Anthony", "worksFor": { "@type": "Organization", "name": "Digital Allies" ,
-  "telephone": "+1-928-228-5769",
-  "sameAs": [
-    "https://www.instagram.com/digitalallies__",
-    "https://www.facebook.com/digitalallies",
-    "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
-  ]
-  } },
-        "publisher": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
-        "dateModified": "2026-05-01",
-        "mainEntityOfPage": "https://digitalallies.net/learn/alttext"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mastering Alt-Text: Good vs. Bad & Why It Matters",
+  "description": "Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker.",
+  "url": "https://digitalallies.net/learn/alttext",
+  "author": {
+    "@type": "Person",
+    "name": "Anthony",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital Allies",
+      "telephone": "+1-928-228-5769",
+      "sameAs": [
+        "https://www.instagram.com/digitalallies__",
+        "https://www.facebook.com/digitalallies",
+        "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+      ]
     }
-    </script>
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net"
+  },
+  "dateModified": "2026-06-01",
+  "mainEntityOfPage": "https://digitalallies.net/learn/alttext"
+}
+</script>
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            { "@type": "Question", "name": "What is alt-text?", "acceptedAnswer": { "@type": "Answer", "text": "Alt-text (alternative text) is a written description added to an image's HTML that screen readers read aloud for visually impaired users, and that appears as visible text when an image fails to load. It also helps search engines understand image content." } },
-            { "@type": "Question", "name": "How long should alt-text be?", "acceptedAnswer": { "@type": "Answer", "text": "Alt-text should be under 125 characters. Most screen readers truncate after this limit. Be specific and descriptive, but concise. If an image requires a longer explanation, use a caption or surrounding body text instead." } },
-            { "@type": "Question", "name": "Should I write 'image of' at the start of alt-text?", "acceptedAnswer": { "@type": "Answer", "text": "No. Screen readers already announce that the element is an image before reading the alt-text. Starting with 'image of' or 'photo of' is redundant and makes the experience worse for users. Start directly with the description." } },
-            { "@type": "Question", "name": "What alt-text should decorative images have?", "acceptedAnswer": { "@type": "Answer", "text": "Decorative images — backgrounds, dividers, purely visual elements that add no informational value — should use an empty alt attribute: alt=\"\". This tells screen readers to skip the image entirely, which is the correct behavior." } },
-            { "@type": "Question", "name": "Does alt-text affect SEO?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Search engines use alt-text to understand image content, which affects how images appear in Google Image Search and contributes to page relevance for related queries. Descriptive alt-text on product and content images provides additional ranking signal." } }
-        ]
+      "@type": "Question",
+      "name": "What is alt-text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Alt-text (alternative text) is a written description added to an image's HTML that screen readers read aloud for visually impaired users, and that appears as visible text when an image fails to load. It also helps search engines understand image content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should alt-text be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Alt-text should be under 125 characters. Most screen readers truncate after this limit. Be specific and descriptive, but concise. If an image requires a longer explanation, use a caption or surrounding body text instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I write 'image of' at the start of alt-text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Screen readers already announce that the element is an image before reading the alt-text. Starting with 'image of' or 'photo of' is redundant and makes the experience worse for users. Start directly with the description."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What alt-text should decorative images have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Decorative images — backgrounds, dividers, purely visual elements that add no informational value — should use an empty alt attribute: alt=\"\". This tells screen readers to skip the image entirely, which is the correct behavior."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does alt-text affect SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Search engines use alt-text to understand image content, which affects how images appear in Google Image Search and contributes to page relevance for related queries. Descriptive alt-text on product and content images provides additional ranking signal."
+      }
     }
-    </script>
+  ],
+  "dateModified": "2026-06-01"
+}
+</script>
 
 
     <script>

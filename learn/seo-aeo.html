@@ -18,11 +18,11 @@
     <meta property="og:description" content="Schema markup, directory consistency, answer formatting — what AI actually reads when it recommends businesses.">
     <meta property="og:url" content="https://digitalallies.net/learn/seo-aeo">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="../assets/css/a11y.css">
+
+    <script src="../assets/js/lucide-da.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -137,14 +137,13 @@
   "provider": {
     "@type": "LocalBusiness",
     "@id": "https://digitalallies.net/#business",
-    "name": "Digital Allies"
-  ,
-  "telephone": "+1-928-228-5769",
-  "sameAs": [
-    "https://www.instagram.com/digitalallies__",
-    "https://www.facebook.com/digitalallies",
-    "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
-  ]
+    "name": "Digital Allies",
+    "telephone": "+1-928-228-5769",
+    "sameAs": [
+      "https://www.instagram.com/digitalallies__",
+      "https://www.facebook.com/digitalallies",
+      "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+    ]
   },
   "areaServed": {
     "@type": "Place",
@@ -157,7 +156,8 @@
     "priceCurrency": "USD",
     "description": "Free initial SEO/AEO audit"
   },
-  "url": "https://digitalallies.net/learn/seo-aeo"
+  "url": "https://digitalallies.net/learn/seo-aeo",
+  "dateModified": "2026-06-01"
 }
 </script>
 </head>
@@ -230,6 +230,8 @@
             <li class="text-signal-red">SEO vs AEO</li>
         </ol>
     </nav>
+<main id="main-content" tabindex="-1">
+
 </div>
 
 <!-- HERO -->
@@ -339,11 +341,11 @@
                 <!-- Inputs -->
                 <div class="p-8 border-r border-gray-dark space-y-4">
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Business Name</label>
+                        <label for="sg-name" class="block text-xs font-bold tracking-widest uppercase mb-2">Business Name</label>
                         <input id="sg-name" class="field" type="text" placeholder="El Palacio Kingman" oninput="SG.generate()">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Business Type</label>
+                        <label for="sg-type" class="block text-xs font-bold tracking-widest uppercase mb-2">Business Type</label>
                         <select id="sg-type" class="field" onchange="SG.generate()">
                             <option value="LocalBusiness">Local Business (General)</option>
                             <option value="Restaurant">Restaurant</option>
@@ -361,33 +363,33 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Street Address</label>
+                        <label for="sg-address" class="block text-xs font-bold tracking-widest uppercase mb-2">Street Address</label>
                         <input id="sg-address" class="field" type="text" placeholder="1234 Stockton Hill Rd" oninput="SG.generate()">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase mb-2">City</label>
+                            <label for="sg-city" class="block text-xs font-bold tracking-widest uppercase mb-2">City</label>
                             <input id="sg-city" class="field" type="text" placeholder="Kingman" oninput="SG.generate()">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold tracking-widest uppercase mb-2">State</label>
+                            <label for="sg-state" class="block text-xs font-bold tracking-widest uppercase mb-2">State</label>
                             <input id="sg-state" class="field" type="text" placeholder="AZ" oninput="SG.generate()">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Phone</label>
+                        <label for="sg-phone" class="block text-xs font-bold tracking-widest uppercase mb-2">Phone</label>
                         <input id="sg-phone" class="field" type="tel" placeholder="+1-928-555-0100" oninput="SG.generate()">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Website URL</label>
+                        <label for="sg-url" class="block text-xs font-bold tracking-widest uppercase mb-2">Website URL</label>
                         <input id="sg-url" class="field" type="url" placeholder="https://yoursite.com" oninput="SG.generate()">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Description (1–2 sentences)</label>
+                        <label for="sg-desc" class="block text-xs font-bold tracking-widest uppercase mb-2">Description (1–2 sentences)</label>
                         <textarea id="sg-desc" class="field" rows="2" placeholder="Family-owned restaurant serving Sonoran-style Mexican food in Kingman, AZ since 1998." oninput="SG.generate()"></textarea>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Price Range</label>
+                        <label for="sg-price" class="block text-xs font-bold tracking-widest uppercase mb-2">Price Range</label>
                         <select id="sg-price" class="field" onchange="SG.generate()">
                             <option value="$">$ — Inexpensive</option>
                             <option value="$$" selected>$$ — Moderate</option>
@@ -396,10 +398,10 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold tracking-widest uppercase mb-2">Hours (Mon–Fri)</label>
+                        <label for="sg-open" class="block text-xs font-bold tracking-widest uppercase mb-2">Hours (Mon–Fri)</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <input id="sg-open" class="field" type="time" value="09:00" oninput="SG.generate()">
-                            <input id="sg-close" class="field" type="time" value="17:00" oninput="SG.generate()">
+                            <input id="sg-open" class="field" type="time" value="09:00" aria-label="Opening time" oninput="SG.generate()">
+                            <input id="sg-close" class="field" type="time" value="17:00" aria-label="Closing time" oninput="SG.generate()">
                         </div>
                     </div>
                 </div>
@@ -889,7 +891,8 @@ renderAeo();
     <!-- ============================================================
          THE COMMAND CENTER (FOOTER)
     ============================================================= -->
-    <footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+    </main>
+<footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
 
             <!-- Left: Info -->
@@ -1079,8 +1082,7 @@ renderAeo();
                     }
                 });
                 // Re-initialize Lucide icons after content update
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-            }
+                }
 
             updateButtons(lang) {
                 ['en', 'es'].forEach(l => {
@@ -1110,37 +1112,76 @@ renderAeo();
 
     <!-- STRUCTURED DATA -->
     <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "SEO vs AEO: What AI Actually Reads When It Recommends Businesses",
-        "description": "Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps local businesses visible to AI search.",
-        "url": "https://digitalallies.net/learn/seo-aeo",
-        "author": { "@type": "Person", "name": "Anthony", "worksFor": { "@type": "Organization", "name": "Digital Allies" ,
-  "telephone": "+1-928-228-5769",
-  "sameAs": [
-    "https://www.instagram.com/digitalallies__",
-    "https://www.facebook.com/digitalallies",
-    "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
-  ]
-  } },
-        "publisher": { "@type": "Organization", "name": "Digital Allies", "url": "https://digitalallies.net" },
-        "dateModified": "2026-05-01",
-        "mainEntityOfPage": "https://digitalallies.net/learn/seo-aeo"
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SEO vs AEO: What AI Actually Reads When It Recommends Businesses",
+  "description": "Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps local businesses visible to AI search.",
+  "url": "https://digitalallies.net/learn/seo-aeo",
+  "author": {
+    "@type": "Person",
+    "name": "Anthony",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital Allies",
+      "telephone": "+1-928-228-5769",
+      "sameAs": [
+        "https://www.instagram.com/digitalallies__",
+        "https://www.facebook.com/digitalallies",
+        "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+      ]
     }
-    </script>
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net"
+  },
+  "dateModified": "2026-06-01",
+  "mainEntityOfPage": "https://digitalallies.net/learn/seo-aeo"
+}
+</script>
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
     {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            { "@type": "Question", "name": "What is AEO?", "acceptedAnswer": { "@type": "Answer", "text": "AEO stands for Answer Engine Optimization. It structures your content so AI assistants like ChatGPT, Google AI Overviews, and Siri can find and recommend your business directly in their answers — not just in a list of search results." } },
-            { "@type": "Question", "name": "What is schema markup?", "acceptedAnswer": { "@type": "Answer", "text": "Schema markup is structured data in your website's code that explicitly labels what your business is — type, location, hours, services, prices. It tells AI exactly what you offer without requiring it to interpret your content." } },
-            { "@type": "Question", "name": "Does FAQ schema still matter after Google's 2026 update?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Google stopped showing FAQ rich results in search listings as of May 2026, but AI platforms including ChatGPT, Perplexity, and Google's AI Overviews still actively use FAQ schema to extract and cite information from business websites." } },
-            { "@type": "Question", "name": "How often should I update my site for AEO?", "acceptedAnswer": { "@type": "Answer", "text": "Monthly: verify directory listings and respond to reviews. Quarterly: publish new content and test AI search results. Annually: comprehensive directory audit and schema expansion." } }
-        ]
+      "@type": "Question",
+      "name": "What is AEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEO stands for Answer Engine Optimization. It structures your content so AI assistants like ChatGPT, Google AI Overviews, and Siri can find and recommend your business directly in their answers — not just in a list of search results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is schema markup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema markup is structured data in your website's code that explicitly labels what your business is — type, location, hours, services, prices. It tells AI exactly what you offer without requiring it to interpret your content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does FAQ schema still matter after Google's 2026 update?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Google stopped showing FAQ rich results in search listings as of May 2026, but AI platforms including ChatGPT, Perplexity, and Google's AI Overviews still actively use FAQ schema to extract and cite information from business websites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I update my site for AEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monthly: verify directory listings and respond to reviews. Quarterly: publish new content and test AI search results. Annually: comprehensive directory audit and schema expansion."
+      }
     }
-    </script>
+  ],
+  "dateModified": "2026-06-01"
+}
+</script>
 
 
     <script>

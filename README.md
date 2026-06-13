@@ -2,48 +2,78 @@
 
 **AI Consultant & Tech Services for Small Businesses — Kingman, AZ**
 
-> Clean engineering, clear communication, and follow-through that won't require follow up.
+> Clean engineering, clear communication, and follow-through that won't require follow-up.
 
 ---
 
 ## What This Repo Is
 
-This is the source for [digitalallies.net](https://digitalallies.net) — a single-file HTML website built without frameworks, dependencies, or build tools. It's fast, accessible, bilingual, and structured for both traditional search engines and AI assistants.
+Source for [digitalallies.net](https://digitalallies.net) — a multi-page static HTML site
+built without frameworks. Fast, accessible, bilingual (EN/ES), and structured for both
+traditional search engines and AI assistants.
 
 ---
 
 ## Stack
 
-- HTML5 with semantic markup and ARIA roles
-- Tailwind CSS (CDN — no build step)
-- Vanilla JavaScript — no frameworks
-- Lucide Icons (CDN)
-- Google Fonts: Lexend Deca + JetBrains Mono
-- FormSubmit for contact form handling
-- JSON-LD structured data (LocalBusiness, WebSite, FAQPage, Service schemas)
+| Layer | Tool | Notes |
+|---|---|---|
+| CSS | Tailwind CSS 3 (built) | `assets/css/tailwind.min.css` — no CDN |
+| Icons | Lucide v1.17.0 (custom build) | `assets/js/lucide-da.js` — 4 icons, 3 KB |
+| Fonts | JetBrains Mono + Lexend Deca | `assets/fonts/` — woff2, latin + latin-ext via @fontsource |
+| JS | Vanilla | No frameworks |
+| Schema | JSON-LD | LocalBusiness, WebSite, FAQPage, Service, Article per page |
+| Hosting | Cloudflare Pages | `_headers` for 1-year asset cache |
+| Forms | FormSubmit | No server required |
 
 ---
 
-## Site Structure
+## Folder Structure
 
 ```
 digitalallies.net/
-├── index.html              # Main site — hero, services, pricing, FAQ, contact
-├── brand.html              # Brand guide — colors, typography, grid system, asset portal
-├── favicon.svg
-├── suspension bridge.png   # Hero section illustration
+├── index.html                  # Home: hero, services, pricing, FAQ, contact
+├── brand.html                  # Brand guide: colors, typography, grid, asset portal
+├── cookies.html
+├── privacy.html
+├── terms.html
+├── sitemap.html
+├── sitemap.xml
+├── robots.txt
+├── _headers                    # Cloudflare cache headers
+├── _redirects                  # Cloudflare redirects (e.g. /learn/video-training → /learn/)
+├── favicon.svg / favicon.png
+│
 ├── assets/
-│   ├── Brand System/       # Logos, icons, document templates, ads, media
-│   ├── design-icon.png
-│   ├── integrations-icon.png
-│   ├── automation-icon.png
-│   └── support-icon.png
-├── diagrams/               # AEO/SEO, process, language/accessibility diagrams
-└── learn/
-    ├── index.html          # Learning Hub — guides and video training index
-    ├── seo-aeo.html        # Interactive guide: SEO vs AEO, schema generator, checklists
-    ├── alttext.html        # Interactive guide: alt text best practices and live checker
-    └── video-training.html # 100+ Vimeo platform tutorials with category filter
+│   ├── css/
+│   │   ├── tailwind.min.css    # Tailwind production build (self-hosted)
+│   │   └── a11y.css            # WCAG 2.1 AA overrides (e.g. contrast fix)
+│   ├── js/
+│   │   └── lucide-da.js        # Custom 4-icon Lucide bundle
+│   ├── fonts/
+│   │   ├── fonts.css           # @font-face declarations
+│   │   ├── jetbrains-mono-*.woff2
+│   │   └── lexend-deca-*.woff2
+│   ├── diagrams/               # Diagram images (.webp)
+│   ├── departments/            # Department icon images (.webp)
+│   └── suspension-bridge/      # Hero illustration assets
+│
+├── learn/
+│   ├── index.html              # Learning Hub (CollectionPage schema)
+│   ├── seo-aeo.html            # Interactive SEO/AEO guide + schema generator
+│   ├── alttext.html            # Alt-text guide + live checker
+│   ├── ada-compliance.html     # ADA & web accessibility
+│   ├── bilingual-web.html      # Bilingual web design
+│   ├── dept-cooperation.html   # App integrations
+│   ├── design-bureau.html      # Design & brand
+│   └── self-governing-bureau.html  # Business automation
+│
+├── scripts/                    # Utility Python scripts (not part of build)
+│   ├── README.md
+│   └── *.py
+│
+└── docs/
+    └── CODE-STANDARDS.md       # This file's companion — coding standards
 ```
 
 ---
@@ -51,60 +81,27 @@ digitalallies.net/
 ## Key Features
 
 **Bilingual (EN/ES)**
-Full content toggle via a `LanguageController` class. Language preference persists in `localStorage`. Screen reader announcements fire on toggle. No page reload.
+Full content toggle via `LanguageController`. Language persists in `localStorage`.
+Screen reader announcements fire on toggle. No page reload. All text uses
+`data-en` / `data-es` attributes.
 
-**Accessibility**
-WCAG 2.1 Level AA compliant. Full keyboard navigation. ARIA roles, labels, and landmark regions throughout. `prefers-reduced-motion` respected. Screen reader-friendly language toggle.
+**Accessibility — WCAG 2.1 AA**
+All pages: semantic landmarks, `<main id="main-content">`, ARIA labels,
+focus management, `prefers-reduced-motion`. Color contrast enforced via `a11y.css`
+(Pulse Blue #3A7BD5 → #1D5FAD for text on bone-white background, 5.4:1 ratio).
 
-**AEO & Structured Data**
-Every page has JSON-LD schema. `index.html` uses a combined array block covering `LocalBusiness`, `WebSite`, and `FAQPage`. Learn pages each carry `Article`, `FAQPage`, and `Service` schemas relevant to their content. The `knowsAbout` field on the `LocalBusiness` schema covers AI consulting, SEO/AEO, web design, and accessibility — targeting both traditional and AI-driven search.
+**Structured Data**
+Every page has JSON-LD schema. Learn pages carry both Service and Article schemas.
+`index.html` and `learn/seo-aeo.html` include FAQPage. See `assets/docs/CODE-STANDARDS.md`
+for the full schema matrix.
 
-**No-Framework JavaScript**
-Language switching, symmetry demos, interactive checklists, schema generators, and video filtering all run on vanilla JS class instances. No React, no Vue, no build pipeline.
-
----
-
-## Services Covered
-
-| Service | Price |
-|---|---|
-| AI Consulting | Free |
-| Tech Consulting | Free |
-| Brand Discovery | Free |
-| AEO & SEO Audit | Free |
-| Website Design | From $800 |
-| Graphic Design | From $100 |
-| Full Project Build | From $800 |
-| Monthly Maintenance | From $60 |
-| Automation Setup | Quoted |
-
----
-
-## Local SEO Signals
-
-- **Address:** Kingman, Arizona (Mojave County)
-- **Phone:** (928) 228-5769
-- **Email:** contact@digitalallies.net
-- **`areaServed`:** GeoCircle — 100km radius from Kingman coordinates (35.1894, -114.0530)
-- **`knowsLanguage`:** en, es
-- **`priceRange`:** Free–$$$
-
----
-
-## Schema Coverage
-
-| Page | Schema Types |
-|---|---|
-| `index.html` | LocalBusiness, WebSite, FAQPage (AI consulting, AEO, ghosting guarantee) |
-| `learn/seo-aeo.html` | Article, FAQPage, Service (SEO/AEO) |
-| `learn/alttext.html` | Article, FAQPage, Service (ADA/Accessibility) |
-| `learn/index.html` | CollectionPage |
+**No-Build JavaScript**
+Language switching, symmetry demos, interactive checklists, schema generators
+all run on vanilla JS class instances. The only "build" is Tailwind CSS.
 
 ---
 
 ## Running Locally
-
-No build step. Open any `.html` file directly in a browser, or serve the root with any static file server:
 
 ```bash
 npx serve .
@@ -112,15 +109,16 @@ npx serve .
 python3 -m http.server 8080
 ```
 
-Tailwind and Lucide load from CDN. No `npm install` required.
+No `npm install` required for the site itself. To rebuild Tailwind or the Lucide bundle,
+see `assets/docs/CODE-STANDARDS.md`.
 
 ---
 
 ## Deployment
 
-Push to GitHub. Deploy via GitHub Pages, Netlify, or any static host. After each deploy, submit updated pages for reindexing via [Google Search Console](https://search.google.com/search-console).
+Push to `site-overhaul-2026` branch → merge to `main` → Cloudflare Pages auto-deploys.
 
-Priority reindex targets after a schema or meta update:
+After any schema or meta update, reindex these URLs in Google Search Console:
 - `https://digitalallies.net/`
 - `https://digitalallies.net/learn/seo-aeo`
 - `https://digitalallies.net/learn/alttext`
@@ -129,17 +127,19 @@ Priority reindex targets after a schema or meta update:
 
 ## Brand Tokens
 
-| Name | Hex |
-|---|---|
-| Bone White | `#F9F6F0` |
-| Charcoal Grey | `#2D2D2D` |
-| Pulse Blue | `#3A7BD5` |
-| Light Pink | `#FADEEB` |
-| Signal Red | `#C5301A` |
+| Token | Hex | Usage |
+|---|---|---|
+| Bone White | `#F9F6F0` | Background |
+| Charcoal | `#2D2D2D` | Text, borders |
+| Pulse Blue | `#3A7BD5` | Links, accents (use `#1D5FAD` for text on bone-white) |
+| Signal Red | `#C5301A` | Labels, CTAs |
+| Light Pink | `#FADEEB` | Hover states |
 
-Typography: `Lexend Deca` (headers), `JetBrains Mono` (body/details)
+Typography: `Lexend Deca` (headers, body) · `JetBrains Mono` (code, detail labels)
 
-Grid: 20px Technical Lace canvas with 0.5px structural borders at `#2D2D2D`
+Grid: 20px Technical Lace canvas · 0.5px structural borders at `#2D2D2D`
+
+**For full brand guidance:** use the `digital-allies-brand` skill in Claude (Cowork).
 
 ---
 

@@ -18,21 +18,19 @@
     <!-- End Google Tag Manager -->
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Lexend+Deca:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/a11y.css">
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="favicon.svg">
 
     <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="assets/js/lucide-da.js"></script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -235,6 +233,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
         </div>
     </nav>
+<main id="main-content" tabindex="-1">
+
 
     <!-- ============================================================
          HERO / TITLE
@@ -625,7 +625,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span data-en="Formal" data-es="Formal">Formal</span>
                             <span class="text-signal-red">65% Casual</span>
                         </div>
-                        <input type="range" class="spectrum-slider pointer-events-none" min="0" max="100" value="65" readonly>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="65" readonly>
                     </div>
 
                     <!-- Dry -->
@@ -634,7 +634,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span data-en="Dry" data-es="Seco">Dry</span>
                             <span class="text-signal-red">55% Dry</span>
                         </div>
-                        <input type="range" class="spectrum-slider pointer-events-none" min="0" max="100" value="45" readonly>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="45" readonly>
                     </div>
 
                     <!-- Plain -->
@@ -643,7 +643,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span data-en="Technical" data-es="Técnico">Technical</span>
                             <span class="text-signal-red">70% Plain</span>
                         </div>
-                        <input type="range" class="spectrum-slider pointer-events-none" min="0" max="100" value="70" readonly>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="70" readonly>
                     </div>
 
                     <!-- Confident -->
@@ -652,7 +652,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <span data-en="Confident" data-es="Seguro">Confident</span>
                             <span class="text-signal-red">75% Confident</span>
                         </div>
-                        <input type="range" class="spectrum-slider pointer-events-none" min="0" max="100" value="75" readonly>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="75" readonly>
                     </div>
                 </div>
 
@@ -1417,7 +1417,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- ============================================================
          FOOTER
     ============================================================= -->
-    <footer class="bg-gray-dark text-white py-16 px-6">
+    </main>
+<footer class="bg-gray-dark text-white py-16 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-10">
                 <div>
@@ -1551,8 +1552,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     if (!val) return;
                     el.innerHTML = val;
                 });
-                if (typeof lucide !== 'undefined') lucide.createIcons();
-            }
+                }
 
             updateButtons(lang) {
                 ['en', 'es'].forEach(l => {
