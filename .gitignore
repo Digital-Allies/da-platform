@@ -46,3 +46,4 @@ logs/
 # Misc
 coverage/
 *.tsbuildinfo
+*.zip
