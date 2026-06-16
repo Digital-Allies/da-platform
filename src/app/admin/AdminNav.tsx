@@ -3,25 +3,29 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, FileText, Briefcase, Star, Settings, LogOut, Menu, X } from 'lucide-react'
+import {
+  LayoutDashboard, FileText, Briefcase, Star, MessageSquare,
+  Settings, LogOut, ExternalLink,
+} from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 
 interface AdminNavProps {
   userEmail: string
+  unreadCount?: number
 }
 
 const NAV_ITEMS = [
-  { label: 'Dashboard', href: '/admin', icon: LayoutDashboard },
-  { label: 'Posts', href: '/admin/posts', icon: FileText },
-  { label: 'Services', href: '/admin/services', icon: Briefcase },
-  { label: 'Testimonials', href: '/admin/testimonials', icon: Star },
-  { label: 'Settings', href: '/admin/settings', icon: Settings },
+  { label: 'Dashboard',      href: '/admin',              icon: LayoutDashboard, exact: true },
+  { label: 'Posts',          href: '/admin/posts',        icon: FileText },
+  { label: 'Departments',    href: '/admin/services',     icon: Briefcase },
+  { label: 'Field Notes',    href: '/admin/testimonials', icon: Star },
+  { label: 'Command Center', href: '/admin/messages',     icon: MessageSquare },
+  { label: 'Settings',       href: '/admin/settings',     icon: Settings },
 ]
 
-export default function AdminNav({ userEmail }: AdminNavProps) {
+export default function AdminNav({ userEmail, unreadCount = 0 }: AdminNavProps) {
   const pathname = usePathname()
   const router = useRouter()
-  const [open, setOpen] = useState(false)
 
   async function signOut() {
     const supabase = createClient()
@@ -30,77 +34,53 @@ export default function AdminNav({ userEmail }: AdminNavProps) {
     router.refresh()
   }
 
+  function isActive(item: typeof NAV_ITEMS[0]) {
+    if (item.exact) return pathname === item.href
+    return pathname.startsWith(item.href)
+  }
+
   return (
-    <header className="bg-charcoal text-canvas border-b border-neutral-700">
-      <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between gap-6">
-        {/* Logo */}
-        <Link href="/admin" className="font-headline font-bold text-sm flex-shrink-0">
-          Site Admin
-        </Link>
+    <header className="admin-topbar">
+      {/* Brand */}
+      <Link href="/admin" className="admin-brand">
+        <span className="da-pulse" />
+        Site Admin
+      </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1 flex-1">
-          {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
-            const active = pathname === href || (href !== '/admin' && pathname.startsWith(href))
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors rounded-sm
-                  ${active ? 'bg-white/15 text-white' : 'text-neutral-400 hover:text-white hover:bg-white/10'}`}
-              >
-                <Icon size={13} />
-                {label}
-              </Link>
-            )
-          })}
-        </nav>
+      {/* Nav links */}
+      <nav className="admin-topbar__nav">
+        {NAV_ITEMS.map((item) => {
+          const Icon = item.icon
+          const active = isActive(item)
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`navitem${active ? ' is-active' : ''}`}
+            >
+              <Icon size={13} />
+              <span>{item.label}</span>
+            </Link>
+          )
+        })}
+      </nav>
 
-        {/* User + sign out */}
-        <div className="hidden md:flex items-center gap-3">
-          <span className="text-xs text-neutral-400">{userEmail}</span>
-          <button
-            onClick={signOut}
-            className="flex items-center gap-1 text-xs text-neutral-400 hover:text-white transition-colors"
-          >
-            <LogOut size={13} />
-            Sign out
-          </button>
-        </div>
-
-        {/* Mobile toggle */}
-        <button className="md:hidden p-1" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X size={18} /> : <Menu size={18} />}
+      {/* Right side */}
+      <div className="admin-topbar__right">
+        {unreadCount > 0 && (
+          <Link href="/admin/messages" className="admin-badge" style={{ textDecoration: 'none' }}>
+            {unreadCount}
+          </Link>
+        )}
+        <a href="/" target="_blank" rel="noopener noreferrer" className="admin-user">
+          <ExternalLink size={13} />
+          View site
+        </a>
+        <button className="admin-user" onClick={signOut}>
+          <LogOut size={13} />
+          Sign out
         </button>
       </div>
-
-      {/* Mobile drawer */}
-      {open && (
-        <nav className="md:hidden border-t border-neutral-700 px-6 py-3 flex flex-col gap-1">
-          {NAV_ITEMS.map(({ label, href, icon: Icon }) => {
-            const active = pathname === href || (href !== '/admin' && pathname.startsWith(href))
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className={`flex items-center gap-2 px-3 py-2 text-xs font-medium transition-colors
-                  ${active ? 'text-white bg-white/15' : 'text-neutral-400 hover:text-white'}`}
-              >
-                <Icon size={13} />
-                {label}
-              </Link>
-            )
-          })}
-          <button
-            onClick={signOut}
-            className="flex items-center gap-2 px-3 py-2 text-xs text-neutral-400 hover:text-white mt-2 border-t border-neutral-700"
-          >
-            <LogOut size={13} />
-            Sign out
-          </button>
-        </nav>
-      )}
     </header>
   )
 }
