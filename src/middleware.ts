@@ -27,23 +27,25 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
-  // Redirect unauthenticated users away from /admin/* (except /admin/login)
+  // Only protect /admin pages that are NOT the login page.
+  // When redirecting, copy Supabase session cookies so the token state
+  // survives the redirect — without this, the redirect response drops the
+  // refreshed tokens and causes an infinite redirect loop.
   if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !user) {
     const loginUrl = request.nextUrl.clone()
     loginUrl.pathname = '/admin/login'
-    return NextResponse.redirect(loginUrl)
-  }
-
-  // Redirect authenticated users away from /admin/login
-  if (pathname === '/admin/login' && user) {
-    const dashboardUrl = request.nextUrl.clone()
-    dashboardUrl.pathname = '/admin'
-    return NextResponse.redirect(dashboardUrl)
+    const redirectResponse = NextResponse.redirect(loginUrl)
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value)
+    })
+    return redirectResponse
   }
 
   return supabaseResponse
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  // Exclude /admin/login from middleware entirely so it always renders.
+  // The login page handles post-auth redirect itself.
+  matcher: ['/admin', '/admin/((?!login$).+)'],
 }
