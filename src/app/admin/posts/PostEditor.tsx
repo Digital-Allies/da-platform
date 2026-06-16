@@ -4,7 +4,10 @@ import { useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import { Bold, Italic, List, ListOrdered, Heading2, Heading3, Quote, Undo, Redo } from 'lucide-react'
+import {
+  Bold, Italic, List, ListOrdered, Heading2, Heading3, Quote,
+  Undo, Redo, Save, Trash2,
+} from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { type Post } from '@/lib/types'
 
@@ -39,7 +42,7 @@ export default function PostEditor({ post }: PostEditorProps) {
     content: post?.content ?? '',
     editorProps: {
       attributes: {
-        class: 'prose-da min-h-[320px] focus:outline-none px-4 py-4',
+        class: 'rte__area prose-da',
       },
     },
   })
@@ -71,7 +74,10 @@ export default function PostEditor({ post }: PostEditorProps) {
       const res = await supabase.from('posts').insert(payload)
       err = res.error
     } else {
-      const res = await supabase.from('posts').update({ ...payload, updated_at: new Date().toISOString() }).eq('id', post!.id)
+      const res = await supabase
+        .from('posts')
+        .update({ ...payload, updated_at: new Date().toISOString() })
+        .eq('id', post!.id)
       err = res.error
     }
 
@@ -94,38 +100,34 @@ export default function PostEditor({ post }: PostEditorProps) {
     router.refresh()
   }
 
-  const ToolbarBtn = ({ onClick, active, children, title }: {
-    onClick: () => void; active?: boolean; children: React.ReactNode; title: string
-  }) => (
-    <button
-      type="button"
-      title={title}
-      onClick={onClick}
-      className={`p-1.5 transition-colors ${active ? 'bg-charcoal text-white' : 'hover:bg-neutral-100'}`}
-    >
-      {children}
-    </button>
-  )
-
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
-        <h1 className="font-headline font-bold text-xl">{isNew ? 'New Post' : 'Edit Post'}</h1>
-        <div className="flex items-center gap-2">
+    <div className="apage apage--narrow">
+      <div className="apage__head">
+        <div>
+          <h1 className="apage__title">{isNew ? 'New post' : 'Edit post'}</h1>
+        </div>
+        <div className="apage__actions">
           {!isNew && (
             <button
               type="button"
               onClick={deletePost}
               disabled={deleting}
-              className="admin-btn-danger text-xs px-3 py-1.5"
+              className="abtn abtn--danger"
             >
-              {deleting ? 'Deleting...' : 'Delete'}
+              <Trash2 size={13} /> {deleting ? 'Deleting…' : 'Delete'}
             </button>
           )}
+          <button
+            type="button"
+            onClick={() => router.push('/admin/posts')}
+            className="abtn abtn--ghost"
+          >
+            Cancel
+          </button>
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value as 'draft' | 'published')}
-            className="admin-input text-xs py-1.5 w-auto"
+            className="ainput ainput--select"
           >
             <option value="draft">Draft</option>
             <option value="published">Published</option>
@@ -134,93 +136,102 @@ export default function PostEditor({ post }: PostEditorProps) {
             type="button"
             onClick={save}
             disabled={saving || !title.trim()}
-            className="admin-btn-primary text-xs px-4 py-1.5"
+            className="abtn abtn--primary"
           >
-            {saving ? 'Saving...' : 'Save'}
+            <Save size={13} /> {saving ? 'Saving…' : 'Save'}
           </button>
         </div>
       </div>
 
       {error && (
-        <p className="mb-4 text-xs text-alert border border-alert px-3 py-2">{error}</p>
+        <p style={{ marginBottom: 16, fontSize: 12, color: 'var(--signal)', border: '1px solid var(--signal)', padding: '8px 12px' }}>
+          {error}
+        </p>
       )}
 
-      <div className="space-y-4">
+      <div className="editor-stack">
         {/* Title */}
-        <div>
-          <label className="admin-label" htmlFor="title">Title</label>
+        <label className="afield">
+          <span className="afield__label">Title</span>
           <input
-            id="title"
             type="text"
-            className="admin-input text-base font-medium"
+            className="ainput ainput--lg"
             placeholder="Post title"
             value={title}
             onChange={handleTitleChange}
           />
-        </div>
+        </label>
 
         {/* Slug */}
-        <div>
-          <label className="admin-label" htmlFor="slug">Slug</label>
+        <label className="afield">
+          <span className="afield__label">Slug</span>
           <input
-            id="slug"
             type="text"
-            className="admin-input text-xs font-mono"
+            className="ainput mono"
             placeholder="post-url-slug"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
           />
-        </div>
+        </label>
 
         {/* Excerpt */}
-        <div>
-          <label className="admin-label" htmlFor="excerpt">Excerpt <span className="lowercase normal-case text-neutral-400">(optional, shown in blog list)</span></label>
+        <label className="afield">
+          <span className="afield__label">
+            Excerpt <em className="afield__hint">(shown in the blog list)</em>
+          </span>
           <textarea
-            id="excerpt"
             rows={2}
-            className="admin-input resize-none"
+            className="ainput"
             value={excerpt}
             onChange={(e) => setExcerpt(e.target.value)}
           />
-        </div>
+        </label>
 
         {/* Editor */}
-        <div>
-          <label className="admin-label">Content</label>
-          <div className="border border-neutral-300 rounded-sm bg-white">
-            {/* Toolbar */}
+        <div className="afield">
+          <span className="afield__label">Content</span>
+          <div className="rte">
             {editor && (
-              <div className="flex flex-wrap items-center gap-0.5 border-b border-neutral-200 px-2 py-1.5">
-                <ToolbarBtn title="Bold" active={editor.isActive('bold')} onClick={() => editor.chain().focus().toggleBold().run()}>
+              <div className="rte__toolbar">
+                <button type="button" title="Bold" className={`tb-btn${editor.isActive('bold') ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleBold().run()}>
                   <Bold size={14} />
-                </ToolbarBtn>
-                <ToolbarBtn title="Italic" active={editor.isActive('italic')} onClick={() => editor.chain().focus().toggleItalic().run()}>
+                </button>
+                <button type="button" title="Italic" className={`tb-btn${editor.isActive('italic') ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleItalic().run()}>
                   <Italic size={14} />
-                </ToolbarBtn>
-                <div className="w-px h-4 bg-neutral-200 mx-1" />
-                <ToolbarBtn title="Heading 2" active={editor.isActive('heading', { level: 2 })} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
+                </button>
+                <span className="rte__sep" />
+                <button type="button" title="Heading 2" className={`tb-btn${editor.isActive('heading', { level: 2 }) ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
                   <Heading2 size={14} />
-                </ToolbarBtn>
-                <ToolbarBtn title="Heading 3" active={editor.isActive('heading', { level: 3 })} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>
+                </button>
+                <button type="button" title="Heading 3" className={`tb-btn${editor.isActive('heading', { level: 3 }) ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>
                   <Heading3 size={14} />
-                </ToolbarBtn>
-                <div className="w-px h-4 bg-neutral-200 mx-1" />
-                <ToolbarBtn title="Bullet List" active={editor.isActive('bulletList')} onClick={() => editor.chain().focus().toggleBulletList().run()}>
+                </button>
+                <span className="rte__sep" />
+                <button type="button" title="Bullet List" className={`tb-btn${editor.isActive('bulletList') ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleBulletList().run()}>
                   <List size={14} />
-                </ToolbarBtn>
-                <ToolbarBtn title="Ordered List" active={editor.isActive('orderedList')} onClick={() => editor.chain().focus().toggleOrderedList().run()}>
+                </button>
+                <button type="button" title="Ordered List" className={`tb-btn${editor.isActive('orderedList') ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleOrderedList().run()}>
                   <ListOrdered size={14} />
-                </ToolbarBtn>
-                <ToolbarBtn title="Blockquote" active={editor.isActive('blockquote')} onClick={() => editor.chain().focus().toggleBlockquote().run()}>
+                </button>
+                <button type="button" title="Blockquote" className={`tb-btn${editor.isActive('blockquote') ? ' is-active' : ''}`}
+                  onClick={() => editor.chain().focus().toggleBlockquote().run()}>
                   <Quote size={14} />
-                </ToolbarBtn>
-                <div className="w-px h-4 bg-neutral-200 mx-1" />
-                <ToolbarBtn title="Undo" onClick={() => editor.chain().focus().undo().run()}>
+                </button>
+                <span className="rte__sep" />
+                <button type="button" title="Undo" className="tb-btn"
+                  onClick={() => editor.chain().focus().undo().run()}>
                   <Undo size={14} />
-                </ToolbarBtn>
-                <ToolbarBtn title="Redo" onClick={() => editor.chain().focus().redo().run()}>
+                </button>
+                <button type="button" title="Redo" className="tb-btn"
+                  onClick={() => editor.chain().focus().redo().run()}>
                   <Redo size={14} />
-                </ToolbarBtn>
+                </button>
               </div>
             )}
             <EditorContent editor={editor} />

@@ -1,15 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Plus, Trash2, Star } from 'lucide-react'
+import { Plus, Save, Pencil } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { type Testimonial } from '@/lib/types'
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
+type Editing = null | 'new' | Testimonial
+
 export default function TestimonialsPage() {
   const [items, setItems] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
+  const [editing, setEditing] = useState<Editing>(null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
@@ -26,123 +29,196 @@ export default function TestimonialsPage() {
 
   useEffect(() => { load() }, [])
 
-  function add() {
-    const fake: Testimonial = {
-      id: `new-${Date.now()}`,
-      client_id: CLIENT_ID,
-      author_name: '',
-      author_role: '',
-      content: '',
-      rating: 5,
-      image_url: null,
-      display_order: items.length,
-      created_at: '',
-    }
-    setItems([...items, fake])
-  }
+  async function save(form: {
+    content: string
+    author_name: string
+    author_role: string
+    rating: number
+  }) {
+    if (!form.content.trim()) return
+    setSaving(true)
+    setError('')
+    const supabase = createClient()
 
-  function update<K extends keyof Testimonial>(id: string, field: K, value: Testimonial[K]) {
-    setItems(items.map((t) => t.id === id ? { ...t, [field]: value } : t))
+    if (editing === 'new') {
+      const { error: e } = await supabase.from('testimonials').insert({
+        client_id: CLIENT_ID,
+        ...form,
+        display_order: items.length,
+      })
+      if (e) { setError(e.message); setSaving(false); return }
+    } else if (editing !== null) {
+      const t = editing
+      const { error: e } = await supabase
+        .from('testimonials')
+        .update(form)
+        .eq('id', t.id)
+      if (e) { setError(e.message); setSaving(false); return }
+    }
+
+    await load()
+    setEditing(null)
+    setSaving(false)
   }
 
   async function remove(id: string) {
-    if (id.startsWith('new-')) { setItems(items.filter((t) => t.id !== id)); return }
+    if (!confirm('Delete this field note?')) return
     const supabase = createClient()
     await supabase.from('testimonials').delete().eq('id', id)
     setItems(items.filter((t) => t.id !== id))
   }
 
-  async function saveAll() {
-    setSaving(true)
-    setError('')
-    const supabase = createClient()
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i]
-      const payload = {
-        client_id: CLIENT_ID,
-        author_name: item.author_name,
-        author_role: item.author_role,
-        content: item.content,
-        rating: item.rating,
-        display_order: i,
-      }
-      if (item.id.startsWith('new-')) {
-        const { error: e } = await supabase.from('testimonials').insert(payload)
-        if (e) { setError(e.message); setSaving(false); return }
-      } else {
-        const { error: e } = await supabase.from('testimonials').update(payload).eq('id', item.id)
-        if (e) { setError(e.message); setSaving(false); return }
-      }
-    }
-    await load()
-    setSaving(false)
+  if (loading) return <div className="apage"><p className="empty">Loading…</p></div>
+
+  if (editing !== null) {
+    const editingItem = editing === 'new' ? null : editing
+    return (
+      <NoteEditor
+        note={editingItem}
+        onSave={save}
+        onCancel={() => { setEditing(null); setError('') }}
+        onDelete={editingItem ? () => { remove(editingItem.id); setEditing(null) } : undefined}
+        saving={saving}
+        error={error}
+      />
+    )
   }
 
-  if (loading) return <p className="text-sm text-neutral-500">Loading...</p>
-
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="font-headline font-bold text-xl">Testimonials</h1>
-        <div className="flex gap-2">
-          <button onClick={add} className="admin-btn-secondary flex items-center gap-1.5 text-xs px-3 py-1.5">
-            <Plus size={13} />
-            Add
-          </button>
-          <button onClick={saveAll} disabled={saving} className="admin-btn-primary text-xs px-4 py-1.5">
-            {saving ? 'Saving...' : 'Save All'}
+    <div className="apage">
+      <div className="apage__head">
+        <div>
+          <h1 className="apage__title">Field Notes</h1>
+          <p className="apage__sub">Testimonials from the people you have helped.</p>
+        </div>
+        <div className="apage__actions">
+          <button className="abtn abtn--primary" onClick={() => setEditing('new')}>
+            <Plus size={14} /> Add note
           </button>
         </div>
       </div>
 
-      {error && <p className="mb-4 text-xs text-alert border border-alert px-3 py-2">{error}</p>}
-
-      <div className="space-y-3">
-        {items.map((item) => (
-          <div key={item.id} className="admin-card">
-            <div className="flex items-start gap-3">
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div>
-                  <label className="admin-label">Author Name</label>
-                  <input className="admin-input" value={item.author_name} onChange={(e) => update(item.id, 'author_name', e.target.value)} />
-                </div>
-                <div>
-                  <label className="admin-label">Role / Company <span className="lowercase normal-case text-neutral-400">(optional)</span></label>
-                  <input className="admin-input" value={item.author_role ?? ''} onChange={(e) => update(item.id, 'author_role', e.target.value)} placeholder="CEO, Acme Co" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="admin-label">Quote</label>
-                  <textarea className="admin-input resize-none" rows={3} value={item.content} onChange={(e) => update(item.id, 'content', e.target.value)} />
-                </div>
-                <div>
-                  <label className="admin-label">Rating</label>
-                  <div className="flex gap-1 mt-1">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <button key={n} type="button" onClick={() => update(item.id, 'rating', n)}>
-                        <Star
-                          size={18}
-                          fill={n <= item.rating ? 'currentColor' : 'none'}
-                          className={n <= item.rating ? 'text-yellow-400' : 'text-neutral-300'}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <button onClick={() => remove(item.id)} className="text-neutral-300 hover:text-alert transition-colors flex-shrink-0">
-                <Trash2 size={15} />
-              </button>
+      <div className="notes-admin">
+        {items.map((t) => (
+          <button key={t.id} className="note-admin" onClick={() => setEditing(t)}>
+            <div className="note-admin__stars">
+              {Array.from({ length: t.rating || 5 }).map((_, i) => (
+                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="var(--signal)" stroke="var(--signal)" strokeWidth="1.5">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+              ))}
             </div>
-          </div>
+            <p className="note-admin__quote">&ldquo;{t.content}&rdquo;</p>
+            <div className="note-admin__by">
+              <strong>{t.author_name}</strong>
+              <span>{t.author_role}</span>
+            </div>
+            <Pencil size={14} className="note-admin__edit" />
+          </button>
         ))}
       </div>
 
       {items.length === 0 && (
-        <div className="admin-card text-center py-10">
-          <p className="text-sm text-neutral-500 mb-3">No testimonials yet.</p>
-          <button onClick={add} className="admin-btn-primary text-xs px-4 py-1.5">Add first testimonial</button>
-        </div>
+        <p className="empty">No field notes yet. Add the first one.</p>
       )}
+    </div>
+  )
+}
+
+function NoteEditor({
+  note,
+  onSave,
+  onCancel,
+  onDelete,
+  saving,
+  error,
+}: {
+  note: Testimonial | null
+  onSave: (form: { content: string; author_name: string; author_role: string; rating: number }) => void
+  onCancel: () => void
+  onDelete?: () => void
+  saving: boolean
+  error: string
+}) {
+  const isNew = !note
+  const [form, setForm] = useState({
+    content: note?.content ?? '',
+    author_name: note?.author_name ?? '',
+    author_role: note?.author_role ?? '',
+    rating: note?.rating ?? 5,
+  })
+
+  return (
+    <div className="apage apage--narrow">
+      <div className="apage__head">
+        <div>
+          <h1 className="apage__title">{isNew ? 'New field note' : 'Edit field note'}</h1>
+        </div>
+        <div className="apage__actions">
+          {onDelete && (
+            <button className="abtn abtn--danger" onClick={onDelete}>Delete</button>
+          )}
+          <button className="abtn abtn--ghost" onClick={onCancel}>Cancel</button>
+          <button
+            className="abtn abtn--primary"
+            onClick={() => onSave(form)}
+            disabled={saving || !form.content.trim()}
+          >
+            <Save size={13} /> {saving ? 'Saving…' : 'Save'}
+          </button>
+        </div>
+      </div>
+
+      {error && (
+        <p style={{ marginBottom: 16, fontSize: 12, color: 'var(--signal)', border: '1px solid var(--signal)', padding: '8px 12px' }}>
+          {error}
+        </p>
+      )}
+
+      <div className="editor-stack">
+        <label className="afield">
+          <span className="afield__label">Quote</span>
+          <textarea
+            className="ainput"
+            rows={4}
+            value={form.content}
+            onChange={(e) => setForm((p) => ({ ...p, content: e.target.value }))}
+            placeholder="What did they say?"
+          />
+        </label>
+        <div className="afield-row">
+          <label className="afield">
+            <span className="afield__label">Author name</span>
+            <input
+              className="ainput"
+              value={form.author_name}
+              onChange={(e) => setForm((p) => ({ ...p, author_name: e.target.value }))}
+            />
+          </label>
+          <label className="afield">
+            <span className="afield__label">Rating</span>
+            <select
+              className="ainput ainput--select"
+              value={form.rating}
+              onChange={(e) => setForm((p) => ({ ...p, rating: Number(e.target.value) }))}
+              style={{ width: '100%' }}
+            >
+              {[5, 4, 3, 2, 1].map((n) => (
+                <option key={n} value={n}>{n} stars</option>
+              ))}
+            </select>
+          </label>
+        </div>
+        <label className="afield">
+          <span className="afield__label">Author role / business</span>
+          <input
+            className="ainput"
+            value={form.author_role}
+            onChange={(e) => setForm((p) => ({ ...p, author_role: e.target.value }))}
+            placeholder="Vance & Daughters Hardware · Kingman"
+          />
+        </label>
+      </div>
     </div>
   )
 }

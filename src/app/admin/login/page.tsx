@@ -31,40 +31,57 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen grid-overlay flex items-center justify-center px-6">
-      <div className="w-full max-w-sm">
-        <div className="border border-charcoal bg-white p-8">
-          <h1 className="font-headline font-bold text-xl mb-1">Admin Login</h1>
-          <p className="text-sm text-neutral-500 mb-6">Sign in to manage your site.</p>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px',
+        backgroundImage: 'linear-gradient(var(--grid-line) .5px, transparent .5px), linear-gradient(90deg, var(--grid-line) .5px, transparent .5px)',
+        backgroundSize: 'var(--lace-step) var(--lace-step)',
+        backgroundColor: 'var(--bone-white)',
+      }}
+    >
+      <div style={{ width: '100%', maxWidth: 360 }}>
+        <div style={{ border: '1px solid var(--charcoal)', background: '#fff', padding: 40 }}>
+          {/* Brand */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 28 }}>
+            <span className="da-pulse" />
+            <span style={{ fontFamily: 'var(--font-headers)', fontWeight: 700, fontSize: 15 }}>
+              Site Admin
+            </span>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="admin-label" htmlFor="email">Email</label>
+          <h1 className="apage__title" style={{ fontSize: 20, marginBottom: 6 }}>Sign in</h1>
+          <p className="apage__sub" style={{ marginBottom: 28 }}>Access the admin panel.</p>
+
+          <form onSubmit={handleSubmit} className="editor-stack">
+            <label className="afield">
+              <span className="afield__label">Email</span>
               <input
-                id="email"
                 type="email"
                 autoComplete="email"
                 required
-                className="admin-input"
+                className="ainput"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </div>
-            <div>
-              <label className="admin-label" htmlFor="password">Password</label>
+            </label>
+            <label className="afield">
+              <span className="afield__label">Password</span>
               <input
-                id="password"
                 type="password"
                 autoComplete="current-password"
                 required
-                className="admin-input"
+                className="ainput"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
+            </label>
 
             {error && (
-              <p className="text-xs text-alert border border-alert px-3 py-2">
+              <p style={{ fontSize: 12, color: 'var(--signal)', border: '1px solid var(--signal)', padding: '8px 12px' }}>
                 {error}
               </p>
             )}
@@ -72,16 +89,17 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="admin-btn-primary w-full mt-2"
+              className="abtn abtn--primary"
+              style={{ width: '100%', justifyContent: 'center', padding: '10px 16px', fontSize: 13 }}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing in…' : 'Sign in'}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-xs text-neutral-400 mt-4">
+        <p style={{ textAlign: 'center', marginTop: 16, fontFamily: 'var(--font-details)', fontSize: 12, color: 'var(--text-soft)' }}>
           &larr;{' '}
-          <Link href="/" className="hover:text-charcoal transition-colors">
+          <Link href="/" style={{ color: 'inherit', textDecoration: 'none' }}>
             Back to site
           </Link>
         </p>
