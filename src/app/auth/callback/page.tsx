@@ -19,35 +19,68 @@ export default function AuthCallbackPage() {
   )
 
   useEffect(() => {
-    const hash = window.location.hash.substring(1) // strip leading #
-    const params = new URLSearchParams(hash)
+    async function handleCallback() {
+      // ── PKCE flow (Supabase default since 2024) ──────────────────
+      // Invite/recovery links arrive as ?code=xxx, type may be present
+      const searchParams = new URLSearchParams(window.location.search)
+      const code = searchParams.get('code')
+      const codeType = searchParams.get('type') // 'invite' | 'recovery' | null
 
-    const accessToken = params.get('access_token')
-    const refreshToken = params.get('refresh_token')
-    const tokenType = params.get('type') // 'invite' | 'recovery' | 'signup'
-
-    if (!accessToken || !refreshToken) {
-      router.replace('/admin/login')
-      return
-    }
-
-    supabase.auth
-      .setSession({ access_token: accessToken, refresh_token: refreshToken })
-      .then(({ error }) => {
-        if (error) {
-          setError(error.message)
+      if (code) {
+        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
+        if (exchangeError) {
+          setError(exchangeError.message)
           setInitializing(false)
           return
         }
+        // For invite/recovery, always show the password-set form.
+        // If type isn't in the URL (some Supabase versions omit it), check the
+        // user object — invited users have no password and need to set one.
+        if (codeType === 'invite' || codeType === 'recovery' || !codeType) {
+          const { data: { user } } = await supabase.auth.getUser()
+          // If the user was just invited, show the set-password form.
+          // If they already have a confirmed session (magic link), go to admin.
+          if (user?.app_metadata?.provider === 'email' && codeType !== 'magiclink') {
+            setType(codeType ?? 'invite')
+            setInitializing(false)
+            return
+          }
+        }
+        router.replace('/admin')
+        return
+      }
 
+      // ── Implicit/hash flow (legacy, kept for backward compat) ────
+      const hash = window.location.hash.substring(1)
+      const hashParams = new URLSearchParams(hash)
+      const accessToken = hashParams.get('access_token')
+      const refreshToken = hashParams.get('refresh_token')
+      const tokenType = hashParams.get('type')
+
+      if (accessToken && refreshToken) {
+        const { error: sessionError } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        })
+        if (sessionError) {
+          setError(sessionError.message)
+          setInitializing(false)
+          return
+        }
         if (tokenType === 'invite' || tokenType === 'recovery') {
           setType(tokenType)
           setInitializing(false)
-        } else {
-          // Magic link or email confirmation — go straight to admin
-          router.replace('/admin')
+          return
         }
-      })
+        router.replace('/admin')
+        return
+      }
+
+      // Nothing usable in the URL — send to login
+      router.replace('/admin/login')
+    }
+
+    handleCallback()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSetPassword = async (e: React.FormEvent) => {
@@ -83,7 +116,7 @@ export default function AuthCallbackPage() {
     )
   }
 
-  const isInvite = type === 'invite'
+  const isInvite = type === 'invite' || type === null
 
   return (
     <div
