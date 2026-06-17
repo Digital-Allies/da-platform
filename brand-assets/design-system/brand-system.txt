@@ -1,0 +1,360 @@
+﻿ALWAYS add reference links in a source glossary format at the end of the article or social media post.
+
+
+Social Media: 
+
+
+Facebook: https://www.facebook.com/digitalallies
+Instagram: https://www.instagram.com/digitalallies__
+Google Business: https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6
+Blogger: https://blog.digitalallies.net/
+
+
+# Digital Allies Brand Skill
+
+
+## When to use this skill
+
+
+Apply this skill whenever creating any branded content for Digital Allies — HTML pages, slide decks, social posts, documents, reports, emails, proposals, or any artifact where the Digital Allies brand should show up. This skill gives Claude the exact specs, hex codes, fonts, voice rules, and do/don't guidelines needed to produce on-brand output every time.
+
+
+---
+
+
+## Who Digital Allies is
+
+
+**Company:** Digital Allies  
+**Owner:** Anthony  
+**Location:** Kingman, Arizona (Est. 2024)  
+**Website:** digitalallies.net  
+**Phone:** (928) 228-5769  
+**Email:** contact@digitalallies.net  
+
+
+**Core identity:** A one-person tech shop serving small businesses and nonprofits in Arizona (and remotely). The "Ally Curator" — expert precision, zero condescension, a dry joke when it earns its place. Combines local reliability with high-end engineering.
+
+
+**Taglines (use as-is, do not rewrite):**
+- "Technological solutions for people with better things to do."
+- "Technology is our craft. People are our purpose."
+- "Clear tech. Straight talk. No ghosts."
+
+
+**Four service departments:**
+- The Design Bureau — Design & Brand
+- Dept. of Cooperation — Integrations
+- The Self-Governing Bureau — Automation
+- The Permanent Observation Post — Support (monitoring)
+
+
+**Key differentiator:** The No-Ghosting Guarantee. Anthony lives in Kingman. If you call, he answers.
+
+
+---
+
+
+## Color System — The 95/5 Rule
+
+
+95% of any canvas stays neutral (Bone White + Charcoal). The remaining 5% carries all the color weight. This makes every color signal absolute and impossible to miss.
+
+
+| Name | Role | Hex |
+|---|---|---|
+| Bone White | Canvas / background | `#F9F6F0` |
+| Charcoal Grey | Text / borders / structure | `#2D2D2D` |
+| Pulse Blue | Action buttons, live indicators, links | `#3A7BD5` |
+| Light Pink | Subtle highlights, hover states, accent plates | `#FADEEB` |
+| Signal Red (Anderson Vermillion) | Critical action cues, POI markers, alerts | `#C5301A` |
+| Grid Lines | Faint canvas grid overlay | `#E0DDD5` |
+
+
+**Signal Red is reserved.** Use it only for: focused field borders, floating action buttons, POI markers (the animated dot in the logo), and one purposefully off-center element per layout (the "Symmetry Break").
+
+
+**Never use Signal Red for decorative purposes.** It is a functional signal only.
+
+
+---
+
+
+## Typography
+
+
+**Headers, titles, CTAs, card headers, buttons:**  
+Font: **Lexend Deca** (Google Fonts)  
+Weights: 400, 500, 600, 700  
+Import: `https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&display=swap`  
+Why: High x-height, designed for scannability in high-glare, mobile environments.
+
+
+**Body copy, pricing, technical specs, tables, system text, code:**  
+Font: **JetBrains Mono** (Google Fonts)  
+Weights: 400, 500, 600  
+Import: `https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap`  
+Why: Monospaced precision. Enforces structured alignment. Signals technical rigor.
+
+
+**Usage rules:**
+- Headlines: Lexend Deca, bold (700)
+- Subheadings: Lexend Deca, semibold (600)
+- Body text: JetBrains Mono, regular (400)
+- Pricing / specs: JetBrains Mono, bold (700) in all caps
+- Never swap these fonts. Never use a third font.
+
+
+---
+
+
+## Layout & Grid — Technical Lace
+
+
+The grid is called "Technical Lace." It signals that the design is as organized as the underlying code.
+
+
+**Canvas:** Bone White `#F9F6F0`  
+**Grid overlay:** 0.5px solid lines in `#E0DDD5`, spaced 20px apart (horizontal and vertical)  
+**Grid implementation (CSS):**
+```css
+background-color: #F9F6F0;
+background-image:
+  linear-gradient(rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px),
+  linear-gradient(90deg, rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px);
+background-size: 20px 20px;
+```
+
+
+**Structure:**
+- 12-column centered grid
+- Borders on elements: 1px solid `#2D2D2D` (called "structural borders")
+- Use 2x the whitespace of a standard layout. Generous padding and margin signal brand confidence.
+- Max content width: 1280px (max-w-7xl) or 1024px (max-w-5xl) depending on context
+
+
+**The Symmetry Break:**  
+Every layout includes exactly one element nudged 5–10px off-center. This is always a Signal Red element (a dot, border accent, or action cue). It creates a "visual itch" that draws the eye to the strategic objective. Do NOT make the off-center element anything other than Signal Red.
+
+
+**Logo — The Pulse Dot:**  
+The logo is "Digital Allies" in Lexend Deca bold, preceded by a small animated Pulse Blue circle. The circle pulses gently (scale and opacity animation). A faint ring radiates outward from it. Replicate in CSS or describe it accurately in non-HTML formats.
+
+
+```css
+/* Pulse Dot (logo mark) */
+.pulse-dot {
+  width: 12px;
+  height: 12px;
+  background: #3A7BD5;
+  border-radius: 50%;
+  border: 1px solid #2D2D2D;
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.25); }
+}
+```
+
+
+---
+
+
+## Icon Style
+
+
+**Forbidden:** Generic abstract tech shapes — clouds, gears, network nodes, lightning bolts, Wi-Fi icons.
+
+
+**Use instead:** Literal, vintage-inspired "artifact" icons from a 1960s research manual aesthetic. Think: rotary phones, metronomes, topographical contour lines, compass roses, analog dials. These ground digital concepts in physical reality.
+
+
+When using Lucide icons (the icon library used on the site), choose the most literal, stripped-down option available. Avoid anything that looks like a generic SaaS product icon.
+
+
+---
+
+
+## Voice & Tone
+
+
+**The voice in one sentence:**  
+"The sharp, straight-talking tech guy you actually want to call — because he picks up, explains things plainly, and doesn't make you feel dumb for asking."
+
+
+**Tone coordinates:**
+- 65% casual (smart but approachable — business without the blazer)
+- 55% dry (dry inflection, genuine intent — not cold, not cozy)
+- 70% plain (plain language always preferred over technical jargon)
+- 75% confident (doesn't chase approval, trusts the work)
+- 100% authentic (no character voice, no performance — the person is present)
+
+
+**Core voice principles:**
+
+
+1. **Say the smart thing simply.** If someone needs a glossary to read your website, you've already lost them.
+
+
+2. **Warmth through action, not decoration.** Don't say "we're passionate about your journey." Just answer the phone.
+
+
+3. **Wit is a tool, not a costume.** Humor when it clarifies or disarms. The joke should make the point, not replace it.
+
+
+4. **Confidence without posturing.** DA knows its craft. It doesn't need to impress — it needs to communicate.
+
+
+5. **Local roots, professional reach.** Kingman, AZ is proof that serious work happens outside expected zip codes. Never apologize for it.
+
+
+6. **Match the moment.** Dry wit works on website copy and social. Don't deploy it in billing emails. Read the room.
+
+
+**The Jargon Jar — never use these, use the translations instead:**
+
+
+| Corporate Speak | DA Translation |
+|---|---|
+| Synergy | Working together (without the posturing) |
+| Scalable | It won't break when more than three people show up |
+| Deep Dive | Looking at it for more than five minutes |
+| Bandwidth | Time. Just regular human time. |
+| User-Centric | I put the buttons where your thumb can actually reach them |
+| Leverage | To use. (Preferred by people who want to sound more expensive.) |
+| Disruptive | Actually useful |
+| Ecosystem | Your tools, working together |
+| Pivot | Changed our minds. On purpose. |
+| Onboarding | Getting started |
+| End-to-end digital transformation | We fix what's broken and build what's missing. |
+| Scalable solutions for your growth journey | It works now and won't fall apart later. |
+| SEO-optimized content ecosystems | Your site shows up when people search. That's the goal. |
+| Robust backend infrastructure | The stuff running quietly in the background so nothing crashes. |
+| Holistic brand alignment | Your logo, site, and words look like they know each other. |
+
+
+---
+
+
+## Tone by Context
+
+
+| Context | Tone | Example |
+|---|---|---|
+| Website copy | Confident, dry wit, a little editorial | "The Dept. of Cooperation: your apps, finally on speaking terms." |
+| Social posts | Warmer, shorter, direct — occasionally a one-liner | "We watch the servers. You watch the sunset." |
+| Client emails | Warm and efficient. Wit optional, competence required. | "Here's what I found, here's what I'm doing about it, here's when it'll be done." |
+| Error messages | Honest and calm — never cute, never cold | "Something went sideways. We're on it — or email contact@digitalallies.net." |
+| Proposals | Plainspoken authority. No fluff. | "Here's what you need, why it works, and what it costs." |
+| Social media captions | Short, punchy, no hashtag padding | One sentence that does real work. |
+
+
+---
+
+
+## Writing Rules — Do / Don't
+
+
+**DO:**
+- "Your apps talk to each other. You don't have to."
+- "Repetitive tasks are for machines. You've got better things to do."
+- "Monitoring runs 24/7. If something breaks at 2am, that's my problem — not yours."
+- "We answer the phone. In person. Every time."
+- "This is what we do all day. It won't take long."
+- "Clean engineering, clear communication, and follow-through that won't require follow up."
+- Use "I" (first person singular) — it enforces personal accountability
+- Use plain, short sentences
+
+
+**DON'T:**
+- "We facilitate seamless API-level ecosystem integration."
+- "We're passionate about nurturing your digital journey."
+- "As a strategic technology partner, we align solutions to your roadmap."
+- "We leverage automation frameworks to optimize operational bandwidth."
+- Use passive voice
+- Use any word from the Jargon Jar above
+- Add filler phrases like "in today's digital landscape"
+
+
+---
+
+
+## Bilingual Support
+
+
+The site is fully bilingual (EN/ES). When creating bilingual content:
+- Language toggle uses EN | ES pattern with a vertical divider
+- Active language gets Charcoal background with Bone White text
+- Inactive language gets Bone White background with Charcoal text
+- All UI labels, headings, and copy need both language versions
+
+
+---
+
+
+## Accessibility Rules
+
+
+Digital Allies is committed to WCAG 2.1 AA compliance:
+- Minimum contrast ratio 4.5:1 for normal text, 3:1 for large text
+- All interactive elements need clear focus states (use Signal Red border on focus)
+- Touch targets: minimum 44x44px
+- All images need descriptive alt text
+- Semantic HTML structure required (proper heading hierarchy: h1 → h2 → h3)
+
+
+---
+
+
+## Practical Application by Format
+
+
+### HTML Pages
+- Background: `#F9F6F0` with Technical Lace grid CSS
+- Font import: Lexend Deca + JetBrains Mono from Google Fonts
+- All borders: `1px solid #2D2D2D`
+- Body font: JetBrains Mono
+- Heading font: Lexend Deca
+- Include one Symmetry Break Signal Red element
+- Logo: Pulse Dot animation + "Digital Allies" wordmark
+- Navigation: sticky top, structural border bottom, Bone White bg
+
+
+### Slide Decks / Presentations
+- Slide background: `#F9F6F0` with subtle grid pattern or solid Bone White
+- Title slides: Lexend Deca bold, large, left-aligned
+- Body text: JetBrains Mono
+- Accent color for section dividers or data callouts: Pulse Blue `#3A7BD5`
+- Use Signal Red `#C5301A` for one key stat or highlight per slide — not for every bullet
+- No decorative clip art, gradients, or stock photography
+- Data visualization: minimal, monochrome with one accent color
+
+
+### Social Posts
+- Background: Dark (`#2D2D2D`) or Bone White (`#F9F6F0`)
+- Text: contrasting color (Bone White on dark, Charcoal on light)
+- Accent: Pulse Blue or Signal Red dot — one per image
+- Font: Lexend Deca for headlines, JetBrains Mono for supporting text
+- Copy: one idea per post, plainspoken, no hashtag walls
+- Abstract brand art: use minimalist line art, geometric shapes, or the existing "Technical Lace" pattern
+
+
+### Documents / Reports
+- Header: "Digital Allies" in Lexend Deca bold with the Pulse Dot (or plain "DA" lettermark)
+- Body: JetBrains Mono for all text
+- Section headers: Lexend Deca bold, all caps or title case
+- Borders on tables and callout boxes: 1px `#2D2D2D`
+- Highlight boxes: Light Pink `#FADEEB` background for key callouts
+- Pricing: displayed as a clean table with monospaced alignment
+- Footer: "© [Year] Digital Allies. Based in Kingman, AZ. digitalallies.net"
+
+
+### Emails
+- Plain-text feel — no heavy HTML templates
+- Warm and efficient
+- Sign off: "Anthony / Digital Allies / (928) 228-5769"
+- No marketing fluff, no "hope this email finds you well"
+
+
+---

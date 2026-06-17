@@ -1,0 +1,120 @@
+# Digital Allies — Brand Voice Guide
+### One document. No fluff. No performance.
+
+---
+
+## 1. The Voice in One Sentence
+
+**"The sharp, straight-talking tech guy you actually want to call — because he picks up, explains things plainly, and doesn't make you feel dumb for asking."**
+
+*(Internally: The Knowledgeable Neighbor. Expert precision, zero condescension, a dry joke when it earns its place.)*
+
+---
+
+## 2. Core Principles
+
+**Plain is powerful.**
+If someone needs a glossary to read your website, you've already lost them. Every sentence earns its words or it's cut.
+
+**Warmth through action, not decoration.**
+DA doesn't *say* it's personable — it *answers the phone.* The voice reflects that: genuine, not performed.
+
+**Wit is a tool, not a costume.**
+Humor when it clarifies or disarms. Never humor to seem quirky. The joke should make the point, not replace it.
+
+**Confidence without posturing.**
+DA knows its craft. That means it doesn't need to impress — it just needs to communicate. Calm authority, not self-congratulation.
+
+**Local roots, professional reach.**
+Kingman, AZ isn't a liability to explain away. It's proof that serious work happens outside the expected zip codes.
+
+---
+
+## 3. The Tone Spectrum
+
+| Scale | Position | Notes |
+|---|---|---|
+| Formal ↔ **Casual** | 65% casual | Smart but approachable. Business without the blazer. |
+| **Dry** ↔ Warm | 55% dry | Dry inflection, genuine intent. Not cold. Not cozy. |
+| Technical ↔ **Plain** | 70% plain | Precision when needed, plain language always preferred. |
+| **Confident** ↔ Eager | 75% confident | Doesn't chase approval. Trusts the work. |
+| Performing ↔ **Authentic** | Full authentic | The character is gone. The person is present. |
+
+---
+
+## 4. The Jargon Jar 2.0
+
+*Same concept. Updated voice. Still costs a dollar.*
+
+| Corporate Speak | DA Translation |
+|---|---|
+| "Leverage synergies across touchpoints" | "Make the parts work together." |
+| "End-to-end digital transformation" | "We fix what's broken and build what's missing." |
+| "Scalable solutions for your growth journey" | "It works now and won't fall apart later." |
+| "SEO-optimized content ecosystems" | "Your site shows up when people search. That's the goal." |
+| "Robust backend infrastructure" | "The stuff running quietly in the background so nothing crashes." |
+| "Holistic brand alignment" | "Your logo, your site, your words — they should look like they know each other." |
+| "Onboarding workflow optimization" | "Getting started without the runaround." |
+
+---
+
+## 5. Do This / Not That
+
+**Too deadpan (old primary):**
+> "High-end engineering delivered with the enthusiasm of a librarian on a Tuesday."
+
+**Too fluffy (old secondary):**
+> "We nurture your digital presence like a garden, helping your brand blossom into its fullest potential."
+
+**DA unified voice:**
+> "Solid engineering, clear communication, and the kind of follow-through that means you won't need to follow up."
+
+---
+
+**Too deadpan:**
+> "Repetitive tasks are for machines. Go have a sandwich."
+
+**Too fluffy:**
+> "We take the weight of technology off your shoulders so you can grow freely."
+
+**DA unified voice:**
+> "The boring, repetitive stuff runs automatically. You've got better things to do."
+
+---
+
+**Too deadpan:**
+> "I watch the servers so you can watch the sunset."
+
+**DA unified voice:**
+> "Monitoring runs 24/7. If something breaks at 2am, that's my problem — not yours."
+
+---
+
+## 6. Sample Copy (Unified Voice)
+
+**About Section**
+Digital Allies is a one-person operation based in Kingman, AZ. That means when you call, I answer. When something breaks, I fix it. No ticket queue, no account manager, no middleman explaining what the other guy meant.
+
+I build websites, manage the technical layer, and handle the kind of ongoing work that keeps things running — so you can focus on running your business.
+
+---
+
+**The Design Bureau**
+Every element placed with purpose. Not because design is art (though sometimes it is) — because a well-built site does its job without you having to explain it to visitors.
+
+---
+
+**Dept. of Cooperation**
+Most tech partnerships end with one side confused and one side defensive. This one doesn't. You'll know what's happening, why it's happening, and what it costs. That's the whole model.
+
+---
+
+**Tagline Options (Unified Voice)**
+
+- *"Technology is our craft. People are our purpose."* ✓ Keep as-is — it lands.
+- *"Technological solutions for people with better things to do."* ✓ Keep — dry, honest, earns it.
+- New option: *"Clear tech. Straight talk. No ghosts."*
+
+---
+
+*This document supersedes both the primary website voice guide and the secondary brand guide tone section. When in doubt: ask yourself if the owner would actually say it. If the answer requires a character voice, rewrite it.*

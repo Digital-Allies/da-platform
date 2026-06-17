@@ -1,0 +1,286 @@
+{
+  "config": {
+    "schedule": "Mon, Tue, Wed, Fri at 12:00 PM Arizona time (noon)",
+    "platforms": [
+      "meta_business_suite",
+      "google_business_profile"
+    ],
+    "base_path": "/Users/cuus/Claude/projects/digital-allies/assets/Design System /social-media-marketing/services-marketing-content/",
+    "site": "https://digitalallies.net"
+  },
+  "campaigns": [
+    {
+      "name": "Design",
+      "article_url": "https://digitalallies.net/learn/design-bureau",
+      "theme": "Web design built for people and AI"
+    },
+    {
+      "name": "Automation",
+      "article_url": "https://digitalallies.net/learn/self-governing-bureau",
+      "theme": "Repetitive tasks are for machines"
+    },
+    {
+      "name": "Integrations",
+      "article_url": "https://digitalallies.net/learn/dept-cooperation",
+      "theme": "Your apps talk to each other. You don't have to."
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "date": "2026-06-09",
+      "day": "Tuesday",
+      "campaign": "Design",
+      "format": "carousel",
+      "images": [
+        "Design/001_.png",
+        "Design/002_.png",
+        "Design/003_.png",
+        "Design/004_.png",
+        "Design/005_.png",
+        "Design/006_.png",
+        "Design/007_.png"
+      ],
+      "cover_image": "Design/001_.png",
+      "facebook_image": "Design/001_.png",
+      "gbp_image": "Design/002_.png",
+      "caption_meta": "Your website is the first impression. We make it count \u2014 accessible, bilingual, and built to show up in search and AI.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "87.4% of your customers use a phone. That's where design starts. Digital Allies designs and builds websites, creative assets, and performance audits for Kingman small businesses. Mobile first always. Learn more: digitalallies.net/learn/design-bureau",
+      "status": "posted"
+    },
+    {
+      "id": 2,
+      "date": "2026-06-11",
+      "day": "Wednesday",
+      "campaign": "Design",
+      "image": "Design/003_In_a_bold_typographic_style_text_reads_your_jZJnlaa.png",
+      "caption_meta": "Your design should work before anyone reads a word. Custom websites for local businesses \u2014 built to be found.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "Custom web design for Kingman, Bullhead City, and Lake Havasu City businesses. Professional, accessible, and built for AI search. digitalallies.net/learn/design-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "date": "2026-06-13",
+      "day": "Friday",
+      "campaign": "Design",
+      "image": "Design/004_In_a_minimalist_graphic_design_style_a_dark_5z6JI08J.png",
+      "caption_meta": "A dark, clean aesthetic means business. We build websites that look professional and perform even better.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "Digital Allies builds modern websites for Arizona businesses ready to compete online. Professional design + AEO-ready structure. digitalallies.net/learn/design-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "date": "2026-06-16",
+      "day": "Monday",
+      "campaign": "Design",
+      "image": "Design/005_In_a_brutalist_typographic_style_large_black_3dTXgXiU.png",
+      "caption_meta": "Bold design. Real results. Websites built for local businesses that want to be taken seriously.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "Strong web presence starts with strong design. We build sites that work for people and for AI. Local businesses, Mohave County. digitalallies.net/learn/design-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "date": "2026-06-18",
+      "day": "Wednesday",
+      "campaign": "Design",
+      "image": "Design/006_In_a_minimalist_modern_style_the_graphic_01WRa0eQ.png",
+      "caption_meta": "Modern. Minimal. Built to convert. Your business deserves a website that works as hard as you do.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "Minimalist, modern web design for local businesses in Arizona. Fast, accessible, and built to be found. digitalallies.net/learn/design-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "date": "2026-06-20",
+      "day": "Friday",
+      "campaign": "Design",
+      "image": "Design/007_In_a_graphic_design_style_bold_sans-serif_text_ucmXTDZF.png",
+      "caption_meta": "Every business in Mohave County deserves a website that shows up. We build sites for people and for AI search.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "Get found by people and by AI. Digital Allies builds AI-discoverable websites for Kingman and surrounding communities. digitalallies.net/learn/design-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "date": "2026-06-23",
+      "day": "Monday",
+      "campaign": "Design",
+      "image": "Design/007_In_a_minimalist_graphic_design_style_the_text_69xfc7Ma.png",
+      "caption_meta": "Design that serves your community. Every site includes bilingual support, accessibility compliance, and AEO structure.\n\n\u2192 digitalallies.net/learn/design-bureau",
+      "caption_gbp": "Complete web design packages for Arizona small businesses. Bilingual, accessible, and built to compete. digitalallies.net/learn/design-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 8,
+      "date": "2026-06-25",
+      "day": "Wednesday",
+      "campaign": "Automation",
+      "image": "Automation/001_In_a_graphic_design_style_bold_white_text_reads_Fe02YuIE.png",
+      "caption_meta": "Repetitive tasks are for machines. You've got better things to do.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "AI automation for small businesses in Mohave County. Let the tools do the routine work \u2014 you focus on what matters. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 9,
+      "date": "2026-06-27",
+      "day": "Friday",
+      "campaign": "Automation",
+      "image": "Automation/002_In_a_minimalist_dark-themed_graphic_design_uBkcZQVt.png",
+      "caption_meta": "Your inbox, your schedule, your follow-ups \u2014 handled. Automation isn't just for big companies anymore.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "Workflow automation for local businesses. Reduce manual tasks and focus on serving customers. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 10,
+      "date": "2026-06-30",
+      "day": "Monday",
+      "campaign": "Automation",
+      "image": "Automation/003_In_a_minimalist_graphic_design_style_bold_white_1hTQx_Ol.png",
+      "caption_meta": "When the system runs itself, you stop putting out fires. Automation builds the breathing room.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "Business automation setup for Arizona small businesses. Bookings, follow-ups, and intake \u2014 all handled automatically. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 11,
+      "date": "2026-07-02",
+      "day": "Wednesday",
+      "campaign": "Automation",
+      "image": "Automation/004_In_a_minimalist_graphic_design_style_large_black_U2BFoEvp.png",
+      "caption_meta": "Your time is worth more than copy-paste. Let automation handle the routine.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "Automation services for businesses in Kingman, Bullhead City, and Lake Havasu. Save hours every week. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 12,
+      "date": "2026-07-07",
+      "day": "Monday",
+      "campaign": "Automation",
+      "image": "Automation/005_In_a_minimalist_graphic_design_style_this_NmjuZ2Ha.png",
+      "caption_meta": "Automation is already running at businesses like yours. Are you using it?\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "Is your business using automation yet? Digital Allies sets up AI-powered workflows for local companies. No IT background needed. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending",
+      "note": "Skipping July 4th \u2014 post resumes July 7"
+    },
+    {
+      "id": 13,
+      "date": "2026-07-09",
+      "day": "Wednesday",
+      "campaign": "Automation",
+      "image": "Automation/006_In_a_minimalist_graphic_design_style_bold_white_A9dEB-5M.png",
+      "caption_meta": "Set it up once. Let it run. That's what good automation looks like.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "One-time setup, ongoing results. We build automation workflows that keep running without constant maintenance. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 14,
+      "date": "2026-07-11",
+      "day": "Friday",
+      "campaign": "Automation",
+      "image": "Automation/007_In_a_minimalist_infographic_style_this_image_UNaLMtPF.png",
+      "caption_meta": "How automation saves 5+ hours a week for a small business. This one's worth a read.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "See how automation saves local businesses time every week. Digital Allies \u2014 Mohave County's AI implementation team. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 15,
+      "date": "2026-07-14",
+      "day": "Monday",
+      "campaign": "Automation",
+      "image": "Automation/008_In_a_bold_typographic_style_the_text_77acdlYY.png",
+      "caption_meta": "If you're still doing this manually, we need to talk.\n\n\u2192 digitalallies.net/learn/self-governing-bureau",
+      "caption_gbp": "Stop doing it manually. Digital Allies sets up automation for small businesses that want to scale without hiring. digitalallies.net/learn/self-governing-bureau",
+      "status": "pending"
+    },
+    {
+      "id": 16,
+      "date": "2026-07-16",
+      "day": "Wednesday",
+      "campaign": "Integrations",
+      "image": "Integrations/001_In_a_minimalist_graphic_design_style_text_is_-15rri3Q.png",
+      "caption_meta": "Your apps talk to each other. You don't have to.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "System integrations for local businesses in Mohave County. Connect your booking, POS, CRM, and intake tools. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    },
+    {
+      "id": 17,
+      "date": "2026-07-18",
+      "day": "Friday",
+      "campaign": "Integrations",
+      "image": "Integrations/002_In_a_bold_minimalist_graphic_design_style_the_n_jSejUa.png",
+      "caption_meta": "Connected systems mean less falling through the cracks. Less manual work. More done.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "Digital Allies builds integrations between the tools you already use. Booking, payments, CRM \u2014 all connected. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    },
+    {
+      "id": 18,
+      "date": "2026-07-21",
+      "day": "Monday",
+      "campaign": "Integrations",
+      "image": "Integrations/003_This_infographic_in_a_minimalist_bold_style_4IjY1WJz.png",
+      "caption_meta": "This is what good system integration actually looks like for a small business. Save this one.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "Connected systems for Arizona businesses. No more copy-pasting between apps. Digital Allies handles the integration. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    },
+    {
+      "id": 19,
+      "date": "2026-07-23",
+      "day": "Wednesday",
+      "campaign": "Integrations",
+      "image": "Integrations/004_In_a_minimalist_graphic_design_style_the_text_FbOIuoqk.png",
+      "caption_meta": "Every hour you spend moving data manually is an hour you're not growing.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "Stop moving data by hand. We connect your business tools so they work together automatically. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    },
+    {
+      "id": 20,
+      "date": "2026-07-25",
+      "day": "Friday",
+      "campaign": "Integrations",
+      "image": "Integrations/005_In_a_minimalist_modern_style_the_graphic_AtZNcmZN.png",
+      "caption_meta": "We bring the same integrations used by large companies to businesses in your community.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "Enterprise-level integrations for Kingman, Bullhead City, and Lake Havasu businesses. Booking, POS, CRM, intake forms \u2014 all connected. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    },
+    {
+      "id": 21,
+      "date": "2026-07-28",
+      "day": "Monday",
+      "campaign": "Integrations",
+      "image": "Integrations/006_In_a_minimalist_graphic_design_style_large_bold_MpPOhSyB.png",
+      "caption_meta": "Your tools should work for you \u2014 not the other way around.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "Custom integrations for Arizona small businesses. Digital Allies makes your tools work together. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    },
+    {
+      "id": 22,
+      "date": "2026-07-30",
+      "day": "Wednesday",
+      "campaign": "Integrations",
+      "image": "Integrations/007_In_a_modern_graphic_design_style_this_eqEZB54-.png",
+      "caption_meta": "Integrations aren't optional anymore. They're how you stay competitive.\n\n\u2192 digitalallies.net/learn/dept-cooperation",
+      "caption_gbp": "Stay competitive with connected systems. Digital Allies \u2014 integration and automation for local businesses in Mohave County. digitalallies.net/learn/dept-cooperation",
+      "status": "pending"
+    }
+  ],
+  "upcoming_campaigns": [
+    {
+      "name": "Kingman Data Story",
+      "type": "carousel",
+      "source": "/Users/cuus/Claude/projects/digital-allies/assets/Design System /brand-images/Social Template Designs/kingman-data-story/",
+      "notes": "11-slide carousel. Best for IG carousel + FB album. GBP single cover slide.",
+      "status": "planned"
+    },
+    {
+      "name": "Website Demo Reels",
+      "type": "video_reel",
+      "source": "/Users/cuus/Claude/projects/digital-allies/assets/Design System /social-media-marketing/social media services highlights/uploads/",
+      "notes": "Animated HTML demos exported as reels. Pair with custom music tracks.",
+      "status": "planned"
+    },
+    {
+      "name": "Brand Visuals",
+      "type": "visual_filler",
+      "source": "/Users/cuus/Claude/projects/digital-allies/assets/Brand Images/",
+      "notes": "Between campaigns. Lower text, higher visual. Abstract brand art, logo system shots.",
+      "status": "planned"
+    }
+  ]
+}

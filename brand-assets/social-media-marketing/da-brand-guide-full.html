@@ -1,0 +1,542 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--da:#2A4DF4;--ink:#0F1115;--sand:#E7E2D6;--warm:#D0D0D6;--off:#F7F6F3}
+body{font-family:var(--font-sans);color:var(--color-text-primary)}
+.guide{display:flex;flex-direction:column}
+.section{padding:1.75rem 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+.section:last-child{border-bottom:none}
+.lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:1rem;font-weight:500}
+.rule-list{display:flex;flex-direction:column;gap:6px}
+.rule{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:8px 10px;border-radius:8px;border:0.5px solid var(--color-border-tertiary)}
+.rdot{width:6px;height:6px;background:#2A4DF4;border-radius:50%;flex-shrink:0;margin-top:5px}
+
+/* Hero */
+.hero{background:#0F1115;padding:2.5rem 1.5rem;border-radius:12px 12px 0 0}
+.hero-name{font-size:34px;font-weight:700;color:#fff;line-height:1.05;margin-bottom:.5rem}
+.hero-dot{display:inline-block;width:9px;height:9px;background:#2A4DF4;border-radius:50%;margin-left:4px}
+.hero-sub{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap}
+.hbadge{font-size:10px;padding:3px 10px;border:0.5px solid rgba(255,255,255,.2);border-radius:999px;color:rgba(255,255,255,.45)}
+
+/* Landing fragment */
+.lp-wrap{background:var(--color-background-secondary);border-radius:12px;padding:1rem;border:0.5px solid var(--color-border-tertiary)}
+.lp-frame{background:#F7F6F3;border-radius:8px;overflow:hidden}
+.lp-nav{background:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:0.5px solid #e5e5e3}
+.lp-nav-logo{font-size:13px;font-weight:700;color:#0F1115;display:flex;align-items:center;gap:6px}
+.lp-nav-dot{width:7px;height:7px;background:#2A4DF4;border-radius:50%}
+.lp-nav-links{display:flex;gap:16px}
+.lp-nav-link{font-size:11px;color:#555}
+.lp-nav-cta{font-size:11px;background:#2A4DF4;color:#fff;padding:5px 12px;border-radius:6px}
+.lp-hero{padding:2rem 1.5rem;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}
+.lp-h1{font-size:26px;font-weight:700;color:#0F1115;line-height:1.1;max-width:320px}
+.lp-h1 span{color:#2A4DF4}
+.lp-sub{font-size:12px;color:#666;margin-top:.5rem;line-height:1.5;max-width:280px}
+.lp-btns{display:flex;gap:8px;margin-top:1rem}
+.lp-btn-p{font-size:11px;background:#2A4DF4;color:#fff;padding:7px 14px;border-radius:6px}
+.lp-btn-s{font-size:11px;border:0.5px solid #ccc;color:#0F1115;padding:7px 14px;border-radius:6px;background:#fff}
+.lp-fig{width:80px;height:80px;background:#0F1115;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lp-stat-bar{background:#0F1115;padding:14px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.lp-stat{text-align:center}
+.lp-stat-n{font-size:18px;font-weight:700;color:#2A4DF4}
+.lp-stat-l{font-size:10px;color:rgba(255,255,255,.5);margin-top:2px}
+
+/* Product cards */
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pc-dark{background:#0F1115;border-radius:12px;padding:1.25rem;min-height:140px;display:flex;flex-direction:column;justify-content:space-between}
+.pc-light{background:#F7F6F3;border-radius:12px;padding:1.25rem;min-height:140px;border:0.5px solid var(--color-border-tertiary);display:flex;flex-direction:column;justify-content:space-between}
+.pc-label{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em}
+.pc-label-d{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.1em}
+.pc-title{font-size:18px;font-weight:700;color:#fff;line-height:1.15;margin-top:.5rem}
+.pc-title-d{font-size:18px;font-weight:700;color:#0F1115;line-height:1.15;margin-top:.5rem}
+.pc-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:.25rem}
+.pc-sub-d{font-size:11px;color:#888;margin-top:.25rem}
+.pc-arrow{width:28px;height:28px;background:#2A4DF4;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pc-arrow-d{width:28px;height:28px;background:#0F1115;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pc-deco{width:48px;height:48px;border-radius:50%;background:#2A4DF4;opacity:.3;align-self:flex-end}
+.pc-deco-sm{width:24px;height:24px;border-radius:50%;background:#2A4DF4;opacity:.6}
+
+/* Patterns */
+.pat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pat-cell{border-radius:10px;height:90px;overflow:hidden;border:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:center}
+.pat-label{font-size:10px;color:var(--color-text-secondary);text-align:center;margin-top:6px}
+
+/* Photography */
+.photo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.photo-cell{border-radius:10px;overflow:hidden;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)}
+.photo-scene{height:90px;display:flex;align-items:center;justify-content:center;position:relative}
+.photo-caption{font-size:10px;color:var(--color-text-secondary);padding:6px 8px;border-top:0.5px solid var(--color-border-tertiary)}
+
+/* Interface snippets */
+.ui-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ui-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;overflow:hidden}
+.ui-nav-strip{display:flex;flex-direction:column;padding:.75rem}
+.ui-nav-link{font-size:12px;padding:6px 8px;border-radius:6px;color:var(--color-text-secondary)}
+.ui-nav-link.active{background:#2A4DF4;color:#fff}
+.ui-nav-cta{margin-top:8px;background:#2A4DF4;color:#fff;font-size:11px;padding:6px 12px;border-radius:6px;text-align:center}
+.ui-impact{padding:.75rem}
+.ui-impact-title{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem}
+.ui-stat{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.ui-n{font-size:18px;font-weight:700;color:#2A4DF4}
+.ui-dot-ind{width:7px;height:7px;background:#2A4DF4;border-radius:50%;flex-shrink:0}
+.ui-l{font-size:11px;color:var(--color-text-secondary)}
+
+/* Sticker */
+.sticker-grid{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:.5rem 0}
+.sticker-round{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;font-weight:700}
+.sticker-arc{width:90px;height:90px;border-radius:50%;border:2px solid #0F1115;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative}
+.sticker-hex{width:80px;height:80px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700}
+
+/* Editorial posters */
+.poster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.poster{border-radius:10px;padding:1rem;min-height:100px;display:flex;flex-direction:column;justify-content:space-between}
+.poster-tag{font-size:9px;text-transform:uppercase;letter-spacing:.1em;opacity:.6}
+.poster-copy{font-size:14px;font-weight:700;line-height:1.2}
+
+/* Packaging */
+.pkg-row{display:flex;gap:16px;align-items:flex-end}
+.pkg-box{border-radius:8px;padding:1rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.pkg-title{font-size:13px;font-weight:700}
+.pkg-sub{font-size:10px;opacity:.6}
+
+/* Branded mockups */
+.merch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.merch-item{background:var(--color-background-secondary);border-radius:10px;height:100px;display:flex;align-items:center;justify-content:center;border:0.5px solid var(--color-border-tertiary)}
+
+/* Motion */
+.motion-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.motion-cell{border-radius:10px;height:90px;border:0.5px solid var(--color-border-tertiary);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--color-background-secondary)}
+
+/* Footer */
+.guide-footer{background:#0F1115;padding:1.25rem 1.5rem;border-radius:0 0 12px 12px;display:flex;justify-content:space-between;align-items:center}
+.gf-logo{font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px}
+.gf-dot{width:7px;height:7px;background:#2A4DF4;border-radius:50%}
+.gf-meta{font-size:10px;color:rgba(255,255,255,.35)}
+</style>
+
+<div class="guide">
+
+<div class="hero">
+  <div class="hero-sub">Brand Identity System — Full Asset Reference</div>
+  <div class="hero-name">Digital Allies<span class="hero-dot"></span></div>
+  <div class="hero-badges">
+    <span class="hbadge">v1.0 · 2024</span>
+    <span class="hbadge">17 asset categories</span>
+    <span class="hbadge">Kingman, AZ</span>
+  </div>
+</div>
+
+<!-- 08. Landing Page Fragment -->
+<div class="section">
+  <div class="lbl">08 — Landing Page Fragment</div>
+  <div class="lp-wrap">
+    <div class="lp-frame">
+      <div class="lp-nav">
+        <div class="lp-nav-logo"><span class="lp-nav-dot"></span>Digital Allies</div>
+        <div class="lp-nav-links">
+          <span class="lp-nav-link">Work</span>
+          <span class="lp-nav-link">Services</span>
+          <span class="lp-nav-link">About</span>
+          <span class="lp-nav-link">Insights</span>
+          <span class="lp-nav-cta">Contact us</span>
+        </div>
+      </div>
+      <div class="lp-hero">
+        <div>
+          <div class="lp-h1">We build digital solutions that move people <span>forward.</span></div>
+          <div class="lp-sub">Strategy, design and engineering for a better tomorrow.</div>
+          <div class="lp-btns">
+            <div class="lp-btn-p">See our work</div>
+            <div class="lp-btn-s">Book a consultation</div>
+          </div>
+        </div>
+        <div class="lp-fig">
+          <div style="width:32px;height:32px;border-radius:50%;background:#2A4DF4"></div>
+        </div>
+      </div>
+      <div class="lp-stat-bar">
+        <div class="lp-stat"><div class="lp-stat-n">120+</div><div class="lp-stat-l">Projects delivered</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">98%</div><div class="lp-stat-l">Client satisfaction</div></div>
+        <div class="lp-stat"><div class="lp-stat-n">15+</div><div class="lp-stat-l">Industries served</div></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Nav: logo left, links center, blue CTA right. Always on white.</div>
+    <div class="rule"><span class="rdot"></span>Hero headline: large, bold, period-terminated. Blue on the final word.</div>
+    <div class="rule"><span class="rdot"></span>Stat bar: dark background, blue numbers, muted labels.</div>
+  </div>
+</div>
+
+<!-- 07. Product Cards -->
+<div class="section">
+  <div class="lbl">07 — Product Cards</div>
+  <div class="pc-grid">
+    <div class="pc-dark">
+      <div>
+        <div class="pc-label">Digital Allies</div>
+        <div class="pc-title">Strategy &amp; Advisory</div>
+        <div class="pc-sub">Clarity. Alignment. Measurable impact.</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end">
+        <div class="pc-arrow"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div style="display:flex;gap:6px"><div class="pc-deco-sm" style="width:32px;height:32px;border-radius:50%;background:#2A4DF4;opacity:.5"></div><div style="width:16px;height:16px;border-radius:50%;background:#2A4DF4;opacity:.3;align-self:flex-end"></div></div>
+      </div>
+    </div>
+    <div class="pc-light">
+      <div>
+        <div class="pc-label-d">Digital Allies</div>
+        <div class="pc-title-d">Platform Engineering</div>
+        <div class="pc-sub-d">Scalable. Secure. Future-ready.</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end">
+        <div class="pc-arrow-d"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H4M10 2V8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div style="display:flex;gap:4px;align-items:flex-end"><div style="width:40px;height:40px;border-radius:50%;background:#2A4DF4;opacity:.15"></div><div style="width:20px;height:20px;border-radius:50%;background:#2A4DF4;opacity:.3"></div><div style="width:12px;height:12px;border-radius:50%;background:#2A4DF4;opacity:.5"></div></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Two card variants: Ink Black (primary services) and Off White (secondary).</div>
+    <div class="rule"><span class="rdot"></span>Decorative dot clusters always bottom-right. Blue, opacity 0.3–0.6.</div>
+    <div class="rule"><span class="rdot"></span>Arrow CTA in blue circle. Never text-only CTA on cards.</div>
+  </div>
+</div>
+
+<!-- 04. Editorial Posters -->
+<div class="section">
+  <div class="lbl">04 — Editorial Posters</div>
+  <div class="poster-grid">
+    <div class="poster" style="background:#0F1115">
+      <div class="poster-tag" style="color:rgba(255,255,255,.4)">Digital Allies</div>
+      <div class="poster-copy" style="color:#fff">Technology with purpose.<br>People at the center.</div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#2A4DF4;margin-top:.5rem"></div>
+    </div>
+    <div class="poster" style="background:#2A4DF4">
+      <div class="poster-tag" style="color:rgba(255,255,255,.6)">Digital Allies</div>
+      <div class="poster-copy" style="color:#fff">Build digitally.<br>Scale humanly.</div>
+      <div style="margin-top:.5rem;display:flex;gap:3px"><div style="width:6px;height:6px;border-radius:50%;background:#fff;opacity:.5"></div><div style="width:6px;height:6px;border-radius:50%;background:#fff"></div></div>
+    </div>
+    <div class="poster" style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)">
+      <div class="poster-tag" style="color:var(--color-text-secondary)">Digital Allies</div>
+      <div class="poster-copy" style="color:var(--color-text-primary)">Stronger together in a digital world.</div>
+      <div style="width:20px;height:20px;border-radius:50%;background:#0F1115;margin-top:.5rem"></div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Three poster modes: Ink (dark), Cobalt (brand blue), Light (neutral).</div>
+    <div class="rule"><span class="rdot"></span>Copy is short, punchy, period-ended. Never more than two lines.</div>
+    <div class="rule"><span class="rdot"></span>Dot mark always present. Never absent from a poster.</div>
+  </div>
+</div>
+
+<!-- 10. Sticker System -->
+<div class="section">
+  <div class="lbl">10 — Sticker System</div>
+  <div class="sticker-grid">
+    <div style="text-align:center">
+      <div class="sticker-round" style="background:#2A4DF4;color:#fff;width:80px;height:80px">Digital<br>Allies</div>
+      <div style="font-size:10px;color:var(--color-text-secondary);margin-top:6px">Filled round</div>
+    </div>
+    <div style="text-align:center">
+      <div class="sticker-round" style="background:#0F1115;color:#fff;font-size:10px;width:80px;height:80px;padding:8px;line-height:1.3">Build digitally.<br>Scale humanly.</div>
+      <div style="font-size:10px;color:var(--color-text-secondary);margin-top:6px">Tagline round</div>
+    </div>
+    <div style="text-align:center">
+      <div class="sticker-arc" style="width:80px;height:80px;border:2px solid #0F1115;background:var(--color-background-secondary)">
+        <div style="font-size:10px;font-weight:700;color:#0F1115;text-align:center;line-height:1.2">PURPOSE<br>PEOPLE<br>PROGRESS</div>
+      </div>
+      <div style="font-size:10px;color:var(--color-text-secondary);margin-top:6px">Arc text</div>
+    </div>
+    <div style="text-align:center">
+      <div class="sticker-hex" style="background:#0F1115;color:#fff;width:80px;height:80px">DA</div>
+      <div style="font-size:10px;color:var(--color-text-secondary);margin-top:6px">Monogram</div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>All stickers are circular. No square or oval variants.</div>
+    <div class="rule"><span class="rdot"></span>Three colorways: Cobalt Blue, Ink Black, Off White.</div>
+    <div class="rule"><span class="rdot"></span>Arc text reads PURPOSE · PEOPLE · PROGRESS. Always in this order.</div>
+  </div>
+</div>
+
+<!-- 11. Patterns & Textures -->
+<div class="section">
+  <div class="lbl">11 — Patterns &amp; Textures</div>
+  <div class="pat-grid">
+    <div>
+      <div class="pat-cell" style="background:#F7F6F3">
+        <svg width="80" height="70" viewBox="0 0 80 70">
+          <defs><pattern id="dots" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.5" fill="#2A4DF4" opacity=".5"/></pattern></defs>
+          <rect width="80" height="70" fill="url(#dots)"/>
+        </svg>
+      </div>
+      <div class="pat-label">Dot grid — light</div>
+    </div>
+    <div>
+      <div class="pat-cell" style="background:#0F1115">
+        <svg width="80" height="70" viewBox="0 0 80 70">
+          <defs><pattern id="dots2" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1.5" fill="#2A4DF4" opacity=".7"/></pattern></defs>
+          <rect width="80" height="70" fill="url(#dots2)"/>
+        </svg>
+      </div>
+      <div class="pat-label">Dot grid — dark</div>
+    </div>
+    <div>
+      <div class="pat-cell" style="background:#F7F6F3">
+        <svg width="80" height="70" viewBox="0 0 80 70">
+          <defs><pattern id="diag" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse"><line x1="0" y1="12" x2="12" y2="0" stroke="#0F1115" stroke-width=".5" opacity=".2"/></pattern></defs>
+          <rect width="80" height="70" fill="url(#diag)"/>
+        </svg>
+      </div>
+      <div class="pat-label">Diagonal lines</div>
+    </div>
+    <div>
+      <div class="pat-cell" style="background:#2A4DF4">
+        <svg width="80" height="70" viewBox="0 0 80 70">
+          <defs><pattern id="dots3" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1" fill="#fff" opacity=".4"/></pattern></defs>
+          <rect width="80" height="70" fill="url(#dots3)"/>
+        </svg>
+      </div>
+      <div class="pat-label">Dot grid — cobalt</div>
+    </div>
+    <div>
+      <div class="pat-cell" style="background:#0F1115">
+        <svg width="80" height="70" viewBox="0 0 80 70">
+          <line x1="40" y1="35" x2="0" y2="0" stroke="#2A4DF4" stroke-width=".8" opacity=".6"/>
+          <line x1="40" y1="35" x2="80" y2="0" stroke="#2A4DF4" stroke-width=".8" opacity=".6"/>
+          <line x1="40" y1="35" x2="80" y2="70" stroke="#2A4DF4" stroke-width=".8" opacity=".6"/>
+          <line x1="40" y1="35" x2="0" y2="70" stroke="#2A4DF4" stroke-width=".8" opacity=".6"/>
+          <line x1="40" y1="35" x2="40" y2="0" stroke="#2A4DF4" stroke-width=".8" opacity=".4"/>
+          <line x1="40" y1="35" x2="80" y2="35" stroke="#2A4DF4" stroke-width=".8" opacity=".4"/>
+          <line x1="40" y1="35" x2="0" y2="35" stroke="#2A4DF4" stroke-width=".8" opacity=".4"/>
+          <line x1="40" y1="35" x2="40" y2="70" stroke="#2A4DF4" stroke-width=".8" opacity=".4"/>
+          <circle cx="40" cy="35" r="4" fill="#2A4DF4"/>
+        </svg>
+      </div>
+      <div class="pat-label">Kinetic rays — dark</div>
+    </div>
+    <div>
+      <div class="pat-cell" style="background:#F7F6F3">
+        <svg width="80" height="70" viewBox="0 0 80 70">
+          <circle cx="40" cy="35" r="28" fill="none" stroke="#0F1115" stroke-width=".5" opacity=".15"/>
+          <circle cx="40" cy="35" r="18" fill="none" stroke="#0F1115" stroke-width=".5" opacity=".2"/>
+          <circle cx="40" cy="35" r="10" fill="none" stroke="#0F1115" stroke-width=".5" opacity=".3"/>
+          <circle cx="40" cy="35" r="4" fill="#2A4DF4"/>
+        </svg>
+      </div>
+      <div class="pat-label">Concentric rings</div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Dot grids scale from 8–12px spacing. Never denser than 8px.</div>
+    <div class="rule"><span class="rdot"></span>Kinetic rays always radiate from a single point or dot.</div>
+    <div class="rule"><span class="rdot"></span>Patterns are backgrounds only — never foreground decoration.</div>
+  </div>
+</div>
+
+<!-- 14. Motion / Graphic Language -->
+<div class="section">
+  <div class="lbl">14 — Motion &amp; Graphic Language</div>
+  <div class="motion-grid">
+    <div style="text-align:center">
+      <div class="motion-cell" style="background:#0F1115;flex-direction:column;gap:.25rem">
+        <svg width="100" height="60" viewBox="0 0 100 60">
+          <line x1="50" y1="30" x2="5" y2="5" stroke="#2A4DF4" stroke-width=".8" opacity=".5"/>
+          <line x1="50" y1="30" x2="95" y2="5" stroke="#2A4DF4" stroke-width=".8" opacity=".5"/>
+          <line x1="50" y1="30" x2="95" y2="55" stroke="#2A4DF4" stroke-width=".8" opacity=".5"/>
+          <line x1="50" y1="30" x2="5" y2="55" stroke="#2A4DF4" stroke-width=".8" opacity=".5"/>
+          <line x1="50" y1="30" x2="50" y2="2" stroke="#2A4DF4" stroke-width=".8" opacity=".35"/>
+          <line x1="50" y1="30" x2="98" y2="30" stroke="#2A4DF4" stroke-width=".8" opacity=".35"/>
+          <line x1="50" y1="30" x2="2" y2="30" stroke="#2A4DF4" stroke-width=".8" opacity=".35"/>
+          <line x1="50" y1="30" x2="50" y2="58" stroke="#2A4DF4" stroke-width=".8" opacity=".35"/>
+          <circle cx="50" cy="30" r="5" fill="#2A4DF4"/>
+          <text x="50" y="52" text-anchor="middle" font-size="8" fill="rgba(255,255,255,.4)">Connecting ideas.</text>
+        </svg>
+      </div>
+      <div class="pat-label">Connecting ideas</div>
+    </div>
+    <div style="text-align:center">
+      <div class="motion-cell" style="background:#F7F6F3">
+        <svg width="100" height="60" viewBox="0 0 100 60">
+          <path d="M10 55 Q50 5 90 55" fill="none" stroke="#0F1115" stroke-width="1" opacity=".2"/>
+          <path d="M20 55 Q50 10 80 55" fill="none" stroke="#0F1115" stroke-width="1" opacity=".25"/>
+          <path d="M30 55 Q50 18 70 55" fill="none" stroke="#0F1115" stroke-width="1" opacity=".3"/>
+          <circle cx="50" cy="55" r="5" fill="#2A4DF4"/>
+          <text x="50" y="15" text-anchor="middle" font-size="8" fill="#555">Creating impact.</text>
+        </svg>
+      </div>
+      <div class="pat-label">Creating impact</div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Kinetic compositions built from dot, line, and contrast.</div>
+    <div class="rule"><span class="rdot"></span>Movements converge on or radiate from a single source dot.</div>
+    <div class="rule"><span class="rdot"></span>Copy overlays are always short: "Connecting ideas." / "Creating impact."</div>
+  </div>
+</div>
+
+<!-- 15. Photography Style -->
+<div class="section">
+  <div class="lbl">15 — Photography Style</div>
+  <div class="photo-grid">
+    <div class="photo-cell">
+      <div class="photo-scene" style="background:#c8c0b0">
+        <svg width="60" height="70" viewBox="0 0 60 70">
+          <rect x="18" y="15" width="24" height="30" rx="12" fill="#8b7355"/>
+          <rect x="10" y="42" width="40" height="25" rx="8" fill="#6b5a3e"/>
+          <circle cx="30" cy="10" r="8" fill="#a0876a"/>
+        </svg>
+      </div>
+      <div class="photo-caption">Authentic — real people, natural moments</div>
+    </div>
+    <div class="photo-cell">
+      <div class="photo-scene" style="background:#d0cfc8">
+        <svg width="70" height="70" viewBox="0 0 70 70">
+          <rect x="5" y="20" width="28" height="36" rx="10" fill="#7a6a5a"/>
+          <rect x="37" y="25" width="28" height="30" rx="10" fill="#6b5a4a"/>
+          <rect x="15" y="50" width="40" height="4" rx="2" fill="#555" opacity=".3"/>
+          <circle cx="35" cy="15" r="7" fill="#8a7a6a"/>
+          <circle cx="52" cy="20" r="6" fill="#7a6a5a"/>
+        </svg>
+      </div>
+      <div class="photo-caption">Collaborative — people working together</div>
+    </div>
+    <div class="photo-cell">
+      <div class="photo-scene" style="background:#1a1a1a">
+        <svg width="50" height="70" viewBox="0 0 50 70">
+          <rect x="15" y="10" width="20" height="50" rx="4" fill="#333"/>
+          <rect x="18" y="8" width="14" height="5" rx="2" fill="#444"/>
+          <line x1="0" y1="35" x2="15" y2="35" stroke="#2A4DF4" stroke-width=".8" opacity=".6"/>
+          <line x1="35" y1="35" x2="50" y2="35" stroke="#2A4DF4" stroke-width=".8" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="photo-caption">Forward-looking — modern, purposeful</div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Human, real, and forward-looking. Authentic moments over perfection.</div>
+    <div class="rule"><span class="rdot"></span>No stock-photo feel. No excessive retouching or staged setups.</div>
+    <div class="rule"><span class="rdot"></span>Color grade: neutral-warm. Avoid oversaturated or high-contrast edits.</div>
+    <div class="rule"><span class="rdot"></span>People are the subject — technology is context, not the hero.</div>
+  </div>
+</div>
+
+<!-- 12. Interface Snippets -->
+<div class="section">
+  <div class="lbl">12 — Interface Snippets</div>
+  <div class="ui-grid">
+    <div class="ui-card">
+      <div style="padding:.75rem;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:6px">
+        <div style="width:6px;height:6px;border-radius:50%;background:#2A4DF4"></div>
+        <span style="font-size:12px;font-weight:500">Digital Allies</span>
+      </div>
+      <div class="ui-nav-strip">
+        <div class="ui-nav-link active">Home</div>
+        <div class="ui-nav-link">Services</div>
+        <div class="ui-nav-link">Work</div>
+        <div class="ui-nav-link">Insights</div>
+        <div class="ui-nav-link">About</div>
+        <div class="ui-nav-cta">Contact us</div>
+      </div>
+    </div>
+    <div class="ui-card">
+      <div style="padding:.75rem;border-bottom:0.5px solid var(--color-border-tertiary);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;font-weight:500">Impact in numbers</span>
+        <div class="ui-dot-ind"></div>
+      </div>
+      <div class="ui-impact">
+        <div class="ui-stat"><span class="ui-n">120+</span><span class="ui-l">Projects delivered</span></div>
+        <div class="ui-stat"><span class="ui-n">98%</span><span class="ui-l">Client satisfaction</span></div>
+        <div class="ui-stat"><span class="ui-n">15+</span><span class="ui-l">Industries served</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Nav: always includes logo mark, 5 core links, and a blue CTA button.</div>
+    <div class="rule"><span class="rdot"></span>Active state: blue fill, white text. No underlines or bold-only states.</div>
+    <div class="rule"><span class="rdot"></span>Stat blocks: blue number + muted label. No units in the number itself.</div>
+  </div>
+</div>
+
+<!-- 09. Packaging -->
+<div class="section">
+  <div class="lbl">09 — Packaging Concepts</div>
+  <div style="display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap">
+    <div>
+      <div class="pkg-box" style="background:#F7F6F3;border:0.5px solid var(--color-border-tertiary);width:90px;height:110px;justify-content:space-between;padding:12px">
+        <div style="width:8px;height:8px;border-radius:50%;background:#2A4DF4"></div>
+        <div>
+          <div class="pkg-title" style="font-size:11px;font-weight:700;color:#0F1115">Digital<br>Allies</div>
+          <div class="pkg-sub" style="font-size:9px">Starter Kit</div>
+          <div style="font-size:8px;color:#999;margin-top:2px;line-height:1.3">Thoughtful tools<br>for greater impact.</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--color-text-secondary);text-align:center;margin-top:6px">Starter Kit</div>
+    </div>
+    <div>
+      <div class="pkg-box" style="background:#0F1115;width:90px;height:110px;justify-content:space-between;padding:12px">
+        <div style="width:8px;height:8px;border-radius:50%;background:#2A4DF4"></div>
+        <div>
+          <div style="font-size:11px;font-weight:700;color:#fff">Digital<br>Allies</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px">Partner Pack</div>
+          <div style="font-size:8px;color:rgba(255,255,255,.35);margin-top:2px;line-height:1.3">Stronger together<br>for greater impact.</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--color-text-secondary);text-align:center;margin-top:6px">Partner Pack</div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Two packaging tiers: Starter Kit (light) and Partner Pack (dark).</div>
+    <div class="rule"><span class="rdot"></span>Dot mark always top-left on all physical packaging.</div>
+    <div class="rule"><span class="rdot"></span>Box copy follows voice rules: short, purposeful, period-ended.</div>
+  </div>
+</div>
+
+<!-- 13. Branded Mockups -->
+<div class="section">
+  <div class="lbl">13 — Branded Mockups</div>
+  <div class="merch-grid">
+    <div class="merch-item" style="flex-direction:column;gap:.5rem">
+      <div style="width:50px;height:60px;background:#1a1a1a;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px">
+        <div style="width:6px;height:6px;border-radius:50%;background:#2A4DF4"></div>
+        <div style="font-size:7px;font-weight:700;color:#fff;text-align:center;line-height:1.2">Digital<br>Allies</div>
+      </div>
+      <div style="font-size:10px;color:var(--color-text-secondary)">Tote bag</div>
+    </div>
+    <div class="merch-item" style="flex-direction:column;gap:.5rem">
+      <div style="width:60px;height:50px;background:#111;border-radius:4px;display:flex;align-items:center;justify-content:center;border-left:3px solid #2A4DF4">
+        <div style="text-align:center">
+          <div style="width:5px;height:5px;border-radius:50%;background:#2A4DF4;margin:0 auto 3px"></div>
+          <div style="font-size:6px;font-weight:700;color:#fff">Digital<br>Allies</div>
+        </div>
+      </div>
+      <div style="font-size:10px;color:var(--color-text-secondary)">Notebook</div>
+    </div>
+  </div>
+  <div style="margin-top:.75rem" class="rule-list">
+    <div class="rule"><span class="rdot"></span>Merch: Ink Black base, blue dot mark. Never blue base with white copy.</div>
+    <div class="rule"><span class="rdot"></span>Notebook spine accent: Cobalt Blue stripe, 3–4mm wide.</div>
+    <div class="rule"><span class="rdot"></span>All merch uses the stacked wordmark, never the inline or caps version.</div>
+  </div>
+</div>
+
+<!-- 17. Brand Essence -->
+<div class="section" style="background:#0F1115;margin:0">
+  <div class="lbl" style="color:rgba(255,255,255,.35)">17 — Brand Essence</div>
+  <div style="font-size:22px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:.5rem">Technology is our craft.<br>People are our <span style="color:#2A4DF4">purpose.</span></div>
+  <div style="display:flex;align-items:center;gap:6px;margin-top:1rem">
+    <div style="width:7px;height:7px;border-radius:50%;background:#2A4DF4"></div>
+    <span style="font-size:12px;font-weight:700;color:#fff">Digital Allies</span>
+  </div>
+</div>
+
+<div class="guide-footer">
+  <div class="gf-logo"><div class="gf-dot"></div>Digital Allies</div>
+  <div style="display:flex;gap:16px">
+    <span class="gf-meta">Brand Identity v1.0</span>
+    <span class="gf-meta">Full Asset Reference</span>
+    <span class="gf-meta">2024</span>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,720 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Digital Allies - Business Information &amp; Contact Details</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="28afc742-b9f7-819d-8aa0-c78d89d241ad" class="page sans"><header><h1 class="page-title">Digital Allies - Business Information &amp; Contact Details</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Chatbot Ready</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/layers_gray.svg" style="width:14px;height:14px;display:block"/></span>Areas</th><td><a href="../Areas%20Database%20264fc742b9f781c8b5b2e58c1d407536/Digital%20Allies%20-%20Services%2028afc742b9f781fca8d6cc17c4aadaea.html">Digital Allies - Services</a></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user_gray.svg" style="width:14px;height:14px;display:block"/></span>Author</th><td><span class="selected-value select-value-color-gray">Anthony Cassella</span></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Last edited</th><td><time>@October 16, 2025 6:47 AM</time></td></tr><tr class="property-row property-row-created_by"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user-circle_gray.svg" style="width:14px;height:14px;display:block"/></span>Created by</th><td><span class="user"><span class="icon text-icon user-icon"><span class="user-icon-inner">A</span></span>Anthony Cassella</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/link_gray.svg" style="width:14px;height:14px;display:block"/></span>Source</th><td><a href="https://digitalallies.net/" class="url-value">https://digitalallies.net/</a></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Status</th><td><span class="status-value"><div class="status-dot"></div>New</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Entry Type</th><td><span class="selected-value select-value-color-purple">Reference</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Completeness</th><td><span class="selected-value select-value-color-green">Complete</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Content Type</th><td><span class="selected-value select-value-color-green">Business Info</span><span class="selected-value select-value-color-yellow">Client-Facing</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Keywords</th><td><span class="selected-value select-value-color-red">Services</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Priority</th><td><span class="selected-value select-value-color-red">Critical</span></td></tr></tbody></table></header><div class="page-body"><h2 id="9f8d3524-42f1-4cca-b5bd-e86910b3f97b" class="">Company Overview</h2><h3 id="7c522a6a-bc6e-4f56-9acc-09186c6c6c6e" class="">Business Identity</h3><ul id="5901bf61-83a4-47c9-a87e-e567864b06cf" class="bulleted-list"><li style="list-style-type:disc"><strong>Company Name</strong>: Digital Allies</li></ul><ul id="736ff1ed-5f20-4a06-9f2d-2432910a552c" class="bulleted-list"><li style="list-style-type:disc"><strong>Tagline</strong>: &quot;Digital Solutions for the Real World&quot;</li></ul><ul id="64966d90-5a90-49d7-a074-99108876189c" class="bulleted-list"><li style="list-style-type:disc"><strong>Industry</strong>: Web Development &amp; Digital Solutions</li></ul><ul id="7eb0e7de-ce39-4982-8aa7-2585191d47ff" class="bulleted-list"><li style="list-style-type:disc"><strong>Target Market</strong>: Small businesses, local enterprises</li></ul><ul id="63c00918-924e-4094-8d70-6484643f7cd4" class="bulleted-list"><li style="list-style-type:disc"><strong>Service Area</strong>: Kingman, AZ and surrounding areas</li></ul><h3 id="5e7582d1-86d9-48fc-8370-46b5b95ae4d5" class="">Mission Statement</h3><p id="ef0ffcb9-3d75-4027-a5bd-8e209895ec67" class="">Providing accessible, professional web development and digital solutions that help small businesses connect with their communities and grow their online presence.</p><h2 id="296bb3ab-3487-4c5b-9099-c55fe14d82f6" class="">Contact Information</h2><h3 id="4756b493-b47f-470c-b8e8-99ef224136b4" class="">Primary Contact</h3><ul id="55e011b6-728e-4fe7-90e9-dfecbd4b26a9" class="bulleted-list"><li style="list-style-type:disc"><strong>Email</strong>: <a href="mailto:contact@digitalallies.net">contact@digitalallies.net</a></li></ul><ul id="c03b83c9-c476-4cc2-b645-4f098abf38e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Phone</strong>: 928-228-5769</li></ul><ul id="661a2059-8ca2-472f-9170-100fcd0d2a30" class="bulleted-list"><li style="list-style-type:disc"><strong>Response Time</strong>: 24-hour response guarantee</li></ul><ul id="82e56e32-4e20-480c-89ca-3b6d4838b19b" class="bulleted-list"><li style="list-style-type:disc"><strong>Business Hours</strong>: Mountain Standard Time</li></ul><h3 id="c714c619-6ee0-4229-bf30-296d51271157" class="">Business Address</h3><ul id="3c6e3408-417b-45ae-80f9-d9329fd79dd7" class="bulleted-list"><li style="list-style-type:disc"><strong>City</strong>: Kingman</li></ul><ul id="b0ae8eab-5892-4e4f-b89f-d6b1bf4635b4" class="bulleted-list"><li style="list-style-type:disc"><strong>State</strong>: Arizona (AZ)</li></ul><ul id="def08d4d-d409-4978-b9b5-9299a9e34e75" class="bulleted-list"><li style="list-style-type:disc"><strong>Country</strong>: United States</li></ul><ul id="6aa10710-a9c5-4d5f-8554-25bb05ca094a" class="bulleted-list"><li style="list-style-type:disc"><strong>Region</strong>: Southwest United States</li></ul><ul id="89faca63-2681-4bbf-9ea1-b4bf07d6b16f" class="bulleted-list"><li style="list-style-type:disc"><strong>Time Zone</strong>: Mountain Standard Time (MST)</li></ul><h2 id="71eb9300-78d1-4752-8c38-b860db35f35c" class="">Service Statistics</h2><h3 id="63f1bf38-f0a0-4a8f-beee-7ffd7836ba11" class="">Business Metrics</h3><ul id="0196f327-84b5-4e3a-ad6f-6b8dc1655e19" class="bulleted-list"><li style="list-style-type:disc"><strong>Happy Clients</strong>: 50+</li></ul><ul id="d1d92b6f-6041-4e75-92aa-a2554887d2be" class="bulleted-list"><li style="list-style-type:disc"><strong>Years Experience</strong>: 5+</li></ul><ul id="2ae275dc-46b6-4674-ba8f-ea4b57336494" class="bulleted-list"><li style="list-style-type:disc"><strong>Satisfaction Rate</strong>: 100%</li></ul><ul id="176f4677-8726-4c51-888f-9380f50f3579" class="bulleted-list"><li style="list-style-type:disc"><strong>Support Availability</strong>: 24/7</li></ul><h3 id="7b293fa6-bd9d-418c-8bd0-6de33c546750" class="">Service Commitments</h3><ul id="d4d60e7c-4859-45a2-bb91-f247c6f93d72" class="bulleted-list"><li style="list-style-type:disc"><strong>Project Timeline</strong>: 6-8 weeks for web development</li></ul><ul id="a8ed9918-5e4a-45ad-802c-8ec2f7757795" class="bulleted-list"><li style="list-style-type:disc"><strong>Launch Sprints</strong>: Two-week rapid deployment option</li></ul><ul id="872f77bb-1ed4-464a-a2c9-5e7eff9305be" class="bulleted-list"><li style="list-style-type:disc"><strong>Response Time</strong>: 24-hour guarantee</li></ul><ul id="d62c3e05-a31b-4ed7-a743-98919ee1e905" class="bulleted-list"><li style="list-style-type:disc"><strong>Quarterly Reviews</strong>: Strategy sessions included</li></ul><h2 id="951a0219-2116-4981-9774-162defcad881" class="">Pricing Structure</h2><h3 id="7cdc10c3-1eca-41b9-a564-20bddf25cf47" class="">Base Pricing</h3><ul id="56410f8b-0d94-4943-a80d-13603ebb9ce4" class="bulleted-list"><li style="list-style-type:disc"><strong>Starting Price</strong>: $1,800 (fixed-price packages)</li></ul><ul id="e9c0a178-8a98-4e33-b4eb-08a649b082f7" class="bulleted-list"><li style="list-style-type:disc"><strong>Pricing Model</strong>: Transparent, no hidden fees</li></ul><ul id="05fdbcd4-5319-4f32-ad08-8f6fb05c2fef" class="bulleted-list"><li style="list-style-type:disc"><strong>Payment Structure</strong>: Fixed-price packages</li></ul><ul id="beb5b156-e243-45cf-87a2-291522587864" class="bulleted-list"><li style="list-style-type:disc"><strong>Value Proposition</strong>: Affordable excellence</li></ul><h3 id="7df254d2-b051-4ad9-97bc-4dd7212bafc7" class="">Service Impact Metrics</h3><ul id="82baf7dd-cdec-41e1-8a13-b895fe46f5a5" class="bulleted-list"><li style="list-style-type:disc"><strong>Brand Recognition Increase</strong>: Up to 40% (Design &amp; Branding)</li></ul><ul id="a262aaa1-d8d4-4afe-bb0b-7e1923be49ae" class="bulleted-list"><li style="list-style-type:disc"><strong>Busywork Reduction</strong>: Average 32% (Tech Consulting)</li></ul><ul id="f6ff943c-5896-4515-ad16-53fb387e429b" class="bulleted-list"><li style="list-style-type:disc"><strong>ROI Focus</strong>: Conversion-focused development</li></ul><h2 id="dd7d35bb-9aa7-45cd-b28c-b4d965f6b540" class="">Technology Certifications &amp; Standards</h2><h3 id="038bcc76-5e8a-451a-ba2e-7de0f8c0ab62" class="">Compliance Standards</h3><ul id="78b70ff6-b714-42b0-bcc5-e90a426f8f76" class="bulleted-list"><li style="list-style-type:disc"><strong>WCAG 2.1 AA</strong>: Web Content Accessibility Guidelines compliance</li></ul><ul id="426fd016-656f-42b6-9e87-7a8e45af31f8" class="bulleted-list"><li style="list-style-type:disc"><strong>GDPR Ready</strong>: Privacy compliance for international clients</li></ul><ul id="6079b2f3-a37b-4e6f-bd52-2bfe8cf431db" class="bulleted-list"><li style="list-style-type:disc"><strong>Security Standards</strong>: HTTPS, secure development practices</li></ul><h3 id="2ef8dea3-6b18-495f-9ea7-f82f26efd1f7" class="">Technical Expertise</h3><ul id="5f084086-642e-4cf1-a104-8066b673342a" class="bulleted-list"><li style="list-style-type:disc"><strong>Frontend</strong>: HTML5, CSS3, JavaScript (ES6+)</li></ul><ul id="4f760c0b-b7a2-4522-a210-b52cb11de196" class="bulleted-list"><li style="list-style-type:disc"><strong>Frameworks</strong>: Tailwind CSS, Progressive Enhancement</li></ul><ul id="247948a1-1f46-414c-920b-df2266380558" class="bulleted-list"><li style="list-style-type:disc"><strong>CMS</strong>: Custom static site generation</li></ul><ul id="756a68d3-8643-4b66-a0d2-d471198212c1" class="bulleted-list"><li style="list-style-type:disc"><strong>Analytics</strong>: Google Analytics 4, Tag Manager integration</li></ul><ul id="832d9cf5-74b9-42ee-bbfa-c63e48ea7e91" class="bulleted-list"><li style="list-style-type:disc"><strong>Performance</strong>: Optimized loading, CDN integration</li></ul><h2 id="ac3bc3e6-4836-40eb-88ea-7d23d573f23d" class="">Service Offerings Detail</h2><h3 id="7eb7e53e-d318-4fc8-9b49-6b3246e60dd5" class="">Web Development</h3><ul id="8c6629c5-e9f0-4c99-8127-d5debd79ca9f" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom websites</strong>: Responsive, conversion-focused</li></ul><ul id="b0d59cbe-d746-4d60-8b2a-5e55f05c0cf9" class="bulleted-list"><li style="list-style-type:disc"><strong>E-commerce solutions</strong>: Online store development</li></ul><ul id="775f9f43-b062-4ac4-9b4b-cec307bca828" class="bulleted-list"><li style="list-style-type:disc"><strong>Performance optimization</strong>: Fast loading, SEO-friendly</li></ul><ul id="92a763ea-b309-4286-9606-fdbf0a9cde9f" class="bulleted-list"><li style="list-style-type:disc"><strong>Analytics integration</strong>: Tracking and measurement</li></ul><ul id="807de2e0-6aca-4316-9aca-3639d70eba8b" class="bulleted-list"><li style="list-style-type:disc"><strong>Lead capture</strong>: Form integration and automation</li></ul><h3 id="abdd5980-f6cd-4d35-bfaf-e7caa6450173" class="">Design &amp; Branding</h3><ul id="09750074-a040-449a-b4de-292c67eaf34f" class="bulleted-list"><li style="list-style-type:disc"><strong>Logo design</strong>: Professional brand identity</li></ul><ul id="f2e9be65-32b4-4434-bbac-e6d28d2cfa0b" class="bulleted-list"><li style="list-style-type:disc"><strong>Brand guidelines</strong>: Comprehensive style guides</li></ul><ul id="9f28529b-e61d-40e3-b0ae-d4f9fa51dd2a" class="bulleted-list"><li style="list-style-type:disc"><strong>Marketing materials</strong>: Digital and print assets</li></ul><ul id="5ba285b0-0e4e-44ec-baf0-2693ab7e5602" class="bulleted-list"><li style="list-style-type:disc"><strong>Color schemes</strong>: Accessible, brand-consistent palettes</li></ul><ul id="a8d6c468-d3fd-4cd1-b3f2-57fa67eae929" class="bulleted-list"><li style="list-style-type:disc"><strong>Typography</strong>: Professional font selections</li></ul><h3 id="fa3d87f7-74b1-4343-97cb-1d887f42144f" class="">Tech Consulting</h3><ul id="e78e8e9e-a4bc-4532-b453-ab722c568688" class="bulleted-list"><li style="list-style-type:disc"><strong>Process automation</strong>: Workflow optimization</li></ul><ul id="a2eb095b-a9b2-41ff-96b2-4eb1861bcce3" class="bulleted-list"><li style="list-style-type:disc"><strong>System integration</strong>: Tool connectivity</li></ul><ul id="babaf3bf-4e60-4e2d-b89f-fcc2cb271fd0" class="bulleted-list"><li style="list-style-type:disc"><strong>Training programs</strong>: Team capability building</li></ul><ul id="8928447c-a3bc-468f-8240-022144e5c992" class="bulleted-list"><li style="list-style-type:disc"><strong>Technology roadmaps</strong>: Strategic planning</li></ul><ul id="7fe21087-bd1f-4526-b5b2-610985166404" class="bulleted-list"><li style="list-style-type:disc"><strong>Documentation</strong>: Process and system documentation</li></ul><h3 id="df2a22a7-b41a-4f85-9fde-686dcea58a98" class="">Additional Services</h3><ul id="030debf3-3750-4f57-a39c-d83581567596" class="bulleted-list"><li style="list-style-type:disc"><strong>SEO optimization</strong>: Search engine visibility</li></ul><ul id="24d58f96-bb42-4fc4-a013-6e0cf2509ac3" class="bulleted-list"><li style="list-style-type:disc"><strong>Website maintenance</strong>: Ongoing support and updates</li></ul><ul id="0608b995-d447-4133-8aba-b3bf38345093" class="bulleted-list"><li style="list-style-type:disc"><strong>Accessibility audits</strong>: WCAG compliance assessment</li></ul><ul id="5f8c4109-0b6f-4220-a94b-fba3571d957c" class="bulleted-list"><li style="list-style-type:disc"><strong>Content management</strong>: Blog and content systems</li></ul><ul id="91b1f6d5-4415-4e5e-8c67-ea2c4ce0195c" class="bulleted-list"><li style="list-style-type:disc"><strong>Analytics setup</strong>: Measurement and reporting</li></ul><h2 id="63c405f7-95dc-41a0-a108-e561de0acee7" class="">Client Support Model</h2><h3 id="1dc15e11-2467-44dd-bd12-3999e40caf78" class="">Ongoing Support</h3><ul id="30e98b7b-9f74-4cbe-9127-8c8e34b9e457" class="bulleted-list"><li style="list-style-type:disc"><strong>24-hour response time</strong>: Quick issue resolution</li></ul><ul id="6bd04a49-6a4b-412f-945a-437c0aa6c16f" class="bulleted-list"><li style="list-style-type:disc"><strong>Quarterly strategy sessions</strong>: Regular check-ins</li></ul><ul id="4b7bcf12-eb9f-4999-8865-686e12cc406e" class="bulleted-list"><li style="list-style-type:disc"><strong>Maintenance packages</strong>: Ongoing site care</li></ul><ul id="1c1c2bd4-392f-49df-8df9-cfd720a2be1e" class="bulleted-list"><li style="list-style-type:disc"><strong>Training provided</strong>: Client capability building</li></ul><ul id="b95af8bc-cf44-462d-bc5b-3a24bd8baa0e" class="bulleted-list"><li style="list-style-type:disc"><strong>Documentation</strong>: Comprehensive handover materials</li></ul><h3 id="ba88c9c7-33d3-4a44-aa4f-89b25df4262f" class="">Communication Channels</h3><ul id="ffbba22b-7736-4e87-bf59-baf88f9405b8" class="bulleted-list"><li style="list-style-type:disc"><strong>Email</strong>: Primary communication method</li></ul><ul id="b89defba-92f0-4cca-9a8c-05091c693eee" class="bulleted-list"><li style="list-style-type:disc"><strong>Phone</strong>: Direct consultation and support</li></ul><ul id="166ec158-b456-48bf-b5a2-ce2a837a16ed" class="bulleted-list"><li style="list-style-type:disc"><strong>Project portal</strong>: (Planned feature)</li></ul><ul id="0bb6e8b6-814b-42b9-a464-2a3b60cccaa4" class="bulleted-list"><li style="list-style-type:disc"><strong>Documentation</strong>: Self-service resources</li></ul><h2 id="a6749bd4-462d-43f1-8f91-b65061021993" class="">Structured Data &amp; SEO</h2><h3 id="2ed0fe75-f42e-490c-9a20-a39e6daf28c6" class=""><a href="http://Schema.org">Schema.org</a> Implementation</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="faa682fa-fafe-4d2d-a7a7-02e0d32561ad" class="code code-wrap"><code class="language-JSON" style="white-space:pre-wrap;word-break:break-all">{
+  &quot;@context&quot;: &quot;https://schema.org&quot;,
+  &quot;@type&quot;: &quot;Organization&quot;,
+  &quot;name&quot;: &quot;Digital Allies&quot;,
+  &quot;email&quot;: &quot;contact@digitalallies.net&quot;,
+  &quot;telephone&quot;: &quot;928-228-5769&quot;,
+  &quot;address&quot;: {
+    &quot;@type&quot;: &quot;PostalAddress&quot;,
+    &quot;addressLocality&quot;: &quot;Kingman&quot;,
+    &quot;addressRegion&quot;: &quot;AZ&quot;,
+    &quot;addressCountry&quot;: &quot;US&quot;
+  },
+  &quot;url&quot;: &quot;https://digitalallies.net&quot;,
+  &quot;description&quot;: &quot;Professional web development and digital solutions for businesses in Kingman, AZ and surrounding areas.&quot;
+}</code></pre><h3 id="7dcf11f7-d1ae-4525-a61f-558cf76d692e" class="">Local SEO Optimization</h3><ul id="af4019f5-97c5-4ce9-bd86-14160cc7ce36" class="bulleted-list"><li style="list-style-type:disc"><strong>Geographic targeting</strong>: Kingman, AZ focus</li></ul><ul id="acaf22c8-0dde-4845-bbc0-e54a36f64f58" class="bulleted-list"><li style="list-style-type:disc"><strong>Local keywords</strong>: Arizona web development</li></ul><ul id="c718e89d-60e9-4af2-8864-c41bad06c122" class="bulleted-list"><li style="list-style-type:disc"><strong>Service area</strong>: Southwest United States</li></ul><ul id="c716a459-9722-497b-aad6-6575d8139bd4" class="bulleted-list"><li style="list-style-type:disc"><strong>Local business schema</strong>: Structured data implementation</li></ul><h2 id="5fadd58e-6c06-4621-8d46-676158bb750e" class="">Competitive Advantages</h2><h3 id="972d886f-f5b6-4128-b37f-6ddbcc4466bd" class="">Unique Value Propositions</h3><ol type="1" id="5a9efef8-60f9-4b4a-a75c-1e9b8154a8df" class="numbered-list" start="1"><li><strong>Affordable Excellence</strong>: Fixed pricing starting at $1,800</li></ol><ol type="1" id="4668fb17-bfb4-4002-92da-c9367126faa5" class="numbered-list" start="2"><li><strong>Personal Partnership</strong>: Quarterly strategy sessions</li></ol><ol type="1" id="ed5053fd-cdf6-47b1-9cf6-83a50bb32914" class="numbered-list" start="3"><li><strong>Real-World Focus</strong>: Customer-tested prototypes</li></ol><ol type="1" id="3d0abc85-d10d-42c0-8a5c-59308b784871" class="numbered-list" start="4"><li><strong>Accessibility First</strong>: WCAG compliance built-in</li></ol><ol type="1" id="4c3edb7b-6ded-4e8e-9922-e6b76a25c43f" class="numbered-list" start="5"><li><strong>Local Expertise</strong>: Understanding of regional market</li></ol><h3 id="ac8a4265-3667-4b95-b6e2-1a39a5f244ba" class="">Service Differentiators</h3><ul id="1be3dce7-bcd2-4fd2-b1c1-fede2eccb44b" class="bulleted-list"><li style="list-style-type:disc"><strong>Two-week launch sprints</strong>: Rapid deployment capability</li></ul><ul id="04db53d7-7b92-4182-9ff7-1337be89a7dd" class="bulleted-list"><li style="list-style-type:disc"><strong>No hidden fees</strong>: Transparent pricing model</li></ul><ul id="f79df03d-3149-427a-a6ad-28e0e3c0e044" class="bulleted-list"><li style="list-style-type:disc"><strong>Accessibility built-in</strong>: Not an afterthought</li></ul><ul id="ab988adb-ebf3-4dc1-8b16-56058e0f8c7a" class="bulleted-list"><li style="list-style-type:disc"><strong>Performance optimized</strong>: Fast, efficient websites</li></ul><ul id="a9c20212-5c03-472e-b3ab-db3e776c052b" class="bulleted-list"><li style="list-style-type:disc"><strong>Multilingual support</strong>: English and Spanish capabilities</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

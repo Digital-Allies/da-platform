@@ -1,0 +1,748 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Digital Allies - Accessibility Standards &amp; Implementation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="28afc742-b9f7-8156-a003-e32837374e0d" class="page sans"><header><h1 class="page-title">Digital Allies - Accessibility Standards &amp; Implementation</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Chatbot Ready</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/layers_gray.svg" style="width:14px;height:14px;display:block"/></span>Areas</th><td><a href="../Areas%20Database%20264fc742b9f781c8b5b2e58c1d407536/Digital%20Allies%20-%20Technical%2028afc742b9f781f4905ad03919f857dc.html">Digital Allies - Technical</a></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user_gray.svg" style="width:14px;height:14px;display:block"/></span>Author</th><td><span class="selected-value select-value-color-gray">Anthony Cassella</span></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Last edited</th><td><time>@October 16, 2025 6:47 AM</time></td></tr><tr class="property-row property-row-created_by"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user-circle_gray.svg" style="width:14px;height:14px;display:block"/></span>Created by</th><td><span class="user"><span class="icon text-icon user-icon"><span class="user-icon-inner">A</span></span>Anthony Cassella</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/link_gray.svg" style="width:14px;height:14px;display:block"/></span>Source</th><td><a href="https://digitalallies.net/accessibility-guide.html" class="url-value">https://digitalallies.net/accessibility-guide.html</a></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Status</th><td><span class="status-value"><div class="status-dot"></div>New</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Entry Type</th><td><span class="selected-value select-value-color-blue">Documentation</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Completeness</th><td><span class="selected-value select-value-color-green">Complete</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Content Type</th><td><span class="selected-value select-value-color-yellow">Client-Facing</span><span class="selected-value select-value-color-blue">Technical Docs</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Keywords</th><td><span class="selected-value select-value-color-blue">Accessibility</span></td></tr><tr class="property-row property-row-select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-circle-down_gray.svg" style="width:14px;height:14px;display:block"/></span>Priority</th><td><span class="selected-value select-value-color-red">Critical</span></td></tr></tbody></table></header><div class="page-body"><h2 id="a226e178-e06b-478d-8824-99af949f209c" class="">WCAG 2.1 AA Compliance</h2><h3 id="3afad349-e2fe-4918-ae57-d148eb0ef20e" class="">Perceivable</h3><ul id="b02c470b-8997-417e-85d9-e0c459be2cdd" class="bulleted-list"><li style="list-style-type:disc"><strong>Alt text</strong>: Descriptive alternative text for all images</li></ul><ul id="7c4fd3e9-48d4-43c2-80fa-6ad8e9033d48" class="bulleted-list"><li style="list-style-type:disc"><strong>Color contrast</strong>: Meeting 4.5:1 ratio for normal text, 3:1 for large text</li></ul><ul id="edb24ebe-4d86-47bf-bf4e-9b910256e99f" class="bulleted-list"><li style="list-style-type:disc"><strong>Responsive design</strong>: Content adapts to different screen sizes</li></ul><ul id="d3c6fcbe-12ba-4a26-bbc3-3ef8c57fe171" class="bulleted-list"><li style="list-style-type:disc"><strong>Text alternatives</strong>: For non-text content</li></ul><h3 id="970314b3-550f-459d-a654-a74b6649cb8a" class="">Operable</h3><ul id="61c699ab-a6b1-44c4-89d3-fd6484f53800" class="bulleted-list"><li style="list-style-type:disc"><strong>Keyboard navigation</strong>: Full site functionality without mouse</li></ul><ul id="71d13a78-6b04-4e04-88de-4cfa5bef36a4" class="bulleted-list"><li style="list-style-type:disc"><strong>Skip links</strong>: &quot;Skip to main content&quot; for screen reader users</li></ul><ul id="a30df705-182f-4916-8d37-abe299e4225b" class="bulleted-list"><li style="list-style-type:disc"><strong>No seizure triggers</strong>: Careful animation and flashing content</li></ul><ul id="77a7332d-17ec-4178-93bd-94f34e73f3a6" class="bulleted-list"><li style="list-style-type:disc"><strong>Focus management</strong>: Clear focus indicators and logical tab order</li></ul><h3 id="f4e4a59e-76e4-4861-bf8f-941e5c29e77e" class="">Understandable</h3><ul id="600f1d2b-d022-41a1-912c-b3874a810732" class="bulleted-list"><li style="list-style-type:disc"><strong>Clear language</strong>: Simple, direct communication</li></ul><ul id="801a261f-250e-4745-a33c-666482ea3ab6" class="bulleted-list"><li style="list-style-type:disc"><strong>Consistent navigation</strong>: Predictable interface patterns</li></ul><ul id="9a52cad2-f2e8-4eda-8d2a-d69b9bd0e62b" class="bulleted-list"><li style="list-style-type:disc"><strong>Error prevention</strong>: Input validation and clear error messages</li></ul><ul id="5bc02d21-4be5-4d1e-bb57-bd0e27e3dc4d" class="bulleted-list"><li style="list-style-type:disc"><strong>Help text</strong>: Contextual assistance for form inputs</li></ul><h3 id="b50f4d29-0ab6-433a-a77d-1e33d528366a" class="">Robust</h3><ul id="3fb637ee-e3bb-4112-91e5-76d3a0ea0efe" class="bulleted-list"><li style="list-style-type:disc"><strong>Valid HTML</strong>: Standards-compliant markup</li></ul><ul id="b6a8430f-22b2-4205-b52e-250034caf5de" class="bulleted-list"><li style="list-style-type:disc"><strong>Semantic elements</strong>: Proper use of headings, landmarks, lists</li></ul><ul id="948911f4-73c6-4690-91bc-34510f10263d" class="bulleted-list"><li style="list-style-type:disc"><strong>ARIA labels</strong>: Enhanced accessibility information</li></ul><ul id="2504a484-151e-4747-a16c-3e75030116bd" class="bulleted-list"><li style="list-style-type:disc"><strong>Assistive technology</strong>: Screen reader and voice control compatibility</li></ul><h2 id="445bcc77-4775-4e47-b8fd-217f44528866" class="">Interactive Accessibility Tools</h2><h3 id="427508f0-7c74-446c-9ee0-53b11de4ef11" class="">Color Contrast Checker</h3><ul id="355808e3-0ac5-4a74-8288-62e57295948f" class="bulleted-list"><li style="list-style-type:disc"><strong>Real-time testing</strong>: Live contrast ratio calculation</li></ul><ul id="ac47bdc2-4718-4e7f-bd6b-960a77a3d7b2" class="bulleted-list"><li style="list-style-type:disc"><strong>WCAG compliance</strong>: Instant pass/fail feedback</li></ul><ul id="14ef69a0-be5b-4948-97ba-0ecb9fba22fe" class="bulleted-list"><li style="list-style-type:disc"><strong>Color suggestions</strong>: Recommendations for compliant alternatives</li></ul><h3 id="e1688f0d-a868-4933-86bb-387a23081f8a" class="">Alt Text Analyzer</h3><ul id="686811b3-92ea-4be8-954d-b2c8847c469a" class="bulleted-list"><li style="list-style-type:disc"><strong>Content quality</strong>: Evaluation of alternative text</li></ul><ul id="ea3068b6-d0d6-4e2a-ab89-76281a460758" class="bulleted-list"><li style="list-style-type:disc"><strong>Best practices</strong>: Guidelines for effective descriptions</li></ul><ul id="bc2ad13c-e573-41fd-8e13-904f2d9a7720" class="bulleted-list"><li style="list-style-type:disc"><strong>Context awareness</strong>: Image purpose and content analysis</li></ul><h3 id="8a128ab9-ab72-4fe3-91d4-47cfcff065b1" class="">Heading Structure Validator</h3><ul id="5ccd2bb4-ef96-488b-86d7-b135ca07b58b" class="bulleted-list"><li style="list-style-type:disc"><strong>Document outline</strong>: Hierarchical heading analysis</li></ul><ul id="c689a0bf-ee6e-4291-8d86-36f67a9eee64" class="bulleted-list"><li style="list-style-type:disc"><strong>Navigation aid</strong>: Screen reader navigation structure</li></ul><ul id="fd4cc473-6db6-44c6-bcc4-e602caed9df8" class="bulleted-list"><li style="list-style-type:disc"><strong>SEO benefits</strong>: Proper content organization</li></ul><h3 id="833046c8-5d89-41ad-96d6-4f8b2e47d68f" class="">Keyboard Navigation Demo</h3><ul id="3b6c58ea-8c3c-4772-9620-02a28ee01977" class="bulleted-list"><li style="list-style-type:disc"><strong>Interactive examples</strong>: Common navigation patterns</li></ul><ul id="bdecbb1a-aa4a-475d-9e31-d425220f199f" class="bulleted-list"><li style="list-style-type:disc"><strong>Testing procedures</strong>: How to verify keyboard accessibility</li></ul><ul id="918159cb-f9e4-49cc-a2a9-7ff8067ae372" class="bulleted-list"><li style="list-style-type:disc"><strong>Focus management</strong>: Best practices for focus order</li></ul><h2 id="b1d65dd2-b537-4ea9-9096-fed82defef20" class="">Implementation Standards</h2><h3 id="2790e0c7-fa08-47de-a1d7-3f6bb7c761d0" class="">HTML Semantic Structure</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="86f4a42d-2b84-46de-a6da-f1c74242f89e" class="code code-wrap"><code class="language-HTML" style="white-space:pre-wrap;word-break:break-all">&lt;header role=&quot;banner&quot;&gt;
+  &lt;nav role=&quot;navigation&quot; aria-label=&quot;Main navigation&quot;&gt;
+    &lt;!-- Navigation content --&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main id=&quot;main-content&quot; role=&quot;main&quot;&gt;
+  &lt;section aria-labelledby=&quot;section-heading&quot;&gt;
+    &lt;h2 id=&quot;section-heading&quot;&gt;Section Title&lt;/h2&gt;
+    &lt;!-- Section content --&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;footer role=&quot;contentinfo&quot;&gt;
+  &lt;!-- Footer content --&gt;
+&lt;/footer&gt;</code></pre><h3 id="9a390cda-691f-4724-80c1-2eaa79620047" class="">Form Accessibility</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="7f5fd97d-5f5d-49a6-bfd4-39a3f910ba4d" class="code code-wrap"><code class="language-HTML" style="white-space:pre-wrap;word-break:break-all">&lt;form&gt;
+  &lt;label for=&quot;email-input&quot;&gt;Email Address (required)&lt;/label&gt;
+  &lt;input 
+    type=&quot;email&quot; 
+    id=&quot;email-input&quot; 
+    required 
+    aria-describedby=&quot;email-help&quot;
+  &gt;
+  &lt;div id=&quot;email-help&quot;&gt;We&#x27;ll never share your email&lt;/div&gt;
+&lt;/form&gt;</code></pre><h3 id="c4093f19-3f5f-4311-b3f0-5e61280b9ae8" class="">Focus Management</h3><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="cc21e1b1-f1de-46a2-88e0-fc1ebed35fe5" class="code code-wrap"><code class="language-CSS" style="white-space:pre-wrap;word-break:break-all">:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #2563eb;
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}</code></pre><h2 id="6b5dbd48-7956-4e38-8f96-714f1d4eca03" class="">Testing Procedures</h2><h3 id="13c1ee3b-ad02-435f-b4ee-2506292e7092" class="">Manual Testing</h3><ol type="1" id="576be95d-8824-4cad-9f0e-03d3d8aac28a" class="numbered-list" start="1"><li><strong>Keyboard navigation</strong>: Tab through entire site</li></ol><ol type="1" id="32b05461-2204-4972-b6a8-97ea4e7ee140" class="numbered-list" start="2"><li><strong>Screen reader</strong>: Test with NVDA/JAWS/VoiceOver</li></ol><ol type="1" id="5a911e39-54ac-4bc9-8d87-786922497c0b" class="numbered-list" start="3"><li><strong>Color contrast</strong>: Verify all text meets ratios</li></ol><ol type="1" id="7eaddbd7-4417-4369-b58f-fa79531a276d" class="numbered-list" start="4"><li><strong>Zoom testing</strong>: 200% browser zoom functionality</li></ol><h3 id="8fc726c3-16e2-482a-86b7-0f4373faede3" class="">Automated Testing</h3><ul id="41b1d01d-9aeb-48ef-8d49-203af16e7849" class="bulleted-list"><li style="list-style-type:disc"><strong>axe-core</strong>: Accessibility testing engine</li></ul><ul id="ee2f1ff6-467c-4ea7-9372-3d56fb5c249b" class="bulleted-list"><li style="list-style-type:disc"><strong>WAVE</strong>: Web accessibility evaluation</li></ul><ul id="e2d2b8ce-9042-4841-845c-03df87d9bad5" class="bulleted-list"><li style="list-style-type:disc"><strong>Lighthouse</strong>: Built-in Chrome accessibility audit</li></ul><h3 id="ece1cf87-9af3-486f-80e4-492faf04cca2" class="">User Testing</h3><ul id="11d1bb56-db70-46a9-a851-7323e5cc1b23" class="bulleted-list"><li style="list-style-type:disc"><strong>Real users</strong>: Testing with people who use assistive technology</li></ul><ul id="b221a4a1-ca99-4e97-ae76-825c36422ad7" class="bulleted-list"><li style="list-style-type:disc"><strong>Diverse abilities</strong>: Various disability types and severities</li></ul><ul id="49165e7c-3607-404d-b6a5-14aa464b4c19" class="bulleted-list"><li style="list-style-type:disc"><strong>Feedback integration</strong>: Continuous improvement based on user input</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

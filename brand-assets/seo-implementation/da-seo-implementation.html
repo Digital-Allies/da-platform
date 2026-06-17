@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DA SEO Implementation Guide — digitalallies.net</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'JetBrains Mono', 'Fira Mono', monospace; background: #F9F6F0; color: #2D2D2D; padding: 2rem; line-height: 1.6; }
+  h1, h2, h3 { font-family: system-ui, sans-serif; }
+  h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+  .meta { font-size: 0.75rem; color: #888; margin-bottom: 3rem; letter-spacing: 0.05em; text-transform: uppercase; }
+  .checklist { display: grid; gap: 0.5rem; margin: 1.5rem 0 3rem; }
+  .check-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #2D2D2D; background: white; cursor: pointer; user-select: none; }
+  .check-item input[type="checkbox"] { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; cursor: pointer; accent-color: #C5301A; }
+  .check-item label { font-size: 0.8rem; cursor: pointer; }
+  .check-item.done label { text-decoration: line-through; color: #999; }
+  .section { margin-bottom: 4rem; }
+  .section-label { font-size: 0.7rem; font-weight: bold; letter-spacing: 0.1em; text-transform: uppercase; color: #C5301A; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.25rem; margin-bottom: 0.5rem; border-bottom: 1px solid #2D2D2D; padding-bottom: 0.5rem; margin-bottom: 1.25rem; }
+  h3 { font-size: 0.9rem; margin: 1.5rem 0 0.5rem; color: #555; letter-spacing: 0.02em; }
+  .instruction { font-size: 0.8rem; color: #555; margin-bottom: 0.5rem; }
+  .file-tag { display: inline-block; font-size: 0.7rem; font-weight: bold; background: #2D2D2D; color: #F9F6F0; padding: 2px 8px; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+  pre { background: #1e1e1e; color: #d4d4d4; padding: 1.25rem; overflow-x: auto; font-size: 0.75rem; line-height: 1.55; border: 1px solid #2D2D2D; position: relative; margin-bottom: 1rem; }
+  .copy-btn { position: absolute; top: 0.5rem; right: 0.5rem; background: #C5301A; color: white; border: none; font-size: 0.65rem; font-weight: bold; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; cursor: pointer; }
+  .copy-btn:hover { background: #3A7BD5; }
+  .copy-btn.copied { background: #3A7BD5; }
+  .note { font-size: 0.75rem; color: #666; border-left: 3px solid #FADEEB; padding: 0.5rem 0.75rem; margin: 0.75rem 0 1.5rem; background: #fff; }
+  .note strong { color: #C5301A; }
+  .divider { border: none; border-top: 1px dashed rgba(45,45,45,0.2); margin: 3rem 0; }
+  .progress-wrap { margin: 1rem 0 2rem; }
+  .progress-label { font-size: 0.75rem; margin-bottom: 0.4rem; }
+  .progress-bar { height: 8px; background: #E0DDD5; border: 1px solid #2D2D2D; }
+  .progress-fill { height: 100%; background: #C5301A; transition: width 0.3s; width: 0%; }
+</style>
+</head>
+<body>
+
+<h1>DA SEO Implementation Guide</h1>
+<p class="meta">digitalallies.net · All changes from da-seo-updates.md · Check off as you go</p>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-label" id="progress-label">0 of 12 complete</div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+</div>
+
+<!-- MASTER CHECKLIST -->
+<div class="checklist" id="master-checklist">
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c1"><label for="c1">index.html — Update title tag</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c2"><label for="c2">index.html — Update meta description</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c3"><label for="c3">index.html — Update meta keywords</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c4"><label for="c4">index.html — Update og:title and og:description</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c5"><label for="c5">index.html — Update twitter:description</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c6"><label for="c6">index.html — Replace full JSON-LD block</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c7"><label for="c7">index.html — Add 3 new FAQ items</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c8"><label for="c8">learn/seo-aeo.html — Update title + meta tags</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c9"><label for="c9">learn/seo-aeo.html — Add service callout section + schema</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c10"><label for="c10">learn/alttext.html — Update title + meta tags</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c11"><label for="c11">learn/alttext.html — Add service callout section + schema</label></div>
+  <div class="check-item" onclick="toggle(this)"><input type="checkbox" id="c12"><label for="c12">Google Search Console — submit all 3 pages for reindex</label></div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 1: index.html META TAGS -->
+<div class="section">
+  <div class="section-label">Section 1 of 4</div>
+  <h2>index.html — Meta Tags</h2>
+
+  <h3>1a. Title Tag</h3>
+  <p class="instruction">Find and replace the existing &lt;title&gt; tag.</p>
+  <span class="file-tag">index.html · &lt;head&gt;</span>
+  <pre id="code-1a"><button class="copy-btn" onclick="copyCode('code-1a', this)">Copy</button>&lt;title&gt;Digital Allies | AI Consultant &amp;amp; Tech Services for Small Businesses — Kingman, AZ&lt;/title&gt;</pre>
+
+  <h3>1b. Meta Description</h3>
+  <p class="instruction">Find the existing meta description tag and replace it entirely.</p>
+  <span class="file-tag">index.html · &lt;head&gt;</span>
+  <pre id="code-1b"><button class="copy-btn" onclick="copyCode('code-1b', this)">Copy</button>&lt;meta name="description" content="Digital Allies — AI consulting, website builds, SEO/AEO, and systems integration for small businesses in Kingman, AZ. Free consulting. No ghosting guarantee."&gt;</pre>
+
+  <h3>1c. Meta Keywords</h3>
+  <p class="instruction">Find the existing meta keywords tag and replace it.</p>
+  <span class="file-tag">index.html · &lt;head&gt;</span>
+  <pre id="code-1c"><button class="copy-btn" onclick="copyCode('code-1c', this)">Copy</button>&lt;meta name="keywords" content="AI consultant Kingman AZ, AI consulting Kingman Arizona, artificial intelligence consultant Arizona, AI implementation small business, best AI consultant Kingman Arizona, tech consultant Kingman, web development Kingman AZ, systems integration Arizona, SEO AEO Kingman, ADA compliance, bilingual website, small business technology Kingman"&gt;</pre>
+
+  <h3>1d + 1e. Open Graph Tags</h3>
+  <p class="instruction">Find og:title and og:description and replace both.</p>
+  <span class="file-tag">index.html · &lt;head&gt;</span>
+  <pre id="code-1d"><button class="copy-btn" onclick="copyCode('code-1d', this)">Copy</button>&lt;meta property="og:title" content="Digital Allies — AI Consultant &amp;amp; Tech Services for Small Businesses in Kingman, AZ"&gt;
+&lt;meta property="og:description" content="AI consulting, website design, SEO/AEO, and systems integration for small businesses in Kingman, AZ. Free initial consult. No ghosting guarantee."&gt;</pre>
+
+  <h3>1f. Twitter Description</h3>
+  <p class="instruction">Find the twitter:description meta tag and replace it.</p>
+  <span class="file-tag">index.html · &lt;head&gt;</span>
+  <pre id="code-1f"><button class="copy-btn" onclick="copyCode('code-1f', this)">Copy</button>&lt;meta name="twitter:description" content="AI consulting, website design, SEO/AEO, and systems integration for small businesses in Kingman, AZ. Free initial consult. No ghosting guarantee."&gt;</pre>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 2: JSON-LD -->
+<div class="section">
+  <div class="section-label">Section 2 of 4</div>
+  <h2>index.html — Replace Full JSON-LD Block</h2>
+
+  <p class="instruction">Find the existing <code>&lt;script type="application/ld+json"&gt;</code> block that contains "ProfessionalService" and replace the entire script tag with the block below. This replaces all three existing ld+json blocks with one combined array block.</p>
+  <div class="note"><strong>Note on telephone:</strong> The telephone field is blank in the schema below. Add <code>"+19282285769"</code> if you want it indexed, or leave blank to keep it off crawlers.</div>
+  <div class="note"><strong>Note on logo/image paths:</strong> The schema references <code>/assets/img/da-logo.png</code> and <code>/assets/img/da-og.png</code>. Update these to match your actual asset paths, or remove those fields until the images exist at those URLs.</div>
+  <span class="file-tag">index.html · before &lt;/body&gt; — replaces all existing ld+json blocks</span>
+  <pre id="code-2"><button class="copy-btn" onclick="copyCode('code-2', this)">Copy</button>&lt;script type="application/ld+json"&gt;
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://digitalallies.net/#business",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net",
+    "logo": "https://digitalallies.net/assets/img/da-logo.png",
+    "image": "https://digitalallies.net/assets/img/da-og.png",
+    "telephone": "",
+    "email": "contact@digitalallies.net",
+    "description": "AI consulting, website design, SEO/AEO, systems integration, and tech support for small businesses in Kingman, AZ and Mojave County.",
+    "priceRange": "Free–$$$",
+    "currenciesAccepted": "USD",
+    "paymentAccepted": "Cash, Credit Card, Invoice",
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 35.1894,
+        "longitude": -114.0530
+      },
+      "geoRadius": "100000"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kingman",
+      "addressRegion": "AZ",
+      "addressCountry": "US"
+    },
+    "sameAs": [
+      "https://digitalallies.net"
+    ],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "AI Consulting",
+      "AI Implementation",
+      "Machine Learning Tools",
+      "Prompt Engineering",
+      "Web Design",
+      "SEO",
+      "AEO",
+      "Answer Engine Optimization",
+      "Systems Integration",
+      "Workflow Automation",
+      "ADA Compliance",
+      "WCAG 2.1",
+      "Small Business Technology"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Allies Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Consulting",
+            "description": "Free AI strategy sessions for small businesses. Tool selection, workflow integration, prompt engineering, and plain-language guidance on what AI can and cannot do for your business.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Technology Consulting",
+            "description": "Free tech strategy for small businesses. Hardware, software, apps, and general digital infrastructure guidance.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Website Design and Development",
+            "description": "Custom website builds for small businesses. Mobile-first, ADA-compliant, bilingual-ready, and connected to tools you already use.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "minPrice": "800",
+            "priceCurrency": "USD",
+            "description": "Starting at $800"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Graphic Design",
+            "description": "Logos, brand identity, print materials, and social graphics for small businesses.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "minPrice": "100",
+            "priceCurrency": "USD",
+            "description": "Starting at $100"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Brand Discovery",
+            "description": "Free brand clarity session. We identify your voice, values, and visual direction before any design work begins.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Systems Integration",
+            "description": "Connect your apps, APIs, and platforms so they work together. Shopify, Stripe, booking systems, CRMs, and custom integrations.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automation Setup",
+            "description": "Eliminate repetitive manual work with workflow automation. Email triggers, data routing, report generation, and task hand-offs.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO and AEO Audit",
+            "description": "Free audit covering both traditional search engine optimization and answer engine optimization — making sure your site shows up in Google and in AI assistants like ChatGPT and Gemini.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "ADA and Accessibility Compliance",
+            "description": "WCAG 2.1 AA compliance audits and remediation for websites. Covers screen reader support, color contrast, keyboard navigation, and alt text.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Ongoing Support and Monitoring",
+            "description": "Monthly support plans covering uptime monitoring, content updates, plugin management, and priority access.",
+            "provider": { "@id": "https://digitalallies.net/#business" }
+          },
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "minPrice": "60",
+            "priceCurrency": "USD",
+            "description": "Starting at $60/month"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://digitalallies.net/#website",
+    "url": "https://digitalallies.net",
+    "name": "Digital Allies",
+    "description": "AI consulting, web design, SEO/AEO, and tech services for small businesses in Kingman, AZ",
+    "publisher": { "@id": "https://digitalallies.net/#business" },
+    "inLanguage": ["en", "es"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you offer AI consulting for small businesses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, and it's free. I help small businesses understand which AI tools actually make sense for their situation — what to use, what to skip, and how to set it up without disrupting how you already work. No pitch. No upsell. Just a straight answer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does AI implementation mean for a local business in Kingman?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It means connecting AI tools to the work you already do — automating follow-ups, generating reports, routing inquiries, or setting up a smarter booking flow. I handle the setup and explain how it works in plain language."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you help my business show up in AI search results like ChatGPT or Google AI Overviews?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This is called AEO — Answer Engine Optimization. I structure your site content so AI assistants can read it, parse it, and recommend your business when someone asks a relevant question. It's part of every SEO engagement I do."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the initial consultation really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The first conversation is always free, no time limit. You'll walk away with a clear picture of what you need and whether working together makes sense. No pressure either way."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the no ghosting guarantee mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It means you'll always get a response. Most people who've worked with agencies or freelancers have experienced being ignored mid-project. That doesn't happen here. If something changes on my end, I'll tell you directly."
+        }
+      }
+    ]
+  }
+]
+&lt;/script&gt;</pre>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 3: FAQ HTML -->
+<div class="section">
+  <div class="section-label">Section 3 of 4</div>
+  <h2>index.html — Add 3 FAQ Items</h2>
+
+  <p class="instruction">Paste these three items inside the existing FAQ section alongside the other <code>&lt;details&gt;</code> blocks. The styling already matches your existing FAQ pattern — no class changes needed.</p>
+  <div class="note">These questions mirror the FAQPage schema you just added above, so Google and AI systems can cross-reference your visible content with your structured data.</div>
+  <span class="file-tag">index.html · #faq section · paste inside existing details list</span>
+  <pre id="code-3"><button class="copy-btn" onclick="copyCode('code-3', this)">Copy</button>&lt;details class="structural-border bg-bone-white group"&gt;
+  &lt;summary
+    class="p-6 cursor-pointer font-headers font-bold text-base flex justify-between items-center hover:bg-light-pink transition"
+    data-en="Do you offer AI consulting for small businesses?"
+    data-es="¿Ofrecen consultoría de IA para pequeñas empresas?"&gt;
+    Do you offer AI consulting for small businesses?
+    &lt;span class="text-primary-blue text-xl ml-4 flex-shrink-0 transition-transform group-open:rotate-45"&gt;+&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class="px-6 pb-6 text-sm leading-relaxed border-t border-gray-dark/10 pt-4"
+    data-en="Yes, and it's free. I help small businesses understand which AI tools actually make sense for their situation — what to use, what to skip, and how to set it up without disrupting how you already work. No pitch. No upsell. Just a straight answer."
+    data-es="Sí, y es gratuito. Ayudo a pequeñas empresas a entender qué herramientas de IA tienen sentido para su situación — qué usar, qué omitir, y cómo configurarlas sin interrumpir su flujo de trabajo actual."&gt;
+    Yes, and it's free. I help small businesses understand which AI tools actually make sense for their situation — what to use, what to skip, and how to set it up without disrupting how you already work. No pitch. No upsell. Just a straight answer.
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details class="structural-border bg-bone-white group"&gt;
+  &lt;summary
+    class="p-6 cursor-pointer font-headers font-bold text-base flex justify-between items-center hover:bg-light-pink transition"
+    data-en="What does AI implementation mean for a local business in Kingman?"
+    data-es="¿Qué significa implementación de IA para un negocio local en Kingman?"&gt;
+    What does AI implementation mean for a local business in Kingman?
+    &lt;span class="text-primary-blue text-xl ml-4 flex-shrink-0 transition-transform group-open:rotate-45"&gt;+&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class="px-6 pb-6 text-sm leading-relaxed border-t border-gray-dark/10 pt-4"
+    data-en="It means connecting AI tools to the work you already do — automating follow-ups, generating reports, routing inquiries, or setting up a smarter booking flow. I handle the setup and explain how it works in plain language."
+    data-es="Significa conectar herramientas de IA al trabajo que ya haces — automatizar seguimientos, generar reportes, enrutar consultas, o configurar un flujo de reservas más inteligente. Me encargo de la configuración y te explico cómo funciona en lenguaje sencillo."&gt;
+    It means connecting AI tools to the work you already do — automating follow-ups, generating reports, routing inquiries, or setting up a smarter booking flow. I handle the setup and explain how it works in plain language.
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;details class="structural-border bg-bone-white group"&gt;
+  &lt;summary
+    class="p-6 cursor-pointer font-headers font-bold text-base flex justify-between items-center hover:bg-light-pink transition"
+    data-en="Can you help my business show up in AI search results like ChatGPT or Google AI Overviews?"
+    data-es="¿Pueden ayudarme a aparecer en resultados de IA como ChatGPT o Google AI Overviews?"&gt;
+    Can you help my business show up in AI search results like ChatGPT or Google AI Overviews?
+    &lt;span class="text-primary-blue text-xl ml-4 flex-shrink-0 transition-transform group-open:rotate-45"&gt;+&lt;/span&gt;
+  &lt;/summary&gt;
+  &lt;div class="px-6 pb-6 text-sm leading-relaxed border-t border-gray-dark/10 pt-4"
+    data-en="Yes. This is called AEO — Answer Engine Optimization. I structure your site content so AI assistants can read it, parse it, and recommend your business when someone asks a relevant question. It's part of every SEO engagement I do."
+    data-es="Sí. Esto se llama AEO — Optimización para Motores de Respuesta. Estructuro el contenido de tu sitio para que los asistentes de IA puedan leerlo, analizarlo y recomendar tu negocio cuando alguien haga una pregunta relevante. Es parte de cada trabajo de SEO que hago."&gt;
+    Yes. This is called AEO — Answer Engine Optimization. I structure your site content so AI assistants can read it, parse it, and recommend your business when someone asks a relevant question. It's part of every SEO engagement I do.
+  &lt;/div&gt;
+&lt;/details&gt;</pre>
+  <div class="note">I've added full bilingual <code>data-en</code>/<code>data-es</code> attributes that match your existing LanguageController pattern. The originals from the update file were English-only.</div>
+</div>
+
+<hr class="divider">
+
+<!-- SECTION 4: seo-aeo.html and alttext.html -->
+<div class="section">
+  <div class="section-label">Section 4 of 4</div>
+  <h2>learn/seo-aeo.html &amp; learn/alttext.html</h2>
+
+  <h3>seo-aeo.html — Title + Meta Tags</h3>
+  <p class="instruction">Add inside &lt;head&gt;. Replace the existing title and meta description with these.</p>
+  <span class="file-tag">learn/seo-aeo.html · &lt;head&gt;</span>
+  <pre id="code-4a"><button class="copy-btn" onclick="copyCode('code-4a', this)">Copy</button>&lt;title&gt;AI Search Visibility, SEO &amp;amp; AEO Services — Kingman, AZ | Digital Allies&lt;/title&gt;
+&lt;meta name="description" content="Learn the difference between SEO and AEO — and how Digital Allies helps small businesses in Kingman, AZ show up in both Google search and AI assistants like ChatGPT and Gemini."&gt;
+&lt;meta name="keywords" content="SEO Kingman AZ, AEO Kingman Arizona, AI search visibility, answer engine optimization, AI consultant Kingman, show up in ChatGPT, Google AI Overviews small business"&gt;</pre>
+
+  <h3>seo-aeo.html — Service Callout Section</h3>
+  <p class="instruction">Paste before the closing &lt;/article&gt; tag (at the very end of the article, after the CTA section).</p>
+  <span class="file-tag">learn/seo-aeo.html · before &lt;/article&gt;</span>
+  <pre id="code-4b"><button class="copy-btn" onclick="copyCode('code-4b', this)">Copy</button>&lt;section class="max-w-5xl mx-auto px-6 mb-16" aria-label="Service: SEO and AEO"&gt;
+  &lt;div class="structural-border bg-bone-white p-8"&gt;
+    &lt;div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"&gt;Digital Allies Can Help&lt;/div&gt;
+    &lt;h2 class="font-headers font-bold text-2xl mb-4"&gt;Not showing up in search — or in AI assistants? That's fixable.&lt;/h2&gt;
+    &lt;p class="text-sm leading-relaxed mb-4"&gt;If you're a small business in Kingman or Mojave County, Digital Allies offers free SEO and AEO audits that show exactly where you're invisible and why. Every engagement includes structured data markup, content strategy, and ongoing support so your site stays readable by both humans and AI systems.&lt;/p&gt;
+    &lt;p class="text-sm leading-relaxed mb-6"&gt;You don't need a big budget or a marketing team. You need the right setup.&lt;/p&gt;
+    &lt;a href="/index.html#contact" class="inline-block px-8 py-3 bg-signal-red text-white font-headers font-bold structural-border hover:bg-gray-dark transition text-sm"&gt;
+      [ Get a Free SEO/AEO Audit ]
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+
+  <h3>seo-aeo.html — Service Schema</h3>
+  <p class="instruction">Paste before the closing &lt;/head&gt; tag.</p>
+  <span class="file-tag">learn/seo-aeo.html · before &lt;/head&gt;</span>
+  <pre id="code-4c"><button class="copy-btn" onclick="copyCode('code-4c', this)">Copy</button>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SEO and AEO Services — Search and AI Visibility",
+  "description": "Digital Allies offers SEO and Answer Engine Optimization (AEO) for small businesses in Kingman, AZ. We structure your site so it appears in both traditional search results and AI assistant responses.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://digitalallies.net/#business",
+    "name": "Digital Allies"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Kingman, AZ"
+  },
+  "serviceType": "SEO, AEO, Answer Engine Optimization, AI Search Visibility",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free initial SEO/AEO audit"
+  },
+  "url": "https://digitalallies.net/learn/seo-aeo"
+}
+&lt;/script&gt;</pre>
+
+  <hr class="divider">
+
+  <h3>alttext.html — Title + Meta Tags</h3>
+  <p class="instruction">Replace the existing title and meta description with these.</p>
+  <span class="file-tag">learn/alttext.html · &lt;head&gt;</span>
+  <pre id="code-5a"><button class="copy-btn" onclick="copyCode('code-5a', this)">Copy</button>&lt;title&gt;Web Accessibility &amp;amp; ADA Compliance Services — Kingman, AZ | Digital Allies&lt;/title&gt;
+&lt;meta name="description" content="Learn how alt text works — and find out how Digital Allies helps small businesses in Kingman, AZ meet WCAG 2.1 AA accessibility standards without the jargon."&gt;
+&lt;meta name="keywords" content="ADA compliance Kingman AZ, web accessibility Arizona, WCAG 2.1 small business, alt text, screen reader optimization, accessible website Kingman"&gt;</pre>
+
+  <h3>alttext.html — Service Callout Section</h3>
+  <p class="instruction">Paste before the closing &lt;/article&gt; tag (after the CTA section at the bottom of the article).</p>
+  <span class="file-tag">learn/alttext.html · before &lt;/article&gt;</span>
+  <pre id="code-5b"><button class="copy-btn" onclick="copyCode('code-5b', this)">Copy</button>&lt;section class="max-w-5xl mx-auto px-6 mb-16" aria-label="Service: Accessibility and ADA Compliance"&gt;
+  &lt;div class="structural-border bg-bone-white p-8"&gt;
+    &lt;div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"&gt;Digital Allies Can Help&lt;/div&gt;
+    &lt;h2 class="font-headers font-bold text-2xl mb-4"&gt;ADA compliance isn't just about avoiding liability — it's about reaching your whole community.&lt;/h2&gt;
+    &lt;p class="text-sm leading-relaxed mb-4"&gt;Digital Allies offers WCAG 2.1 AA audits and full remediation for small business websites in Kingman and across Mojave County. We check color contrast, keyboard navigation, screen reader compatibility, alt text, form labels, and more.&lt;/p&gt;
+    &lt;p class="text-sm leading-relaxed mb-6"&gt;You get a plain-language report and we handle the fixes. No tech background needed on your end.&lt;/p&gt;
+    &lt;a href="/index.html#contact" class="inline-block px-8 py-3 bg-signal-red text-white font-headers font-bold structural-border hover:bg-gray-dark transition text-sm"&gt;
+      [ Request an Accessibility Audit ]
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre>
+
+  <h3>alttext.html — Service Schema</h3>
+  <p class="instruction">Paste before the closing &lt;/head&gt; tag.</p>
+  <span class="file-tag">learn/alttext.html · before &lt;/head&gt;</span>
+  <pre id="code-5c"><button class="copy-btn" onclick="copyCode('code-5c', this)">Copy</button>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ADA Compliance and Web Accessibility Services",
+  "description": "Digital Allies audits and remediates small business websites for WCAG 2.1 AA compliance. Services include screen reader optimization, alt text, color contrast, keyboard navigation, and form accessibility.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://digitalallies.net/#business",
+    "name": "Digital Allies"
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Kingman, AZ"
+  },
+  "serviceType": "ADA Compliance, Web Accessibility, WCAG 2.1",
+  "url": "https://digitalallies.net/learn/alttext"
+}
+&lt;/script&gt;</pre>
+</div>
+
+<hr class="divider">
+
+<!-- FINAL STEP -->
+<div class="section">
+  <div class="section-label">Final Step</div>
+  <h2>After Pushing to GitHub</h2>
+  <p class="instruction">Submit all three pages for reindexing in Google Search Console. Use the URL Inspection tool and click "Request Indexing" for each.</p>
+  <div class="checklist">
+    <div class="check-item" style="cursor:default"><label style="cursor:default;font-weight:bold;">https://digitalallies.net/</label></div>
+    <div class="check-item" style="cursor:default"><label style="cursor:default;font-weight:bold;">https://digitalallies.net/learn/seo-aeo</label></div>
+    <div class="check-item" style="cursor:default"><label style="cursor:default;font-weight:bold;">https://digitalallies.net/learn/alttext</label></div>
+  </div>
+  <div class="note">Then validate your new JSON-LD at <strong>validator.schema.org</strong> — paste the full URL of index.html and check for errors on the LocalBusiness block.</div>
+</div>
+
+<script>
+function toggle(el) {
+  const cb = el.querySelector('input[type="checkbox"]');
+  cb.checked = !cb.checked;
+  el.classList.toggle('done', cb.checked);
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = document.querySelectorAll('#master-checklist .check-item input').length;
+  const done = document.querySelectorAll('#master-checklist .check-item input:checked').length;
+  document.getElementById('progress-label').textContent = done + ' of ' + total + ' complete';
+  document.getElementById('progress-fill').style.width = Math.round((done / total) * 100) + '%';
+}
+
+function copyCode(id, btn) {
+  const pre = document.getElementById(id);
+  const text = pre.innerText.replace(/^Copy\n/, '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>

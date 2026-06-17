@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Claude</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3906738b-c26d-4658-aa55-d5195595ddc5" class="page sans"><header><div class="page-header-icon undefined"><img class="icon notion-static-icon" src="https://www.notion.so/icons/cursor-click_gray.svg"/></div><h1 class="page-title">Claude</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Chatbot Ready</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Last edited</th><td><time>@October 16, 2025 6:47 AM</time></td></tr><tr class="property-row property-row-created_by"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user-circle_gray.svg" style="width:14px;height:14px;display:block"/></span>Created by</th><td><span class="user"><span class="icon text-icon user-icon"><span class="user-icon-inner">A</span></span>Anthony Cassella</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/link_gray.svg" style="width:14px;height:14px;display:block"/></span>Source</th><td><a href="https://claude.ai/artifacts/my" class="url-value">https://claude.ai/artifacts/my</a></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Status</th><td><span class="status-value"><div class="status-dot"></div>New</span></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Content Type</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/list_gray.svg" style="width:14px;height:14px;display:block"/></span>Keywords</th><td></td></tr></tbody></table></header><div class="page-body"><figure id="750bdd27-c0be-4c50-bc2c-a66e0ebe056b" class="image"><a href="Claude%203906738bc26d4658aa55d5195595ddc5/stn-XSzyVO6CV6v3wTtibACR2qwF1YBH1bxfOerPe3Ju.jpeg"><img style="width:720px" src="Claude%203906738bc26d4658aa55d5195595ddc5/stn-XSzyVO6CV6v3wTtibACR2qwF1YBH1bxfOerPe3Ju.jpeg"/></a></figure><p id="c56e94fc-bf91-49c6-9e79-273f4b19f74d" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">Digital Allies - GitHub + Vercel CMS Integration Plan</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">=====================================================</a></mark></p><p id="b4ba78d0-1e12-478b-853c-9df077c8b49c" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">🚀 Modern Jamstack Architecture</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">-------------------------------</a></mark></p><p id="f3fc5b64-ba39-40db-9aa7-1be2bd821ddd" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">This plan leverages GitHub for version control and content management, with Vercel for hosting and deployment automation. This approach provides excellent per</a></mark></p><p id="ffbd9abe-1f4b-48a4-8360-396b75b1444c" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">Digital Allies - GitHub + Vercel CMS Integration Plan</a></mark></p><p id="624132f0-fda5-495d-972a-73636223fceb" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/73c54da1-1be3-4457-be6e-a3892e071107?artifactId=github-vercel-cms-plan">Last edited 3 days ago</a></mark></p><p id="c10e31aa-a859-4c1c-a20c-1f23d2d1fce7" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">🎨 Asset Management &amp; 3D Figurine Integration</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">=============================================</a></mark></p><p id="c19e3815-5a4a-44a8-b9ec-49848bbe027f" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">📁 Complete Project Structure</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">-----------------------------</a></mark></p><p id="19738d57-4ff2-443a-a371-41c099bd3c76" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">ezra-birthday-dashboard/</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">├── app/</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">│   ├── api/                    # API routes</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">│   ├── layout.tsx</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">│   ├── page.tsx</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">│   └── globals.css</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">├── components/</a></mark></p><p id="e5eccecf-3655-4883-8098-138a0c3dd42a" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">Project Structure &amp; Asset Integration Guide</a></mark></p><p id="fb3a9e64-4cc5-4be0-aec1-227581959934" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=project_structure_assets">Last edited 8 days ago</a></mark></p><p id="99455c1b-1233-418a-abc9-ece27a0f558d" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=ezra_maintenance">#!/usr/bin/env node /** * 🎉 Ezra&#x27;s Birthday Dashboard - Maintenance Script * * This script performs daily maintenance tasks to keep the dashboard * running smoothly. Run this via cron job or Vercel Edge Functions. * * Usage: node maintenance</a></mark></p><p id="ef155699-d9f0-4d47-9152-fc7fdbe15259" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=ezra_maintenance">Ezra Dashboard Maintenance Script</a></mark></p><p id="ac78abc8-aa3f-45ab-90d8-9e11730fb423" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=ezra_maintenance">Last edited 8 days ago</a></mark></p><p id="a13b664b-b8d1-4a20-9ced-0a5c7155f44b" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=maintenance_package">{ &quot;name&quot;: &quot;ezra-dashboard-maintenance&quot;, &quot;version&quot;: &quot;1.0.0&quot;, &quot;description&quot;: &quot;Maintenance scripts for Ezra&#x27;s Birthday Dashboard&quot;, &quot;scripts&quot;: { &quot;maintenance&quot;: &quot;node maintenance.js&quot;, &quot;maintenance:dry&quot;: &quot;node maintenance.js --dry-run&quot;,</a></mark></p><p id="cd9111ba-1d60-484f-a6c2-135677b2c0c7" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=maintenance_package">Maintenance Package &amp; Deployment Files</a></mark></p><p id="d1f588cd-a329-4816-926e-a527186003ae" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6036afad-59bd-433d-94eb-5f1ce8004a39?artifactId=maintenance_package">Last edited 8 days ago</a></mark></p><p id="47ab2ebc-bbf8-4793-a71b-678de86f014a" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/1276f51e-3f2c-4ae2-9cde-334bc0f2ee4d?artifactId=ai_assistant_component">&#x27;use client&#x27;; import { useState } from &#x27;react&#x27;; import { motion } from &#x27;framer-motion&#x27;; import { Bot, Send, Smile, Lightbulb, Cake, Heart, Sparkles } from &#x27;lucide-react&#x27;; import { toast } from &#x27;react-hot-toast&#x27;; export default function AIAssistant(</a></mark></p><p id="207485cc-5dc6-48ef-87b9-a42ac6719e1c" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/1276f51e-3f2c-4ae2-9cde-334bc0f2ee4d?artifactId=ai_assistant_component">AIAssistant Component</a></mark></p><p id="bc8c8dd1-b58e-43fa-abf3-144415d7dbc3" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/1276f51e-3f2c-4ae2-9cde-334bc0f2ee4d?artifactId=ai_assistant_component">Last edited 10 days ago</a></mark></p><p id="a6f8d3d1-900e-4fed-bc17-39f00ffa78a4" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/1276f51e-3f2c-4ae2-9cde-334bc0f2ee4d?artifactId=settings_component">&#x27;use client&#x27;; import { useState } from &#x27;react&#x27;; import { motion } from &#x27;framer-motion&#x27;; import { Settings as SettingsIcon, Key, Bell, Palette, Save, Shield } from &#x27;lucide-react&#x27;; import { toast } from &#x27;react-hot-toast&#x27;; export default function Sett</a></mark></p><p id="4e1f0e2c-8ae4-493e-8a89-da34de7a38bb" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/1276f51e-3f2c-4ae2-9cde-334bc0f2ee4d?artifactId=settings_component">Settings Component</a></mark></p><p id="0f0ca3af-346b-40a2-b046-4aa4a4a4d426" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/1276f51e-3f2c-4ae2-9cde-334bc0f2ee4d?artifactId=settings_component">Last edited 10 days ago</a></mark></p><p id="b9347f05-6444-4fe0-a967-ec1b47e2db39" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=quick-setup">#!/bin/bash echo &quot;🎉 Setting up Ezra&#x27;s Birthday Dashboard 🎉&quot; echo &quot;=========================================&quot; # Create all directories echo &quot;Creating project structure...&quot; mkdir -p app/api/{auth/login,spotify/{auth,callback},openai/chat,nasa/apod,if</a></mark></p><p id="d7175826-7506-4550-8576-fc658e1cc430" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=quick-setup">Quick Setup Script - setup.sh</a></mark></p><p id="086a2fae-4b51-4383-97f0-85d1d25624b7" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=quick-setup">Last edited 10 days ago</a></mark></p><p id="4121c1dd-d732-4f46-935d-07e9204ed5cf" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/f35a8494-ad29-4d7a-9d34-8e4ffd6e7ebd?artifactId=ezra_final_logo">Ezra&#x27;s Final Logo</a></mark></p><p id="2e1583fa-b6a2-454d-94bd-daf27772132b" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/f35a8494-ad29-4d7a-9d34-8e4ffd6e7ebd?artifactId=ezra_final_logo">Last edited 11 days ago</a></mark></p><p id="9b8829ea-84cd-4aea-b173-0f22f30fa009" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/f35a8494-ad29-4d7a-9d34-8e4ffd6e7ebd?artifactId=ezra_brand_logo">Ezra&#x27;s Brand Logo - Text Variations</a></mark></p><p id="9f101899-5466-42f6-9337-098ebb0cf427" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/f35a8494-ad29-4d7a-9d34-8e4ffd6e7ebd?artifactId=ezra_brand_logo">Last edited 11 days ago</a></mark></p><p id="6a0db1c0-e6b0-4d7b-a182-404eef8f9577" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/22be4d0d-50f1-43be-8c1b-11b00ee088ac?artifactId=ezra_dashboard_readme">🎉 Ezra&#x27;s Birthday Dashboard</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/22be4d0d-50f1-43be-8c1b-11b00ee088ac?artifactId=ezra_dashboard_readme">============================</a></mark></p><p id="b6b5be7e-34d4-45d2-b617-70ecccade22e" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/22be4d0d-50f1-43be-8c1b-11b00ee088ac?artifactId=ezra_dashboard_readme">A personalized web application celebrating Ezra&#x27;s 13th birthday (September 12, 2012) - a dashboard filled with interactive features, family connections, and everything he loves: fishing, farming, and space exploration!</a></mark></p><p id="8cbb9f64-afe0-45ae-9cb8-fe0bc8261b59" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/22be4d0d-50f1-43be-8c1b-11b00ee088ac?artifactId=ezra_dashboard_readme">README.md - Ezra&#x27;s Birthday Dashboard</a></mark></p><p id="2bf137ca-6240-4419-bbc5-b9256e681079" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/22be4d0d-50f1-43be-8c1b-11b00ee088ac?artifactId=ezra_dashboard_readme">Last edited 11 days ago</a></mark></p><p id="e1a6205c-cfb9-4530-ad89-968572f4583b" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=env-and-deploy"># .env.local - Create this file in your project root # DO NOT commit this to git - add to .gitignore # Supabase (for authentication &amp; database) NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key S</a></mark></p><p id="c7df40cf-5953-43b3-9298-72fe94715e72" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=env-and-deploy">Environment Variables &amp; Deployment Config</a></mark></p><p id="9be147c2-44ce-4478-a29d-afbf572a731c" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=env-and-deploy">Last edited 12 days ago</a></mark></p><p id="3f034f9f-5e3d-41b5-b13f-2b1a2003ba50" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-app-main">&#x27;use client&#x27;; import { useState, useEffect } from &#x27;react&#x27;; import { motion, AnimatePresence } from &#x27;framer-motion&#x27;; import { Home, Music, Users, BookOpen, Bot, Settings, LogOut, Smile, Lightbulb, Fish, Cake, Newspaper, Heart, Phone, Mail, Ski</a></mark></p><p id="d11339d0-f389-4ee9-978f-d2be9666f541" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-app-main">app/page.tsx - Main App Component</a></mark></p><p id="59d69216-8166-485b-9954-4bcd1b82191f" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-app-main">Last edited 12 days ago</a></mark></p><p id="0ac6f42d-d6f8-4568-897c-a7bfe9c791de" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=api-routes">// app/api/auth/login/route.ts import { NextResponse } from &#x27;next/server&#x27;; import { createClient } from &#x27;@supabase/supabase-js&#x27;; const supabase = createClient( process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_KEY! ); export a</a></mark></p><p id="b797ac01-2a00-40f8-a70e-d3342ecd9ab0" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=api-routes">API Routes - Backend Integrations</a></mark></p><p id="381305d2-0472-49a9-af58-30fb2ca7a85d" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=api-routes">Last edited 12 days ago</a></mark></p><p id="1a7bca80-acc6-4950-a57b-35c324b0b523" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-nextjs-app">{ &quot;name&quot;: &quot;ezra-birthday-dashboard&quot;, &quot;version&quot;: &quot;1.0.0&quot;, &quot;private&quot;: true, &quot;scripts&quot;: { &quot;dev&quot;: &quot;next dev&quot;, &quot;build&quot;: &quot;next build&quot;, &quot;start&quot;: &quot;next start&quot;, &quot;lint&quot;: &quot;next lint&quot; }, &quot;dependencies&quot;: { &quot;next&quot;: &quot;14.0.4&quot;, &quot;re</a></mark></p><p id="49406810-a889-4a69-bfe4-df18fdb966bc" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-nextjs-app">Next.js App - package.json &amp; Project Structure</a></mark></p><p id="b18166d8-1a26-418a-9123-40a0334eb1d7" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-nextjs-app">Last edited 12 days ago</a></mark></p><p id="46b7c71a-5f55-4f07-9996-d9b12c4468ae" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-birthday-dashboard">Ezra&#x27;s Birthday Dashboard - Complete Web App</a></mark></p><p id="153cca84-184d-4681-a5c6-beb5cefb55d9" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/5f7d8a02-4b9c-4a06-a623-8fe778d49ae5?artifactId=ezra-birthday-dashboard">Last edited 12 days ago</a></mark></p><p id="7e088e6b-4feb-49e5-b86c-3a3cd3ac1afa" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Ezra&#x27;s 13th Birthday Dashboard App</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">==================================</a></mark></p><p id="75d5b704-e27d-4896-b7c1-dc912ce77bab" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Complete Sitemap &amp; Feature Breakdown</a></mark><mark class="highlight-default"><br/></mark><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">------------------------------------</a></mark></p><h3 id="922d4e61-4ba2-477d-8dde-b4d988338494" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">🏠 </a></mark><mark class="highlight-default"><strong><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Main Navigation Structure</a></strong></mark></h3><h3 id="37d32550-4ee0-4154-aab7-a0511b943982" class=""><mark class="highlight-default"><strong><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Public Pages</a></strong></mark></h3><ul id="fd4f4db9-ec91-40e5-ad4d-2da59efaf58e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default"><strong><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Login/Welcome Page</a></strong></mark><ul id="2b08fa24-cf8e-4912-9aae-5836e38a43c1" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Google OAuth</a></mark></li></ul><ul id="21588a78-f974-401e-81f0-b1f11e407ea5" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Apple Sign-In</a></mark></li></ul><ul id="e069bedc-aff3-4855-95f8-421b0f80ac84" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Phone number verification</a></mark></li></ul><ul id="1defad31-d118-4812-b39a-449eeb8280b8" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Email account creat</a></mark></li></ul></li></ul><p id="cd4d7540-eff6-43b6-b80d-39b6f8d4e037" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Ezra&#x27;s 13th Birthday Dashboard App - Complete Sitemap &amp; Features</a></mark></p><p id="de8092d7-453e-496c-a5b4-e250287d0f31" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/35ec1c45-3a06-49fc-a83a-404904ed2cc7?artifactId=ezra_app_sitemap">Last edited 14 days ago</a></mark></p><p id="1288228e-0307-44f1-87ba-143a52076279" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/8453913f-4d97-4862-b721-9c930a94228d?artifactId=daily_routine_shortcut"># Daily Project &amp; Life Management Routine Shortcut ## Overview This shortcut creates a comprehensive morning briefing that helps you stay on track with projects, personal life, and daily priorities. ## Shortcut Structure ### 1. MORNING BRIEFING IN</a></mark></p><p id="53f5d78e-2e1a-4728-93a8-e75578ca4d8a" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/8453913f-4d97-4862-b721-9c930a94228d?artifactId=daily_routine_shortcut">Daily Project &amp; Life Management Routine</a></mark></p><p id="9a368cf0-143f-48aa-8ebc-ea9243b2b85a" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/8453913f-4d97-4862-b721-9c930a94228d?artifactId=daily_routine_shortcut">Last edited 16 days ago・Published</a></mark></p><p id="d93c7bb9-cefb-4aa1-919e-a8544775da64" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/8453913f-4d97-4862-b721-9c930a94228d?artifactId=smart_focus_mode">-- Smart Focus Mode AppleScript -- This script sets up different work environments based on your choice on run -- Present mode selection dialog set modeChoice to choose from list {&quot;Deep Work&quot;, &quot;Meetings&quot;, &quot;Creative&quot;, &quot;Break Time&quot;} with title &quot;Smar</a></mark></p><p id="f2663dea-b1bc-42a8-a6f0-1a1f9789d4a9" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/8453913f-4d97-4862-b721-9c930a94228d?artifactId=smart_focus_mode">Smart Focus Mode AppleScript</a></mark></p><p id="358efa11-9f05-4621-aaad-69db44f4afd3" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/8453913f-4d97-4862-b721-9c930a94228d?artifactId=smart_focus_mode">Last edited 21 days ago</a></mark></p><p id="a87e2183-008c-4774-83e9-86a84489f702" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=blog-case-studies">Digital Allies - Blog &amp; Case Studies</a></mark></p><p id="f744ce59-3d00-4b6c-babf-ff5a045b9956" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=blog-case-studies">Last edited 22 days ago</a></mark></p><p id="faafa06d-8ecc-487a-ae82-f488082d90c3" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=e17_blog_post">E17 Cooperative Blog Post</a></mark></p><p id="ed1be6c7-65d0-4632-a2ae-169659e9f5d9" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=e17_blog_post">Last edited 22 days ago</a></mark></p><p id="45914b30-8711-44b7-942d-499adcf8934a" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=updated_case_studies">Digital Allies - Updated Case Studies Page with E17</a></mark></p><p id="05ca3583-5478-446b-87ed-14b42ee30052" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=updated_case_studies">Last edited 22 days ago</a></mark></p><p id="5d8751c8-b9ac-4458-8271-f2665edf46fc" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=services_page">Digital Allies - Services Page</a></mark></p><p id="9d8304a9-a852-4a4f-91d7-e19177670c31" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=services_page">Last edited 22 days ago</a></mark></p><p id="daa3f302-94ad-4b63-90e9-725959ad0f66" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=blog_index">Digital Allies - Blog Index Page</a></mark></p><p id="1e4feba2-7344-400d-b982-68364665a673" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=blog_index">Last edited 22 days ago</a></mark></p><p id="760e11c3-bbf4-4c4b-bd24-4d352cac8cdb" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=blog_post_e17">Digital Allies - Blog Post: E17 Cooperative Success Story</a></mark></p><p id="06807039-3e5c-47ab-bd52-75bc2446990c" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=blog_post_e17">Last edited 22 days ago</a></mark></p><p id="565e45e5-dac9-4583-9763-e8e8a9db57a2" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=e17_graphic">E17 Member Intranet Interface Mockup</a></mark></p><p id="ed1fd208-0ed4-430c-bc6f-fec33e5dca2e" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6bfb8976-6ead-4f30-b995-d5633f6b6238?artifactId=e17_graphic">Last edited 22 days ago</a></mark></p><p id="c772489a-a78c-413d-aabb-64b796157aa8" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/3e870e85-78c6-43e6-b7b6-304f71f117be?artifactId=digital_allies_professional_icons">Digital Allies - Updated with Professional Icons</a></mark></p><p id="edb9d96b-4f79-4883-aeff-884647beca26" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/3e870e85-78c6-43e6-b7b6-304f71f117be?artifactId=digital_allies_professional_icons">Last edited 22 days ago</a></mark></p><p id="fd3b5d85-1cfb-4da9-a120-3bb6eab5c9c0" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=services_page">Digital Allies - Services Page</a></mark></p><p id="2dd61645-c3d3-42f8-babb-e87820f78851" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=services_page">Last edited 22 days ago</a></mark></p><p id="9786b19d-01fa-433e-bd6e-cc784479a101" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=updated_index">Updated Digital Allies - index.html</a></mark></p><p id="f4b3faef-cbad-4af7-8abd-ef4fe255950b" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=updated_index">Last edited 22 days ago</a></mark></p><p id="4e624957-64a1-49d3-90d3-329b8b78edad" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=about_page">Digital Allies - About Page</a></mark></p><p id="40535f26-714f-4152-be28-4b406cdc4095" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=about_page">Last edited 22 days ago</a></mark></p><p id="56058075-b3ed-4d7b-a201-ab4cabdc6335" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=services-detailed">Digital Allies - Services Page</a></mark></p><p id="e35f2a41-fb67-4fdc-b886-cf1c3a8386ef" class=""><mark class="highlight-default"><a href="https://claude.ai/chat/6fe3ee11-278c-473e-89f9-230111c2e970?artifactId=services-detailed">Last edited 22 days ago</a></mark></p><p id="c5cd0e37-ee6f-4427-a787-b8d7bc8ac6e7" class=""><mark class="highlight-default">View more</mark></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

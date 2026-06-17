@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jargon Jar Card</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .fc { border: 1px solid var(--charcoal); height: 130px; padding: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg); position: relative; }
+    .fc.back { background: var(--bg-alt); transform: none; }
+    .fc h4 { font-family: var(--font-headers); font-weight: 700; font-size: 10px; margin: 0 0 6px; }
+    .fc.front h4 { color: var(--signal); }
+    .fc.back h4 { color: var(--accent); }
+    .fc p { font-family: var(--font-details); font-size: 10px; line-height: 1.4; margin: 0; font-weight: 700; }
+    .arrow { font-family: var(--font-headers); font-weight: 700; font-size: 18px; color: var(--fg-soft); align-self: center; justify-self: center; }
+    .row { display: contents; }
+    .label { font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <span class="label">Jargon Jar — click-to-flip card pair (front + back)</span>
+    <div class="grid">
+      <div class="fc front">
+        <h4>Corporate Speak</h4>
+        <p>"Leverage synergies across touchpoints"</p>
+      </div>
+      <div class="fc back">
+        <h4>DA Translation</h4>
+        <p>"Make the parts work together."</p>
+      </div>
+      <div class="fc front">
+        <h4>Corporate Speak</h4>
+        <p>"Robust backend infrastructure"</p>
+      </div>
+      <div class="fc back">
+        <h4>DA Translation</h4>
+        <p>"Quiet stuff running behind the scenes so nothing crashes."</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

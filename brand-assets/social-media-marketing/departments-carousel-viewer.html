@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Departments Carousels — Digital Allies</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1a1a1a; font-family: 'JetBrains Mono', monospace; color: #F9F6F0; min-height: 100vh; }
+
+  /* Top toolbar */
+  #toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: #111; border-bottom: 1px solid #333;
+    display: flex; align-items: center; gap: 0; height: 48px;
+    padding: 0 16px;
+  }
+  .tb-group { display: flex; align-items: center; gap: 8px; }
+  .tb-sep { width: 1px; height: 28px; background: #333; margin: 0 12px; }
+  .tb-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #888; }
+  .deck-btn {
+    padding: 5px 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; border: 1px solid #444; background: transparent;
+    color: #aaa; cursor: pointer; transition: all 0.15s; border-radius: 3px;
+  }
+  .deck-btn:hover { border-color: #888; color: #fff; }
+  .deck-btn.active { background: #C5301A; border-color: #C5301A; color: #fff; }
+  .nav-btn {
+    width: 32px; height: 32px; border: 1px solid #444; background: transparent;
+    color: #aaa; cursor: pointer; font-size: 18px; display: flex; align-items: center;
+    justify-content: center; border-radius: 3px; transition: all 0.15s;
+  }
+  .nav-btn:hover { border-color: #888; color: #fff; }
+  .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  #slide-counter { font-size: 12px; font-weight: 700; color: #888; min-width: 48px; text-align: center; }
+  .screenshot-tip {
+    margin-left: auto; font-size: 11px; color: #555; letter-spacing: 0.05em;
+  }
+
+  /* Canvas area */
+  #canvas {
+    margin-top: 48px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: calc(100vh - 48px);
+    padding: 40px 20px;
+  }
+
+  /* The slide wrapper — 1080×1080 scaled to fit */
+  #slide-scale-wrapper {
+    position: relative;
+  }
+  #slide-root {
+    width: 1080px; height: 1080px;
+    transform-origin: top left;
+    overflow: hidden;
+  }
+
+  /* ─── DA Brand Variables ────────────────────────────── */
+  :root {
+    --bone: #F9F6F0;
+    --char: #2D2D2D;
+    --blue: #3A7BD5;
+    --red: #C5301A;
+    --pink: #FADEEB;
+    --pinned: #FCFAED;
+    --lace: rgba(45,45,45,0.07);
+  }
+
+  /* ─── Lace background (Technical Lace grid) ───────── */
+  .lace-bg {
+    background-color: #F9F6F0;
+    background-image:
+      linear-gradient(rgba(45,45,45,0.07) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, rgba(45,45,45,0.07) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+  }
+  .dark-bg {
+    background-color: #2D2D2D;
+    background-image:
+      linear-gradient(rgba(249,246,240,0.04) 0.5px, transparent 0.5px),
+      linear-gradient(90deg, rgba(249,246,240,0.04) 0.5px, transparent 0.5px);
+    background-size: 20px 20px;
+  }
+
+  /* ─── Slide shell ──────────────────────────────────── */
+  .slide {
+    width: 1080px; height: 1080px;
+    position: relative; overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; flex-direction: column;
+    padding: 80px;
+  }
+
+  /* ─── Typography ───────────────────────────────────── */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(249,246,240,0.5);
+    margin-bottom: 0;
+  }
+  .eyebrow.dark { color: rgba(45,45,45,0.45); }
+  .eyebrow.red { color: #C5301A; }
+  .eyebrow.blue { color: #3A7BD5; }
+
+  .big { font-family: 'Lexend Deca', sans-serif; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
+  .body-txt { font-family: 'JetBrains Mono', monospace; line-height: 1.75; }
+
+  /* ─── Footer bar ───────────────────────────────────── */
+  .slide-footer {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 20px 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(249,246,240,0.08);
+  }
+  .slide-footer.light { border-top-color: rgba(45,45,45,0.08); }
+  .footer-tag {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .footer-num { font-size: 13px; opacity: 0.4; font-weight: 700; }
+
+  /* ─── Structural border ────────────────────────────── */
+  .s-border { border: 1px solid #2D2D2D; }
+  .s-border-light { border: 1px solid rgba(249,246,240,0.2); }
+
+  /* ─── Pinned note ──────────────────────────────────── */
+  .pinned {
+    background: #FCFAED; position: relative; padding: 44px 48px 40px;
+    border: 1px solid #2D2D2D; border-left: 6px solid #C5301A;
+  }
+  .pinned::before {
+    content: ""; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 20px; background: #C5301A;
+    border: 1.5px solid #2D2D2D; border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  /* Keyboard hint */
+  #key-hint {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(0,0,0,0.7); color: #888; font-size: 11px;
+    padding: 6px 14px; border-radius: 20px; letter-spacing: 0.06em;
+    pointer-events: none;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <div class="tb-group">
+    <span class="tb-label">Deck</span>
+    <button class="deck-btn active" onclick="switchDeck(0)">Design Bureau</button>
+    <button class="deck-btn" onclick="switchDeck(1)">Dept. of Cooperation</button>
+    <button class="deck-btn" onclick="switchDeck(2)">Self-Governing</button>
+    <button class="deck-btn" onclick="switchDeck(3)">Observation Post</button>
+  </div>
+  <div class="tb-sep"></div>
+  <div class="tb-group">
+    <button class="nav-btn" id="btn-prev" onclick="prev()">←</button>
+    <span id="slide-counter">1 / 6</span>
+    <button class="nav-btn" id="btn-next" onclick="next()">→</button>
+  </div>
+  <span class="screenshot-tip">← → keys to navigate · Cmd+Shift+4 to screenshot each slide</span>
+</div>
+
+<!-- CANVAS -->
+<div id="canvas">
+  <div id="slide-scale-wrapper">
+    <div id="slide-root"></div>
+  </div>
+</div>
+
+<div id="key-hint">← → Navigate slides</div>
+
+<script>
+// ─── Brand constants ──────────────────────────────────────────────────
+const V = {
+  bone: '#F9F6F0', char: '#2D2D2D', blue: '#3A7BD5',
+  red: '#C5301A', pink: '#FADEEB', pinned: '#FCFAED'
+};
+
+// ─── Slide builder helpers ────────────────────────────────────────────
+function slide(theme, content, tag, idx, total) {
+  const dark = theme === 'dark';
+  const bgClass = dark ? 'dark-bg' : 'lace-bg';
+  const fg = dark ? V.bone : V.char;
+  const footerFg = dark ? 'rgba(249,246,240,0.35)' : 'rgba(45,45,45,0.35)';
+  return `
+    <div class="slide ${bgClass}" style="color:${fg};">
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">${content}</div>
+      <div class="slide-footer ${dark?'':'light'}">
+        <span class="footer-tag" style="color:${footerFg};">${tag}</span>
+        <span class="footer-num" style="color:${footerFg};">${idx} / ${total}</span>
+      </div>
+    </div>`;
+}
+
+function eyebrow(text, color) {
+  const c = color === 'red' ? V.red : color === 'blue' ? V.blue : color === 'dark' ? 'rgba(45,45,45,0.45)' : 'rgba(249,246,240,0.5)';
+  return `<div class="eyebrow" style="color:${c};margin-bottom:36px;">${text}</div>`;
+}
+function big(text, size, color, mt) {
+  return `<div class="big" style="font-size:${size}px;color:${color||'inherit'};${mt?'margin-top:'+mt+'px;':''}">${text}</div>`;
+}
+function body(text, size, opacity, mt) {
+  return `<div class="body-txt" style="font-size:${size||26}px;opacity:${opacity||0.78};max-width:860px;${mt?'margin-top:'+mt+'px;':''}">${text}</div>`;
+}
+function arrow(color) { return `<span style="color:${color||V.red};font-weight:700;font-size:22px;">→</span>`; }
+function box(text, style) { return `<div style="border:1px solid rgba(249,246,240,0.2);padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:16px;${style||''}">${text}</div>`; }
+function lightbox(text, style) { return `<div style="border:1px solid #2D2D2D;padding:10px 20px;font-family:'JetBrains Mono',monospace;font-size:16px;background:#fff;${style||''}">${text}</div>`; }
+
+function row(items, gap, mt) {
+  return `<div style="display:flex;align-items:center;flex-wrap:wrap;gap:${gap||16}px;${mt?'margin-top:'+mt+'px;':''}">${items}</div>`;
+}
+function tableRow(label, value, labelColor, valueColor, last) {
+  return `<div style="display:flex;justify-content:space-between;align-items:center;${last?'':'border-bottom:1px dashed rgba(45,45,45,0.15);padding-bottom:14px;margin-bottom:14px;}">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:16px;color:${labelColor||V.char};">${label}</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:${valueColor||V.red};">${value}</span>
+  </div>`;
+}
+function listItem(text, color, borderColor, last) {
+  return `<div style="display:flex;align-items:flex-start;gap:20px;${last?'':'border-bottom:1px solid rgba(249,246,240,0.1);padding-bottom:16px;margin-bottom:16px;}">
+    <span style="color:${color||V.blue};font-weight:700;font-size:18px;min-width:20px;margin-top:2px;">→</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:rgba(249,246,240,0.82);line-height:1.5;">${text}</span>
+  </div>`;
+}
+
+// ─── DECKS ────────────────────────────────────────────────────────────
+
+const DECKS = [
+
+  // ── DECK 0: The Design Bureau ───────────────────────────────────────
+  {
+    label: "Design Bureau",
+    slides: [
+      // Slide 1 — Intro
+      slide('dark', `
+        ${eyebrow('The Departments · 01 of 04')}
+        ${big('The Design', 130, V.bone)}
+        ${big('Bureau.', 130, V.red, 8)}
+        ${body('The visual side of the operation. Website, brand identity, social graphics, document templates — built as a system, not a stack of one-offs.', 28, 0.78, 48)}
+      `, 'The Design Bureau', 1, 6),
+
+      // Slide 2 — The 95/5 Rule
+      slide('light', `
+        ${eyebrow('The rule', 'red')}
+        ${big('Color everywhere is', 90, V.char)}
+        ${big('color nowhere.', 90, V.red, 8)}
+        ${body('95% of every canvas stays neutral. The remaining 5% is where all the color lives — and because it\'s rare, it works. Restraint is not a limitation. It\'s the mechanism that makes the one accent land.', 26, 0.72, 48)}
+      `, 'The Design Bureau', 2, 6),
+
+      // Slide 3 — Typography
+      slide('dark', `
+        ${eyebrow('Typography')}
+        ${big('Your font is talking', 80, V.bone)}
+        ${big('before the first', 80, V.blue, 4)}
+        ${big('word is read.', 80, V.bone, 4)}
+        ${body('One typeface for headers. One for body. That\'s the whole system. Loading four font weights when you only use two is burning energy for nothing — and slowing down every page load.', 26, 0.78, 48)}
+      `, 'The Design Bureau', 3, 6),
+
+      // Slide 4 — Performance & Sustainability
+      slide('light', `
+        ${eyebrow('Performance = Sustainability', 'red')}
+        ${big('A fast site isn\'t just', 68, V.char)}
+        ${big('good for users.', 68, V.char, 4)}
+        ${big('It\'s good for the planet.', 68, V.red, 4)}
+        ${body('Every unoptimized image, every unused font weight, every idle script burns energy in a data center. A 4MB photo optimized to 200KB WebP is ~95% less data — on every page load, every visitor, every day.', 26, 0.72, 44)}
+      `, 'The Design Bureau', 4, 6),
+
+      // Slide 5 — Brand consistency
+      slide('dark', `
+        ${eyebrow('Brand consistency')}
+        ${big('Your logo, site, and', 78, V.bone)}
+        ${big('social posts should look like', 78, V.bone, 4)}
+        ${big('they know each other.', 78, V.red, 4)}
+        ${body('Three things consistent everywhere: your color, your typeface, your spacing. That\'s a brand system. Everything else follows from those three decisions.', 26, 0.78, 48)}
+      `, 'The Design Bureau', 5, 6),
+
+      // Slide 6 — CTA
+      slide('light', `
+        ${eyebrow('What The Design Bureau builds', 'red')}
+        <div style="margin-top:8px;">
+          ${[
+            ['Website design','Mobile-first, WCAG 2.1 AA, bilingual, fast.'],
+            ['Brand identity','Logo system, color, type — one reference file.'],
+            ['Social graphics','Post templates, carousels — consistent with the brand.'],
+            ['Performance audit','Image optimization, font loading, script review.'],
+          ].map(([t,d],i) => `<div style="display:flex;align-items:flex-start;gap:24px;${i<3?'border-bottom:1px solid rgba(45,45,45,0.10);padding-bottom:20px;margin-bottom:20px;':''}">
+            <span style="color:${V.red};font-weight:700;font-size:18px;min-width:24px;margin-top:3px;">→</span>
+            <div><span style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:18px;color:${V.char};">${t}</span><span style="font-family:'JetBrains Mono',monospace;font-size:15px;color:rgba(45,45,45,0.55);margin-left:12px;">${d}</span></div>
+          </div>`).join('')}
+        </div>
+        <div style="margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:18px;opacity:0.45;color:${V.char};">digitalallies.net/learn/design-bureau · Strategy is free.</div>
+      `, 'The Design Bureau', 6, 6),
+    ]
+  },
+
+  // ── DECK 1: Dept. of Cooperation ────────────────────────────────────
+  {
+    label: "Dept. of Cooperation",
+    slides: [
+      slide('dark', `
+        ${eyebrow('The Departments · 02 of 04')}
+        ${big('Dept. of', 110, V.bone)}
+        ${big('Cooperation.', 110, V.blue, 8)}
+        ${body('Your apps, finally on speaking terms. This department handles the connections between your tools so data moves automatically — no manual entry, no CSV exports, no copy-paste at 10pm.', 28, 0.78, 48)}
+      `, 'Dept. of Cooperation', 1, 6),
+
+      slide('light', `
+        ${eyebrow('The actual problem', 'red')}
+        ${big('You\'re using 5–10 apps every day.', 78, V.char)}
+        ${big('Most share zero data with each other.', 78, V.red, 12)}
+        ${body('The average small business spends roughly 40% of its working hours on manual data entry. That\'s not a staffing problem. That\'s a connection problem.', 26, 0.72, 48)}
+      `, 'Dept. of Cooperation', 2, 6),
+
+      slide('dark', `
+        ${eyebrow('What it looks like')}
+        <div style="display:flex;flex-direction:column;gap:28px;margin-top:8px;">
+          ${[
+            ['Customer books online','Calendar updated','Invoice created'],
+            ['Order placed on site','Inventory adjusted','You get a text'],
+            ['Form submitted','CRM updated','Welcome email sent'],
+          ].map(flow => `<div style="display:flex;align-items:center;flex-wrap:wrap;gap:14px;">
+            ${flow.map((s,j) => `
+              <div style="border:1px solid rgba(249,246,240,0.22);padding:10px 20px;font-size:16px;background:rgba(249,246,240,0.07);">${s}</div>
+              ${j<2?`<span style="color:${V.blue};font-weight:700;font-size:22px;">→</span>`:''}
+            `).join('')}
+          </div>`).join('')}
+        </div>
+        ${body('You get notified. You show up. The admin was already done.', 22, 0.65, 40)}
+      `, 'Dept. of Cooperation', 3, 6),
+
+      slide('light', `
+        ${eyebrow('The math', 'red')}
+        ${big('20 minutes a day moving data between systems.', 70, V.char)}
+        <div style="margin-top:44px;padding:36px 44px;background:${V.bone};border:1px solid ${V.char};border-left:6px solid ${V.red};max-width:820px;position:relative;">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:20px;height:20px;background:${V.red};border:1.5px solid ${V.char};border-radius:50%;"></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:26px;color:${V.char};line-height:1.5;">
+            That's <strong>80+ hours a year.</strong> At $50/hr, that's <strong style="color:${V.red};">$4,000 annually</strong> spent on a task a $30/month tool could eliminate.
+          </div>
+        </div>
+      `, 'Dept. of Cooperation', 4, 6),
+
+      slide('dark', `
+        ${eyebrow('Common connections')}
+        <div style="margin-top:8px;">
+          ${[
+            ['Booking / Website','Google Calendar'],
+            ['POS / Square','QuickBooks'],
+            ['Contact Form','Mailchimp / HubSpot'],
+            ['Google Forms','Airtable / Notion'],
+            ['Shopify','Shipstation'],
+          ].map(([a,b],i) => `<div style="display:flex;align-items:center;gap:20px;${i<4?'border-bottom:1px solid rgba(249,246,240,0.10);padding-bottom:16px;margin-bottom:16px;':''}">
+            <span style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:18px;color:${V.bone};min-width:240px;">${a}</span>
+            <span style="color:${V.blue};font-weight:700;font-size:20px;">→</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:16px;color:rgba(249,246,240,0.6);">${b}</span>
+          </div>`).join('')}
+        </div>
+      `, 'Dept. of Cooperation', 5, 6),
+
+      slide('light', `
+        ${eyebrow('How it works with Digital Allies', 'red')}
+        ${big('I map what you have. Identify what\'s costing you time. Wire it together.', 68, V.char)}
+        <div style="margin-top:44px;">
+          ${tableRow('Strategy conversation','Free',V.char,V.blue)}
+          ${tableRow('Integration setup','Included in Full Deployment',V.char,V.red)}
+          ${tableRow('Custom build — Tactical Sprint','$625/week',V.char,V.red,true)}
+        </div>
+        <div style="margin-top:28px;font-family:'JetBrains Mono',monospace;font-size:18px;opacity:0.45;color:${V.char};">digitalallies.net/learn/dept-cooperation · Strategy is free.</div>
+      `, 'Dept. of Cooperation', 6, 6),
+    ]
+  },
+
+  // ── DECK 2: The Self-Governing Bureau ───────────────────────────────
+  {
+    label: "Self-Governing Bureau",
+    slides: [
+      slide('dark', `
+        ${eyebrow('The Departments · 03 of 04')}
+        ${big('The Self-Governing', 96, V.bone)}
+        ${big('Bureau.', 96, V.red, 8)}
+        ${body('Automation. The department that runs while you\'re not watching — handling the tasks that don\'t need a human, so you can focus on the ones that do.', 28, 0.78, 48)}
+      `, 'The Self-Governing Bureau', 1, 6),
+
+      slide('light', `
+        ${eyebrow('The test', 'red')}
+        ${big('Does this task require a human decision — or just a human doing it?', 70, V.char)}
+        ${body('If a task always happens the same way — same trigger, same action, same outcome — a machine should be doing it. Most businesses have more of those than they realize.', 26, 0.72, 48)}
+      `, 'The Self-Governing Bureau', 2, 6),
+
+      slide('dark', `
+        ${eyebrow('Good automation candidates')}
+        <div style="margin-top:8px;">
+          ${['Appointment confirmation and reminder emails',
+            'Invoice follow-up sequences (day 7, day 14, day 30)',
+            'Review request emails after service completion',
+            'Lead notifications when a form is submitted',
+            'Social media scheduling',
+            'Weekly reports — generated and delivered automatically',
+            'New client onboarding sequences',
+          ].map((item,i,arr) => listItem(item, V.blue, V.blue, i===arr.length-1)).join('')}
+        </div>
+      `, 'The Self-Governing Bureau', 3, 6),
+
+      slide('light', `
+        ${eyebrow('The hours-back math', 'red')}
+        <div style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:200px;color:${V.red};line-height:0.85;letter-spacing:-0.04em;">2 hrs</div>
+        ${big('per day on tasks automation handles.', 54, V.char, 16)}
+        ${body('That\'s 500 hours a year — $20,000–$30,000 in owner time at any reasonable rate. The tools to automate it cost a fraction of that.', 26, 0.72, 36)}
+      `, 'The Self-Governing Bureau', 4, 6),
+
+      slide('dark', `
+        ${eyebrow('The reliability factor')}
+        ${big('Machines don\'t forget', 96, V.bone)}
+        ${big('to follow up.', 96, V.red, 12)}
+        ${body('The follow-up email goes out at day 7. Every time. Whether you remembered or not. Whether it\'s a Tuesday or a holiday weekend.', 26, 0.78, 48)}
+        ${body('An automated appointment reminder typically reduces no-shows by 30–40%.', 22, 0.55, 24)}
+      `, 'The Self-Governing Bureau', 5, 6),
+
+      slide('light', `
+        ${eyebrow('How to get started', 'red')}
+        ${big('It starts with a workflow audit — a list of everything you do repeatedly.', 66, V.char)}
+        <div style="margin-top:44px;">
+          ${tableRow('Workflow audit conversation','Free',V.char,V.blue)}
+          ${tableRow('Custom build — Tactical Sprint','$625/week',V.char,V.red)}
+          ${tableRow('Ongoing — Command Center Alliance','~$145/mo',V.char,V.red,true)}
+        </div>
+        <div style="margin-top:28px;font-family:'JetBrains Mono',monospace;font-size:18px;opacity:0.45;color:${V.char};">digitalallies.net/learn/self-governing-bureau · Strategy is free.</div>
+      `, 'The Self-Governing Bureau', 6, 6),
+    ]
+  },
+
+  // ── DECK 3: The Permanent Observation Post ───────────────────────────
+  {
+    label: "Observation Post",
+    slides: [
+      slide('dark', `
+        ${eyebrow('The Departments · 04 of 04')}
+        ${big('The Permanent', 86, V.bone)}
+        ${big('Observation Post.', 86, V.blue, 8)}
+        ${body('Hosting, uptime monitoring, SSL, backups, security updates — running continuously in the background. This is the department that means you never have to think about your site going down.', 28, 0.78, 48)}
+      `, 'The Permanent Observation Post', 1, 6),
+
+      slide('light', `
+        ${eyebrow('What\'s actually running', 'red')}
+        <div style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:200px;color:${V.char};line-height:0.85;letter-spacing:-0.03em;">24/7</div>
+        ${big('uptime monitoring.', 54, V.red, 12)}
+        ${body('When something breaks at 2am — a plugin update that kills the site, an SSL certificate that lapses — it\'s my problem. Not yours. That\'s the whole premise.', 26, 0.72, 36)}
+      `, 'The Permanent Observation Post', 2, 6),
+
+      slide('dark', `
+        ${eyebrow('What the Observation Post covers')}
+        <div style="margin-top:8px;">
+          ${[
+            ['Uptime monitoring','24/7 — alerts fire before customers notice.'],
+            ['SSL certificate','Renewed automatically. Never lapsed.'],
+            ['Weekly backups','Restore to any checkpoint in 7 days.'],
+            ['Security updates','Core, plugins, themes — maintained continuously.'],
+            ['Monthly summary','A plain-English report of what ran, what changed.'],
+          ].map(([t,d],i,arr) => `<div style="display:flex;align-items:flex-start;gap:20px;${i<arr.length-1?'border-bottom:1px solid rgba(249,246,240,0.10);padding-bottom:16px;margin-bottom:16px;':''}">
+            <span style="color:${V.blue};font-weight:700;font-size:18px;min-width:20px;margin-top:2px;">→</span>
+            <div><span style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:17px;color:${V.bone};">${t}</span><span style="font-family:'JetBrains Mono',monospace;font-size:15px;color:rgba(249,246,240,0.5);margin-left:10px;">${d}</span></div>
+          </div>`).join('')}
+        </div>
+      `, 'The Permanent Observation Post', 3, 6),
+
+      slide('light', `
+        ${eyebrow('The actual cost of downtime', 'red')}
+        ${big('Your site is down. A potential customer lands on an error page.', 70, V.char)}
+        <div class="pinned" style="margin-top:44px;max-width:820px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:26px;color:${V.char};line-height:1.5;">
+            They don't email you. They close the tab and call the next person on the list. <strong>You never know it happened.</strong>
+          </div>
+        </div>
+      `, 'The Permanent Observation Post', 4, 6),
+
+      slide('dark', `
+        ${eyebrow('The No-Ghosting Guarantee')}
+        ${big('I am historically easy to reach.', 78, V.bone)}
+        ${big('I live in Kingman.', 78, V.blue, 12)}
+        ${big('If you call, I answer.', 78, V.bone, 12)}
+        ${body('It is a very avant-garde concept called "Doing My Job."', 24, 0.65, 48)}
+      `, 'The Permanent Observation Post', 5, 6),
+
+      slide('light', `
+        ${eyebrow('The monitoring plans', 'red')}
+        <div style="margin-top:12px;">
+          ${[
+            ['The Secure Line','~$17/mo','Hosting, SSL, monitoring, weekly backups, updates.'],
+            ['The Vanguard Plan','~$80/mo','Secure Line + 1hr dedicated support/mo.'],
+            ['Command Center Alliance','~$145/mo','Premium hosting, priority support, 3hrs tactical/mo.'],
+            ['Community Shield (Nonprofit)','~$50/mo','Hosting at roughly cost. WCAG infrastructure included.'],
+          ].map(([name,price,desc],i,arr) => `<div style="display:flex;justify-content:space-between;align-items:flex-start;${i<arr.length-1?'border-bottom:1px dashed rgba(45,45,45,0.15);padding-bottom:16px;margin-bottom:16px;':''}gap:20px;">
+            <div>
+              <div style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:17px;color:${V.char};">${name}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:rgba(45,45,45,0.5);margin-top:4px;">${desc}</div>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:${V.red};white-space:nowrap;">${price}</span>
+          </div>`).join('')}
+        </div>
+        <div style="margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:18px;opacity:0.4;color:${V.char};">digitalallies.net · (928) 228-5769</div>
+      `, 'The Permanent Observation Post', 6, 6),
+    ]
+  }
+];
+
+// ─── State ────────────────────────────────────────────────────────────
+let currentDeck = 0;
+let currentSlide = 0;
+
+// ─── Rendering ────────────────────────────────────────────────────────
+function render() {
+  const deck = DECKS[currentDeck];
+  const total = deck.slides.length;
+  document.getElementById('slide-root').innerHTML = deck.slides[currentSlide];
+  document.getElementById('slide-counter').textContent = (currentSlide + 1) + ' / ' + total;
+  document.getElementById('btn-prev').disabled = currentSlide === 0;
+  document.getElementById('btn-next').disabled = currentSlide === total - 1;
+
+  // Update deck buttons
+  document.querySelectorAll('.deck-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === currentDeck);
+  });
+
+  // Scale to fit
+  scaleSlide();
+}
+
+function scaleSlide() {
+  const canvas = document.getElementById('canvas');
+  const wrapper = document.getElementById('slide-scale-wrapper');
+  const vw = canvas.clientWidth - 80;
+  const vh = canvas.clientHeight - 80;
+  const scale = Math.min(vw / 1080, vh / 1080, 1);
+  document.getElementById('slide-root').style.transform = `scale(${scale})`;
+  wrapper.style.width = Math.round(1080 * scale) + 'px';
+  wrapper.style.height = Math.round(1080 * scale) + 'px';
+}
+
+function switchDeck(idx) {
+  currentDeck = idx;
+  currentSlide = 0;
+  render();
+}
+
+function next() {
+  if (currentSlide < DECKS[currentDeck].slides.length - 1) {
+    currentSlide++;
+    render();
+  }
+}
+
+function prev() {
+  if (currentSlide > 0) {
+    currentSlide--;
+    render();
+  }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') next();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prev();
+  if (e.key === '1') switchDeck(0);
+  if (e.key === '2') switchDeck(1);
+  if (e.key === '3') switchDeck(2);
+  if (e.key === '4') switchDeck(3);
+});
+
+window.addEventListener('resize', scaleSlide);
+
+// Init
+render();
+</script>
+</body>
+</html>

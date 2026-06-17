@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Department Card</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--charcoal); overflow: hidden; }
+    .dept { padding: 24px 18px; text-align: center; background: var(--bg); border-top: 4px solid transparent; }
+    .dept.b1 { border-right: 1px solid var(--charcoal); border-bottom: 1px solid var(--charcoal); }
+    .dept.b2 { border-bottom: 1px solid var(--charcoal); }
+    .dept.b3 { border-right: 1px solid var(--charcoal); }
+    .dept.hover { border-top-color: var(--signal); background: rgba(250,222,235,0.2); }
+    .dept img { width: 64px; height: 64px; object-fit: contain; margin-bottom: 8px; }
+    .dept h3 { font-family: var(--font-headers); font-weight: 700; font-size: 14px; margin: 0 0 2px; }
+    .dept .eb { font-family: var(--font-details); font-size: 8px; color: var(--signal); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+    .dept p { font-family: var(--font-details); font-size: 10px; line-height: 1.5; margin: 0; color: var(--fg-muted); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="grid">
+      <div class="dept b1">
+        <img src="../assets/design-icon.png" alt="">
+        <h3>The Design Bureau</h3>
+        <span class="eb">Design &amp; Brand</span>
+        <p>Polished visuals that look like you meant it.</p>
+      </div>
+      <div class="dept b2 hover">
+        <img src="../assets/integrations-icon.png" alt="">
+        <h3>Dept. of Cooperation</h3>
+        <span class="eb">Integrations</span>
+        <p>Your apps talk to each other without arguing.</p>
+      </div>
+      <div class="dept b3">
+        <img src="../assets/automation-icon.png" alt="">
+        <h3>Self-Governing Bureau</h3>
+        <span class="eb">Automation</span>
+        <p>Boring repetitive stuff runs automatically.</p>
+      </div>
+      <div class="dept">
+        <img src="../assets/support-icon.png" alt="">
+        <h3>Observation Post</h3>
+        <span class="eb">Support</span>
+        <p>If something breaks at 2am, that's my problem.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

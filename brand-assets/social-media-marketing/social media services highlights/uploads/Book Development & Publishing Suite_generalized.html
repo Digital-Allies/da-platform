@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parable Series - Book Development Suite</title>
+    <style>
+        :root {
+            --color-primary: #208080;
+            --color-primary-hover: #1a6b6b;
+            --color-primary-active: #145555;
+            --color-success: #2d9e6e;
+            --color-error: #c0152f;
+            --color-warning: #a84b2f;
+            --color-bg: #fcfcf9;
+            --color-surface: #fffff5;
+            --color-text: #134252;
+            --color-text-secondary: #627c81;
+            --color-border: #5e5240;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --radius-8: 8px;
+            --radius-12: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-20);
+        }
+
+        header {
+            background: linear-gradient(135deg, #208080 0%, #1a6b6b 100%);
+            color: white;
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+            border-radius: var(--radius-12);
+        }
+
+        header h1 {
+            margin: 0 0 var(--space-16) 0;
+            font-size: 2em;
+        }
+
+        .tab-nav {
+            display: flex;
+            gap: var(--space-16);
+            margin-bottom: var(--space-24);
+            border-bottom: 2px solid var(--color-border);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: var(--space-16) var(--space-20);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-btn:hover {
+            color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-12);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+        }
+
+        .section h2 {
+            margin: 0 0 var(--space-16) 0;
+            color: var(--color-primary);
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: var(--space-20);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 0.95em;
+            color: var(--color-text);
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-8);
+            font-family: inherit;
+            font-size: 1em;
+            color: var(--color-text);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(32, 128, 128, 0.15);
+        }
+
+        .button-group {
+            display: flex;
+            gap: var(--space-16);
+            margin-top: var(--space-24);
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius-8);
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(32, 128, 128, 0.1);
+            color: var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(32, 128, 128, 0.2);
+        }
+
+        .btn-success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #258a5f;
+        }
+
+        .version-item {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-8);
+            padding: var(--space-16);
+            margin-bottom: var(--space-16);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .version-info {
+            flex: 1;
+        }
+
+        .version-title {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .version-date {
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .version-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            font-size: 0.9em;
+        }
+
+        .notes-list {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-8);
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: var(--space-16);
+        }
+
+        .note-item {
+            padding: var(--space-16);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .note-item:last-child {
+            border-bottom: none;
+        }
+
+        .note-date {
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .note-text {
+            color: var(--color-text);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-24);
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-8);
+            padding: var(--space-20);
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .alert {
+            padding: var(--space-16);
+            border-radius: var(--radius-8);
+            margin-bottom: var(--space-20);
+        }
+
+        .alert-success {
+            background: rgba(45, 158, 110, 0.1);
+            border: 1px solid var(--color-success);
+            color: var(--color-success);
+        }
+
+        .alert-info {
+            background: rgba(32, 128, 128, 0.1);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-24);
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-nav {
+                flex-wrap: wrap;
+            }
+            
+            .version-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .version-actions {
+                margin-top: var(--space-16);
+                width: 100%;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-12);
+            padding: var(--space-24);
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            margin-bottom: var(--space-24);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: var(--space-16);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--color-primary);
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+        }
+
+        .close-modal:hover {
+            color: var(--color-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>The "Serious Play" Book Development Suite</h1>
+            <p>Book Series Publishing & Copyright Documentation Workflow</p>
+        </header>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('editor')">📝 Editor & Notes</button>
+            <button class="tab-btn" onclick="switchTab('versions')">📋 Versions & History</button>
+            <button class="tab-btn" onclick="switchTab('glossary')">📚 Glossary</button>
+            <button class="tab-btn" onclick="switchTab('publishing')">🚀 Publish & Copyright</button>
+        </div>
+
+        <!-- EDITOR & NOTES TAB -->
+        <div id="editor" class="tab-content active">
+            <div class="section">
+                <h2>Book Editor</h2>
+                <div class="form-group">
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" id="bookTitle" placeholder="e.g., To Kill a Mockingbird" value="">
+                </div>
+                <div class="form-group">
+                    <label for="bookNumber">Book Number in Series</label>
+                    <select id="bookNumber">
+                        <option value="">Select book...</option>
+                        <option value="1">Book 1: Your Future Book Title</option>
+                        <option value="2">Book 2: Your Second Your Future Book Title</option>
+                        <option value="3">Book 3: Third Future Book Title</option>
+                        <option value="4">Book 4: Fourth Future Book Title</option>
+                        <option value="5">Book 5: Fifth Future Book Title</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bookContent">Book Content / Manuscript</label>
+                    <textarea id="bookContent" placeholder="Paste your book text here..."></textarea>
+                </div>
+                <div class="button-group">
+                    <button class="btn-primary" onclick="autoSave()">💾 Auto-Save Draft</button>
+                    <button class="btn-secondary" onclick="createVersion()">📌 Create Version Snapshot</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Notes & Concepts</h2>
+                <div class="form-group">
+                    <label for="conceptName">Concept / Term Name</label>
+                    <input type="text" id="conceptName" placeholder="e.g., The Abyss">
+                </div>
+                <div class="form-group">
+                    <label for="conceptNote">Definition or Note</label>
+                    <textarea id="conceptNote" placeholder="Add definition, context, or development notes..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="noteDate">Date (Auto-filled)</label>
+                    <input type="date" id="noteDate">
+                </div>
+                <button class="btn-primary" onclick="addConcept()">+ Add to Glossary</button>
+
+                <h3 style="margin-top: var(--space-24); color: var(--color-primary);">Recent Notes</h3>
+                <div id="notesList" class="notes-list"></div>
+            </div>
+        </div>
+
+        <!-- VERSIONS TAB -->
+        <div id="versions" class="tab-content">
+            <div class="section">
+                <h2>Version History & Management</h2>
+                <div class="form-group">
+                    <label for="versionName">Version Label</label>
+                    <input type="text" id="versionName" placeholder="e.g., Draft 3 - Major Revisions">
+                </div>
+                <div class="form-group">
+                    <label for="versionDate">Date Created (Auto-filled)</label>
+                    <input type="date" id="versionDate">
+                </div>
+                <div class="form-group">
+                    <label for="versionNotes">What Changed in This Version?</label>
+                    <textarea id="versionNotes" placeholder="e.g., Expanded chapter 3, refined key concepts..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="createVersion()">💾 Save This Version</button>
+
+                <h3 style="margin-top: var(--space-24); color: var(--color-primary);">All Versions</h3>
+                <div id="versionsList"></div>
+            </div>
+        </div>
+
+        <!-- GLOSSARY TAB -->
+        <div id="glossary" class="tab-content">
+            <div class="section">
+                <h2>Concepts & Word Dictionary</h2>
+                <div class="alert alert-info">
+                    ℹ️ All concepts and terms you add here will be compiled for your copyright submission and trademark consideration.
+                </div>
+                <div id="glossaryList"></div>
+            </div>
+        </div>
+
+        <!-- PUBLISHING & COPYRIGHT TAB -->
+        <div id="publishing" class="tab-content">
+            <div class="section">
+                <h2>📤 Publish & Generate Copyright Submission</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Current Word Count</div>
+                        <div class="stat-value" id="wordCount">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Saved Versions</div>
+                        <div class="stat-value" id="versionCount">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Concepts Defined</div>
+                        <div class="stat-value" id="conceptCount">0</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: var(--space-24); color: var(--color-primary);">Publish & Export Options</h3>
+                
+                <div class="form-group">
+                    <label for="publishStatus">Publication Status</label>
+                    <select id="publishStatus">
+                        <option value="unpublished">Unpublished (In Development)</option>
+                        <option value="published">Published</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="copyrightHolder">Copyright Holder Name (Author)</label>
+                    <input type="text" id="copyrightHolder" placeholder="e.g., Author Name" value="Author Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="copyrightYear">Copyright Year</label>
+                    <input type="text" id="copyrightYear" placeholder="e.g., 2025" value="2026">
+                </div>
+
+                <div class="form-group">
+                    <label for="publicationDate">Publication Date</label>
+                    <input type="date" id="publicationDate">
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-success" onclick="generateCoverLetter()">📄 Generate Cover Letter</button>
+                    <button class="btn-success" onclick="generateFormattedBook()">📖 Generate Formatted Manuscript</button>
+                    <button class="btn-primary" onclick="emailDocument()">✉️ Email Document</button>
+                    <button class="btn-secondary" onclick="downloadDocument()">💾 Download Document</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR PREVIEW -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h3>Document Preview</h3>
+            </div>
+            <div id="previewContent" style="max-height: 400px; overflow-y: auto;"></div>
+            <div class="button-group" style="margin-top: var(--space-24);">
+                <button class="btn-primary" onclick="downloadPreview()">Download as .docx</button>
+                <button class="btn-secondary" onclick="copyPreview()">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize app data from localStorage
+        let appData = {
+            versions: [],
+            concepts: [],
+            notes: [],
+            currentBook: ''
+        };
+
+        // Load data on startup
+        function loadData() {
+            const saved = localStorage.getItem('parable_app_data');
+            if (saved) {
+                appData = JSON.parse(saved);
+            }
+            updateAllCounts();
+            renderVersions();
+            renderGlossary();
+            renderNotes();
+            setTodayDate();
+        }
+
+        function saveData() {
+            localStorage.setItem('parable_app_data', JSON.stringify(appData));
+        }
+
+        function setTodayDate() {
+            document.getElementById('noteDate').valueAsDate = new Date();
+            document.getElementById('versionDate').valueAsDate = new Date();
+            document.getElementById('publicationDate').valueAsDate = new Date();
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function autoSave() {
+            const title = document.getElementById('bookTitle').value;
+            const content = document.getElementById('bookContent').value;
+            
+            if (!title || !content) {
+                alert('Please enter both a book title and content.');
+                return;
+            }
+
+            saveData();
+            alert('✅ Draft auto-saved successfully!');
+        }
+
+        function createVersion() {
+            const title = document.getElementById('bookTitle').value;
+            const content = document.getElementById('bookContent').value;
+            const versionName = document.getElementById('versionName').value || `Version ${appData.versions.length + 1}`;
+            const versionDate = document.getElementById('versionDate').value;
+            const versionNotes = document.getElementById('versionNotes').value;
+
+            if (!title || !content) {
+                alert('Please enter book title and content first.');
+                return;
+            }
+
+            const version = {
+                id: Date.now(),
+                name: versionName,
+                title: title,
+                date: versionDate,
+                notes: versionNotes,
+                content: content,
+                wordCount: content.trim().split(/\s+/).length
+            };
+
+            appData.versions.push(version);
+            saveData();
+            renderVersions();
+            document.getElementById('versionName').value = '';
+            document.getElementById('versionNotes').value = '';
+            alert('✅ Version saved!');
+        }
+
+        function renderVersions() {
+            const list = document.getElementById('versionsList');
+            if (appData.versions.length === 0) {
+                list.innerHTML = '<p style="color: var(--color-text-secondary); text-align: center;">No versions saved yet.</p>';
+                return;
+            }
+
+            list.innerHTML = appData.versions
+                .sort((a, b) => b.id - a.id)
+                .map(v => `
+                    <div class="version-item">
+                        <div class="version-info">
+                            <div class="version-title">${v.name}</div>
+                            <div class="version-date">${v.date} • ${v.wordCount} words</div>
+                            ${v.notes ? `<div style="margin-top: 8px; font-size: 0.9em; color: var(--color-text-secondary);">${v.notes}</div>` : ''}
+                        </div>
+                        <div class="version-actions">
+                            <button class="btn-small btn-secondary" onclick="loadVersion(${v.id})">Load</button>
+                            <button class="btn-small btn-secondary" onclick="deleteVersion(${v.id})">Delete</button>
+                        </div>
+                    </div>
+                `)
+                .join('');
+        }
+
+        function loadVersion(versionId) {
+            const version = appData.versions.find(v => v.id === versionId);
+            if (version) {
+                document.getElementById('bookTitle').value = version.title;
+                document.getElementById('bookContent').value = version.content;
+                alert(`✅ Loaded: ${version.name}`);
+                switchTab('editor');
+            }
+        }
+
+        function deleteVersion(versionId) {
+            if (confirm('Delete this version?')) {
+                appData.versions = appData.versions.filter(v => v.id !== versionId);
+                saveData();
+                renderVersions();
+            }
+        }
+
+        function addConcept() {
+            const name = document.getElementById('conceptName').value;
+            const definition = document.getElementById('conceptNote').value;
+            const date = document.getElementById('noteDate').value;
+
+            if (!name || !definition) {
+                alert('Please enter both concept name and definition.');
+                return;
+            }
+
+            const concept = {
+                id: Date.now(),
+                name: name,
+                definition: definition,
+                date: date,
+                ipStatus: `© 2026 Claimed as unique terminology.`
+            };
+
+            appData.concepts.push(concept);
+            saveData();
+            renderGlossary();
+            document.getElementById('conceptName').value = '';
+            document.getElementById('conceptNote').value = '';
+            alert('✅ Concept added to glossary!');
+        }
+
+        function renderGlossary() {
+            const list = document.getElementById('glossaryList');
+            if (appData.concepts.length === 0) {
+                list.innerHTML = '<p style="color: var(--color-text-secondary); text-align: center;">No concepts added yet. Start adding terms from the Editor tab.</p>';
+                return;
+            }
+
+            list.innerHTML = appData.concepts
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(c => `
+                    <div class="version-item" style="margin-bottom: var(--space-16);">
+                        <div class="version-info">
+                            <div class="version-title">${c.name}</div>
+                            <div style="margin-top: 8px; color: var(--color-text); font-size: 0.95em;">${c.definition}</div>
+                            <div class="version-date" style="margin-top: 8px;">Added: ${c.date} • ${c.ipStatus}</div>
+                        </div>
+                        <div class="version-actions">
+                            <button class="btn-small btn-secondary" onclick="deleteConcept(${c.id})">Delete</button>
+                        </div>
+                    </div>
+                `)
+                .join('');
+        }
+
+        function deleteConcept(conceptId) {
+            if (confirm('Delete this concept?')) {
+                appData.concepts = appData.concepts.filter(c => c.id !== conceptId);
+                saveData();
+                renderGlossary();
+            }
+        }
+
+        function addNote() {
+            const text = document.getElementById('noteText').value;
+            if (!text) {
+                alert('Enter a note.');
+                return;
+            }
+
+            const note = {
+                id: Date.now(),
+                text: text,
+                date: new Date().toLocaleDateString()
+            };
+
+            appData.notes.push(note);
+            saveData();
+            renderNotes();
+            document.getElementById('noteText').value = '';
+        }
+
+        function renderNotes() {
+            const list = document.getElementById('notesList');
+            if (appData.notes.length === 0) {
+                list.innerHTML = '<p style="text-align: center; color: var(--color-text-secondary); padding: var(--space-16);">No notes yet.</p>';
+                return;
+            }
+
+            list.innerHTML = appData.notes
+                .sort((a, b) => b.id - a.id)
+                .slice(0, 5)
+                .map(n => `
+                    <div class="note-item">
+                        <div class="note-date">${n.date}</div>
+                        <div class="note-text">${n.text}</div>
+                    </div>
+                `)
+                .join('');
+        }
+
+        function updateAllCounts() {
+            document.getElementById('wordCount').textContent = document.getElementById('bookContent').value.trim().split(/\s+/).filter(w => w).length;
+            document.getElementById('versionCount').textContent = appData.versions.length;
+            document.getElementById('conceptCount').textContent = appData.concepts.length;
+        }
+
+        function generateFormattedBook() {
+            const title = document.getElementById('bookTitle').value;
+            const content = document.getElementById('bookContent').value;
+            const copyrightYear = document.getElementById('copyrightYear').value;
+            const copyrightHolder = document.getElementById('copyrightHolder').value;
+
+            if (!title || !content) {
+                alert('Please enter book title and content.');
+                return;
+            }
+
+            const wordCount = content.trim().split(/\s+/).filter(w => w).length;
+            const latestVersion = appData.versions.length > 0 
+                ? appData.versions[appData.versions.length - 1] 
+                : null;
+
+            const formatted = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📖 BOOK SERIES
+${title}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MANUSCRIPT INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Title: ${title}
+Author: ${copyrightHolder}
+Copyright Year: ${copyrightYear}
+Word Count: ${wordCount}
+Publication Status: ${document.getElementById('publishStatus').value}
+Generated: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
+
+${latestVersion ? `Latest Version: ${latestVersion.name} (${latestVersion.date})` : ''}
+
+CONTENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+${content}
+
+VERSIONING HISTORY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${appData.versions.length === 0 ? 'No versions saved.' : appData.versions.map(v => `• ${v.name} (${v.date}) - ${v.wordCount} words`).join('\n')}
+
+CONCEPTS & TERMINOLOGY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${appData.concepts.length === 0 ? 'No concepts defined.' : appData.concepts.map(c => `• ${c.name}: ${c.definition}`).join('\n\n')}
+
+COPYRIGHT & IP NOTICE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+© ${copyrightYear} ${copyrightHolder}. All rights reserved.
+
+This work and all unique terminology, concepts, and intellectual property 
+contained herein are the original creative works of the author and are 
+protected under U.S. Copyright Law.
+
+`;
+
+            showPreview(formatted, 'Formatted Manuscript');
+        }
+
+        function generateCoverLetter() {
+            const copyrightHolder = document.getElementById('copyrightHolder').value;
+            const copyrightYear = document.getElementById('copyrightYear').value;
+            const title = document.getElementById('bookTitle').value;
+            const pubStatus = document.getElementById('publishStatus').value;
+            const pubDate = document.getElementById('publicationDate').value;
+
+            if (!title) {
+                alert('Please enter a book title first.');
+                return;
+            }
+
+            const coverLetter = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+COPYRIGHT OFFICE COVER LETTER
+U.S. Copyright Office Registration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TO: The Register of Copyrights
+U.S. Copyright Office
+Library of Congress
+101 Independence Avenue SE
+Washington, DC 20559-6000
+
+APPLICANT INFORMATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Author/Claimant: ${copyrightHolder}
+Title of Work: "${title}"
+Date of Creation: ${copyrightYear}
+Registration Type: ${pubStatus === 'published' ? 'Published Literary Work' : 'Unpublished Literary Manuscript'}
+Publication Date: ${pubDate || '[Date]'}
+
+WORK DESCRIPTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+This work is part of [book or series title], [book summary], comprising original writing with 
+unique terminology and conceptual frameworks.
+
+ORIGINAL AUTHORSHIP CLAIM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+I certify that I am the sole author and copyright claimant of this work.
+The work contains entirely original creative expression, including unique 
+terminology, conceptual frameworks, and original analysis.
+
+SPECIAL CONSIDERATIONS (examples)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Unique philosophical terminology trademarked/copyrighted
+• Multi-part book series with interconnected conceptual framework
+• Potential for trademark protection of series title and key terms
+• Original metaphysical system and thought experiment methodology
+
+ATTACHED MATERIALS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+☑ Complete manuscript (digital deposit via eCO system)
+☑ Glossary of unique terms and definitions
+☑ Version history and development documentation
+☑ Copyright ownership documentation
+
+CORRESPONDENCE ADDRESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Name: ${copyrightHolder}
+Email: [Your email]
+Address: [Your address]
+
+Respectfully submitted,
+
+${copyrightHolder}
+Author and Copyright Claimant
+
+Date: ${new Date().toLocaleDateString()}
+
+---
+
+NOTE FOR USER:
+This cover letter is a template guide for your copyright.gov submission.
+You will complete the official eCO (Electronic Copyright Office) form at:
+https://www.copyright.gov/registration/
+
+For unpublished works, use: Group Registration of Unpublished Works (GRUW)
+For published works, use: Standard Application
+Filing Fee: $65 per work (as of 2025)
+Processing Time: 2-6 months
+
+`;
+
+            showPreview(coverLetter, 'Copyright Cover Letter');
+        }
+
+        function showPreview(content, title) {
+            document.getElementById('previewContent').innerHTML = `<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace; font-size: 0.9em;">${content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`;
+            document.getElementById('previewModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('previewModal').classList.remove('show');
+        }
+
+        function downloadPreview() {
+            const content = document.getElementById('previewContent').innerText;
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', 'manuscript_' + Date.now() + '.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function copyPreview() {
+            const content = document.getElementById('previewContent').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('✅ Copied to clipboard!');
+            });
+        }
+
+        function emailDocument() {
+            alert('📧 Email functionality: Copy the formatted document and paste into your email client, or use your preferred email service to send.');
+        }
+
+        function downloadDocument() {
+            downloadPreview();
+        }
+
+        // Initialize on page load
+        loadData();
+        setInterval(updateAllCounts, 1000);
+    </script>
+    <footer style="background:#1a1a2e;color:#888;text-align:center;padding:20px;font-size:0.8rem;margin-top:30px;">
+        <p>© 2026 Digital Allies. Based in Kingman, AZ. &nbsp;|&nbsp; <a href="https://digitalallies.net/privacy.html" style="color:#888;">Privacy</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/terms.html" style="color:#888;">Terms</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/cookies.html" style="color:#888;">Cookies</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/sitemap.html" style="color:#888;">Sitemap</a></p>
+    </footer>
+</body>
+</html>

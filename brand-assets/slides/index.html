@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — Slide Templates</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { padding: 60px 40px 80px; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 40px; margin: 0 0 10px; }
+    .lede { font-family: var(--font-body); max-width: 720px; color: var(--fg-muted); margin: 0 0 56px; line-height: 1.65; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 28px; }
+    .card { border: 1px solid var(--charcoal); background: var(--bg); }
+    .card a { display: block; text-decoration: none; color: inherit; }
+    .frame {
+      width: 100%; aspect-ratio: 16 / 9;
+      background: var(--charcoal); position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--charcoal);
+    }
+    .frame iframe {
+      position: absolute; top: 0; left: 0;
+      width: 1280px; height: 720px;
+      transform-origin: 0 0;
+      transform: scale(0.395);
+      border: 0; pointer-events: none;
+    }
+    .meta { padding: 14px 18px; display: flex; justify-content: space-between; align-items: baseline; }
+    .name { font-family: var(--font-headers); font-weight: 700; font-size: 16px; }
+    .tag { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; }
+    .eyebrow { font-family: var(--font-details); font-size: 11px; font-weight: 700; color: var(--signal); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Digital Allies · Field Notes</div>
+    <h1>Slide Templates</h1>
+    <p class="lede">Seven 16:9 templates built on the Digital Allies brand: dark Technical-Lace theme + bone-white light variant, pulse-dot header, signal-red slide number, and JetBrains Mono footer strip. Click any thumbnail to open the full slide.</p>
+
+    <div class="grid">
+      <div class="card"><a href="01-title.html">
+        <div class="frame"><iframe src="01-title.html"></iframe></div>
+        <div class="meta"><span class="name">Title Slide</span><span class="tag">01 · Dark</span></div>
+      </a></div>
+      <div class="card"><a href="02-section-header.html">
+        <div class="frame"><iframe src="02-section-header.html"></iframe></div>
+        <div class="meta"><span class="name">Section Header</span><span class="tag">02 · Dark</span></div>
+      </a></div>
+      <div class="card"><a href="03-content-light.html">
+        <div class="frame"><iframe src="03-content-light.html"></iframe></div>
+        <div class="meta"><span class="name">Content (light)</span><span class="tag">03 · Light</span></div>
+      </a></div>
+      <div class="card"><a href="04-comparison.html">
+        <div class="frame"><iframe src="04-comparison.html"></iframe></div>
+        <div class="meta"><span class="name">Comparison</span><span class="tag">04 · Dark</span></div>
+      </a></div>
+      <div class="card"><a href="05-big-quote.html">
+        <div class="frame"><iframe src="05-big-quote.html"></iframe></div>
+        <div class="meta"><span class="name">Pinned Quote</span><span class="tag">05 · Light</span></div>
+      </a></div>
+      <div class="card"><a href="06-stat.html">
+        <div class="frame"><iframe src="06-stat.html"></iframe></div>
+        <div class="meta"><span class="name">Stats / By the Numbers</span><span class="tag">06 · Dark</span></div>
+      </a></div>
+      <div class="card" style="grid-column: span 2; max-width: 540px;"><a href="07-end-card.html">
+        <div class="frame"><iframe src="07-end-card.html"></iframe></div>
+        <div class="meta"><span class="name">End Card / Contact</span><span class="tag">07 · Dark</span></div>
+      </a></div>
+    </div>
+  </div>
+</body>
+</html>

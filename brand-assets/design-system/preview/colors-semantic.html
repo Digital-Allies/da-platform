@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Semantic Tokens</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .row { display: grid; grid-template-columns: 28px 1fr 1fr 1fr; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--grid-line-strong); }
+    .row:last-child { border-bottom: none; }
+    .chip { width: 28px; height: 28px; border: 1px solid var(--charcoal); }
+    .name { font-family: var(--font-headers); font-weight: 700; font-size: 13px; }
+    .var { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); }
+    .use { font-family: var(--font-details); font-size: 11px; color: var(--fg-soft); }
+    .header { display: grid; grid-template-columns: 28px 1fr 1fr 1fr; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--charcoal); margin-bottom: 4px; }
+    .h { font-family: var(--font-details); font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--fg-soft); }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <div class="header"><span></span><span class="h">Token</span><span class="h">CSS Var</span><span class="h">Use</span></div>
+    <div class="row"><div class="chip" style="background:var(--bg)"></div><span class="name">bg</span><span class="var">--bg / --bone-white</span><span class="use">page canvas</span></div>
+    <div class="row"><div class="chip" style="background:var(--bg-alt)"></div><span class="name">bg-alt</span><span class="var">--bg-alt</span><span class="use">pinned notes, quotes</span></div>
+    <div class="row"><div class="chip" style="background:var(--fg)"></div><span class="name">fg</span><span class="var">--fg / --charcoal</span><span class="use">all body + heading text</span></div>
+    <div class="row"><div class="chip" style="background:var(--fg-muted)"></div><span class="name">fg-muted</span><span class="var">--fg-muted</span><span class="use">secondary body, captions</span></div>
+    <div class="row"><div class="chip" style="background:var(--accent)"></div><span class="name">accent</span><span class="var">--accent / --pulse-blue</span><span class="use">links, live state, pulse dot</span></div>
+    <div class="row"><div class="chip" style="background:var(--accent-soft)"></div><span class="name">accent-soft</span><span class="var">--accent-soft / --light-pink</span><span class="use">hover wash, highlight plate</span></div>
+    <div class="row"><div class="chip" style="background:var(--signal)"></div><span class="name">signal</span><span class="var">--signal / --signal-red</span><span class="use">primary CTA, POI marker</span></div>
+    <div class="row"><div class="chip" style="background:var(--border); border-color:transparent"></div><span class="name">border</span><span class="var">--border (1 px solid)</span><span class="use">the structural-border</span></div>
+  </div>
+</body>
+</html>

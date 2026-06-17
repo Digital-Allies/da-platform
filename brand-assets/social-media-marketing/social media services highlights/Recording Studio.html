@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Allies — Recording Studio</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: #0e0e0e;
+    font-family: "JetBrains Mono", monospace;
+    overflow: hidden;
+  }
+  :root {
+    --font-headers: "Lexend Deca", sans-serif;
+    --font-body: "JetBrains Mono", monospace;
+    --font-details: "JetBrains Mono", monospace;
+  }
+  button, select { font-family: "JetBrains Mono", monospace; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<script src="studio-sites.js"></script>
+<script type="text/babel" src="lib.jsx"></script>
+<script type="text/babel" src="scrolls.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const FORMATS = {
+  reel:   { label: "Reel · 9:16",   w: 1080, h: 1920, iframeWidth: 480,  get iframeScale(){ return this.h / 1920 * (1920/480); } },
+  x:      { label: "X · 16:9",      w: 1200, h: 675,  iframeWidth: 1200, iframeScale: 1 },
+  square: { label: "Square · 1:1",  w: 1080, h: 1080, iframeWidth: 1080, iframeScale: 1 },
+};
+// Explicit iframe params per format (clean values)
+const FMT = {
+  reel:   { label: "Reel · 9:16",  w: 1080, h: 1920, iframeWidth: 480,  iframeScale: 1080/480 },
+  x:      { label: "X · 16:9",     w: 1200, h: 675,  iframeWidth: 1200, iframeScale: 1 },
+  square: { label: "Square · 1:1", w: 1080, h: 1080, iframeWidth: 1080, iframeScale: 1 },
+};
+
+function Studio() {
+  const projects = ALL_PROJECTS;
+  const [idx, setIdx] = useState(0);
+  const [fmtKey, setFmtKey] = useState("reel");
+  const [speed, setSpeed] = useState(45);
+  const [caption, setCaption] = useState(true);
+  const [loop, setLoop] = useState(false);
+  const [runId, setRunId] = useState(0);
+  const [showUI, setShowUI] = useState(true);
+  const [showList, setShowList] = useState(false);
+  const [done, setDone] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("da-rec-checklist") || "{}"); } catch(e) { return {}; }
+  });
+  const [vp, setVp] = useState({ w: window.innerWidth, h: window.innerHeight });
+
+  const proj = projects[idx];
+  const fmt = FMT[fmtKey];
+
+  // Clips to track: every project in the two video formats
+  const VIDEO_FORMATS = ["reel", "x"];
+  const clipKey = (pid, f) => `${pid}-${f}`;
+  const totalClips = projects.length * VIDEO_FORMATS.length;
+  const doneCount = Object.values(done).filter(Boolean).length;
+
+  const toggleDone = (pid, f) => {
+    setDone(prev => {
+      const next = { ...prev, [clipKey(pid, f)]: !prev[clipKey(pid, f)] };
+      try { localStorage.setItem("da-rec-checklist", JSON.stringify(next)); } catch(e) {}
+      return next;
+    });
+  };
+  const markCurrentDone = () => toggleDone(proj.id, fmtKey);
+
+  useEffect(() => {
+    const onResize = () => setVp({ w: window.innerWidth, h: window.innerHeight });
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "h" || e.key === "H") setShowUI(s => !s);
+      else if (e.key === "c" || e.key === "C") setShowList(s => !s);
+      else if (e.key === "x" || e.key === "X") { markCurrentDone(); }
+      else if (e.key === "r" || e.key === "R" || e.key === " ") { e.preventDefault(); setRunId(n => n + 1); }
+      else if (e.key === "ArrowRight") setIdx(i => (i + 1) % projects.length);
+      else if (e.key === "ArrowLeft")  setIdx(i => (i - 1 + projects.length) % projects.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [projects.length, idx, fmtKey]);
+
+  // Restart scroll whenever the clip identity changes
+  useEffect(() => { setRunId(n => n + 1); }, [idx, fmtKey, speed, caption, loop]);
+
+  // Fit the clip to the viewport, leaving room for the UI bar when shown
+  const margin = showUI ? 150 : 40;
+  const scale = Math.min((vp.w - 40) / fmt.w, (vp.h - margin) / fmt.h);
+
+  const barBtn = (active) => ({
+    background: active ? "#C5301A" : "transparent",
+    color: active ? "#F9F6F0" : "#cfcabf",
+    border: "1px solid " + (active ? "#C5301A" : "#3a3a3a"),
+    padding: "7px 14px",
+    fontSize: 12,
+    letterSpacing: "0.04em",
+  });
+
+  return (
+    <div style={{ position: "fixed", inset: 0, display: "flex", flexDirection: "column" }}>
+
+      {/* Control bar */}
+      {showUI && (
+      <div style={{
+        flex: "0 0 auto",
+        background: "#161616",
+        borderBottom: "1px solid #2a2a2a",
+        padding: "12px 18px",
+        display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap",
+        color: "#cfcabf",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#C5301A", display: "inline-block" }} />
+          <span style={{ fontFamily: "var(--font-headers,sans-serif)", fontWeight: 600, color: "#F9F6F0", fontSize: 14, letterSpacing: "0.02em" }}>Recording Studio</span>
+        </div>
+
+        {/* Project nav */}
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <button style={barBtn(false)} onClick={() => setIdx(i => (i - 1 + projects.length) % projects.length)}>←</button>
+          <select value={idx} onChange={e => setIdx(Number(e.target.value))}
+            style={{ background: "#0e0e0e", color: "#F9F6F0", border: "1px solid #3a3a3a", padding: "7px 10px", fontSize: 12, maxWidth: 240 }}>
+            {projects.map((p, i) => <option key={p.id} value={i}>{`${String(i+1).padStart(2,"0")} · ${p.name}`}</option>)}
+          </select>
+          <button style={barBtn(false)} onClick={() => setIdx(i => (i + 1) % projects.length)}>→</button>
+        </div>
+
+        {/* Format */}
+        <div style={{ display: "flex", gap: 6 }}>
+          {Object.keys(FMT).map(k => (
+            <button key={k} style={barBtn(fmtKey === k)} onClick={() => setFmtKey(k)}>{FMT[k].label}</button>
+          ))}
+        </div>
+
+        {/* Speed */}
+        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12 }}>
+          Speed
+          <input type="range" min={15} max={120} step={5} value={speed} onChange={e => setSpeed(Number(e.target.value))} style={{ accentColor: "#C5301A" }} />
+          <span style={{ width: 28, textAlign: "right" }}>{speed}</span>
+        </label>
+
+        {/* Toggles */}
+        <button style={barBtn(caption)} onClick={() => setCaption(c => !c)}>Caption</button>
+        <button style={barBtn(loop)} onClick={() => setLoop(l => !l)}>Loop</button>
+        <button style={barBtn(false)} onClick={() => setRunId(n => n + 1)}>⟳ Restart</button>
+        <button style={barBtn(showList)} onClick={() => setShowList(s => !s)}>{`Checklist · ${doneCount}/${totalClips}`}</button>
+
+        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 14, fontSize: 11, color: "#8a857a" }}>
+          <span>{fmt.w}×{fmt.h}px</span>
+          <span>press <b style={{ color: "#cfcabf" }}>H</b> hide · <b style={{ color: "#cfcabf" }}>R</b> restart · <b style={{ color: "#cfcabf" }}>X</b> mark done · <b style={{ color: "#cfcabf" }}>C</b> list</span>
+        </div>
+      </div>
+      )}
+
+      {/* Stage */}
+      <div style={{ flex: 1, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", background: "#0e0e0e", overflow: "hidden" }}>
+        <div style={{ width: fmt.w * scale, height: fmt.h * scale, position: "relative" }}>
+          <div style={{ width: fmt.w, height: fmt.h, transform: `scale(${scale})`, transformOrigin: "top left", position: "absolute", top: 0, left: 0 }}>
+            <IframeScrollClip
+              key={`${proj.id}-${fmtKey}-${runId}`}
+              clipWidth={fmt.w}
+              clipHeight={fmt.h}
+              src={proj.src}
+              srcDoc={(typeof window !== "undefined" && window.__sites) ? window.__sites[proj.id] : undefined}
+              project={proj}
+              speed={speed}
+              iframeWidth={fmt.iframeWidth}
+              iframeScale={fmt.iframeScale}
+              loop={loop}
+              showCaption={caption}
+              startDelay={800}
+            />
+          </div>
+        </div>
+
+        {/* Hidden-UI hint */}
+        {!showUI && (
+          <div style={{ position: "absolute", bottom: 14, right: 16, fontSize: 11, color: "#3a3a3a", letterSpacing: "0.04em" }}>press H for controls</div>
+        )}
+      </div>
+
+      {/* Checklist panel */}
+      {showList && (
+        <div style={{
+          position: "absolute", top: showUI ? 0 : 0, right: 0, bottom: 0,
+          width: 340, background: "#141414", borderLeft: "1px solid #2a2a2a",
+          display: "flex", flexDirection: "column", zIndex: 50, color: "#cfcabf",
+        }}>
+          <div style={{ padding: "16px 18px", borderBottom: "1px solid #2a2a2a", flex: "0 0 auto" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontFamily: "var(--font-headers,sans-serif)", fontWeight: 600, color: "#F9F6F0", fontSize: 14 }}>Recording Checklist</span>
+              <button style={{ ...barBtn(false), padding: "4px 10px" }} onClick={() => setShowList(false)}>×</button>
+            </div>
+            <div style={{ marginTop: 12, height: 4, background: "#2a2a2a" }}>
+              <div style={{ height: "100%", width: `${(doneCount/totalClips)*100}%`, background: "#C5301A", transition: "width 0.2s" }} />
+            </div>
+            <div style={{ marginTop: 8, fontSize: 11, color: "#8a857a", letterSpacing: "0.04em" }}>
+              {doneCount} of {totalClips} clips recorded
+            </div>
+          </div>
+
+          <div style={{ flex: 1, overflowY: "auto", padding: "8px 0" }}>
+            {projects.map((p, i) => (
+              <div key={p.id} style={{ padding: "6px 18px" }}>
+                <div style={{ fontSize: 11, color: "#8a857a", letterSpacing: "0.04em", marginBottom: 6, display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: i === idx ? "#F9F6F0" : "#8a857a", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{`${String(i+1).padStart(2,"0")} · ${p.name}`}</span>
+                </div>
+                <div style={{ display: "flex", gap: 6 }}>
+                  {VIDEO_FORMATS.map(f => {
+                    const isDone = !!done[clipKey(p.id, f)];
+                    const isCurrent = i === idx && f === fmtKey;
+                    return (
+                      <div key={f} style={{
+                        flex: 1, display: "flex", alignItems: "center", gap: 8,
+                        border: "1px solid " + (isCurrent ? "#C5301A" : "#2a2a2a"),
+                        background: isDone ? "rgba(197,48,26,0.12)" : "transparent",
+                        padding: "8px 10px",
+                      }}>
+                        <button
+                          onClick={() => toggleDone(p.id, f)}
+                          title="Mark recorded"
+                          style={{
+                            width: 16, height: 16, flexShrink: 0, padding: 0,
+                            border: "1px solid " + (isDone ? "#C5301A" : "#4a4a4a"),
+                            background: isDone ? "#C5301A" : "transparent",
+                            color: "#F9F6F0", fontSize: 11, lineHeight: "14px",
+                          }}>{isDone ? "✓" : ""}</button>
+                        <button
+                          onClick={() => { setIdx(i); setFmtKey(f); }}
+                          style={{ flex: 1, textAlign: "left", background: "transparent", border: "none", color: isDone ? "#8a857a" : "#cfcabf", fontSize: 11, letterSpacing: "0.04em", textDecoration: isDone ? "line-through" : "none" }}>
+                          {FMT[f].label}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ padding: "12px 18px", borderTop: "1px solid #2a2a2a", flex: "0 0 auto", display: "flex", gap: 8 }}>
+            <button style={{ ...barBtn(false), flex: 1 }} onClick={markCurrentDone}>Mark current ✓</button>
+            <button style={{ ...barBtn(false), flex: "0 0 auto" }} onClick={() => { if (confirm("Reset all recording progress?")) { setDone({}); localStorage.removeItem("da-rec-checklist"); } }}>Reset</button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Studio />);
+</script>
+
+<div id="root"></div>
+</body>
+</html>

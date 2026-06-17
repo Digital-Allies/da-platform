@@ -1,0 +1,129 @@
+================================================================================
+  🚨 DO NOT MOVE THIS FOLDER: /social-media/ 🚨
+================================================================================
+
+digital-allies/
+│
+├── 📁 social-media/  ← 🚨 DO NOT MOVE. DO NOT RENAME. 🚨
+│   │
+│   ├── README.md ← Read this first
+│   ├── DIRECTORY_MAP.txt ← You're reading it
+│   ├── DA_SOCIAL_RESTRUCTURE_PLAN.md ← Strategy & workflow guide
+│   │
+│   ├── 📁 campaigns/ ← Active and current campaigns
+│   │   │
+│   │   ├── 📁 2026-06-design/ ← Example: YYYYMM-campaignname
+│   │   │   ├── brief.md ← Campaign goals & info
+│   │   │   ├── posts.json ← Schedule for this campaign
+│   │   │   └── 📁 assets/ ← Images for this campaign
+│   │   │       ├── 001.png
+│   │   │       ├── 002.png
+│   │   │       └── ...
+│   │   │
+│   │   ├── 📁 2026-07-automation/ ← Next campaign
+│   │   │   ├── brief.md
+│   │   │   ├── posts.json
+│   │   │   └── 📁 assets/
+│   │   │
+│   │   └── [future campaigns follow same pattern]
+│   │
+│   ├── 📁 archive/ ← Old campaigns (don't delete, just archive)
+│   │   ├── 📁 2026-05-integrations/
+│   │   ├── 📁 2026-04-design/
+│   │   └── [old campaigns here]
+│   │
+│   ├── 📁 automations/ ← Automation setup & logs
+│   │   ├── scheduled-task-tue-fri.md ← How the automation works
+│   │   └── posting-log.json ← Record of what posted when
+│   │
+│   ├── 📁 templates/ ← Copy these to start a new campaign
+│   │   ├── campaign-brief-template.md
+│   │   ├── schedule-template.json
+│   │   └── post-template.json
+│   │
+│   └── 📁 reference/ ← Documentation & guides
+│       ├── posting-checklist.md
+│       └── platform-specs.md
+│
+└── [other DA project folders]
+
+================================================================================
+NAMING RULES
+================================================================================
+
+Campaigns:    YYYYMM-campaignname
+              Example: 2026-06-design, 2026-07-automation
+              NOT: design_june, june_2026_design, Design Campaign
+
+Images:       001.png, 002.png, 003.png, etc.
+              OR: 001-cover.png, 002-slide.png
+              NOT: image1, design1, final_version_2_REAL
+
+Dates:        YYYY-MM-DD (in JSON)
+              Example: 2026-06-09
+              NOT: 06/09/26, 9-june, tuesday
+
+Platforms:    "meta" (Facebook + Instagram together)
+              "gbp" (Google Business Profile)
+              "all" (both)
+              NOT: "facebook", "instagram", "Meta", "FB"
+
+Status:       "pending", "posted", "archived"
+              NOT: "todo", "done", "publishing"
+
+================================================================================
+CRITICAL RULES (PLEASE READ)
+================================================================================
+
+1. DO NOT MOVE the /social-media/ folder from digital-allies/
+   - If you move it, I lose access
+   - If you rename it, I lose access
+   - Just... don't move it
+
+2. DO NOT rename campaign folders once created
+   - If you rename 2026-06-design to something else, I can't find it
+   - Just tell Claude first
+
+3. DO NOT put random stuff in this folder
+   - Only active/archived campaigns go here
+   - Test files go in a /temp/ folder OUTSIDE this directory
+
+4. DO keep old campaigns in /archive/
+   - Don't delete them, just move them there when they end
+   - We might want to repeat them later
+
+5. DO tell Claude when you move/rename/delete anything
+   - One sentence in chat is enough
+   - Prevents access issues
+
+================================================================================
+IF YOU NEED TO MOVE SOMETHING
+================================================================================
+
+BEFORE you move anything:
+1. Tell Claude in chat: "I'm moving [folder] from [old location] to [new location]"
+2. Wait for Claude to say "OK" or "Here's a better way"
+3. Then do it
+4. Tell Claude after: "Done, moved [folder]"
+
+This takes 30 seconds and prevents hours of troubleshooting.
+
+================================================================================
+YOUR CHECKLIST FOR CLEANUP
+================================================================================
+
+Before handing back to Claude for organization:
+
+☐ Delete/move files that don't belong in /social-media/
+☐ Keep only: campaigns, archive, automations, templates, reference folders
+☐ Remove: old test files, random images, duplicate folders
+☐ Make sure campaigns/ is EMPTY (old stuff goes to archive/)
+☐ Tell Claude when you're done
+
+Then Claude will:
+1. Organize the new structure
+2. Set up folder permissions
+3. Create templates
+4. Be ready for your first campaign
+
+================================================================================

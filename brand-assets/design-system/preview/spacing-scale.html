@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spacing Scale</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .row { display: grid; grid-template-columns: 80px 1fr 90px; gap: 16px; align-items: center; padding: 6px 0; }
+    .name { font-family: var(--font-headers); font-weight: 700; font-size: 12px; }
+    .bar { height: 14px; background: var(--charcoal); border: 1px solid var(--charcoal); }
+    .px { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); text-align: right; }
+    .note { font-family: var(--font-details); font-size: 10px; color: var(--fg-soft); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--grid-line-strong); }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <div class="row"><span class="name">space-1</span><div class="bar" style="width:4px"></div><span class="px">4px</span></div>
+    <div class="row"><span class="name">space-2</span><div class="bar" style="width:8px"></div><span class="px">8px</span></div>
+    <div class="row"><span class="name">space-3</span><div class="bar" style="width:12px"></div><span class="px">12px</span></div>
+    <div class="row"><span class="name">space-4</span><div class="bar" style="width:16px"></div><span class="px">16px</span></div>
+    <div class="row"><span class="name">space-5 ◆</span><div class="bar" style="width:20px; background: var(--signal)"></div><span class="px">20px · lace</span></div>
+    <div class="row"><span class="name">space-6</span><div class="bar" style="width:24px"></div><span class="px">24px</span></div>
+    <div class="row"><span class="name">space-8</span><div class="bar" style="width:32px"></div><span class="px">32px</span></div>
+    <div class="row"><span class="name">space-10</span><div class="bar" style="width:40px"></div><span class="px">40px</span></div>
+    <div class="row"><span class="name">space-12</span><div class="bar" style="width:48px"></div><span class="px">48px</span></div>
+    <div class="row"><span class="name">space-16</span><div class="bar" style="width:64px"></div><span class="px">64px</span></div>
+    <div class="row"><span class="name">space-20</span><div class="bar" style="width:80px"></div><span class="px">80px · section</span></div>
+    <p class="note">◆ 20 px is the Technical Lace baseline. Everything else is 4 px multiples derived from it. "2× the padding of a generic template" is the rule.</p>
+  </div>
+</body>
+</html>

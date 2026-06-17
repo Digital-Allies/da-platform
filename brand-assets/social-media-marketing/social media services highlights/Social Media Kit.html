@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Allies — Social Media Kit</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #E8E4DB; font-family: "JetBrains Mono", monospace; }
+  :root {
+    --font-headers: "Lexend Deca", sans-serif;
+    --font-body: "JetBrains Mono", monospace;
+    --font-details: "JetBrains Mono", monospace;
+  }
+</style>
+</head>
+<body>
+
+<script type="text/babel" src="lib.jsx"></script>
+<script type="text/babel" src="covers.jsx"></script>
+<script type="text/babel" src="scrolls.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "scrollSpeed": 55,
+  "accentColor": "#C5301A",
+  "showCaptions": true,
+  "theme": "bone"
+}/*EDITMODE-END*/;
+
+// ── Vibe Cover — abstract DA brand art ───────────────────────────────────
+function VibeCover({ accent }) {
+  return (
+    <div style={{
+      width: 1080, height: 1080,
+      background: "#F9F6F0",
+      backgroundImage: laceBg(20, 0.065),
+      position: "relative", overflow: "hidden",
+      fontFamily: "var(--font-body,'JetBrains Mono',monospace)",
+    }}>
+      {/* Inner frame */}
+      <div style={{ position: "absolute", inset: 40, border: "1px solid #2D2D2D", pointerEvents: "none" }} />
+
+      {/* Corner ticks */}
+      {[
+        { top: 40, left: 40, borderTop: "1px solid", borderLeft: "1px solid", transform: "translate(-1px,-1px)" },
+        { top: 40, right: 40, borderTop: "1px solid", borderRight: "1px solid", transform: "translate(1px,-1px)" },
+        { bottom: 40, left: 40, borderBottom: "1px solid", borderLeft: "1px solid", transform: "translate(-1px,1px)" },
+        { bottom: 40, right: 40, borderBottom: "1px solid", borderRight: "1px solid", transform: "translate(1px,1px)" },
+      ].map((s, i) => (
+        <div key={i} style={{ position: "absolute", width: 28, height: 28, borderColor: "#2D2D2D", ...s }} />
+      ))}
+
+      {/* Top bar */}
+      <div style={{ position: "absolute", top: 72, left: 72, right: 72, display: "flex", justifyContent: "space-between" }}>
+        <Eyebrow size={14}>DIGITAL ALLIES</Eyebrow>
+        <Eyebrow size={14}>KINGMAN AZ · EST. 2024</Eyebrow>
+      </div>
+
+      {/* Big radial burst */}
+      <svg style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }} viewBox="0 0 1080 1080">
+        {Array.from({ length: 32 }, (_, i) => {
+          const a = (i / 32) * 360;
+          const rad = a * Math.PI / 180;
+          const r1 = 120, r2 = 460;
+          const x1 = 540 + Math.cos(rad) * r1, y1 = 460 + Math.sin(rad) * r1;
+          const x2 = 540 + Math.cos(rad) * r2, y2 = 460 + Math.sin(rad) * r2;
+          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#2D2D2D" strokeWidth="0.5" opacity="0.18" />;
+        })}
+        {/* Concentric rings */}
+        {[80, 160, 240, 340, 450].map((r, i) => (
+          <circle key={i} cx="540" cy="460" r={r}
+            fill="none" stroke="#2D2D2D" strokeWidth="0.5"
+            opacity={0.12 + i * 0.03}
+            strokeDasharray={i % 2 === 0 ? "none" : "3 6"}
+          />
+        ))}
+        {/* Signal red pulse at center */}
+        <circle cx="540" cy="460" r="14" fill={accent} />
+        <circle cx="540" cy="460" r="28" fill="none" stroke={accent} strokeWidth="1" opacity="0.3" />
+        <circle cx="540" cy="460" r="48" fill="none" stroke={accent} strokeWidth="0.5" opacity="0.15" />
+        {/* Bridge silhouette subtle */}
+        <line x1="40" y1="800" x2="1040" y2="800" stroke="#2D2D2D" strokeWidth="0.5" opacity="0.12" />
+        {/* Horizontal axis through dot */}
+        <line x1="40" y1="460" x2="1040" y2="460" stroke="#2D2D2D" strokeWidth="0.5" strokeDasharray="2 8" opacity="0.15" />
+        <line x1="540" y1="40" x2="540" y2="880" stroke="#2D2D2D" strokeWidth="0.5" strokeDasharray="2 8" opacity="0.15" />
+      </svg>
+
+      {/* Bottom text */}
+      <div style={{ position: "absolute", bottom: 72, left: 72, right: 72, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div>
+          <div style={{ fontFamily: "var(--font-headers,'Lexend Deca',sans-serif)", fontSize: 52, fontWeight: 700, lineHeight: 1.0, letterSpacing: "-0.02em" }}>
+            Technological<br/>Solutions.
+          </div>
+          <div style={{ fontFamily: "var(--font-body,'JetBrains Mono',monospace)", fontSize: 15, marginTop: 16, color: "#5a5347", lineHeight: 1.5 }}>
+            For people with better things to do.
+          </div>
+        </div>
+        <div style={{ textAlign: "right" }}>
+          <img src="assets/brand-art-dot-square.png" alt="" style={{ width: 80, height: 80, mixBlendMode: "multiply" }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── IG Story — Project Highlight (9:16) ──────────────────────────────────
+function StoryProjectHighlight({ project, accent }) {
+  return (
+    <div style={{
+      width: 1080, height: 1920,
+      background: "#F9F6F0",
+      backgroundImage: laceBg(24, 0.065),
+      position: "relative", overflow: "hidden",
+      fontFamily: "var(--font-body,'JetBrains Mono',monospace)",
+      color: "#2D2D2D",
+    }}>
+      <div style={{ position: "absolute", inset: 48, border: "1px solid #2D2D2D", pointerEvents: "none" }} />
+
+      {/* Top bar */}
+      <div style={{ position: "absolute", top: 110, left: 96, right: 96, display: "flex", justifyContent: "space-between" }}>
+        <Eyebrow size={16}>DIGITAL ALLIES · PAST WORK</Eyebrow>
+        <SignalDot size={13} />
+      </div>
+
+      {/* Category tag */}
+      <div style={{ position: "absolute", top: 260, left: 96 }}>
+        <Eyebrow size={13} color="#7a6f5e">{project.category}</Eyebrow>
+      </div>
+
+      {/* Big project name */}
+      <div style={{
+        position: "absolute", top: 310, left: 96, right: 96,
+        fontFamily: "var(--font-headers,'Lexend Deca',sans-serif)",
+        fontSize: 108, fontWeight: 700, lineHeight: 0.9,
+        letterSpacing: "-0.03em",
+      }}>{project.name}</div>
+
+      {/* Horizontal divider */}
+      <div style={{ position: "absolute", top: 720, left: 96, right: 96, height: 1, background: "#2D2D2D" }} />
+
+      {/* Problem / Solution */}
+      <div style={{ position: "absolute", top: 760, left: 96, right: 96 }}>
+        <div style={{ marginBottom: 56 }}>
+          <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
+            <div style={{ fontFamily: "var(--font-details,'JetBrains Mono',monospace)", fontSize: 13, letterSpacing: "0.14em", color: "#C5301A", marginTop: 4, flexShrink: 0 }}>BEFORE</div>
+            <div style={{ fontFamily: "var(--font-headers,'Lexend Deca',sans-serif)", fontSize: 52, fontWeight: 500, lineHeight: 1.05, letterSpacing: "-0.015em", color: "#5a5347" }}>{project.problem}</div>
+          </div>
+        </div>
+        <div>
+          <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
+            <div style={{ fontFamily: "var(--font-details,'JetBrains Mono',monospace)", fontSize: 13, letterSpacing: "0.14em", color: "#3A7BD5", marginTop: 4, flexShrink: 0 }}>AFTER &nbsp;</div>
+            <div style={{ fontFamily: "var(--font-headers,'Lexend Deca',sans-serif)", fontSize: 52, fontWeight: 600, lineHeight: 1.05, letterSpacing: "-0.015em" }}>{project.solution}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative SVG */}
+      <svg style={{ position: "absolute", top: 1150, left: 96, width: 888, height: 400, opacity: 0.1 }} viewBox="0 0 888 400">
+        {Array.from({ length: 18 }, (_, i) => (
+          <line key={i} x1={i * 52} y1="0" x2={i * 52 + 200} y2="400" stroke="#2D2D2D" strokeWidth="0.5" />
+        ))}
+        <circle cx="444" cy="200" r="180" fill="none" stroke="#2D2D2D" strokeWidth="1" />
+        <circle cx="444" cy="200" r="100" fill="none" stroke="#2D2D2D" strokeWidth="0.5" strokeDasharray="3 5" />
+        <circle cx="444" cy="200" r="14" fill={accent} opacity="10" />
+      </svg>
+
+      {/* URL tag */}
+      <div style={{ position: "absolute", top: 1600, left: 96, right: 96 }}>
+        <div style={{ fontFamily: "var(--font-details,'JetBrains Mono',monospace)", fontSize: 18, color: "#7a6f5e", letterSpacing: "0.04em" }}>{project.url}</div>
+      </div>
+
+      {/* Bottom CTA */}
+      <div style={{ position: "absolute", bottom: 110, left: 96, right: 96, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div>
+          <Eyebrow size={13} color="#7a6f5e">BUILT BY</Eyebrow>
+          <div style={{ fontFamily: "var(--font-headers,'Lexend Deca',sans-serif)", fontSize: 40, fontWeight: 600, marginTop: 6 }}>digitalallies.net</div>
+        </div>
+        <Bracket size={22}>See More Work</Bracket>
+      </div>
+    </div>
+  );
+}
+
+// ── X/Twitter 16:9 Static Service Card (1200×675) ────────────────────────
+function XServiceCard({ dept, accent }) {
+  return (
+    <div style={{
+      width: 1200, height: 675,
+      background: "#F9F6F0",
+      backgroundImage: laceBg(22, 0.065),
+      position: "relative", overflow: "hidden",
+      fontFamily: "var(--font-body,'JetBrains Mono',monospace)",
+      color: "#2D2D2D",
+    }}>
+      <div style={{ position: "absolute", inset: 36, border: "1px solid #2D2D2D" }} />
+
+      {/* Top strip */}
+      <div style={{ position: "absolute", top: 68, left: 68, right: 68, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <Eyebrow size={12}>{`DEPT · ${dept.n} / 04`}</Eyebrow>
+        <Eyebrow size={12}>DIGITAL ALLIES · KINGMAN AZ</Eyebrow>
+      </div>
+
+      {/* Dept icon — large */}
+      <div style={{ position: "absolute", top: 130, right: 80, width: 280, height: 280, opacity: 0.9 }}>
+        <img src={dept.icon} alt="" style={{ width: "100%", height: "100%", objectFit: "contain", mixBlendMode: "multiply" }} />
+      </div>
+
+      {/* Code */}
+      <div style={{ position: "absolute", top: 148, left: 68 }}>
+        <div style={{
+          fontFamily: "var(--font-details,'JetBrains Mono',monospace)",
+          fontSize: 13, letterSpacing: "0.2em", color: "#7a6f5e",
+        }}>{dept.code}</div>
+        <div style={{
+          fontFamily: "var(--font-headers,'Lexend Deca',sans-serif)",
+          fontSize: 72, fontWeight: 700, lineHeight: 0.9, letterSpacing: "-0.025em",
+          marginTop: 8, maxWidth: 640,
+        }}>{dept.name}</div>
+      </div>
+
+      {/* Blurb */}
+      <div style={{ position: "absolute", top: 380, left: 68, maxWidth: 560 }}>
+        <div style={{
+          fontFamily: "var(--font-body,'JetBrains Mono',monospace)",
+          fontSize: 18, lineHeight: 1.6, color: "#5a5347",
+        }}>{dept.blurb}</div>
+      </div>
+
+      {/* Bottom */}
+      <div style={{ position: "absolute", bottom: 68, left: 68, right: 68, display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <SignalDot size={11} />
+          <span style={{ fontSize: 14, letterSpacing: "0.04em", color: "#5a5347" }}>digitalallies.net</span>
+        </div>
+        <Bracket size={16}>Inquire Within</Bracket>
+      </div>
+    </div>
+  );
+}
+
+// ── Figma / external live demos (can't iframe — external host) ────────────
+const FIGMA_DEMOS = [
+  {
+    id: "get-tickets",
+    name: "Get Tickets",
+    url: "digital-allies-demo.figma.site/get-tickets",
+    category: "Event / Ticketing",
+    problem: "Event organizers collecting RSVPs via DM and paper sign-up sheets.",
+    solution: "Live ticketing flow — browse, select, and confirm in seconds.",
+  },
+  {
+    id: "grace-gentle",
+    name: "Grace & Gentle",
+    url: "grace-gentle-15661474.figma.site",
+    category: "Brand / Product",
+    problem: "A small brand with no web presence and no way to tell their story.",
+    solution: "Clean brand site with product showcase and contact flow.",
+  },
+];
+
+// ── Main App ──────────────────────────────────────────────────────────────
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const speed  = t.scrollSpeed;
+  const accent = t.accentColor;
+
+  // First 6 projects get IG Story highlight cards
+  const storyProjects = ALL_PROJECTS.slice(0, 6);
+
+  return (
+    <>
+      <DesignCanvas title="Digital Allies — Social Media Kit">
+
+        {/* ── SECTION 1: IG Square Dept. Covers ── */}
+        <DCSection id="covers-dept" title="IG Square · Dept. Covers (1080×1080)">
+          <DCArtboard id="cover-design" label="The Design Bureau" width={1080} height={1080}>
+            <CoverDesign />
+          </DCArtboard>
+          <DCArtboard id="cover-coop" label="Dept. of Cooperation" width={1080} height={1080}>
+            <CoverCooperation />
+          </DCArtboard>
+          <DCArtboard id="cover-auto" label="Self-Governing Bureau" width={1080} height={1080}>
+            <CoverAutomation />
+          </DCArtboard>
+          <DCArtboard id="cover-obs" label="Observation Post" width={1080} height={1080}>
+            <CoverObservation />
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── SECTION 2: IG Square Brand + Set ── */}
+        <DCSection id="covers-misc" title="IG Square · Brand + Set (1080×1080)">
+          <DCArtboard id="cover-vibe" label="Brand Vibe Cover" width={1080} height={1080}>
+            <VibeCover accent={accent} />
+          </DCArtboard>
+          <DCArtboard id="cover-set" label="The Departments Set" width={1080} height={1080}>
+            <CoverSet />
+          </DCArtboard>
+        </DCSection>
+
+        {/* ── SECTION 3: IG Stories ── */}
+        <DCSection id="stories" title="IG Story · 9:16 (1080×1920)">
+          <DCArtboard id="story-depts" label="The Departments" width={1080} height={1920}>
+            <StoryDepartments />
+          </DCArtboard>
+          {storyProjects.map(p => (
+            <DCArtboard key={p.id} id={`story-${p.id}`} label={p.name} width={1080} height={1920}>
+              <StoryProjectHighlight project={p} accent={accent} />
+            </DCArtboard>
+          ))}
+        </DCSection>
+
+        {/* ── SECTION 4: X/Twitter Service Cards ── */}
+        <DCSection id="x-static" title="X / Twitter · Service Cards (1200×675)">
+          {DEPARTMENTS.map(d => (
+            <DCArtboard key={d.code} id={`x-dept-${d.code}`} label={d.name} width={1200} height={675}>
+              <XServiceCard dept={d} accent={accent} />
+            </DCArtboard>
+          ))}
+        </DCSection>
+
+        {/* ── SECTION 5: X/Twitter Animated Scrolls — real uploaded files ── */}
+        <DCSection id="x-scrolls" title="X / Twitter · Portfolio Scrolls (1200×675)">
+          {ALL_PROJECTS.map(p => (
+            <DCArtboard key={p.id} id={`x-${p.id}`} label={p.name} width={1200} height={675}>
+              <XScrollClip project={p} speed={speed} />
+            </DCArtboard>
+          ))}
+          {/* Figma live demos — external, can't iframe */}
+          {FIGMA_DEMOS.map(p => (
+            <DCArtboard key={p.id} id={`x-figma-${p.id}`} label={`${p.name} (Live)`} width={1200} height={675}>
+              <ExternalSiteCard clipWidth={1200} clipHeight={675} url={p.url} label={p.name} project={p} />
+            </DCArtboard>
+          ))}
+        </DCSection>
+
+        {/* ── SECTION 6: IG Reel Animated Scrolls — real uploaded files ── */}
+        <DCSection id="reel-scrolls" title="IG Reel · Portfolio Scrolls (1080×1920)">
+          {ALL_PROJECTS.map(p => (
+            <DCArtboard key={p.id} id={`reel-${p.id}`} label={p.name} width={1080} height={1920}>
+              <ReelScrollClip project={p} speed={speed} />
+            </DCArtboard>
+          ))}
+          {FIGMA_DEMOS.map(p => (
+            <DCArtboard key={p.id} id={`reel-figma-${p.id}`} label={`${p.name} (Live)`} width={1080} height={1920}>
+              <ExternalSiteCard clipWidth={1080} clipHeight={1920} url={p.url} label={p.name} project={p} />
+            </DCArtboard>
+          ))}
+        </DCSection>
+
+      </DesignCanvas>
+
+      <TweaksPanel>
+        <TweakSection title="Scrolls">
+          <TweakSlider label="Scroll Speed" id="scrollSpeed" min={10} max={150} step={5} />
+        </TweakSection>
+        <TweakSection title="Accent Color">
+          <TweakColor label="Signal Red" id="accentColor" options={["#C5301A", "#3A7BD5", "#7C5A2E", "#2A2118"]} />
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+
+<div id="root"></div>
+</body>
+</html>
