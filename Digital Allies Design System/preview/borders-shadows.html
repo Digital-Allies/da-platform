@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Borders & Shadows" subtitle="Structural 1 px + hairline + dashed + pinned variants" viewport="700x280" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Borders & Shadows</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .demo { background: var(--bg); padding: 14px; height: 78px; display: flex; flex-direction: column; justify-content: space-between; }
+    .label { font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.15em; }
+    .name { font-family: var(--font-headers); font-weight: 700; font-size: 12px; }
+    .spec { font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+    .b1 { border: 1px solid var(--charcoal); }
+    .bh { border: 1px solid var(--hairline); }
+    .bd { border: 1px dashed var(--grid-line-strong); }
+    .bl { border: 1px solid var(--charcoal); border-left: 4px solid var(--signal); }
+    .s-sm { border: 1px solid var(--charcoal); box-shadow: var(--shadow-sm); }
+    .s-md { border: 1px solid var(--charcoal); box-shadow: var(--shadow-md); }
+    .s-lg { border: 1px solid var(--charcoal); box-shadow: var(--shadow-lg); }
+    .s-pin { border: 1px solid var(--charcoal); position: relative; }
+    .s-pin .dot { position: absolute; top: 8px; left: calc(50% - 7px); width: 14px; height: 14px; background: var(--signal); border-radius: 50%; border: 1px solid var(--charcoal); box-shadow: var(--shadow-pin); }
+    .header { font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin: 12px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--charcoal); }
+    .header:first-child { margin-top: 0; }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <div class="header">Borders — corners stay square</div>
+    <div class="grid">
+      <div class="demo b1"><span class="label">structural</span><span class="name">1 px</span><span class="spec">solid #2D2D2D</span></div>
+      <div class="demo bh"><span class="label">hairline</span><span class="name">15%</span><span class="spec">card divider</span></div>
+      <div class="demo bd"><span class="label">dashed</span><span class="name">price row</span><span class="spec">18% charcoal</span></div>
+      <div class="demo bl"><span class="label">pinned</span><span class="name">red 4 px</span><span class="spec">+ solid 1 px</span></div>
+    </div>
+    <div class="header">Shadows — used sparingly</div>
+    <div class="grid">
+      <div class="demo s-sm"><span class="label">resting</span><span class="name">shadow-sm</span><span class="spec">0 1 2 / 4%</span></div>
+      <div class="demo s-md"><span class="label">live demo</span><span class="name">shadow-md</span><span class="spec">0 6 12 / 6%</span></div>
+      <div class="demo s-lg"><span class="label">hover lift</span><span class="name">shadow-lg</span><span class="spec">0 16 32 / 8%</span></div>
+      <div class="demo s-pin"><div class="dot"></div><span class="label" style="margin-top:14px">red pin</span><span class="name">shadow-pin</span><span class="spec">0 2 4 / 20%</span></div>
+    </div>
+  </div>
+</body>
+</html>

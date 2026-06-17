@@ -8,7 +8,7 @@
    Injected into layout.tsx as a style attribute on <body>:
    style={{ '--brand': settings.brand_color } as React.CSSProperties}           */
 :root {
-  --brand: #1A6B8A; /* Default — overridden per client */
+  --brand: #C5301A; /* Default Signal Red — overridden per client via Supabase settings.brand_color */
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
