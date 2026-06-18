@@ -9,9 +9,9 @@
 -- Value: 3d76b896-e1fb-49f0-a8db-f62fdd5bc258
 
 -- ─── Step 1: Insert the Digital Allies client row ───────────
-insert into clients (id, business_name) values
-  ('3d76b896-e1fb-49f0-a8db-f62fdd5bc258', 'Digital Allies')
-on conflict (id) do update set business_name = excluded.business_name;
+insert into clients (id, auth_user_id, business_name) values
+  ('3d76b896-e1fb-49f0-a8db-f62fdd5bc258', '492ac568-85c8-4105-b0f4-29c9f447ff4c', 'Digital Allies')
+on conflict (id) do update set auth_user_id = excluded.auth_user_id, business_name = excluded.business_name;
 
 -- ─── Step 2: Site settings ──────────────────────────────────
 insert into settings (client_id, key, value) values

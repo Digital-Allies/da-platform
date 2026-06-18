@@ -9,8 +9,7 @@ const nextConfig = {
       },
     ],
   },
-  // Each client deployment sets NEXT_PUBLIC_CLIENT_ID in their Vercel env vars
-  // This lets one codebase serve many clients
+  outputFileTracingRoot: __dirname,
 }
 
 module.exports = nextConfig

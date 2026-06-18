@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
 import { getSiteSettings } from '@/lib/data'
+import AuthListener from '@/components/AuthListener'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
@@ -31,6 +32,7 @@ export default async function RootLayout({
         // Inject the client's brand color as a CSS variable
         style={{ '--brand': settings.brand_color } as React.CSSProperties}
       >
+        <AuthListener />
         {children}
       </body>
     </html>
