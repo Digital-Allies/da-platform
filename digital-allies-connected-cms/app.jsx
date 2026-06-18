@@ -98,8 +98,8 @@
     };
 
     const url = mode === 'admin'
-      ? 'digitalallies.net/admin/' + section.split(':')[0].replace('dashboard', '')
-      : 'digitalallies.net';
+      ? 'https://digitalallies.net/admin/' + section.split(':')[0].replace('dashboard', '')
+      : 'https://digitalallies.net';
 
     return (
       <div className="shell">
