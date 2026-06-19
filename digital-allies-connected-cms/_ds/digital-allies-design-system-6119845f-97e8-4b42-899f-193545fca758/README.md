@@ -19,7 +19,7 @@ in `assets/`.
 
 - **GitHub — primary live site** (HTML/CSS/JS, the source of truth for
   visual implementation):
-  - https://github.com/Digital-Allies/DigitalAllies_V2 — `index.html`,
+  - https://github.com/Digital-Allies/DigitalAllies — `index.html`,
     `brand.html`, the four department icons, `suspension bridge.svg`,
     `favicon.svg`, and the `/diagrams` folder.
   - https://github.com/Digital-Allies/brand — companion brand repo.
