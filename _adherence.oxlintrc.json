@@ -17,6 +17,8 @@
           {
             "group": [
               "cms/**",
+              "cms/connected/**",
+              "cms/connected/workspace/**",
               "social/**",
               "ui_kits/website/**",
               "uploads/**"

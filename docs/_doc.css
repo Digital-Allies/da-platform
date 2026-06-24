@@ -1,0 +1,63 @@
+/* ============================================================
+   Digital Allies — Documentation skin
+   Pairs with colors_and_type.css (tokens). Square corners,
+   1px structural borders, calm. No colored side-border callouts.
+   ============================================================ */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); }
+
+.doc { max-width: 860px; margin: 0 auto; padding: 64px 56px 120px; }
+.doc h1, .doc h2, .doc h3 { text-wrap: balance; font-family: var(--font-headers); }
+
+.backlink { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); text-decoration: none; letter-spacing: 0.04em; }
+.backlink:hover { color: var(--signal); }
+
+.eyebrow { font-family: var(--font-details); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--signal); }
+.doc-head { border-bottom: 2px solid var(--charcoal); padding-bottom: 28px; margin-bottom: 44px; }
+.doc-head h1 { font-size: 42px; margin: 14px 0 16px; line-height: 1.08; }
+.lede { font-size: 16px; line-height: 1.7; color: var(--fg); max-width: 62ch; margin: 0; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); margin-top: 20px; }
+.meta-row b { color: var(--fg); font-weight: 600; }
+
+section { margin: 0 0 52px; }
+section > h2 { font-size: 24px; margin: 0 0 6px; }
+section > h2 .num { font-family: var(--font-details); font-size: 14px; color: var(--signal); margin-right: 10px; font-weight: 400; }
+.sub { font-family: var(--font-details); font-size: 12px; color: var(--fg-muted); margin: 0 0 22px; }
+h3 { font-size: 16px; margin: 28px 0 8px; }
+p { font-size: 13.5px; line-height: 1.7; }
+ul, ol { font-size: 13.5px; line-height: 1.7; padding-left: 20px; }
+li { margin-bottom: 6px; }
+a { color: var(--accent); }
+
+.card { border: 1px solid var(--charcoal); background: var(--bg); padding: 22px 24px; margin-bottom: 16px; }
+.card h3 { font-size: 15px; margin: 0 0 6px; }
+.card p { margin: 0; font-size: 12.5px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+/* The brand's pinned-note (Field Note): cream, red pin, NO side border */
+.note { position: relative; background: var(--pinned-note, #FCFAED); border: 1px solid var(--charcoal); padding: 34px 22px 18px; margin: 20px 0; }
+.note::before { content: ""; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 13px; height: 13px; background: var(--signal); border: 1px solid var(--charcoal); border-radius: 50%; box-shadow: var(--shadow-pin); }
+.note p { margin: 0; font-size: 12.5px; }
+
+table { width: 100%; border-collapse: collapse; font-family: var(--font-details); font-size: 12px; margin: 8px 0 20px; }
+th, td { border: 1px solid var(--hairline); padding: 9px 12px; text-align: left; vertical-align: top; }
+thead th { background: var(--charcoal); color: var(--bone-white); font-weight: 600; border-color: var(--charcoal); }
+tbody th { font-weight: 600; background: var(--pinned-note, #FCFAED); white-space: nowrap; }
+code.inl { background: var(--bg-alt); padding: 1px 6px; font-family: var(--font-details); font-size: 12px; border: 1px solid var(--hairline); }
+pre { font-family: var(--font-details); font-size: 12px; line-height: 1.7; background: var(--charcoal); color: var(--bone-white); padding: 20px 22px; overflow-x: auto; border: 1px solid var(--charcoal); margin: 8px 0 18px; }
+pre .c { color: #9fb8d8; }
+pre .k { color: #e7a07f; }
+
+.linklist { list-style: none; padding: 0; }
+.linklist li { margin: 0 0 10px; }
+.linklist a { display: flex; align-items: baseline; gap: 10px; border: 1px solid var(--charcoal); background: var(--bg); padding: 14px 18px; text-decoration: none; color: var(--fg); transition: all .2s var(--ease-snap, ease); }
+.linklist a:hover { background: var(--bg-alt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.linklist .ll-name { font-family: var(--font-headers); font-weight: 700; font-size: 14px; }
+.linklist .ll-desc { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); }
+
+.method { font-family: var(--font-details); font-weight: 700; font-size: 10px; padding: 2px 7px; border: 1px solid var(--charcoal); margin-right: 8px; }
+.m-get { background: var(--accent-soft, #e7f0fb); color: var(--accent); }
+.m-post { background: var(--pinned-note, #FCFAED); color: var(--signal); }
+
+footer { border-top: 1px solid var(--hairline); margin-top: 64px; padding-top: 24px; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); }

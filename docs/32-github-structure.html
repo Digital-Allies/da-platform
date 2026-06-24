@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Structure & Consolidation — Digital Allies</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_doc.css">
+</head>
+<body>
+<div class="doc">
+  <a class="backlink" href="../00-master-index.html">← Master Index</a>
+  <div class="doc-head" style="margin-top:16px;">
+    <div class="eyebrow">Repository</div>
+    <h1>GitHub Structure &amp; Consolidation</h1>
+    <p class="lede">How this design system is organized for GitHub, and the one rule that keeps it from sprawling: <b>one project = one repo = one deploy.</b> Everything that links together lives together.</p>
+    <div class="meta-row"><span>Doc <b>32 / 32</b></span><span>Repo <b>Digital-Allies/design-system</b></span></div>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>The rule</h2>
+    <p>Work split across separate projects can't link to each other once deployed — that's how portals end up pointing at nothing. So:</p>
+    <ul>
+      <li>This project is the <b>single source of truth</b>. Tokens, fonts, components, templates, slides, the UI kit, and the CMS all live here.</li>
+      <li>New work that <b>links into</b> the system is built <b>inside</b> this project.</li>
+      <li>New work that merely <b>uses</b> the brand (a separate product, e.g. Atomic Finds) copies in the assets it needs — it doesn't cross-link to this repo's files.</li>
+    </ul>
+    <div class="note"><p><b>Field note.</b> If you ever find a link reaching into another project's files, that's the bug. Bring the files home or copy what's needed.</p></div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>Folder structure</h2>
+    <pre>design-system/
+  index.html                  <span class="c"># landing — portals + downloads</span>
+  00-master-index.html        <span class="c"># every doc, linked</span>
+  colors_and_type.css         <span class="c"># all tokens + @font-face</span>
+  README.md  SKILL.md         <span class="c"># brand book + skill manifest</span>
+  GLOBAL_CONTEXT_FOR_CLAUDE.md
+  assets/                     <span class="c"># logos, icons, art, photos</span>
+  fonts/                      <span class="c"># Lexend Deca + JetBrains Mono</span>
+  preview/                    <span class="c"># one spec card per concept</span>
+  ui_kits/website/            <span class="c"># digitalallies.net as components</span>
+  slides/                     <span class="c"># 7 slide templates</span>
+  social/                     <span class="c"># social carousels</span>
+  templates/                  <span class="c"># CMS-ready page templates</span>
+  docs/                       <span class="c"># extended documentation</span>
+  cms/                        <span class="c"># CMS / marketing hub</span>
+    index.html                <span class="c"># the hub</span>
+    dashboard.html            <span class="c"># standalone dashboard</span>
+    connected/                <span class="c"># Connected CMS + 30-Day Run (editable)</span>
+  _ds_bundle.js               <span class="c"># compiled components (generated)</span></pre>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Updating the repo</h2>
+    <p>The platform project is the live working copy. To publish:</p>
+    <pre><span class="c"># inside your local clone of the repo</span>
+git add .
+git commit -m "Sync: CMS consolidation + docs"
+git push origin HEAD:main</pre>
+    <p>If git reports <code class="inl">not a git repository</code>, you're not inside the repo folder — <code class="inl">cd</code> into your clone (or <code class="inl">git clone</code> it first), drop the updated files in, then commit. Authentication uses a GitHub <b>Personal Access Token</b> as the password.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>Deploying</h2>
+    <p>Once the repo is current, import <code class="inl">Digital-Allies/design-system</code> into Vercel (<b>Add New → Project</b>). Vercel serves every file, so all portals, previews, downloads, and the CMS apps work — the whole system live, from one deploy.</p>
+    <p>Related: <a href="../README.md">README</a> · <a href="../GITHUB_IMPLEMENTATION_GUIDE.md">GitHub Implementation Guide</a> · <a href="../GITHUB_CONSOLIDATION_PLAN.md">Consolidation Plan</a>.</p>
+  </section>
+
+  <footer>Digital Allies Design System · GitHub Structure · one project, one repo, one deploy.</footer>
+</div>
+</body>
+</html>

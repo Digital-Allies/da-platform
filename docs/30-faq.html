@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Digital Allies</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_doc.css">
+<style>
+  .qa { border-bottom: 1px solid var(--hairline); padding: 20px 0; }
+  .qa:last-child { border-bottom: none; }
+  .qa h3 { margin: 0 0 8px; font-size: 16px; }
+  .qa p { margin: 0; }
+</style>
+</head>
+<body>
+<div class="doc">
+  <a class="backlink" href="../00-master-index.html">← Master Index</a>
+  <div class="doc-head" style="margin-top:16px;">
+    <div class="eyebrow">Reference</div>
+    <h1>FAQ</h1>
+    <p class="lede">The questions that come up most when designing or building with this system. Short answers; deeper links where they help.</p>
+    <div class="meta-row"><span>Doc <b>30 / 32</b></span><span>Group <b>Guides & Reference</b></span></div>
+  </div>
+
+  <section>
+    <div class="qa"><h3>Can I add a new color?</h3><p>Almost never. The palette is five colors held to the 95/5 rule — 95% neutral, 5% signal, never stacked. If you think you need another, you probably need more whitespace instead. See <a href="../preview/colors-95-5-rule.html">the 95/5 rule</a>.</p></div>
+    <div class="qa"><h3>What's the difference between a Field Note and a call-out?</h3><p><b>Field Notes</b> are testimonials/quotes: cream background, a red pin dot at top-center, and <em>no</em> side border. <b>Call-outs</b> have no background — just the text and a colored right border (red by default, blue for certain topics). Review cards look like Field Notes (the dot) but drop the background.</p></div>
+    <div class="qa"><h3>Can I use emoji?</h3><p>No. The brand uses middots (·), em-dashes (—), bracketed CTAs ([ … ]), and the red signal dot instead.</p></div>
+    <div class="qa"><h3>Which font goes where?</h3><p>Lexend Deca for headers, eyebrows, titles, and CTAs. JetBrains Mono for body, prices, tables, and system text. Don't mix the roles.</p></div>
+    <div class="qa"><h3>Rounded corners — ever?</h3><p>Square is the default (<code class="inl">border-radius: 0</code>). The only exceptions are the pulse dot (a circle) and inputs (2px, for affordance).</p></div>
+    <div class="qa"><h3>How much animation is allowed?</h3><p>Calm. The only continuous animation is the Pulse Dot. Hovers lift gently (~300–400ms); accordions rotate a + into a ×. No bounce, no parallax, no scroll-jacking.</p></div>
+    <div class="qa"><h3>Do I write in "we" or "I"?</h3><p>First person singular — "I". It's a one-person shop and the voice owns that. "We" only for the rare collective-philosophy line; never "our team". Owner: Anthony. Location: Kingman, AZ.</p></div>
+    <div class="qa"><h3>Where do the components live?</h3><p>Foundations and patterns are spec cards under <code class="inl">preview/</code>; the website is recreated as JSX under <code class="inl">ui_kits/website/</code>; the one exposed, reusable React component is <code class="inl">ContentCalendar</code>. See the <a href="23-component-library.html">Component Library</a>.</p></div>
+    <div class="qa"><h3>How do I connect this to a CMS?</h3><p>Start at the <a href="../cms/index.html">CMS / Marketing Hub</a>, then the <a href="../cms/connected/CMS Build Plan.html">Build Plan</a> and <a href="26-api-reference.html">API Reference</a>.</p></div>
+    <div class="qa"><h3>How do I keep everything in one place?</h3><p>One project = one repo = one deploy. New work that links together lives in the same project; new work that just <em>uses</em> the brand copies the assets it needs in. See <a href="32-github-structure.html">GitHub Structure</a>.</p></div>
+  </section>
+
+  <footer>Digital Allies Design System · FAQ · would Anthony actually say this?</footer>
+</div>
+</body>
+</html>

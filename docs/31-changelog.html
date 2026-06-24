@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Digital Allies</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_doc.css">
+<style>
+  .rel { border-left: 1px solid var(--hairline); padding: 0 0 8px 22px; margin-left: 6px; position: relative; }
+  .rel::before { content: ""; position: absolute; left: -5px; top: 4px; width: 9px; height: 9px; background: var(--signal); border: 1px solid var(--charcoal); border-radius: 50%; }
+  .rel h3 { margin: 0 0 2px; font-size: 16px; }
+  .rel .date { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); margin-bottom: 10px; }
+  .rel ul { margin: 0 0 28px; }
+  .tag { font-family: var(--font-details); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 1px 6px; border: 1px solid var(--charcoal); margin-right: 8px; }
+  .t-add { background: var(--pinned-note, #FCFAED); color: var(--signal); }
+  .t-chg { background: var(--accent-soft, #e7f0fb); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="doc">
+  <a class="backlink" href="../00-master-index.html">← Master Index</a>
+  <div class="doc-head" style="margin-top:16px;">
+    <div class="eyebrow">Reference</div>
+    <h1>Changelog</h1>
+    <p class="lede">What changed, when, and why. Newest first. The design system is the single source of truth; this is its history.</p>
+    <div class="meta-row"><span>Doc <b>31 / 32</b></span><span>Group <b>Guides & Reference</b></span></div>
+  </div>
+
+  <section>
+    <div class="rel">
+      <h3>Consolidation</h3>
+      <div class="date">June 2026</div>
+      <ul>
+        <li><span class="tag t-add">Add</span>Brought the Connected CMS, CMS Workspace, the 30-Day Run, and the CMS Build Plan into this project (editable source) under <code class="inl">cms/connected/</code>.</li>
+        <li><span class="tag t-add">Add</span>New <a href="../cms/index.html">CMS / Marketing Hub</a> linking every CMS app, calendar, dashboard, and integration doc.</li>
+        <li><span class="tag t-chg">Change</span>Marketing Hub portal now points at the CMS, not the old social-only page.</li>
+        <li><span class="tag t-chg">Change</span>Master Index rewired — every card points at a real, existing file. No more dead links.</li>
+        <li><span class="tag t-add">Add</span>New gap docs: Modals & Overlays, Content Blocks, Component Library, API Reference, Installation & Setup, FAQ, this Changelog, and GitHub Structure.</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <h3>Components exposed</h3>
+      <div class="date">June 2026</div>
+      <ul>
+        <li><span class="tag t-add">Add</span><code class="inl">ContentCalendar</code> promoted to a real, reusable design-system component (typed, with its own card).</li>
+        <li><span class="tag t-chg">Change</span>README refreshed to document components vs. page partials.</li>
+      </ul>
+    </div>
+
+    <div class="rel">
+      <h3>Initial system</h3>
+      <div class="date">2024 — early 2026</div>
+      <ul>
+        <li><span class="tag t-add">Add</span>Foundations: colors & the 95/5 rule, type (Lexend Deca + JetBrains Mono), spacing (Technical Lace), borders & shadows.</li>
+        <li><span class="tag t-add">Add</span>Brand: logo system, the Artifact Icons, department badges, abstract art, bridge motif, photography.</li>
+        <li><span class="tag t-add">Add</span>Voice: primary & marketing voices, the Jargon Jar, tone spectrum, personas.</li>
+        <li><span class="tag t-add">Add</span>UI Kit recreating digitalallies.net; seven 16:9 slide templates; services-index & tool-detail page templates.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>Digital Allies Design System · Changelog · one source of truth, with receipts.</footer>
+</div>
+</body>
+</html>

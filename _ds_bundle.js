@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":3,"namespace":"DigitalAlliesDesignSystem_611984","components":[{"name":"ContentCalendar","sourcePath":"ui_kits/website/ContentCalendar.jsx"}],"sourceHashes":{"cms/app.js":"e44b9d9daeee","social/AEO.jsx":"2cbf598790c0","social/Atoms.jsx":"39e18fb81884","social/Kingman.jsx":"55687765c9df","social/Strategy.jsx":"f988978d78dc","social/design-canvas.jsx":"3b0e985041dd","ui_kits/website/ContentCalendar.jsx":"6fcbe5a085b7","ui_kits/website/Departments.jsx":"5a1fb1b1de39","ui_kits/website/Diagrams.jsx":"2ef376b61dec","ui_kits/website/FieldNotes.jsx":"b6568defa0ec","ui_kits/website/Footer.jsx":"29f8851f9d16","ui_kits/website/Hero.jsx":"c14118abc65d","ui_kits/website/JargonJar.jsx":"0bb1011651dd","ui_kits/website/Nav.jsx":"dde49a8d0d79","ui_kits/website/Pricing.jsx":"0c8fab87e151","ui_kits/website/Primitives.jsx":"9b64780c9f2a","ui_kits/website/Reliability.jsx":"cd10d47b9ca3","uploads/app.js":"bf3111fcd89e"},"inlinedExternals":[],"unexposedExports":[]} */
+/* @ds-bundle: {"format":3,"namespace":"DigitalAlliesDesignSystem_611984","components":[{"name":"ContentCalendar","sourcePath":"ui_kits/website/ContentCalendar.jsx"}],"sourceHashes":{"cms/app.js":"e44b9d9daeee","cms/connected/admin.jsx":"d8bc1ecfd323","cms/connected/app.jsx":"ad4bfca5471a","cms/connected/icons.jsx":"05a34cc83944","cms/connected/site.jsx":"e0e29fb4611f","cms/connected/store.js":"d1a5965bd64e","cms/connected/tweaks-panel.jsx":"6591467622ed","cms/connected/workspace/content-tabs.jsx":"53bb850b5817","cms/connected/workspace/content.jsx":"7e137b44fecb","cms/connected/workspace/icons-ext.jsx":"36f44394b260","cms/connected/workspace/palette.jsx":"4bdbbb10db95","cms/connected/workspace/projects.jsx":"db559be2f72d","cms/connected/workspace/shell.jsx":"dea932169c26","cms/connected/workspace/store.js":"49a5947f4cce","cms/connected/workspace/views.jsx":"4603446bb5dc","social/AEO.jsx":"2cbf598790c0","social/Atoms.jsx":"39e18fb81884","social/Kingman.jsx":"55687765c9df","social/Strategy.jsx":"f988978d78dc","social/design-canvas.jsx":"3b0e985041dd","ui_kits/website/ContentCalendar.jsx":"6fcbe5a085b7","ui_kits/website/Departments.jsx":"5a1fb1b1de39","ui_kits/website/Diagrams.jsx":"2ef376b61dec","ui_kits/website/FieldNotes.jsx":"b6568defa0ec","ui_kits/website/Footer.jsx":"29f8851f9d16","ui_kits/website/Hero.jsx":"c14118abc65d","ui_kits/website/JargonJar.jsx":"0bb1011651dd","ui_kits/website/Nav.jsx":"dde49a8d0d79","ui_kits/website/Pricing.jsx":"0c8fab87e151","ui_kits/website/Primitives.jsx":"9b64780c9f2a","ui_kits/website/Reliability.jsx":"cd10d47b9ca3","uploads/app.js":"bf3111fcd89e"},"inlinedExternals":[],"unexposedExports":[]} */
 
 (() => {
 
@@ -1591,6 +1591,6128 @@ What This Means
 // Initialize the application
 const app = new BusinessDashboard();
 })(); } catch (e) { __ds_ns.__errors.push({ path: "cms/app.js", error: String((e && e.message) || e) }); }
+
+// cms/connected/admin.jsx
+try { (() => {
+/* ============================================================
+   ADMIN CMS — Site Admin for Digital Allies.
+   Exports window.AdminApp({ data, actions, layout, chrome,
+                             section, setSection, onViewSite })
+   layout: 'topbar' | 'sidebar' | 'rail'
+   chrome: 'dark' | 'light'
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useEffect
+  } = React;
+  const Icon = window.Icon;
+  const NAV = [{
+    id: 'dashboard',
+    label: 'Dashboard',
+    icon: 'dashboard'
+  }, {
+    id: 'posts',
+    label: 'Posts',
+    icon: 'fileText'
+  }, {
+    id: 'services',
+    label: 'The Departments',
+    icon: 'briefcase'
+  }, {
+    id: 'testimonials',
+    label: 'Field Notes',
+    icon: 'star'
+  }, {
+    id: 'messages',
+    label: 'Command Center',
+    icon: 'message'
+  }, {
+    id: 'settings',
+    label: 'Settings',
+    icon: 'settings'
+  }];
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }) : '—';
+  const fmtAgo = d => {
+    if (!d) return '';
+    const diff = (Date.now() - new Date(d).getTime()) / 1000;
+    if (diff < 3600) return Math.max(1, Math.floor(diff / 60)) + 'm ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+    return Math.floor(diff / 86400) + 'd ago';
+  };
+
+  // ── Reusable field ──────────────────────────────────────────
+  function Field({
+    label,
+    hint,
+    children
+  }) {
+    return /*#__PURE__*/React.createElement("label", {
+      className: "afield"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "afield__label"
+    }, label, hint && /*#__PURE__*/React.createElement("em", {
+      className: "afield__hint"
+    }, hint)), children);
+  }
+  function PageHead({
+    title,
+    sub,
+    children
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage__head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+      className: "apage__title"
+    }, title), sub && /*#__PURE__*/React.createElement("p", {
+      className: "apage__sub"
+    }, sub)), /*#__PURE__*/React.createElement("div", {
+      className: "apage__actions"
+    }, children));
+  }
+
+  // ── Dashboard ───────────────────────────────────────────────
+  function Dashboard({
+    data,
+    setSection,
+    onViewSite
+  }) {
+    const unread = data.messages.filter(m => !m.read).length;
+    const drafts = data.posts.filter(p => p.status === 'draft').length;
+    const stats = [{
+      label: 'Blog Posts',
+      value: data.posts.length,
+      sub: drafts + ' draft' + (drafts === 1 ? '' : 's'),
+      id: 'posts',
+      icon: 'fileText'
+    }, {
+      label: 'Departments',
+      value: data.services.length,
+      sub: 'live on site',
+      id: 'services',
+      icon: 'briefcase'
+    }, {
+      label: 'Field Notes',
+      value: data.testimonials.length,
+      sub: 'published',
+      id: 'testimonials',
+      icon: 'star'
+    }, {
+      label: 'Unread Transmissions',
+      value: unread,
+      sub: data.messages.length + ' total',
+      id: 'messages',
+      icon: 'message',
+      alert: unread > 0
+    }];
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: "Dashboard",
+      sub: "Everything you change here goes live on the site."
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--ghost",
+      onClick: onViewSite
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "external",
+      size: 13
+    }), " View site")), /*#__PURE__*/React.createElement("div", {
+      className: "stat-grid"
+    }, stats.map(s => /*#__PURE__*/React.createElement("button", {
+      className: 'stat-card' + (s.alert ? ' stat-card--alert' : ''),
+      key: s.id,
+      onClick: () => setSection(s.id)
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "stat-card__top"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: s.icon,
+      size: 15
+    }), s.alert && /*#__PURE__*/React.createElement("span", {
+      className: "da-signal-dot stat-card__dot"
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "stat-card__val"
+    }, s.value), /*#__PURE__*/React.createElement("span", {
+      className: "stat-card__label"
+    }, s.label), /*#__PURE__*/React.createElement("span", {
+      className: "stat-card__sub"
+    }, s.sub)))), /*#__PURE__*/React.createElement("h2", {
+      className: "asubhead"
+    }, "Quick actions"), /*#__PURE__*/React.createElement("div", {
+      className: "quick-grid"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "quick-card",
+      onClick: () => setSection('posts:new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "fileText",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "New blog post"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "quick-card",
+      onClick: () => setSection('services')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "briefcase",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Edit a Department"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "quick-card",
+      onClick: () => setSection('settings')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "settings",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Edit site settings"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "quick-card",
+      onClick: () => setSection('messages')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "message",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Read transmissions"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "da-pinned dash-pin"
+    }, /*#__PURE__*/React.createElement("strong", null, "Connected, not copied."), " This admin and the public site read from the same source. Save a change here, switch to ", /*#__PURE__*/React.createElement("em", null, "Live Site"), ", and it\u2019s already there."));
+  }
+
+  // ── Posts ───────────────────────────────────────────────────
+  function slugify(t) {
+    return t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
+  }
+  function PostsList({
+    data,
+    setSection,
+    onEdit
+  }) {
+    const posts = [...data.posts].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: "Posts",
+      sub: "The Journal \u2014 long-form notes from the desk."
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: () => setSection('posts:new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 14
+    }), " New post")), /*#__PURE__*/React.createElement("div", {
+      className: "alist"
+    }, posts.map(p => /*#__PURE__*/React.createElement("button", {
+      className: "arow",
+      key: p.id,
+      onClick: () => onEdit(p)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: 'pill ' + (p.status === 'published' ? 'pill--live' : 'pill--draft')
+    }, p.status), /*#__PURE__*/React.createElement("span", {
+      className: "arow__main"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "arow__title"
+    }, p.title), /*#__PURE__*/React.createElement("span", {
+      className: "arow__meta"
+    }, "/", p.slug, " \xB7 updated ", fmtDate(p.updated_at))), /*#__PURE__*/React.createElement(Icon, {
+      name: "edit",
+      size: 15,
+      className: "arow__go"
+    }))), !posts.length && /*#__PURE__*/React.createElement("p", {
+      className: "empty"
+    }, "No posts yet. Write the first one.")));
+  }
+  function PostEditor({
+    post,
+    actions,
+    onDone
+  }) {
+    const isNew = !post;
+    const [title, setTitle] = useState(post?.title ?? '');
+    const [slug, setSlug] = useState(post?.slug ?? '');
+    const [excerpt, setExcerpt] = useState(post?.excerpt ?? '');
+    const [content, setContent] = useState(post?.content ?? '');
+    const [status, setStatus] = useState(post?.status ?? 'draft');
+    const editRef = React.useRef(null);
+    useEffect(() => {
+      if (editRef.current) editRef.current.innerHTML = post?.content ?? '';
+    }, []);
+    function onTitle(e) {
+      setTitle(e.target.value);
+      if (isNew) setSlug(slugify(e.target.value));
+    }
+    function exec(cmd, val) {
+      document.execCommand(cmd, false, val);
+      editRef.current.focus();
+    }
+    function save() {
+      const html = editRef.current ? editRef.current.innerHTML : content;
+      actions.savePost({
+        id: post?.id,
+        title,
+        slug: slug || slugify(title),
+        excerpt,
+        content: html,
+        status,
+        published_at: status === 'published' ? post?.published_at ?? new Date().toISOString() : null
+      });
+      onDone();
+    }
+    const Tb = ({
+      cmd,
+      val,
+      icon,
+      title
+    }) => /*#__PURE__*/React.createElement("button", {
+      type: "button",
+      className: "tb-btn",
+      title: title,
+      onMouseDown: e => {
+        e.preventDefault();
+        exec(cmd, val);
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: icon,
+      size: 14
+    }));
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage apage--narrow"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: isNew ? 'New post' : 'Edit post'
+    }, !isNew && /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--danger",
+      onClick: () => {
+        if (confirm('Delete this post?')) {
+          actions.deletePost(post.id);
+          onDone();
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    }), " Delete"), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--ghost",
+      onClick: onDone
+    }, "Cancel"), /*#__PURE__*/React.createElement("select", {
+      className: "ainput ainput--select",
+      value: status,
+      onChange: e => setStatus(e.target.value)
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "draft"
+    }, "Draft"), /*#__PURE__*/React.createElement("option", {
+      value: "published"
+    }, "Published")), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: save,
+      disabled: !title.trim()
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save")), /*#__PURE__*/React.createElement("div", {
+      className: "editor-stack"
+    }, /*#__PURE__*/React.createElement(Field, {
+      label: "Title"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ainput ainput--lg",
+      value: title,
+      onChange: onTitle,
+      placeholder: "Post title"
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Slug"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ainput mono",
+      value: slug,
+      onChange: e => setSlug(e.target.value),
+      placeholder: "post-url-slug"
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Excerpt",
+      hint: "(shown in the blog list)"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ainput",
+      rows: 2,
+      value: excerpt,
+      onChange: e => setExcerpt(e.target.value)
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Content"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "rte"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "rte__toolbar"
+    }, /*#__PURE__*/React.createElement(Tb, {
+      cmd: "bold",
+      icon: "bold",
+      title: "Bold"
+    }), /*#__PURE__*/React.createElement(Tb, {
+      cmd: "italic",
+      icon: "italic",
+      title: "Italic"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "rte__sep"
+    }), /*#__PURE__*/React.createElement(Tb, {
+      cmd: "formatBlock",
+      val: "<h2>",
+      icon: "heading",
+      title: "Heading"
+    }), /*#__PURE__*/React.createElement(Tb, {
+      cmd: "formatBlock",
+      val: "<blockquote>",
+      icon: "quote",
+      title: "Quote"
+    }), /*#__PURE__*/React.createElement(Tb, {
+      cmd: "insertUnorderedList",
+      icon: "list",
+      title: "List"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "rte__area prose-da",
+      contentEditable: true,
+      ref: editRef,
+      suppressContentEditableWarning: true
+    })))));
+  }
+
+  // ── Departments (services) ──────────────────────────────────
+  const ICONS = ['compass', 'cog', 'timer', 'radar'];
+  function Services({
+    data,
+    actions,
+    editing,
+    setEditing
+  }) {
+    const list = [...data.services].sort((a, b) => a.display_order - b.display_order);
+    if (editing) return /*#__PURE__*/React.createElement(ServiceEditor, {
+      svc: editing === 'new' ? null : editing,
+      count: list.length,
+      actions: actions,
+      onDone: () => setEditing(null)
+    });
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: "The Departments",
+      sub: "Four distinct operations. One point of contact."
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: () => setEditing('new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 14
+    }), " Add department")), /*#__PURE__*/React.createElement("div", {
+      className: "svc-list"
+    }, list.map((svc, i) => /*#__PURE__*/React.createElement("div", {
+      className: "svc-item",
+      key: svc.id
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "svc-item__icon"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: svc.icon,
+      size: 22,
+      stroke: 1.4
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "svc-item__body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "svc-item__top"
+    }, /*#__PURE__*/React.createElement("h3", null, svc.title), /*#__PURE__*/React.createElement("span", {
+      className: "svc-item__price"
+    }, svc.price)), /*#__PURE__*/React.createElement("p", null, svc.description)), /*#__PURE__*/React.createElement("div", {
+      className: "svc-item__ctrls"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "iconbtn",
+      disabled: i === 0,
+      onClick: () => actions.moveService(svc.id, -1),
+      title: "Move up"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronDown",
+      size: 15,
+      style: {
+        transform: 'rotate(180deg)'
+      }
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "iconbtn",
+      disabled: i === list.length - 1,
+      onClick: () => actions.moveService(svc.id, 1),
+      title: "Move down"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronDown",
+      size: 15
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "iconbtn",
+      onClick: () => setEditing(svc),
+      title: "Edit"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "edit",
+      size: 15
+    })))))));
+  }
+  function ServiceEditor({
+    svc,
+    count,
+    actions,
+    onDone
+  }) {
+    const isNew = !svc;
+    const [f, setF] = useState(svc || {
+      title: '',
+      description: '',
+      price: 'From $',
+      icon: 'compass'
+    });
+    const set = k => e => setF(p => ({
+      ...p,
+      [k]: e.target.value
+    }));
+    function save() {
+      actions.saveService({
+        ...f,
+        id: svc?.id,
+        display_order: svc?.display_order ?? count
+      });
+      onDone();
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage apage--narrow"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: isNew ? 'New department' : 'Edit department'
+    }, !isNew && /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--danger",
+      onClick: () => {
+        if (confirm('Delete this department?')) {
+          actions.deleteService(svc.id);
+          onDone();
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    }), " Delete"), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--ghost",
+      onClick: onDone
+    }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: save,
+      disabled: !f.title.trim()
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save")), /*#__PURE__*/React.createElement("div", {
+      className: "editor-stack"
+    }, /*#__PURE__*/React.createElement(Field, {
+      label: "Department name"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ainput ainput--lg",
+      value: f.title,
+      onChange: set('title'),
+      placeholder: "The Design Bureau"
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Artifact icon"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "icon-picker"
+    }, ICONS.map(ic => /*#__PURE__*/React.createElement("button", {
+      key: ic,
+      className: 'icon-opt' + (f.icon === ic ? ' is-on' : ''),
+      onClick: () => setF(p => ({
+        ...p,
+        icon: ic
+      })),
+      type: "button"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: ic,
+      size: 22,
+      stroke: 1.4
+    }))))), /*#__PURE__*/React.createElement(Field, {
+      label: "Description"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ainput",
+      rows: 3,
+      value: f.description,
+      onChange: set('description')
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Price",
+      hint: "(use the From $X convention)"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ainput mono",
+      value: f.price,
+      onChange: set('price'),
+      placeholder: "From $2,400"
+    }))));
+  }
+
+  // ── Field Notes (testimonials) ──────────────────────────────
+  function FieldNotes({
+    data,
+    actions,
+    editing,
+    setEditing
+  }) {
+    const list = [...data.testimonials].sort((a, b) => a.display_order - b.display_order);
+    if (editing) return /*#__PURE__*/React.createElement(NoteEditor, {
+      note: editing === 'new' ? null : editing,
+      count: list.length,
+      actions: actions,
+      onDone: () => setEditing(null)
+    });
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: "Field Notes",
+      sub: "Testimonials from the people you have helped."
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: () => setEditing('new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 14
+    }), " Add note")), /*#__PURE__*/React.createElement("div", {
+      className: "notes-admin"
+    }, list.map(t => /*#__PURE__*/React.createElement("button", {
+      className: "note-admin",
+      key: t.id,
+      onClick: () => setEditing(t)
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "note-admin__stars"
+    }, Array.from({
+      length: t.rating || 5
+    }).map((_, i) => /*#__PURE__*/React.createElement(Icon, {
+      key: i,
+      name: "star",
+      size: 12,
+      color: "var(--signal)",
+      style: {
+        fill: 'var(--signal)'
+      }
+    }))), /*#__PURE__*/React.createElement("p", {
+      className: "note-admin__quote"
+    }, "\u201C", t.content, "\u201D"), /*#__PURE__*/React.createElement("div", {
+      className: "note-admin__by"
+    }, /*#__PURE__*/React.createElement("strong", null, t.author_name), /*#__PURE__*/React.createElement("span", null, t.author_role)), /*#__PURE__*/React.createElement(Icon, {
+      name: "edit",
+      size: 14,
+      className: "note-admin__edit"
+    })))));
+  }
+  function NoteEditor({
+    note,
+    count,
+    actions,
+    onDone
+  }) {
+    const isNew = !note;
+    const [f, setF] = useState(note || {
+      author_name: '',
+      author_role: '',
+      content: '',
+      rating: 5
+    });
+    const set = k => e => setF(p => ({
+      ...p,
+      [k]: e.target.value
+    }));
+    function save() {
+      actions.saveTestimonial({
+        ...f,
+        id: note?.id,
+        rating: Number(f.rating),
+        display_order: note?.display_order ?? count
+      });
+      onDone();
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage apage--narrow"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: isNew ? 'New field note' : 'Edit field note'
+    }, !isNew && /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--danger",
+      onClick: () => {
+        if (confirm('Delete this note?')) {
+          actions.deleteTestimonial(note.id);
+          onDone();
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    }), " Delete"), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--ghost",
+      onClick: onDone
+    }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: save,
+      disabled: !f.content.trim()
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save")), /*#__PURE__*/React.createElement("div", {
+      className: "editor-stack"
+    }, /*#__PURE__*/React.createElement(Field, {
+      label: "Quote"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ainput",
+      rows: 4,
+      value: f.content,
+      onChange: set('content'),
+      placeholder: "What did they say?"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "afield-row"
+    }, /*#__PURE__*/React.createElement(Field, {
+      label: "Author name"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ainput",
+      value: f.author_name,
+      onChange: set('author_name')
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Rating"
+    }, /*#__PURE__*/React.createElement("select", {
+      className: "ainput ainput--select",
+      value: f.rating,
+      onChange: set('rating')
+    }, [5, 4, 3, 2, 1].map(n => /*#__PURE__*/React.createElement("option", {
+      key: n,
+      value: n
+    }, n, " stars"))))), /*#__PURE__*/React.createElement(Field, {
+      label: "Author role / business"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ainput",
+      value: f.author_role,
+      onChange: set('author_role'),
+      placeholder: "Vance & Daughters Hardware \xB7 Kingman"
+    }))));
+  }
+
+  // ── Command Center (messages) ───────────────────────────────
+  function Messages({
+    data,
+    actions
+  }) {
+    const list = [...data.messages].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    const [open, setOpen] = useState(list[0]?.id ?? null);
+    const active = list.find(m => m.id === open);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: "The Command Center",
+      sub: "Transmissions from the contact form arrive here."
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "cc"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cc__list"
+    }, list.map(m => /*#__PURE__*/React.createElement("button", {
+      className: 'cc__item' + (m.id === open ? ' is-open' : '') + (!m.read ? ' is-unread' : ''),
+      key: m.id,
+      onClick: () => {
+        setOpen(m.id);
+        if (!m.read) actions.markRead(m.id, true);
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cc__item-top"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "cc__from"
+    }, !m.read && /*#__PURE__*/React.createElement("span", {
+      className: "da-signal-dot cc__unread"
+    }), m.name), /*#__PURE__*/React.createElement("span", {
+      className: "cc__time"
+    }, fmtAgo(m.created_at))), /*#__PURE__*/React.createElement("span", {
+      className: "cc__subj"
+    }, m.subject || '(no subject)'), /*#__PURE__*/React.createElement("span", {
+      className: "cc__snip"
+    }, m.message))), !list.length && /*#__PURE__*/React.createElement("p", {
+      className: "empty"
+    }, "No transmissions yet.")), active ? /*#__PURE__*/React.createElement("div", {
+      className: "cc__detail"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "cc__detail-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, active.subject || '(no subject)'), /*#__PURE__*/React.createElement("p", {
+      className: "cc__detail-from"
+    }, active.name, " \xB7 ", /*#__PURE__*/React.createElement("a", {
+      href: 'mailto:' + active.email
+    }, active.email), active.phone && ' · ' + active.phone)), /*#__PURE__*/React.createElement("div", {
+      className: "cc__detail-actions"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "iconbtn",
+      title: active.read ? 'Mark unread' : 'Mark read',
+      onClick: () => actions.markRead(active.id, !active.read)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "eye",
+      size: 15
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "iconbtn",
+      title: "Delete",
+      onClick: () => {
+        if (confirm('Delete this transmission?')) {
+          actions.deleteMessage(active.id);
+          setOpen(null);
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 15
+    })))), /*#__PURE__*/React.createElement("p", {
+      className: "cc__body"
+    }, active.message), /*#__PURE__*/React.createElement("div", {
+      className: "cc__reply"
+    }, /*#__PURE__*/React.createElement("a", {
+      className: "abtn abtn--primary",
+      href: 'mailto:' + active.email
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "mail",
+      size: 13
+    }), " Reply by email"), /*#__PURE__*/React.createElement("span", {
+      className: "cc__received"
+    }, "Received ", fmtDate(active.created_at)))) : /*#__PURE__*/React.createElement("div", {
+      className: "cc__detail cc__detail--empty"
+    }, "Select a transmission to read it.")));
+  }
+
+  // ── Settings ────────────────────────────────────────────────
+  const SETTING_GROUPS = [{
+    title: 'Identity',
+    fields: [{
+      key: 'site_title',
+      label: 'Business name'
+    }, {
+      key: 'tagline',
+      label: 'Tagline',
+      type: 'textarea'
+    }, {
+      key: 'brand_color',
+      label: 'Brand color',
+      type: 'color'
+    }]
+  }, {
+    title: 'The Lobby (hero)',
+    fields: [{
+      key: 'hero_title',
+      label: 'Hero headline',
+      type: 'textarea'
+    }, {
+      key: 'hero_subtitle',
+      label: 'Hero subheading',
+      type: 'textarea'
+    }, {
+      key: 'hero_cta_text',
+      label: 'Hero button text'
+    }]
+  }, {
+    title: 'About',
+    fields: [{
+      key: 'about_title',
+      label: 'About title'
+    }, {
+      key: 'about_body',
+      label: 'About text',
+      type: 'textarea',
+      rows: 5
+    }]
+  }, {
+    title: 'Contact',
+    fields: [{
+      key: 'phone',
+      label: 'Phone'
+    }, {
+      key: 'email',
+      label: 'Email'
+    }, {
+      key: 'address',
+      label: 'Location line',
+      type: 'textarea'
+    }, {
+      key: 'business_hours',
+      label: 'Business hours'
+    }]
+  }];
+  const SWATCHES = ['#3A7BD5', '#C5301A', '#1F8A5B', '#7A5AE0', '#B7791F'];
+  function Settings({
+    data,
+    actions,
+    onToast
+  }) {
+    const [v, setV] = useState(data.settings);
+    const [dirty, setDirty] = useState(false);
+    const set = k => e => {
+      setV(p => ({
+        ...p,
+        [k]: e.target.value
+      }));
+      setDirty(true);
+    };
+    const setVal = (k, val) => {
+      setV(p => ({
+        ...p,
+        [k]: val
+      }));
+      setDirty(true);
+    };
+    function save() {
+      actions.saveSettings(v);
+      setDirty(false);
+      onToast && onToast('Settings saved · Live site updated');
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      className: "apage apage--narrow"
+    }, /*#__PURE__*/React.createElement(PageHead, {
+      title: "Site Settings",
+      sub: "The words and identity of the public site."
+    }, dirty && /*#__PURE__*/React.createElement("span", {
+      className: "dirty-dot"
+    }, "Unsaved"), /*#__PURE__*/React.createElement("button", {
+      className: "abtn abtn--primary",
+      onClick: save,
+      disabled: !dirty
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save changes")), SETTING_GROUPS.map(g => /*#__PURE__*/React.createElement("section", {
+      className: "settings-group",
+      key: g.title
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "asubhead"
+    }, g.title), /*#__PURE__*/React.createElement("div", {
+      className: "settings-card"
+    }, g.fields.map(fld => /*#__PURE__*/React.createElement(Field, {
+      key: fld.key,
+      label: fld.label
+    }, fld.type === 'textarea' ? /*#__PURE__*/React.createElement("textarea", {
+      className: "ainput",
+      rows: fld.rows || 2,
+      value: v[fld.key] || '',
+      onChange: set(fld.key)
+    }) : fld.type === 'color' ? /*#__PURE__*/React.createElement("div", {
+      className: "color-row"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "color-chip",
+      style: {
+        background: v[fld.key]
+      }
+    }), SWATCHES.map(c => /*#__PURE__*/React.createElement("button", {
+      key: c,
+      type: "button",
+      className: 'swatch' + (v[fld.key] === c ? ' is-on' : ''),
+      style: {
+        background: c
+      },
+      onClick: () => setVal(fld.key, c)
+    })), /*#__PURE__*/React.createElement("input", {
+      className: "ainput mono color-hex",
+      value: v[fld.key] || '',
+      onChange: set(fld.key)
+    })) : /*#__PURE__*/React.createElement("input", {
+      className: "ainput",
+      value: v[fld.key] || '',
+      onChange: set(fld.key)
+    })))))));
+  }
+
+  // ── Nav chrome ──────────────────────────────────────────────
+  function Brand({
+    collapsed
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "admin-brand"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse"
+    }), !collapsed && /*#__PURE__*/React.createElement("span", null, "Site Admin"));
+  }
+  function NavItems({
+    section,
+    go,
+    collapsed
+  }) {
+    const cur = section.split(':')[0];
+    return NAV.map(n => /*#__PURE__*/React.createElement("button", {
+      key: n.id,
+      className: 'navitem' + (cur === n.id ? ' is-active' : ''),
+      onClick: () => go(n.id),
+      title: n.label
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: n.icon,
+      size: 15
+    }), !collapsed && /*#__PURE__*/React.createElement("span", null, n.label)));
+  }
+  function AdminApp({
+    data,
+    actions,
+    layout = 'topbar',
+    chrome = 'dark',
+    section,
+    setSection,
+    onViewSite,
+    onToast
+  }) {
+    const base = section.split(':')[0];
+    const sub = section.split(':')[1];
+    const [svcEditing, setSvcEditing] = useState(null);
+    const [noteEditing, setNoteEditing] = useState(null);
+    const go = id => {
+      setSection(id);
+      setSvcEditing(null);
+      setNoteEditing(null);
+    };
+
+    // posts editor state derived from section ("posts:new" or "posts:edit")
+    const [editingPost, setEditingPost] = useState(null);
+    useEffect(() => {
+      if (base !== 'posts') setEditingPost(null);
+      if (section === 'posts:new') setEditingPost('new');
+    }, [section]);
+    let content;
+    if (base === 'dashboard') content = /*#__PURE__*/React.createElement(Dashboard, {
+      data: data,
+      setSection: go,
+      onViewSite: onViewSite
+    });else if (base === 'posts') {
+      if (editingPost === 'new') content = /*#__PURE__*/React.createElement(PostEditor, {
+        actions: actions,
+        onDone: () => {
+          setEditingPost(null);
+          setSection('posts');
+        }
+      });else if (editingPost) content = /*#__PURE__*/React.createElement(PostEditor, {
+        post: editingPost,
+        actions: actions,
+        onDone: () => {
+          setEditingPost(null);
+          setSection('posts');
+        }
+      });else content = /*#__PURE__*/React.createElement(PostsList, {
+        data: data,
+        setSection: go,
+        onEdit: p => setEditingPost(p)
+      });
+    } else if (base === 'services') content = /*#__PURE__*/React.createElement(Services, {
+      data: data,
+      actions: actions,
+      editing: svcEditing,
+      setEditing: setSvcEditing
+    });else if (base === 'testimonials') content = /*#__PURE__*/React.createElement(FieldNotes, {
+      data: data,
+      actions: actions,
+      editing: noteEditing,
+      setEditing: setNoteEditing
+    });else if (base === 'messages') content = /*#__PURE__*/React.createElement(Messages, {
+      data: data,
+      actions: actions
+    });else if (base === 'settings') content = /*#__PURE__*/React.createElement(Settings, {
+      data: data,
+      actions: actions,
+      onToast: onToast
+    });
+    const unread = data.messages.filter(m => !m.read).length;
+    return /*#__PURE__*/React.createElement("div", {
+      className: 'admin admin--' + layout + ' admin--' + chrome
+    }, layout === 'topbar' && /*#__PURE__*/React.createElement("header", {
+      className: "admin-topbar"
+    }, /*#__PURE__*/React.createElement(Brand, null), /*#__PURE__*/React.createElement("nav", {
+      className: "admin-topbar__nav"
+    }, /*#__PURE__*/React.createElement(NavItems, {
+      section: section,
+      go: go
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "admin-topbar__right"
+    }, unread > 0 && /*#__PURE__*/React.createElement("span", {
+      className: "admin-badge"
+    }, unread), /*#__PURE__*/React.createElement("button", {
+      className: "admin-user",
+      onClick: onViewSite,
+      title: "View live site"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "external",
+      size: 13
+    }), " View site"))), (layout === 'sidebar' || layout === 'rail') && /*#__PURE__*/React.createElement("aside", {
+      className: 'admin-side' + (layout === 'rail' ? ' admin-side--rail' : '')
+    }, /*#__PURE__*/React.createElement(Brand, {
+      collapsed: layout === 'rail'
+    }), /*#__PURE__*/React.createElement("nav", {
+      className: "admin-side__nav"
+    }, /*#__PURE__*/React.createElement(NavItems, {
+      section: section,
+      go: go,
+      collapsed: layout === 'rail'
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "navitem navitem--foot",
+      onClick: onViewSite,
+      title: "View live site"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "external",
+      size: 15
+    }), layout !== 'rail' && /*#__PURE__*/React.createElement("span", null, "View live site"))), /*#__PURE__*/React.createElement("main", {
+      className: "admin-main"
+    }, content));
+  }
+  window.AdminApp = AdminApp;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/admin.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/app.jsx
+try { (() => {
+/* ============================================================
+   SHELL — browser chrome, Admin <-> Live Site, device toggle,
+   connected-save feedback, Tweaks. Mounts the whole prototype.
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useEffect,
+    useCallback
+  } = React;
+  const Icon = window.Icon;
+  const Store = window.CMSStore;
+  function useStore() {
+    const [data, setData] = useState(Store.get());
+    useEffect(() => Store.subscribe(s => setData({
+      ...s
+    })), []);
+    return data;
+  }
+
+  // ── Toast ───────────────────────────────────────────────────
+  function Toast({
+    msg
+  }) {
+    if (!msg) return null;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "toast",
+      key: msg.id
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse toast__dot"
+    }), /*#__PURE__*/React.createElement("span", null, msg.text));
+  }
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "adminLayout": "topbar",
+    "adminChrome": "dark",
+    "startMode": "admin"
+  } /*EDITMODE-END*/;
+  function App() {
+    const data = useStore();
+    const [t, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+    const [mode, setMode] = useState(t.startMode === 'site' ? 'site' : 'admin');
+    const [device, setDevice] = useState('desktop');
+    const [section, setSection] = useState('dashboard');
+    const [toast, setToast] = useState(null);
+    const [syncing, setSyncing] = useState(false);
+    const fireToast = useCallback(text => {
+      setToast({
+        id: Date.now(),
+        text
+      });
+      setSyncing(true);
+      setTimeout(() => setSyncing(false), 1100);
+      setTimeout(() => setToast(cur => cur && Date.now() - cur.id >= 3200 ? null : cur), 3300);
+    }, []);
+
+    // honor startMode tweak when changed in panel
+    useEffect(() => {
+      setMode(t.startMode === 'site' ? 'site' : 'admin');
+    }, [t.startMode]);
+
+    // ── Store actions ─────────────────────────────────────────
+    const actions = {
+      saveSettings(next) {
+        Store.update(d => {
+          d.settings = {
+            ...d.settings,
+            ...next
+          };
+        });
+      },
+      savePost(post) {
+        Store.update(d => {
+          if (post.id) {
+            const i = d.posts.findIndex(p => p.id === post.id);
+            d.posts[i] = {
+              ...d.posts[i],
+              ...post,
+              updated_at: new Date().toISOString()
+            };
+          } else {
+            d.posts.unshift({
+              ...post,
+              id: Store.uid('post'),
+              updated_at: new Date().toISOString()
+            });
+          }
+        });
+        fireToast(post.status === 'published' ? 'Post published · Live on the site' : 'Draft saved');
+      },
+      deletePost(id) {
+        Store.update(d => {
+          d.posts = d.posts.filter(p => p.id !== id);
+        });
+        fireToast('Post deleted');
+      },
+      saveService(svc) {
+        Store.update(d => {
+          if (svc.id) {
+            const i = d.services.findIndex(x => x.id === svc.id);
+            d.services[i] = {
+              ...d.services[i],
+              ...svc
+            };
+          } else d.services.push({
+            ...svc,
+            id: Store.uid('svc')
+          });
+        });
+        fireToast('Department saved · Live site updated');
+      },
+      deleteService(id) {
+        Store.update(d => {
+          d.services = d.services.filter(x => x.id !== id);
+        });
+        fireToast('Department removed');
+      },
+      moveService(id, dir) {
+        Store.update(d => {
+          const arr = [...d.services].sort((a, b) => a.display_order - b.display_order);
+          const i = arr.findIndex(x => x.id === id);
+          const j = i + dir;
+          if (j < 0 || j >= arr.length) return;
+          [arr[i].display_order, arr[j].display_order] = [arr[j].display_order, arr[i].display_order];
+        });
+      },
+      saveTestimonial(t2) {
+        Store.update(d => {
+          if (t2.id) {
+            const i = d.testimonials.findIndex(x => x.id === t2.id);
+            d.testimonials[i] = {
+              ...d.testimonials[i],
+              ...t2
+            };
+          } else d.testimonials.push({
+            ...t2,
+            id: Store.uid('tst')
+          });
+        });
+        fireToast('Field note saved · Live site updated');
+      },
+      deleteTestimonial(id) {
+        Store.update(d => {
+          d.testimonials = d.testimonials.filter(x => x.id !== id);
+        });
+        fireToast('Field note removed');
+      },
+      markRead(id, read) {
+        Store.update(d => {
+          const m = d.messages.find(x => x.id === id);
+          if (m) m.read = read;
+        });
+      },
+      deleteMessage(id) {
+        Store.update(d => {
+          d.messages = d.messages.filter(x => x.id !== id);
+        });
+        fireToast('Transmission deleted');
+      },
+      addMessage(form) {
+        Store.update(d => {
+          d.messages.unshift({
+            ...form,
+            id: Store.uid('msg'),
+            read: false,
+            created_at: new Date().toISOString()
+          });
+        });
+        fireToast('Transmission received · Now in the Command Center');
+      }
+    };
+    const url = mode === 'admin' ? 'https://digitalallies.net/admin/' + section.split(':')[0].replace('dashboard', '') : 'https://digitalallies.net';
+    return /*#__PURE__*/React.createElement("div", {
+      className: "shell"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "strip"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "strip__brand"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "strip__name"
+    }, "Digital Allies"), /*#__PURE__*/React.createElement("span", {
+      className: "strip__tag"
+    }, "Connected CMS")), /*#__PURE__*/React.createElement("div", {
+      className: "seg"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: mode === 'admin' ? 'is-on' : '',
+      onClick: () => setMode('admin')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "lock",
+      size: 13
+    }), " Admin"), /*#__PURE__*/React.createElement("button", {
+      className: mode === 'site' ? 'is-on' : '',
+      onClick: () => setMode('site')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "globe",
+      size: 13
+    }), " Live Site")), /*#__PURE__*/React.createElement("div", {
+      className: "strip__right"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: 'sync' + (syncing ? ' sync--on' : '')
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse sync__dot"
+    }), syncing ? 'Syncing…' : 'Connected'), mode === 'site' && /*#__PURE__*/React.createElement("div", {
+      className: "seg seg--device"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: device === 'desktop' ? 'is-on' : '',
+      onClick: () => setDevice('desktop'),
+      title: "Desktop"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "monitor",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: device === 'phone' ? 'is-on' : '',
+      onClick: () => setDevice('phone'),
+      title: "Phone"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "smartphone",
+      size: 14
+    }))))), /*#__PURE__*/React.createElement("div", {
+      className: "bw"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bw__bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bw__lights"
+    }, /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null), /*#__PURE__*/React.createElement("span", null)), /*#__PURE__*/React.createElement("div", {
+      className: "bw__url"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "lock",
+      size: 11
+    }), /*#__PURE__*/React.createElement("span", null, url)), /*#__PURE__*/React.createElement("div", {
+      className: "bw__bar-right"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "refresh",
+      size: 13
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: 'bw__view' + (mode === 'site' && device === 'phone' ? ' bw__view--stage' : '')
+    }, mode === 'admin' ? /*#__PURE__*/React.createElement(AdminApp, {
+      data: data,
+      actions: actions,
+      layout: t.adminLayout,
+      chrome: t.adminChrome,
+      section: section,
+      setSection: setSection,
+      onViewSite: () => setMode('site'),
+      onToast: fireToast
+    }) : device === 'phone' ? /*#__PURE__*/React.createElement("div", {
+      className: "phone"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "phone__notch"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "phone__screen"
+    }, /*#__PURE__*/React.createElement(PublicSite, {
+      data: data,
+      device: "phone",
+      onSubmitMessage: actions.addMessage
+    }))) : /*#__PURE__*/React.createElement(PublicSite, {
+      data: data,
+      device: "desktop",
+      onSubmitMessage: actions.addMessage
+    }))), /*#__PURE__*/React.createElement(Toast, {
+      msg: toast
+    }), /*#__PURE__*/React.createElement(window.TweaksPanel, null, /*#__PURE__*/React.createElement(window.TweakSection, {
+      label: "Admin layout"
+    }), /*#__PURE__*/React.createElement(window.TweakRadio, {
+      label: "Navigation",
+      value: t.adminLayout,
+      options: [{
+        value: 'topbar',
+        label: 'Top bar'
+      }, {
+        value: 'sidebar',
+        label: 'Sidebar'
+      }, {
+        value: 'rail',
+        label: 'Rail'
+      }],
+      onChange: v => {
+        setTweak('adminLayout', v);
+        setMode('admin');
+      }
+    }), /*#__PURE__*/React.createElement(window.TweakRadio, {
+      label: "Chrome",
+      value: t.adminChrome,
+      options: [{
+        value: 'dark',
+        label: 'Dark'
+      }, {
+        value: 'light',
+        label: 'Light'
+      }],
+      onChange: v => {
+        setTweak('adminChrome', v);
+        setMode('admin');
+      }
+    }), /*#__PURE__*/React.createElement(window.TweakSection, {
+      label: "Brand color"
+    }), /*#__PURE__*/React.createElement(window.TweakColor, {
+      label: "Accent (re-themes the site)",
+      value: data.settings.brand_color,
+      options: ['#3A7BD5', '#C5301A', '#1F8A5B', '#7A5AE0', '#B7791F'],
+      onChange: v => {
+        actions.saveSettings({
+          brand_color: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(window.TweakSection, {
+      label: "Demo"
+    }), /*#__PURE__*/React.createElement(window.TweakRadio, {
+      label: "Start on",
+      value: t.startMode,
+      options: [{
+        value: 'admin',
+        label: 'Admin'
+      }, {
+        value: 'site',
+        label: 'Live Site'
+      }],
+      onChange: v => setTweak('startMode', v)
+    }), /*#__PURE__*/React.createElement(window.TweakButton, {
+      label: "Reset demo content",
+      onClick: () => {
+        Store.reset();
+        fireToast('Demo content reset');
+      }
+    })));
+  }
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(/*#__PURE__*/React.createElement(App, null));
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/app.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/icons.jsx
+try { (() => {
+/* Shared line-art icon set — 1.5px stroke, square caps, matches the
+   Digital Allies "Artifact Icon" aesthetic. Lucide-derived paths. */
+(function () {
+  const P = {
+    // department artifacts
+    compass: '<circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+    cog: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+    timer: '<line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="12" y1="14" y2="9"/><circle cx="12" cy="14" r="8"/>',
+    radar: '<path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/>',
+    // ui
+    phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+    mail: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+    mapPin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+    arrowRight: '<line x1="5" x2="19" y1="12" y2="12"/><polyline points="12 5 19 12 12 19"/>',
+    star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    plus: '<line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/>',
+    x: '<line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/>',
+    menu: '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
+    edit: '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/>',
+    trash: '<path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+    eye: '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+    layout: '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>',
+    fileText: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/>',
+    briefcase: '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+    settings: '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+    message: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    dashboard: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+    external: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+    check: '<polyline points="20 6 9 17 4 12"/>',
+    chevronLeft: '<path d="m15 18-6-6 6-6"/>',
+    chevronDown: '<path d="m6 9 6 6 6-6"/>',
+    image: '<rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
+    bold: '<path d="M14 12a4 4 0 0 0 0-8H6v8"/><path d="M15 20a4 4 0 0 0 0-8H6v8Z"/>',
+    italic: '<line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/>',
+    list: '<line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/>',
+    heading: '<path d="M6 12h12"/><path d="M6 20V4"/><path d="M18 20V4"/>',
+    quote: '<path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/>',
+    send: '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+    clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+    refresh: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/>',
+    monitor: '<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+    smartphone: '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>',
+    globe: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+    lock: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    user: '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+    logout: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/>',
+    save: '<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>',
+    grid: '<rect width="7" height="7" x="3" y="3"/><rect width="7" height="7" x="14" y="3"/><rect width="7" height="7" x="14" y="14"/><rect width="7" height="7" x="3" y="14"/>',
+    plug: '<path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/>'
+  };
+  function Icon({
+    name,
+    size = 18,
+    stroke = 1.6,
+    color = 'currentColor',
+    style,
+    className
+  }) {
+    return React.createElement('svg', {
+      width: size,
+      height: size,
+      viewBox: '0 0 24 24',
+      fill: 'none',
+      stroke: color,
+      strokeWidth: stroke,
+      strokeLinecap: 'round',
+      strokeLinejoin: 'round',
+      className,
+      style,
+      dangerouslySetInnerHTML: {
+        __html: P[name] || ''
+      }
+    });
+  }
+  window.Icon = Icon;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/icons.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/site.jsx
+try { (() => {
+/* ============================================================
+   PUBLIC SITE — digitalallies.net, rendered live from the store.
+   Exports window.PublicSite({ data, device, onSubmitMessage })
+   ============================================================ */
+(function () {
+  const {
+    useState
+  } = React;
+  const Icon = window.Icon;
+  const ICON_FOR = {
+    compass: 'compass',
+    cog: 'cog',
+    timer: 'timer',
+    radar: 'radar'
+  };
+  function Eyebrow({
+    children,
+    tone
+  }) {
+    return /*#__PURE__*/React.createElement("span", {
+      className: 'da-eyebrow' + (tone ? ' da-eyebrow--' + tone : '')
+    }, children);
+  }
+  function Bracket({
+    children,
+    primary,
+    href,
+    onClick
+  }) {
+    return /*#__PURE__*/React.createElement("a", {
+      className: 'site-btn' + (primary ? ' site-btn--primary' : ''),
+      href: href || '#',
+      onClick: onClick
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "["), /*#__PURE__*/React.createElement("span", null, children), /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "]"));
+  }
+
+  // ── Nav ─────────────────────────────────────────────────────
+  function SiteNav({
+    s,
+    compact,
+    onNav
+  }) {
+    return /*#__PURE__*/React.createElement("header", {
+      className: "site-nav"
+    }, /*#__PURE__*/React.createElement("a", {
+      className: "site-brand",
+      href: "#top",
+      onClick: e => {
+        e.preventDefault();
+        onNav('top');
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "site-brand__word"
+    }, s.site_title)), !compact && /*#__PURE__*/React.createElement("nav", {
+      className: "site-nav__links"
+    }, /*#__PURE__*/React.createElement("a", {
+      href: "#departments",
+      onClick: e => {
+        e.preventDefault();
+        onNav('departments');
+      }
+    }, "The Departments"), /*#__PURE__*/React.createElement("a", {
+      href: "#fieldnotes",
+      onClick: e => {
+        e.preventDefault();
+        onNav('fieldnotes');
+      }
+    }, "Field Notes"), /*#__PURE__*/React.createElement("a", {
+      href: "#journal",
+      onClick: e => {
+        e.preventDefault();
+        onNav('journal');
+      }
+    }, "The Journal"), /*#__PURE__*/React.createElement("span", {
+      className: "site-nav__lang",
+      style: {
+        color: "rgb(45, 45, 45)"
+      }
+    }, "EN ", /*#__PURE__*/React.createElement("span", null, "|"), " ES")), /*#__PURE__*/React.createElement("a", {
+      className: "site-btn site-btn--primary site-nav__cta",
+      href: "#contact",
+      onClick: e => {
+        e.preventDefault();
+        onNav('contact');
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "["), /*#__PURE__*/React.createElement("span", null, s.hero_cta_text || 'Inquire Within'), /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "]")));
+  }
+
+  // ── Hero / The Lobby ────────────────────────────────────────
+  function SiteHero({
+    s,
+    onNav
+  }) {
+    return /*#__PURE__*/React.createElement("section", {
+      className: "site-hero",
+      id: "top"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, s.address), /*#__PURE__*/React.createElement("h1", {
+      className: "site-hero__title da-display"
+    }, s.hero_title), /*#__PURE__*/React.createElement("p", {
+      className: "site-hero__sub"
+    }, s.hero_subtitle), /*#__PURE__*/React.createElement("div", {
+      className: "site-hero__cta"
+    }, /*#__PURE__*/React.createElement(Bracket, {
+      primary: true,
+      href: "#contact",
+      onClick: e => {
+        e.preventDefault();
+        onNav('contact');
+      }
+    }, s.hero_cta_text || 'Inquire Within'), /*#__PURE__*/React.createElement(Bracket, {
+      href: "#departments",
+      onClick: e => {
+        e.preventDefault();
+        onNav('departments');
+      }
+    }, "View the Departments")), /*#__PURE__*/React.createElement("div", {
+      className: "da-pinned site-hero__pin"
+    }, "Clean engineering, clear communication, and follow-through that won\u2019t require follow up."));
+  }
+
+  // ── The Departments ─────────────────────────────────────────
+  function SiteDepartments({
+    services
+  }) {
+    if (!services.length) return null;
+    return /*#__PURE__*/React.createElement("section", {
+      className: "site-section",
+      id: "departments"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-section__head"
+    }, /*#__PURE__*/React.createElement(Eyebrow, {
+      tone: "blue"
+    }, "The Departments"), /*#__PURE__*/React.createElement("h2", {
+      className: "site-section__title"
+    }, "Four distinct operations. One point of contact.")), /*#__PURE__*/React.createElement("div", {
+      className: "dept-grid"
+    }, services.map(svc => /*#__PURE__*/React.createElement("article", {
+      className: "dept-card",
+      key: svc.id
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "dept-card__icon"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: ICON_FOR[svc.icon] || 'compass',
+      size: 26,
+      stroke: 1.4
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "dept-card__dot"
+    })), /*#__PURE__*/React.createElement("h3", {
+      className: "dept-card__title"
+    }, svc.title), /*#__PURE__*/React.createElement("p", {
+      className: "dept-card__desc"
+    }, svc.description), /*#__PURE__*/React.createElement("div", {
+      className: "dept-card__price"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "dept-card__price-label"
+    }, "Transparency Table"), /*#__PURE__*/React.createElement("span", {
+      className: "dept-card__price-val"
+    }, svc.price))))));
+  }
+
+  // ── About ───────────────────────────────────────────────────
+  function SiteAbout({
+    s
+  }) {
+    if (!s.about_body) return null;
+    return /*#__PURE__*/React.createElement("section", {
+      className: "site-section site-about",
+      id: "about"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-about__col"
+    }, /*#__PURE__*/React.createElement(Eyebrow, null, "Field Manual \xB7 01"), /*#__PURE__*/React.createElement("h2", {
+      className: "site-section__title"
+    }, s.about_title)), /*#__PURE__*/React.createElement("div", {
+      className: "site-about__col"
+    }, s.about_body.split('\n\n').map((para, i) => /*#__PURE__*/React.createElement("p", {
+      className: "site-about__p",
+      key: i
+    }, para))));
+  }
+
+  // ── Field Notes (testimonials) ──────────────────────────────
+  function SiteFieldNotes({
+    items
+  }) {
+    if (!items.length) return null;
+    return /*#__PURE__*/React.createElement("section", {
+      className: "site-section",
+      id: "fieldnotes"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-section__head"
+    }, /*#__PURE__*/React.createElement(Eyebrow, {
+      tone: "blue"
+    }, "Archive: Field Notes"), /*#__PURE__*/React.createElement("h2", {
+      className: "site-section__title"
+    }, "What the neighbors say.")), /*#__PURE__*/React.createElement("div", {
+      className: "notes-grid"
+    }, items.map(t => /*#__PURE__*/React.createElement("figure", {
+      className: "note-card",
+      key: t.id
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "note-card__stars"
+    }, Array.from({
+      length: t.rating || 5
+    }).map((_, i) => /*#__PURE__*/React.createElement(Icon, {
+      key: i,
+      name: "star",
+      size: 13,
+      stroke: 0,
+      color: "var(--signal)",
+      style: {
+        fill: 'var(--signal)'
+      }
+    }))), /*#__PURE__*/React.createElement("blockquote", {
+      className: "note-card__quote"
+    }, "\u201C", t.content, "\u201D"), /*#__PURE__*/React.createElement("figcaption", {
+      className: "note-card__by"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "note-card__name"
+    }, t.author_name), t.author_role && /*#__PURE__*/React.createElement("span", {
+      className: "note-card__role"
+    }, t.author_role))))));
+  }
+
+  // ── The Journal (published posts) ───────────────────────────
+  function SiteJournal({
+    posts
+  }) {
+    const live = posts.filter(p => p.status === 'published');
+    if (!live.length) return null;
+    const fmt = d => d ? new Date(d).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    }) : '';
+    return /*#__PURE__*/React.createElement("section", {
+      className: "site-section",
+      id: "journal"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-section__head"
+    }, /*#__PURE__*/React.createElement(Eyebrow, {
+      tone: "blue"
+    }, "The Journal"), /*#__PURE__*/React.createElement("h2", {
+      className: "site-section__title"
+    }, "Notes from the desk.")), /*#__PURE__*/React.createElement("div", {
+      className: "journal-list"
+    }, live.map(p => /*#__PURE__*/React.createElement("article", {
+      className: "journal-row",
+      key: p.id
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "journal-row__meta"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "journal-row__date"
+    }, fmt(p.published_at))), /*#__PURE__*/React.createElement("div", {
+      className: "journal-row__body"
+    }, /*#__PURE__*/React.createElement("h3", {
+      className: "journal-row__title"
+    }, p.title), p.excerpt && /*#__PURE__*/React.createElement("p", {
+      className: "journal-row__excerpt"
+    }, p.excerpt), /*#__PURE__*/React.createElement("span", {
+      className: "journal-row__more"
+    }, "Read the post ", /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 13
+    })))))));
+  }
+
+  // ── The Command Center (contact) ────────────────────────────
+  function SiteContact({
+    s,
+    onSubmitMessage
+  }) {
+    const [form, setForm] = useState({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
+    });
+    const [sent, setSent] = useState(false);
+    const set = k => e => setForm(f => ({
+      ...f,
+      [k]: e.target.value
+    }));
+    function submit(e) {
+      e.preventDefault();
+      if (!form.name || !form.email || !form.message) return;
+      onSubmitMessage(form);
+      setSent(true);
+      setForm({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+      setTimeout(() => setSent(false), 4000);
+    }
+    return /*#__PURE__*/React.createElement("section", {
+      className: "site-section site-contact",
+      id: "contact"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-contact__intro"
+    }, /*#__PURE__*/React.createElement(Eyebrow, {
+      tone: "blue"
+    }, "The Command Center"), /*#__PURE__*/React.createElement("h2", {
+      className: "site-section__title"
+    }, "Send a Transmission."), /*#__PURE__*/React.createElement("p", {
+      className: "site-contact__lead",
+      style: {
+        color: "rgb(249, 246, 240)"
+      }
+    }, "I am historically easy to reach. I live in Kingman. If you call, I answer."), /*#__PURE__*/React.createElement("ul", {
+      className: "site-contact__lines"
+    }, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Icon, {
+      name: "phone",
+      size: 15
+    }), " ", s.phone), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Icon, {
+      name: "mail",
+      size: 15
+    }), " ", s.email), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement(Icon, {
+      name: "clock",
+      size: 15
+    }), " ", s.business_hours))), /*#__PURE__*/React.createElement("form", {
+      className: "transmission",
+      onSubmit: submit
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "transmission__row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "field"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "field__label"
+    }, "Name"), /*#__PURE__*/React.createElement("input", {
+      className: "field__input",
+      value: form.name,
+      onChange: set('name'),
+      required: true
+    })), /*#__PURE__*/React.createElement("label", {
+      className: "field"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "field__label"
+    }, "Email"), /*#__PURE__*/React.createElement("input", {
+      className: "field__input",
+      type: "email",
+      value: form.email,
+      onChange: set('email'),
+      required: true
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "transmission__row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "field"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "field__label"
+    }, "Phone ", /*#__PURE__*/React.createElement("em", null, "(optional)")), /*#__PURE__*/React.createElement("input", {
+      className: "field__input",
+      value: form.phone,
+      onChange: set('phone')
+    })), /*#__PURE__*/React.createElement("label", {
+      className: "field"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "field__label"
+    }, "Subject"), /*#__PURE__*/React.createElement("input", {
+      className: "field__input",
+      value: form.subject,
+      onChange: set('subject')
+    }))), /*#__PURE__*/React.createElement("label", {
+      className: "field"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "field__label"
+    }, "Message"), /*#__PURE__*/React.createElement("textarea", {
+      className: "field__input",
+      rows: 4,
+      value: form.message,
+      onChange: set('message'),
+      required: true
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "transmission__foot"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "site-btn site-btn--primary",
+      type: "submit"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "["), /*#__PURE__*/React.createElement("span", null, "Submit Transmission"), /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "]")), sent && /*#__PURE__*/React.createElement("span", {
+      className: "transmission__sent"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "check",
+      size: 14
+    }), " Received. Anthony will reply in person."))));
+  }
+
+  // ── Footer ──────────────────────────────────────────────────
+  function SiteFooter({
+    s
+  }) {
+    return /*#__PURE__*/React.createElement("footer", {
+      className: "site-footer"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-footer__main"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+      className: "site-footer__big"
+    }, "Need a strategic ally?"), /*#__PURE__*/React.createElement("a", {
+      className: "site-btn site-btn--primary",
+      href: "#contact"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "["), /*#__PURE__*/React.createElement("span", null, "Inquire Within"), /*#__PURE__*/React.createElement("span", {
+      className: "site-btn__bracket"
+    }, "]"))), /*#__PURE__*/React.createElement("div", {
+      className: "site-footer__meta"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-brand"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse"
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "site-brand__word"
+    }, s.site_title)), /*#__PURE__*/React.createElement("p", null, s.address), /*#__PURE__*/React.createElement("p", null, s.phone, " \xB7 ", s.email), /*#__PURE__*/React.createElement("p", {
+      className: "site-footer__fine"
+    }, "High-end engineering delivered with the enthusiasm of a librarian on a Tuesday."))));
+  }
+  function PublicSite({
+    data,
+    device,
+    onSubmitMessage
+  }) {
+    const s = data.settings;
+    const scrollRef = React.useRef(null);
+    const compact = device === 'phone';
+    function onNav(id) {
+      const root = scrollRef.current;
+      if (!root) return;
+      const el = id === 'top' ? root : root.querySelector('#' + id);
+      if (el) root.scrollTo({
+        top: id === 'top' ? 0 : el.offsetTop - 12,
+        behavior: 'smooth'
+      });
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      className: 'site-root' + (compact ? ' site-root--phone' : ''),
+      style: {
+        '--accent': s.brand_color,
+        '--site-accent': s.brand_color
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "site-scroll da-lace",
+      ref: scrollRef
+    }, /*#__PURE__*/React.createElement(SiteNav, {
+      s: s,
+      compact: compact,
+      onNav: onNav
+    }), /*#__PURE__*/React.createElement(SiteHero, {
+      s: s,
+      onNav: onNav
+    }), /*#__PURE__*/React.createElement(SiteDepartments, {
+      services: [...data.services].sort((a, b) => a.display_order - b.display_order)
+    }), /*#__PURE__*/React.createElement(SiteAbout, {
+      s: s
+    }), /*#__PURE__*/React.createElement(SiteFieldNotes, {
+      items: [...data.testimonials].sort((a, b) => a.display_order - b.display_order)
+    }), /*#__PURE__*/React.createElement(SiteJournal, {
+      posts: data.posts
+    }), /*#__PURE__*/React.createElement(SiteContact, {
+      s: s,
+      onSubmitMessage: onSubmitMessage
+    }), /*#__PURE__*/React.createElement(SiteFooter, {
+      s: s
+    })));
+  }
+  window.PublicSite = PublicSite;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/site.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/store.js
+try { (() => {
+/* ============================================================
+   Connected CMS — shared data store
+   A tiny observable store, persisted to localStorage, that BOTH
+   the admin CMS and the public site read from. Editing in admin
+   mutates this store; the live site re-renders from it. That is
+   the "connected" magic.
+   ============================================================ */
+(function () {
+  const LS_KEY = 'da_connected_cms_v1';
+
+  // ── Seed content — Digital Allies, the real brand ──────────────
+  const SEED = {
+    settings: {
+      site_title: 'Digital Allies',
+      tagline: 'Technological Solutions for People with Better Things to Do.',
+      site_description: 'A one-person technology shop in Kingman, AZ. I build systems that work and explain them in plain English.',
+      phone: '(928) 228-5769',
+      email: 'contact@digitalallies.net',
+      address: 'Based in Kingman, AZ · Serving Everywhere Else',
+      business_hours: 'Mon–Fri · 8a–6p MST · I answer the phone.',
+      brand_color: '#3A7BD5',
+      hero_title: 'Technological Solutions for People with Better Things to Do.',
+      hero_subtitle: "I build systems that don't require a master's degree to operate. Clean engineering, clear communication, and follow-through that won't require follow up.",
+      hero_cta_text: 'Inquire Within',
+      hero_cta_link: '#contact',
+      about_title: 'The Knowledgeable Neighbor',
+      about_body: "I am historically easy to reach. I live in Kingman. If you call, I answer. It is a very avant-garde concept called \u201CDoing My Job.\u201D\n\nStrategy is free. Execution is paid. All quotes are given before work begins \u2014 no surprises, no silent scope creep."
+    },
+    // The Departments
+    services: [{
+      id: 'svc-1',
+      title: 'The Design Bureau',
+      icon: 'compass',
+      price: 'From $2,400',
+      description: 'Your logo, site, and words look like they know each other. Brand, identity, and a website that earns its keep.',
+      display_order: 0
+    }, {
+      id: 'svc-2',
+      title: 'Dept. of Cooperation',
+      icon: 'cog',
+      price: 'From $1,800',
+      description: 'Your apps talk to each other. You don\u2019t have to. Integrations that quietly move data where it needs to go.',
+      display_order: 1
+    }, {
+      id: 'svc-3',
+      title: 'The Self-Governing Bureau',
+      icon: 'timer',
+      price: 'From $1,200',
+      description: 'Repetitive tasks are for machines. Go take a real lunch break. Automation that runs without you watching.',
+      display_order: 2
+    }, {
+      id: 'svc-4',
+      title: 'The Permanent Observation Post',
+      icon: 'radar',
+      price: 'From $300/mo',
+      description: 'Monitoring runs 24/7. If something breaks at 2am, that\u2019s my problem \u2014 not yours.',
+      display_order: 3
+    }],
+    // Field Notes
+    testimonials: [{
+      id: 'tst-1',
+      author_name: 'Marguerite Vance',
+      author_role: 'Vance & Daughters Hardware · Kingman',
+      rating: 5,
+      content: 'He picked up the phone on the first ring, every single time. The new ordering system saved my Saturdays. I do not know what half of it does and I do not need to.',
+      display_order: 0
+    }, {
+      id: 'tst-2',
+      author_name: 'Dr. Elias Knox',
+      author_role: 'Knox Family Dental',
+      rating: 5,
+      content: 'No jargon, no runaround. He explained the whole thing in plain English, gave the quote before starting, and finished early. Rare.',
+      display_order: 1
+    }, {
+      id: 'tst-3',
+      author_name: 'Pilar Ortega',
+      author_role: 'Ortega Route 66 Diner',
+      rating: 5,
+      content: 'The reservations and the website finally talk to each other. My host stand stopped double-booking tables. Worth every dollar.',
+      display_order: 2
+    }],
+    // Posts
+    posts: [{
+      id: 'post-1',
+      title: 'Why I answer the phone',
+      slug: 'why-i-answer-the-phone',
+      excerpt: 'A short defense of a radical business practice: being reachable.',
+      content: '<p>There is a strange idea in this industry that being hard to reach makes you important. I disagree. If you call, I answer. If I am on a roof fixing an antenna, I will call you back before the end of the day.</p><h2>The whole pitch</h2><p>Going quiet is not part of my service model. If I take your project, I finish it. If something changes, I tell you.</p>',
+      status: 'published',
+      published_at: '2025-02-18T15:00:00Z',
+      updated_at: '2025-02-18T15:00:00Z'
+    }, {
+      id: 'post-2',
+      title: 'The Jargon Jar: a translation guide',
+      slug: 'the-jargon-jar',
+      excerpt: 'Corporate speak, translated into things a human being would actually say.',
+      content: '<p>"Leverage synergies across touchpoints" means "make the parts work together." That is the whole jar.</p><p>If I ever reach for the left column, rewrite me using the right.</p>',
+      status: 'published',
+      published_at: '2025-01-30T15:00:00Z',
+      updated_at: '2025-01-30T15:00:00Z'
+    }, {
+      id: 'post-3',
+      title: 'On the Reciprocity Loop (draft)',
+      slug: 'the-reciprocity-loop',
+      excerpt: 'Strategy is free. Execution is paid. Here is why that works.',
+      content: '<p>I do not charge for conversations or clarity. Call it a professional courtesy.</p>',
+      status: 'draft',
+      published_at: null,
+      updated_at: '2025-03-02T18:30:00Z'
+    }],
+    // The Command Center — incoming transmissions
+    messages: [{
+      id: 'msg-1',
+      name: 'Theodore Brandt',
+      email: 'theo@brandtmotors.com',
+      phone: '(928) 555-0147',
+      subject: 'Website + booking for the shop',
+      message: 'Saw your site. My current one is held together with tape. Can we talk about a rebuild and an online booking thing for the garage?',
+      read: false,
+      created_at: '2025-03-04T17:42:00Z'
+    }, {
+      id: 'msg-2',
+      name: 'Ruth Calloway',
+      email: 'ruth.calloway@gmail.com',
+      phone: null,
+      subject: 'Automating invoices',
+      message: 'I spend every Friday typing invoices by hand. A friend said you might be able to make that stop happening. Please.',
+      read: false,
+      created_at: '2025-03-03T09:12:00Z'
+    }, {
+      id: 'msg-3',
+      name: 'Sam Whitfield',
+      email: 'sam@whitfieldlaw.net',
+      phone: '(602) 555-0190',
+      subject: 'Quick question on monitoring',
+      message: 'What does the Permanent Observation Post actually cover? Do you watch the site overnight?',
+      read: true,
+      created_at: '2025-02-28T20:05:00Z'
+    }]
+  };
+
+  // ── Persistence ───────────────────────────────────────────────
+  function load() {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return JSON.parse(JSON.stringify(SEED));
+  }
+  let state = load();
+  const listeners = new Set();
+  function persist() {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+  function emit() {
+    listeners.forEach(fn => fn(state));
+  }
+  const Store = {
+    get: () => state,
+    subscribe(fn) {
+      listeners.add(fn);
+      return () => listeners.delete(fn);
+    },
+    // mutate with an updater fn that returns a (possibly new) state
+    update(mutator) {
+      const draft = JSON.parse(JSON.stringify(state));
+      const next = mutator(draft) || draft;
+      state = next;
+      persist();
+      emit();
+    },
+    reset() {
+      state = JSON.parse(JSON.stringify(SEED));
+      persist();
+      emit();
+    },
+    uid(prefix) {
+      return (prefix || 'id') + '-' + Math.random().toString(36).slice(2, 9);
+    }
+  };
+  window.CMSStore = Store;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/store.js", error: String((e && e.message) || e) }); }
+
+// cms/connected/tweaks-panel.jsx
+try { (() => {
+// @ds-adherence-ignore -- omelette starter scaffold (raw elements/hex/px by design)
+
+/* BEGIN USAGE */
+// tweaks-panel.jsx
+// Reusable Tweaks shell + form-control helpers.
+// Exports (to window): useTweaks, TweaksPanel, TweakSection, TweakRow, TweakSlider,
+//   TweakToggle, TweakRadio, TweakSelect, TweakText, TweakNumber, TweakColor, TweakButton.
+//
+// Owns the host protocol (listens for __activate_edit_mode / __deactivate_edit_mode,
+// posts __edit_mode_available / __edit_mode_set_keys / __edit_mode_dismissed) so
+// individual prototypes don't re-roll it. Ships a consistent set of controls so you
+// don't hand-draw <input type="range">, segmented radios, steppers, etc.
+//
+// Usage (in an HTML file that loads React + Babel):
+//
+//   const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+//     "primaryColor": "#D97757",
+//     "palette": ["#D97757", "#29261b", "#f6f4ef"],
+//     "fontSize": 16,
+//     "density": "regular",
+//     "dark": false
+//   }/*EDITMODE-END*/;
+//
+//   function App() {
+//     const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+//     return (
+//       <div style={{ fontSize: t.fontSize, color: t.primaryColor }}>
+//         Hello
+//         <TweaksPanel>
+//           <TweakSection label="Typography" />
+//           <TweakSlider label="Font size" value={t.fontSize} min={10} max={32} unit="px"
+//                        onChange={(v) => setTweak('fontSize', v)} />
+//           <TweakRadio  label="Density" value={t.density}
+//                        options={['compact', 'regular', 'comfy']}
+//                        onChange={(v) => setTweak('density', v)} />
+//           <TweakSection label="Theme" />
+//           <TweakColor  label="Primary" value={t.primaryColor}
+//                        options={['#D97757', '#2A6FDB', '#1F8A5B', '#7A5AE0']}
+//                        onChange={(v) => setTweak('primaryColor', v)} />
+//           <TweakColor  label="Palette" value={t.palette}
+//                        options={[['#D97757', '#29261b', '#f6f4ef'],
+//                                  ['#475569', '#0f172a', '#f1f5f9']]}
+//                        onChange={(v) => setTweak('palette', v)} />
+//           <TweakToggle label="Dark mode" value={t.dark}
+//                        onChange={(v) => setTweak('dark', v)} />
+//         </TweaksPanel>
+//       </div>
+//     );
+//   }
+//
+// TweakRadio is the segmented control for 2–3 short options (auto-falls-back to
+// TweakSelect past ~16/~10 chars per label); reach for TweakSelect directly when
+// options are many or long. For color tweaks always curate 3-4 options rather than
+// a free picker; an option can also be a whole 2–5 color palette (the stored value
+// is the array). The Tweak* controls are a floor, not a ceiling — build custom
+// controls inside the panel if a tweak calls for UI they don't cover.
+/* END USAGE */
+// ─────────────────────────────────────────────────────────────────────────────
+
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-body::-webkit-scrollbar-thumb:hover{background:rgba(0,0,0,.25);
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;
+    color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='rgba(0,0,0,.5)' d='M0 0h10L5 6z'/></svg>");
+    background-repeat:no-repeat;background-position:right 8px center}
+
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+    background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;
+    overflow-wrap:anywhere}
+
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+
+  .twk-num{display:flex;align-items:center;box-sizing:border-box;min-width:0;height:26px;padding:0 0 0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6)}
+  .twk-num-lbl{font-weight:500;color:rgba(41,38,27,.6);cursor:ew-resize;
+    user-select:none;padding-right:8px}
+  .twk-num input{flex:1;min-width:0;height:100%;border:0;background:transparent;
+    font:inherit;font-variant-numeric:tabular-nums;text-align:right;padding:0 8px 0 0;
+    outline:none;color:inherit;-moz-appearance:textfield}
+  .twk-num input::-webkit-inner-spin-button,.twk-num input::-webkit-outer-spin-button{
+    -webkit-appearance:none;margin:0}
+  .twk-num-unit{padding-right:8px;color:rgba(41,38,27,.45)}
+
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;
+    background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+  .twk-btn.secondary:hover{background:rgba(0,0,0,.1)}
+
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+  .twk-swatch::-moz-color-swatch{border:0;border-radius:5.5px}
+
+  .twk-chips{display:flex;gap:6px}
+  .twk-chip{position:relative;appearance:none;flex:1;min-width:0;height:46px;
+    padding:0;border:0;border-radius:6px;overflow:hidden;cursor:default;
+    box-shadow:0 0 0 .5px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.06);
+    transition:transform .12s cubic-bezier(.3,.7,.4,1),box-shadow .12s}
+  .twk-chip:hover{transform:translateY(-1px);
+    box-shadow:0 0 0 .5px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.12)}
+  .twk-chip[data-on="1"]{box-shadow:0 0 0 1.5px rgba(0,0,0,.85),
+    0 2px 6px rgba(0,0,0,.15)}
+  .twk-chip>span{position:absolute;top:0;bottom:0;right:0;width:34%;
+    display:flex;flex-direction:column;box-shadow:-1px 0 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i{flex:1;box-shadow:0 -1px 0 rgba(0,0,0,.1)}
+  .twk-chip>span>i:first-child{box-shadow:none}
+  .twk-chip svg{position:absolute;top:6px;left:6px;width:13px;height:13px;
+    filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+`;
+
+// ── useTweaks ───────────────────────────────────────────────────────────────
+// Single source of truth for tweak values. setTweak persists via the host
+// (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  // Accepts either setTweak('key', value) or setTweak({ key: value, ... }) so a
+  // useState-style call doesn't write a "[object Object]" key into the persisted
+  // JSON block.
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null ? keyOrEdits : {
+      [keyOrEdits]: val
+    };
+    setValues(prev => ({
+      ...prev,
+      ...edits
+    }));
+    window.parent.postMessage({
+      type: '__edit_mode_set_keys',
+      edits
+    }, '*');
+    // Same-window signal so in-page listeners (deck-stage rail thumbnails)
+    // can react — the parent message only reaches the host, not peers.
+    window.dispatchEvent(new CustomEvent('tweakchange', {
+      detail: edits
+    }));
+  }, []);
+  return [values, setTweak];
+}
+
+// ── TweaksPanel ─────────────────────────────────────────────────────────────
+// Floating shell. Registers the protocol listener BEFORE announcing
+// availability — if the announce ran first, the host's activate could land
+// before our handler exists and the toolbar toggle would silently no-op.
+// The close button posts __edit_mode_dismissed so the host's toolbar toggle
+// flips off in lockstep; the host echoes __deactivate_edit_mode back which
+// is what actually hides the panel.
+function TweaksPanel({
+  title = 'Tweaks',
+  children
+}) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({
+    x: 16,
+    y: 16
+  });
+  const PAD = 16;
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth,
+      h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y))
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', clampToViewport);
+      return () => window.removeEventListener('resize', clampToViewport);
+    }
+    const ro = new ResizeObserver(clampToViewport);
+    ro.observe(document.documentElement);
+    return () => ro.disconnect();
+  }, [open, clampToViewport]);
+  React.useEffect(() => {
+    const onMsg = e => {
+      const t = e?.data?.type;
+      if (t === '__activate_edit_mode') setOpen(true);else if (t === '__deactivate_edit_mode') setOpen(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({
+      type: '__edit_mode_available'
+    }, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+  const dismiss = () => {
+    setOpen(false);
+    window.parent.postMessage({
+      type: '__edit_mode_dismissed'
+    }, '*');
+  };
+  const onDragStart = e => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX,
+      sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = ev => {
+      offsetRef.current = {
+        x: startRight - (ev.clientX - sx),
+        y: startBottom - (ev.clientY - sy)
+      };
+      clampToViewport();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+  if (!open) return null;
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, __TWEAKS_STYLE), /*#__PURE__*/React.createElement("div", {
+    ref: dragRef,
+    className: "twk-panel",
+    "data-omelette-chrome": "",
+    style: {
+      right: offsetRef.current.x,
+      bottom: offsetRef.current.y
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-hd",
+    onMouseDown: onDragStart
+  }, /*#__PURE__*/React.createElement("b", null, title), /*#__PURE__*/React.createElement("button", {
+    className: "twk-x",
+    "aria-label": "Close tweaks",
+    onMouseDown: e => e.stopPropagation(),
+    onClick: dismiss
+  }, "\u2715")), /*#__PURE__*/React.createElement("div", {
+    className: "twk-body"
+  }, children)));
+}
+
+// ── Layout helpers ──────────────────────────────────────────────────────────
+
+function TweakSection({
+  label,
+  children
+}) {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "twk-sect"
+  }, label), children);
+}
+function TweakRow({
+  label,
+  value,
+  children,
+  inline = false
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: inline ? 'twk-row twk-row-h' : 'twk-row'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-lbl"
+  }, /*#__PURE__*/React.createElement("span", null, label), value != null && /*#__PURE__*/React.createElement("span", {
+    className: "twk-val"
+  }, value)), children);
+}
+
+// ── Controls ────────────────────────────────────────────────────────────────
+
+function TweakSlider({
+  label,
+  value,
+  min = 0,
+  max = 100,
+  step = 1,
+  unit = '',
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label,
+    value: `${value}${unit}`
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "range",
+    className: "twk-slider",
+    min: min,
+    max: max,
+    step: step,
+    value: value,
+    onChange: e => onChange(Number(e.target.value))
+  }));
+}
+function TweakToggle({
+  label,
+  value,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "twk-row twk-row-h"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-lbl"
+  }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "twk-toggle",
+    "data-on": value ? '1' : '0',
+    role: "switch",
+    "aria-checked": !!value,
+    onClick: () => onChange(!value)
+  }, /*#__PURE__*/React.createElement("i", null)));
+}
+function TweakRadio({
+  label,
+  value,
+  options,
+  onChange
+}) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  // The active value is read by pointer-move handlers attached for the lifetime
+  // of a drag — ref it so a stale closure doesn't fire onChange for every move.
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  // Segments wrap mid-word once per-segment width runs out. The track is
+  // ~248px (280 panel − 28 body pad − 4 seg pad), each button loses 12px
+  // to its own padding, and 11.5px system-ui averages ~6.3px/char — so 2
+  // options fit ~16 chars each, 3 fit ~10. Past that (or >3 options), fall
+  // back to a dropdown rather than wrap.
+  const labelLen = o => String(typeof o === 'object' ? o.label : o).length;
+  const maxLen = options.reduce((m, o) => Math.max(m, labelLen(o)), 0);
+  const fitsAsSegments = maxLen <= ({
+    2: 16,
+    3: 10
+  }[options.length] ?? 0);
+  if (!fitsAsSegments) {
+    // <select> emits strings — map back to the original option value so the
+    // fallback stays type-preserving (numbers, booleans) like the segment path.
+    const resolve = s => {
+      const m = options.find(o => String(typeof o === 'object' ? o.value : o) === s);
+      return m === undefined ? s : typeof m === 'object' ? m.value : m;
+    };
+    return /*#__PURE__*/React.createElement(TweakSelect, {
+      label: label,
+      value: value,
+      options: options,
+      onChange: s => onChange(resolve(s))
+    });
+  }
+  const opts = options.map(o => typeof o === 'object' ? o : {
+    value: o,
+    label: o
+  });
+  const idx = Math.max(0, opts.findIndex(o => o.value === value));
+  const n = opts.length;
+  const segAt = clientX => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor((clientX - r.left - 2) / inner * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+  const onPointerDown = e => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = ev => {
+      if (!trackRef.current) return;
+      const v = segAt(ev.clientX);
+      if (v !== valueRef.current) onChange(v);
+    };
+    const up = () => {
+      setDragging(false);
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("div", {
+    ref: trackRef,
+    role: "radiogroup",
+    onPointerDown: onPointerDown,
+    className: dragging ? 'twk-seg dragging' : 'twk-seg'
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-seg-thumb",
+    style: {
+      left: `calc(2px + ${idx} * (100% - 4px) / ${n})`,
+      width: `calc((100% - 4px) / ${n})`
+    }
+  }), opts.map(o => /*#__PURE__*/React.createElement("button", {
+    key: o.value,
+    type: "button",
+    role: "radio",
+    "aria-checked": o.value === value
+  }, o.label))));
+}
+function TweakSelect({
+  label,
+  value,
+  options,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "twk-field",
+    value: value,
+    onChange: e => onChange(e.target.value)
+  }, options.map(o => {
+    const v = typeof o === 'object' ? o.value : o;
+    const l = typeof o === 'object' ? o.label : o;
+    return /*#__PURE__*/React.createElement("option", {
+      key: v,
+      value: v
+    }, l);
+  })));
+}
+function TweakText({
+  label,
+  value,
+  placeholder,
+  onChange
+}) {
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "twk-field",
+    type: "text",
+    value: value,
+    placeholder: placeholder,
+    onChange: e => onChange(e.target.value)
+  }));
+}
+function TweakNumber({
+  label,
+  value,
+  min,
+  max,
+  step = 1,
+  unit = '',
+  onChange
+}) {
+  const clamp = n => {
+    if (min != null && n < min) return min;
+    if (max != null && n > max) return max;
+    return n;
+  };
+  const startRef = React.useRef({
+    x: 0,
+    val: 0
+  });
+  const onScrubStart = e => {
+    e.preventDefault();
+    startRef.current = {
+      x: e.clientX,
+      val: value
+    };
+    const decimals = (String(step).split('.')[1] || '').length;
+    const move = ev => {
+      const dx = ev.clientX - startRef.current.x;
+      const raw = startRef.current.val + dx * step;
+      const snapped = Math.round(raw / step) * step;
+      onChange(clamp(Number(snapped.toFixed(decimals))));
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "twk-num"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "twk-num-lbl",
+    onPointerDown: onScrubStart
+  }, label), /*#__PURE__*/React.createElement("input", {
+    type: "number",
+    value: value,
+    min: min,
+    max: max,
+    step: step,
+    onChange: e => onChange(clamp(Number(e.target.value)))
+  }), unit && /*#__PURE__*/React.createElement("span", {
+    className: "twk-num-unit"
+  }, unit));
+}
+
+// Relative-luminance contrast pick — checkmarks drawn over a swatch need to
+// read on both #111 and #fafafa without per-option configuration. Hex input
+// only (#rgb / #rrggbb); named or rgb()/hsl() colors fall through to "light".
+function __twkIsLight(hex) {
+  const h = String(hex).replace('#', '');
+  const x = h.length === 3 ? h.replace(/./g, c => c + c) : h.padEnd(6, '0');
+  const n = parseInt(x.slice(0, 6), 16);
+  if (Number.isNaN(n)) return true;
+  const r = n >> 16 & 255,
+    g = n >> 8 & 255,
+    b = n & 255;
+  return r * 299 + g * 587 + b * 114 > 148000;
+}
+const __TwkCheck = ({
+  light
+}) => /*#__PURE__*/React.createElement("svg", {
+  viewBox: "0 0 14 14",
+  "aria-hidden": "true"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M3 7.2 5.8 10 11 4.2",
+  fill: "none",
+  strokeWidth: "2.2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  stroke: light ? 'rgba(0,0,0,.78)' : '#fff'
+}));
+
+// TweakColor — curated color/palette picker. Each option is either a single
+// hex string or an array of 1-5 hex strings; the card adapts — a lone color
+// renders solid, a palette renders colors[0] as the hero (left ~2/3) with the
+// rest stacked in a sharp column on the right. onChange emits the
+// option in the shape it was passed (string stays string, array stays array).
+// Without options it falls back to the native color input for back-compat.
+function TweakColor({
+  label,
+  value,
+  options,
+  onChange
+}) {
+  if (!options || !options.length) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "twk-row twk-row-h"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "twk-lbl"
+    }, /*#__PURE__*/React.createElement("span", null, label)), /*#__PURE__*/React.createElement("input", {
+      type: "color",
+      className: "twk-swatch",
+      value: value,
+      onChange: e => onChange(e.target.value)
+    }));
+  }
+  // Native <input type=color> emits lowercase hex per the HTML spec, so
+  // compare case-insensitively. String() guards JSON.stringify(undefined),
+  // which returns the primitive undefined (no .toLowerCase).
+  const key = o => String(JSON.stringify(o)).toLowerCase();
+  const cur = key(value);
+  return /*#__PURE__*/React.createElement(TweakRow, {
+    label: label
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "twk-chips",
+    role: "radiogroup"
+  }, options.map((o, i) => {
+    const colors = Array.isArray(o) ? o : [o];
+    const [hero, ...rest] = colors;
+    const sup = rest.slice(0, 4);
+    const on = key(o) === cur;
+    return /*#__PURE__*/React.createElement("button", {
+      key: i,
+      type: "button",
+      className: "twk-chip",
+      role: "radio",
+      "aria-checked": on,
+      "data-on": on ? '1' : '0',
+      "aria-label": colors.join(', '),
+      title: colors.join(' · '),
+      style: {
+        background: hero
+      },
+      onClick: () => onChange(o)
+    }, sup.length > 0 && /*#__PURE__*/React.createElement("span", null, sup.map((c, j) => /*#__PURE__*/React.createElement("i", {
+      key: j,
+      style: {
+        background: c
+      }
+    }))), on && /*#__PURE__*/React.createElement(__TwkCheck, {
+      light: __twkIsLight(hero)
+    }));
+  })));
+}
+function TweakButton({
+  label,
+  onClick,
+  secondary = false
+}) {
+  return /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: secondary ? 'twk-btn secondary' : 'twk-btn',
+    onClick: onClick
+  }, label);
+}
+Object.assign(window, {
+  useTweaks,
+  TweaksPanel,
+  TweakSection,
+  TweakRow,
+  TweakSlider,
+  TweakToggle,
+  TweakRadio,
+  TweakSelect,
+  TweakText,
+  TweakNumber,
+  TweakColor,
+  TweakButton
+});
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/tweaks-panel.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/content-tabs.jsx
+try { (() => {
+/* ============================================================
+   CONTENT SUB-TABS — Articles · Departments · Field Notes ·
+   Command Center · Settings. Client-scoped. Exported on window.
+   ============================================================ */
+(function () {
+  const {
+    useState
+  } = React;
+  const Icon = window.Icon;
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }) : '—';
+  const fmtAgo = d => {
+    if (!d) return '';
+    const s = (Date.now() - new Date(d).getTime()) / 1000;
+    if (s < 3600) return Math.max(1, Math.floor(s / 60)) + 'm';
+    if (s < 86400) return Math.floor(s / 3600) + 'h';
+    return Math.floor(s / 86400) + 'd';
+  };
+  const slugify = t => (t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+  function Field({
+    label,
+    hint,
+    children
+  }) {
+    return /*#__PURE__*/React.createElement("label", {
+      className: "ws-field"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-field__label"
+    }, label, hint && /*#__PURE__*/React.createElement("em", {
+      className: "ws-field__hint"
+    }, hint)), children);
+  }
+
+  // ── Articles (The Journal) ──────────────────────────────────
+  function ContentArticles({
+    client,
+    actions
+  }) {
+    const [editing, setEditing] = useState(null);
+    const list = [...(client.site.articles || [])].sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    if (editing) return /*#__PURE__*/React.createElement(ArticleEditor, {
+      article: editing === 'new' ? null : editing,
+      actions: actions,
+      onDone: () => setEditing(null)
+    });
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head",
+      style: {
+        border: 0,
+        marginBottom: 16,
+        paddingBottom: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 17
+      }
+    }, "Articles"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "The Journal \u2014 long-form notes.")), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: () => setEditing('new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 13
+    }), " New article")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-list"
+    }, list.map(p => /*#__PURE__*/React.createElement("button", {
+      className: "ws-row",
+      key: p.id,
+      onClick: () => setEditing(p)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: 'ws-pill ws-pill--' + (p.status === 'published' ? 'live' : 'draft')
+    }, p.status), /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__main"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__title"
+    }, p.title), /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__meta"
+    }, "/", p.slug, " \xB7 updated ", fmtDate(p.updated_at))), /*#__PURE__*/React.createElement(Icon, {
+      name: "edit",
+      size: 15,
+      className: "ws-row__go"
+    }))), !list.length && /*#__PURE__*/React.createElement("div", {
+      className: "ws-empty"
+    }, "No articles yet.")));
+  }
+  function ArticleEditor({
+    article,
+    actions,
+    onDone
+  }) {
+    const isNew = !article;
+    const [f, setF] = useState(article || {
+      title: '',
+      slug: '',
+      excerpt: '',
+      content: '',
+      status: 'draft'
+    });
+    const set = k => e => setF(p => ({
+      ...p,
+      [k]: e.target.value,
+      ...(k === 'title' && isNew ? {
+        slug: slugify(e.target.value)
+      } : {})
+    }));
+    function save() {
+      actions.saveArticle({
+        ...f,
+        id: article?.id,
+        slug: f.slug || slugify(f.title)
+      });
+      onDone();
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: 720
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 18
+      }
+    }, isNew ? 'New article' : 'Edit article')), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, !isNew && /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--danger ws-btn--sm",
+      onClick: () => {
+        if (confirm('Delete this article?')) {
+          actions.deleteArticle(article.id);
+          onDone();
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--ghost ws-btn--sm",
+      onClick: onDone
+    }, "Cancel"), /*#__PURE__*/React.createElement("select", {
+      className: "ws-input ws-input--select",
+      style: {
+        width: 'auto'
+      },
+      value: f.status,
+      onChange: set('status')
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "draft"
+    }, "Draft"), /*#__PURE__*/React.createElement("option", {
+      value: "published"
+    }, "Published")), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: save,
+      disabled: !f.title.trim()
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save"))), /*#__PURE__*/React.createElement(Field, {
+      label: "Title"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ws-input ws-input--lg",
+      value: f.title,
+      onChange: set('title'),
+      placeholder: "Article title"
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Slug"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ws-input",
+      style: {
+        fontFamily: 'var(--font-details)'
+      },
+      value: f.slug,
+      onChange: set('slug')
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Excerpt",
+      hint: "(blog list)"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ws-input",
+      rows: 2,
+      value: f.excerpt,
+      onChange: set('excerpt')
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Body",
+      hint: "(plain text / HTML)"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ws-input",
+      rows: 9,
+      value: f.content,
+      onChange: set('content')
+    })));
+  }
+
+  // ── Departments ─────────────────────────────────────────────
+  const DEPT_ICONS = ['compass', 'cog', 'timer', 'radar'];
+  function ContentDepartments({
+    client,
+    actions
+  }) {
+    const [editing, setEditing] = useState(null);
+    const list = [...(client.site.departments || [])].sort((a, b) => a.display_order - b.display_order);
+    if (editing) return /*#__PURE__*/React.createElement(DeptEditor, {
+      svc: editing === 'new' ? null : editing,
+      count: list.length,
+      actions: actions,
+      onDone: () => setEditing(null)
+    });
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head",
+      style: {
+        border: 0,
+        marginBottom: 16,
+        paddingBottom: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 17
+      }
+    }, "The Departments"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "Service offerings shown on the site.")), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: () => setEditing('new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 13
+    }), " Add department")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-list"
+    }, list.map((svc, i) => /*#__PURE__*/React.createElement("div", {
+      className: "ws-row",
+      key: svc.id,
+      style: {
+        cursor: 'default'
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        flex: '0 0 auto',
+        display: 'grid',
+        placeItems: 'center',
+        width: 38,
+        height: 38,
+        border: 'var(--border-1)'
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: svc.icon,
+      size: 20,
+      stroke: 1.4
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__main"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__title"
+    }, svc.title, " ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-details)',
+        fontSize: 11,
+        color: 'var(--accent)',
+        fontWeight: 400
+      }
+    }, svc.price)), /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__meta"
+    }, svc.description.slice(0, 80), "\u2026")), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'flex',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-icon-btn",
+      disabled: i === 0,
+      onClick: () => actions.moveDepartment(svc.id, -1)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronDown",
+      size: 14,
+      style: {
+        transform: 'rotate(180deg)'
+      }
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-icon-btn",
+      disabled: i === list.length - 1,
+      onClick: () => actions.moveDepartment(svc.id, 1)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronDown",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-icon-btn",
+      onClick: () => setEditing(svc)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "edit",
+      size: 14
+    }))))), !list.length && /*#__PURE__*/React.createElement("div", {
+      className: "ws-empty"
+    }, "No departments. Add one to show a services grid on the site.")));
+  }
+  function DeptEditor({
+    svc,
+    count,
+    actions,
+    onDone
+  }) {
+    const isNew = !svc;
+    const [f, setF] = useState(svc || {
+      title: '',
+      description: '',
+      price: 'From $',
+      icon: 'compass'
+    });
+    const set = k => e => setF(p => ({
+      ...p,
+      [k]: e.target.value
+    }));
+    function save() {
+      actions.saveDepartment({
+        ...f,
+        id: svc?.id,
+        display_order: svc?.display_order ?? count
+      });
+      onDone();
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: 620
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 18
+      }
+    }, isNew ? 'New department' : 'Edit department')), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, !isNew && /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--danger ws-btn--sm",
+      onClick: () => {
+        if (confirm('Delete?')) {
+          actions.deleteDepartment(svc.id);
+          onDone();
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--ghost ws-btn--sm",
+      onClick: onDone
+    }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: save,
+      disabled: !f.title.trim()
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save"))), /*#__PURE__*/React.createElement(Field, {
+      label: "Department name"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ws-input ws-input--lg",
+      value: f.title,
+      onChange: set('title'),
+      placeholder: "The Design Bureau"
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Icon"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 8
+      }
+    }, DEPT_ICONS.map(ic => /*#__PURE__*/React.createElement("button", {
+      key: ic,
+      type: "button",
+      className: "ws-icon-btn",
+      style: {
+        width: 44,
+        height: 44,
+        background: f.icon === ic ? 'var(--accent-soft)' : 'var(--bg)'
+      },
+      onClick: () => setF(p => ({
+        ...p,
+        icon: ic
+      }))
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: ic,
+      size: 22,
+      stroke: 1.4
+    }))))), /*#__PURE__*/React.createElement(Field, {
+      label: "Description"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ws-input",
+      rows: 3,
+      value: f.description,
+      onChange: set('description')
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Price",
+      hint: "(From $X)"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ws-input",
+      style: {
+        fontFamily: 'var(--font-details)'
+      },
+      value: f.price,
+      onChange: set('price')
+    })));
+  }
+
+  // ── Field Notes ─────────────────────────────────────────────
+  function ContentNotes({
+    client,
+    actions
+  }) {
+    const [editing, setEditing] = useState(null);
+    const list = [...(client.site.fieldNotes || [])].sort((a, b) => a.display_order - b.display_order);
+    if (editing) return /*#__PURE__*/React.createElement(NoteEditor, {
+      note: editing === 'new' ? null : editing,
+      count: list.length,
+      actions: actions,
+      onDone: () => setEditing(null)
+    });
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head",
+      style: {
+        border: 0,
+        marginBottom: 16,
+        paddingBottom: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 17
+      }
+    }, "Field Notes"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "Testimonials from people you have helped.")), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: () => setEditing('new')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 13
+    }), " Add note")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: 14
+      }
+    }, list.map(t => /*#__PURE__*/React.createElement("button", {
+      key: t.id,
+      onClick: () => setEditing(t),
+      className: "da-pinned",
+      style: {
+        textAlign: 'left',
+        cursor: 'pointer',
+        padding: '30px 18px 16px',
+        background: 'var(--bg-alt)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 2,
+        marginBottom: 8
+      }
+    }, Array.from({
+      length: t.rating || 5
+    }).map((_, i) => /*#__PURE__*/React.createElement(Icon, {
+      key: i,
+      name: "star",
+      size: 12,
+      color: "var(--signal)",
+      style: {
+        fill: 'var(--signal)'
+      }
+    }))), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontStyle: 'italic',
+        fontSize: 13,
+        lineHeight: 1.6
+      }
+    }, "\u201C", t.content, "\u201D"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 10,
+        fontSize: 12
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, t.author_name), " \xB7 ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--fg-muted)'
+      }
+    }, t.author_role)))), !list.length && /*#__PURE__*/React.createElement("div", {
+      className: "ws-empty",
+      style: {
+        gridColumn: '1 / -1'
+      }
+    }, "No field notes yet.")));
+  }
+  function NoteEditor({
+    note,
+    count,
+    actions,
+    onDone
+  }) {
+    const isNew = !note;
+    const [f, setF] = useState(note || {
+      author_name: '',
+      author_role: '',
+      content: '',
+      rating: 5
+    });
+    const set = k => e => setF(p => ({
+      ...p,
+      [k]: e.target.value
+    }));
+    function save() {
+      actions.saveNote({
+        ...f,
+        id: note?.id,
+        rating: Number(f.rating),
+        display_order: note?.display_order ?? count
+      });
+      onDone();
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: 620
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 18
+      }
+    }, isNew ? 'New field note' : 'Edit field note')), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, !isNew && /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--danger ws-btn--sm",
+      onClick: () => {
+        if (confirm('Delete?')) {
+          actions.deleteNote(note.id);
+          onDone();
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--ghost ws-btn--sm",
+      onClick: onDone
+    }, "Cancel"), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: save,
+      disabled: !f.content.trim()
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save"))), /*#__PURE__*/React.createElement(Field, {
+      label: "Quote"
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "ws-input",
+      rows: 4,
+      value: f.content,
+      onChange: set('content')
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "ws-field-row"
+    }, /*#__PURE__*/React.createElement(Field, {
+      label: "Author name"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ws-input",
+      value: f.author_name,
+      onChange: set('author_name')
+    })), /*#__PURE__*/React.createElement(Field, {
+      label: "Rating"
+    }, /*#__PURE__*/React.createElement("select", {
+      className: "ws-input ws-input--select",
+      value: f.rating,
+      onChange: set('rating')
+    }, [5, 4, 3, 2, 1].map(n => /*#__PURE__*/React.createElement("option", {
+      key: n,
+      value: n
+    }, n, " stars"))))), /*#__PURE__*/React.createElement(Field, {
+      label: "Role / business"
+    }, /*#__PURE__*/React.createElement("input", {
+      className: "ws-input",
+      value: f.author_role,
+      onChange: set('author_role'),
+      placeholder: "Vance & Daughters Hardware \xB7 Kingman"
+    })));
+  }
+
+  // ── Command Center (messages) ───────────────────────────────
+  function ContentMessages({
+    client,
+    actions
+  }) {
+    const list = [...(client.site.messages || [])].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    const [open, setOpen] = useState(list[0]?.id ?? null);
+    const active = list.find(m => m.id === open);
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head",
+      style: {
+        border: 0,
+        marginBottom: 16,
+        paddingBottom: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 17
+      }
+    }, "The Command Center"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "Transmissions from the contact form."))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-cc"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-cc__list"
+    }, list.map(m => /*#__PURE__*/React.createElement("button", {
+      key: m.id,
+      className: 'ws-cc__item' + (m.id === open ? ' is-open' : ''),
+      onClick: () => {
+        setOpen(m.id);
+        if (!m.read) actions.markRead(m.id, true);
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-cc__top"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-cc__from"
+    }, !m.read && /*#__PURE__*/React.createElement("span", {
+      className: "da-signal-dot"
+    }), m.name), /*#__PURE__*/React.createElement("span", {
+      className: "ws-cc__time"
+    }, fmtAgo(m.created_at))), /*#__PURE__*/React.createElement("span", {
+      className: "ws-cc__subj"
+    }, m.subject || '(no subject)'), /*#__PURE__*/React.createElement("span", {
+      className: "ws-cc__snip"
+    }, m.message))), !list.length && /*#__PURE__*/React.createElement("div", {
+      className: "ws-empty"
+    }, "No transmissions yet.")), active ? /*#__PURE__*/React.createElement("div", {
+      className: "ws-cc__detail"
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start'
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", null, active.subject || '(no subject)'), /*#__PURE__*/React.createElement("p", {
+      className: "ws-cc__detail-from"
+    }, active.name, " \xB7 ", /*#__PURE__*/React.createElement("a", {
+      href: 'mailto:' + active.email,
+      style: {
+        color: 'var(--accent)'
+      }
+    }, active.email), active.phone && ' · ' + active.phone)), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: 'flex',
+        gap: 6
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-icon-btn",
+      title: active.read ? 'Mark unread' : 'Mark read',
+      onClick: () => actions.markRead(active.id, !active.read)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "eye",
+      size: 15
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-icon-btn",
+      title: "Delete",
+      onClick: () => {
+        if (confirm('Delete?')) {
+          actions.deleteMessage(active.id);
+          setOpen(null);
+        }
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 15
+    })))), /*#__PURE__*/React.createElement("p", {
+      className: "ws-cc__body"
+    }, active.message), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 24,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 14
+      }
+    }, /*#__PURE__*/React.createElement("a", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      href: 'mailto:' + active.email
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "mail",
+      size: 13
+    }), " Reply by email"), /*#__PURE__*/React.createElement("span", {
+      className: "da-small"
+    }, "Received ", fmtDate(active.created_at)))) : /*#__PURE__*/React.createElement("div", {
+      className: "ws-cc__detail ws-cc__detail--empty"
+    }, "Select a transmission.")));
+  }
+
+  // ── Settings ────────────────────────────────────────────────
+  const GROUPS = [{
+    title: 'Identity',
+    fields: [{
+      key: 'site_title',
+      label: 'Business name'
+    }, {
+      key: 'tagline',
+      label: 'Tagline',
+      type: 'textarea'
+    }]
+  }, {
+    title: 'The Lobby (hero)',
+    fields: [{
+      key: 'hero_title',
+      label: 'Hero headline',
+      type: 'textarea'
+    }, {
+      key: 'hero_subtitle',
+      label: 'Hero subheading',
+      type: 'textarea'
+    }, {
+      key: 'hero_cta_text',
+      label: 'Hero button'
+    }]
+  }, {
+    title: 'About',
+    fields: [{
+      key: 'about_title',
+      label: 'About title'
+    }, {
+      key: 'about_body',
+      label: 'About text',
+      type: 'textarea',
+      rows: 5
+    }]
+  }, {
+    title: 'Contact',
+    fields: [{
+      key: 'phone',
+      label: 'Phone'
+    }, {
+      key: 'email',
+      label: 'Email'
+    }, {
+      key: 'address',
+      label: 'Location'
+    }, {
+      key: 'business_hours',
+      label: 'Hours'
+    }]
+  }];
+  function ContentSettings({
+    client,
+    actions,
+    onToast
+  }) {
+    const [v, setV] = useState(client.site.settings || {});
+    const [dirty, setDirty] = useState(false);
+    const set = k => e => {
+      setV(p => ({
+        ...p,
+        [k]: e.target.value
+      }));
+      setDirty(true);
+    };
+    function save() {
+      actions.saveSettings(v);
+      setDirty(false);
+      onToast && onToast('Settings saved · Live site updated');
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      style: {
+        maxWidth: 680
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head",
+      style: {
+        border: 0,
+        marginBottom: 16,
+        paddingBottom: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 17
+      }
+    }, "Site settings"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "The words and identity of ", client.domain, ".")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, dirty && /*#__PURE__*/React.createElement("span", {
+      className: "ws-dirty"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-signal-dot",
+      style: {
+        width: 8,
+        height: 8
+      }
+    }), " Unsaved"), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: save,
+      disabled: !dirty
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save changes"))), GROUPS.map(g => /*#__PURE__*/React.createElement("section", {
+      key: g.title,
+      style: {
+        marginBottom: 24
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-subhead",
+      style: {
+        margin: '0 0 12px'
+      }
+    }, g.title), /*#__PURE__*/React.createElement("div", {
+      style: {
+        border: 'var(--border-1)',
+        background: 'var(--bg)',
+        padding: 20
+      }
+    }, g.fields.map(fld => /*#__PURE__*/React.createElement(Field, {
+      key: fld.key,
+      label: fld.label
+    }, fld.type === 'textarea' ? /*#__PURE__*/React.createElement("textarea", {
+      className: "ws-input",
+      rows: fld.rows || 2,
+      value: v[fld.key] || '',
+      onChange: set(fld.key)
+    }) : /*#__PURE__*/React.createElement("input", {
+      className: "ws-input",
+      value: v[fld.key] || '',
+      onChange: set(fld.key)
+    })))))));
+  }
+  Object.assign(window, {
+    ContentArticles,
+    ContentDepartments,
+    ContentNotes,
+    ContentMessages,
+    ContentSettings
+  });
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/content-tabs.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/content.jsx
+try { (() => {
+/* ============================================================
+   CONTENT MODULE — "The Press Office"
+   Tabs: Pages (page builder) · Articles · Departments ·
+         Field Notes · Command Center · Settings
+   window.ContentModule({ client, actions, onToast })
+   Sub-tab components live in content-tabs.jsx (window.*).
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useRef,
+    useEffect
+  } = React;
+  const Icon = window.Icon;
+
+  // ── Inline-editable text (commits on blur) ──────────────────
+  function InlineText({
+    value,
+    onCommit,
+    tag = 'div',
+    className,
+    placeholder,
+    multiline
+  }) {
+    const ref = useRef(null);
+    useEffect(() => {
+      if (ref.current && ref.current.textContent !== (value || '')) ref.current.textContent = value || '';
+    }, [value]);
+    return React.createElement(tag, {
+      ref,
+      className: 'ws-edit ' + (className || ''),
+      contentEditable: true,
+      suppressContentEditableWarning: true,
+      'data-ph': placeholder,
+      onBlur: e => onCommit(e.currentTarget.textContent),
+      onKeyDown: e => {
+        if (!multiline && e.key === 'Enter') {
+          e.preventDefault();
+          e.currentTarget.blur();
+        }
+      }
+    });
+  }
+  const BLOCK_TYPES = [{
+    type: 'hero',
+    label: 'Hero',
+    icon: 'layout'
+  }, {
+    type: 'richtext',
+    label: 'Text',
+    icon: 'fileText'
+  }, {
+    type: 'departments',
+    label: 'Departments',
+    icon: 'briefcase'
+  }, {
+    type: 'fieldNotes',
+    label: 'Field Notes',
+    icon: 'star'
+  }, {
+    type: 'cta',
+    label: 'Call to action',
+    icon: 'send'
+  }];
+
+  // ── Block preview (inline-editable) ─────────────────────────
+  function BlockPreview({
+    block,
+    client,
+    onChange
+  }) {
+    const d = block.data || {};
+    const set = k => val => onChange({
+      ...d,
+      [k]: val
+    });
+    if (block.type === 'hero') {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-hero"
+      }, /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-eyebrow",
+        value: d.eyebrow,
+        onCommit: set('eyebrow'),
+        placeholder: "EYEBROW"
+      }), /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-h",
+        value: d.heading,
+        onCommit: set('heading'),
+        placeholder: "Headline",
+        multiline: true
+      }), /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-body",
+        value: d.body,
+        onCommit: set('body'),
+        placeholder: "Supporting line",
+        multiline: true
+      }), d.cta != null && /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-cta"
+      }, /*#__PURE__*/React.createElement(InlineText, {
+        tag: "span",
+        value: d.cta,
+        onCommit: set('cta'),
+        placeholder: "Button"
+      })));
+    }
+    if (block.type === 'richtext') {
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-h",
+        style: {
+          fontSize: 20
+        },
+        value: d.heading,
+        onCommit: set('heading'),
+        placeholder: "Section heading"
+      }), /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-body",
+        value: d.body,
+        onCommit: set('body'),
+        placeholder: "Body text\u2026",
+        multiline: true
+      }));
+    }
+    if (block.type === 'departments') {
+      const list = [...(client.site.departments || [])].sort((a, b) => a.display_order - b.display_order).slice(0, 4);
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-h",
+        style: {
+          fontSize: 18
+        },
+        value: d.heading,
+        onCommit: set('heading'),
+        placeholder: "The Departments"
+      }), /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-body",
+        value: d.sub,
+        onCommit: set('sub'),
+        placeholder: "Subhead"
+      }), list.length ? /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-grid"
+      }, list.map(s => /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-card",
+        key: s.id
+      }, /*#__PURE__*/React.createElement("h5", null, s.title), /*#__PURE__*/React.createElement("span", null, s.price), /*#__PURE__*/React.createElement("p", null, s.description.slice(0, 70), "\u2026")))) : /*#__PURE__*/React.createElement("p", {
+        className: "ws-pv-body",
+        style: {
+          fontStyle: 'italic',
+          marginTop: 8
+        }
+      }, "No departments yet \u2014 add them in the Departments tab."));
+    }
+    if (block.type === 'fieldNotes') {
+      const list = (client.site.fieldNotes || []).slice(0, 2);
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-h",
+        style: {
+          fontSize: 18
+        },
+        value: d.heading,
+        onCommit: set('heading'),
+        placeholder: "Field Notes"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-grid"
+      }, list.map(n => /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-card",
+        key: n.id
+      }, /*#__PURE__*/React.createElement("p", {
+        style: {
+          fontStyle: 'italic'
+        }
+      }, "\u201C", n.content.slice(0, 80), "\u2026\u201D"), /*#__PURE__*/React.createElement("h5", {
+        style: {
+          marginTop: 6
+        }
+      }, n.author_name))), !list.length && /*#__PURE__*/React.createElement("p", {
+        className: "ws-pv-body",
+        style: {
+          fontStyle: 'italic'
+        }
+      }, "No field notes yet.")));
+    }
+    if (block.type === 'cta') {
+      return /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-cta-block"
+      }, /*#__PURE__*/React.createElement(InlineText, {
+        className: "ws-pv-h",
+        style: {
+          fontSize: 20
+        },
+        value: d.heading,
+        onCommit: set('heading'),
+        placeholder: "Call to action"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "ws-pv-cta",
+        style: {
+          marginTop: 10
+        }
+      }, /*#__PURE__*/React.createElement(InlineText, {
+        tag: "span",
+        value: d.button,
+        onCommit: set('button'),
+        placeholder: "Button"
+      })));
+    }
+    return null;
+  }
+
+  // ── Page builder ────────────────────────────────────────────
+  function PageBuilder({
+    page,
+    client,
+    actions,
+    onDone
+  }) {
+    const [sel, setSel] = useState(null);
+    const [dragI, setDragI] = useState(null);
+    const [overI, setOverI] = useState(null);
+    const blocks = page.blocks || [];
+    function onDrop(to) {
+      if (dragI === null || dragI === to) {
+        setDragI(null);
+        setOverI(null);
+        return;
+      }
+      actions.moveBlock(page.id, dragI, to);
+      setDragI(null);
+      setOverI(null);
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page ws-page--full",
+      style: {
+        maxWidth: 1180
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__eyebrow da-eyebrow da-eyebrow--muted"
+    }, "The Press Office \xB7 Page"), /*#__PURE__*/React.createElement("h1", null, /*#__PURE__*/React.createElement(InlineText, {
+      tag: "span",
+      value: page.title,
+      onCommit: v => actions.savePage({
+        ...page,
+        title: v
+      }),
+      placeholder: "Page title"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, client.domain, page.slug)), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--ghost",
+      onClick: onDone
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronLeft",
+      size: 14
+    }), " All pages"), /*#__PURE__*/React.createElement("select", {
+      className: "ws-input ws-input--select",
+      style: {
+        width: 'auto'
+      },
+      value: page.status,
+      onChange: e => actions.savePage({
+        ...page,
+        status: e.target.value
+      })
+    }, /*#__PURE__*/React.createElement("option", {
+      value: "draft"
+    }, "Draft"), /*#__PURE__*/React.createElement("option", {
+      value: "published"
+    }, "Published")), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary",
+      onClick: () => actions.savePage(page, true)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "save",
+      size: 13
+    }), " Save & publish"))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-builder"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-canvas"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-canvas__bar"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-canvas__url"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "lock",
+      size: 11
+    }), client.domain, page.slug), /*#__PURE__*/React.createElement("span", {
+      className: "da-small"
+    }, "Drag ", /*#__PURE__*/React.createElement(Icon, {
+      name: "grip",
+      size: 12,
+      style: {
+        verticalAlign: 'middle'
+      }
+    }), " to reorder \xB7 click text to edit")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-blocks"
+    }, blocks.map((b, i) => /*#__PURE__*/React.createElement("div", {
+      key: b.id,
+      className: 'ws-block' + (sel === b.id ? ' is-sel' : '') + (dragI === i ? ' is-drag' : '') + (overI === i ? ' is-over' : ''),
+      onClick: () => setSel(b.id),
+      onDragOver: e => {
+        e.preventDefault();
+        setOverI(i);
+      },
+      onDrop: () => onDrop(i)
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-block__bar"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-block__handle",
+      draggable: true,
+      onDragStart: () => setDragI(i),
+      onDragEnd: () => {
+        setDragI(null);
+        setOverI(null);
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "grip",
+      size: 14
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "ws-block__type"
+    }, b.type), /*#__PURE__*/React.createElement("button", {
+      className: "ws-block__del",
+      title: "Delete block",
+      onClick: e => {
+        e.stopPropagation();
+        actions.deleteBlock(page.id, b.id);
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 13
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-block__body"
+    }, /*#__PURE__*/React.createElement(BlockPreview, {
+      block: b,
+      client: client,
+      onChange: data => actions.updateBlock(page.id, b.id, data)
+    })))), /*#__PURE__*/React.createElement(AddBlock, {
+      onAdd: type => actions.addBlock(page.id, type)
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-insp"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-insp__head"
+    }, "Add a section"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-insp__body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-palette"
+    }, BLOCK_TYPES.map(bt => /*#__PURE__*/React.createElement("button", {
+      key: bt.type,
+      onClick: () => actions.addBlock(page.id, bt.type)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: bt.icon,
+      size: 18,
+      stroke: 1.4
+    }), bt.label))), /*#__PURE__*/React.createElement("div", {
+      className: "da-pinned",
+      style: {
+        marginTop: 20,
+        padding: '24px 16px 14px',
+        fontSize: 12
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Connected."), " Saving publishes straight to ", client.domain, ". Departments & Field Notes blocks pull live from their tabs.")))));
+  }
+  function AddBlock({
+    onAdd
+  }) {
+    const [open, setOpen] = useState(false);
+    if (!open) return /*#__PURE__*/React.createElement("button", {
+      className: "ws-block__add",
+      onClick: () => setOpen(true)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 14
+    }), " Add a section");
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-block",
+      style: {
+        borderStyle: 'dashed'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-block__bar"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-block__type"
+    }, "Choose a block"), /*#__PURE__*/React.createElement("button", {
+      className: "ws-block__del",
+      onClick: () => setOpen(false)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "x",
+      size: 13
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-block__body"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-palette"
+    }, BLOCK_TYPES.map(bt => /*#__PURE__*/React.createElement("button", {
+      key: bt.type,
+      onClick: () => {
+        onAdd(bt.type);
+        setOpen(false);
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: bt.icon,
+      size: 18,
+      stroke: 1.4
+    }), bt.label)))));
+  }
+
+  // ── Pages list ──────────────────────────────────────────────
+  function PagesTab({
+    client,
+    actions,
+    onOpen
+  }) {
+    const pages = client.site.pages || [];
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head",
+      style: {
+        border: 0,
+        marginBottom: 16,
+        paddingBottom: 0
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        fontFamily: 'var(--font-headers)',
+        fontSize: 17
+      }
+    }, "Pages")), /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary ws-btn--sm",
+      onClick: () => actions.addPage(onOpen)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 13
+    }), " New page")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-list"
+    }, pages.map(p => /*#__PURE__*/React.createElement("button", {
+      className: "ws-row",
+      key: p.id,
+      onClick: () => onOpen(p.id)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: 'ws-pill ws-pill--' + (p.status === 'published' ? 'live' : 'draft')
+    }, p.status), /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__main"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__title"
+    }, p.title), /*#__PURE__*/React.createElement("span", {
+      className: "ws-row__meta"
+    }, client.domain, p.slug, " \xB7 ", (p.blocks || []).length, " blocks \xB7 updated ", fmtDate(p.updated_at))), /*#__PURE__*/React.createElement(Icon, {
+      name: "edit",
+      size: 15,
+      className: "ws-row__go"
+    }))), !pages.length && /*#__PURE__*/React.createElement("div", {
+      className: "ws-empty"
+    }, "No pages yet. Build the first one.")));
+  }
+  const fmtDate = d => d ? new Date(d).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric'
+  }) : '—';
+
+  // ── Module shell ────────────────────────────────────────────
+  const TABS = [{
+    id: 'pages',
+    label: 'Pages'
+  }, {
+    id: 'articles',
+    label: 'Articles'
+  }, {
+    id: 'departments',
+    label: 'Departments'
+  }, {
+    id: 'notes',
+    label: 'Field Notes'
+  }, {
+    id: 'messages',
+    label: 'Command Center'
+  }, {
+    id: 'settings',
+    label: 'Settings'
+  }];
+  function ContentModule({
+    client,
+    actions,
+    onToast,
+    initialTab
+  }) {
+    const [tab, setTab] = useState(initialTab || 'pages');
+    const [openPage, setOpenPage] = useState(null);
+    useEffect(() => {
+      setOpenPage(null);
+    }, [client.id]);
+    useEffect(() => {
+      if (initialTab) setTab(initialTab);
+    }, [initialTab]);
+    const page = openPage ? (client.site.pages || []).find(p => p.id === openPage) : null;
+    if (tab === 'pages' && page) return /*#__PURE__*/React.createElement(PageBuilder, {
+      page: page,
+      client: client,
+      actions: actions,
+      onDone: () => setOpenPage(null)
+    });
+    const counts = {
+      pages: (client.site.pages || []).length,
+      articles: (client.site.articles || []).length,
+      departments: (client.site.departments || []).length,
+      notes: (client.site.fieldNotes || []).length,
+      messages: (client.site.messages || []).filter(m => !m.read).length
+    };
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__eyebrow da-eyebrow da-eyebrow--muted"
+    }, "Content"), /*#__PURE__*/React.createElement("h1", null, "The Press Office"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "Everything that lives on ", client.domain, ". Edit here, it goes live."))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-tabs"
+    }, TABS.map(t => /*#__PURE__*/React.createElement("button", {
+      key: t.id,
+      className: 'ws-tab' + (tab === t.id ? ' is-on' : ''),
+      onClick: () => setTab(t.id)
+    }, t.label, counts[t.id] != null && counts[t.id] > 0 && /*#__PURE__*/React.createElement("span", {
+      className: "ws-tab__count"
+    }, counts[t.id])))), tab === 'pages' && /*#__PURE__*/React.createElement(PagesTab, {
+      client: client,
+      actions: actions,
+      onOpen: setOpenPage
+    }), tab === 'articles' && /*#__PURE__*/React.createElement(window.ContentArticles, {
+      client: client,
+      actions: actions
+    }), tab === 'departments' && /*#__PURE__*/React.createElement(window.ContentDepartments, {
+      client: client,
+      actions: actions
+    }), tab === 'notes' && /*#__PURE__*/React.createElement(window.ContentNotes, {
+      client: client,
+      actions: actions
+    }), tab === 'messages' && /*#__PURE__*/React.createElement(window.ContentMessages, {
+      client: client,
+      actions: actions
+    }), tab === 'settings' && /*#__PURE__*/React.createElement(window.ContentSettings, {
+      client: client,
+      actions: actions,
+      onToast: onToast
+    }));
+  }
+  window.ContentModule = ContentModule;
+  window.InlineText = InlineText;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/content.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/icons-ext.jsx
+try { (() => {
+/* Extra line-art icons for the workspace, layered over window.Icon.
+   Keeps the 1.5px Artifact aesthetic. */
+(function () {
+  const EXTRA = {
+    search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+    grip: '<circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/>',
+    calendar: '<rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/>',
+    folder: '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+    copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+    book: '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>',
+    sparkle: '<path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1M7.7 16.3l-2.1 2.1"/>',
+    flask: '<path d="M9 3h6"/><path d="M10 3v5.5L4.5 18a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 8.5V3"/><path d="M7 14h10"/>',
+    column: '<rect width="6" height="18" x="4" y="3" rx="1"/><rect width="6" height="18" x="14" y="3" rx="1"/>'
+  };
+  const base = window.Icon;
+  window.Icon = function Icon(props) {
+    const {
+      name,
+      size = 18,
+      stroke = 1.6,
+      color = 'currentColor',
+      style,
+      className
+    } = props || {};
+    if (EXTRA[name]) {
+      return React.createElement('svg', {
+        width: size,
+        height: size,
+        viewBox: '0 0 24 24',
+        fill: 'none',
+        stroke: color,
+        strokeWidth: stroke,
+        strokeLinecap: 'round',
+        strokeLinejoin: 'round',
+        className,
+        style,
+        dangerouslySetInnerHTML: {
+          __html: EXTRA[name]
+        }
+      });
+    }
+    return base(props);
+  };
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/icons-ext.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/palette.jsx
+try { (() => {
+/* ============================================================
+   Command palette — ⌘K / Ctrl-K. Receives a flat list of
+   commands; filters, keyboard-navigates, runs.
+   window.CmdPalette({ open, onClose, commands })
+   command: { id, label, sub, icon, group, run() }
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useEffect,
+    useRef,
+    useMemo
+  } = React;
+  const Icon = window.Icon;
+  function CmdPalette({
+    open,
+    onClose,
+    commands
+  }) {
+    const [q, setQ] = useState('');
+    const [active, setActive] = useState(0);
+    const inputRef = useRef(null);
+    const listRef = useRef(null);
+    useEffect(() => {
+      if (open) {
+        setQ('');
+        setActive(0);
+        setTimeout(() => inputRef.current && inputRef.current.focus(), 20);
+      }
+    }, [open]);
+    const filtered = useMemo(() => {
+      const s = q.trim().toLowerCase();
+      if (!s) return commands;
+      return commands.filter(c => (c.label + ' ' + (c.sub || '') + ' ' + (c.group || '')).toLowerCase().includes(s));
+    }, [q, commands]);
+    useEffect(() => {
+      setActive(0);
+    }, [q]);
+
+    // group while preserving order
+    const grouped = useMemo(() => {
+      const out = [];
+      const idx = {};
+      filtered.forEach(c => {
+        const g = c.group || 'Actions';
+        if (!(g in idx)) {
+          idx[g] = out.length;
+          out.push({
+            label: g,
+            items: []
+          });
+        }
+        out[idx[g]].items.push(c);
+      });
+      return out;
+    }, [filtered]);
+    function run(c) {
+      onClose();
+      setTimeout(() => c.run && c.run(), 0);
+    }
+    function onKey(e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setActive(a => Math.min(a + 1, filtered.length - 1));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActive(a => Math.max(a - 1, 0));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (filtered[active]) run(filtered[active]);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+    }
+    useEffect(() => {
+      if (!listRef.current) return;
+      const el = listRef.current.querySelector('.is-active');
+      if (el) el.scrollIntoView({
+        block: 'nearest'
+      });
+    }, [active]);
+    if (!open) return null;
+    let counter = -1;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-cmdk",
+      onMouseDown: e => {
+        if (e.target === e.currentTarget) onClose();
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-cmdk__box",
+      onKeyDown: onKey
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-cmdk__input-row"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "search",
+      size: 17,
+      color: "var(--fg-muted)"
+    }), /*#__PURE__*/React.createElement("input", {
+      ref: inputRef,
+      className: "ws-cmdk__input",
+      placeholder: "Search actions, clients, content\u2026",
+      value: q,
+      onChange: e => setQ(e.target.value)
+    }), /*#__PURE__*/React.createElement("kbd", {
+      style: {
+        fontFamily: 'var(--font-details)',
+        fontSize: 10,
+        color: 'var(--fg-soft)',
+        border: '1px solid var(--field-border)',
+        padding: '1px 6px'
+      }
+    }, "esc")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-cmdk__list",
+      ref: listRef
+    }, grouped.map(g => /*#__PURE__*/React.createElement("div", {
+      key: g.label
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-cmdk__group"
+    }, g.label), g.items.map(c => {
+      counter += 1;
+      const i = counter;
+      return /*#__PURE__*/React.createElement("button", {
+        key: c.id,
+        className: 'ws-cmdk__item' + (i === active ? ' is-active' : ''),
+        onMouseEnter: () => setActive(i),
+        onClick: () => run(c)
+      }, /*#__PURE__*/React.createElement(Icon, {
+        name: c.icon || 'arrowRight',
+        size: 15,
+        color: "var(--fg-muted)"
+      }), /*#__PURE__*/React.createElement("span", null, c.label), c.sub && /*#__PURE__*/React.createElement("span", {
+        className: "ws-cmdk__item-sub"
+      }, c.sub));
+    }))), !filtered.length && /*#__PURE__*/React.createElement("div", {
+      className: "ws-cmdk__empty"
+    }, "No matches for \u201C", q, "\u201D"))));
+  }
+  window.CmdPalette = CmdPalette;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/palette.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/projects.jsx
+try { (() => {
+/* ============================================================
+   PROJECTS MODULE — drag kanban with inline edit.
+   window.ProjectsModule({ client, actions })
+   actions: moveTask, addTask, updateTask, deleteTask, addProject
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useEffect
+  } = React;
+  const Icon = window.Icon;
+  const InlineText = window.InlineText;
+  const PRIOS = ['Low', 'Medium', 'High'];
+  function Card({
+    task,
+    projectId,
+    actions,
+    onDrag,
+    dragId
+  }) {
+    const [open, setOpen] = useState(false);
+    return /*#__PURE__*/React.createElement("div", {
+      className: 'ws-card' + (dragId === task.id ? ' is-drag' : ''),
+      draggable: true,
+      onDragStart: e => {
+        e.dataTransfer.effectAllowed = 'move';
+        onDrag(task.id);
+      },
+      onDragEnd: () => onDrag(null)
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-card__title"
+    }, /*#__PURE__*/React.createElement(InlineText, {
+      tag: "span",
+      value: task.title,
+      onCommit: v => v.trim() && actions.updateTask(projectId, task.id, {
+        title: v
+      })
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "ws-card__meta"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: 'ws-prio ws-prio--' + task.priority.toLowerCase(),
+      title: "Cycle priority",
+      onClick: () => {
+        const n = PRIOS[(PRIOS.indexOf(task.priority) + 1) % 3];
+        actions.updateTask(projectId, task.id, {
+          priority: n
+        });
+      }
+    }, task.priority), /*#__PURE__*/React.createElement("span", {
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-card__due"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "calendar",
+      size: 10,
+      style: {
+        verticalAlign: 'middle',
+        marginRight: 3
+      }
+    }), task.due ? task.due.slice(5) : '—'), /*#__PURE__*/React.createElement("button", {
+      className: "ws-block__del",
+      onClick: () => actions.deleteTask(projectId, task.id),
+      title: "Delete"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "trash",
+      size: 12
+    })))));
+  }
+  function Column({
+    col,
+    tasks,
+    projectId,
+    actions,
+    dragId,
+    setDragId
+  }) {
+    const [over, setOver] = useState(false);
+    const [adding, setAdding] = useState(false);
+    const [val, setVal] = useState('');
+    function commitAdd() {
+      if (val.trim()) actions.addTask(projectId, col, val.trim());
+      setVal('');
+      setAdding(false);
+    }
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-col"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-col__head"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-col__title"
+    }, col), /*#__PURE__*/React.createElement("span", {
+      className: "ws-col__count"
+    }, tasks.length)), /*#__PURE__*/React.createElement("div", {
+      className: 'ws-col__body' + (over ? ' is-over' : ''),
+      onDragOver: e => {
+        e.preventDefault();
+        setOver(true);
+      },
+      onDragLeave: () => setOver(false),
+      onDrop: () => {
+        setOver(false);
+        if (dragId) actions.moveTask(projectId, dragId, col);
+        setDragId(null);
+      }
+    }, tasks.map(t => /*#__PURE__*/React.createElement(Card, {
+      key: t.id,
+      task: t,
+      projectId: projectId,
+      actions: actions,
+      onDrag: setDragId,
+      dragId: dragId
+    })), !tasks.length && !over && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: 'var(--fg-soft)',
+        textAlign: 'center',
+        padding: '10px 0'
+      }
+    }, "Drop here")), adding ? /*#__PURE__*/React.createElement("div", {
+      style: {
+        padding: 8,
+        borderTop: 'var(--border-hairline)'
+      }
+    }, /*#__PURE__*/React.createElement("textarea", {
+      autoFocus: true,
+      className: "ws-input",
+      rows: 2,
+      value: val,
+      placeholder: "Task title\u2026",
+      onChange: e => setVal(e.target.value),
+      onBlur: commitAdd,
+      onKeyDown: e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          commitAdd();
+        }
+        if (e.key === 'Escape') {
+          setVal('');
+          setAdding(false);
+        }
+      }
+    })) : /*#__PURE__*/React.createElement("button", {
+      className: "ws-col__add",
+      onClick: () => setAdding(true)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 13
+    }), " Add task"));
+  }
+  function ProjectsModule({
+    client,
+    actions
+  }) {
+    const projects = client.site.projects || [];
+    const [pid, setPid] = useState(projects[0]?.id ?? null);
+    const [dragId, setDragId] = useState(null);
+    useEffect(() => {
+      setPid((client.site.projects || [])[0]?.id ?? null);
+    }, [client.id]);
+    const project = projects.find(p => p.id === pid) || projects[0];
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page ws-page--full"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__eyebrow da-eyebrow da-eyebrow--muted"
+    }, "Projects"), /*#__PURE__*/React.createElement("h1", null, "Project boards"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "Track builds for ", client.name, ". Drag cards between columns.")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--primary",
+      onClick: () => {
+        const id = actions.addProject();
+        if (id) setPid(id);
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 13
+    }), " New board"))), !projects.length ? /*#__PURE__*/React.createElement("div", {
+      className: "ws-empty",
+      style: {
+        border: 'var(--border-1)'
+      }
+    }, "No boards yet. Create the first one.") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-proj-bar"
+    }, /*#__PURE__*/React.createElement("select", {
+      className: "ws-input ws-input--select",
+      style: {
+        width: 'auto',
+        minWidth: 240
+      },
+      value: pid || '',
+      onChange: e => setPid(e.target.value)
+    }, projects.map(p => /*#__PURE__*/React.createElement("option", {
+      key: p.id,
+      value: p.id
+    }, p.name))), /*#__PURE__*/React.createElement("span", {
+      className: "da-small"
+    }, project.description)), /*#__PURE__*/React.createElement("div", {
+      className: "ws-kanban"
+    }, project.columns.map(col => /*#__PURE__*/React.createElement(Column, {
+      key: col,
+      col: col,
+      tasks: project.tasks.filter(t => t.column === col),
+      projectId: project.id,
+      actions: actions,
+      dragId: dragId,
+      setDragId: setDragId
+    })))));
+  }
+  window.ProjectsModule = ProjectsModule;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/projects.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/shell.jsx
+try { (() => {
+/* ============================================================
+   SHELL — orchestrates the CMS workspace.
+   Top bar (brand · client switcher · ⌘K · sync), module nav with
+   plan-gating, content/projects/dashboard routing, embed view,
+   command palette, tweaks, toast. Mounts everything.
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useEffect,
+    useCallback,
+    useRef
+  } = React;
+  const Icon = window.Icon;
+  const Store = window.CMSWorkspace;
+  function useStore() {
+    const [s, setS] = useState(Store.get());
+    useEffect(() => Store.subscribe(x => setS({
+      ...x
+    })), []);
+    return s;
+  }
+  const BLOCK_DEFAULTS = {
+    hero: {
+      eyebrow: 'BASED IN KINGMAN, AZ',
+      heading: 'A headline worth reading',
+      body: 'One clear supporting sentence underneath.',
+      cta: 'Inquire Within'
+    },
+    richtext: {
+      heading: 'Section heading',
+      body: 'Write something plain and useful here.'
+    },
+    departments: {
+      heading: 'The Departments',
+      sub: 'Four distinct operations. One point of contact.'
+    },
+    fieldNotes: {
+      heading: 'Field Notes'
+    },
+    cta: {
+      heading: 'Need a strategic ally?',
+      button: 'Send a Transmission'
+    }
+  };
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    navLayout: 'sidebar',
+    startClient: 'da'
+  } /*EDITMODE-END*/;
+  function App() {
+    const data = useStore();
+    const [t, setTweak] = window.useTweaks(TWEAK_DEFAULTS);
+    const [moduleId, setModuleId] = useState('dashboard');
+    const [contentTab, setContentTab] = useState('pages');
+    const [embed, setEmbed] = useState(false);
+    const [clientMenu, setClientMenu] = useState(false);
+    const [cmdOpen, setCmdOpen] = useState(false);
+    const [toast, setToast] = useState(null);
+    const [syncing, setSyncing] = useState(false);
+    const client = data.clients.find(c => c.id === data.activeClient) || data.clients[0];
+    useEffect(() => {
+      if (t.startClient && t.startClient !== data.activeClient) Store.setActive(t.startClient);
+    }, [t.startClient]);
+    const fireToast = useCallback(text => {
+      setToast({
+        id: Date.now(),
+        text
+      });
+      setSyncing(true);
+      setTimeout(() => setSyncing(false), 1000);
+      setTimeout(() => setToast(c => c && Date.now() - c.id >= 2900 ? null : c), 3000);
+    }, []);
+
+    // ── ⌘K listener ───────────────────────────────────────────
+    useEffect(() => {
+      const h = e => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          setCmdOpen(o => !o);
+        }
+      };
+      window.addEventListener('keydown', h);
+      return () => window.removeEventListener('keydown', h);
+    }, []);
+
+    // ── Store mutation helpers (scoped to active client) ──────
+    const mut = fn => Store.update(d => {
+      const c = d.clients.find(x => x.id === d.activeClient);
+      fn(c.site, c, d);
+    });
+    const touch = page => {
+      page.updated_at = new Date().toISOString();
+    };
+    const actions = {
+      // pages / builder
+      savePage(page, publish) {
+        mut(site => {
+          const i = site.pages.findIndex(p => p.id === page.id);
+          const next = {
+            ...page,
+            status: publish ? 'published' : page.status
+          };
+          touch(next);
+          if (i >= 0) site.pages[i] = next;else site.pages.unshift(next);
+        });
+        if (publish) fireToast('Page published · Live on ' + client.domain);
+      },
+      deletePage(id) {
+        mut(site => {
+          site.pages = site.pages.filter(p => p.id !== id);
+        });
+        fireToast('Page deleted');
+      },
+      addPage(onOpen) {
+        const id = Store.uid('pg');
+        mut(site => {
+          site.pages.unshift({
+            id,
+            title: 'Untitled page',
+            slug: '/' + (site.pages.length + 1),
+            status: 'draft',
+            updated_at: new Date().toISOString(),
+            blocks: [{
+              id: Store.uid('blk'),
+              type: 'hero',
+              data: {
+                ...BLOCK_DEFAULTS.hero
+              }
+            }]
+          });
+        });
+        if (onOpen) setTimeout(() => onOpen(id), 0);
+      },
+      updateBlock(pageId, blockId, dataObj) {
+        mut(site => {
+          const p = site.pages.find(x => x.id === pageId);
+          const b = p.blocks.find(x => x.id === blockId);
+          b.data = dataObj;
+          touch(p);
+        });
+      },
+      addBlock(pageId, type) {
+        mut(site => {
+          const p = site.pages.find(x => x.id === pageId);
+          p.blocks.push({
+            id: Store.uid('blk'),
+            type,
+            data: {
+              ...BLOCK_DEFAULTS[type]
+            }
+          });
+          touch(p);
+        });
+      },
+      deleteBlock(pageId, blockId) {
+        mut(site => {
+          const p = site.pages.find(x => x.id === pageId);
+          p.blocks = p.blocks.filter(b => b.id !== blockId);
+          touch(p);
+        });
+      },
+      moveBlock(pageId, from, to) {
+        mut(site => {
+          const p = site.pages.find(x => x.id === pageId);
+          const a = p.blocks;
+          const [m] = a.splice(from, 1);
+          a.splice(to, 0, m);
+          touch(p);
+        });
+      },
+      // articles
+      saveArticle(a) {
+        mut(site => {
+          const i = site.articles.findIndex(x => x.id === a.id);
+          const next = {
+            ...a,
+            updated_at: new Date().toISOString(),
+            published_at: a.status === 'published' ? a.published_at || new Date().toISOString() : null
+          };
+          if (i >= 0) site.articles[i] = {
+            ...site.articles[i],
+            ...next
+          };else site.articles.unshift({
+            ...next,
+            id: Store.uid('post')
+          });
+        });
+        fireToast(a.status === 'published' ? 'Article published' : 'Draft saved');
+      },
+      deleteArticle(id) {
+        mut(site => {
+          site.articles = site.articles.filter(x => x.id !== id);
+        });
+        fireToast('Article deleted');
+      },
+      // departments
+      saveDepartment(s) {
+        mut(site => {
+          const i = site.departments.findIndex(x => x.id === s.id);
+          if (i >= 0) site.departments[i] = {
+            ...site.departments[i],
+            ...s
+          };else site.departments.push({
+            ...s,
+            id: Store.uid('svc')
+          });
+        });
+        fireToast('Department saved · Live site updated');
+      },
+      deleteDepartment(id) {
+        mut(site => {
+          site.departments = site.departments.filter(x => x.id !== id);
+        });
+        fireToast('Department removed');
+      },
+      moveDepartment(id, dir) {
+        mut(site => {
+          const arr = [...site.departments].sort((a, b) => a.display_order - b.display_order);
+          const i = arr.findIndex(x => x.id === id);
+          const j = i + dir;
+          if (j < 0 || j >= arr.length) return;
+          [arr[i].display_order, arr[j].display_order] = [arr[j].display_order, arr[i].display_order];
+        });
+      },
+      // notes
+      saveNote(n) {
+        mut(site => {
+          const i = site.fieldNotes.findIndex(x => x.id === n.id);
+          if (i >= 0) site.fieldNotes[i] = {
+            ...site.fieldNotes[i],
+            ...n
+          };else site.fieldNotes.push({
+            ...n,
+            id: Store.uid('tst')
+          });
+        });
+        fireToast('Field note saved · Live site updated');
+      },
+      deleteNote(id) {
+        mut(site => {
+          site.fieldNotes = site.fieldNotes.filter(x => x.id !== id);
+        });
+        fireToast('Field note removed');
+      },
+      // messages
+      markRead(id, read) {
+        mut(site => {
+          const m = site.messages.find(x => x.id === id);
+          if (m) m.read = read;
+        });
+      },
+      deleteMessage(id) {
+        mut(site => {
+          site.messages = site.messages.filter(x => x.id !== id);
+        });
+        fireToast('Transmission deleted');
+      },
+      // settings
+      saveSettings(next) {
+        mut(site => {
+          site.settings = {
+            ...site.settings,
+            ...next
+          };
+        });
+      },
+      // projects
+      moveTask(projectId, taskId, toCol) {
+        mut(site => {
+          const p = site.projects.find(x => x.id === projectId);
+          const tk = p.tasks.find(x => x.id === taskId);
+          if (tk) tk.column = toCol;
+        });
+      },
+      addTask(projectId, column, title) {
+        mut(site => {
+          const p = site.projects.find(x => x.id === projectId);
+          p.tasks.push({
+            id: Store.uid('t'),
+            title,
+            column,
+            priority: 'Medium',
+            due: ''
+          });
+        });
+      },
+      updateTask(projectId, taskId, patch) {
+        mut(site => {
+          const p = site.projects.find(x => x.id === projectId);
+          const tk = p.tasks.find(x => x.id === taskId);
+          Object.assign(tk, patch);
+        });
+      },
+      deleteTask(projectId, taskId) {
+        mut(site => {
+          const p = site.projects.find(x => x.id === projectId);
+          p.tasks = p.tasks.filter(x => x.id !== taskId);
+        });
+      },
+      addProject() {
+        const id = Store.uid('prj');
+        const name = prompt('Board name:');
+        if (!name) return null;
+        mut(site => {
+          site.projects.push({
+            id,
+            name,
+            description: '',
+            columns: ['Backlog', 'In Progress', 'Review', 'Done'],
+            tasks: []
+          });
+        });
+        return id;
+      },
+      // plan / clients
+      setPlan(planId) {
+        mut((site, c) => {
+          c.plan = planId;
+        });
+        fireToast('Plan changed to ' + Store.plan(planId).name);
+      }
+    };
+    function go(mod, tab) {
+      setEmbed(false);
+      if (!Store.can(client, mod)) {
+        setModuleId(mod);
+        return;
+      } // locked → upsell renders
+      setModuleId(mod);
+      if (mod === 'content' && tab) setContentTab(tab);
+    }
+    function switchClient(id) {
+      Store.setActive(id);
+      setClientMenu(false);
+      setModuleId('dashboard');
+      setEmbed(false);
+    }
+
+    // ── Command palette commands ──────────────────────────────
+    const commands = [];
+    Store.MODULES.forEach(m => commands.push({
+      id: 'nav-' + m.id,
+      group: 'Go to',
+      icon: m.icon,
+      label: m.brand,
+      sub: Store.can(client, m.id) ? '' : 'locked',
+      run: () => go(m.id)
+    }));
+    commands.push({
+      id: 'nav-site',
+      group: 'Go to',
+      icon: 'external',
+      label: 'View live site',
+      run: () => setEmbed(true)
+    });
+    commands.push({
+      id: 'new-page',
+      group: 'Create',
+      icon: 'layout',
+      label: 'New page',
+      run: () => {
+        go('content', 'pages');
+        actions.addPage();
+      }
+    });
+    commands.push({
+      id: 'new-article',
+      group: 'Create',
+      icon: 'fileText',
+      label: 'New article',
+      run: () => go('content', 'articles')
+    });
+    data.clients.forEach(c => {
+      if (c.id !== client.id) commands.push({
+        id: 'cli-' + c.id,
+        group: 'Switch client',
+        icon: 'user',
+        label: c.name,
+        sub: c.domain,
+        run: () => switchClient(c.id)
+      });
+    });
+
+    // ── Render main ───────────────────────────────────────────
+    let main;
+    if (embed) main = /*#__PURE__*/React.createElement(window.WsEmbed, {
+      client: client,
+      onBack: () => setEmbed(false)
+    });else if (moduleId === 'dashboard') main = /*#__PURE__*/React.createElement(window.WsDashboard, {
+      client: client,
+      go: go,
+      onViewSite: () => setEmbed(true)
+    });else if (!Store.can(client, moduleId)) main = /*#__PURE__*/React.createElement(window.WsUpsell, {
+      client: client,
+      moduleId: moduleId,
+      onPlan: actions.setPlan
+    });else if (moduleId === 'content') main = /*#__PURE__*/React.createElement(window.ContentModule, {
+      client: client,
+      actions: actions,
+      onToast: fireToast,
+      initialTab: contentTab
+    });else if (moduleId === 'projects') main = /*#__PURE__*/React.createElement(window.ProjectsModule, {
+      client: client,
+      actions: actions
+    });else if (moduleId === 'research') main = /*#__PURE__*/React.createElement(ResearchPlaceholder, {
+      client: client
+    });else if (moduleId === 'development') main = /*#__PURE__*/React.createElement(DevPlaceholder, {
+      client: client
+    });
+    const layoutClass = t.navLayout === 'rail' ? 'ws-nav--rail' : 'ws-nav--sidebar';
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-top"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-top__brand"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse",
+      style: {
+        borderColor: 'rgba(255,255,255,.4)'
+      }
+    }), /*#__PURE__*/React.createElement("span", {
+      className: "ws-top__name"
+    }, "Digital Allies"), /*#__PURE__*/React.createElement("span", {
+      className: "ws-top__tag"
+    }, "CMS")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-client"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-client__btn",
+      onClick: () => setClientMenu(o => !o)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-avatar",
+      style: {
+        background: client.brand_color
+      }
+    }, client.initials), /*#__PURE__*/React.createElement("span", {
+      className: "ws-client__meta"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-client__name"
+    }, client.name), /*#__PURE__*/React.createElement("span", {
+      className: "ws-client__dom"
+    }, client.domain)), /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronDown",
+      size: 14,
+      color: "rgba(255,255,255,.6)"
+    })), clientMenu && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: 'fixed',
+        inset: 0,
+        zIndex: 50
+      },
+      onClick: () => setClientMenu(false)
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "ws-client__menu"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-client__head"
+    }, /*#__PURE__*/React.createElement("span", null, "Your sites"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontFamily: 'var(--font-details)'
+      }
+    }, data.clients.length)), data.clients.map(c => /*#__PURE__*/React.createElement("button", {
+      key: c.id,
+      className: 'ws-client__opt' + (c.id === client.id ? ' is-on' : ''),
+      onClick: () => switchClient(c.id)
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-avatar",
+      style: {
+        background: c.brand_color
+      }
+    }, c.initials), /*#__PURE__*/React.createElement("span", {
+      className: "ws-client__opt-meta"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "ws-client__opt-name"
+    }, c.name, c.owner && ' ·', c.owner && /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: 'var(--accent)',
+        fontSize: 10
+      }
+    }, " you")), /*#__PURE__*/React.createElement("span", {
+      className: "ws-client__opt-dom"
+    }, c.domain)), /*#__PURE__*/React.createElement("span", {
+      className: 'ws-plan-tag ws-plan-tag--' + c.plan
+    }, Store.plan(c.plan).name))), /*#__PURE__*/React.createElement("button", {
+      className: "ws-client__add",
+      onClick: () => fireToast('Demo · client onboarding is an Agency feature')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plus",
+      size: 14
+    }), " Add a client site")))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-top__spacer"
+    }), /*#__PURE__*/React.createElement("button", {
+      className: "ws-cmd",
+      onClick: () => setCmdOpen(true)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "search",
+      size: 14
+    }), " Search & commands ", /*#__PURE__*/React.createElement("kbd", null, "\u2318K")), /*#__PURE__*/React.createElement("span", {
+      className: 'ws-sync' + (syncing ? ' ws-sync--on' : '')
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse"
+    }), syncing ? 'Syncing…' : 'Connected')), /*#__PURE__*/React.createElement("div", {
+      className: "ws-body"
+    }, /*#__PURE__*/React.createElement("nav", {
+      className: 'ws-nav ' + layoutClass
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-nav__group"
+    }, t.navLayout === 'rail' ? '—' : 'Modules'), Store.MODULES.map(m => {
+      const locked = !Store.can(client, m.id);
+      const active = moduleId === m.id && !embed;
+      return /*#__PURE__*/React.createElement("button", {
+        key: m.id,
+        className: 'ws-navitem' + (active ? ' is-active' : '') + (locked ? ' is-locked' : ''),
+        onClick: () => go(m.id),
+        title: m.brand
+      }, /*#__PURE__*/React.createElement(Icon, {
+        name: m.icon,
+        size: 16
+      }), t.navLayout !== 'rail' && /*#__PURE__*/React.createElement("span", {
+        className: "ws-navitem__label"
+      }, m.brand), t.navLayout !== 'rail' && locked && /*#__PURE__*/React.createElement(Icon, {
+        name: "lock",
+        size: 12,
+        className: "ws-navitem__lock"
+      }));
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "ws-nav__foot"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-nav__viewsite",
+      onClick: () => setEmbed(true)
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "external",
+      size: 14
+    }), /*#__PURE__*/React.createElement("span", null, "View live site")))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-main"
+    }, main)), toast && /*#__PURE__*/React.createElement("div", {
+      className: "ws-toast",
+      key: toast.id
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "da-pulse"
+    }), toast.text), /*#__PURE__*/React.createElement(window.CmdPalette, {
+      open: cmdOpen,
+      onClose: () => setCmdOpen(false),
+      commands: commands
+    }), /*#__PURE__*/React.createElement(window.TweaksPanel, null, /*#__PURE__*/React.createElement(window.TweakSection, {
+      label: "Navigation"
+    }), /*#__PURE__*/React.createElement(window.TweakRadio, {
+      label: "Nav layout",
+      value: t.navLayout,
+      options: [{
+        value: 'sidebar',
+        label: 'Sidebar'
+      }, {
+        value: 'rail',
+        label: 'Icon rail'
+      }],
+      onChange: v => setTweak('navLayout', v)
+    }), /*#__PURE__*/React.createElement(window.TweakSection, {
+      label: "Demo"
+    }), /*#__PURE__*/React.createElement(window.TweakRadio, {
+      label: "Start on client",
+      value: t.startClient,
+      options: data.clients.map(c => ({
+        value: c.id,
+        label: c.initials
+      })),
+      onChange: v => {
+        setTweak('startClient', v);
+        switchClient(v);
+      }
+    }), /*#__PURE__*/React.createElement(window.TweakButton, {
+      label: "Reset demo content",
+      onClick: () => {
+        Store.reset();
+        fireToast('Demo content reset');
+      }
+    })));
+  }
+
+  // ── Locked-module placeholders (Studio/Agency) — but if plan
+  //    allows, show a tidy "coming together" stub so nav works. ─
+  function ResearchPlaceholder({
+    client
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__eyebrow da-eyebrow da-eyebrow--muted"
+    }, "Research"), /*#__PURE__*/React.createElement("h1", null, "Research & Notes"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "A notebook archive for ", client.name, "."))), /*#__PURE__*/React.createElement("div", {
+      className: "da-pinned",
+      style: {
+        padding: '30px 20px 16px'
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Unlocked on ", client.name, "."), " Notebooks, tagged notes, and exportable research live here \u2014 wired the same connected way as Content. This module is mapped in the build plan and ready to flesh out next."));
+  }
+  function DevPlaceholder({
+    client
+  }) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__eyebrow da-eyebrow da-eyebrow--muted"
+    }, "Development"), /*#__PURE__*/React.createElement("h1", null, "The Workshop"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, "Feature, bug & milestone tracker for ", client.name, "."))), /*#__PURE__*/React.createElement("div", {
+      className: "da-pinned",
+      style: {
+        padding: '30px 20px 16px'
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Agency module."), " The Workshop tracks features, bugs and launch milestones against each site \u2014 the dev counterpart to the Projects board. Mapped in the build plan."));
+  }
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(/*#__PURE__*/React.createElement(App, null));
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/shell.jsx", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/store.js
+try { (() => {
+/* ============================================================
+   Digital Allies — CMS Workspace store
+   Multi-client, plan-aware. One observable store persisted to
+   localStorage. Each CLIENT owns its own site content (pages,
+   articles, departments, field notes, messages, projects).
+   The admin edits a client; the "live site" reads the same data.
+   ============================================================ */
+(function () {
+  const LS_KEY = 'da_cms_workspace_v1';
+
+  // ── Plans ─────────────────────────────────────────────────────
+  const PLANS = [{
+    id: 'starter',
+    name: 'Starter',
+    price: '$0',
+    tier: 0,
+    blurb: 'One site. Pages, articles, settings.',
+    modules: ['dashboard', 'content']
+  }, {
+    id: 'studio',
+    name: 'Studio',
+    price: 'From $49/mo',
+    tier: 1,
+    blurb: 'Add project boards and a research archive.',
+    modules: ['dashboard', 'content', 'projects', 'research']
+  }, {
+    id: 'agency',
+    name: 'Agency',
+    price: 'From $149/mo',
+    tier: 2,
+    blurb: 'Everything, plus multi-client and the dev workshop.',
+    modules: ['dashboard', 'content', 'projects', 'research', 'development'],
+    perks: ['Manage unlimited client sites', 'White-label the admin', 'The Workshop (dev tracker)']
+  }];
+  const MODULES = [{
+    id: 'dashboard',
+    label: 'Dashboard',
+    brand: 'Dashboard',
+    icon: 'dashboard',
+    generic: true
+  }, {
+    id: 'content',
+    label: 'Content',
+    brand: 'The Press Office',
+    icon: 'fileText',
+    generic: false
+  }, {
+    id: 'projects',
+    label: 'Projects',
+    brand: 'Projects',
+    icon: 'grid',
+    generic: true
+  }, {
+    id: 'research',
+    label: 'Research',
+    brand: 'Research',
+    icon: 'briefcase',
+    generic: true
+  }, {
+    id: 'development',
+    label: 'Development',
+    brand: 'The Workshop',
+    icon: 'plug',
+    generic: true
+  }];
+
+  // ── Page-builder block factory ────────────────────────────────
+  const uid = p => (p || 'id') + '-' + Math.random().toString(36).slice(2, 9);
+
+  // ── Owner site (Digital Allies) — rich seed ───────────────────
+  const DA_SETTINGS = {
+    site_title: 'Digital Allies',
+    tagline: 'Technological Solutions for People with Better Things to Do.',
+    phone: '(928) 228-5769',
+    email: 'contact@digitalallies.net',
+    address: 'Based in Kingman, AZ · Serving Everywhere Else',
+    business_hours: 'Mon–Fri · 8a–6p MST · I answer the phone.',
+    hero_title: 'Technological Solutions for People with Better Things to Do.',
+    hero_subtitle: "I build systems that don't require a master's degree to operate. Clean engineering, clear communication, and follow-through that won't require follow up.",
+    hero_cta_text: 'Inquire Within',
+    about_title: 'The Knowledgeable Neighbor',
+    about_body: "I am historically easy to reach. I live in Kingman. If you call, I answer. It is a very avant-garde concept called \u201CDoing My Job.\u201D\n\nStrategy is free. Execution is paid. All quotes are given before work begins \u2014 no surprises, no silent scope creep."
+  };
+  const DA_PAGES = [{
+    id: 'pg-home',
+    title: 'Home',
+    slug: '/',
+    status: 'published',
+    updated_at: '2025-03-01T12:00:00Z',
+    blocks: [{
+      id: uid('blk'),
+      type: 'hero',
+      data: {
+        eyebrow: 'BASED IN KINGMAN, AZ · SERVING EVERYWHERE ELSE',
+        heading: DA_SETTINGS.hero_title,
+        body: DA_SETTINGS.hero_subtitle,
+        cta: 'Inquire Within'
+      }
+    }, {
+      id: uid('blk'),
+      type: 'departments',
+      data: {
+        heading: 'The Departments',
+        sub: 'Four distinct operations. One point of contact.'
+      }
+    }, {
+      id: uid('blk'),
+      type: 'fieldNotes',
+      data: {
+        heading: 'Field Notes'
+      }
+    }, {
+      id: uid('blk'),
+      type: 'cta',
+      data: {
+        heading: 'Need a strategic ally?',
+        button: 'Send a Transmission'
+      }
+    }]
+  }, {
+    id: 'pg-about',
+    title: 'About',
+    slug: '/about',
+    status: 'published',
+    updated_at: '2025-02-20T12:00:00Z',
+    blocks: [{
+      id: uid('blk'),
+      type: 'richtext',
+      data: {
+        heading: 'The Knowledgeable Neighbor',
+        body: DA_SETTINGS.about_body
+      }
+    }, {
+      id: uid('blk'),
+      type: 'cta',
+      data: {
+        heading: 'Have something to build?',
+        button: 'Inquire Within'
+      }
+    }]
+  }, {
+    id: 'pg-services',
+    title: 'Services',
+    slug: '/services',
+    status: 'draft',
+    updated_at: '2025-03-04T09:00:00Z',
+    blocks: [{
+      id: uid('blk'),
+      type: 'departments',
+      data: {
+        heading: 'The Departments',
+        sub: 'Pick a bureau.'
+      }
+    }]
+  }];
+  const DA_DEPARTMENTS = [{
+    id: 'svc-1',
+    title: 'The Design Bureau',
+    icon: 'compass',
+    price: 'From $2,400',
+    description: 'Your logo, site, and words look like they know each other. Brand, identity, and a website that earns its keep.',
+    display_order: 0
+  }, {
+    id: 'svc-2',
+    title: 'Dept. of Cooperation',
+    icon: 'cog',
+    price: 'From $1,800',
+    description: 'Your apps talk to each other. You don\u2019t have to. Integrations that quietly move data where it needs to go.',
+    display_order: 1
+  }, {
+    id: 'svc-3',
+    title: 'The Self-Governing Bureau',
+    icon: 'timer',
+    price: 'From $1,200',
+    description: 'Repetitive tasks are for machines. Go take a real lunch break. Automation that runs without you watching.',
+    display_order: 2
+  }, {
+    id: 'svc-4',
+    title: 'The Permanent Observation Post',
+    icon: 'radar',
+    price: 'From $300/mo',
+    description: 'Monitoring runs 24/7. If something breaks at 2am, that\u2019s my problem \u2014 not yours.',
+    display_order: 3
+  }];
+  const DA_NOTES = [{
+    id: 'tst-1',
+    author_name: 'Marguerite Vance',
+    author_role: 'Vance & Daughters Hardware · Kingman',
+    rating: 5,
+    content: 'He picked up the phone on the first ring, every single time. The new ordering system saved my Saturdays.',
+    display_order: 0
+  }, {
+    id: 'tst-2',
+    author_name: 'Dr. Elias Knox',
+    author_role: 'Knox Family Dental',
+    rating: 5,
+    content: 'No jargon, no runaround. He explained the whole thing in plain English, gave the quote before starting, and finished early. Rare.',
+    display_order: 1
+  }, {
+    id: 'tst-3',
+    author_name: 'Pilar Ortega',
+    author_role: 'Ortega Route 66 Diner',
+    rating: 5,
+    content: 'The reservations and the website finally talk to each other. My host stand stopped double-booking tables.',
+    display_order: 2
+  }];
+  const DA_ARTICLES = [{
+    id: 'post-1',
+    title: 'Why I answer the phone',
+    slug: 'why-i-answer-the-phone',
+    excerpt: 'A short defense of a radical business practice: being reachable.',
+    content: '<p>There is a strange idea in this industry that being hard to reach makes you important. I disagree. If you call, I answer.</p>',
+    status: 'published',
+    published_at: '2025-02-18T15:00:00Z',
+    updated_at: '2025-02-18T15:00:00Z'
+  }, {
+    id: 'post-2',
+    title: 'The Jargon Jar: a translation guide',
+    slug: 'the-jargon-jar',
+    excerpt: 'Corporate speak, translated into things a human being would actually say.',
+    content: '<p>"Leverage synergies across touchpoints" means "make the parts work together." That is the whole jar.</p>',
+    status: 'published',
+    published_at: '2025-01-30T15:00:00Z',
+    updated_at: '2025-01-30T15:00:00Z'
+  }, {
+    id: 'post-3',
+    title: 'On the Reciprocity Loop (draft)',
+    slug: 'the-reciprocity-loop',
+    excerpt: 'Strategy is free. Execution is paid. Here is why that works.',
+    content: '<p>I do not charge for conversations or clarity. Call it a professional courtesy.</p>',
+    status: 'draft',
+    published_at: null,
+    updated_at: '2025-03-02T18:30:00Z'
+  }];
+  const DA_MESSAGES = [{
+    id: 'msg-1',
+    name: 'Theodore Brandt',
+    email: 'theo@brandtmotors.com',
+    phone: '(928) 555-0147',
+    subject: 'Website + booking for the shop',
+    message: 'Saw your site. My current one is held together with tape. Can we talk about a rebuild and an online booking thing for the garage?',
+    read: false,
+    created_at: '2025-03-04T17:42:00Z'
+  }, {
+    id: 'msg-2',
+    name: 'Ruth Calloway',
+    email: 'ruth.calloway@gmail.com',
+    phone: null,
+    subject: 'Automating invoices',
+    message: 'I spend every Friday typing invoices by hand. A friend said you might be able to make that stop happening. Please.',
+    read: false,
+    created_at: '2025-03-03T09:12:00Z'
+  }, {
+    id: 'msg-3',
+    name: 'Sam Whitfield',
+    email: 'sam@whitfieldlaw.net',
+    phone: '(602) 555-0190',
+    subject: 'Quick question on monitoring',
+    message: 'What does the Permanent Observation Post actually cover? Do you watch the site overnight?',
+    read: true,
+    created_at: '2025-02-28T20:05:00Z'
+  }];
+  const DA_PROJECTS = [{
+    id: 'prj-1',
+    name: 'Brandt Motors — rebuild',
+    description: 'Full site rebuild + online booking for the garage.',
+    columns: ['Backlog', 'In Progress', 'Review', 'Done'],
+    tasks: [{
+      id: 't1',
+      title: 'Sitemap + content inventory',
+      column: 'Done',
+      priority: 'High',
+      due: '2025-03-08'
+    }, {
+      id: 't2',
+      title: 'Homepage layout in CMS',
+      column: 'In Progress',
+      priority: 'High',
+      due: '2025-03-14'
+    }, {
+      id: 't3',
+      title: 'Booking integration (Calendly)',
+      column: 'In Progress',
+      priority: 'Medium',
+      due: '2025-03-18'
+    }, {
+      id: 't4',
+      title: 'Migrate 6 service pages',
+      column: 'Backlog',
+      priority: 'Medium',
+      due: '2025-03-22'
+    }, {
+      id: 't5',
+      title: 'Launch checklist + DNS',
+      column: 'Backlog',
+      priority: 'Low',
+      due: '2025-03-28'
+    }]
+  }, {
+    id: 'prj-2',
+    name: 'Knox Dental — automation',
+    description: 'Invoice + reminder automation.',
+    columns: ['Backlog', 'In Progress', 'Review', 'Done'],
+    tasks: [{
+      id: 't6',
+      title: 'Map current invoice flow',
+      column: 'Done',
+      priority: 'High',
+      due: '2025-03-05'
+    }, {
+      id: 't7',
+      title: 'Zapier → QuickBooks bridge',
+      column: 'Review',
+      priority: 'High',
+      due: '2025-03-12'
+    }, {
+      id: 't8',
+      title: 'SMS appointment reminders',
+      column: 'Backlog',
+      priority: 'Medium',
+      due: '2025-03-20'
+    }]
+  }];
+
+  // ── Client sites ──────────────────────────────────────────────
+  function emptySite(over) {
+    return Object.assign({
+      settings: {},
+      pages: [],
+      articles: [],
+      departments: [],
+      fieldNotes: [],
+      messages: [],
+      projects: []
+    }, over);
+  }
+  const SEED = {
+    activeClient: 'da',
+    clients: [{
+      id: 'da',
+      name: 'Digital Allies',
+      domain: 'digitalallies.net',
+      initials: 'DA',
+      plan: 'agency',
+      brand_color: '#3A7BD5',
+      owner: true,
+      live_url: 'https://digitalallies.net',
+      admin_url: 'https://da-webwssite-build-workflows.vercel.app/',
+      site: emptySite({
+        settings: DA_SETTINGS,
+        pages: DA_PAGES,
+        articles: DA_ARTICLES,
+        departments: DA_DEPARTMENTS,
+        fieldNotes: DA_NOTES,
+        messages: DA_MESSAGES,
+        projects: DA_PROJECTS
+      })
+    }, {
+      id: 'brandt',
+      name: 'Brandt Motors',
+      domain: 'brandtmotors.com',
+      initials: 'BM',
+      plan: 'starter',
+      brand_color: '#C5301A',
+      live_url: 'https://digitalallies.net',
+      admin_url: '',
+      site: emptySite({
+        settings: {
+          site_title: 'Brandt Motors',
+          tagline: 'Honest repair since 1986. Kingman, AZ.',
+          phone: '(928) 555-0147',
+          email: 'theo@brandtmotors.com',
+          address: 'Andy Devine Ave · Kingman, AZ',
+          hero_title: 'Your truck, back on the road by Friday.',
+          hero_subtitle: 'Diagnostics, brakes, and the stuff that goes wrong on Route 66. Book online — we answer the phone too.',
+          hero_cta_text: 'Book a service',
+          about_title: 'Three bays. Two mechanics. No surprises.',
+          about_body: 'We tell you what it needs and what it costs before we touch it.'
+        },
+        pages: [{
+          id: 'bm-home',
+          title: 'Home',
+          slug: '/',
+          status: 'published',
+          updated_at: '2025-03-04T10:00:00Z',
+          blocks: [{
+            id: uid('blk'),
+            type: 'hero',
+            data: {
+              eyebrow: 'KINGMAN, AZ · SINCE 1986',
+              heading: 'Your truck, back on the road by Friday.',
+              body: 'Diagnostics, brakes, and the stuff that goes wrong on Route 66.',
+              cta: 'Book a service'
+            }
+          }, {
+            id: uid('blk'),
+            type: 'cta',
+            data: {
+              heading: 'Need it looked at?',
+              button: 'Book a service'
+            }
+          }]
+        }, {
+          id: 'bm-svc',
+          title: 'Services',
+          slug: '/services',
+          status: 'draft',
+          updated_at: '2025-03-04T10:30:00Z',
+          blocks: [{
+            id: uid('blk'),
+            type: 'richtext',
+            data: {
+              heading: 'What we do',
+              body: 'Brakes. Diagnostics. A/C. Tires. Pre-trip inspections.'
+            }
+          }]
+        }],
+        articles: [],
+        departments: [],
+        fieldNotes: [{
+          id: 'bm-n1',
+          author_name: 'Dale R.',
+          author_role: 'Regular since 2009',
+          rating: 5,
+          content: 'Fixed in a day, charged what they quoted. Nobody does that anymore.',
+          display_order: 0
+        }],
+        messages: [{
+          id: 'bm-m1',
+          name: 'Cindy Ross',
+          email: 'cindy@example.com',
+          phone: null,
+          subject: 'Brake noise',
+          message: 'Grinding when I stop. Can I come in Thursday?',
+          read: false,
+          created_at: '2025-03-05T08:00:00Z'
+        }],
+        projects: []
+      })
+    }, {
+      id: 'knox',
+      name: 'Knox Family Dental',
+      domain: 'knoxfamilydental.com',
+      initials: 'KD',
+      plan: 'studio',
+      brand_color: '#1F8A5B',
+      live_url: 'https://digitalallies.net',
+      admin_url: '',
+      site: emptySite({
+        settings: {
+          site_title: 'Knox Family Dental',
+          tagline: 'Gentle dentistry for the whole family.',
+          phone: '(928) 555-0202',
+          email: 'front@knoxfamilydental.com',
+          address: 'Stockton Hill Rd · Kingman, AZ',
+          hero_title: 'A dentist your kids won\u2019t dread.',
+          hero_subtitle: 'Cleanings, checkups, and same-week emergencies. New patients welcome.',
+          hero_cta_text: 'Request appointment',
+          about_title: 'Dr. Elias Knox, DDS',
+          about_body: 'Twenty years keeping Kingman smiling.'
+        },
+        pages: [{
+          id: 'kd-home',
+          title: 'Home',
+          slug: '/',
+          status: 'published',
+          updated_at: '2025-03-02T11:00:00Z',
+          blocks: [{
+            id: uid('blk'),
+            type: 'hero',
+            data: {
+              eyebrow: 'KINGMAN, AZ · NEW PATIENTS WELCOME',
+              heading: 'A dentist your kids won\u2019t dread.',
+              body: 'Cleanings, checkups, and same-week emergencies.',
+              cta: 'Request appointment'
+            }
+          }, {
+            id: uid('blk'),
+            type: 'fieldNotes',
+            data: {
+              heading: 'What patients say'
+            }
+          }]
+        }],
+        articles: [{
+          id: 'kd-a1',
+          title: 'When should kids see a dentist?',
+          slug: 'kids-first-visit',
+          excerpt: 'Sooner than you think.',
+          content: '<p>By the first birthday, ideally.</p>',
+          status: 'published',
+          published_at: '2025-02-10T15:00:00Z',
+          updated_at: '2025-02-10T15:00:00Z'
+        }],
+        departments: [],
+        fieldNotes: [{
+          id: 'kd-n1',
+          author_name: 'The Ortega family',
+          author_role: 'Patients since 2018',
+          rating: 5,
+          content: 'Three kids, zero meltdowns. The staff is unreasonably kind.',
+          display_order: 0
+        }],
+        messages: [],
+        projects: [{
+          id: 'kd-p1',
+          name: 'Patient portal',
+          description: 'Online forms + reminders.',
+          columns: ['Backlog', 'In Progress', 'Review', 'Done'],
+          tasks: [{
+            id: 'kt1',
+            title: 'Intake form builder',
+            column: 'In Progress',
+            priority: 'High',
+            due: '2025-03-15'
+          }, {
+            id: 'kt2',
+            title: 'SMS reminders',
+            column: 'Backlog',
+            priority: 'Medium',
+            due: '2025-03-22'
+          }]
+        }]
+      })
+    }]
+  };
+
+  // ── Persistence ───────────────────────────────────────────────
+  function load() {
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return JSON.parse(JSON.stringify(SEED));
+  }
+  let state = load();
+  const listeners = new Set();
+  function persist() {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+  function emit() {
+    listeners.forEach(fn => fn(state));
+  }
+  const Store = {
+    PLANS,
+    MODULES,
+    get: () => state,
+    plan: id => PLANS.find(p => p.id === id),
+    activeClient: () => state.clients.find(c => c.id === state.activeClient),
+    can(clientOrId, moduleId) {
+      const c = typeof clientOrId === 'string' ? state.clients.find(x => x.id === clientOrId) : clientOrId;
+      if (!c) return false;
+      const pl = PLANS.find(p => p.id === c.plan);
+      return !!pl && pl.modules.includes(moduleId);
+    },
+    subscribe(fn) {
+      listeners.add(fn);
+      return () => listeners.delete(fn);
+    },
+    update(mutator) {
+      const draft = JSON.parse(JSON.stringify(state));
+      state = mutator(draft) || draft;
+      persist();
+      emit();
+    },
+    setActive(id) {
+      Store.update(d => {
+        d.activeClient = id;
+      });
+    },
+    reset() {
+      state = JSON.parse(JSON.stringify(SEED));
+      persist();
+      emit();
+    },
+    uid
+  };
+  window.CMSWorkspace = Store;
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/store.js", error: String((e && e.message) || e) }); }
+
+// cms/connected/workspace/views.jsx
+try { (() => {
+/* ============================================================
+   VIEWS — Dashboard · Upsell (plan gate) · Embed (live site/admin)
+   Exported on window.
+   ============================================================ */
+(function () {
+  const {
+    useState,
+    useRef
+  } = React;
+  const Icon = window.Icon;
+  const Store = window.CMSWorkspace;
+
+  // ── Dashboard ───────────────────────────────────────────────
+  function Dashboard({
+    client,
+    go,
+    onViewSite
+  }) {
+    const s = client.site;
+    const unread = (s.messages || []).filter(m => !m.read).length;
+    const drafts = (s.pages || []).filter(p => p.status === 'draft').length + (s.articles || []).filter(a => a.status === 'draft').length;
+    const tasks = (s.projects || []).reduce((n, p) => n + p.tasks.length, 0);
+    const canProjects = Store.can(client, 'projects');
+    const stats = [{
+      label: 'Pages',
+      value: (s.pages || []).length,
+      sub: drafts + ' draft' + (drafts === 1 ? '' : 's'),
+      icon: 'fileText',
+      go: () => go('content', 'pages')
+    }, {
+      label: 'Articles',
+      value: (s.articles || []).length,
+      sub: 'in the Journal',
+      icon: 'book',
+      go: () => go('content', 'articles')
+    }, {
+      label: 'Open tasks',
+      value: canProjects ? tasks : '—',
+      sub: canProjects ? 'across boards' : 'Studio plan',
+      icon: 'grid',
+      go: () => go('projects')
+    }, {
+      label: 'Unread',
+      value: unread,
+      sub: (s.messages || []).length + ' transmissions',
+      icon: 'message',
+      alert: unread > 0,
+      go: () => go('content', 'messages')
+    }];
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__eyebrow da-eyebrow da-eyebrow--muted"
+    }, "Dashboard"), /*#__PURE__*/React.createElement("h1", null, client.name), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__sub"
+    }, client.domain, " \xB7 ", Store.plan(client.plan).name, " plan")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-head__actions"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn",
+      onClick: onViewSite
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "external",
+      size: 13
+    }), " View live site"))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-stat-grid"
+    }, stats.map(st => /*#__PURE__*/React.createElement("button", {
+      className: "ws-stat",
+      key: st.label,
+      onClick: st.go
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-stat__top"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: st.icon,
+      size: 15
+    }), st.alert && /*#__PURE__*/React.createElement("span", {
+      className: "da-signal-dot",
+      style: {
+        width: 10,
+        height: 10
+      }
+    })), /*#__PURE__*/React.createElement("span", {
+      className: "ws-stat__val"
+    }, st.value), /*#__PURE__*/React.createElement("span", {
+      className: "ws-stat__label"
+    }, st.label), /*#__PURE__*/React.createElement("span", {
+      className: "ws-stat__sub"
+    }, st.sub)))), /*#__PURE__*/React.createElement("div", {
+      className: "ws-subhead"
+    }, "Quick actions"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-quick-grid"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-quick",
+      onClick: () => go('content', 'pages')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "layout",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Build a page"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-quick",
+      onClick: () => go('content', 'articles')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "fileText",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Write an article"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-quick",
+      onClick: () => go('content', 'settings')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "settings",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Edit site settings"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    })), /*#__PURE__*/React.createElement("button", {
+      className: "ws-quick",
+      onClick: () => go('content', 'messages')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "message",
+      size: 16
+    }), /*#__PURE__*/React.createElement("span", null, "Read transmissions"), /*#__PURE__*/React.createElement(Icon, {
+      name: "arrowRight",
+      size: 14
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "da-pinned",
+      style: {
+        marginTop: 32,
+        padding: '30px 20px 16px'
+      }
+    }, /*#__PURE__*/React.createElement("strong", null, "Connected, not copied."), " This workspace and ", client.domain, " read from the same source. Save a change, hit ", /*#__PURE__*/React.createElement("em", null, "View live site"), ", and it\u2019s already there."));
+  }
+
+  // ── Upsell (plan gate) ──────────────────────────────────────
+  function Upsell({
+    client,
+    moduleId,
+    onPlan
+  }) {
+    const mod = Store.MODULES.find(m => m.id === moduleId);
+    const target = Store.PLANS.find(p => p.modules.includes(moduleId));
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-page"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-upsell"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-upsell__lock"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "lock",
+      size: 22
+    })), /*#__PURE__*/React.createElement("h1", null, mod.brand, " is a ", target.name, " feature"), /*#__PURE__*/React.createElement("p", null, client.name, " is on the ", /*#__PURE__*/React.createElement("strong", null, Store.plan(client.plan).name), " plan. Upgrade to ", /*#__PURE__*/React.createElement("strong", null, target.name), " to unlock ", mod.brand.toLowerCase(), " \u2014 and everything below it."), /*#__PURE__*/React.createElement("div", {
+      className: "ws-plans"
+    }, Store.PLANS.map(pl => {
+      const isCur = pl.id === client.plan;
+      const isTarget = pl.id === target.id;
+      return /*#__PURE__*/React.createElement("div", {
+        key: pl.id,
+        className: 'ws-plan' + (isCur ? ' is-current' : '') + (isTarget && !isCur ? ' is-target' : '')
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "ws-plan__name"
+      }, pl.name, isCur && /*#__PURE__*/React.createElement("span", {
+        className: "ws-plan-tag ws-plan-tag--studio"
+      }, "Current")), /*#__PURE__*/React.createElement("div", {
+        className: "ws-plan__price"
+      }, pl.price), /*#__PURE__*/React.createElement("div", {
+        className: "ws-plan__blurb"
+      }, pl.blurb), /*#__PURE__*/React.createElement("div", {
+        className: "ws-plan__mods"
+      }, Store.MODULES.map(m => {
+        const on = pl.modules.includes(m.id);
+        return /*#__PURE__*/React.createElement("div", {
+          key: m.id,
+          className: 'ws-plan__mod' + (on ? '' : ' is-off')
+        }, /*#__PURE__*/React.createElement(Icon, {
+          name: on ? 'check' : 'x',
+          size: 13,
+          color: on ? 'var(--accent)' : 'currentColor'
+        }), m.brand);
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "ws-plan__cta"
+      }, isCur ? /*#__PURE__*/React.createElement("button", {
+        className: "ws-btn ws-btn--sm",
+        disabled: true,
+        style: {
+          width: '100%'
+        }
+      }, "You\u2019re here") : /*#__PURE__*/React.createElement("button", {
+        className: "ws-btn ws-btn--primary ws-btn--sm",
+        style: {
+          width: '100%'
+        },
+        onClick: () => onPlan(pl.id)
+      }, "Switch to ", pl.name)));
+    })), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 20,
+        fontSize: 11
+      }
+    }, "Demo \u2014 switching plans is instant and reversible from the client switcher.")));
+  }
+
+  // ── Embed (live site / admin panel) ─────────────────────────
+  function Embed({
+    client,
+    onBack
+  }) {
+    const hasAdmin = !!client.admin_url;
+    const [view, setView] = useState('live');
+    const frameRef = useRef(null);
+    const url = view === 'live' ? client.live_url : client.admin_url;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "ws-embed"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "ws-embed__bar"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "ws-btn ws-btn--ghost ws-btn--sm",
+      onClick: onBack
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "chevronLeft",
+      size: 14
+    }), " Back to workspace"), /*#__PURE__*/React.createElement("div", {
+      className: "ws-embed__seg"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: view === 'live' ? 'is-on' : '',
+      onClick: () => setView('live')
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "globe",
+      size: 13
+    }), " Live site"), /*#__PURE__*/React.createElement("button", {
+      className: view === 'admin' ? 'is-on' : '',
+      onClick: () => setView('admin'),
+      disabled: !hasAdmin,
+      title: hasAdmin ? '' : 'No admin panel linked'
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "lock",
+      size: 13
+    }), " Admin panel")), /*#__PURE__*/React.createElement("div", {
+      className: "ws-embed__url"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "lock",
+      size: 11
+    }), /*#__PURE__*/React.createElement("span", null, url)), /*#__PURE__*/React.createElement("button", {
+      className: "ws-icon-btn",
+      title: "Reload",
+      onClick: () => {
+        if (frameRef.current) frameRef.current.src = frameRef.current.src;
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "refresh",
+      size: 14
+    })), /*#__PURE__*/React.createElement("a", {
+      className: "ws-btn ws-btn--sm",
+      href: url,
+      target: "_blank",
+      rel: "noopener"
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "external",
+      size: 13
+    }), " Open")), view === 'admin' && !hasAdmin ? /*#__PURE__*/React.createElement("div", {
+      className: "ws-embed__frame",
+      style: {
+        display: 'grid',
+        placeItems: 'center',
+        background: 'var(--bg-alt)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: 'center',
+        maxWidth: 360
+      }
+    }, /*#__PURE__*/React.createElement(Icon, {
+      name: "plug",
+      size: 28,
+      color: "var(--fg-soft)"
+    }), /*#__PURE__*/React.createElement("p", {
+      className: "da-small",
+      style: {
+        marginTop: 12
+      }
+    }, "No external admin panel linked for ", client.name, ". This client is managed entirely inside the workspace."))) : /*#__PURE__*/React.createElement("iframe", {
+      ref: frameRef,
+      className: "ws-embed__frame",
+      src: url,
+      title: view + ' view',
+      loading: "lazy",
+      referrerPolicy: "no-referrer"
+    }));
+  }
+  Object.assign(window, {
+    WsDashboard: Dashboard,
+    WsUpsell: Upsell,
+    WsEmbed: Embed
+  });
+})();
+})(); } catch (e) { __ds_ns.__errors.push({ path: "cms/connected/workspace/views.jsx", error: String((e && e.message) || e) }); }
 
 // social/AEO.jsx
 try { (() => {
