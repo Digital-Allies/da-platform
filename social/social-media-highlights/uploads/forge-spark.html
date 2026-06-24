@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    :root { --orange: #ff4500; --dark: #111; --gray: #222; }
+    body { font-family: 'Arial', sans-serif; margin: 0; background: var(--dark); color: #fff; }
+    header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--orange); }
+    .logo { font-weight: 900; font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; }
+    .hero { 
+        padding: 80px 20px; text-align: center; 
+        background: radial-gradient(circle at center, #333 0%, #000 100%);
+    }
+    h1 { font-size: 3rem; margin-bottom: 10px; text-transform: uppercase; }
+    p.sub { color: #ccc; max-width: 600px; margin: 0 auto 30px auto; }
+    .btn { background: var(--orange); color: white; padding: 15px 40px; text-decoration: none; font-weight: bold; text-transform: uppercase; display: inline-block; clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%); transition: 0.3s; }
+    .btn:hover { background: #fff; color: var(--orange); }
+    .stats { display: flex; justify-content: space-around; padding: 40px 20px; background: var(--gray); margin-top: -20px; }
+    .stat-box h3 { color: var(--orange); font-size: 2rem; margin: 0; }
+    .services { padding: 60px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .card { background: var(--gray); padding: 30px; border: 1px solid #333; }
+    .card h3 { border-left: 3px solid var(--orange); padding-left: 10px; }
+    footer { text-align: center; padding: 20px; font-size: 0.8rem; opacity: 0.5; }
+</style>
+</head>
+<body>
+    <header>
+        <div class="logo">Desert<span style="color:var(--orange)">Iron</span></div>
+        <a href="#" style="color:white; text-decoration:none;">(928) 555-0123</a>
+    </header>
+    <div class="hero">
+        <h1>Precision Steel<br>Kingman, AZ</h1>
+        <p class="sub">Structural steel, custom fabrication, and mobile welding services for Mohave County's industrial sector.</p>
+        <a href="#" class="btn">Upload Blueprints</a>
+    </div>
+    <div class="stats">
+        <div class="stat-box"><h3>25+</h3><p>Years</p></div>
+        <div class="stat-box"><h3>AWS</h3><p>Certified</p></div>
+        <div class="stat-box"><h3>24hr</h3><p>Turnaround</p></div>
+    </div>
+    <div class="services">
+        <div class="card">
+            <h3>Structural Steel</h3>
+            <p>Beams, columns, and trusses for commercial construction projects.</p>
+        </div>
+        <div class="card">
+            <h3>Industrial Repair</h3>
+            <p>Heavy equipment welding and repair to minimize downtime.</p>
+        </div>
+        <div class="card">
+            <h3>Custom Gates</h3>
+            <p>Security and aesthetic ironwork for commercial properties.</p>
+        </div>
+    </div>
+    <footer>
+        <p>© 2026 Digital Allies. Based in Kingman, AZ. &nbsp;|&nbsp; <a href="https://digitalallies.net/privacy.html" style="color:#fff;opacity:0.5;">Privacy</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/terms.html" style="color:#fff;opacity:0.5;">Terms</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/cookies.html" style="color:#fff;opacity:0.5;">Cookies</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/sitemap.html" style="color:#fff;opacity:0.5;">Sitemap</a></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Street Market - Mockup</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; margin: 0; padding: 0; color: #333; }
+        header { padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background-color: #fff; border-bottom: 3px solid #e67e22; }
+        header h1 { margin: 0; font-size: 2rem; font-weight: 700; color: #2c3e50; text-transform: uppercase; }
+        nav a { margin-left: 25px; text-decoration: none; color: #7f8c8d; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        nav a:hover { color: #e67e22; }
+        .hero { height: 350px; display: flex; justify-content: center; align-items: center; text-align: center; color: white; background-image: linear-gradient(rgba(44,62,80,0.6),rgba(44,62,80,0.6)), url('https://placehold.co/1200x400/e67e22/fff?text=Artisan+Gifts+%26+Local+Finds'); background-size: cover; }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .btn-hero { background-color: #e67e22; color: white; padding: 12px 28px; text-decoration: none; font-weight: bold; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; }
+        .container { max-width: 1000px; margin: 3rem auto; padding: 0 20px; }
+        .section-title { text-align: center; margin-bottom: 2.5rem; font-size: 1.8rem; color: #2c3e50; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .vendor-card { border: 1px solid #eee; padding: 20px; text-align: center; transition: transform 0.3s; }
+        .vendor-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: #e67e22; }
+        .vendor-img { height: 180px; background-color: #ecf0f1; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: #95a5a6; font-weight: bold; }
+        .vendor-name { font-weight: bold; font-size: 1.2rem; margin: 10px 0; color: #2c3e50; }
+        .about-section { background-color: #f9f9f9; padding: 3rem 2rem; text-align: center; margin-top: 3rem; }
+        footer { background-color: #2c3e50; color: #ecf0f1; text-align: center; padding: 2rem; margin-top: 3rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Main Street Market</h1>
+        <nav>
+            <a href="#">Our Artisans</a>
+            <a href="#">Shop Online</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <div>
+            <h2>A Curated Collection of Local Artisan Goods</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">Featuring unique gifts from local vendors.</p>
+            <a href="#" class="btn-hero">Browse the Collection</a>
+        </div>
+    </section>
+    <div class="container">
+        <h3 class="section-title">Discover Our Local Makers</h3>
+        <div class="grid">
+            <div class="vendor-card">
+                <div class="vendor-img">Ceramic Artist Work</div>
+                <div class="vendor-name">Featured Artisan: [Name]</div>
+                <p>Hand-thrown pottery and unique home decor.</p>
+            </div>
+            <div class="vendor-card">
+                <div class="vendor-img">Handmade Jewelry</div>
+                <div class="vendor-name">Local Jeweler: [Name]</div>
+                <p>One-of-a-kind pieces crafted by local hands.</p>
+            </div>
+            <div class="vendor-card">
+                <div class="vendor-img">Leather Goods</div>
+                <div class="vendor-name">Custom Leather: [Name]</div>
+                <p>Durable, handcrafted bags and accessories.</p>
+            </div>
+        </div>
+    </div>
+    <section class="about-section">
+        <h3 class="section-title">More Than Just a Gift Shop</h3>
+        <p style="max-width: 700px; margin: 0 auto; line-height: 1.6;">Main Street Market is a community hub dedicated to showcasing the talent of local artisans. We believe in supporting small businesses and bringing unique, high-quality goods to our town. Come see what our community is creating!</p>
+    </section>
+    <footer>
+        <p>© 2026 Digital Allies. Based in Kingman, AZ. &nbsp;|&nbsp; <a href="https://digitalallies.net/privacy.html" style="color: #e67e22; text-decoration: none;">Privacy</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/terms.html" style="color: #e67e22; text-decoration: none;">Terms</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/cookies.html" style="color: #e67e22; text-decoration: none;">Cookies</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/sitemap.html" style="color: #e67e22; text-decoration: none;">Sitemap</a></p>
+    </footer>
+</body>
+</html>

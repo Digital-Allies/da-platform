@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Colors" name="The 95/5 Rule" subtitle="75% canvas + 20% structure + 5% signal — never stacked" viewport="700x230" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The 95/5 Rule</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; }
+    .bar { height: 56px; border: 1px solid var(--charcoal); display: flex; overflow: hidden; }
+    .seg-bone { background: var(--bone-white); flex: 0 0 75%; display: flex; align-items: center; justify-content: center; }
+    .seg-char { background: var(--charcoal); flex: 0 0 20%; }
+    .seg-signal { background: var(--signal-red); flex: 0 0 5%; }
+    .seg-label { font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+    .legend { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    .leg { display: flex; gap: 8px; align-items: flex-start; }
+    .swat { width: 12px; height: 12px; border: 1px solid var(--charcoal); margin-top: 2px; flex: 0 0 12px; }
+    .leg-text { font-family: var(--font-details); font-size: 11px; line-height: 1.5; }
+    .leg-text strong { font-family: var(--font-headers); font-weight: 700; display: block; font-size: 12px; color: var(--fg); }
+    .quote { font-family: var(--font-details); font-size: 11px; font-style: italic; color: var(--fg-muted); margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--grid-line-strong); line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <div class="bar">
+      <div class="seg-bone"><span class="seg-label">75% Bone White</span></div>
+      <div class="seg-char"></div>
+      <div class="seg-signal"></div>
+    </div>
+    <div class="legend">
+      <div class="leg"><div class="swat" style="background:var(--bone-white)"></div><div class="leg-text"><strong>Canvas · 75%</strong>Bone White does the heavy lifting.</div></div>
+      <div class="leg"><div class="swat" style="background:var(--charcoal)"></div><div class="leg-text"><strong>Structure · 20%</strong>Charcoal text + 1 px borders.</div></div>
+      <div class="leg"><div class="swat" style="background:var(--signal-red)"></div><div class="leg-text"><strong>Signal · 5%</strong>The one moment of red, and only one.</div></div>
+    </div>
+    <p class="quote">"95% of the canvas serves the 5% masterpiece. When I signal the user, the signal is absolute."</p>
+  </div>
+</body>
+</html>

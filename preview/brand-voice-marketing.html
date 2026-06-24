@@ -1,0 +1,569 @@
+<!-- @dsCard group="Brand" name="Voice & Marketing Hub" subtitle="Primary + secondary voice, target audience, content calendar, asset prompts" viewport="1200x1400" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Voice & Marketing — Digital Allies</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
+    
+    h1 { font-family: var(--font-headers); font-size: 42px; font-weight: 700; margin: 0 0 8px 0; line-height: 1.1; }
+    .eyebrow { font-family: var(--font-details); font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--signal); font-weight: 700; margin-bottom: 16px; }
+    h2 { font-family: var(--font-headers); font-size: 28px; font-weight: 700; margin: 48px 0 20px 0; padding-bottom: 12px; border-bottom: 1px solid var(--charcoal); }
+    h3 { font-family: var(--font-headers); font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
+    
+    .section { margin-bottom: 60px; }
+    .section-intro { font-family: var(--font-body); font-size: 15px; line-height: 1.7; color: var(--fg); margin-bottom: 24px; max-width: 900px; }
+    
+    /* Voice sections */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+    .voice-card { border: 1px solid var(--charcoal); padding: 28px; background: var(--bg); }
+    .voice-card h3 { margin-top: 0; }
+    .voice-label { font-family: var(--font-details); font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--signal); font-weight: 700; margin-bottom: 12px; }
+    
+    .tone-spectrum { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0; font-family: var(--font-details); font-size: 12px; }
+    .tone-item { display: flex; align-items: center; gap: 16px; }
+    .tone-label { width: 140px; text-align: right; color: var(--fg-muted); }
+    .tone-bar { flex: 1; height: 24px; background: var(--bg-alt); border: 1px solid var(--hairline); position: relative; display: flex; align-items: center; }
+    .tone-fill { height: 100%; background: var(--signal); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: white; font-weight: 700; font-size: 10px; }
+    
+    .jargon-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: var(--font-body); font-size: 13px; }
+    .jargon-table th { background: var(--bg-alt); padding: 12px 16px; text-align: left; font-weight: 700; border: 1px solid var(--hairline); }
+    .jargon-table td { padding: 12px 16px; border: 1px solid var(--hairline); }
+    .jargon-table tr:nth-child(even) { background: var(--bg-alt); }
+    .corporate { color: var(--signal); font-family: var(--font-details); }
+    
+    .example-box { background: var(--bg-alt); border-left: 3px solid var(--signal); padding: 16px 20px; margin: 16px 0; font-family: var(--font-body); font-size: 13px; line-height: 1.6; }
+    .do { border-left-color: #2A6FDB; }
+    .dont { border-left-color: var(--signal); }
+    
+    /* Target Audience */
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 24px 0; }
+    .audience-card { border: 1px solid var(--charcoal); padding: 20px; }
+    .audience-card h4 { font-family: var(--font-headers); font-size: 16px; font-weight: 700; margin: 0 0 12px 0; }
+    .audience-card p { font-family: var(--font-body); font-size: 12px; line-height: 1.6; margin: 0; color: var(--fg); }
+    .persona-stat { display: flex; gap: 12px; margin-top: 8px; font-size: 11px; }
+    .persona-stat strong { color: var(--signal); }
+    
+    /* Content Calendar */
+    .calendar-note { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); margin: 12px 0; font-style: italic; }
+    .calendar-preview { border: 1px solid var(--charcoal); padding: 20px; background: var(--bg-alt); margin: 20px 0; font-family: var(--font-body); font-size: 12px; }
+    .cal-row { display: grid; grid-template-columns: 60px 80px 100px 1fr 1fr 100px; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--hairline); align-items: start; }
+    .cal-row:first-child { font-weight: 700; color: var(--signal); margin-bottom: 8px; }
+    .cal-row:last-child { border-bottom: none; }
+    
+    /* Asset Prompts */
+    .prompt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 24px 0; }
+    .prompt-card { border: 1px solid var(--charcoal); padding: 16px; }
+    .prompt-card .day { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; font-weight: 700; }
+    .prompt-card .topic { font-family: var(--font-headers); font-size: 14px; font-weight: 700; margin: 6px 0; }
+    .prompt-card .hook { font-family: var(--font-body); font-size: 11px; line-height: 1.5; color: var(--fg-muted); margin: 8px 0; font-style: italic; }
+    .prompt-card .brief { font-family: var(--font-details); font-size: 10px; line-height: 1.5; color: var(--fg); background: var(--bg-alt); padding: 8px; margin-top: 8px; border-left: 2px solid var(--signal); }
+    
+    /* Integration section */
+    .code-block { background: var(--charcoal); color: var(--fg-on-dark); padding: 16px; border: 1px solid var(--bg-alt); font-family: 'JetBrains Mono', monospace; font-size: 11px; overflow-x: auto; margin: 16px 0; }
+    
+    footer { padding: 40px; text-align: center; font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); border-top: 1px solid var(--hairline); margin-top: 60px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Digital Allies Brand Standards</div>
+    <h1>Voice & Marketing Hub</h1>
+    <p class="section-intro">The canonical source for brand voice (primary + secondary), target audience definition, content calendar (live-updating via CMS), and visual asset prompts for all Digital Allies marketing materials.</p>
+
+    <!-- ====== PRIMARY VOICE ====== -->
+    <section class="section">
+      <h2>Primary Brand Voice</h2>
+      <p class="section-intro">The main voice used across all Digital Allies communications. Sharp, straight-talking, plainly spoken — the knowledgeable neighbor you actually want to call.</p>
+      
+      <div class="voice-card">
+        <div class="voice-label">Brand Voice in One Sentence</div>
+        <p style="font-family: var(--font-body); font-size: 16px; line-height: 1.7; margin: 0; font-style: italic; color: var(--signal);">
+          "The sharp, straight-talking tech guy you actually want to call — because he picks up, explains things plainly, and doesn't make you feel dumb for asking."
+        </p>
+      </div>
+
+      <h3>Tone Coordinates</h3>
+      <div class="tone-spectrum">
+        <div class="tone-item">
+          <div class="tone-label">Formal ↔ Casual</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 65%;">65% casual</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Dry ↔ Warm</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 45%;">45% warm</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Technical ↔ Plain</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 70%;">70% plain</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Eager ↔ Confident</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 75%;">75% confident</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Performing ↔ Authentic</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 100%;">100% authentic</div></div>
+        </div>
+      </div>
+
+      <h3>Core Rules</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 24px 0;">
+        <div>
+          <h4 style="color: var(--signal); margin-top: 0;">Person & Address</h4>
+          <ul style="font-family: var(--font-body); font-size: 13px; line-height: 1.7; margin: 12px 0;">
+            <li><strong>First person singular ("I")</strong> — this is a one-person operation</li>
+            <li><strong>Direct address ("you")</strong> — speak to the reader</li>
+            <li><strong>Owner:</strong> Anthony · <strong>Location:</strong> Kingman, Arizona</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: var(--signal); margin-top: 0;">Casing & Punctuation</h4>
+          <ul style="font-family: var(--font-body); font-size: 13px; line-height: 1.7; margin: 12px 0;">
+            <li><strong>Sentence case</strong> for headlines</li>
+            <li><strong>UPPERCASE TRACKED</strong> for eyebrows</li>
+            <li><strong>Square brackets</strong> for CTAs: [ Inquire Within ]</li>
+            <li><strong>Em-dashes</strong> and → for flow</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Proprietary Vocabulary</h3>
+      <p style="font-family: var(--font-body); font-size: 13px; color: var(--fg-muted); margin: 12px 0;">These branded names replace generic categories. Always use these exact labels:</p>
+      <table class="jargon-table">
+        <tr>
+          <th>Generic</th>
+          <th>Digital Allies Name</th>
+        </tr>
+        <tr>
+          <td>Services overview</td>
+          <td><strong>The Departments</strong></td>
+        </tr>
+        <tr>
+          <td>Design & brand work</td>
+          <td><strong>The Design Bureau</strong></td>
+        </tr>
+        <tr>
+          <td>Integrations</td>
+          <td><strong>Dept. of Cooperation</strong></td>
+        </tr>
+        <tr>
+          <td>Automation</td>
+          <td><strong>The Self-Governing Bureau</strong></td>
+        </tr>
+        <tr>
+          <td>Support / monitoring</td>
+          <td><strong>The Permanent Observation Post</strong></td>
+        </tr>
+        <tr>
+          <td>Pricing table</td>
+          <td><strong>The Transparency Table</strong></td>
+        </tr>
+        <tr>
+          <td>Contact form</td>
+          <td><strong>Send a Transmission</strong></td>
+        </tr>
+        <tr>
+          <td>Testimonials</td>
+          <td><strong>Field Notes</strong></td>
+        </tr>
+      </table>
+
+      <h3>Writing Examples</h3>
+      <div class="example-box do">
+        <strong style="color: #2A6FDB;">✓ DO write like this:</strong><br><br>
+        "Your apps talk to each other. You don't have to."<br>
+        "We answer the phone. In person. Every time."<br>
+        "Repetitive tasks are for machines. Go take a real lunch break."<br>
+        "Monitoring runs 24/7. If something breaks at 2am, that's my problem — not yours."<br>
+        "Strategy is free. Execution is paid."
+      </div>
+
+      <div class="example-box dont">
+        <strong style="color: var(--signal);">✗ DO NOT write like this:</strong><br><br>
+        "We facilitate seamless API-level ecosystem integration."<br>
+        "We're passionate about nurturing your digital journey."<br>
+        "Leverage scalable, user-centric digital solutions."<br>
+        Anything that requires the reader to look up a word.
+      </div>
+
+      <h3>The Jargon Jar</h3>
+      <p style="font-family: var(--font-body); font-size: 13px; color: var(--fg-muted); margin: 12px 0;">When you find yourself reaching for corporate speak, translate it using this table instead:</p>
+      <table class="jargon-table">
+        <tr>
+          <th>Corporate Speak</th>
+          <th>Digital Allies Translation</th>
+        </tr>
+        <tr>
+          <td class="corporate">Leverage synergies across touchpoints</td>
+          <td>Make the parts work together.</td>
+        </tr>
+        <tr>
+          <td class="corporate">End-to-end digital transformation</td>
+          <td>We fix what's broken and build what's missing.</td>
+        </tr>
+        <tr>
+          <td class="corporate">Scalable solutions for your growth journey</td>
+          <td>It works now and won't fall apart later.</td>
+        </tr>
+        <tr>
+          <td class="corporate">SEO-optimized content ecosystems</td>
+          <td>Your site shows up when people search.</td>
+        </tr>
+        <tr>
+          <td class="corporate">Robust backend infrastructure</td>
+          <td>The stuff running quietly so nothing crashes.</td>
+        </tr>
+        <tr>
+          <td class="corporate">Holistic brand alignment</td>
+          <td>Your logo, site, and words know each other.</td>
+        </tr>
+        <tr>
+          <td class="corporate">Onboarding workflow optimization</td>
+          <td>Getting started without the runaround.</td>
+        </tr>
+      </table>
+    </section>
+
+    <!-- ====== SECONDARY VOICE ====== -->
+    <section class="section">
+      <h2>Secondary Voice (Marketing)</h2>
+      <p class="section-intro">Used for social media, promotional content, and audience-facing marketing. Less formal than primary voice — warmer, slightly more conversational, but still authentic. This is how we talk when we're not explaining something technical.</p>
+      
+      <div class="voice-card">
+        <div class="voice-label">Marketing Voice in One Sentence</div>
+        <p style="font-family: var(--font-body); font-size: 16px; line-height: 1.7; margin: 0; font-style: italic; color: var(--signal);">
+          "Real talk about real problems from someone who actually answers the phone."
+        </p>
+      </div>
+
+      <h3>Tone Shift (vs. Primary)</h3>
+      <div class="tone-spectrum">
+        <div class="tone-item">
+          <div class="tone-label">Formal ↔ Casual</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 75%;">75% casual</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Dry ↔ Warm</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 60%;">60% warm</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Technical ↔ Plain</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 80%;">80% plain</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Eager ↔ Confident</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 70%;">70% confident</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Performing ↔ Authentic</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 100%;">100% authentic</div></div>
+        </div>
+      </div>
+
+      <h3>Marketing Voice Guidelines</h3>
+      <div style="display: grid; grid-template-columns: 1fr; gap: 16px; margin: 24px 0;">
+        <div class="example-box do">
+          <strong style="color: #2A6FDB;">✓ Marketing voice examples:</strong><br><br>
+          "Your site is turning away Spanish-speaking customers. Want to know why?"<br>
+          "Machine translation is fine for a first draft. Public-facing? Not so much."<br>
+          "Bilingual content isn't a bonus feature — it's respect."<br>
+          "Most websites treat Spanish like an afterthought. Yours shouldn't."<br>
+          "Your customers speak two languages. Your site should too."
+        </div>
+      </div>
+
+      <h3>When to Use Secondary Voice</h3>
+      <ul style="font-family: var(--font-body); font-size: 13px; line-height: 1.7;">
+        <li><strong>Social media posts</strong> — Twitter, LinkedIn, Instagram captions</li>
+        <li><strong>Email campaigns</strong> — Newsletter bodies, promotional blasts</li>
+        <li><strong>Ad copy</strong> — Google Ads, Facebook, LinkedIn ads</li>
+        <li><strong>Blog intros & conclusions</strong> — Story framing, calls to action</li>
+        <li><strong>Testimonials & case studies</strong> — Client voices echoing brand tone</li>
+        <li><strong>Promotional graphics</strong> — Pamali asset copy, social carousels</li>
+      </ul>
+    </section>
+
+    <!-- ====== TARGET AUDIENCE ====== -->
+    <section class="section">
+      <h2>Target Audience</h2>
+      <p class="section-intro">Who we're talking to. These are the small business owners, local entrepreneurs, and service professionals in the Southwest who know they have a problem but aren't sure where to start.</p>
+      
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h4>Small Local Business Owner</h4>
+          <p><strong>Pain:</strong> "My site is broken, but I don't know what's wrong or who to call."</p>
+          <p><strong>Age:</strong> 35–55 · <strong>Tech:</strong> Moderate</p>
+          <p><strong>Location:</strong> Mohave County & surrounding</p>
+          <p><strong>Decision maker:</strong> Yes (usually sole decision maker)</p>
+        </div>
+        <div class="audience-card">
+          <h4>Marketing Manager (Mid-size Biz)</h4>
+          <p><strong>Pain:</strong> "We need to expand to Spanish-speaking markets but don't know how to do it right."</p>
+          <p><strong>Age:</strong> 28–42 · <strong>Tech:</strong> High</p>
+          <p><strong>Budget:</strong> Has one; guards it closely</p>
+          <p><strong>Decision maker:</strong> With CFO approval</p>
+        </div>
+        <div class="audience-card">
+          <h4>Bilingual Community Leader</h4>
+          <p><strong>Pain:</strong> "Local businesses ignore Spanish speakers, then wonder why they can't sell."</p>
+          <p><strong>Age:</strong> Any · <strong>Tech:</strong> Variable</p>
+          <p><strong>Influence:</strong> High (recommends vendors)</p>
+          <p><strong>Motivation:</strong> Community respect, trust</p>
+        </div>
+      </div>
+
+      <h3>What They Care About</h3>
+      <ul style="font-family: var(--font-body); font-size: 13px; line-height: 1.8;">
+        <li>✓ <strong>Being heard the first time</strong> — clear answers without jargon</li>
+        <li>✓ <strong>Knowing costs upfront</strong> — no hidden fees or surprises</li>
+        <li>✓ <strong>Doing it right once</strong> — not quick fixes that fail later</li>
+        <li>✓ <strong>Actual human contact</strong> — someone who picks up the phone</li>
+        <li>✓ <strong>Respecting their customers</strong> — proper localization, not an afterthought</li>
+        <li>✓ <strong>Staying in business</strong> — solutions that actually convert</li>
+      </ul>
+
+      <h3>What They Don't Care About</h3>
+      <ul style="font-family: var(--font-body); font-size: 13px; line-height: 1.8;">
+        <li>✗ Trendy design patterns or "cutting edge" tech</li>
+        <li>✗ Case studies from companies 100x their size</li>
+        <li>✗ Calls from salespeople during lunch</li>
+        <li>✗ Technical explanations when they asked for a solution</li>
+        <li>✗ Promises instead of guarantees</li>
+      </ul>
+    </section>
+
+    <!-- ====== CONTENT CALENDAR ====== -->
+    <section class="section">
+      <h2>Content Calendar</h2>
+      <p class="section-intro">30-day social + email content plan. CMS-editable — update schedule, swaps, topics, and copy directly in the connected CMS without touching this file.</p>
+      <div class="calendar-note">🔗 Managed in: Connected CMS → Marketing → Content Calendar (live-updating)</div>
+
+      <h3>How to Use This Calendar</h3>
+      <ul style="font-family: var(--font-body); font-size: 13px; line-height: 1.8;">
+        <li><strong>Import the 30-day template</strong> into your CMS's calendar module</li>
+        <li><strong>Swap topics & copy</strong> as needed (edit directly in CMS, not here)</li>
+        <li><strong>Assign asset prompts</strong> from the Pamali library below to each day</li>
+        <li><strong>Track status</strong> (draft, approved, scheduled, posted) in CMS</li>
+        <li><strong>Connect to social scheduler</strong> (Buffer, Later, Hootsuite) for automation</li>
+      </ul>
+
+      <h3>Calendar Structure</h3>
+      <div class="calendar-preview">
+        <div class="cal-row">
+          <div>Day</div>
+          <div>Week</div>
+          <div>Category</div>
+          <div>Topic</div>
+          <div>Copy (Hook + CTA)</div>
+          <div>Asset Prompt</div>
+        </div>
+        <div class="cal-row">
+          <div><strong>1</strong></div>
+          <div>1</div>
+          <div>Local data</div>
+          <div>Mohave County market</div>
+          <div>"Mohave County has a real bilingual market..."</div>
+          <div>Bilingual storefront visual</div>
+        </div>
+        <div class="cal-row">
+          <div><strong>2</strong></div>
+          <div>1</div>
+          <div>Local data</div>
+          <div>Spanish-speaking market</div>
+          <div>"Spanish-speaking market: local businesses..."</div>
+          <div>Business counter with paperwork</div>
+        </div>
+        <div class="cal-row">
+          <div><em>...etc (30 days)</em></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+      <h3>Categories (Repeat Every 30 Days)</h3>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 24px 0; font-family: var(--font-body); font-size: 13px;">
+        <div>
+          <strong style="color: var(--signal);">Week 1: Local Data</strong>
+          <p style="margin: 8px 0 0 0; color: var(--fg-muted);">Why bilingual matters in Mohave County. Data-driven, audience-aware.</p>
+        </div>
+        <div>
+          <strong style="color: var(--signal);">Week 2: Machine Translation Myth</strong>
+          <p style="margin: 8px 0 0 0; color: var(--fg-muted);">The pitfalls of automated translation. Education-focused.</p>
+        </div>
+        <div>
+          <strong style="color: var(--signal);">Week 3: Trust & Culture</strong>
+          <p style="margin: 8px 0 0 0; color: var(--fg-muted);">Bilingual is about respect, not features. Values-driven.</p>
+        </div>
+        <div>
+          <strong style="color: var(--signal);">Week 4: Digital Allies Standard</strong>
+          <p style="margin: 8px 0 0 0; color: var(--fg-muted);">Our approach & how it's different. Conversion-focused.</p>
+        </div>
+      </div>
+
+      <p style="font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); margin-top: 24px;">
+        📋 <strong>Full calendar</strong> available in <code>uploads/da-master-social-copy.csv</code>. Import into your CMS or social scheduler. Update copy, topics, and scheduling directly in the CMS interface — no need to edit this file.
+      </p>
+    </section>
+
+    <!-- ====== ASSET PROMPTS ====== -->
+    <section class="section">
+      <h2>Visual Asset Prompts (Pamali Library)</h2>
+      <p class="section-intro">Art direction briefs for all 30 calendar days. Each prompt pairs with a specific social post. Use these when commissioning graphics from Pamali or your in-house designer. Includes tone, mood, composition, and brand alignment notes.</p>
+
+      <div class="prompt-grid">
+        <!-- Day 1 -->
+        <div class="prompt-card">
+          <div class="day">Day 1 · Week 1</div>
+          <div class="topic">Mohave County market</div>
+          <div class="hook">"Bilingual content isn't a bonus — it's respect."</div>
+          <div class="brief">Minimal Southwest editorial photo: local storefront window, warm desert light, bilingual signage EN/ES, empty headline space, calm modern composition. Brand-aligned, clean lines, muted tones. Not photorealistic.</div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="prompt-card">
+          <div class="day">Day 2 · Week 1</div>
+          <div class="topic">Spanish-speaking market</div>
+          <div class="hook">"Buying power speaks two languages."</div>
+          <div class="brief">Clean conceptual image: small business counter with bilingual paperwork, phone, laptop on grid layout. Desert-neutral palette, soft shadow, friendly local feel. Designed for social ad text overlay.</div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="prompt-card">
+          <div class="day">Day 3 · Week 1</div>
+          <div class="topic">Buying power</div>
+          <div class="hook">"Your customers speak Spanish. Your website should too."</div>
+          <div class="brief">Abstract editorial scene: hands reviewing website on laptop beside bilingual flyers. Warm off-white, charcoal, one blue accent. Simple composition, roomy negative space. Not stock photography.</div>
+        </div>
+
+        <!-- Day 8 -->
+        <div class="prompt-card">
+          <div class="day">Day 8 · Week 2</div>
+          <div class="topic">Machine translation myth</div>
+          <div class="hook">"Machine translation is a draft. Public-facing? That's a different story."</div>
+          <div class="brief">Concept comparison: rough machine-translated draft on one side, clean human-reviewed Spanish page on the other. Simple split layout, muted colors, no robot imagery. Not photorealistic.</div>
+        </div>
+
+        <!-- Day 15 -->
+        <div class="prompt-card">
+          <div class="day">Day 15 · Week 3</div>
+          <div class="topic">Trust & culture</div>
+          <div class="hook">"Bilingual content is about more than words — it's about welcome."</div>
+          <div class="brief">Warm editorial scene: shop owner greeting customer in bilingual environment. Calm human expressions, subtle Spanish signage, natural light. Not overly posed. Brand-consistent, modest.</div>
+        </div>
+
+        <!-- Day 22 -->
+        <div class="prompt-card">
+          <div class="day">Day 22 · Week 4</div>
+          <div class="topic">Digital Allies standard</div>
+          <div class="hook">"Bilingual sites should work like one business, not two half-finished versions."</div>
+          <div class="brief">Brand-forward ad concept: bilingual website draft checked by hand against style guide. Clean lines, muted colors, subtle red accent. Calm, trustworthy. Not corporate or futuristic.</div>
+        </div>
+      </div>
+
+      <p style="font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); margin-top: 24px;">
+        📋 <strong>Full prompts</strong> (all 30 days) in <code>uploads/pamali-asset-prompts.csv</code>. Share with your designer or Pamali AI system for batch asset generation.
+      </p>
+    </section>
+
+    <!-- ====== INTEGRATION ====== -->
+    <section class="section">
+      <h2>CMS Integration</h2>
+      <p class="section-intro">How to connect this hub to your connected CMS and enable live updates without rebuilding the design system.</p>
+
+      <h3>Option 1: Content Calendar Component (Recommended)</h3>
+      <p style="font-family: var(--font-body); font-size: 13px; line-height: 1.7; margin: 12px 0;">
+        Use the reusable <code>ContentCalendar.jsx</code> component from the UI kit. It consumes JSON data directly from your CMS API and re-renders live when you update schedules.
+      </p>
+      <div class="code-block">
+// In your CMS page template:
+&lt;x-import component="ContentCalendar" from="../../../ui_kits/website/ContentCalendar.jsx" data="{{ cms.contentCalendar }}" hint-size="100%,600px"&gt;&lt;/x-import&gt;
+
+// CMS API returns:
+{
+  "contentCalendar": [
+    {
+      "day": 1,
+      "week": 1,
+      "category": "Local data",
+      "topic": "Mohave County market",
+      "hook": "...",
+      "caption": "...",
+      "cta": "...",
+      "promptRef": "icon-001",
+      "status": "scheduled",
+      "scheduledDate": "2026-06-18"
+    }
+    // ...30 items
+  ]
+}
+      </div>
+
+      <h3>Option 2: JSON Data Store (If No Real-time Needed)</h3>
+      <p style="font-family: var(--font-body); font-size: 13px; line-height: 1.7; margin: 12px 0;">
+        Export the CSV as JSON, host it in your CMS assets folder, and import it statically. Update in CMS, re-export CSV → JSON, deploy. Good for weekly/monthly updates.
+      </p>
+      <div class="code-block">
+// data/content-calendar.json
+{
+  "calendarEntries": [
+    { "day": 1, "week": 1, ... },
+    { "day": 2, "week": 1, ... }
+  ],
+  "lastUpdated": "2026-06-18T14:30:00Z"
+}
+
+// Import in template:
+&lt;sc-for list="{{ calendar }}" as="entry"&gt;...&lt;/sc-for&gt;
+      </div>
+
+      <h3>Option 3: Embedded CMS Editor (Advanced)</h3>
+      <p style="font-family: var(--font-body); font-size: 13px; line-height: 1.7; margin: 12px 0;">
+        If your CMS has a rich editor UI, embed a content calendar table inline using your CMS's native table editor. Sync changes back to the API on save.
+      </p>
+
+      <h3>Implementation Steps</h3>
+      <ol style="font-family: var(--font-body); font-size: 13px; line-height: 1.8;">
+        <li><strong>Export CSV → JSON</strong> using the converter at <code>uploads/da-master-social-copy.csv</code></li>
+        <li><strong>Create a CMS collection</strong> called "Content Calendar" with fields: day, week, category, topic, hook, caption, cta, promptRef, status, scheduledDate</li>
+        <li><strong>Populate initial 30 rows</strong> from the CSV data</li>
+        <li><strong>Set up API endpoint</strong> at <code>/api/marketing/calendar</code> that returns all entries sorted by day</li>
+        <li><strong>Mount the ContentCalendar.jsx component</strong> in your marketing page template, passing <code>data="{{ calendar }}"</code></li>
+        <li><strong>Test live edits</strong> — update a calendar entry in the CMS, see it update in the component (no page refresh needed)</li>
+      </ol>
+
+      <h3>ContentCalendar.jsx API</h3>
+      <div class="code-block">
+Props:
+  - data: Array of calendar entry objects
+  - onEntryClick: (entry) => void (optional, for edit modals)
+  - sortBy: 'day' | 'category' | 'status' (default: 'day')
+  - showStatus: boolean (default: true)
+  - showPromptRef: boolean (default: true)
+
+Example:
+&lt;ContentCalendar 
+  data={calendarEntries}
+  showStatus={true}
+  onEntryClick={(entry) => openEditModal(entry)}
+  sortBy="day"
+/&gt;
+      </div>
+    </section>
+
+    <footer>
+      Digital Allies Brand Voice & Marketing Hub · Last updated June 18, 2026
+      <br>
+      See also: <strong>Primary Voice Guide</strong> (README.md) · <strong>Secondary Voice PDFs</strong> (uploads/) · <strong>Content Calendar</strong> (connected CMS) · <strong>Asset Prompts</strong> (uploads/)
+    </footer>
+  </div>
+</body>
+</html>

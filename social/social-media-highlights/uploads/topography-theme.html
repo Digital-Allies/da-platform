@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body { font-family: 'Consolas', 'Monaco', monospace; margin: 0; background: #fff; color: #333; }
+    .sidebar { width: 60px; height: 100vh; background: #2c3e50; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; align-items: center; padding-top: 20px; }
+    .main { margin-left: 60px; }
+    header { padding: 40px; border-bottom: 1px solid #eee; background: #fcfcfc; }
+    .brand { font-size: 1.5rem; letter-spacing: -1px; font-weight: bold; color: #27ae60; }
+    .hero { padding: 60px 40px; background-image: radial-gradient(#27ae60 1px, transparent 1px); background-size: 20px 20px; background-color: #fff; }
+    h1 { font-size: 2.5rem; max-width: 600px; margin-bottom: 20px; }
+    .btn { background: #27ae60; color: white; padding: 15px 30px; text-decoration: none; display: inline-block; font-family: sans-serif; font-weight: bold; }
+    .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #ddd; margin: 40px; border: 1px solid #ddd; }
+    .data-item { background: white; padding: 20px; text-align: center; }
+    .data-item h4 { margin: 0; color: #555; font-size: 0.9rem; }
+    .icon { width: 30px; height: 30px; background: #ddd; margin-bottom: 20px; border-radius: 50%; }
+</style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="icon" style="background:#27ae60;"></div>
+        <div class="icon"></div>
+        <div class="icon"></div>
+    </div>
+    <div class="main">
+        <header>
+            <div class="brand">COLORADO RIVER SURVEYING</div>
+            <div style="font-size: 0.8rem; color: #999; margin-top:5px;">LIC #12345-AZ | EST. 1998</div>
+        </header>
+        <div class="hero">
+            <h1>Precision Mapping &<br>Geospatial Data.</h1>
+            <p>Serving Commercial Developers in Bullhead City & Laughlin.</p>
+            <a href="#" class="btn">Request ALTA Survey</a>
+        </div>
+        <div class="data-grid">
+            <div class="data-item">
+                <h4>Boundary</h4>
+            </div>
+            <div class="data-item">
+                <h4>Topographic</h4>
+            </div>
+            <div class="data-item">
+                <h4>Construction</h4>
+            </div>
+            <div class="data-item">
+                <h4>GPS/LiDAR</h4>
+            </div>
+            <div class="data-item">
+                <h4>Easements</h4>
+            </div>
+            <div class="data-item">
+                <h4>FEMA Certs</h4>
+            </div>
+        </div>
+    </div>
+    <footer style="margin-left:60px;background:#f9f9f9;color:#999;text-align:center;padding:15px;font-size:0.75rem;border-top:1px solid #eee;font-family:sans-serif;">
+        <p>© 2026 Digital Allies. Based in Kingman, AZ. &nbsp;|&nbsp; <a href="https://digitalallies.net/privacy.html" style="color:#999;">Privacy</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/terms.html" style="color:#999;">Terms</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/cookies.html" style="color:#999;">Cookies</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/sitemap.html" style="color:#999;">Sitemap</a></p>
+    </footer>
+</body>
+</html>

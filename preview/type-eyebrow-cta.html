@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Type — Eyebrow & CTA" subtitle="Uppercase tracked eyebrows + the bracketed-CTA pattern" viewport="700x320" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Eyebrow & Tagline</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 32px 24px; box-sizing: border-box; }
+    .ex { padding: 20px 0; border-bottom: 1px dashed var(--grid-line-strong); }
+    .ex:last-child { border-bottom: none; }
+    .label { font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 10px; display: block; }
+    .display-mock { font-family: var(--font-headers); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -0.005em; max-width: 480px; }
+    .cta-mock { font-family: var(--font-headers); font-weight: 700; font-size: 13px; }
+    .spec-row { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+    .spec-item { font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+    .spec-item b { color: var(--fg); font-family: var(--font-headers); font-size: 11px; display: block; margin-bottom: 2px; }
+    .local-badge { display: inline-block; font-family: var(--font-details); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark); background: var(--charcoal); padding: 2px 5px; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div class="card da-lace">
+    <div><span class="local-badge">All fonts local · No network request</span></div>
+
+    <div class="ex">
+      <span class="label">Eyebrow · signal-red, tracked widest · JetBrains Mono 700</span>
+      <span class="da-eyebrow">Based in Kingman, AZ &middot; Serving Everywhere Else</span>
+      <div class="spec-row">
+        <div class="spec-item"><b>Family</b>JetBrains Mono</div>
+        <div class="spec-item"><b>Size</b>10px</div>
+        <div class="spec-item"><b>Weight</b>700</div>
+        <div class="spec-item"><b>Tracking</b>0.18em</div>
+        <div class="spec-item"><b>Color</b>--signal-red</div>
+      </div>
+    </div>
+
+    <div class="ex">
+      <span class="label">Eyebrow + display headline — the brand's lobby pattern</span>
+      <span class="da-eyebrow" style="margin-bottom: 14px; display: block;">Identity &middot; Style Manual &middot; Spec Sheet</span>
+      <div class="display-mock">Technological Solutions for People with Better Things to Do.</div>
+    </div>
+
+    <div class="ex">
+      <span class="label">Bracketed CTA — the brand's button label convention · Lexend Deca 700 13px</span>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 4px;">
+        <span class="cta-mock">[ Inquire Within ]</span>
+        <span class="cta-mock">[ View the Diagrams ]</span>
+        <span class="cta-mock" style="color: var(--signal);">[ Report a Signal ]</span>
+      </div>
+    </div>
+
+    <div class="ex">
+      <span class="label">Tagline — Lexend Deca 600 18px · used in card intros</span>
+      <span class="da-tagline">We translate the internet into plain English.</span>
+    </div>
+  </div>
+</body>
+</html>

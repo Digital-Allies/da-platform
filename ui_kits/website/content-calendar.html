@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Content Calendar" subtitle="Reusable 30-day marketing calendar — sortable, filterable, CMS-hookable" viewport="1100x760" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — ContentCalendar</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../colors_and_type.css">
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+
+  <!-- Compiled design-system bundle — exposes window.DigitalAlliesDesignSystem_611984 -->
+  <script src="../../_ds_bundle.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px; }
+    .doc-head { margin-bottom: 8px; }
+    .eyebrow {
+      font-family: var(--font-details); font-weight: 700; font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--signal);
+    }
+    h1 { font-family: var(--font-headers); font-weight: 700; font-size: 28px; margin: 8px 0 4px; color: var(--fg); }
+    .sub { font-family: var(--font-details); font-size: 13px; color: var(--fg-muted); margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="doc-head">
+      <span class="eyebrow">Components · UI Kit</span>
+      <h1>Content Calendar</h1>
+      <p class="sub">Pass CMS rows via <code>data</code>. Sort by day / category / status, filter by category, click a row to edit.</p>
+    </div>
+    <div id="root"></div>
+  </div>
+
+  <script>
+    (function () {
+      var NS = window.DigitalAlliesDesignSystem_611984 || {};
+      var ContentCalendar = NS.ContentCalendar;
+
+      var SAMPLE = [
+        { day: 1,  week: "1 · Local data",        category: "Local",       topic: "Kingman is mobile-first", hook: "Most of your neighbors are reading this on a phone in a parking lot.", promptRef: "PAM-01", status: "posted" },
+        { day: 2,  week: "1 · Local data",        category: "Local",       topic: "Desktop is the office, not the town", hook: "Your customers aren't at a desk. Your site shouldn't assume they are.", promptRef: "PAM-02", status: "scheduled" },
+        { day: 8,  week: "2 · Machine translation", category: "Translation", topic: "Auto-translate ≠ understood", hook: "Google Translate gets the words. It misses the neighbor.", promptRef: "PAM-08", status: "approved" },
+        { day: 15, week: "3 · Trust & culture",   category: "Trust",       topic: "Why I pick up the phone", hook: "No ticket queue. No bot. Just me.", promptRef: "PAM-15", status: "draft" },
+        { day: 22, week: "4 · DA standard",       category: "Standard",    topic: "The no-ghosting promise", hook: "If I start it, I finish it — and I tell you the truth in between.", promptRef: "PAM-22", status: "draft" },
+        { day: 29, week: "4 · DA standard",       category: "Standard",    topic: "Close the technology gap", hook: "Technology should work for people with better things to do.", promptRef: "PAM-29", status: "archived" }
+      ];
+
+      function Demo() {
+        return React.createElement(ContentCalendar, {
+          data: SAMPLE,
+          sortBy: "day",
+          showStatus: true,
+          showPromptRef: true,
+          onEntryClick: function (e) { console.log("entry clicked", e); }
+        });
+      }
+
+      function mount() {
+        if (!NS.ContentCalendar) { NS = window.DigitalAlliesDesignSystem_611984 || {}; ContentCalendar = NS.ContentCalendar; }
+        if (!ContentCalendar) { setTimeout(mount, 40); return; }
+        ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(Demo));
+      }
+      mount();
+    })();
+  </script>
+</body>
+</html>

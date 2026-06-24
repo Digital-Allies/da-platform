@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Allies - Connected CMS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="custom-widget ws">
+        <!-- Top bar -->
+        <div class="ws-top">
+            <div class="ws-top__brand">
+                <span class="da-pulse" style="border-color: rgba(255,255,255,.4)"></span>
+                <span class="ws-top__name">Digital Allies</span>
+                <span class="ws-top__tag">CMS</span>
+            </div>
+
+            <div class="ws-client" id="da-client-switcher">
+                <button class="ws-client__btn" id="da-client-btn">
+                    <span class="ws-avatar" style="background: #3A7BD5">DA</span>
+                    <span class="ws-client__meta">
+                        <span class="ws-client__name">Digital Allies</span>
+                        <span class="ws-client__dom">digitalallies.net</span>
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                
+                <!-- Dropdown menu -->
+                <div class="ws-client__menu" id="da-client-menu" style="display: none;">
+                    <div class="ws-client__head"><span>Your sites</span><span style="font-family: var(--font-details)">3</span></div>
+                    <button class="ws-client__opt is-on">
+                        <span class="ws-avatar" style="background: #3A7BD5">DA</span>
+                        <span class="ws-client__opt-meta">
+                            <span class="ws-client__opt-name">Digital Allies · <span style="color: var(--accent); font-size: 10px;">you</span></span>
+                            <span class="ws-client__opt-dom">digitalallies.net</span>
+                        </span>
+                        <span class="ws-plan-tag ws-plan-tag--agency">Agency</span>
+                    </button>
+                    <button class="ws-client__opt">
+                        <span class="ws-avatar" style="background: #C5301A">AF</span>
+                        <span class="ws-client__opt-meta">
+                            <span class="ws-client__opt-name">Atomic Finds</span>
+                            <span class="ws-client__opt-dom">atomicfinds.com</span>
+                        </span>
+                        <span class="ws-plan-tag ws-plan-tag--starter">Starter</span>
+                    </button>
+                    <button class="ws-client__opt">
+                        <span class="ws-avatar" style="background: #1F8A5B">HT</span>
+                        <span class="ws-client__opt-meta">
+                            <span class="ws-client__opt-name">Healthcare Training System</span>
+                            <span class="ws-client__opt-dom">healthcaretraining.edu</span>
+                        </span>
+                        <span class="ws-plan-tag ws-plan-tag--studio">Studio</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="ws-top__spacer"></div>
+            
+            <div class="search-container" style="margin-right: 16px;">
+                <input type="text" id="globalSearch" class="form-control search-input" placeholder="Search across all content..." style="background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.16); color: #fff; width: 300px; padding: 6px 10px;">
+                <button class="search-btn" id="searchBtn" style="color: rgba(255,255,255,.7)">🔍</button>
+            </div>
+
+            <button class="ws-cmd btn btn--outline" id="notificationBtn" style="min-width: auto; padding: 6px 12px; position: relative;">
+                <span class="notification-badge">3</span>
+                🔔
+            </button>
+
+            <span class="ws-sync ws-sync--on" style="margin-left: 16px;"><span class="da-pulse"></span>Connected</span>
+        </div>
+
+        <!-- Body -->
+        <div class="ws-body">
+            <nav class="ws-nav ws-nav--sidebar" id="sidebar">
+                <div class="ws-nav__group">Modules</div>
+                
+                <button class="ws-navitem is-active" data-section="dashboard">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                    <span class="ws-navitem__label">Dashboard</span>
+                </button>
+                
+                <button class="ws-navitem" data-section="content">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span class="ws-navitem__label">The Press Office</span>
+                </button>
+
+                <button class="ws-navitem" data-section="projects">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    <span class="ws-navitem__label">Projects</span>
+                </button>
+                
+                <button class="ws-navitem" data-section="research">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    <span class="ws-navitem__label">Research</span>
+                </button>
+                
+                <button class="ws-navitem" data-section="development">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg>
+                    <span class="ws-navitem__label">The Workshop</span>
+                </button>
+
+                <div class="ws-nav__foot">
+                    <button class="ws-nav__viewsite">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        <span>View live site</span>
+                    </button>
+                </div>
+            </nav>
+            
+            <div class="ws-main" id="mainContent">
+                <div class="ws-page">
+                    <!-- Dashboard Section -->
+                    <section class="section active" id="dashboard-section">
+                        <div class="ws-head">
+                            <div>
+                                <div class="ws-head__eyebrow da-eyebrow da-eyebrow--muted" id="breadcrumb">Dashboard</div>
+                                <h1>Good Morning, Admin</h1>
+                                <div class="ws-head__sub">Here's what's happening across Digital Allies.</div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-grid">
+                            <div class="ws-stat-grid stats-grid">
+                                <div class="ws-stat stat-card">
+                                    <div class="ws-stat__top">
+                                        <span class="ws-stat__label">Active Projects</span>
+                                    </div>
+                                    <span class="ws-stat__val stat-card__number" id="totalProjects">0</span>
+                                </div>
+                                <div class="ws-stat stat-card">
+                                    <div class="ws-stat__top">
+                                        <span class="ws-stat__label">Content Pieces</span>
+                                    </div>
+                                    <span class="ws-stat__val stat-card__number" id="totalContent">0</span>
+                                </div>
+                                <div class="ws-stat stat-card">
+                                    <div class="ws-stat__top">
+                                        <span class="ws-stat__label">Research Notes</span>
+                                    </div>
+                                    <span class="ws-stat__val stat-card__number" id="totalNotes">0</span>
+                                </div>
+                                <div class="ws-stat stat-card">
+                                    <div class="ws-stat__top">
+                                        <span class="ws-stat__label">Dev Tasks</span>
+                                    </div>
+                                    <span class="ws-stat__val stat-card__number" id="totalTasks">0</span>
+                                </div>
+                            </div>
+
+                            <div class="widget-grid">
+                                <div class="widget">
+                                    <h3>Recent Activity</h3>
+                                    <div class="activity-feed" id="activityFeed">
+                                        <div class="activity-item">
+                                            <div class="activity-icon">📝</div>
+                                            <div class="activity-content">
+                                                <p><strong>Digital Transformation Guide</strong> was published</p>
+                                                <small>2 hours ago</small>
+                                            </div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-icon">✅</div>
+                                            <div class="activity-content">
+                                                <p><strong>Design homepage mockup</strong> completed</p>
+                                                <small>1 day ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="widget">
+                                    <h3>Upcoming Deadlines</h3>
+                                    <div class="deadline-list" id="deadlineList">
+                                        <div class="deadline-item priority-high">
+                                            <div class="deadline-date">Oct 15</div>
+                                            <div class="deadline-content">
+                                                <p>Contact form bug fix</p>
+                                                <span class="status status--error">High Priority</span>
+                                            </div>
+                                        </div>
+                                        <div class="deadline-item priority-medium">
+                                            <div class="deadline-date">Oct 18</div>
+                                            <div class="deadline-content">
+                                                <p>Business automation blog post</p>
+                                                <span class="status status--warning">Medium Priority</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="quick-actions">
+                                <button class="btn btn--primary quick-action-btn" data-action="new-content">+ New Content</button>
+                                <button class="btn btn--primary quick-action-btn" data-action="new-project">+ New Project</button>
+                                <button class="btn btn--primary quick-action-btn" data-action="new-note">+ New Note</button>
+                                <button class="btn btn--primary quick-action-btn" data-action="new-task">+ New Task</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Content Management Section -->
+                    <section class="section" id="content-section">
+                        <div class="ws-head">
+                            <div>
+                                <div class="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Content</div>
+                                <h2>The Press Office</h2>
+                            </div>
+                            <button class="btn btn--primary" id="newContentBtn">+ New Content</button>
+                        </div>
+
+                        <div class="content-tabs">
+                            <button class="tab-btn active" data-tab="library">Content Library</button>
+                            <button class="tab-btn" data-tab="create">Create Content</button>
+                            <button class="tab-btn" data-tab="calendar">Content Calendar</button>
+                            <button class="tab-btn" data-tab="templates">Templates</button>
+                        </div>
+
+                        <!-- Content Library Tab -->
+                        <div class="tab-content active" id="library-tab">
+                            <div class="content-filters">
+                                <input type="text" class="form-control" id="contentSearch" placeholder="Search content...">
+                                <select class="form-control" id="contentTypeFilter">
+                                    <option value="">All Types</option>
+                                    <option value="Blog Post">Blog Post</option>
+                                    <option value="Email Template">Email Template</option>
+                                    <option value="Social Media">Social Media</option>
+                                </select>
+                                <select class="form-control" id="contentStatusFilter">
+                                    <option value="">All Status</option>
+                                    <option value="Draft">Draft</option>
+                                    <option value="Published">Published</option>
+                                    <option value="Scheduled">Scheduled</option>
+                                </select>
+                            </div>
+
+                            <div class="content-grid" id="contentGrid">
+                                <!-- Content items will be dynamically generated -->
+                            </div>
+                        </div>
+
+                        <!-- Create Content Tab -->
+                        <div class="tab-content" id="create-tab">
+                            <form class="content-form" id="contentForm">
+                                <div class="form-group">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="contentTitle" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-control" id="contentType" required>
+                                        <option value="">Select type</option>
+                                        <option value="Blog Post">Blog Post</option>
+                                        <option value="Email Template">Email Template</option>
+                                        <option value="Social Media">Social Media</option>
+                                        <option value="Landing Page">Landing Page</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control" id="contentStatus">
+                                        <option value="Draft">Draft</option>
+                                        <option value="Review">Review</option>
+                                        <option value="Published">Published</option>
+                                        <option value="Scheduled">Scheduled</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tags</label>
+                                    <input type="text" class="form-control" id="contentTags" placeholder="Separate tags with commas">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Content</label>
+                                    <textarea class="form-control" id="contentBody" rows="10" required></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn--primary">Save Content</button>
+                                    <button type="button" class="btn btn--secondary" id="clearContentForm">Clear</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Calendar Tab -->
+                        <div class="tab-content" id="calendar-tab">
+                            <div class="calendar-view">
+                                <h3>Content Calendar - October 2025</h3>
+                                <div class="calendar-grid" id="contentCalendar">
+                                    <!-- Calendar will be generated dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Templates Tab -->
+                        <div class="tab-content" id="templates-tab">
+                            <div class="templates-grid">
+                                <div class="template-card">
+                                    <h4>Blog Post Template</h4>
+                                    <p>Standard structure for blog posts</p>
+                                    <button class="btn btn--secondary">Use Template</button>
+                                </div>
+                                <div class="template-card">
+                                    <h4>Welcome Email</h4>
+                                    <p>New user welcome email template</p>
+                                    <button class="btn btn--secondary">Use Template</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Projects Section -->
+                    <section class="section" id="projects-section">
+                        <div class="ws-head">
+                            <div>
+                                <div class="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Organization</div>
+                                <h2>Projects</h2>
+                            </div>
+                            <button class="btn btn--primary" id="newProjectBtn">+ New Project</button>
+                        </div>
+
+                        <div class="project-selector">
+                            <select class="form-control" id="projectSelect">
+                                <!-- Projects will be populated dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="kanban-board" id="kanbanBoard">
+                            <!-- Kanban columns will be generated dynamically -->
+                        </div>
+                    </section>
+
+                    <!-- Research Section -->
+                    <section class="section" id="research-section">
+                        <div class="ws-head">
+                            <div>
+                                <div class="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Documentation</div>
+                                <h2>Research</h2>
+                            </div>
+                            <button class="btn btn--primary" id="newNoteBtn">+ New Note</button>
+                        </div>
+
+                        <div class="research-layout">
+                            <div class="notebooks-sidebar">
+                                <h3>Notebooks</h3>
+                                <div class="notebook-list" id="notebookList">
+                                    <!-- Notebooks will be generated dynamically -->
+                                </div>
+                            </div>
+
+                            <div class="notes-content">
+                                <div class="notes-header">
+                                    <input type="text" class="form-control" id="notesSearch" placeholder="Search notes...">
+                                    <button class="btn btn--secondary" id="exportNotesBtn">Export Notes</button>
+                                </div>
+
+                                <div class="notes-grid" id="notesGrid">
+                                    <!-- Notes will be generated dynamically -->
+                                </div>
+
+                                <div class="note-editor hidden" id="noteEditor">
+                                    <form id="noteForm">
+                                        <div class="form-group">
+                                            <label class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="noteTitle" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Notebook</label>
+                                            <input type="text" class="form-control" id="noteNotebook" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Tags</label>
+                                            <input type="text" class="form-control" id="noteTags" placeholder="Separate tags with commas">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Content</label>
+                                            <textarea class="form-control" id="noteContent" rows="15" required></textarea>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn--primary">Save Note</button>
+                                            <button type="button" class="btn btn--secondary" id="cancelNoteEdit">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Development Section -->
+                    <section class="section" id="development-section">
+                        <div class="ws-head">
+                            <div>
+                                <div class="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Development Tracker</div>
+                                <h2>The Workshop</h2>
+                            </div>
+                            <button class="btn btn--primary" id="newDevTaskBtn">+ New Task</button>
+                        </div>
+
+                        <div class="dev-tabs">
+                            <button class="tab-btn active" data-tab="features">Features</button>
+                            <button class="tab-btn" data-tab="bugs">Bugs</button>
+                            <button class="tab-btn" data-tab="milestones">Milestones</button>
+                        </div>
+
+                        <div class="tab-content active" id="features-tab">
+                            <div class="dev-filters">
+                                <select class="form-control" id="devStatusFilter">
+                                    <option value="">All Status</option>
+                                    <option value="Open">Open</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Testing">Testing</option>
+                                    <option value="Done">Done</option>
+                                </select>
+                                <select class="form-control" id="devPriorityFilter">
+                                    <option value="">All Priority</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                            <div class="dev-tasks-grid" id="devTasksGrid">
+                                <!-- Development tasks will be generated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Development Task Form -->
+                        <div class="dev-task-form hidden" id="devTaskForm">
+                            <form id="devForm">
+                                <div class="form-group">
+                                    <label class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="devTaskTitle" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Type</label>
+                                    <select class="form-control" id="devTaskType" required>
+                                        <option value="Feature">Feature</option>
+                                        <option value="Bug">Bug</option>
+                                        <option value="Enhancement">Enhancement</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control" id="devTaskStatus">
+                                        <option value="Open">Open</option>
+                                        <option value="In Progress">In Progress</option>
+                                        <option value="Testing">Testing</option>
+                                        <option value="Done">Done</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Priority</label>
+                                    <select class="form-control" id="devTaskPriority">
+                                        <option value="Low">Low</option>
+                                        <option value="Medium">Medium</option>
+                                        <option value="High">High</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Due Date</label>
+                                    <input type="date" class="form-control" id="devTaskDueDate">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Description</label>
+                                    <textarea class="form-control" id="devTaskDescription" rows="5"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn--primary">Save Task</button>
+                                    <button type="button" class="btn btn--secondary" id="cancelDevTask">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Results Modal -->
+        <div class="modal hidden" id="searchModal" style="position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-content" style="background: var(--bg); border: var(--border-1); padding: 32px; width: 600px; max-height: 80vh; overflow-y: auto;">
+                <div class="modal-header" style="display: flex; justify-content: space-between; border-bottom: var(--border-1); padding-bottom: 16px; margin-bottom: 16px;">
+                    <h3 style="font-family: var(--font-headers);">Search Results</h3>
+                    <button class="modal-close" id="closeSearchModal" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+                </div>
+                <div class="modal-body" id="searchResults">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

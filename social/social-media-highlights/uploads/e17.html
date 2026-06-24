@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E17 Cooperative Intranet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F7965; /* Earthy Green */
+            --primary-light: #E8F3EE;
+            --secondary: #D68C45; /* Warm Clay */
+            --bg-off-white: #F9FAFB;
+            --text-main: #374151;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-off-white);
+            color: var(--text-main);
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Merriweather', serif;
+        }
+
+        .sidebar-link.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            border-right: 3px solid var(--primary);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Checkbox Custom Styling */
+        .custom-checkbox:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Modal Transitions */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col md:flex-row overflow-hidden">
+
+    <!-- Mobile Header -->
+    <header class="md:hidden flex justify-between items-center p-4 bg-white border-b border-gray-200 z-20">
+        <div class="flex items-center gap-2">
+            <i data-lucide="home" class="text-[#4F7965]"></i>
+            <span class="font-bold serif text-lg text-[#4F7965]">E17 Intranet</span>
+        </div>
+        <button id="mobile-menu-btn" class="p-2 text-gray-600">
+            <i data-lucide="menu"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 w-64 bg-white border-r border-gray-200 flex flex-col transition-transform duration-200 ease-in-out z-10">
+        <div class="p-6 border-b border-gray-100 hidden md:flex items-center gap-2">
+            <div class="bg-[#4F7965] p-2 rounded-lg text-white">
+                <i data-lucide="home" size="20"></i>
+            </div>
+            <span class="font-bold serif text-xl text-[#4F7965]">E17 Intranet</span>
+        </div>
+
+        <div class="flex-1 py-6 space-y-1">
+            <button onclick="router('dashboard')" id="nav-dashboard" class="sidebar-link w-full flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 transition-colors">
+                <i data-lucide="layout-dashboard" size="18"></i>
+                <span class="font-medium">Dashboard</span>
+            </button>
+            <button onclick="router('calendar')" id="nav-calendar" class="sidebar-link w-full flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 transition-colors">
+                <i data-lucide="calendar" size="18"></i>
+                <span class="font-medium">Community Calendar</span>
+            </button>
+            <button onclick="router('tasks')" id="nav-tasks" class="sidebar-link w-full flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 transition-colors">
+                <i data-lucide="check-square" size="18"></i>
+                <span class="font-medium">Tasks & Expenses</span>
+            </button>
+            <button onclick="router('documents')" id="nav-documents" class="sidebar-link w-full flex items-center gap-3 px-6 py-3 text-gray-600 hover:bg-gray-50 transition-colors">
+                <i data-lucide="file-text" size="18"></i>
+                <span class="font-medium">Governance & Docs</span>
+            </button>
+        </div>
+
+        <div class="p-4 border-t border-gray-100">
+            <div class="bg-gray-50 rounded-xl p-4">
+                <p class="text-xs font-semibold text-gray-500 uppercase mb-2">Current Persona</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span id="current-persona-name" class="font-medium text-sm text-gray-800">Standard Member</span>
+                    <i data-lucide="user" size="16" class="text-gray-400"></i>
+                </div>
+                <button onclick="togglePersona()" class="w-full text-xs bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 py-2 px-3 rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2">
+                    <i data-lucide="refresh-cw" size="12"></i>
+                    Switch Role
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-[calc(100vh-60px)] md:h-screen overflow-hidden bg-[#F9FAFB]">
+        <!-- Top Bar (Desktop) -->
+        <div class="hidden md:flex justify-between items-center py-4 px-8 bg-white border-b border-gray-200">
+            <h2 id="page-title" class="text-xl font-semibold serif text-gray-800">Dashboard</h2>
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <i data-lucide="bell" class="text-gray-500 hover:text-[#4F7965] cursor-pointer transition-colors" size="20"></i>
+                    <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </div>
+                <div class="h-8 w-8 rounded-full bg-[#E8F3EE] flex items-center justify-center text-[#4F7965] font-bold border border-[#4F7965]">
+                    JD
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div id="app-content" class="flex-1 overflow-y-auto p-4 md:p-8">
+            <!-- Content Injected via JS -->
+        </div>
+    </main>
+
+    <!-- Universal Modal -->
+    <div id="universal-modal" class="fixed inset-0 modal-backdrop z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden animate-fade-in flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div id="modal-header" class="bg-[#4F7965] p-4 flex justify-between items-center shrink-0">
+                <h3 id="modal-title" class="text-white font-bold text-lg serif">Title</h3>
+                <button onclick="closeModal()" class="text-white/80 hover:text-white transition-colors">
+                    <i data-lucide="x" size="24"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Content (Scrollable) -->
+            <div id="modal-body" class="p-6 overflow-y-auto">
+                <!-- Injected Content -->
+            </div>
+
+            <!-- Modal Footer (Optional) -->
+            <div id="modal-footer" class="p-4 border-t border-gray-100 bg-gray-50 flex justify-end gap-3 shrink-0 hidden">
+                <!-- Injected Buttons -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            persona: 'member', // 'member' or 'steward'
+            currentView: 'dashboard',
+            data: {
+                announcements: [
+                    { id: 1, title: 'Guest Arrival', desc: 'Jane Doe arriving Friday 8pm. Using the guest room.', details: 'Jane will be staying in the guest room until Sunday morning. Please ensure the hallway is clear.', type: 'info', date: 'Oct 23' },
+                    { id: 2, title: 'Water Shutoff', desc: 'Maintenance scheduled Saturday 9am-11am.', details: 'City water will be off for main line repairs. Fill pitchers beforehand!', type: 'alert', date: 'Oct 25' }
+                ],
+                cleaning: [
+                    { id: 101, area: 'Kitchen', assignee: 'You', due: 'Today', complete: false, notes: 'Includes wiping down all counters, sweeping floor, and taking out recycling.' },
+                    { id: 102, area: 'Bathrooms (Upstairs)', assignee: 'Sarah', due: 'Tomorrow', complete: true, notes: 'Scrub tub, clean toilet, wipe mirrors. Use the blue spray for glass.' },
+                    { id: 103, area: 'Living Room', assignee: 'Mike', due: 'Friday', complete: false, notes: 'Vacuum rug, dust shelves, water the plants.' },
+                ],
+                grocery: [
+                    { id: 201, item: 'Dish Soap', addedBy: 'Mike', checked: false },
+                    { id: 202, item: 'Olive Oil', addedBy: 'Sarah', checked: false },
+                    { id: 203, item: 'Coffee Filters', addedBy: 'You', checked: true },
+                ],
+                expenses: [
+                    { id: 301, desc: 'PGE Bill (Oct)', amount: 245.50, paidBy: 'Sarah', date: '2023-10-15', category: 'Utilities' },
+                    { id: 302, desc: 'Costco Run', amount: 189.20, paidBy: 'Mike', date: '2023-10-18', category: 'Groceries' },
+                    { id: 303, desc: 'Plumber Repair', amount: 150.00, paidBy: 'You', date: '2023-10-20', category: 'Maintenance' }
+                ],
+                auditLog: [
+                    { action: 'Updated Budget: Utilities', user: 'Sarah (Steward)', time: '2023-10-21 14:30' },
+                    { action: 'Added Document: House Rules v2', user: 'Mike', time: '2023-10-20 09:15' },
+                    { action: 'Resolved Conflict: #204', user: 'Sarah (Steward)', time: '2023-10-19 16:45' }
+                ],
+                events: [
+                    { id: 401, title: 'Community Dinner', date: 24, type: 'social', time: '7:00 PM', location: 'Common House', details: 'Monthly potluck! Theme: Autumn Harvest.' },
+                    { id: 402, title: 'House Meeting', date: 28, type: 'meeting', time: '8:00 PM', location: 'Living Room', details: 'Agenda: Winter heating budget and garden planning.' }
+                ],
+                documents: [
+                    { id: 501, title: 'Lease Agreement 2023.pdf', date: 'Jan 2023', type: 'pdf' },
+                    { id: 502, title: 'Cooperative Bylaws.docx', date: 'June 2023', type: 'doc' },
+                    { id: 503, title: 'Meeting Minutes - Sept.pdf', date: 'Oct 1', type: 'pdf' }
+                ]
+            }
+        };
+
+        // --- Utils & Icons ---
+        function initIcons() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        // --- Router & Rendering ---
+        function router(viewName) {
+            state.currentView = viewName;
+            
+            document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
+            const activeLink = document.getElementById(`nav-${viewName}`);
+            if(activeLink) activeLink.classList.add('active');
+
+            const sb = document.getElementById('sidebar');
+            if(sb) sb.classList.add('-translate-x-full');
+
+            const titles = {
+                'dashboard': 'Dashboard',
+                'calendar': 'Community Calendar',
+                'tasks': 'Tasks & Logistics',
+                'documents': 'Governance & Docs'
+            };
+            const titleEl = document.getElementById('page-title');
+            if (titleEl) titleEl.textContent = titles[viewName];
+
+            const contentContainer = document.getElementById('app-content');
+            contentContainer.innerHTML = '';
+
+            switch(viewName) {
+                case 'dashboard': renderDashboard(contentContainer); break;
+                case 'calendar': renderCalendar(contentContainer); break;
+                case 'tasks': renderTasks(contentContainer); break;
+                case 'documents': renderDocuments(contentContainer); break;
+            }
+
+            initIcons();
+        }
+
+        // --- Render Functions ---
+
+        function renderDashboard(container) {
+            const html = `
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+                    <!-- Maintenance Alert Banner -->
+                    <div onclick="openModal('view-alert', null)" class="lg:col-span-3 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r shadow-sm flex items-start gap-3 cursor-pointer hover:bg-amber-100 transition-colors">
+                        <i data-lucide="alert-triangle" class="text-amber-500 shrink-0 mt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-amber-800">Maintenance Alert</h3>
+                            <p class="text-sm text-amber-700">Quarterly HVAC filter change is due next week. Tap for details.</p>
+                        </div>
+                    </div>
+
+                    <!-- Announcements -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <h3 class="font-serif text-lg font-bold text-gray-800 flex items-center gap-2">
+                            <i data-lucide="megaphone" size="20" class="text-[#D68C45]"></i> Announcements
+                        </h3>
+                        <div class="grid gap-4">
+                            ${state.data.announcements.map(a => `
+                                <div onclick="openModal('view-announcement', ${a.id})" class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all cursor-pointer">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <span class="bg-${a.type === 'alert' ? 'red' : 'blue'}-100 text-${a.type === 'alert' ? 'red' : 'blue'}-700 text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">${a.type}</span>
+                                        <span class="text-gray-400 text-sm">${a.date}</span>
+                                    </div>
+                                    <h4 class="font-bold text-gray-800 mb-1">${a.title}</h4>
+                                    <p class="text-gray-600 text-sm line-clamp-1">${a.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Quick Cleaning View -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 h-full">
+                            <h3 class="font-serif text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                <i data-lucide="sparkles" size="20" class="text-[#4F7965]"></i> Rotation
+                            </h3>
+                            <div class="space-y-4">
+                                ${state.data.cleaning.map(task => `
+                                    <div class="flex items-center gap-3 p-3 rounded-lg ${task.complete ? 'bg-gray-50 opacity-60' : 'bg-green-50'} hover:bg-green-100 transition-colors cursor-pointer group" onclick="openModal('view-task', ${task.id})">
+                                        <div onclick="event.stopPropagation()">
+                                            <input type="checkbox" ${task.complete ? 'checked' : ''} class="w-5 h-5 text-[#4F7965] rounded focus:ring-[#4F7965] cursor-pointer" onchange="toggleTask(${task.id}, this)">
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="text-sm font-semibold text-gray-800 ${task.complete ? 'line-through' : ''}">${task.area}</p>
+                                            <p class="text-xs text-gray-500">${task.assignee} • ${task.due}</p>
+                                        </div>
+                                        <i data-lucide="chevron-right" size="16" class="text-gray-400 opacity-0 group-hover:opacity-100"></i>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button onclick="router('tasks')" class="w-full mt-4 text-center text-sm text-[#4F7965] hover:underline">View Full Schedule</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderCalendar(container) {
+            const html = `
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 animate-fade-in relative">
+                    <button onclick="openModal('add-event')" class="absolute top-6 right-6 bg-[#4F7965] text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-[#3d5e4e] transition-colors flex items-center gap-2">
+                        <i data-lucide="plus" size="16"></i> Add Event
+                    </button>
+
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-serif text-gray-800">October 2023</h2>
+                        <div class="flex gap-2 mr-32 md:mr-0">
+                            <button class="p-2 hover:bg-gray-100 rounded-full"><i data-lucide="chevron-left"></i></button>
+                            <button class="p-2 hover:bg-gray-100 rounded-full"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-7 gap-4 mb-4 text-center text-sm font-semibold text-gray-400 uppercase tracking-wide">
+                        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                    </div>
+
+                    <div class="grid grid-cols-7 gap-4">
+                        <!-- Empty Days -->
+                        <div class="h-24 p-2 border border-gray-100 rounded-lg bg-gray-50"></div>
+                        <div class="h-24 p-2 border border-gray-100 rounded-lg bg-gray-50"></div>
+                        <div class="h-24 p-2 border border-gray-100 rounded-lg bg-gray-50"></div>
+                        
+                        <!-- Days 1-4 -->
+                        ${[1, 2, 3, 4].map(d => `<div class="h-24 p-2 border border-gray-100 rounded-lg hover:border-[#4F7965] transition-colors"><span class="text-sm text-gray-400">${d}</span></div>`).join('')}
+                        
+                        <!-- Days 5-31 Logic -->
+                        ${Array.from({length: 27}, (_, i) => i + 5).map(d => {
+                            const event = state.data.events.find(e => e.date === d);
+                            if (event) {
+                                const bgClass = event.type === 'meeting' ? 'bg-amber-100 text-amber-800' : 'bg-[#4F7965] text-white';
+                                const borderClass = event.type === 'meeting' ? 'border-amber-200' : 'border-[#4F7965]';
+                                const bgCell = event.type === 'meeting' ? 'bg-amber-50' : 'bg-[#E8F3EE]';
+                                
+                                return `
+                                    <div onclick="openModal('view-event', ${event.id})" class="h-24 p-2 border ${borderClass} ${bgCell} rounded-lg cursor-pointer hover:shadow-md transition-all group">
+                                        <span class="text-sm font-bold text-gray-600">${d}</span>
+                                        <div class="mt-1 ${bgClass} text-xs p-1 rounded truncate shadow-sm">
+                                            ${event.title}
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                            return `<div class="h-24 p-2 border border-gray-100 rounded-lg hover:border-[#4F7965] transition-colors cursor-pointer group" onclick="openModal('add-event', {date: ${d}})"><span class="text-sm text-gray-400 group-hover:text-[#4F7965]">${d}</span></div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderTasks(container) {
+            const isSteward = state.persona === 'steward';
+            
+            const html = `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-fade-in">
+                    
+                    <!-- Grocery List -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col h-full">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-serif text-lg font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="shopping-cart" size="20" class="text-[#D68C45]"></i> Grocery List
+                            </h3>
+                        </div>
+                        <div class="space-y-3 flex-1 overflow-y-auto mb-4" style="max-height: 300px;">
+                            ${state.data.grocery.map(item => `
+                                <div class="flex items-center justify-between group p-2 hover:bg-gray-50 rounded-lg transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" ${item.checked ? 'checked' : ''} class="w-4 h-4 text-[#4F7965] rounded focus:ring-[#4F7965] cursor-pointer" onchange="toggleGrocery(${item.id})">
+                                        <span class="text-sm text-gray-700 ${item.checked ? 'line-through text-gray-400' : ''}">${item.item}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs text-gray-400 opacity-60">Added by ${item.addedBy}</span>
+                                        <button onclick="deleteGrocery(${item.id})" class="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"><i data-lucide="trash-2" size="14"></i></button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="pt-3 border-t flex gap-2">
+                            <input type="text" id="new-grocery-input" placeholder="Add item (e.g. Milk)" class="flex-1 text-sm border-gray-300 rounded-lg focus:ring-[#4F7965] focus:border-[#4F7965] px-3 py-2 border">
+                            <button onclick="addGrocery()" class="bg-[#4F7965] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e4e]">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Expenses -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative overflow-hidden flex flex-col">
+                        ${!isSteward ? `
+                            <div class="absolute inset-x-0 bottom-0 top-16 bg-white/60 backdrop-blur-[2px] flex flex-col items-center justify-center z-10 p-6 text-center">
+                                <div class="bg-gray-100 p-4 rounded-full mb-3"><i data-lucide="lock" class="text-gray-500"></i></div>
+                                <h4 class="font-bold text-gray-800">Restricted Access</h4>
+                                <p class="text-sm text-gray-500 mt-1">Only the Financial Steward can view the detailed ledger.</p>
+                                <button onclick="openModal('add-expense')" class="mt-4 bg-[#4F7965] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e4e] z-20 pointer-events-auto">Log an Expense</button>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-serif text-lg font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="dollar-sign" size="20" class="text-[#4F7965]"></i> Expense Ledger
+                            </h3>
+                             <button onclick="openModal('add-expense')" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded text-gray-600 transition-colors flex items-center gap-1">
+                                <i data-lucide="plus" size="12"></i> Log Expense
+                             </button>
+                        </div>
+                        
+                        <div class="overflow-x-auto flex-1">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs text-gray-500 uppercase bg-gray-50">
+                                    <tr>
+                                        <th class="px-3 py-2">Date</th>
+                                        <th class="px-3 py-2">Description</th>
+                                        <th class="px-3 py-2">Paid By</th>
+                                        <th class="px-3 py-2 text-right">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    ${state.data.expenses.map(ex => `
+                                        <tr class="hover:bg-gray-50 cursor-pointer" onclick="openModal('view-expense', ${ex.id})">
+                                            <td class="px-3 py-3 text-gray-500">${ex.date}</td>
+                                            <td class="px-3 py-3 font-medium text-gray-800">
+                                                ${ex.desc}
+                                                <div class="text-xs text-gray-400 font-normal">${ex.category}</div>
+                                            </td>
+                                            <td class="px-3 py-3 text-gray-600">${ex.paidBy}</td>
+                                            <td class="px-3 py-3 text-right font-mono">$${ex.amount.toFixed(2)}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 pt-4 border-t flex justify-between items-center">
+                            <span class="text-sm font-bold text-gray-600">Total October Expenses</span>
+                            <span class="text-lg font-bold text-[#4F7965]">$${state.data.expenses.reduce((sum, item) => sum + item.amount, 0).toFixed(2)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderDocuments(container) {
+            const isSteward = state.persona === 'steward';
+
+            const html = `
+                <div class="space-y-6 animate-fade-in">
+                    <!-- Document Library -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="font-serif text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="library" size="20" class="text-[#D68C45]"></i> Document Library
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            ${state.data.documents.map(doc => `
+                                <div onclick="openModal('view-document', ${doc.id})" class="flex items-center p-4 border border-gray-100 rounded-lg hover:bg-gray-50 cursor-pointer transition-all hover:shadow-sm group">
+                                    <i data-lucide="file-text" class="${doc.type === 'pdf' ? 'text-red-500' : 'text-blue-500'} mr-3"></i>
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-sm text-gray-800 group-hover:text-[#4F7965] transition-colors">${doc.title}</h4>
+                                        <p class="text-xs text-gray-500">${doc.date}</p>
+                                    </div>
+                                    <i data-lucide="eye" size="16" class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Audit Trail (Steward Only) -->
+                     <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative">
+                        ${!isSteward ? `
+                             <div class="absolute inset-0 bg-white/80 backdrop-blur-[1px] flex items-center justify-center z-10 rounded-xl">
+                                <div class="text-center">
+                                    <i data-lucide="shield-alert" class="mx-auto text-gray-400 mb-2" size="32"></i>
+                                    <p class="text-sm font-medium text-gray-500">Audit Log is restricted to Stewards</p>
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-serif text-lg font-bold text-gray-800 flex items-center gap-2">
+                                <i data-lucide="activity" size="20" class="text-[#4F7965]"></i> System Audit Trail
+                            </h3>
+                             <span class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded font-bold">Steward Only</span>
+                        </div>
+
+                        <div class="space-y-0">
+                            ${state.data.auditLog.map((log, index) => `
+                                <div class="flex gap-4 ${index !== state.data.auditLog.length -1 ? 'pb-4 mb-4 border-b border-gray-50' : ''}">
+                                    <div class="mt-1">
+                                        <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-800">${log.action}</p>
+                                        <p class="text-xs text-gray-500">by ${log.user} • ${log.time}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        // --- Logic: Grocery ---
+        function addGrocery() {
+            const input = document.getElementById('new-grocery-input');
+            const val = input.value.trim();
+            if(val) {
+                state.data.grocery.push({
+                    id: Date.now(),
+                    item: val,
+                    addedBy: 'You',
+                    checked: false
+                });
+                renderTasks(document.getElementById('app-content'));
+                initIcons();
+                // input.value = ''; // Reset handled by re-render
+            }
+        }
+        function toggleGrocery(id) {
+            const item = state.data.grocery.find(i => i.id === id);
+            if(item) item.checked = !item.checked;
+            renderTasks(document.getElementById('app-content'));
+            initIcons();
+        }
+        function deleteGrocery(id) {
+            state.data.grocery = state.data.grocery.filter(i => i.id !== id);
+            renderTasks(document.getElementById('app-content'));
+            initIcons();
+        }
+
+        // --- Logic: Modal System ---
+        function openModal(type, payload) {
+            const modal = document.getElementById('universal-modal');
+            const titleEl = document.getElementById('modal-title');
+            const bodyEl = document.getElementById('modal-body');
+            const footerEl = document.getElementById('modal-footer');
+            
+            modal.classList.remove('hidden');
+            footerEl.classList.add('hidden'); // Hide by default
+            
+            // Logic Switcher
+            if (type === 'view-task') {
+                const task = state.data.cleaning.find(t => t.id === payload);
+                titleEl.textContent = 'Task Details';
+                bodyEl.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <h2 class="text-xl font-bold text-gray-800">${task.area}</h2>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">${task.complete ? 'Completed' : 'Pending'}</span>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                            <h4 class="font-semibold text-sm mb-2 text-gray-600">Instructions & Notes</h4>
+                            <p class="text-gray-800 text-sm leading-relaxed">${task.notes}</p>
+                        </div>
+                        <div class="flex gap-4 text-sm text-gray-500">
+                            <div><span class="font-semibold">Assignee:</span> ${task.assignee}</div>
+                            <div><span class="font-semibold">Due:</span> ${task.due}</div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'view-announcement') {
+                const item = state.data.announcements.find(a => a.id === payload);
+                titleEl.textContent = item.type === 'alert' ? 'Alert Details' : 'Announcement';
+                if(item.type === 'alert') {
+                    document.getElementById('modal-header').classList.remove('bg-[#4F7965]');
+                    document.getElementById('modal-header').classList.add('bg-amber-500');
+                } else {
+                    document.getElementById('modal-header').classList.add('bg-[#4F7965]');
+                    document.getElementById('modal-header').classList.remove('bg-amber-500');
+                }
+                bodyEl.innerHTML = `
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">${item.title}</h2>
+                    <p class="text-sm text-gray-500 mb-4">${item.date}</p>
+                    <p class="text-gray-700 leading-relaxed">${item.details || item.desc}</p>
+                `;
+            } else if (type === 'view-event') {
+                const event = state.data.events.find(e => e.id === payload);
+                titleEl.textContent = 'Event Details';
+                document.getElementById('modal-header').classList.add('bg-[#4F7965]');
+                document.getElementById('modal-header').classList.remove('bg-amber-500');
+                bodyEl.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">${event.title}</h2>
+                            <p class="text-[#4F7965] font-medium">${event.time} • ${event.location}</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="text-gray-700 text-sm">${event.details}</p>
+                        </div>
+                        
+                        <!-- Mock Interactive Elements -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-semibold text-sm mb-3">RSVP Status</h4>
+                            <div class="flex gap-2">
+                                <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold">JD</div>
+                                <div class="h-8 w-8 rounded-full bg-blue-200 flex items-center justify-center text-xs font-bold">AS</div>
+                                <div class="h-8 w-8 rounded-full bg-green-200 flex items-center justify-center text-xs font-bold ring-2 ring-white shadow-sm">+3</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                footerEl.innerHTML = `
+                    <button onclick="deleteEvent(${event.id})" class="text-red-500 hover:bg-red-50 px-3 py-2 rounded text-sm font-medium mr-auto">Delete Event</button>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm">Close</button>
+                    <button onclick="closeModal()" class="bg-[#4F7965] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e4e]">I'm Going</button>
+                `;
+                footerEl.classList.remove('hidden');
+                footerEl.classList.add('flex');
+            } else if (type === 'add-event') {
+                titleEl.textContent = 'Add New Event';
+                document.getElementById('modal-header').classList.add('bg-[#4F7965]');
+                document.getElementById('modal-header').classList.remove('bg-amber-500');
+                const defaultDate = payload && payload.date ? payload.date : '';
+                bodyEl.innerHTML = `
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Event Title</label>
+                            <input type="text" id="evt-title" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-[#4F7965] focus:border-[#4F7965]" placeholder="e.g. Garden Work Day">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Date (Oct)</label>
+                                <input type="number" id="evt-date" value="${defaultDate}" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-[#4F7965] focus:border-[#4F7965]">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Time</label>
+                                <input type="text" id="evt-time" value="7:00 PM" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-[#4F7965] focus:border-[#4F7965]">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Type</label>
+                            <select id="evt-type" class="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                                <option value="social">Social Gathering</option>
+                                <option value="meeting">House Meeting</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Details</label>
+                            <textarea id="evt-details" rows="3" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-[#4F7965] focus:border-[#4F7965]" placeholder="Description..."></textarea>
+                        </div>
+                    </div>
+                `;
+                footerEl.innerHTML = `
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm">Cancel</button>
+                    <button onclick="saveEvent()" class="bg-[#4F7965] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e4e]">Save Event</button>
+                `;
+                footerEl.classList.remove('hidden');
+                footerEl.classList.add('flex');
+            } else if (type === 'add-expense') {
+                titleEl.textContent = 'Log New Expense';
+                 document.getElementById('modal-header').classList.add('bg-[#4F7965]');
+                 document.getElementById('modal-header').classList.remove('bg-amber-500');
+                bodyEl.innerHTML = `
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Description</label>
+                            <input type="text" id="exp-desc" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-[#4F7965] focus:border-[#4F7965]" placeholder="e.g. Internet Bill">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Amount ($)</label>
+                            <input type="number" id="exp-amt" class="w-full border border-gray-300 rounded-lg p-2 text-sm focus:ring-[#4F7965] focus:border-[#4F7965]" placeholder="0.00">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Category</label>
+                            <select id="exp-cat" class="w-full border border-gray-300 rounded-lg p-2 text-sm">
+                                <option>Utilities</option>
+                                <option>Groceries</option>
+                                <option>Maintenance</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+                footerEl.innerHTML = `
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm">Cancel</button>
+                    <button onclick="saveExpense()" class="bg-[#4F7965] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#3d5e4e]">Submit Expense</button>
+                `;
+                footerEl.classList.remove('hidden');
+                footerEl.classList.add('flex');
+            } else if (type === 'view-expense') {
+                const ex = state.data.expenses.find(e => e.id === payload);
+                titleEl.textContent = 'Expense Details';
+                document.getElementById('modal-header').classList.add('bg-[#4F7965]');
+                document.getElementById('modal-header').classList.remove('bg-amber-500');
+                bodyEl.innerHTML = `
+                    <div class="text-center py-4">
+                        <div class="text-3xl font-bold text-gray-800">$${ex.amount.toFixed(2)}</div>
+                        <div class="text-sm text-gray-500 uppercase tracking-wide font-semibold mt-1">${ex.desc}</div>
+                    </div>
+                    <div class="border-t border-b py-3 my-2 space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Paid By</span>
+                            <span class="font-medium text-gray-800">${ex.paidBy}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Date</span>
+                            <span class="font-medium text-gray-800">${ex.date}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-500">Category</span>
+                            <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">${ex.category}</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 text-blue-800 text-xs p-3 rounded-lg mt-4">
+                        Status: <span class="font-bold">Pending Monthly Settlement</span>
+                    </div>
+                `;
+            } else if (type === 'view-document') {
+                const doc = state.data.documents.find(d => d.id === payload);
+                titleEl.textContent = doc.title;
+                document.getElementById('modal-header').classList.add('bg-[#4F7965]');
+                document.getElementById('modal-header').classList.remove('bg-amber-500');
+                bodyEl.innerHTML = `
+                    <div class="bg-gray-100 rounded-lg h-64 flex flex-col items-center justify-center border-2 border-dashed border-gray-300">
+                        <i data-lucide="file-text" size="48" class="text-gray-400 mb-2"></i>
+                        <p class="text-gray-500 font-medium">Document Preview</p>
+                        <p class="text-xs text-gray-400">This is a simulated PDF viewer for the demo.</p>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <div class="text-sm text-gray-600">Uploaded: ${doc.date}</div>
+                        <button class="flex items-center gap-2 text-[#4F7965] font-medium hover:underline text-sm">
+                            <i data-lucide="download" size="16"></i> Download
+                        </button>
+                    </div>
+                `;
+            } else if (type === 'view-alert') {
+                // ... same as announcement logic but specific context if needed
+                titleEl.textContent = 'Maintenance Alert';
+                 document.getElementById('modal-header').classList.remove('bg-[#4F7965]');
+                 document.getElementById('modal-header').classList.add('bg-amber-500');
+                bodyEl.innerHTML = `
+                     <div class="flex items-center gap-3 mb-4 text-amber-600">
+                        <i data-lucide="alert-triangle" size="24"></i>
+                        <h2 class="text-xl font-bold">Action Required</h2>
+                    </div>
+                    <p class="text-gray-800 mb-4 leading-relaxed">Quarterly HVAC filter change is due next week. Please clear space around the utility closet so the technician can access the unit.</p>
+                    <div class="bg-gray-50 p-3 rounded text-sm text-gray-600">
+                        <strong>Technician:</strong> Green Air Services<br>
+                        <strong>Appointment:</strong> Tue, Oct 30 @ 10am
+                    </div>
+                `;
+            }
+
+            initIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('universal-modal').classList.add('hidden');
+        }
+
+        // --- Logic: Interactions ---
+
+        function togglePersona() {
+            state.persona = state.persona === 'member' ? 'steward' : 'member';
+            
+            // Update UI Badge
+            const badge = document.getElementById('current-persona-name');
+            const parent = badge.parentElement.parentElement;
+            
+            if(state.persona === 'steward') {
+                badge.textContent = 'Financial Steward';
+                // Add a visual cue for steward mode
+                document.body.style.setProperty('--primary', '#4F7965'); // Keep brand but maybe add subtle cue?
+            } else {
+                badge.textContent = 'Standard Member';
+            }
+
+            // Re-render current view to reflect permissions
+            router(state.currentView);
+        }
+        
+        // --- Logic: Saving Data ---
+        function saveEvent() {
+            const title = document.getElementById('evt-title').value;
+            const date = document.getElementById('evt-date').value;
+            const time = document.getElementById('evt-time').value;
+            const type = document.getElementById('evt-type').value;
+            const details = document.getElementById('evt-details').value;
+
+            if(title && date) {
+                state.data.events.push({
+                    id: Date.now(),
+                    title,
+                    date: parseInt(date),
+                    type,
+                    time,
+                    location: 'Common House',
+                    details
+                });
+                closeModal();
+                router('calendar'); // Re-render
+            }
+        }
+
+        function deleteEvent(id) {
+            if(confirm('Are you sure you want to delete this event?')) {
+                state.data.events = state.data.events.filter(e => e.id !== id);
+                closeModal();
+                router('calendar');
+            }
+        }
+
+        function saveExpense() {
+            const desc = document.getElementById('exp-desc').value;
+            const amt = document.getElementById('exp-amt').value;
+            const cat = document.getElementById('exp-cat').value;
+            
+            if(desc && amt) {
+                state.data.expenses.push({
+                    id: Date.now(),
+                    desc,
+                    amount: parseFloat(amt),
+                    paidBy: 'You',
+                    date: '2023-10-24',
+                    category: cat
+                });
+                closeModal();
+                renderTasks(document.getElementById('app-content'));
+                initIcons();
+            }
+        }
+        
+        function toggleTask(id, checkbox) {
+             const task = state.data.cleaning.find(t => t.id === id);
+             if(task) task.complete = checkbox.checked;
+             // Re-rendering isn't strictly necessary for visual if we just style it,
+             // but strictly correct for state sync. Let's just update style for smoothness.
+             const row = checkbox.closest('.group');
+             const text = row.querySelector('.text-sm');
+             if(checkbox.checked) {
+                 text.classList.add('line-through');
+                 row.classList.add('opacity-60', 'bg-gray-50');
+                 row.classList.remove('bg-green-50');
+             } else {
+                 text.classList.remove('line-through');
+                 row.classList.remove('opacity-60', 'bg-gray-50');
+                 row.classList.add('bg-green-50');
+             }
+        }
+
+        // --- Init ---
+        window.addEventListener('load', () => {
+            router('dashboard');
+        });
+
+    </script>
+    <footer style="background:#f9fafb;color:#9ca3af;text-align:center;padding:12px;font-size:0.75rem;border-top:1px solid #e5e7eb;">
+        <p>© 2026 Digital Allies. Based in Kingman, AZ. &nbsp;|&nbsp; <a href="https://digitalallies.net/privacy.html" style="color:#9ca3af;">Privacy</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/terms.html" style="color:#9ca3af;">Terms</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/cookies.html" style="color:#9ca3af;">Cookies</a> &nbsp;|&nbsp; <a href="https://digitalallies.net/sitemap.html" style="color:#9ca3af;">Sitemap</a></p>
+    </footer>
+</body>
+</html>
