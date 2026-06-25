@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atomic Finds — Design System</title>
+<link rel="stylesheet" href="colors_and_type.css" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  .hero { text-align: center; }
+  .grid { display: grid; gap: 24px; }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px 32px; justify-items: center; }
+  .grid-3 > * { width: 100%; max-width: 340px; }
+  .grid-3 > .af-galaxy { width: 300px; }
+  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .swatch { height: 80px; border-radius: var(--radius-md); border: 1px solid var(--rich-brown); display: flex; align-items: flex-end; padding: 8px; }
+  .swatch span { font-family: var(--font-body); font-size: 10px; color: rgba(0,0,0,0.65); font-weight: 600; }
+  .tile { display: block; text-decoration: none; }
+  .tile-frame { height: 150px; border-radius: var(--radius-md); border: 2px solid var(--rattan-tan); background: var(--galaxy-bg); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; transition: all var(--dur-base) var(--ease-out); overflow: hidden; }
+  .tile:hover .tile-frame { border-color: var(--celestial-yellow); box-shadow: 0 0 24px rgba(244,196,48,0.35); transform: translateY(-4px); }
+  .tile-frame span { font-family: var(--font-display); font-size: 30px; color: var(--celestial-yellow); text-shadow: var(--glow-md); }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  code { font-family: var(--font-body); font-size: 12px; background: var(--bg-inset); border: 1px solid var(--rich-brown); padding: 2px 8px; border-radius: 4px; color: var(--rattan-tan); }
+</style>
+</head>
+<body>
+
+<nav class="af-nav">
+  <a class="af-nav-logo" href="#">Atomic Finds — DS</a>
+  <div class="af-nav-links">
+    <a class="af-nav-link" href="#foundations">Foundations</a>
+    <a class="af-nav-link" href="#components">Components</a>
+    <a class="af-nav-link" href="#templates">Templates</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="af-hero-bg af-section hero">
+  <div class="af-prose">
+    <p class="af-eyebrow" style="margin-bottom:16px;">DESIGN SYSTEM · v1.0 · NAMESPACE AtomicFindsDesignSystem_af0620</p>
+    <h1 class="af-display" style="animation: af-neon-glow 3.5s ease-in-out infinite;">Atomic Finds</h1>
+    <p class="af-script" style="margin:14px 0 20px;">A transferable, golden-glow brand system</p>
+    <p class="af-p">Celestial 70s warmth — honey-gold glow on deep charcoal, vintage rattan and bamboo, with a moss-green eco accent. Load the tokens, mount the components, start from a template.</p>
+  </div>
+</header>
+
+<!-- FOUNDATIONS -->
+<section class="af-section" id="foundations">
+  <div class="af-wrap">
+    <h2>Foundations</h2>
+    <p class="af-script" style="margin:8px 0 40px;">Color, type, and the glow</p>
+
+    <h3 style="margin-bottom:16px;">Palette</h3>
+    <div class="grid grid-4" style="margin-bottom:48px;">
+      <div class="swatch" style="background:#F5C842;"><span>Celestial Yellow #F5C842</span></div>
+      <div class="swatch" style="background:#D4822A;"><span>Amber Orange #D4822A</span></div>
+      <div class="swatch" style="background:#D4A853;"><span>Bamboo Honey #D4A853</span></div>
+      <div class="swatch" style="background:#C4956A;"><span>Rattan Tan #C4956A</span></div>
+      <div class="swatch" style="background:#556B4A;"><span style="color:#F0E8D8;">Woven Moss #556B4A</span></div>
+      <div class="swatch" style="background:#C1502E;"><span style="color:#F0E8D8;">Austin Clay #C1502E</span></div>
+      <div class="swatch" style="background:#F0E8D8;"><span>Bone White #F0E8D8</span></div>
+      <div class="swatch" style="background:#1E1E1E; border-color:var(--rich-brown);"><span style="color:#D4A853;">Deep Charcoal #1E1E1E</span></div>
+    </div>
+
+    <h3 style="margin-bottom:16px;">Type</h3>
+    <div class="af-card" style="margin-bottom:12px;">
+      <p style="font-family:var(--font-display); font-size:42px; line-height:1.05; letter-spacing:-0.015em; color:var(--celestial-yellow); text-shadow:var(--glow-md); margin:0;">Recoleta display</p>
+      <p class="af-spec" style="margin-top:8px;">Warm rounded retro serif · headlines + the logo wordmark. Fallback: DM Serif Display.</p>
+    </div>
+    <div class="af-card" style="margin-bottom:12px;">
+      <p class="af-script" style="font-size:46px; margin:0;">Bromello script</p>
+      <p class="af-spec" style="margin-top:8px;">Relaxed brush script · subheads &amp; accents, matches the logo. Fallback: Kaushan Script.</p>
+    </div>
+    <div class="af-card">
+      <p style="font-family:var(--font-body); font-size:17px; color:var(--fg-body); margin:0;">DM Sans — a clean humanist sans for body copy, descriptions, labels, and longer prose. Warm and readable on the dark canvas.</p>
+      <p class="af-spec" style="margin-top:8px;">Body &amp; UI · weights 400 / 500 / 600 / 700.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPONENTS -->
+<section class="af-section" id="components" style="background:linear-gradient(135deg,#1b1813 0%,#16140f 50%,#1d1a14 100%);">
+  <div class="af-wrap">
+    <h2>Components</h2>
+    <p class="af-script" style="margin:8px 0 40px;">Eight, mountable from the bundle</p>
+
+    <div class="grid grid-3">
+      <!-- Buttons -->
+      <div class="af-card">
+        <p class="af-eyebrow" style="margin-bottom:16px;">Button</p>
+        <div class="row">
+          <a class="af-btn af-btn-primary" href="#">[ Primary ]</a>
+          <a class="af-btn af-btn-solid" href="#">[ Solid ]</a>
+          <a class="af-btn af-btn-amber" href="#">[ Amber ]</a>
+        </div>
+      </div>
+      <!-- Badges -->
+      <div class="af-card">
+        <p class="af-eyebrow" style="margin-bottom:16px;">Badge</p>
+        <div class="row">
+          <span class="af-badge af-badge-instock">In Stock</span>
+          <span class="af-badge af-badge-featured">Featured</span>
+          <span class="af-badge af-badge-out">Out of Stock</span>
+        </div>
+      </div>
+      <!-- Field -->
+      <div class="af-card">
+        <p class="af-eyebrow" style="margin-bottom:16px;">Field</p>
+        <label class="af-label">Product Name *</label>
+        <input class="af-input" type="text" placeholder="e.g. Catalina" />
+      </div>
+      <!-- Galaxy card -->
+      <div class="af-galaxy" data-img="assets/alien-milo.png" data-name="Milo" data-script="vinyl guardian" data-desc="Bamboo record stand, brass detail." data-price="380"></div>
+      <!-- Product card -->
+      <div class="af-card">
+        <div style="width:calc(100% + 48px); height:120px; margin:-24px -24px 16px; background:linear-gradient(135deg,rgba(212,170,130,0.15),rgba(244,196,48,0.1)); border-bottom:1px solid var(--rattan-tan); display:flex; align-items:center; justify-content:center; font-size:36px; color:var(--celestial-yellow);">▣</div>
+        <span class="af-badge af-badge-instock" style="margin-bottom:8px; display:inline-block;">In Stock</span>
+        <h4 class="af-card-title">Peacock Chair</h4>
+        <p class="af-card-text">1970s · restored finish</p>
+        <p class="af-price" style="margin-top:12px;">$1,450</p>
+      </div>
+      <!-- Testimonial -->
+      <div class="af-testimonial">
+        <p class="af-testimonial-quote">"This chair completely changed my living room. You can tell it's been cared for."</p>
+        <p class="af-testimonial-author">Sarah, Portland</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section class="af-section" id="templates">
+  <div class="af-wrap">
+    <h2>Templates</h2>
+    <p class="af-script" style="margin:8px 0 40px;">Four starting points, fully editable</p>
+    <div class="grid grid-4">
+      <a class="tile" href="templates/homepage/index.html">
+        <div class="tile-frame"><span>☾</span></div>
+        <h4 class="af-card-title">Homepage</h4>
+        <p class="af-card-text">Hero · features · featured collection · CTA</p>
+      </a>
+      <a class="tile" href="templates/product-index/index.html">
+        <div class="tile-frame"><span>▣</span></div>
+        <h4 class="af-card-title">Product Index</h4>
+        <p class="af-card-text">Filterable gallery of galaxy cards</p>
+      </a>
+      <a class="tile" href="templates/product-detail/index.html">
+        <div class="tile-frame"><span>✦</span></div>
+        <h4 class="af-card-title">Product Detail</h4>
+        <p class="af-card-text">Large image · specs · related pieces</p>
+      </a>
+      <a class="tile" href="templates/cms-admin/index.html">
+        <div class="tile-frame"><span>⚛</span></div>
+        <h4 class="af-card-title">CMS Admin</h4>
+        <p class="af-card-text">Dashboard · product table · quick add</p>
+      </a>
+    </div>
+
+    <div class="af-card" style="margin-top:48px;">
+      <p class="af-eyebrow" style="margin-bottom:12px;">LOAD THE SYSTEM</p>
+      <p class="af-p" style="margin:0 0 8px;"><code>&lt;link rel="stylesheet" href="colors_and_type.css"&gt;</code></p>
+      <p class="af-p" style="margin:0 0 8px;"><code>&lt;link rel="stylesheet" href="styles.css"&gt;</code></p>
+      <p class="af-p" style="margin:0;"><code>&lt;script src="_ds_bundle.js"&gt;&lt;/script&gt;</code> → <code>window.AtomicFindsDesignSystem_af0620</code></p>
+    </div>
+  </div>
+</section>
+
+<footer class="af-footer">
+  <div class="af-footer-bottom" style="border:none; margin-top:0;">© 2026 Atomic Finds · Curated by Fran &amp; Mabel · A brand of its own, powered by Digital Allies CMS</div>
+</footer>
+
+<script src="templates/ds-base.js"></script>
+</body>
+</html>

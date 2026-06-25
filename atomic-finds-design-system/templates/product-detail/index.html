@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Atomic Finds — Product Detail Template</title>
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  .detail-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+  .grid-rel { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 56px 40px; justify-items: center; }
+  .spec-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed rgba(212,170,130,0.25); font-family: var(--font-body); font-size: 13px; }
+  .spec-row span:first-child { color: var(--woven-moss); text-transform: uppercase; letter-spacing: 1px; font-size: 11px; }
+  .spec-row span:last-child { color: var(--bone-white); }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+  @media (max-width: 880px) { .detail-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="af-nav">
+  <a class="af-nav-logo" href="../homepage/index.html">Atomic Finds</a>
+  <div class="af-nav-links">
+    <a class="af-nav-link" href="../product-index/index.html">Shop</a>
+    <a class="af-nav-link" href="#">About</a>
+    <a class="af-btn af-btn-solid" href="#" style="padding:10px 22px;">[ Cart ]</a>
+  </div>
+</nav>
+
+<section class="af-section">
+  <div class="af-wrap">
+    <p class="af-eyebrow" style="margin-bottom:28px;">SHOP · SEATING · CATALINA</p>
+    <div class="detail-grid">
+      <div class="af-galaxy-card js-galaxy">
+        <div class="af-galaxy-frame" style="aspect-ratio:1/1;"><img src="../../assets/alien-totiana.png" alt="Catalina" /></div>
+        <div class="af-galaxy-info">
+          <h4 class="af-card-title">"Catalina"</h4>
+          <p class="af-script" style="font-size:20px; margin:0;">Sun-drenched Tiki Charm</p>
+        </div>
+      </div>
+      <div>
+        <span class="af-badge af-badge-featured" style="margin-bottom:14px; display:inline-block;">Featured</span>
+        <h1 style="margin:0;">Catalina</h1>
+        <p class="af-script" style="margin:6px 0 18px;">sun-drenched tiki charm</p>
+        <p class="af-p" style="margin:0 0 24px;">A set of four boho bamboo dining chairs with their original cane seats, gently restored. Catalina spent her first life on a Palm Springs lanai and is ready for her next chapter — sun-soaked breakfasts very much encouraged.</p>
+        <div class="af-price" style="font-size:32px; margin-bottom:24px;">$320</div>
+        <div class="cta-row">
+          <a class="af-btn af-btn-solid" href="#">[ Claim This Piece ]</a>
+          <a class="af-btn af-btn-amber" href="#">[ Ask About Catalina ]</a>
+        </div>
+        <div>
+          <div class="spec-row"><span>Era</span><span>1970s</span></div>
+          <div class="spec-row"><span>Material</span><span>Bamboo · Cane</span></div>
+          <div class="spec-row"><span>Set</span><span>4 chairs</span></div>
+          <div class="spec-row"><span>Condition</span><span>Restored · Excellent</span></div>
+          <div class="spec-row"><span>Origin</span><span>Palm Springs, CA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="af-section" style="background:linear-gradient(135deg,#11201a 0%,#142019 50%,#16271d 100%);">
+  <div class="af-wrap">
+    <div class="center" style="text-align:center; margin-bottom:40px;">
+      <h2>More from the Orbit</h2>
+      <p class="af-script" style="margin-top:8px;">Pieces that pair well</p>
+    </div>
+    <div class="grid-rel">
+      <div class="af-galaxy" data-img="../../assets/alien-ruso.png" data-name="Peacock" data-desc="1970s icon · restored" data-price="1,450"></div>
+      <div class="af-galaxy" data-img="../../assets/alien-malibu.png" data-name="Halcyon" data-desc="Bouclé lounge · restored" data-price="420"></div>
+      <div class="af-galaxy" data-img="../../assets/alien-daisy.png" data-name="Willow" data-desc="Hanging rattan planter" data-price="95"></div>
+    </div>
+  </div>
+</section>
+
+<footer class="af-footer">
+  <div class="af-footer-grid">
+    <div>
+      <div class="af-nav-logo" style="font-size:24px; margin-bottom:12px;">Atomic Finds</div>
+      <p class="af-card-text">Curated vintage rattan, restored with love.</p>
+    </div>
+    <div>
+      <h5 class="af-footer-h">Shop</h5>
+      <a class="af-footer-link" href="../product-index/index.html">All Finds</a>
+      <a class="af-footer-link" href="#">Seating</a>
+      <a class="af-footer-link" href="#">Lighting</a>
+    </div>
+    <div>
+      <h5 class="af-footer-h">About</h5>
+      <a class="af-footer-link" href="#">Our Story</a>
+      <a class="af-footer-link" href="#">Restoration</a>
+    </div>
+    <div>
+      <h5 class="af-footer-h">Connect</h5>
+      <a class="af-footer-link" href="#">Instagram</a>
+      <a class="af-footer-link" href="#">Reserve a Find</a>
+    </div>
+  </div>
+  <div class="af-footer-bottom">© 2026 Atomic Finds · Curated by Fran &amp; Mabel · Powered by Digital Allies CMS</div>
+</footer>
+
+<script src="../ds-base.js"></script>
+</body>
+</html>

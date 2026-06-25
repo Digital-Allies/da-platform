@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atomic Finds — Component Library</title>
+  <link rel="stylesheet" href="atomic-finds-design-system/colors_and_type.css" />
+  <link rel="stylesheet" href="atomic-finds-design-system/styles.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: var(--bg); background-image: var(--weave); }
+  </style>
+</helmet>
+
+<nav style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 48px; position:sticky; top:0; z-index:100; background:rgba(30,30,30,0.92); border-bottom:1px solid rgba(245,200,66,0.18); backdrop-filter:blur(10px);">
+  <div style="font-family:var(--font-display); font-size:22px; letter-spacing:-0.01em; color:var(--celestial-yellow); text-shadow:var(--glow-md);">Atomic Finds — Component Library</div>
+  <div style="font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber-orange); border:1px solid rgba(212,130,42,0.5); border-radius:999px; padding:5px 14px;">v1.1 · live system</div>
+</nav>
+
+<div style="max-width:1180px; margin:0 auto; padding:72px 48px 120px;">
+  <p class="af-eyebrow" style="margin-bottom:14px;">DARK-MODE CELESTIAL 70s · GOLDEN GLOW</p>
+  <h1 style="font-size:clamp(40px,6vw,68px); margin-bottom:18px;">Component System</h1>
+  <p class="af-p" style="max-width:760px; font-size:17px;">Every element here is rendered from the live Atomic Finds design system — the same <code style="font-family:var(--font-body); font-size:13px; color:var(--rattan-tan); background:var(--bg-inset); border:1px solid var(--rich-brown); border-radius:4px; padding:1px 7px;">.af-*</code> classes the templates ship with. Warm neutrals and celestial-yellow glow on deep charcoal, Recoleta + Bromello type, and neon orbital framing on the featured pieces.</p>
+
+  <!-- ============ TYPE ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Typography</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">Recoleta · Bromello · DM Sans</p>
+
+    <div style="display:grid; gap:20px;">
+      <div class="af-card">
+        <p style="font-family:var(--font-display); font-size:46px; line-height:1.05; letter-spacing:-0.015em; color:var(--celestial-yellow); text-shadow:var(--glow-md);">Recoleta display</p>
+        <p class="af-spec" style="margin-top:10px;">Display &amp; headings — warm rounded retro serif, set in title case. <span style="color:var(--fg-soft);">Fallback: DM Serif Display.</span></p>
+      </div>
+      <div class="af-card">
+        <p class="af-script" style="font-size:48px;">Bromello brush script</p>
+        <p class="af-spec" style="margin-top:6px;">Script accents &amp; product nicknames — relaxed brush. <span style="color:var(--fg-soft);">Fallback: Kaushan Script.</span></p>
+      </div>
+      <div class="af-card">
+        <p style="font-family:var(--font-body); font-size:17px; line-height:1.7; color:var(--fg-body);">DM Sans handles body copy, descriptions, labels, specs, and prices — a clean humanist sans that stays legible at small sizes on the dark canvas. The quick brown fox jumps over the lazy dog.</p>
+        <p class="af-spec" style="margin-top:10px;">Body &amp; UI · weights 400 / 500 / 600 / 700.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUTTONS ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Buttons</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">Glowing pills — solid, primary &amp; amber</p>
+
+    <div class="af-card">
+      <p class="af-eyebrow" style="margin-bottom:6px;">Variants</p>
+      <p class="af-card-text" style="margin-bottom:24px;">Fully rounded pills, matching the badge radius. Solid celestial-yellow is the single most important action; outlined primary and amber are secondary paths.</p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; background:var(--bg-inset); border:1px dashed var(--rich-brown); border-radius:var(--radius-md); padding:36px;">
+        <a class="af-btn af-btn-solid" href="#">[ Claim This Piece ]</a>
+        <a class="af-btn af-btn-primary" href="#">[ Explore Collection ]</a>
+        <a class="af-btn af-btn-amber" href="#">[ Schedule Viewing ]</a>
+        <a class="af-btn af-btn-primary" href="#" aria-disabled="true">[ Disabled ]</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BADGES ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Badges &amp; Labels</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">Status pills &amp; tracked eyebrows</p>
+
+    <div class="af-card">
+      <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:center; background:var(--bg-inset); border:1px dashed var(--rich-brown); border-radius:var(--radius-md); padding:36px;">
+        <span class="af-badge af-badge-instock">In Stock</span>
+        <span class="af-badge af-badge-featured">Featured</span>
+        <span class="af-badge af-badge-out">Out of Stock</span>
+        <span class="af-badge af-badge-eco">Eco / Restored</span>
+        <span class="af-eyebrow" style="margin-left:8px;">EYEBROW LABEL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CARDS ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Cards</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">Product &amp; feature surfaces</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:24px;">
+      <div class="af-card">
+        <div style="width:calc(100% + 48px); height:140px; margin:-24px -24px 16px; background:linear-gradient(135deg,rgba(196,149,106,0.18),rgba(245,200,66,0.12)); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:40px; color:var(--celestial-yellow); border-top-left-radius:var(--radius-lg); border-top-right-radius:var(--radius-lg);">▣</div>
+        <span class="af-badge af-badge-instock" style="margin-bottom:10px;">In Stock</span>
+        <h4 class="af-card-title">Peacock Chair</h4>
+        <p class="af-card-text">1970s iconic silhouette · restored finish.</p>
+        <p class="af-price" style="margin-top:14px;">$1,450</p>
+      </div>
+      <div class="af-card">
+        <div style="width:calc(100% + 48px); height:140px; margin:-24px -24px 16px; background:linear-gradient(135deg,rgba(85,107,74,0.22),rgba(212,130,42,0.12)); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:40px; color:var(--celestial-yellow); border-top-left-radius:var(--radius-lg); border-top-right-radius:var(--radius-lg);">✦</div>
+        <span class="af-badge af-badge-featured" style="margin-bottom:10px;">Featured</span>
+        <h4 class="af-card-title">Cane Étagère</h4>
+        <p class="af-card-text">Bamboo &amp; brass shelving · original hardware.</p>
+        <p class="af-price" style="margin-top:14px;">$920</p>
+      </div>
+      <div class="af-card">
+        <div style="width:calc(100% + 48px); height:140px; margin:-24px -24px 16px; background:linear-gradient(135deg,rgba(193,80,46,0.18),rgba(245,200,66,0.1)); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:40px; color:var(--celestial-yellow); border-top-left-radius:var(--radius-lg); border-top-right-radius:var(--radius-lg);">☾</div>
+        <span class="af-badge af-badge-out" style="margin-bottom:10px;">Out of Stock</span>
+        <h4 class="af-card-title">Rattan Pendant</h4>
+        <p class="af-card-text">Woven dome lamp · rewired &amp; ready.</p>
+        <p class="af-price" style="margin-top:14px;">$340</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALAXY (FEATURED) ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Featured · Galaxy Cards</h2>
+    <p class="af-script" style="margin:12px 0 14px; font-size:30px;">The signature — a moon on a tilted orbit</p>
+    <p class="af-p" style="max-width:740px; margin-bottom:40px;">The hero treatment for a standout find. A glowing ring frames one continuous rounded card; a little moon rides a tilted orbit — sweeping to the <em style="color:var(--celestial-yellow); font-style:normal;">front</em> of the card along the bottom and slipping <em style="color:var(--celestial-yellow); font-style:normal;">behind</em> it across the top. Scattered stars twinkle in the image well.</p>
+
+    <div style="display:flex; gap:64px; flex-wrap:wrap; justify-content:center; background:var(--bg-inset); border:1px dashed var(--rich-brown); border-radius:var(--radius-lg); padding:72px 48px;">
+      <div class="af-galaxy" style="width:300px;">
+        <div class="af-galaxy__ring"></div>
+        <div class="af-galaxy__orbit"><div class="af-galaxy__moon"></div></div>
+        <div class="af-galaxy__card">
+          <div class="af-galaxy__media af-gx-stars"><img src="atomic-finds-design-system/assets/alien-milo.png" alt="Milo" /></div>
+          <div class="af-galaxy__info">
+            <h4 class="af-galaxy__name">Milo</h4>
+            <p class="af-galaxy__script">vinyl guardian</p>
+            <p class="af-galaxy__desc">Bamboo record stand, brass detail.</p>
+            <span class="af-galaxy__price">$380</span>
+          </div>
+        </div>
+        <div class="af-galaxy__ring-front"></div>
+      </div>
+
+      <div class="af-galaxy" style="width:300px;">
+        <div class="af-galaxy__ring"></div>
+        <div class="af-galaxy__orbit"><div class="af-galaxy__moon"></div></div>
+        <div class="af-galaxy__card">
+          <div class="af-galaxy__media af-gx-stars"><img src="atomic-finds-design-system/assets/alien-malibu.png" alt="Malibu" /></div>
+          <div class="af-galaxy__info">
+            <h4 class="af-galaxy__name">Malibu</h4>
+            <p class="af-galaxy__script">sun lounger</p>
+            <p class="af-galaxy__desc">Woven cane chair, restored frame.</p>
+            <span class="af-galaxy__price">$640</span>
+          </div>
+        </div>
+        <div class="af-galaxy__ring-front"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIAL ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Testimonials</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">Field notes from collectors</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;">
+      <div class="af-testimonial">
+        <p class="af-testimonial-quote">"This chair completely changed my living room. The quality is incredible, and you can tell it's been cared for."</p>
+        <p class="af-testimonial-author">Sarah, Portland</p>
+      </div>
+      <div class="af-testimonial">
+        <p class="af-testimonial-quote">"Found a piece I'd been hunting for years. Packed beautifully, arrived flawless. I'll be back."</p>
+        <p class="af-testimonial-author">Devon, Austin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORMS ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Form Elements</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">Inputs with a golden focus ring</p>
+
+    <div class="af-card" style="max-width:520px;">
+      <div class="af-field">
+        <label class="af-label">Product Name *</label>
+        <input class="af-input" type="text" placeholder="e.g. Peacock Chair — 1970s" />
+      </div>
+      <div class="af-field">
+        <label class="af-label">Category *</label>
+        <select class="af-select">
+          <option>— Select Category —</option>
+          <option>Seating</option>
+          <option>Storage</option>
+          <option>Décor</option>
+          <option>Lighting</option>
+        </select>
+      </div>
+      <div class="af-field" style="margin-bottom:0;">
+        <label class="af-label">Notes</label>
+        <textarea class="af-textarea" placeholder="Condition, provenance, restoration details…"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLOR ============ -->
+  <section style="margin-top:84px;">
+    <h2 style="border-bottom:1px solid var(--border); padding-bottom:16px;">Color Reference</h2>
+    <p class="af-script" style="margin:12px 0 36px; font-size:30px;">95% warm neutral · 5% golden glow</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:18px;">
+      <div>
+        <div style="height:78px; border-radius:var(--radius-md); background:#F5C842; box-shadow:0 0 18px rgba(245,200,66,0.45);"></div>
+        <p class="af-card-text" style="margin-top:8px; color:var(--fg-body);">Celestial Yellow</p>
+        <p class="af-spec">#F5C842 · accent, CTAs, glow</p>
+      </div>
+      <div>
+        <div style="height:78px; border-radius:var(--radius-md); background:#D4822A; box-shadow:0 0 18px rgba(212,130,42,0.45);"></div>
+        <p class="af-card-text" style="margin-top:8px; color:var(--fg-body);">Amber Orange</p>
+        <p class="af-spec">#D4822A · script, hover</p>
+      </div>
+      <div>
+        <div style="height:78px; border-radius:var(--radius-md); background:#C4956A;"></div>
+        <p class="af-card-text" style="margin-top:8px; color:var(--fg-body);">Rattan Tan</p>
+        <p class="af-spec">#C4956A · borders, weave</p>
+      </div>
+      <div>
+        <div style="height:78px; border-radius:var(--radius-md); background:#556B4A;"></div>
+        <p class="af-card-text" style="margin-top:8px; color:var(--fg-body);">Woven Moss</p>
+        <p class="af-spec">#556B4A · eco tags</p>
+      </div>
+      <div>
+        <div style="height:78px; border-radius:var(--radius-md); background:#F0E8D8; border:1px solid var(--rich-brown);"></div>
+        <p class="af-card-text" style="margin-top:8px; color:var(--fg-body);">Bone White</p>
+        <p class="af-spec">#F0E8D8 · body text</p>
+      </div>
+      <div>
+        <div style="height:78px; border-radius:var(--radius-md); background:#1E1E1E; border:1px solid var(--rich-brown);"></div>
+        <p class="af-card-text" style="margin-top:8px; color:var(--fg-body);">Deep Charcoal</p>
+        <p class="af-spec">#1E1E1E · canvas</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <rect width="400" height="400" fill="#1E1E1E"></rect>
+    <circle cx="200" cy="168" r="78" fill="none" stroke="#F5C842" stroke-width="3"></circle>
+    <circle cx="200" cy="168" r="78" fill="#F5C842" opacity="0.1"></circle>
+    <circle cx="278" cy="168" r="9" fill="#F5C842"></circle>
+    <text x="200" y="192" font-family="Georgia, serif" font-size="62" font-weight="700" fill="#F5C842" text-anchor="middle">AF</text>
+    <text x="200" y="298" font-family="Georgia, serif" font-style="italic" font-size="30" fill="#D4822A" text-anchor="middle">Components</text>
+  </svg>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    // Scatter twinkling stars into every galaxy card's image well,
+    // matching the bundle's GalaxyCard behavior.
+    document.querySelectorAll('.af-gx-stars').forEach((well) => {
+      if (well.dataset.starred) return;
+      well.dataset.starred = '1';
+      for (let i = 0; i < 12; i++) {
+        const s = document.createElement('div');
+        s.className = 'af-galaxy__star';
+        const sz = Math.random() * 1.8 + 0.8;
+        s.style.width = sz + 'px';
+        s.style.height = sz + 'px';
+        s.style.top = Math.random() * 100 + '%';
+        s.style.left = Math.random() * 100 + '%';
+        s.style.opacity = (Math.random() * 0.6 + 0.25).toString();
+        s.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+        well.appendChild(s);
+      }
+    });
+  }
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

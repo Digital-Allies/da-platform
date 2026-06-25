@@ -1,0 +1,50 @@
+{
+  "namespace": "AtomicFindsDesignSystem_af0620",
+  "name": "Atomic Finds Design System",
+  "version": "1.0.0",
+  "description": "Dark-mode celestial 70s brand system — deep-charcoal canvas, golden-glow neon accents, vintage rattan texture. For Fran & Mabel's Rattan Revival Retreat.",
+  "entry": {
+    "tokens": "colors_and_type.css",
+    "styles": "styles.css",
+    "bundle": "_ds_bundle.js"
+  },
+  "components": [
+    { "name": "Button", "subtitle": "Primary / solid / amber CTA", "props": ["variant", "href", "disabled", "onClick"] },
+    { "name": "Badge", "subtitle": "In-stock / featured / out-of-stock label", "props": ["status"] },
+    { "name": "Card", "subtitle": "Product / feature card with hover glow", "props": ["title", "text", "price", "image", "emoji", "badge"] },
+    { "name": "GalaxyCard", "subtitle": "Signature galaxy card — neon ring frame, orbiting moon, scattered stars, continuous rounded frame", "props": ["image", "name", "script", "desc", "price", "stars", "moon"] },
+    { "name": "Testimonial", "subtitle": "Quote with cursive attribution", "props": ["quote", "author"] },
+    { "name": "Field", "subtitle": "Labeled input / select / textarea with golden focus ring", "props": ["label", "type", "placeholder", "options", "required"] },
+    { "name": "Nav", "subtitle": "Sticky glowing navigation bar", "props": ["logo", "links", "cta"] },
+    { "name": "Footer", "subtitle": "Multi-column footer with tagline", "props": ["columns", "tagline", "copyright"] }
+  ],
+  "startingPoints": [
+    { "path": "templates/homepage/index.html", "name": "Homepage", "viewport": "1280x2400", "subtitle": "Hero + features + featured collection + CTA + footer" },
+    { "path": "templates/product-index/index.html", "name": "Product Index", "viewport": "1280x1800", "subtitle": "Filterable gallery of galaxy cards" },
+    { "path": "templates/product-detail/index.html", "name": "Product Detail", "viewport": "1280x1600", "subtitle": "Large image + specs + related pieces" },
+    { "path": "templates/cms-admin/index.html", "name": "CMS Admin", "viewport": "1280x1400", "subtitle": "Dashboard + product table + create/edit form" }
+  ],
+  "cards": [
+    { "path": "index.html", "group": "Brand", "viewport": "1100x1400", "subtitle": "One-page index linking foundations, components, and templates", "name": "Design System Landing" },
+    { "path": "../Atomic Fines Brand System.dc.html", "group": "Brand", "viewport": "1280x2000", "subtitle": "Color palette, typography, component patterns, spacing", "name": "Brand System" },
+    { "path": "../Atomic Fines Color Palette.dc.html", "group": "Colors", "viewport": "1280x1400", "subtitle": "Swatch reference with usage + contrast notes", "name": "Color Palette" },
+    { "path": "../Component Library.dc.html", "group": "Components", "viewport": "1280x2400", "subtitle": "Buttons, badges, cards, galaxy card, testimonial, forms", "name": "Component Library" }
+  ],
+  "palette": {
+    "celestial-yellow": "#F5C842",
+    "amber-orange": "#D4822A",
+    "bamboo-honey": "#D4A853",
+    "rattan-tan": "#C4956A",
+    "woven-moss": "#556B4A",
+    "austin-clay": "#C1502E",
+    "bone-white": "#F0E8D8",
+    "rattan-black": "#2A2017",
+    "deep-charcoal": "#1E1E1E"
+  },
+  "type": {
+    "display": "Recoleta",
+    "script": "Bromello",
+    "body": "DM Sans",
+    "fallbacks": { "display": "DM Serif Display", "script": "Kaushan Script" }
+  }
+}
