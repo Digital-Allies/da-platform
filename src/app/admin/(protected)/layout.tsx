@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase-server'
-import AdminNav from './AdminNav'
+import AdminShell from './AdminShell'
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
@@ -10,19 +10,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   if (!user) redirect('/admin/login')
 
-  // Unread message count for the nav badge
-  const { count: unreadCount } = await supabase
-    .from('contact_submissions')
-    .select('id', { count: 'exact', head: true })
-    .eq('client_id', CLIENT_ID)
-    .eq('read', false)
-
   return (
-    <div className="admin admin--topbar" style={{ height: '100vh' }}>
-      <AdminNav userEmail={user.email ?? ''} unreadCount={unreadCount ?? 0} />
-      <main className="admin-main">
-        {children}
-      </main>
-    </div>
+    <AdminShell userEmail={user.email ?? ''}>
+      {children}
+    </AdminShell>
   )
 }
