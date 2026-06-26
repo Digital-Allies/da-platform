@@ -623,9 +623,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </a>
             </div>
 
-        </div>
     </section>
 
+    <!-- ============================================================
+         PRESS OFFICE: ARTICLES FROM THE CMS
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 mb-20" aria-labelledby="press-heading">
+        <div class="mb-10">
+            <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-2" data-en="Press & Updates"
+                data-es="Prensa y Actualizaciones">Press & Updates</p>
+            <h2 id="press-heading" class="font-headers text-3xl font-bold" data-en="Press Office & Insights"
+                data-es="Oficina de Prensa y Perspectivas">
+                Press Office & Insights
+            </h2>
+        </div>
+
+        <div id="learn-articles-grid" class="grid md:grid-cols-2 gap-6">
+            <p class="text-sm italic text-gray-500" data-en="Loading articles..." data-es="Cargando artículos...">Loading articles...</p>
+        </div>
+    </section>
 
     <!-- ============================================================
          FOOTER
@@ -824,6 +840,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         // Initialize Lucide icons
         if (typeof lucide !== 'undefined') lucide.createIcons();
     </script>
+
+    <!-- Supabase CMS Loader -->
+    <script src="../assets/js/cms-loader.js"></script>
 
     <!-- STRUCTURED DATA -->
     <script type="application/ld+json">
