@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Guide — Healthcare Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F4F6F9;
+            color: #1E3A6E;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        header {
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+            color: white;
+            padding: 60px 24px;
+            text-align: center;
+            margin-bottom: 60px;
+            border-radius: 12px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 60px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #2B8FA9;
+            color: #1E3A6E;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: #1E3A6E;
+        }
+
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            color: #2B8FA9;
+        }
+
+        .intro-box {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid #28A745;
+        }
+
+        .intro-box p {
+            margin-bottom: 12px;
+        }
+
+        .intro-box strong {
+            color: #1E3A6E;
+        }
+
+        .template-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .template-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #F4F6F9;
+        }
+
+        .template-emoji {
+            font-size: 48px;
+        }
+
+        .template-title {
+            flex: 1;
+        }
+
+        .template-title h3 {
+            margin: 0;
+            margin-bottom: 4px;
+        }
+
+        .template-info {
+            font-size: 13px;
+            color: #64748B;
+        }
+
+        .preview {
+            background: #F4F6F9;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px dashed #D0D8E8;
+        }
+
+        .preview.linkedin {
+            aspect-ratio: 1200 / 627;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+        }
+
+        .preview.carousel {
+            aspect-ratio: 1080 / 1350;
+            background: linear-gradient(135deg, #3B7DD8 0%, #2BA89A 100%);
+            font-size: 24px;
+            color: white;
+        }
+
+        .preview.pinterest {
+            aspect-ratio: 1000 / 1500;
+            background: linear-gradient(135deg, #E07B54 0%, #D4A017 100%);
+            font-size: 20px;
+            color: white;
+        }
+
+        .preview.infographic {
+            aspect-ratio: 1080 / 1080;
+            background: linear-gradient(135deg, #2EAA6E 0%, #2BA89A 100%);
+            color: white;
+        }
+
+        .preview.email-sig {
+            aspect-ratio: 600 / 200;
+            background: white;
+            border: 1px solid #D0D8E8;
+            text-align: left;
+            padding: 16px !important;
+            min-height: auto !important;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .how-to {
+            background: #F4F6F9;
+            padding: 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+
+        .step {
+            margin-bottom: 24px;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #2B8FA9;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-right: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .step-content {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(100% - 50px);
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #1E3A6E;
+            margin-bottom: 4px;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .code-block {
+            background: #1E3A6E;
+            color: #D4F1F9;
+            padding: 16px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 12px 0;
+        }
+
+        .tip-box {
+            background: #FFF8E1;
+            border-left: 4px solid #D4A017;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .tip-box strong {
+            color: #1E3A6E;
+        }
+
+        .warning-box {
+            background: #FFE8E8;
+            border-left: 4px solid #DC3545;
+            padding: 16px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+
+        .warning-box strong {
+            color: #1E3A6E;
+        }
+
+        .platform-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .tool-card {
+            background: #F4F6F9;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid #D0D8E8;
+        }
+
+        .tool-card h4 {
+            margin-top: 0;
+            color: #1E3A6E;
+        }
+
+        .tool-card p {
+            font-size: 13px;
+            color: #64748B;
+            margin-bottom: 12px;
+        }
+
+        .tool-card a {
+            display: inline-block;
+            color: #2B8FA9;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .use-case {
+            background: #F4F6F9;
+            padding: 16px;
+            border-left: 4px solid #2B8FA9;
+            border-radius: 4px;
+            margin: 12px 0;
+        }
+
+        .use-case-title {
+            font-weight: 600;
+            color: #1E3A6E;
+            margin-bottom: 4px;
+        }
+
+        .use-case-description {
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-right: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        ul, ol {
+            padding-left: 24px;
+            margin: 12px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #475569;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: #1E3A6E;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #D0D8E8;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #F4F6F9;
+        }
+
+        footer {
+            background: #1E3A6E;
+            color: white;
+            padding: 40px 24px;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 8px;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #2B8FA9;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: background 200ms;
+        }
+
+        .back-button:hover {
+            background: #1a5a73;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Hub</a>
+
+        <header>
+            <h1>Social Media Templates & Guide</h1>
+            <p>Step-by-step instructions for creating and sharing Healthcare Training Center posts</p>
+        </header>
+
+        <div class="intro-box">
+            <p>
+                <strong>Hello! 👋</strong> This guide is designed to help anyone create beautiful, on-brand social media posts
+                even if you've never done this before. Each template below includes:
+            </p>
+            <ul style="margin-top: 12px;">
+                <li><strong>What it is:</strong> A description of the template and when to use it</li>
+                <li><strong>How to use it:</strong> Step-by-step instructions</li>
+                <li><strong>Tools you can use:</strong> Free or inexpensive apps to make it easy</li>
+                <li><strong>Real-world examples:</strong> When and why you'd post this</li>
+            </ul>
+            <p style="margin-top: 12px; color: #64748B; font-style: italic;">
+                Don't worry if you're not tech-savvy — these instructions are written for beginners. If something doesn't make sense,
+                read it through twice or ask for help!
+            </p>
+        </div>
+
+        <!-- ========== LINKEDIN ANNOUNCEMENT ========== -->
+        <div class="template-section">
+            <div class="template-header">
+                <div class="template-emoji">💼</div>
+                <div class="template-title">
+                    <h3>LinkedIn Professional Announcement</h3>
+                    <div class="template-info">Best for: New course launches, professional updates, company news</div>
+                </div>
+            </div>
+
+            <div class="preview linkedin">
+                <div>🚀 Room 2 is Live</div>
+                <div style="font-size: 16px; opacity: 0.9; margin-top: 12px;">HIPAA & Privacy Training</div>
+            </div>
+
+            <h4>📖 What is this?</h4>
+            <p>
+                LinkedIn is a professional networking site where healthcare workers, hospital administrators, and compliance officers hang out.
+                This template is for announcing big updates — like when a new training room launches or a big milestone is reached.
+            </p>
+
+            <h4>🎯 When to use it:</h4>
+            <div class="use-case">
+                <div class="use-case-title">Room Launch</div>
+                <div class="use-case-description">Post when Room 1, 2, 3, 4, or 5 goes live for the first time</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Milestone Achievement</div>
+                <div class="use-case-description">"We've trained 500 healthcare professionals!" or "Our platform is now live in 10 states"</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Testimonial</div>
+                <div class="use-case-description">Share a success story: "This training helped our entire team understand WHY compliance matters"</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Thought Leadership</div>
+                <div class="use-case-description">Share an insight: "Why HIPAA training shouldn't be boring" or "The hidden cost of poor compliance"</div>
+            </div>
+
+            <h4>✏️ How to create this (Step-by-Step):</h4>
+            <div class="how-to">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">Go to LinkedIn and Log In</div>
+                        <div class="step-description">
+                            Visit linkedin.com, log into your account. If you don't have one, create a free account with your email.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">Click "Start a Post"</div>
+                        <div class="step-description">
+                            At the top of your LinkedIn feed, you'll see a text box that says "Start a post". Click on it.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">Write your post text</div>
+                        <div class="step-description">
+                            Click in the text box and type your message. Example:
+                            <div class="code-block">
+🚀 NEW COURSE ALERT: Room 2 (HIPAA & Privacy) is now live!
+
+Protect patient information. Prevent breaches. Understand the rules.
+
+This 45-minute course covers:
+✓ HIPAA Privacy Rule compliance
+✓ How to identify and report a potential breach
+✓ Real-world scenarios and outcomes
+
+Your patients deserve your best. We're here to help you deliver it.
+
+Step inside → [link]
+
+#HealthcareTraining #HIPAA #ComplianceFirst
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">Add an image (optional but recommended)</div>
+                        <div class="step-description">
+                            Click the "image" icon in the post box. Upload a screenshot from the BRAND-GUIDE.html
+                            showing the room colors and title, or take a screenshot of Room 2 on your website.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">Click "Post"</div>
+                        <div class="step-description">
+                            Once you're happy with your text and image, click the blue "Post" button. Your post is now live!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip:</strong> LinkedIn has the best engagement with healthcare professionals between 8–10am and 5–6pm on weekdays.
+                Post during these times if you want more people to see it.
+            </div>
+
+            <h4>🛠️ Tools to make it easier:</h4>
+            <div class="platform-tools">
+                <div class="tool-card">
+                    <h4 style="margin-top: 0;">LinkedIn Native</h4>
+                    <p><strong>Cost:</strong> Free</p>
+                    <p>The easiest way — just type directly in LinkedIn. No extra tools needed.</p>
+                </div>
+                <div class="tool-card">
+                    <h4 style="margin-top: 0;">Buffer</h4>
+                    <p><strong>Cost:</strong> Free or paid</p>
+                    <p>Schedule posts to go out at the perfect time. buffer.com</p>
+                </div>
+                <div class="tool-card">
+                    <h4 style="margin-top: 0;">Canva</h4>
+                    <p><strong>Cost:</strong> Free or paid</p>
+                    <p>Create beautiful graphics for your post. canva.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== INSTAGRAM CAROUSEL ========== -->
+        <div class="template-section">
+            <div class="template-header">
+                <div class="template-emoji">📸</div>
+                <div class="template-title">
+                    <h3>Instagram Carousel Post (Multi-Slide)</h3>
+                    <div class="template-info">Best for: Breaking down concepts, room features, step-by-step tips</div>
+                </div>
+            </div>
+
+            <div class="preview carousel">
+                <div>Swipe through all 5 rooms →</div>
+            </div>
+
+            <h4>📖 What is this?</h4>
+            <p>
+                An Instagram carousel is a post with multiple slides (like a mini-slideshow). People can swipe left to see the next slide.
+                It's perfect for showing all five training rooms, or breaking down a topic into steps.
+            </p>
+
+            <h4>🎯 When to use it:</h4>
+            <div class="use-case">
+                <div class="use-case-title">Show All 5 Rooms</div>
+                <div class="use-case-description">One slide per room: Room 1 (Customer Service), Room 2 (HIPAA), etc. Each slide shows the room color, icon, and a brief description.</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Educational Content</div>
+                <div class="use-case-description">5 tips for better healthcare communication, 4 steps to HIPAA compliance, etc.</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Storytelling</div>
+                <div class="use-case-description">Share the founder's story across multiple slides: "Here's why I built this..." Slide 2: "The problem was..." Slide 3: "Now we're..."</div>
+            </div>
+
+            <h4>✏️ How to create this:</h4>
+            <div class="how-to">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">Use Canva (easiest option)</div>
+                        <div class="step-description">
+                            Go to canva.com, sign up for free (or log in). Search for "Instagram Post" template.
+                            You'll see tons of designs you can customize.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">Create Slide 1: Title</div>
+                        <div class="step-description">
+                            Pick a template design you like. Change the colors to navy (#1E3A6E) and teal (#2B8FA9).
+                            Add text like "Meet the 5 Training Rooms ↓" or "Slide through all 5 rooms →"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">Duplicate and customize for each room</div>
+                        <div class="step-description">
+                            In Canva, click "Duplicate" to copy the slide. Change the title to "Room 1: Customer Service"
+                            and the color to sky blue (#3B7DD8). Repeat for all 5 rooms with their respective colors.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">Download all slides as images</div>
+                        <div class="step-description">
+                            Click "Download" and choose "PNG". Canva will download each slide as a separate image.
+                            You'll have 5 images: Slide1.png, Slide2.png, etc.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">Upload to Instagram</div>
+                        <div class="step-description">
+                            Open Instagram on your phone or computer. Click "Create" → "Post". Upload all 5 images in order.
+                            Instagram will automatically turn them into a carousel. Add your caption and post!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip:</strong> Instagram carousels get 3x more engagement than single-image posts!
+                People love being able to swipe through. Use this format whenever you can.
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> Instagram requires images to be 1080×1350px (taller than they are wide).
+                Canva's "Instagram Post" template is already this size, so you're good!
+            </div>
+
+            <h4>🛠️ Tools you'll need:</h4>
+            <div class="platform-tools">
+                <div class="tool-card">
+                    <h4 style="margin-top: 0;">Canva</h4>
+                    <p><strong>Cost:</strong> Free (with optional paid upgrades)</p>
+                    <p>Design carousel slides without any experience. canva.com</p>
+                </div>
+                <div class="tool-card">
+                    <h4 style="margin-top: 0;">Instagram</h4>
+                    <p><strong>Cost:</strong> Free</p>
+                    <p>Upload and share your carousel. instagram.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== INSTAGRAM STORY ========== -->
+        <div class="template-section">
+            <div class="template-header">
+                <div class="template-emoji">📱</div>
+                <div class="template-title">
+                    <h3>Instagram Story (Quick Daily Updates)</h3>
+                    <div class="template-info">Best for: Quick announcements, daily tips, behind-the-scenes</div>
+                </div>
+            </div>
+
+            <div class="preview carousel">
+                <div>Today's Tip 💡</div>
+            </div>
+
+            <h4>📖 What is this?</h4>
+            <p>
+                Instagram Stories are quick posts that disappear after 24 hours. They're perfect for casual, frequent updates.
+                Stories show up at the top of people's feeds and feel more immediate and personal than regular posts.
+            </p>
+
+            <h4>🎯 When to use it:</h4>
+            <div class="use-case">
+                <div class="use-case-title">Daily Tips</div>
+                <div class="use-case-description">Share one quick HIPAA tip, compliance fact, or healthcare insight every day</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Announcements</div>
+                <div class="use-case-description">"Room 3 launches tomorrow!" or "Join us for a live Q&A Thursday at 2pm"</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Behind-the-Scenes</div>
+                <div class="use-case-description">Show the team working on courses, quick interviews with your mom, sneak peeks of new content</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Polls & Engagement</div>
+                <div class="use-case-description">Ask your audience questions: "Which topic should we cover next?" Use Instagram's built-in poll sticker</div>
+            </div>
+
+            <h4>✏️ How to create this:</h4>
+            <div class="how-to">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">Open Instagram</div>
+                        <div class="step-description">
+                            On your phone, open Instagram and look at the top of your feed. You'll see circles with profile pictures.
+                            Click the "+" in the top-left to start a new story.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">Pick a background color</div>
+                        <div class="step-description">
+                            Click the "Color" tool at the bottom. Pick navy (#1E3A6E) or one of the room colors (#3B7DD8, #2BA89A, #2EAA6E, #7B5EA7, #D4A017).
+                            Hold your finger on the color to select a custom color.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">Add text</div>
+                        <div class="step-description">
+                            Click the "Aa" text tool. Type your message. Example: "💡 HIPAA Tip: Patient privacy isn't just compliance — it's a right."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">Customize the text</div>
+                        <div class="step-description">
+                            Triple-tap the text to select all of it. Change the font (try "Modern" or "Strong").
+                            Change the text color to white or another room color. Make it big and bold so it's easy to read.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">Click "Send To" and share</div>
+                        <div class="step-description">
+                            Click the arrow at the bottom. Select "Your Story". Your story is now live for 24 hours!
+                            After 24 hours, it disappears automatically.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip:</strong> Post stories 1–2 times per day. They don't fill up your followers' feeds like regular posts,
+                and people expect stories to be frequent and casual. Don't stress about making them perfect!
+            </div>
+
+            <h4>🛠️ All you need:</h4>
+            <p>
+                Just Instagram on your phone. No extra tools needed — the built-in color and text tools are perfect for stories.
+            </p>
+        </div>
+
+        <!-- ========== EMAIL SIGNATURE ========== -->
+        <div class="template-section">
+            <div class="template-header">
+                <div class="template-emoji">📧</div>
+                <div class="template-title">
+                    <h3>Email Signature Template</h3>
+                    <div class="template-info">Best for: Every email your mom sends</div>
+                </div>
+            </div>
+
+            <div class="preview email-sig">
+                <div style="border-left: 4px solid #2B8FA9; padding-left: 12px;">
+                    <div style="font-weight: 700; color: #1E3A6E; font-size: 14px;">Your Mom's Name</div>
+                    <div style="font-size: 12px; color: #64748B;">Founder, Healthcare Training Center</div>
+                    <div style="font-size: 12px; color: #2B8FA9; margin-top: 8px;">hello@healthcaretrainingcenter.com</div>
+                    <div style="font-size: 12px; color: #2B8FA9;">www.healthcaretrainingcenter.com</div>
+                </div>
+            </div>
+
+            <h4>📖 What is this?</h4>
+            <p>
+                Every email your mom sends should include a professional footer with her name, title, and contact info.
+                This is called an email signature. It's automatically added to the bottom of every email she writes.
+            </p>
+
+            <h4>🎯 Why use it:</h4>
+            <ul>
+                <li>Looks professional in every email</li>
+                <li>Always includes the company website (great for promotion)</li>
+                <li>People know how to reach her</li>
+                <li>Reinforces brand colors and style</li>
+            </ul>
+
+            <h4>✏️ How to set up an email signature:</h4>
+            <div class="how-to">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">Open your email (Gmail, Outlook, etc.)</div>
+                        <div class="step-description">
+                            This example uses Gmail. Log in at gmail.com
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">Click the gear icon ⚙️ and go to Settings</div>
+                        <div class="step-description">
+                            In the top-right corner of Gmail, click the gear icon. Select "See all settings".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">Go to the "Signature" section</div>
+                        <div class="step-description">
+                            Scroll down until you see "Signature". Click the "Create new" button.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">Copy this text and customize it</div>
+                        <div class="step-description">
+                            <div class="code-block">
+Your Mom's Name
+Founder, Healthcare Training Center
+hello@healthcaretrainingcenter.com
+www.healthcaretrainingcenter.com
+Step Inside. Step Up.
+                            </div>
+                            Type this into the signature box, replacing "Your Mom's Name" with her actual name and the email/website with the correct ones.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">Click "Save Changes"</div>
+                        <div class="step-description">
+                            Scroll down and click "Save Changes". Now every email your mom writes will automatically include this signature!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip:</strong> Email signatures don't have color in Gmail's simple text editor, but they look professional
+                and include all the important contact info. That's what matters!
+            </div>
+        </div>
+
+        <!-- ========== INFOGRAPHIC TEMPLATE ========== -->
+        <div class="template-section">
+            <div class="template-header">
+                <div class="template-emoji">📊</div>
+                <div class="template-title">
+                    <h3>Infographic Post (Shareable Graphic)</h3>
+                    <div class="template-info">Best for: Statistics, facts, educational content</div>
+                </div>
+            </div>
+
+            <div class="preview infographic">
+                <div>5 HIPAA Facts<br>You Need to Know</div>
+            </div>
+
+            <h4>📖 What is this?</h4>
+            <p>
+                An infographic is a visual way to share information. Instead of writing text, you show facts, numbers, or tips
+                with colors, icons, and simple text. These posts get shared a lot because they're easy to understand and look professional.
+            </p>
+
+            <h4>🎯 When to use it:</h4>
+            <div class="use-case">
+                <div class="use-case-title">5 Facts About Each Room</div>
+                <div class="use-case-description">"5 HIPAA facts every healthcare worker should know"</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Statistics</div>
+                <div class="use-case-description">"73% of healthcare teams say our training improved their confidence"</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Checklists</div>
+                <div class="use-case-description">"The 7-point compliance checklist" or "5 red flags for PHI breaches"</div>
+            </div>
+            <div class="use-case">
+                <div class="use-case-title">Timeline</div>
+                <div class="use-case-description">Show the journey from Lobby → Room 1 → Room 2, etc.</div>
+            </div>
+
+            <h4>✏️ How to create this:</h4>
+            <div class="how-to">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <div class="step-title">Go to Canva and search for "Infographic"</div>
+                        <div class="step-description">
+                            Visit canva.com, log in (free account), and search for "infographic".
+                            Pick a template you like.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <div class="step-title">Change the colors to match the brand</div>
+                        <div class="step-description">
+                            Find the color elements (boxes, backgrounds, etc.). Click on them and change the colors
+                            to navy (#1E3A6E), teal (#2B8FA9), or a room color.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <div class="step-title">Update the text</div>
+                        <div class="step-description">
+                            Replace the placeholder text with your facts or tips. Example:
+                            <br><strong>HIPAA FACT #1:</strong> The HIPAA Privacy Rule governs how patient information is protected.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <div class="step-title">Change the icons</div>
+                        <div class="step-description">
+                            Click on any icons in the template. Canva has a search feature — search for Phosphor icons
+                            (like "shield", "chart", "lock") to replace them with brand-appropriate icons.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <div class="step-content">
+                        <div class="step-title">Download and share</div>
+                        <div class="step-description">
+                            Click "Download" and choose "PNG". Then share it on LinkedIn, Instagram, Facebook, or Twitter.
+                            People love sharing infographics!
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip:</strong> Infographics are highly shareable. People will repost them, which helps spread
+                the word about Healthcare Training Center. Make them visually interesting and easy to understand!
+            </div>
+
+            <h4>🛠️ Tools you'll need:</h4>
+            <div class="platform-tools">
+                <div class="tool-card">
+                    <h4 style="margin-top: 0;">Canva</h4>
+                    <p><strong>Cost:</strong> Free (with optional paid upgrades)</p>
+                    <p>Tons of infographic templates. canva.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== COMPARISON TABLE ========== -->
+        <h2>Quick Comparison: When to Use Each Template</h2>
+
+        <div class="template-section">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Template</th>
+                        <th>Platform</th>
+                        <th>Best For</th>
+                        <th>How Often?</th>
+                        <th>Effort Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>LinkedIn Announcement</strong></td>
+                        <td>LinkedIn</td>
+                        <td>Room launches, milestones, thought leadership</td>
+                        <td>1–2 per week</td>
+                        <td>Easy (just typing)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instagram Carousel</strong></td>
+                        <td>Instagram</td>
+                        <td>Showing all 5 rooms, multi-step content</td>
+                        <td>1–2 per month</td>
+                        <td>Medium (need Canva)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Instagram Story</strong></td>
+                        <td>Instagram</td>
+                        <td>Daily tips, quick updates, behind-the-scenes</td>
+                        <td>1–2 per day</td>
+                        <td>Easy (built-in tools)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Signature</strong></td>
+                        <td>Email</td>
+                        <td>Every email sent</td>
+                        <td>Automatic</td>
+                        <td>Super easy (set once, forget)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infographic</strong></td>
+                        <td>Any platform</td>
+                        <td>Facts, statistics, checklists</td>
+                        <td>1–2 per month</td>
+                        <td>Medium (need Canva)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ========== BEGINNER STRATEGY ========== -->
+        <h2>Recommended Weekly Strategy (For Beginners)</h2>
+
+        <div class="template-section">
+            <h3>Week 1 Example Schedule:</h3>
+
+            <div class="how-to">
+                <div class="step">
+                    <span class="step-number">Monday</span>
+                    <div class="step-content">
+                        <div class="step-title">LinkedIn Announcement</div>
+                        <div class="step-description">
+                            Post about something happening this week. Example: "Room 3 (Compliance) launches Thursday!"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Tuesday–Friday</span>
+                    <div class="step-content">
+                        <div class="step-title">Instagram Stories (Daily Tips)</div>
+                        <div class="step-description">
+                            Post one quick tip each day. Tuesday: HIPAA tip. Wednesday: Compliance fact. Thursday: Customer service tip. Friday: Finance insight.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Thursday</span>
+                    <div class="step-content">
+                        <div class="step-title">LinkedIn Post #2</div>
+                        <div class="step-description">
+                            Follow up on Monday's announcement. "Room 3 launches TODAY! Here's what's inside..."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">Friday or Saturday</span>
+                    <div class="step-content">
+                        <div class="step-title">Instagram Carousel or Infographic</div>
+                        <div class="step-description">
+                            Share something bigger. Example: "Swipe through all 5 training rooms" or "5 HIPAA facts you need to know"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <strong>💡 Pro Tip:</strong> Start with this schedule and see how it feels. Don't stress about posting every single day.
+                2–3 posts per week on LinkedIn and 3–5 Instagram stories per week is a great starting point.
+            </div>
+        </div>
+
+        <!-- ========== TROUBLESHOOTING ========== -->
+        <h2>Troubleshooting & Common Questions</h2>
+
+        <div class="template-section">
+            <h3>❓ "I don't know what to post about. What should I say?"</h3>
+            <p>
+                Here are some easy post ideas:
+            </p>
+            <ul>
+                <li><strong>Room launches:</strong> "Room X is live! Here's what you'll learn..."</li>
+                <li><strong>Daily tips:</strong> Share one quick fact or tip related to the rooms</li>
+                <li><strong>Questions for followers:</strong> "What's the biggest compliance challenge in your organization?"</li>
+                <li><strong>Milestones:</strong> "We've trained 100 healthcare professionals!" or "Our platform is now in 5 states!"</li>
+                <li><strong>Founder story:</strong> "Here's why I built this..." Tell your mom's story in bits and pieces</li>
+                <li><strong>Testimonials:</strong> "This training helped our team understand WHY compliance matters" — quote from a user</li>
+            </ul>
+
+            <h3>❓ "I don't have an image for my post. What do I do?"</h3>
+            <p>
+                Option 1: Use Canva to create one (easiest).
+                <br>Option 2: Take a screenshot of your website or the BRAND-GUIDE.html and use that.
+                <br>Option 3: Just post text — LinkedIn is fine with text-only posts!
+            </p>
+
+            <h3>❓ "How do I know if my post is working?"</h3>
+            <p>
+                Check your analytics:
+            </p>
+            <ul>
+                <li><strong>LinkedIn:</strong> After posting, you'll see "impressions" (people who saw it) and "engagement" (likes, comments, shares)</li>
+                <li><strong>Instagram:</strong> Tap the post → tap "View Insights". You'll see how many people saw it and who engaged</li>
+                <li><strong>General rule:</strong> If a post gets more than 5 likes or 1 comment, it's working! Share more like it.</li>
+            </ul>
+
+            <h3>❓ "This is too much. What's the bare minimum I should do?"</h3>
+            <p>
+                Start here and build from there:
+            </p>
+            <ul>
+                <li><strong>Week 1:</strong> Set up an email signature (takes 5 minutes). You're done!</li>
+                <li><strong>Week 2:</strong> Post 1 LinkedIn announcement about a room launch. That's it!</li>
+                <li><strong>Week 3:</strong> Add 2 Instagram stories with quick tips. Easy!</li>
+                <li>Once you're comfortable, add more. No pressure!</li>
+            </ul>
+
+            <h3>❓ "Can I schedule posts in advance?"</h3>
+            <p>
+                Yes! Use these free/cheap tools:
+            </p>
+            <ul>
+                <li><strong>LinkedIn:</strong> You can schedule posts directly in LinkedIn (premium feature, but worth it)</li>
+                <li><strong>Instagram:</strong> Use Buffer (buffer.com) or Later (later.com) to schedule posts in advance</li>
+                <li><strong>Multiple platforms:</strong> Use Buffer to schedule to LinkedIn, Instagram, Twitter all at once</li>
+            </ul>
+        </div>
+
+        <!-- ========== FOOTER ========== -->
+        <footer>
+            <p><strong>You've Got This! 🎉</strong></p>
+            <p>Social media doesn't have to be scary. Start simple, post regularly, and watch your audience grow.</p>
+            <p style="margin-top: 20px; font-size: 14px;">Healthcare Training Center — Step Inside. Step Up.</p>
+        </footer>
+    </div>
+</body>
+</html>

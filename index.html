@@ -1,43 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Healthcare Training Center — Learner App</title>
-    <meta http-equiv="refresh" content="0; url=/healthcare-training-center/project/export/src/Learner%20App.html">
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            font-family: system-ui, sans-serif;
-            background: #f4f6f9;
-            color: #1E3A6E;
-        }
-
-        .shell {
-            max-width: 720px;
-            padding: 32px 24px;
-            text-align: center;
-        }
-
-        a {
-            color: #2B8FA9;
-        }
-    </style>
-    <script>
-        window.location.replace('/healthcare-training-center/project/export/src/Learner%20App.html');
-    </script>
-</head>
-
-<body>
-    <main class="shell">
-        <h1>Redirecting to the learner app</h1>
-        <p>If you are not redirected automatically, open <a
-                href="/healthcare-training-center/project/export/src/Learner%20App.html">the learner app</a>.</p>
-    </main>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Healthcare Training Center</title>
+    
+    <!-- Design System — Healthcare Training Center -->
+    <link rel="stylesheet" href="/../_ds/healthcare-training-center-design-system/colors_and_type.css">
+    <link rel="stylesheet" href="/../_ds/healthcare-training-center-design-system/assets/phosphor/regular/style.css">
+    <link rel="stylesheet" href="/../_ds/healthcare-training-center-design-system/assets/phosphor/fill/style.css">
+    <link rel="stylesheet" href="/../_ds/healthcare-training-center-design-system/ui_kits/learner-app/kit.css">
+    <link rel="stylesheet" href="/../_ds/healthcare-training-center-design-system/styles.css">
+    
+    <!-- Design System Bundle (after React is loaded in main.tsx) -->
+    <script src="/../_ds/healthcare-training-center-design-system/_ds_bundle.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

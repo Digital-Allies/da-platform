@@ -1,0 +1,348 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Customer Service Training Room - Healthcare Training Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#474743",
+                        "surface-bright": "#f7f9fc",
+                        "secondary-fixed-dim": "#79d3ef",
+                        "on-background": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "on-surface-variant": "#44474f",
+                        "room-hipaa": "#2BA89A",
+                        "inverse-primary": "#aec6ff",
+                        "room-cs": "#3B7DD8",
+                        "ink-primary": "#16243D",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-error-container": "#93000a",
+                        "info": "#17A2B8",
+                        "border-muted": "#D0D8E8",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#445d94",
+                        "background": "#f7f9fc",
+                        "error": "#DC3545",
+                        "primary-fixed-dim": "#aec6ff",
+                        "tertiary": "#262623",
+                        "on-surface": "#191c1e",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#8ca5e0",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6d1",
+                        "on-tertiary": "#ffffff",
+                        "room-records": "#7B5EA7",
+                        "surface": "#f7f9fc",
+                        "success": "#28A745",
+                        "on-secondary-container": "#006479",
+                        "on-primary-fixed-variant": "#2b467a",
+                        "on-secondary-fixed": "#001f27",
+                        "room-finance": "#D4A017",
+                        "tertiary-container": "#3c3c39",
+                        "on-primary": "#ffffff",
+                        "warning": "#FFC107",
+                        "on-tertiary-container": "#a8a6a2",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-dim": "#d8dadd",
+                        "inverse-on-surface": "#eff1f4",
+                        "error-container": "#ffdad6",
+                        "outline": "#747780",
+                        "primary": "#002357",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-variant": "#e0e3e6",
+                        "secondary-container": "#88e1fd",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "room-compliance": "#2EAA6E",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed": "#001a43",
+                        "surface-container-high": "#e6e8eb",
+                        "secondary": "#00677d",
+                        "primary-container": "#1e3a6e",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#e0e3e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-8": "64px",
+                        "space-6": "32px",
+                        "space-1": "4px",
+                        "content-max": "1280px",
+                        "space-7": "48px",
+                        "base": "8px",
+                        "space-9": "96px",
+                        "space-5": "24px",
+                        "space-2": "8px",
+                        "space-4": "16px",
+                        "space-3": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-h3": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "body-base": ["Inter"],
+                        "accent-serif": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "headline-h2": ["Montserrat"],
+                        "headline-h1": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "ui-text": ["Inter"],
+                        "headline-h4": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-h3": ["22px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "accent-serif": ["19px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+                        "headline-h2": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "headline-h1": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "ui-text": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-h4": ["18px", {"lineHeight": "22px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .perspective-pop {
+            perspective: 900px;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .perspective-pop:hover {
+            transform: perspective(900px) rotateY(-8deg) rotateX(3deg) scale(1.02);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-fill { font-variation-settings: 'FILL' 1; }
+        
+        .progress-gradient {
+            background: linear-gradient(90deg, #3B7DD8 0%, #88e1fd 100%);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-action {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-space-5 h-16 max-w-content-max mx-auto bg-surface shadow-sm">
+<div class="flex items-center gap-space-4">
+<span class="font-headline-h4 text-headline-h4 text-primary">Healthcare Training Center</span>
+</div>
+<div class="hidden md:flex items-center gap-space-6">
+<a class="font-ui-text text-ui-text text-on-surface-variant hover:text-primary transition-colors" href="#">Lobby</a>
+<a class="font-ui-text text-ui-text text-primary border-b-2 border-primary pb-1" href="#">My Progress</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant hover:text-primary transition-colors" href="#">Live Classes</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant hover:text-primary transition-colors" href="#">Resources</a>
+</div>
+<div class="flex items-center gap-space-4">
+<div class="relative group">
+<input class="bg-surface-container-low border-none rounded-full px-space-4 py-2 text-ui-text focus:ring-2 focus:ring-room-cs w-48 transition-all duration-300" placeholder="Search courses..." type="text">
+<span class="material-symbols-outlined absolute right-3 top-2 text-on-surface-variant">search</span>
+</div>
+<button class="material-symbols-outlined text-primary scale-95 active:scale-90 transition-transform">account_circle</button>
+</div>
+</nav>
+<main class="pt-16 min-h-screen">
+<!-- Hero Banner Section -->
+<header class="relative w-full h-[320px] overflow-hidden bg-room-cs">
+<div class="absolute inset-0 opacity-40 mix-blend-overlay">
+<img alt="Background architecture" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ8Fxvg-UQQpvSdZEgQ3Vw1qZ5lkGY_Tcu1TrXDfr6MuYy2_8jOT2T4nBYq6mnt2grDNP--g9U6X_mq9v8QL2eeih3GvljjXWbiXArz7RCXGshZQazDlHnr76cwfD99leJVNkIMGwXurZlZ10Lnz7UqXt_OHTWccMUvXOV0iPJG1qdZ4UhKV8qltBUx67NUlj9JUrZ11qDUyLEk75RKR5HnqTnnM5A3MlcEOFzoRvIYO9eqc8P55KnJpqYuaiiTA0B4E8jWGKw7oWR">
+</div>
+<div class="max-w-content-max mx-auto px-space-5 h-full flex flex-col justify-end pb-space-6 relative z-10">
+<div class="flex items-center gap-space-3 mb-space-2">
+<div class="bg-white/20 backdrop-blur-md px-space-3 py-1 rounded-full flex items-center gap-2">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-white font-label-caps uppercase tracking-wider">Active Training Room</span>
+</div>
+</div>
+<h1 class="font-headline-h1 text-display-lg text-white mb-space-1">Customer Service</h1>
+<p class="text-white/90 font-body-lg max-w-2xl">Master the art of patient-centered communication and conflict resolution in clinical environments.</p>
+</div>
+</header>
+<!-- Content Layout -->
+<section class="max-w-content-max mx-auto px-space-5 py-space-7 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-space-7">
+<!-- Primary Content Rail -->
+<div class="space-y-space-7">
+<!-- Progress Dashboard -->
+<div class="bg-surface-container-lowest rounded-xl p-space-5 shadow-sm border border-border-muted">
+<div class="flex justify-between items-center mb-space-4">
+<div>
+<h2 class="font-headline-h3 text-headline-h3 text-ink-primary">Room Progress</h2>
+<p class="text-on-surface-variant font-body-sm">3 of 6 Modules Completed</p>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-surface-container flex items-center justify-center relative">
+<span class="font-headline-h4 text-room-cs">50%</span>
+<svg class="absolute inset-0 w-full h-full -rotate-90">
+<circle class="text-room-cs" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="175.9" stroke-dashoffset="87.9" stroke-width="4"></circle>
+</svg>
+</div>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3">
+<div class="progress-gradient h-full rounded-full w-1/2"></div>
+</div>
+</div>
+<!-- Course Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-5">
+<!-- Empathetic Listening -->
+<div class="perspective-pop group cursor-pointer">
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-border-muted flex flex-col h-full">
+<div class="h-24 bg-room-cs flex items-center justify-center relative">
+<img alt="Module icon" class="w-12 h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs2Kvk-9oX4P1liQafcFz8HJPfXwsagyB2sPqTlfxAIgYPGk6J5N3nC50ZyzQHvTtORPUTf6yTtdbXurbVVjJSbgtrwGNU7X12iaCTnw7YuAHN4tM7oQ1AeVhaO3EBzcPn3ZqtsSqhvbqmxZHugBeYcpzMzPICap-GHNCtH7MgJDZMZAbCfNgcznRJIrBL6Jk9JglVjLNWVGorKmmeP0_BlNZpXTwMWNl3H6CVqo4VblO9YaivLZQTK_54QSz0dvRMNaBBtoDDulsj">
+<div class="absolute top-4 right-4 bg-white/20 px-2 py-1 rounded text-white text-[10px] font-bold">MODULE 01</div>
+</div>
+<div class="p-space-4 flex-grow">
+<h3 class="font-headline-h4 text-headline-h4 mb-2">Empathetic Listening</h3>
+<p class="text-body-sm text-on-surface-variant mb-space-4">Learn the clinical techniques for active listening that validate patient concerns and reduce anxiety.</p>
+<div class="flex items-center gap-2 text-success font-label-caps">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    COMPLETED
+                                </div>
+</div>
+<button class="w-full py-3 bg-surface-container-low text-room-cs font-ui-text hover:bg-room-cs hover:text-white transition-colors">Review Module</button>
+</div>
+</div>
+<!-- Conflict Resolution -->
+<div class="perspective-pop group cursor-pointer">
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-border-muted flex flex-col h-full">
+<div class="h-24 bg-room-cs/80 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-white text-4xl">psychology</span>
+<div class="absolute top-4 right-4 bg-white/20 px-2 py-1 rounded text-white text-[10px] font-bold">MODULE 02</div>
+</div>
+<div class="p-space-4 flex-grow">
+<h3 class="font-headline-h4 text-headline-h4 mb-2">Conflict Resolution</h3>
+<p class="text-body-sm text-on-surface-variant mb-space-4">Strategies for de-escalating tense situations with patients and families in high-stress medical environments.</p>
+<div class="flex items-center gap-2 text-room-cs font-label-caps">
+<span class="material-symbols-outlined text-sm">play_circle</span>
+                                    IN PROGRESS
+                                </div>
+</div>
+<button class="w-full py-3 bg-room-cs text-white font-ui-text hover:brightness-110 transition-all">Continue Training</button>
+</div>
+</div>
+<!-- Patient-First Language -->
+<div class="perspective-pop group cursor-pointer md:col-span-2">
+<div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-border-muted flex flex-col md:flex-row h-full">
+<div class="w-full md:w-1/3 bg-room-cs/60 flex items-center justify-center min-h-[160px]">
+<span class="material-symbols-outlined text-white text-6xl">forum</span>
+</div>
+<div class="p-space-5 flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-h3 text-headline-h3">Patient-First Language</h3>
+<span class="bg-warning/10 text-warning px-3 py-1 rounded-full text-[10px] font-bold">LOCKED</span>
+</div>
+<p class="text-body-base text-on-surface-variant mb-space-4">A deep dive into medical terminology vs. patient-accessible language to ensure clarity and comfort.</p>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 text-on-surface-variant/50 font-label-caps">
+<span class="material-symbols-outlined text-sm">lock</span>
+                                        PREREQUISITE REQUIRED
+                                    </div>
+<button class="px-space-5 py-2 border-2 border-border-muted text-on-surface-variant/50 rounded-lg font-ui-text cursor-not-allowed">Locked</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="space-y-space-6">
+<!-- Why This Matters Quote -->
+<div class="bg-surface-container-high rounded-xl p-space-5 relative overflow-hidden">
+<span class="material-symbols-outlined absolute -top-2 -left-2 text-8xl text-room-cs/10 pointer-events-none" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<h4 class="font-label-caps text-room-cs mb-space-3 uppercase tracking-widest">Why This Matters</h4>
+<p class="font-accent-serif text-accent-serif italic text-ink-primary mb-space-4">"Excellence in customer service isn't just about satisfaction scores—it's about building the trust that allows clinical healing to happen."</p>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-room-cs/20 flex items-center justify-center text-room-cs">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-body-sm font-bold text-on-surface-variant">Patient Advocacy Group</span>
+</div>
+</div>
+<!-- Instructor Card -->
+<div class="glass-panel rounded-xl p-space-5 shadow-md border-t-4 border-room-cs">
+<div class="flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full overflow-hidden border-4 border-room-cs/20 mb-space-3 ring-4 ring-white">
+<img alt="Elena Vance Instructor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg0ZZ-4Y-4nJ7VZZuo7FzrvqaigVVMEerm77Z_uoYIWcAz-dhbtiteIiDVNuD4Jy19zd2--PxtTKF87mrSQAJ8ViMOJxnv-RbW0flYffXd2eCtn2EbNDLG4xiQlNF0y42uAP4x-mn5aXaoxIxOxZtf5_aSReu-6f3CzQIVagrpT3JpAXNMHXljjf5Kt9C5n7xW2EDJJvRLPrlJg8dvM0Ej2yBiTXn93rSaw7nHSV3VK0IUEgq8MDgntxVwv7C3cMw5P0B3v2xSMTgJ">
+</div>
+<h4 class="font-headline-h4 text-ink-primary">Elena Vance</h4>
+<p class="text-body-sm text-on-surface-variant mb-space-4">Communication Specialist</p>
+<button class="w-full bg-room-cs text-white py-2 rounded-lg font-ui-text hover:brightness-110 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">chat_bubble</span>
+                            Ask a Question
+                        </button>
+</div>
+</div>
+<!-- Related Resources -->
+<div class="bg-white rounded-xl p-space-5 border border-border-muted shadow-sm">
+<h4 class="font-headline-h4 text-headline-h4 mb-space-4">Resource Library</h4>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 group cursor-pointer">
+<span class="material-symbols-outlined text-room-cs group-hover:scale-110 transition-transform">picture_as_pdf</span>
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Patient Comm Guide</span>
+</li>
+<li class="flex items-center gap-3 group cursor-pointer">
+<span class="material-symbols-outlined text-room-cs group-hover:scale-110 transition-transform">video_library</span>
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">Roleplay Scenarios</span>
+</li>
+<li class="flex items-center gap-3 group cursor-pointer">
+<span class="material-symbols-outlined text-room-cs group-hover:scale-110 transition-transform">description</span>
+<span class="text-body-sm text-on-surface-variant group-hover:text-primary transition-colors">HIPAA Compliance Cheat Sheet</span>
+</li>
+</ul>
+</div>
+</aside>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-highest mt-space-8">
+<div class="max-w-content-max mx-auto py-space-6 px-space-5 flex flex-col md:flex-row justify-between items-center gap-space-4">
+<div class="text-center md:text-left">
+<span class="font-headline-h4 text-headline-h4 text-on-surface">Healthcare Training Center</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">© 2024 Healthcare Training Center. Empowering professionals through immersive education.</p>
+</div>
+<div class="flex gap-space-4 flex-wrap justify-center">
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Compliance</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-sm text-on-surface-variant hover:text-primary underline transition-all" href="#">HIPAA Statement</a>
+</div>
+</div>
+</footer>
+<!-- FAB (Suppressed on details pages per logic, but shown here as it is the room dashboard) -->
+<button class="fixed bottom-space-5 right-space-5 w-14 h-14 bg-room-cs text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-50 floating-action">
+<span class="material-symbols-outlined">support_agent</span>
+</button>
+</body></html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentation & Document Template — Healthcare Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F4F6F9;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #1E3A6E;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .intro-section p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        .slide-deck {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 48px;
+        }
+
+        .slide {
+            min-height: 600px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-bottom: 1px solid #D0D8E8;
+        }
+
+        .slide:last-child {
+            border-bottom: none;
+        }
+
+        /* SLIDE VARIANTS */
+        .slide.title-slide {
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .slide.room-slide {
+            background: #F4F6F9;
+        }
+
+        .slide.content-slide {
+            background: white;
+        }
+
+        .slide.closing-slide {
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+            color: white;
+            text-align: center;
+        }
+
+        /* TITLE SLIDE */
+        .title-slide h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .title-slide .subtitle {
+            font-size: 28px;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+
+        .title-slide .tagline {
+            font-size: 16px;
+            opacity: 0.85;
+            letter-spacing: 1px;
+        }
+
+        /* ROOM SLIDE */
+        .room-slide .room-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2B8FA9;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .room-slide h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 44px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1E3A6E;
+        }
+
+        .room-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .room-slide .description {
+            font-size: 18px;
+            color: #475569;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* CONTENT SLIDE */
+        .content-slide h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #1E3A6E;
+            border-bottom: 3px solid #2B8FA9;
+            padding-bottom: 16px;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-list li {
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            font-size: 18px;
+            color: #1E3A6E;
+            line-height: 1.6;
+        }
+
+        .content-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2B8FA9;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        /* CLOSING SLIDE */
+        .closing-slide h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .closing-slide p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+
+        /* FOOTER */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #D0D8E8;
+            font-size: 12px;
+            color: #94A3B8;
+        }
+
+        .slide.title-slide .slide-footer {
+            border-top-color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+        }
+
+        .slide.closing-slide .slide-footer {
+            border-top-color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* DOCUMENT HEADER */
+        .document-header {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 6px solid #1E3A6E;
+        }
+
+        .document-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1E3A6E;
+        }
+
+        .document-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #D0D8E8;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E3A6E;
+        }
+
+        .guide-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .guide-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1E3A6E;
+        }
+
+        .guide-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guide-section li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .guide-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2B8FA9;
+            font-weight: 700;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-right: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Presentation & Document Templates</h1>
+
+        <!-- INTRO -->
+        <div class="intro-section">
+            <p>
+                <strong>Use these templates for:</strong> Pitch decks, training presentations, internal documentation,
+                stakeholder updates, and employee onboarding materials.
+            </p>
+            <p>
+                Export slides as PNG or PDF for easy sharing. Or paste into PowerPoint, Google Slides, or Keynote and customize further.
+            </p>
+        </div>
+
+        <!-- PRESENTATION TEMPLATE -->
+        <div class="slide-deck">
+            <!-- TITLE SLIDE -->
+            <div class="slide title-slide">
+                <h1>Healthcare Training Center</h1>
+                <div class="subtitle">Where Better Care Begins</div>
+                <div class="tagline">STEP INSIDE. STEP UP.</div>
+                <div class="slide-footer">
+                    <div>© 2026 Healthcare Training Center</div>
+                    <div>healthcare-training-center.com</div>
+                </div>
+            </div>
+
+            <!-- ROOM SHOWCASE SLIDE -->
+            <div class="slide room-slide">
+                <div class="room-number">Room 2</div>
+                <div class="room-icon">🛡️</div>
+                <h2>HIPAA, Privacy & Security</h2>
+                <div class="description">
+                    Protect patient information, maintain privacy compliance, and prevent data breaches.
+                    Real-world scenarios, practical strategies, final assessment.
+                </div>
+                <div class="slide-footer">
+                    <div>Duration: 45 min | Difficulty: Intermediate</div>
+                    <div>healthcare-training-center.com</div>
+                </div>
+            </div>
+
+            <!-- CONTENT SLIDE -->
+            <div class="slide content-slide">
+                <h2>What Makes Us Different</h2>
+                <ul class="content-list">
+                    <li><strong>Built by a lawyer.</strong> Our founder's personal story drives every design decision — compliance + care.</li>
+                    <li><strong>Patient-first focus.</strong> Every lesson ties back to real people and real outcomes, not abstract compliance.</li>
+                    <li><strong>Five specialized rooms.</strong> Each with its own identity, color, and deep expertise — not a generic LMS.</li>
+                    <li><strong>Warm, not clinical.</strong> Training shouldn't feel cold or bureaucratic. It should feel like mentorship.</li>
+                    <li><strong>Practical skills.</strong> Scenario-based learning, real assessments, certificates that mean something.</li>
+                </ul>
+                <div class="slide-footer">
+                    <div>Learn. Grow. Make a Difference.</div>
+                    <div>healthcare-training-center.com</div>
+                </div>
+            </div>
+
+            <!-- CLOSING SLIDE -->
+            <div class="slide closing-slide">
+                <h2>Ready to Transform Your Training?</h2>
+                <p>Step Inside. Step Up.</p>
+                <p style="font-size: 16px; opacity: 0.8; margin-top: 20px;">Empowering Knowledge. Enhancing Care. Building a Better Future.</p>
+                <div class="slide-footer">
+                    <div></div>
+                    <div>healthcare-training-center.com</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOCUMENT TEMPLATES -->
+        <div class="document-header">
+            <h2>Document Header Template</h2>
+            <p style="color: #475569; margin-top: 12px;">Use this header for internal documentation, reports, case studies, and formal materials.</p>
+            <div class="document-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Document Type</div>
+                    <div class="meta-value">Case Study</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Version</div>
+                    <div class="meta-value">1.0</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Date</div>
+                    <div class="meta-value">June 2026</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div class="meta-value">Published</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRESENTATION DESIGN GUIDE -->
+        <div class="guide-section">
+            <h3>Presentation Design Guide</h3>
+            <ul>
+                <li><strong>Title slides:</strong> Navy-to-teal gradient, white text, centered, 56px+ headlines</li>
+                <li><strong>Room showcase slides:</strong> Light surface background, room color accent, icon feature, description</li>
+                <li><strong>Content slides:</strong> White background, navy headings, teal bullets, 18px+ body text</li>
+                <li><strong>Closing slide:</strong> Full-color gradient, centered, motivational copy</li>
+                <li><strong>Spacing:</strong> 60px padding all sides, generous whitespace between sections</li>
+                <li><strong>Fonts:</strong> Montserrat for all headings (600–800 weight), Inter for body (400–600 weight)</li>
+                <li><strong>Colors:</strong> Navy (#1E3A6E) primary, Teal (#2B8FA9) accent, room colors for highlight</li>
+                <li><strong>Imagery:</strong> Phosphor icons, warm healthcare photography, no busy textures</li>
+                <li><strong>Slide numbers:</strong> Bottom right, small (12px), gray (#94A3B8)</li>
+                <li><strong>Consistency:</strong> Keep the footer (date, URL, slide number) visible on all slides</li>
+            </ul>
+        </div>
+
+        <!-- DOCUMENT DESIGN GUIDE -->
+        <div class="guide-section">
+            <h3>Document Design Guide</h3>
+            <ul>
+                <li><strong>Header:</strong> Colored top border (navy or room color), company name, document title, meta info</li>
+                <li><strong>Body copy:</strong> 16px Inter, 1.6 line height, 600px max line width (readability)</li>
+                <li><strong>Headings:</strong> Montserrat (700–800 weight), navy color, 8px grid spacing</li>
+                <li><strong>Lists:</strong> Teal bullet/arrow, 18px left margin, 8px line spacing</li>
+                <li><strong>Emphasis:</strong> Bold navy text (not italics) for key points</li>
+                <li><strong>Boxes/callouts:</strong> Light surface background, teal left border, 20px padding</li>
+                <li><strong>Page breaks:</strong> 96px padding before/after major sections</li>
+                <li><strong>Footer:</strong> Page number (bottom right), document version (bottom center), date</li>
+                <li><strong>Margins:</strong> 40px all sides, 8px grid-aligned</li>
+                <li><strong>Colors:</strong> Navy headings, gray body copy (#475569), teal accents, surface backgrounds</li>
+            </ul>
+        </div>
+
+        <!-- EXPORT TIPS -->
+        <div class="guide-section">
+            <h3>Export & Sharing Tips</h3>
+            <ul>
+                <li><strong>For presentations:</strong> Export as PDF (preserves formatting), or import HTML into PowerPoint/Google Slides</li>
+                <li><strong>For documents:</strong> Save as PDF for final distribution, or export as Word doc for further edits</li>
+                <li><strong>For sharing:</strong> Use PDF for read-only sharing (looks consistent on all devices)</li>
+                <li><strong>File naming:</strong> Use kebab-case: "healthcare-training-center-pitch-deck-june-2026.pdf"</li>
+                <li><strong>Accessibility:</strong> Always add alt text to images; use proper heading hierarchy (H1 → H2 → H3)</li>
+                <li><strong>Print:</strong> Test print layout; ensure color-safe versions exist for monochrome printing</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

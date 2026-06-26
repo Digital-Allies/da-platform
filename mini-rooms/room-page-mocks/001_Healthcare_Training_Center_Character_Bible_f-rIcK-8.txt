@@ -1,0 +1,58 @@
+# Healthcare Training Center — Character Bible v1.0
+## Host Character: "The Receptionist" — Identity Lock
+
+**Status:** Approved Reference Set | **Version:** 1.0 | **Date:** June 2026
+
+---
+
+## Identity Summary
+
+| Attribute | Value |
+|-----------|-------|
+| Role | Platform Host, Greeter, Instructor |
+| Age | ~28–32 years |
+| Skin Tone | Fair peach |
+| Hair | Dark brown, shoulder-length lob, side part |
+| Build | Slender-average |
+| Energy | Warm, confident, patient-advocacy professional |
+
+---
+
+## Wardrobe System
+
+| Mode | Outfit |
+|------|--------|
+| **Reception / Default** | Navy #1E3A6E short-sleeved top, navy trousers, white HTC lanyard badge |
+| **Instructor** | Teal #2B8FA9 blazer over cream blouse, navy trousers, white HTC lanyard badge |
+| **Host / Marketing** | Navy top with lanyard (same as Reception) |
+
+*Both outfits share the brand palette. Lanyard badge "Healthcare Training Center" is always present.*
+
+---
+
+## Reference Sheet — Asset IDs
+
+| # | Pose | Asset ID | Aspect Ratio |
+|---|------|----------|-------------|
+| 1 | **Canonical Portrait** *(identity lock)* | `rkR6_O0Q` | 1:1 |
+| 2 | **Full Body — Receptionist Uniform** | `DjAbHL2t` | 2:3 |
+| 3 | **Instructor Mode** — whiteboard | `OLPDOUQT` | 2:3 |
+| 4 | **Host / Welcome Mode** — arms open | `rgazpIjT` | 1:1 |
+| 5 | **Seated at Reception Desk** | `_PVati8T` | 16:9 |
+| 6 | **Expression Sheet** — 4 expressions | `qBhCxQL1` | 1:1 |
+
+---
+
+## Identity-Consistency Score
+
+Biometric gate passed: **100% match** across all 15 pairwise comparisons. All 6 assets cleared the 80% threshold with zero drift.
+
+---
+
+## Usage Guidelines
+
+- **Always include `rkR6_O0Q` (Canonical Portrait)** as the primary identity reference in any new generation.
+- Chain additional pose references as needed (full body for body shots, expression sheet for emotion work).
+- Wardrobe note: teal blazer (Instructor mode) is an approved variation — do not introduce other colors.
+- Style: warm semi-realistic editorial illustration bridging isometric lobby world and marketing use cases.
+- Do not change hair, skin tone, age, or face shape in any future render.

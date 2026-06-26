@@ -1,0 +1,316 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Room 1: Customer Service Training | Healthcare Training Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .perspective-pop {
+            perspective: 900px;
+        }
+        .perspective-card {
+            transform: perspective(900px) rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .perspective-card:hover {
+            transform: perspective(900px) rotateY(0deg) rotateX(0deg);
+        }
+        /* Custom scrollbar for clinical gray look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #3B7DD8; border-radius: 0px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "secondary-fixed-dim": "#79d3ef",
+                "on-error": "#ffffff",
+                "on-primary": "#ffffff",
+                "info": "#17A2B8",
+                "inverse-surface": "#2d3133",
+                "error": "#DC3545",
+                "surface-container-lowest": "#ffffff",
+                "secondary-container": "#88e1fd",
+                "surface-variant": "#e0e3e6",
+                "success": "#28A745",
+                "room-hipaa": "#2BA89A",
+                "on-tertiary-container": "#a8a6a2",
+                "on-surface-variant": "#44474f",
+                "surface-tint": "#445d94",
+                "primary-fixed-dim": "#aec6ff",
+                "primary": "#002357",
+                "on-tertiary": "#ffffff",
+                "tertiary": "#262623",
+                "tertiary-fixed-dim": "#c8c6c2",
+                "on-primary-fixed-variant": "#2b467a",
+                "on-primary-container": "#8ca5e0",
+                "room-compliance": "#2EAA6E",
+                "on-surface": "#191c1e",
+                "surface": "#f7f9fc",
+                "error-container": "#ffdad6",
+                "on-secondary-container": "#006479",
+                "tertiary-container": "#3c3c39",
+                "on-primary-fixed": "#001a43",
+                "on-tertiary-fixed-variant": "#474743",
+                "inverse-primary": "#aec6ff",
+                "inverse-on-surface": "#eff1f4",
+                "secondary-fixed": "#b3ebff",
+                "primary-fixed": "#d8e2ff",
+                "border-muted": "#D0D8E8",
+                "secondary": "#00677d",
+                "outline-variant": "#c4c6d1",
+                "surface-dim": "#d8dadd",
+                "room-finance": "#D4A017",
+                "on-secondary-fixed": "#001f27",
+                "surface-container": "#eceef1",
+                "on-background": "#191c1e",
+                "surface-container-highest": "#e0e3e6",
+                "on-tertiary-fixed": "#1c1c19",
+                "warning": "#FFC107",
+                "surface-bright": "#f7f9fc",
+                "room-records": "#7B5EA7",
+                "primary-container": "#1e3a6e",
+                "on-error-container": "#93000a",
+                "ink-primary": "#16243D",
+                "outline": "#747780",
+                "surface-container-low": "#f2f4f7",
+                "background": "#f7f9fc",
+                "room-cs": "#3B7DD8",
+                "tertiary-fixed": "#e5e2dd",
+                "surface-container-high": "#e6e8eb",
+                "on-secondary-fixed-variant": "#004e5f",
+                "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "0px",
+                "xl": "0px",
+                "full": "9999px"
+              },
+              "spacing": {
+                "space-6": "32px",
+                "space-5": "24px",
+                "space-2": "8px",
+                "content-max": "1280px",
+                "space-8": "64px",
+                "space-9": "96px",
+                "space-1": "4px",
+                "space-7": "48px",
+                "base": "8px",
+                "space-4": "16px",
+                "space-3": "12px"
+              },
+              "fontFamily": {
+                "label-caps": ["Inter"],
+                "headline-h2": ["Montserrat"],
+                "ui-text": ["Inter"],
+                "headline-h1": ["Montserrat"],
+                "headline-h3": ["Montserrat"],
+                "body-base": ["Inter"],
+                "display-lg": ["Montserrat"],
+                "accent-serif": ["Playfair Display"],
+                "body-lg": ["Inter"],
+                "body-sm": ["Inter"],
+                "headline-h4": ["Montserrat"]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-base text-on-surface selection:bg-room-cs selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-space-5 h-16 max-w-content-max mx-auto bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-space-4">
+<h1 class="font-headline-h4 text-headline-h4 text-primary dark:text-primary-fixed">Healthcare Training Center</h1>
+</div>
+<nav class="hidden md:flex items-center gap-space-6">
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Lobby</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">My Progress</a>
+<a class="font-ui-text text-ui-text text-primary dark:text-secondary-fixed border-b-2 border-primary dark:border-secondary-fixed pb-1" href="#">Live Classes</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-space-3">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container-low transition-transform active:scale-90">account_circle</button>
+</div>
+</header>
+<main class="pt-16 min-h-screen">
+<!-- Hero Section -->
+<section class="bg-room-cs text-white py-space-8 px-space-5">
+<div class="max-w-content-max mx-auto flex flex-col md:flex-row items-center gap-space-7">
+<div class="flex-1">
+<div class="inline-block px-space-2 py-1 bg-white/20 font-label-caps text-label-caps mb-space-3">ROOM 01</div>
+<h2 class="font-headline-h1 text-headline-h1 mb-space-3">Customer Service Training</h2>
+<p class="font-body-lg text-body-lg text-white/90 max-w-2xl">Master the art of patient-centered communication and conflict resolution.</p>
+</div>
+<div class="w-full md:w-80 flex-shrink-0 perspective-pop">
+<img alt="Customer Service Storefront" class="perspective-card w-full aspect-square object-cover shadow-2xl border-4 border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApMlMUFKcDkSzUVJwchRx1sTG6Szjb0nsJF2WYP-8-cjHa85WfKiX33YtvA2fX9yGWkglLr0XsyL9Lab-3w5OeKtT2q2bAji-9-jAqtAy6mc0Kbsj8XP1tfhZhgWgRUdrYrxKBkn_xUG6Cg1aZallvc8FeCrHnTUyPnm98CFd0VCw0Fe-KeuJcP_n9o02cp93YrEFugICa_0JTTjbP93rpWgM4muK7qnIexUAZw9c7pv-HTV3GVNQ1B-pnod9FRYDPpb3342qU2Jkc">
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="max-w-content-max mx-auto px-space-5 py-space-7 grid grid-cols-1 lg:grid-cols-12 gap-space-7 items-start">
+<!-- Content Rail -->
+<div class="lg:col-span-8 space-y-space-7">
+<!-- Video Player Section -->
+<div class="bg-white shadow-sm border border-border-muted overflow-hidden">
+<div class="relative aspect-video bg-black group cursor-pointer">
+<div class="absolute inset-0 bg-cover bg-center opacity-60" data-alt="A clean, modern hospital lobby with a minimalist reception desk and soft blue lighting. The atmosphere is professional and calming, reflecting a clinical yet welcoming healthcare environment. High-fidelity cinematic lighting and sharp details capture the essence of a modern medical facility." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB6cfTMbciDSk-8rlJFI1-AMf_FnU5Fui8ht8hEwSrm1uxTtfSwhXp9NyZJ3xhkpd157JegX8CZd2CxPr4KHCwn2lIOLOQs51YJBq3k559z74BI0_WQ0R_ssjoqADC2x9JHmb3qRXbH2jssvdXUkoxPW6tH-jufmwxv8BXhTiYQ0LlgQhnSpxy7198EKNRF3DHCD1ZZIxf0dPjqTNLMyOcAi3u8csmbXjAJDPmLNGXzJJZQ8w0te4e8ouwZJDcxt1cJKytJmyIoMTK_')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<button class="w-20 h-20 bg-room-cs text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-space-4 bg-gradient-to-t from-black/80 to-transparent">
+<h3 class="font-headline-h4 text-headline-h4 text-white">Watch Introduction Video</h3>
+</div>
+</div>
+</div>
+<!-- Training Modules -->
+<section>
+<div class="flex items-center justify-between mb-space-5">
+<h3 class="font-headline-h3 text-headline-h3 border-l-4 border-room-cs pl-space-3">Course Curriculum</h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">3 MODULES • 105 MINS TOTAL</span>
+</div>
+<div class="space-y-space-4">
+<!-- Module 1 -->
+<div class="bg-white border border-border-muted p-space-5 flex items-center gap-space-4 hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center text-room-cs font-bold text-lg">01</div>
+<div class="flex-1">
+<h4 class="font-headline-h4 text-headline-h4">Empathetic Listening</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Techniques for active engagement and validating patient concerns.</p>
+</div>
+<div class="text-right hidden sm:block">
+<div class="font-label-caps text-label-caps text-on-surface-variant">45 MINS</div>
+<div class="font-ui-text text-ui-text text-room-cs group-hover:underline">Start Module</div>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="bg-white border border-border-muted p-space-5 flex items-center gap-space-4 hover:shadow-md transition-shadow group cursor-pointer">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center text-room-cs font-bold text-lg">02</div>
+<div class="flex-1">
+<h4 class="font-headline-h4 text-headline-h4">Conflict Resolution</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">De-escalation strategies for high-stress medical environments.</p>
+</div>
+<div class="text-right hidden sm:block">
+<div class="font-label-caps text-label-caps text-on-surface-variant">60 MINS</div>
+<div class="font-ui-text text-ui-text text-room-cs group-hover:underline">Start Module</div>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="bg-white border-2 border-room-cs p-space-5 flex items-center gap-space-4 hover:shadow-md transition-shadow group cursor-pointer relative">
+<div class="absolute top-0 right-0 bg-room-cs text-white font-label-caps text-label-caps px-2 py-1">CORE</div>
+<div class="w-12 h-12 bg-room-cs/10 flex items-center justify-center text-room-cs font-bold text-lg">03</div>
+<div class="flex-1">
+<h4 class="font-headline-h4 text-headline-h4">Patient-First Language</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Standardized terminology for credentialed authority and warmth.</p>
+</div>
+<div class="text-right hidden sm:block">
+<div class="font-label-caps text-label-caps text-on-surface-variant">REQUIRED</div>
+<div class="font-ui-text text-ui-text text-room-cs group-hover:underline">Start Module</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Sidebar -->
+<aside class="lg:col-span-4 space-y-space-6 lg:sticky lg:top-24">
+<!-- Instructor Card -->
+<div class="bg-white border border-border-muted p-space-5 text-center">
+<img alt="Elena Vance" class="w-32 h-32 mx-auto grayscale hover:grayscale-0 transition-all duration-500 border-4 border-room-cs mb-space-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA38cppDo9EoHJUM5ZoPmh1SwDmIqksK_0PT4MvtmXnfr1GgFKZCB1ODnScxgv1hcMCGgTyx3k0ynOYcvBfQMECt-pXonrjhd30ZDrNFusdaLNB9oAxLBMi313CmrMFfxTbtqjZrmgZTQAATG-3VuupyuGTlwYSdpeFdAEdJwxzbC41CdrG4_GQn78UtAvjGc5w91VBoROC87Ajyc09O8zqs9mKB4FP_uIsRb4_ggijE7P0NPWoCihSz1u3iEFi3wDDl7F8OfiIikcF">
+<h4 class="font-headline-h4 text-headline-h4">Elena Vance</h4>
+<p class="font-body-sm text-body-sm text-room-cs font-semibold mb-space-3 uppercase tracking-wider">Communication Specialist</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic leading-relaxed">
+                        "Effective healthcare begins with hearing what isn't said."
+                    </p>
+</div>
+<!-- Why This Matters Quote -->
+<div class="bg-room-cs p-space-6 text-white relative overflow-hidden">
+<span class="material-symbols-outlined absolute -top-4 -right-4 text-9xl opacity-10">format_quote</span>
+<h5 class="font-label-caps text-label-caps text-white/70 mb-space-3">WHY THIS MATTERS</h5>
+<p class="font-accent-serif text-accent-serif leading-relaxed italic z-10 relative">
+                        Patient outcomes are directly linked to clear communication. When a patient feels heard, compliance increases by 40%.
+                    </p>
+</div>
+<!-- Resource Library -->
+<div class="bg-surface-container border border-border-muted p-space-5">
+<h5 class="font-headline-h4 text-headline-h4 mb-space-4 flex items-center gap-space-2">
+<span class="material-symbols-outlined text-room-cs">library_books</span>
+                        Resource Library
+                    </h5>
+<ul class="space-y-space-3">
+<li>
+<a class="flex items-center justify-between font-ui-text text-ui-text hover:text-room-cs transition-colors" href="#">
+<span>Conflict Resolution Guide (PDF)</span>
+<span class="material-symbols-outlined text-sm">download</span>
+</a>
+</li>
+<li class="border-t border-border-muted pt-space-3">
+<a class="flex items-center justify-between font-ui-text text-ui-text hover:text-room-cs transition-colors" href="#">
+<span>Verbal De-escalation Checklist</span>
+<span class="material-symbols-outlined text-sm">download</span>
+</a>
+</li>
+<li class="border-t border-border-muted pt-space-3">
+<a class="flex items-center justify-between font-ui-text text-ui-text hover:text-room-cs transition-colors" href="#">
+<span>Case Study: Room 01 Scenarios</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Progress Track -->
+<div class="bg-white border border-border-muted p-space-5">
+<div class="flex justify-between items-center mb-space-2">
+<span class="font-label-caps text-label-caps">YOUR PROGRESS</span>
+<span class="font-label-caps text-label-caps text-room-cs">0%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest overflow-hidden">
+<div class="w-0 h-full bg-room-cs transition-all duration-1000" id="progress-bar"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-3">Complete "Empathetic Listening" to unlock the certification exam.</p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-space-6 px-space-5 flex flex-col md:flex-row justify-between items-center max-w-content-max mx-auto bg-surface-container-highest dark:bg-tertiary">
+<div class="mb-space-4 md:mb-0">
+<h2 class="font-headline-h4 text-headline-h4 text-on-surface dark:text-on-tertiary">Healthcare Training Center</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container mt-1">© 2024 Healthcare Training Center. Empowering professionals through immersive education.</p>
+</div>
+<div class="flex flex-wrap gap-space-4">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Compliance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all font-bold" href="#">HIPAA Statement</a>
+</div>
+</footer>
+<script>
+        // Simple interaction for the progress bar
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const bar = document.getElementById('progress-bar');
+                if(bar) bar.style.width = '12%'; // Just a subtle initial nudge
+            }, 500);
+        });
+
+        // Track hover effects for modules
+        document.querySelectorAll('.group').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.style.transform = 'translateY(-2px)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translateY(0px)';
+            });
+        });
+    </script>
+</body></html>

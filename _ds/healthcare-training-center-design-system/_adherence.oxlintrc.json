@@ -1,0 +1,222 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "ui_kits/learner-app/**",
+              "ui_kits/marketing/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Phosphor|Phosphor-Bold|Phosphor-Fill|Montserrat|Inter|Playfair Display))/i]",
+        "message": "Font not provided by the design system. Available: Phosphor, Phosphor-Bold, Phosphor-Fill, Montserrat, Inter, Playfair Display."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {},
+    "tokens": [
+      "--bg-card",
+      "--bg-page",
+      "--bg-sunken",
+      "--color-border",
+      "--color-border-strong",
+      "--color-cream",
+      "--color-error",
+      "--color-error-tint",
+      "--color-info",
+      "--color-info-tint",
+      "--color-navy",
+      "--color-navy-300",
+      "--color-navy-700",
+      "--color-room-compliance",
+      "--color-room-compliance-tint",
+      "--color-room-cs",
+      "--color-room-cs-tint",
+      "--color-room-finance",
+      "--color-room-finance-tint",
+      "--color-room-hipaa",
+      "--color-room-hipaa-tint",
+      "--color-room-records",
+      "--color-room-records-tint",
+      "--color-success",
+      "--color-success-tint",
+      "--color-surface",
+      "--color-teal",
+      "--color-teal-100",
+      "--color-teal-600",
+      "--color-warning",
+      "--color-warning-tint",
+      "--color-white",
+      "--content-max",
+      "--fg-1",
+      "--fg-2",
+      "--fg-3",
+      "--fg-on-color",
+      "--fg-on-color-dim",
+      "--font-accent",
+      "--font-body",
+      "--font-heading",
+      "--leading-body",
+      "--leading-heading",
+      "--leading-ui",
+      "--motion-base",
+      "--motion-fast",
+      "--motion-slow",
+      "--motion-spring",
+      "--nav-height",
+      "--radius-full",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-sm",
+      "--radius-xl",
+      "--shadow-focus",
+      "--shadow-lg",
+      "--shadow-md",
+      "--shadow-sm",
+      "--space-1",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--text-body",
+      "--text-body-lg",
+      "--text-body-sm",
+      "--text-display",
+      "--text-h1",
+      "--text-h2",
+      "--text-h3",
+      "--text-h4",
+      "--text-label",
+      "--text-ui"
+    ],
+    "tokenKinds": {
+      "--color-navy": "color",
+      "--color-navy-700": "color",
+      "--color-navy-300": "color",
+      "--color-teal": "color",
+      "--color-teal-600": "color",
+      "--color-teal-100": "color",
+      "--color-white": "color",
+      "--color-surface": "color",
+      "--color-cream": "color",
+      "--color-border": "color",
+      "--color-border-strong": "color",
+      "--bg-page": "color",
+      "--bg-card": "color",
+      "--bg-sunken": "color",
+      "--fg-1": "color",
+      "--fg-2": "color",
+      "--fg-3": "color",
+      "--fg-on-color": "color",
+      "--fg-on-color-dim": "color",
+      "--color-room-cs": "color",
+      "--color-room-cs-tint": "color",
+      "--color-room-hipaa": "color",
+      "--color-room-hipaa-tint": "color",
+      "--color-room-compliance": "color",
+      "--color-room-compliance-tint": "color",
+      "--color-room-records": "color",
+      "--color-room-records-tint": "color",
+      "--color-room-finance": "color",
+      "--color-room-finance-tint": "color",
+      "--color-success": "color",
+      "--color-success-tint": "color",
+      "--color-warning": "color",
+      "--color-warning-tint": "color",
+      "--color-error": "color",
+      "--color-error-tint": "color",
+      "--color-info": "color",
+      "--color-info-tint": "color",
+      "--font-heading": "font",
+      "--font-body": "font",
+      "--font-accent": "font",
+      "--text-display": "font",
+      "--text-h1": "font",
+      "--text-h2": "font",
+      "--text-h3": "font",
+      "--text-h4": "font",
+      "--text-body-lg": "font",
+      "--text-body": "font",
+      "--text-body-sm": "font",
+      "--text-label": "font",
+      "--text-ui": "font",
+      "--leading-heading": "font",
+      "--leading-body": "font",
+      "--leading-ui": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--shadow-sm": "shadow",
+      "--shadow-md": "shadow",
+      "--shadow-lg": "shadow",
+      "--shadow-focus": "shadow",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-xl": "radius",
+      "--radius-full": "radius",
+      "--motion-fast": "other",
+      "--motion-base": "other",
+      "--motion-slow": "other",
+      "--motion-spring": "other",
+      "--content-max": "spacing",
+      "--nav-height": "spacing"
+    },
+    "fontFamilies": [
+      "Inter",
+      "Montserrat",
+      "Phosphor",
+      "Phosphor-Bold",
+      "Phosphor-Fill",
+      "Playfair Display"
+    ]
+  }
+}

@@ -1,0 +1,327 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Medical Records - Healthcare Training Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "on-tertiary-fixed-variant": "#474743",
+                        "surface-bright": "#f7f9fc",
+                        "secondary-fixed-dim": "#79d3ef",
+                        "on-background": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "on-surface-variant": "#44474f",
+                        "room-hipaa": "#2BA89A",
+                        "inverse-primary": "#aec6ff",
+                        "room-cs": "#3B7DD8",
+                        "ink-primary": "#16243D",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-error-container": "#93000a",
+                        "info": "#17A2B8",
+                        "border-muted": "#D0D8E8",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#445d94",
+                        "background": "#f7f9fc",
+                        "error": "#DC3545",
+                        "primary-fixed-dim": "#aec6ff",
+                        "tertiary": "#262623",
+                        "on-surface": "#191c1e",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#8ca5e0",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6d1",
+                        "on-tertiary": "#ffffff",
+                        "room-records": "#7B5EA7",
+                        "surface": "#f7f9fc",
+                        "success": "#28A745",
+                        "on-secondary-container": "#006479",
+                        "on-primary-fixed-variant": "#2b467a",
+                        "on-secondary-fixed": "#001f27",
+                        "room-finance": "#D4A017",
+                        "tertiary-container": "#3c3c39",
+                        "on-primary": "#ffffff",
+                        "warning": "#FFC107",
+                        "on-tertiary-container": "#a8a6a2",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-dim": "#d8dadd",
+                        "inverse-on-surface": "#eff1f4",
+                        "error-container": "#ffdad6",
+                        "outline": "#747780",
+                        "primary": "#002357",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-variant": "#e0e3e6",
+                        "secondary-container": "#88e1fd",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "room-compliance": "#2EAA6E",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed": "#001a43",
+                        "surface-container-high": "#e6e8eb",
+                        "secondary": "#00677d",
+                        "primary-container": "#1e3a6e",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#e0e3e6"
+                },
+                "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "9999px"
+                },
+                "spacing": {
+                        "space-8": "64px",
+                        "space-6": "32px",
+                        "space-1": "4px",
+                        "content-max": "1280px",
+                        "space-7": "48px",
+                        "base": "8px",
+                        "space-9": "96px",
+                        "space-5": "24px",
+                        "space-2": "8px",
+                        "space-4": "16px",
+                        "space-3": "12px"
+                },
+                "fontFamily": {
+                        "headline-h3": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "body-base": ["Inter"],
+                        "accent-serif": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "headline-h2": ["Montserrat"],
+                        "headline-h1": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "ui-text": ["Inter"],
+                        "headline-h4": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                },
+                "fontSize": {
+                        "headline-h3": ["22px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "accent-serif": ["19px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+                        "headline-h2": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "headline-h1": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "ui-text": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-h4": ["18px", {"lineHeight": "22px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                }
+              },
+            },
+          }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .perspective-pop {
+            perspective: 900px;
+            transform-style: preserve-3d;
+        }
+        .perspective-pop:hover .room-card-inner {
+            transform: rotateY(-8deg) rotateX(3deg) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(123, 94, 167, 0.2);
+        }
+        .room-card-inner {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-base">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-space-5 h-16 max-w-content-max mx-auto bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-space-4">
+<span class="font-headline-h4 text-headline-h4 text-primary dark:text-primary-fixed">Healthcare Training Center</span>
+</div>
+<nav class="hidden md:flex items-center gap-space-6">
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed font-ui-text text-ui-text transition-colors duration-200" href="#">Lobby</a>
+<a class="text-primary dark:text-secondary-fixed border-b-2 border-primary dark:border-secondary-fixed pb-1 font-ui-text text-ui-text transition-colors duration-200" href="#">My Progress</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed font-ui-text text-ui-text transition-colors duration-200" href="#">Live Classes</a>
+<a class="text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed font-ui-text text-ui-text transition-colors duration-200" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-space-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container border-none rounded-full px-space-4 py-space-1 text-body-sm focus:ring-2 focus:ring-room-records" placeholder="Search training..." type="text">
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed scale-95 active:scale-90 transition-transform">account_circle</button>
+</div>
+</header>
+<!-- Main Content Rail -->
+<main class="mt-16 pt-space-8 pb-space-9 px-space-5 max-w-content-max mx-auto">
+<!-- Hero Row -->
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-space-5 mb-space-7">
+<!-- Left: Hero Section -->
+<section class="relative h-64 shadow-md bg-room-records flex items-end p-space-6 overflow-hidden">
+<img alt="" class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuzWYUJlow1O6zfU7DZUAxUxmnqlS_5z6nMUF1vhh7aM3MAN8a7r91o-6aTHrZpt6LUI07iqXAag9iugk15iXd-Y3UOezhoqdh4tJPxgcbiOsylx2pW4f7-9-Y4_ZR5-GqpZYZPqwFgoen8g3nl4TQiy9YRL9VdVt3eY1_thEQnXj5oO2BW979Ep1DD4NkLTXy4x4ekm2H2qt0_1XRLmU8xqE7FbiAFRzk54GrtbzlPCLU766wYLAmQicJWr6ZcCoakqpJhT7zYwxR">
+<div class="relative z-10 text-white">
+<div class="flex items-center gap-space-3 mb-space-2">
+<span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-label-caps font-label-caps">Room 04</span>
+<span class="text-label-caps font-label-caps opacity-90">Medical Records Specialist</span>
+</div>
+<h1 class="font-headline-h1 text-headline-h1 mb-2">Medical Records Training</h1>
+<p class="font-body-lg text-body-lg opacity-90 max-w-2xl">Master the lifecycle of clinical documentation and ensure the integrity of patient health information.</p>
+</div>
+</section>
+<!-- Right: Room Storefront Tile -->
+<div class="bg-surface-container-lowest shadow-md p-space-5 border border-border-muted flex flex-col items-center justify-center">
+<div class="aspect-square w-full bg-surface-container mb-space-4 overflow-hidden relative group">
+<img alt="" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMNk-PWd_xfWjNGGROHOk7vm2v1lgk0VC6Za1BGDaY9rNutKdaEuAa1cIK7knnR-_NKbAFw7oOlC2deFtxvFL7pHtAHWk7xFvin1NPFBWpLRckG0fW5Hdu1rcgs6lm5DKibF0Iu3yZJ9B1lJAk9tbJyZxNWEa06wcWlcRw0C3slOBSsQSFoDCm-U5qvSWrmA-E-kthv5IfhP8dbZd4JPTtIT-odycI5qoIcW82I2S9CAoaoAe0-UrFntPmAt9KEWCZbCGx0s3q2M0O">
+<div class="absolute inset-0 bg-gradient-to-t from-room-records/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<h5 class="font-headline-h4 text-headline-h4 text-ink-primary text-center leading-tight">Precision Documentation</h5>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-space-7">
+<!-- Left Column -->
+<div class="space-y-space-7">
+<!-- Video Preview Area -->
+<section class="bg-black aspect-video relative flex items-center justify-center group cursor-pointer shadow-lg">
+<img alt="Training Preview" class="absolute inset-0 w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0HPkaClkyDU23iS-cmP-GuSB9QyDH_v46ygrzkm-SV_wDI1nCDfGbmawoHmWXm9Zj2O3f3eZvtK4Y7-QpFsu-L-NAf9vLBBAeW9BhfpibzNeOlGNU4zspoUlBSUM6qtrbJCTAcw5mhjbLNVogIj26ZNUVp0rhhq95tqduig5vaehDQ6ACj1Of_kSznH3hSIatnkuZVf1vXe2L-BTaAooU08XDTQ2543Ro85IDj1lHO2xVbe_HP_0M16TJm8Z656uvfF3Or0paBaWB">
+<div class="relative z-10 flex flex-col items-center">
+<div class="w-20 h-20 bg-room-records/90 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl">play_arrow</span>
+</div>
+<span class="mt-4 text-white font-headline-h4 drop-shadow-md">Watch Introduction Video</span>
+</div>
+<div class="absolute bottom-4 left-4 bg-black/50 backdrop-blur-sm px-3 py-1 text-white text-label-caps flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                        Overview Training Module
+                    </div>
+</section>
+<!-- Progress Tracker -->
+<section class="bg-surface-container-lowest p-space-5 shadow-sm border border-border-muted">
+<div class="flex justify-between items-center mb-space-3">
+<h3 class="font-headline-h4 text-headline-h4 text-ink-primary">Room Completion</h3>
+<span class="font-ui-text text-ui-text text-room-records font-bold">0/5 Modules</span>
+</div>
+<div class="w-full h-3 bg-border-muted overflow-hidden">
+<div class="h-full bg-room-records transition-all duration-1000" style="width: 12%"></div>
+</div>
+<p class="mt-space-2 font-body-sm text-body-sm text-on-surface-variant italic">Next up: Patient Charting Basics</p>
+</section>
+<!-- Module Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-5">
+<!-- Module 1 -->
+<div class="perspective-pop">
+<div class="room-card-inner bg-surface-container-lowest shadow-sm border-l-4 border-room-records p-space-5 cursor-pointer h-full">
+<div class="flex justify-between mb-space-4">
+<span class="material-symbols-outlined text-room-records bg-room-records/10 p-2">clinical_notes</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">45 MINS</span>
+</div>
+<h4 class="font-headline-h3 text-headline-h3 text-ink-primary mb-space-2">Patient Charting Basics</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-4">Foundational principles for accurate, timely, and complete medical documentation across care settings.</p>
+<button class="bg-room-records text-white px-space-4 py-space-2 font-ui-text text-ui-text hover:brightness-110 transition-all flex items-center gap-2">
+                                Enter Module
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="perspective-pop">
+<div class="room-card-inner bg-surface-container-lowest shadow-sm border-l-4 border-room-records p-space-5 cursor-pointer h-full">
+<div class="flex justify-between mb-space-4">
+<span class="material-symbols-outlined text-room-records bg-room-records/10 p-2">enhanced_encryption</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant">60 MINS</span>
+</div>
+<h4 class="font-headline-h3 text-headline-h3 text-ink-primary mb-space-2">Digital Record Security</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-4">Advanced protocols for navigating EHR systems while maintaining the highest cybersecurity standards.</p>
+<button class="bg-room-records text-white px-space-4 py-space-2 font-ui-text text-ui-text hover:brightness-110 transition-all flex items-center gap-2">
+                                Enter Module
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="perspective-pop md:col-span-2">
+<div class="room-card-inner bg-surface-container-lowest shadow-sm border-l-4 border-room-records p-space-6 cursor-pointer flex flex-col md:flex-row gap-space-6 items-center">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-space-2 text-room-records">
+<span class="material-symbols-outlined">share_reviews</span>
+<span class="text-label-caps font-label-caps">Core Competency</span>
+</div>
+<h4 class="font-headline-h3 text-headline-h3 text-ink-primary mb-space-2">Release of Information</h4>
+<p class="font-body-base text-body-base text-on-surface-variant">Mastering the legal framework for patient information sharing, consent forms, and public health reporting requirements.</p>
+</div>
+<div class="w-full md:w-auto">
+<button class="w-full md:w-auto bg-room-records text-white px-space-6 py-space-3 font-ui-text text-ui-text hover:brightness-110 transition-all">Start Module</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column Sidebar -->
+<aside class="space-y-space-6">
+<!-- Host/Instructor Card - Prominent Display -->
+<div class="bg-white shadow-md p-space-5 border-t-4 border-room-records flex flex-col items-center text-center">
+<div class="w-32 h-32 rounded-full overflow-hidden bg-surface-container mb-space-4 border-4 border-surface-container-high ring-2 ring-room-records ring-offset-2">
+<img alt="Elena Vance" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX-FQlOVD_5fRrQwmMGs71PcC5zsNWraNYCBCh1tYQ55EuwfSODkCOJYQ8RtQa4Wj3tZG1DOPRmKgjm-vrgxsFXBlUHFm6vEbc_U4PrQXx2vwhAlzPTq_-J4qS_7wtbgitpn_2iF-toACNZ3Uh6bxJQrwPhMoVCNj_BsWwoiisqco1QuyeZSjhfmfYY2RW1mmSXSVeE8b7eWPHE0bfOiQMw7t4AW0xb82A0N7fAaUTZVVAMX1uw6vkCstm892rVLon_eCIOvSug6vz">
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-room-records tracking-widest mb-1">CHIEF ARCHIVIST &amp; HOST</p>
+<h6 class="font-headline-h3 text-headline-h3 text-ink-primary">Elena Vance</h6>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 leading-relaxed">Expert in clinical data integrity with 15+ years in healthcare management.</p>
+<button class="mt-4 text-room-records font-ui-text text-ui-text hover:underline flex items-center gap-1 mx-auto">
+<span class="material-symbols-outlined text-sm">mail</span> Contact Instructor
+                        </button>
+</div>
+</div>
+<!-- Quick Tools -->
+<div class="bg-surface-container-high p-space-5 shadow-sm">
+<h5 class="font-label-caps text-label-caps text-ink-primary mb-space-3">Quick Resources</h5>
+<ul class="space-y-space-3">
+<li><a class="flex items-center gap-3 font-ui-text text-ui-text text-on-surface-variant hover:text-room-records transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">description</span> HIPAA Cheat Sheet</a></li>
+<li><a class="flex items-center gap-3 font-ui-text text-ui-text text-on-surface-variant hover:text-room-records transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">verified</span> Credential Standards</a></li>
+<li><a class="flex items-center gap-3 font-ui-text text-ui-text text-on-surface-variant hover:text-room-records transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">help</span> Ask a Specialist</a></li>
+</ul>
+</div>
+<!-- Quote Box -->
+<div class="bg-room-records/5 p-space-5 border-l-4 border-room-records">
+<span class="material-symbols-outlined text-room-records/40 text-4xl leading-none">format_quote</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant italic mt-2">"Accurate records are the backbone of clinical excellence and patient safety."</p>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-tertiary w-full py-space-6 px-space-5 flex flex-col md:flex-row justify-between items-center max-w-content-max mx-auto border-t border-border-muted mt-space-9">
+<div class="flex flex-col gap-2 mb-6 md:mb-0">
+<span class="font-headline-h4 text-headline-h4 text-on-surface dark:text-on-tertiary">Healthcare Training Center</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container">© 2024 Healthcare Training Center. Empowering professionals through immersive education.</p>
+</div>
+<div class="flex flex-wrap gap-space-5 justify-center md:justify-end">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Compliance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all opacity-80 hover:opacity-100 font-bold" href="#">HIPAA Statement</a>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.perspective-pop');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.zIndex = '10';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.zIndex = '1';
+                });
+            });
+
+            // Smooth progress bar animation simulation
+            setTimeout(() => {
+                const bar = document.querySelector('.bg-room-records.transition-all');
+                if (bar) bar.style.width = '24%'; // Simulate partial completion for visual interest
+            }, 500);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Training Center — Brand Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f4f6f9 0%, #faf7f2 100%);
+            color: #1E3A6E;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2B8FA9;
+            margin-bottom: 8px;
+        }
+
+        .mission {
+            font-size: 16px;
+            color: #64748B;
+            font-style: italic;
+        }
+
+        .intro {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 4px solid #2B8FA9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .intro h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1E3A6E;
+        }
+
+        .intro p {
+            line-height: 1.8;
+            color: #475569;
+            margin-bottom: 12px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 300ms ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        .resource-header {
+            padding: 32px 24px;
+            color: white;
+            text-align: center;
+            font-size: 48px;
+        }
+
+        .resource-header.guide {
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+        }
+
+        .resource-header.email {
+            background: linear-gradient(135deg, #3B7DD8 0%, #2B8FA9 100%);
+        }
+
+        .resource-header.social {
+            background: linear-gradient(135deg, #2B8FA9 0%, #2EAA6E 100%);
+        }
+
+        .resource-header.presentation {
+            background: linear-gradient(135deg, #2EAA6E 0%, #7B5EA7 100%);
+        }
+
+        .resource-header.icons {
+            background: linear-gradient(135deg, #7B5EA7 0%, #D4A017 100%);
+        }
+
+        .resource-header.skill {
+            background: linear-gradient(135deg, #D4A017 0%, #3B7DD8 100%);
+        }
+
+        .resource-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1E3A6E;
+        }
+
+        .resource-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #64748B;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .resource-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .resource-features li {
+            padding: 4px 0;
+            color: #475569;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .resource-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #2B8FA9;
+            font-weight: 700;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: #1E3A6E;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: background 200ms ease-in-out;
+            align-self: flex-start;
+        }
+
+        .resource-link:hover {
+            background: #142550;
+        }
+
+        .resource-link.secondary {
+            background: #2B8FA9;
+        }
+
+        .resource-link.secondary:hover {
+            background: #1a5a73;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+            color: #1E3A6E;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #2B8FA9;
+        }
+
+        .quick-links {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid #D4A017;
+        }
+
+        .quick-links h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1E3A6E;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .quick-link {
+            background: #F4F6F9;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #1E3A6E;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 200ms ease-in-out;
+            text-align: center;
+            border: 1px solid transparent;
+        }
+
+        .quick-link:hover {
+            background: white;
+            border-color: #2B8FA9;
+            color: #2B8FA9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #64748B;
+            font-size: 13px;
+            border-top: 1px solid #D0D8E8;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        .footer-tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #2B8FA9;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 36px; }
+            .tagline { font-size: 18px; }
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            .intro {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="logo">Healthcare Training Center</div>
+            <div class="tagline">Step Inside. Step Up.</div>
+            <div class="mission">Learn. Grow. Make a Difference.</div>
+        </header>
+
+        <!-- INTRO -->
+        <div class="intro">
+            <h2>Welcome to the Brand Hub</h2>
+            <p>
+                This is your central home for all Healthcare Training Center branding, design templates, and resources.
+                Everything you need to create consistent, on-brand materials is here — ready to use, customize, and share.
+            </p>
+            <p>
+                Open any file below to get started. All files work offline, locally, and can be shared with design tools like Canva and Adobe.
+            </p>
+        </div>
+
+        <!-- PRIMARY RESOURCES -->
+        <div style="margin-bottom: 80px;">
+            <h2 class="section-title">Core Resources</h2>
+            <div class="resources-grid">
+                <!-- BRAND GUIDE -->
+                <div class="resource-card">
+                    <div class="resource-header guide">🎨</div>
+                    <div class="resource-body">
+                        <h3 class="resource-title">Brand Guide</h3>
+                        <p class="resource-description">
+                            Complete visual walkthrough of the brand system. Colors, typography, components, icons, and usage guidelines.
+                        </p>
+                        <ul class="resource-features">
+                            <li>Color swatches (primary + five rooms)</li>
+                            <li>Typography samples</li>
+                            <li>Component library</li>
+                            <li>Voice & tone guidelines</li>
+                        </ul>
+                        <a href="BRAND-GUIDE.html" class="resource-link">Open Brand Guide</a>
+                    </div>
+                </div>
+
+                <!-- EMAIL TEMPLATE -->
+                <div class="resource-card">
+                    <div class="resource-header email">📧</div>
+                    <div class="resource-body">
+                        <h3 class="resource-title">Email Template</h3>
+                        <p class="resource-description">
+                            Professional, ready-to-use email design for campaigns, announcements, and updates.
+                        </p>
+                        <ul class="resource-features">
+                            <li>Course announcements</li>
+                            <li>Room launches</li>
+                            <li>Training reminders</li>
+                            <li>Customizable copy</li>
+                        </ul>
+                        <a href="TEMPLATES-email.html" class="resource-link secondary">Open Email Template</a>
+                    </div>
+                </div>
+
+                <!-- SOCIAL TEMPLATES -->
+                <div class="resource-card">
+                    <div class="resource-header social">📱</div>
+                    <div class="resource-body">
+                        <h3 class="resource-title">Social Media Templates</h3>
+                        <p class="resource-description">
+                            LinkedIn, Instagram, and Twitter post templates with copy examples and posting tips.
+                        </p>
+                        <ul class="resource-features">
+                            <li>LinkedIn posts (1200×627px)</li>
+                            <li>Instagram posts & stories</li>
+                            <li>Twitter/X posts</li>
+                            <li>6 copy examples</li>
+                        </ul>
+                        <a href="TEMPLATES-social.html" class="resource-link secondary">Open Social Templates</a>
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #D0D8E8;">
+                            <a href="SOCIAL-MEDIA-GUIDE-DETAILED.html" class="resource-link secondary" style="background: #D4A017; font-size: 12px;">📖 Beginner's Guide (Step-by-Step)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRESENTATION TEMPLATE -->
+                <div class="resource-card">
+                    <div class="resource-header presentation">🎤</div>
+                    <div class="resource-body">
+                        <h3 class="resource-title">Presentation & Documents</h3>
+                        <p class="resource-description">
+                            Slide deck templates and document header formats for presentations, reports, and materials.
+                        </p>
+                        <ul class="resource-features">
+                            <li>Slide templates (5 types)</li>
+                            <li>Document headers</li>
+                            <li>Design guidelines</li>
+                            <li>Export tips</li>
+                        </ul>
+                        <a href="TEMPLATES-presentation.html" class="resource-link secondary">Open Presentation Templates</a>
+                    </div>
+                </div>
+
+                <!-- ICON LIBRARY -->
+                <div class="resource-card">
+                    <div class="resource-header icons">🎨</div>
+                    <div class="resource-body">
+                        <h3 class="resource-title">Icon Library</h3>
+                        <p class="resource-description">
+                            Complete reference for all Phosphor icons used in the brand. JSON data format for easy lookup.
+                        </p>
+                        <ul class="resource-features">
+                            <li>Room icons (5 colors)</li>
+                            <li>UI icons (home, bell, etc.)</li>
+                            <li>State indicators</li>
+                            <li>Usage rules & sizing</li>
+                        </ul>
+                        <a href="ICON-LIBRARY.json" class="resource-link secondary">Open Icon Library</a>
+                    </div>
+                </div>
+
+                <!-- DESIGN SKILL -->
+                <div class="resource-card">
+                    <div class="resource-header skill">⚡</div>
+                    <div class="resource-body">
+                        <h3 class="resource-title">Design Skill (Quick Ref)</h3>
+                        <p class="resource-description">
+                            Cheat sheet for designers and developers. Color codes, typography, spacing, buttons, and common decisions.
+                        </p>
+                        <ul class="resource-features">
+                            <li>All color codes</li>
+                            <li>Typography specs</li>
+                            <li>Spacing grid</li>
+                            <li>Accessibility rules</li>
+                        </ul>
+                        <a href="SKILL.md" class="resource-link secondary">Open Design Skill</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div class="quick-links">
+            <h3>📚 Documentation & Reference</h3>
+            <div class="quick-links-grid">
+                <a href="BRAND-KIT-README.md" class="quick-link">Brand Kit Overview</a>
+                <a href="design-system-spec.md" class="quick-link">Full Design Spec (v1.0)</a>
+                <a href="Healthcare Training Center Design System/" class="quick-link">Design System Folder</a>
+            </div>
+        </div>
+
+        <!-- GETTING STARTED -->
+        <div style="background: white; padding: 40px; border-radius: 12px; margin-bottom: 60px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 4px solid #28A745;">
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 20px; color: #1E3A6E;">🚀 Getting Started</h3>
+            <p style="margin-bottom: 12px; color: #475569; line-height: 1.6;">
+                <strong>For a quick overview:</strong> Start with the Brand Guide — it's a visual walkthrough of everything.
+            </p>
+            <p style="margin-bottom: 12px; color: #475569; line-height: 1.6;">
+                <strong>For marketing materials:</strong> Use the Email, Social, and Presentation templates as starting points. Customize the copy and you're done.
+            </p>
+            <p style="margin-bottom: 12px; color: #475569; line-height: 1.6;">
+                <strong>For design decisions:</strong> Keep the Design Skill open as a reference. It has color codes, spacing rules, and common Q&As.
+            </p>
+            <p style="color: #475569; line-height: 1.6;">
+                <strong>For uploading to AI tools:</strong> Screenshot key sections from the Brand Guide, copy color codes and typography specs into your prompts, reference icon names from the Icon Library.
+            </p>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p><strong>Healthcare Training Center — Brand Hub</strong></p>
+            <p>Design System v1.0 | Created June 2026</p>
+            <p style="margin-top: 20px; opacity: 0.7; font-size: 12px;">All files are ready to use locally, offline, and with design tools like Canva, Adobe, and Figma.</p>
+            <p class="footer-tagline">Step Inside. Step Up. ✨</p>
+        </footer>
+    </div>
+</body>
+</html>

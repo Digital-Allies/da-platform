@@ -1,0 +1,334 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Finance Training Room | Healthcare Training Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Montserrat:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#474743",
+                        "surface-bright": "#f7f9fc",
+                        "secondary-fixed-dim": "#79d3ef",
+                        "on-background": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "on-surface-variant": "#44474f",
+                        "room-hipaa": "#2BA89A",
+                        "inverse-primary": "#aec6ff",
+                        "room-cs": "#3B7DD8",
+                        "ink-primary": "#16243D",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-error-container": "#93000a",
+                        "info": "#17A2B8",
+                        "border-muted": "#D0D8E8",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#445d94",
+                        "background": "#f7f9fc",
+                        "error": "#DC3545",
+                        "primary-fixed-dim": "#aec6ff",
+                        "tertiary": "#262623",
+                        "on-surface": "#191c1e",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#8ca5e0",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6d1",
+                        "on-tertiary": "#ffffff",
+                        "room-records": "#7B5EA7",
+                        "surface": "#f7f9fc",
+                        "success": "#28A745",
+                        "on-secondary-container": "#006479",
+                        "on-primary-fixed-variant": "#2b467a",
+                        "on-secondary-fixed": "#001f27",
+                        "room-finance": "#D4A017",
+                        "tertiary-container": "#3c3c39",
+                        "on-primary": "#ffffff",
+                        "warning": "#FFC107",
+                        "on-tertiary-container": "#a8a6a2",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-dim": "#d8dadd",
+                        "inverse-on-surface": "#eff1f4",
+                        "error-container": "#ffdad6",
+                        "outline": "#747780",
+                        "primary": "#002357",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-variant": "#e0e3e6",
+                        "secondary-container": "#88e1fd",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "room-compliance": "#2EAA6E",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed": "#001a43",
+                        "surface-container-high": "#e6e8eb",
+                        "secondary": "#00677d",
+                        "primary-container": "#1e3a6e",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#e0e3e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-8": "64px",
+                        "space-6": "32px",
+                        "space-1": "4px",
+                        "content-max": "1280px",
+                        "space-7": "48px",
+                        "base": "8px",
+                        "space-9": "96px",
+                        "space-5": "24px",
+                        "space-2": "8px",
+                        "space-4": "16px",
+                        "space-3": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-h3": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "body-base": ["Inter"],
+                        "accent-serif": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "headline-h2": ["Montserrat"],
+                        "headline-h1": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "ui-text": ["Inter"],
+                        "headline-h4": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-h3": ["22px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "accent-serif": ["19px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+                        "headline-h2": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "headline-h1": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "ui-text": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-h4": ["18px", {"lineHeight": "22px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        .perspective-container {
+            perspective: 1200px;
+        }
+        
+        .room-entrance-effect {
+            transform: perspective(900px) rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .finance-gradient {
+            background: linear-gradient(135deg, #D4A017 0%, #B8860B 100%);
+        }
+
+        .hover-lift {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(212, 160, 23, 0.1), 0 4px 6px -2px rgba(212, 160, 23, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-space-5 h-16 max-w-content-max mx-auto bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-space-4">
+<span class="font-headline-h4 text-headline-h4 text-primary dark:text-primary-fixed tracking-tight">Healthcare Training Center</span>
+</div>
+<nav class="hidden md:flex items-center gap-space-6">
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Lobby</a>
+<a class="font-ui-text text-ui-text text-primary dark:text-secondary-fixed border-b-2 border-primary dark:border-secondary-fixed pb-1" href="#">My Progress</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Live Classes</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-space-3">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-room-finance/30 w-64 text-body-sm transition-all" placeholder="Search curriculum..." type="text">
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors scale-95 active:scale-90">
+<span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-16 px-space-5 max-w-content-max mx-auto">
+<!-- Breadcrumb & Header Title -->
+<div class="mb-space-6 flex items-center gap-2 text-body-sm text-on-surface-variant">
+<a class="hover:text-room-finance transition-colors" href="#">Curriculum</a>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+<span class="text-room-finance font-semibold">Finance &amp; Revenue Cycle</span>
+</div>
+<div class="flex flex-col lg:flex-row gap-space-7">
+<!-- Left Side: Training Room Main View -->
+<div class="flex-1">
+<!-- Hero Section with Background Backdrop -->
+<div class="relative rounded-xl overflow-hidden mb-space-7 shadow-md aspect-[21/9] group">
+<img alt="Finance Training Room" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg0NyBnsd4GxTrSOSDPYfBJk21RmSH36A-DCVQwo35uuFpheMLQqC-nYrbzeRmhkP5YotIAbOi0vnpcBInXIbgOteOuFw1SUkBDGdJ-WHxuKrp_DQO6K2ErmL6XH35z3QlpEsQX7-4qkO6dDyX1fEI9FkqhWK8Nj0qQc2OrGxqD8VDEiBZhvDlO73qJKE_3G84vlO5dMU-xu_sGQzm7Hl9xHtyIfXgMmKUBhU4_VlqNv7PYGy2W9I5dCymvqAdoIOVrDYM-o84Tzbu">
+<div class="absolute inset-0 bg-gradient-to-r from-ink-primary/80 to-transparent flex flex-col justify-end p-space-6">
+<div class="bg-room-finance text-white px-3 py-1 rounded-full text-label-caps w-fit mb-3">ROOM 05</div>
+<h1 class="font-headline-h1 text-headline-h1 text-white mb-2">Finance Training</h1>
+<p class="text-white/80 max-w-xl text-body-lg">Mastering the intersection of clinical excellence and fiscal responsibility in the modern healthcare landscape.</p>
+</div>
+</div>
+<!-- Learning Modules Grid -->
+<div class="space-y-space-4">
+<div class="flex justify-between items-end mb-space-4">
+<h2 class="font-headline-h2 text-headline-h2 text-primary">Core Curriculum</h2>
+<div class="text-body-sm text-on-surface-variant">
+<span class="font-bold text-room-finance">4 of 8</span> modules completed
+                        </div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-3 bg-border-muted rounded-full overflow-hidden mb-space-6">
+<div class="h-full bg-room-finance rounded-full" style="width: 50%"></div>
+</div>
+<!-- Modules List (Bento-ish Layout) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-4">
+<!-- Module 1: Value-Based Care -->
+<div class="p-space-5 bg-white rounded-xl border border-border-muted hover-lift cursor-pointer flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-room-finance p-3 bg-room-finance/10 rounded-lg">payments</span>
+<span class="material-symbols-outlined text-success">check_circle</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 mb-2">Value-Based Care</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Understanding quality-driven reimbursement models and patient outcomes.</p>
+</div>
+<button class="w-full py-2 bg-surface-container-high text-on-surface-variant font-ui-text rounded-lg hover:bg-room-finance hover:text-white transition-all">Review Content</button>
+</div>
+<!-- Module 2: Optimizing Documentation -->
+<div class="p-space-5 bg-white rounded-xl border border-border-muted hover-lift cursor-pointer flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-room-finance p-3 bg-room-finance/10 rounded-lg">description</span>
+<span class="material-symbols-outlined text-success">check_circle</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 mb-2">Optimizing Documentation</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Linking clinical precision with accurate coding for optimal revenue cycle performance.</p>
+</div>
+<button class="w-full py-2 bg-surface-container-high text-on-surface-variant font-ui-text rounded-lg hover:bg-room-finance hover:text-white transition-all">Review Content</button>
+</div>
+<!-- Module 3: Billing Ethics -->
+<div class="p-space-5 bg-white rounded-xl border-2 border-room-finance/30 hover-lift cursor-pointer relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2">
+<span class="bg-room-finance text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">UP NEXT</span>
+</div>
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-room-finance p-3 bg-room-finance/10 rounded-lg">gavel</span>
+<span class="text-room-finance text-label-caps">IN PROGRESS</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 mb-2">Billing Ethics</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Navigating compliance, transparency, and integrity in medical billing practices.</p>
+<button class="w-full py-2 bg-room-finance text-white font-ui-text rounded-lg hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                                Resume Module <span class="material-symbols-outlined text-sm">play_arrow</span>
+</button>
+</div>
+<!-- Module 4: Future Tracks -->
+<div class="p-space-5 bg-surface-container-low rounded-xl border border-dashed border-border-muted opacity-80">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-outline p-3 bg-surface-container-high rounded-lg">lock</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 mb-2 text-on-surface-variant">Revenue Forecasting</h3>
+<p class="text-body-sm text-on-surface-variant mb-4">Advanced modules unlocking after completion of Ethics track.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Metadata & Instructor -->
+<aside class="w-full lg:w-[320px] space-y-space-6">
+<!-- Instructor Card -->
+<div class="bg-white rounded-xl p-space-5 shadow-sm border border-border-muted text-center">
+<div class="relative w-32 h-32 mx-auto mb-4">
+<img alt="Elena Vance" class="w-full h-full object-cover rounded-full border-4 border-room-finance/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg0ZZ-4Y-4nJ7VZZuo7FzrvqaigVVMEerm77Z_uoYIWcAz-dhbtiteIiDVNuD4Jy19zd2--PxtTKF87mrSQAJ8ViMOJxnv-RbW0flYffXd2eCtn2EbNDLG4xiQlNF0y42uAP4x-mn5aXaoxIxOxZtf5_aSReu-6f3CzQIVagrpT3JpAXNMHXljjf5Kt9C5n7xW2EDJJvRLPrlJg8dvM0Ej2yBiTXn93rSaw7nHSV3VK0IUEgq8MDgntxVwv7C3cMw5P0B3v2xSMTgJ">
+<div class="absolute bottom-1 right-1 w-6 h-6 bg-success rounded-full border-4 border-white"></div>
+</div>
+<h4 class="font-headline-h4 text-headline-h4 text-primary">Elena Vance</h4>
+<p class="text-body-sm text-room-finance font-medium mb-4">Chief Revenue Officer</p>
+<div class="bg-surface-container-low rounded-lg p-3 text-left">
+<p class="text-[11px] font-bold text-outline uppercase tracking-wider mb-1">Instructor Mode</p>
+<p class="text-body-sm text-on-surface-variant">"Our focus is value, accountability, and sustainable revenue models."</p>
+</div>
+<button class="w-full mt-4 py-2 text-room-finance border border-room-finance rounded-lg font-ui-text hover:bg-room-finance/5 transition-all">Send Inquiry</button>
+</div>
+<!-- Strategic Focus Card -->
+<div class="bg-primary-container p-space-5 rounded-xl text-on-primary-container relative overflow-hidden group">
+<div class="absolute -right-8 -bottom-8 opacity-10 group-hover:scale-110 transition-transform duration-500">
+<img alt="Finance Room Icon" class="w-32 h-32 rotate-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvsemq8DeJEWwnvFCNrj4Wwf3fTSXDgDlvpGKw493zLIBq56clpg5p5jEN1DFKY0TpLoMTbA59ml_1adX_I0Kj2Pk-yV8gUf9r8Hjm55j6zZ94xp04QDq_m7ahFvXE7mTWdV8flQnKx9HHUgbZZs8iIsxvWqkqfpSN_uq8KWF4Xg6WcOV8V03j_ZxQW2nwSm96Jf29hOtUkwD-aJGXsUfUZboiabeZrZBQKClNL1zNbJ5j7TVFsR_8C4qhb9qgChhd4f8Qeh4f-DGT">
+</div>
+<h5 class="font-headline-h4 text-headline-h4 mb-3">Strategic Pillars</h5>
+<ul class="space-y-3">
+<li class="flex items-center gap-3 text-body-sm">
+<span class="material-symbols-outlined text-room-finance text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+                            Value Optimization
+                        </li>
+<li class="flex items-center gap-3 text-body-sm">
+<span class="material-symbols-outlined text-room-finance text-lg" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+                            Accountability
+                        </li>
+<li class="flex items-center gap-3 text-body-sm">
+<span class="material-symbols-outlined text-room-finance text-lg" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                            Sustainable Revenue
+                        </li>
+</ul>
+</div>
+<!-- Quick Stats -->
+<div class="grid grid-cols-2 gap-space-4">
+<div class="bg-white p-4 rounded-xl border border-border-muted text-center">
+<div class="text-headline-h3 font-bold text-primary">12.5</div>
+<div class="text-[10px] font-bold text-on-surface-variant uppercase">CE Credits</div>
+</div>
+<div class="bg-white p-4 rounded-xl border border-border-muted text-center">
+<div class="text-headline-h3 font-bold text-primary">85%</div>
+<div class="text-[10px] font-bold text-on-surface-variant uppercase">Avg Quiz Score</div>
+</div>
+</div>
+</aside></div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-space-6 px-space-5 flex flex-col md:flex-row justify-between items-center max-w-content-max mx-auto bg-surface-container-highest dark:bg-tertiary">
+<div class="mb-4 md:mb-0">
+<h6 class="font-headline-h4 text-headline-h4 text-on-surface dark:text-on-tertiary">Healthcare Training Center</h6>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container mt-2">© 2024 Healthcare Training Center. Empowering professionals through immersive education.</p>
+</div>
+<div class="flex gap-space-5">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Compliance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">HIPAA Statement</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for hover states
+        document.querySelectorAll('.hover-lift').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'var(--room-finance)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = '';
+            });
+        });
+    </script>
+</body></html>

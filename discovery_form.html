@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Training Platform Discovery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Loading Montserrat (Headings) and Inter (Body) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: '#1E3A6E',
+                        teal: '#2B8FA9',
+                        surface: '#F4F6F9',
+                        cream: '#FAF7F2',
+                        accent: {
+                            cs: '#3B7DD8',
+                            hipaa: '#2BA89A',
+                            compliance: '#2EAA6E',
+                            records: '#7B5EA7',
+                            finance: '#D4A017'
+                        }
+                    },
+                    boxShadow: {
+                        'soft-navy': '0 8px 24px rgba(30, 58, 110, 0.08)',
+                        'focus-ring': '0 0 0 3px rgba(43, 143, 169, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F4F6F9; /* Surface */
+            color: #1E3A6E; /* Navy */
+        }
+        
+        /* Custom range slider styling matching Teal brand color */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #2B8FA9; /* Teal */
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 4px 12px rgba(30, 58, 110, 0.15);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        
+        /* Custom Checkbox/Radio styling */
+        input[type="checkbox"], input[type="radio"] {
+            accent-color: #2B8FA9;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-20 selection:bg-teal selection:text-white">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+        <div class="text-center mb-12">
+            <h1 class="font-display text-4xl sm:text-5xl font-extrabold text-navy tracking-tight mb-4">Healthcare Training Center</h1>
+            <p class="font-display text-xl text-teal font-semibold">Project Discovery & Foundation</p>
+            <p class="mt-4 text-base text-navy/70 max-w-2xl mx-auto leading-relaxed">Please fill out this brief questionnaire to help us establish the foundation for your training platform. Your answers will guide the design, technical requirements, and content structure.</p>
+        </div>
+
+        <form action="https://formsubmit.co/acinktown@gmail.com" method="POST" class="space-y-8">
+            <input type="hidden" name="_subject" value="New Discovery Form Submission!">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <div class="bg-white rounded-2xl shadow-soft-navy border border-navy/5 overflow-hidden transition-all hover:shadow-lg">
+                <div class="bg-accent-cs/10 border-b border-accent-cs/20 px-6 py-5 flex items-center gap-3">
+                    <div class="p-2 bg-white rounded-lg shadow-sm">
+                        <svg class="w-6 h-6 text-accent-cs" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h2 class="font-display text-xl font-bold text-navy">Learner & Audience</h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-1">Who are the main learners?</label>
+                        <p class="text-xs text-navy/60 mb-3">e.g., healthcare students, hospital staff, specific departments.</p>
+                        <input type="text" name="Main_Learners" required class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all placeholder:text-navy/30" placeholder="Describe the target audience...">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-1">What's their average comfort level with technology?</label>
+                        <div class="flex items-center gap-4 mt-4">
+                            <span class="text-xs text-navy/60 font-semibold uppercase tracking-wider">Beginner</span>
+                            <div class="flex-1">
+                                <input type="range" name="Tech_Comfort_Level" id="techSlider" min="1" max="10" value="5" oninput="document.getElementById('techOutput').textContent = this.value">
+                            </div>
+                            <span class="text-xs text-navy/60 font-semibold uppercase tracking-wider">Expert</span>
+                            <span class="ml-2 w-10 h-10 rounded-xl bg-accent-cs/10 text-accent-cs font-display font-bold flex items-center justify-center text-lg" id="techOutput">5</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-3">How will they access this platform?</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <label class="flex items-center p-4 border border-navy/10 rounded-xl cursor-pointer hover:bg-surface transition-colors bg-white shadow-sm">
+                                <input type="checkbox" name="Devices[]" value="Phones" class="w-5 h-5 text-teal rounded border-navy/30 focus:ring-teal">
+                                <span class="ml-3 text-sm font-medium text-navy">Phones</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-navy/10 rounded-xl cursor-pointer hover:bg-surface transition-colors bg-white shadow-sm">
+                                <input type="checkbox" name="Devices[]" value="Tablets" class="w-5 h-5 text-teal rounded border-navy/30 focus:ring-teal">
+                                <span class="ml-3 text-sm font-medium text-navy">Tablets</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-navy/10 rounded-xl cursor-pointer hover:bg-surface transition-colors bg-white shadow-sm">
+                                <input type="checkbox" name="Devices[]" value="Desktops" class="w-5 h-5 text-teal rounded border-navy/30 focus:ring-teal">
+                                <span class="ml-3 text-sm font-medium text-navy">Desktops</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-soft-navy border border-navy/5 overflow-hidden transition-all hover:shadow-lg">
+                <div class="bg-accent-hipaa/10 border-b border-accent-hipaa/20 px-6 py-5 flex items-center gap-3">
+                    <div class="p-2 bg-white rounded-lg shadow-sm">
+                        <svg class="w-6 h-6 text-accent-hipaa" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h2 class="font-display text-xl font-bold text-navy">Content & Outcomes</h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">What's the #1 thing learners must know by the end of each course?</label>
+                        <textarea name="Core_Outcome" rows="3" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all resize-y placeholder:text-navy/30" placeholder="Describe the primary learning objective..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-3">Content Status</label>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-4 border border-navy/10 rounded-xl cursor-pointer hover:bg-surface transition-colors bg-white shadow-sm">
+                                <input type="radio" name="Content_Status" value="Existing Content" class="w-5 h-5 text-teal border-navy/30 focus:ring-teal">
+                                <span class="ml-3 text-sm font-medium text-navy">We have existing content (videos, slide decks, documents) to port in.</span>
+                            </label>
+                            <label class="flex items-center p-4 border border-navy/10 rounded-xl cursor-pointer hover:bg-surface transition-colors bg-white shadow-sm">
+                                <input type="radio" name="Content_Status" value="Build from Scratch" class="w-5 h-5 text-teal border-navy/30 focus:ring-teal">
+                                <span class="ml-3 text-sm font-medium text-navy">We need to build the content from scratch.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">How long should a single lesson take?</label>
+                            <select name="Lesson_Duration" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all cursor-pointer">
+                                <option value="Microlearning (< 5 mins)">Microlearning (< 5 mins)</option>
+                                <option value="Short (5-15 mins)">Short (5-15 mins)</option>
+                                <option value="Medium (15-30 mins)">Medium (15-30 mins)</option>
+                                <option value="Long (45+ mins)">Long (45+ mins)</option>
+                                <option value="Flexible">Flexible depending on topic</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Are passing scores required to "unlock" courses?</label>
+                            <select name="Gating_Logic" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all cursor-pointer">
+                                <option value="Yes, strict gating">Yes, strict gating (must pass to proceed)</option>
+                                <option value="No, open navigation">No, flexible/open navigation</option>
+                                <option value="Only for certain modules">Only for certification modules</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-soft-navy border border-navy/5 overflow-hidden transition-all hover:shadow-lg">
+                <div class="bg-accent-compliance/10 border-b border-accent-compliance/20 px-6 py-5 flex items-center gap-3">
+                    <div class="p-2 bg-white rounded-lg shadow-sm">
+                        <svg class="w-6 h-6 text-accent-compliance" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h2 class="font-display text-xl font-bold text-navy">Compliance & Tracking</h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Which compliance frameworks apply?</label>
+                        <p class="text-xs text-navy/60 mb-3">e.g., HIPAA, state-specific mandates, internal standards.</p>
+                        <input type="text" name="Compliance_Frameworks" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all placeholder:text-navy/30" placeholder="List any specific compliance rules...">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">What data must be tracked?</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-2 rounded hover:bg-surface cursor-pointer">
+                                    <input type="checkbox" name="Tracking[]" value="Completion" class="w-4 h-4 text-teal rounded border-navy/30 focus:ring-teal">
+                                    <span class="ml-3 text-sm text-navy">Course Completion</span>
+                                </label>
+                                <label class="flex items-center p-2 rounded hover:bg-surface cursor-pointer">
+                                    <input type="checkbox" name="Tracking[]" value="Test Scores" class="w-4 h-4 text-teal rounded border-navy/30 focus:ring-teal">
+                                    <span class="ml-3 text-sm text-navy">Test/Quiz Scores</span>
+                                </label>
+                                <label class="flex items-center p-2 rounded hover:bg-surface cursor-pointer">
+                                    <input type="checkbox" name="Tracking[]" value="Time Spent" class="w-4 h-4 text-teal rounded border-navy/30 focus:ring-teal">
+                                    <span class="ml-3 text-sm text-navy">Time Spent on Modules</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Who needs access to this data?</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-2 rounded hover:bg-surface cursor-pointer">
+                                    <input type="checkbox" name="Data_Access[]" value="Admins Only" class="w-4 h-4 text-teal rounded border-navy/30 focus:ring-teal">
+                                    <span class="ml-3 text-sm text-navy">Admins Only</span>
+                                </label>
+                                <label class="flex items-center p-2 rounded hover:bg-surface cursor-pointer">
+                                    <input type="checkbox" name="Data_Access[]" value="Managers" class="w-4 h-4 text-teal rounded border-navy/30 focus:ring-teal">
+                                    <span class="ml-3 text-sm text-navy">Department Managers</span>
+                                </label>
+                                <label class="flex items-center p-2 rounded hover:bg-surface cursor-pointer">
+                                    <input type="checkbox" name="Data_Access[]" value="External Auditors" class="w-4 h-4 text-teal rounded border-navy/30 focus:ring-teal">
+                                    <span class="ml-3 text-sm text-navy">External Auditors</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-soft-navy border border-navy/5 overflow-hidden transition-all hover:shadow-lg">
+                <div class="bg-accent-finance/10 border-b border-accent-finance/20 px-6 py-5 flex items-center gap-3">
+                    <div class="p-2 bg-white rounded-lg shadow-sm">
+                        <svg class="w-6 h-6 text-accent-finance" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
+                    <h2 class="font-display text-xl font-bold text-navy">Virtual Teachers & Character</h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Do you have a persona in mind for the teacher?</label>
+                        <p class="text-xs text-navy/60 mb-3">e.g., Friendly mentor, Clinical expert, Approachable nurse.</p>
+                        <input type="text" name="Teacher_Persona" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all placeholder:text-navy/30" placeholder="Describe the ideal virtual teacher...">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Preferred Tone</label>
+                            <select name="Teacher_Tone" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all cursor-pointer">
+                                <option value="Professional & Clinical">Professional & Clinical</option>
+                                <option value="Warm & Approachable">Warm & Approachable</option>
+                                <option value="Motivational & Energetic">Motivational & Energetic</option>
+                                <option value="Mix of above">Mix of above depending on module</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Visual Format</label>
+                            <select name="Teacher_Format" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all cursor-pointer">
+                                <option value="Visual Avatar + Voice">Visual Avatar + Voice</option>
+                                <option value="Voiceover Only (over slides)">Voiceover Only (over slides)</option>
+                                <option value="Text Only (Chatbot style)">Text Only (Chatbot style)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-soft-navy border border-navy/5 overflow-hidden transition-all hover:shadow-lg">
+                <div class="bg-accent-records/10 border-b border-accent-records/20 px-6 py-5 flex items-center gap-3">
+                    <div class="p-2 bg-white rounded-lg shadow-sm">
+                        <svg class="w-6 h-6 text-accent-records" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h2 class="font-display text-xl font-bold text-navy">Business & Timeline</h2>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Target Launch Date</label>
+                            <input type="date" name="Launch_Date" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all cursor-pointer">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Platform Access Model</label>
+                            <select name="Access_Model" class="w-full rounded-xl border border-navy/20 px-4 py-3 text-navy bg-surface/50 focus:bg-white focus:border-teal focus:ring-4 focus:ring-teal/20 outline-none transition-all cursor-pointer">
+                                <option value="Internal Requirement (Free for staff)">Internal Requirement (Free for staff)</option>
+                                <option value="Paid Subscription / B2B">Paid Subscription / B2B</option>
+                                <option value="One-off Course Sales (B2C)">One-off Course Sales (B2C)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6">
+                <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-teal hover:bg-navy text-white font-display font-bold text-lg rounded-xl shadow-soft-navy hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 group">
+                    <span>Submit Discovery Form</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                <p class="mt-4 text-sm text-navy/50 text-center sm:text-left">By submitting this form, you help us map out the technical and design requirements for the platform.</p>
+            </div>
+            
+        </form>
+    </div>
+
+</body>
+</html>

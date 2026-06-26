@@ -1,0 +1,116 @@
+.auth {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-teal) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+}
+
+.auth__container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.auth__content {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+}
+
+.auth__hero {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.auth__icon {
+  font-size: 4rem;
+  display: inline-block;
+}
+
+.auth__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-h2);
+  color: var(--color-navy);
+  margin: 0 0 var(--space-2) 0;
+  text-align: center;
+}
+
+.auth__subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--fg-2);
+  margin: 0 0 var(--space-6) 0;
+  text-align: center;
+}
+
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.auth__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.auth__label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-body-sm);
+  color: var(--fg-1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.auth__input {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-page);
+  color: var(--fg-1);
+  transition: all var(--motion-base);
+}
+
+.auth__input:focus {
+  outline: none;
+  border-color: var(--color-teal);
+  box-shadow: var(--shadow-focus);
+}
+
+.auth__input::placeholder {
+  color: var(--fg-3);
+}
+
+.auth__divider {
+  text-align: center;
+  color: var(--fg-3);
+  margin: var(--space-5) 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+}
+
+.auth__footer {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--text-body-sm);
+  color: var(--fg-3);
+  margin: var(--space-5) 0 0 0;
+}
+
+@media (max-width: 640px) {
+  .auth__content {
+    padding: var(--space-5);
+  }
+
+  .auth__title {
+    font-size: var(--text-h3);
+  }
+}
