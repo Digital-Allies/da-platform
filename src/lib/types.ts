@@ -98,9 +98,11 @@ export interface SiteSettings {
   address: string
   brand_color: string
   logo_url: string
+  favicon_url: string
   instagram_url: string
   facebook_url: string
   linkedin_url: string
+  twitter_url: string
   hero_title: string
   hero_subtitle: string
   hero_cta_text: string
@@ -120,9 +122,11 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   address: '',
   brand_color: '#1A6B8A',
   logo_url: '',
+  favicon_url: '',
   instagram_url: '',
   facebook_url: '',
   linkedin_url: '',
+  twitter_url: '',
   hero_title: 'Welcome',
   hero_subtitle: '',
   hero_cta_text: 'Get in touch',

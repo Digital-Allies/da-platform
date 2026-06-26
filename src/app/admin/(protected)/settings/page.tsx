@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Save } from 'lucide-react'
+import { Save, Upload } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { DEFAULT_SETTINGS, type SiteSettings } from '@/lib/types'
 
@@ -26,7 +26,8 @@ const SETTING_GROUPS: Array<{
       { key: 'tagline', label: 'Tagline', type: 'textarea' },
       { key: 'site_description', label: 'Site description (SEO)', type: 'textarea', hint: '1–2 sentences for search results' },
       { key: 'brand_color', label: 'Brand color', type: 'color' },
-      { key: 'logo_url', label: 'Logo URL', type: 'url', hint: 'Upload to Supabase Storage and paste the public URL' },
+      { key: 'logo_url', label: 'Logo URL', type: 'url', hint: 'Upload logo file directly or paste URL' },
+      { key: 'favicon_url', label: 'Favicon URL', type: 'url', hint: 'Upload favicon file directly or paste URL' },
     ],
   },
   {
@@ -43,7 +44,7 @@ const SETTING_GROUPS: Array<{
     fields: [
       { key: 'about_title', label: 'About title' },
       { key: 'about_body', label: 'About text', type: 'textarea', rows: 5 },
-      { key: 'about_image_url', label: 'About image URL', type: 'url' },
+      { key: 'about_image_url', label: 'About image URL', type: 'url', hint: 'Upload photo directly or paste URL' },
     ],
   },
   {
@@ -61,6 +62,7 @@ const SETTING_GROUPS: Array<{
       { key: 'instagram_url', label: 'Instagram URL', type: 'url' },
       { key: 'facebook_url', label: 'Facebook URL', type: 'url' },
       { key: 'linkedin_url', label: 'LinkedIn URL', type: 'url' },
+      { key: 'twitter_url', label: 'Twitter/X URL', type: 'url' },
     ],
   },
 ]
@@ -73,9 +75,10 @@ export default function SettingsPage() {
   const [saved, setSaved] = useState(false)
   const [error, setError] = useState('')
 
+  const supabase = createClient()
+
   useEffect(() => {
     async function load() {
-      const supabase = createClient()
       const { data } = await supabase
         .from('settings')
         .select('key, value')
@@ -84,7 +87,7 @@ export default function SettingsPage() {
       if (data) {
         const map: Partial<SiteSettings> = {}
         data.forEach(({ key, value }) => {
-          if (key in DEFAULT_SETTINGS && value) {
+          if (key in DEFAULT_SETTINGS && value !== null) {
             (map as Record<string, string>)[key] = value
           }
         })
@@ -100,11 +103,37 @@ export default function SettingsPage() {
     setDirty(true)
   }
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, key: keyof SiteSettings) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${key}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
+      const filePath = `settings/${fileName}`;
+
+      const { data, error: uploadErr } = await supabase.storage
+        .from('client-assets')
+        .upload(filePath, file);
+
+      if (uploadErr) {
+        alert('Upload failed: ' + uploadErr.message);
+      } else if (data) {
+        const { data: { publicUrl } } = supabase.storage
+          .from('client-assets')
+          .getPublicUrl(filePath);
+
+        update(key, publicUrl);
+      }
+    } catch (err: any) {
+      alert('Upload exception: ' + err.message);
+    }
+  };
+
   async function save() {
     setSaving(true)
     setError('')
     setSaved(false)
-    const supabase = createClient()
 
     const upserts = Object.entries(values).map(([key, value]) => ({
       client_id: CLIENT_ID,
@@ -187,6 +216,26 @@ export default function SettingsPage() {
                       onChange={(e) => update(key, e.target.value)}
                     />
                   </div>
+                ) : type === 'url' ? (
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <input
+                      type="text"
+                      className="ainput"
+                      value={values[key]}
+                      onChange={(e) => update(key, e.target.value)}
+                    />
+                    {(key === 'logo_url' || key === 'favicon_url' || key === 'about_image_url') && (
+                      <label className="abtn" style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
+                        <Upload size={12}/> Upload
+                        <input
+                          type="file"
+                          accept="image/*"
+                          style={{ display: 'none' }}
+                          onChange={(e) => handleFileUpload(e, key)}
+                        />
+                      </label>
+                    )}
+                  </div>
                 ) : (
                   <input
                     type={type}
@@ -200,6 +249,13 @@ export default function SettingsPage() {
           </div>
         </section>
       ))}
+
+      {/* Floating success feedback toast */}
+      {saved && (
+        <div className="toast">
+          <span>✓ Settings saved successfully.</span>
+        </div>
+      )}
     </div>
   )
 }

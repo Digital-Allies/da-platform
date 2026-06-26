@@ -1,52 +1,23 @@
 import React from 'react';
+import { createClient } from '@/lib/supabase-server';
+import DevelopmentClient from './DevelopmentClient';
 
-export default function WorkshopPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function WorkshopPage() {
+  const supabase = await createClient();
+  const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!;
+
+  // Fetch all dev tasks
+  const { data: devTasks } = await supabase
+    .from('dev_tasks')
+    .select('*')
+    .eq('client_id', CLIENT_ID)
+    .order('created_at', { ascending: false });
+
   return (
     <div className="ws-page">
-      <section className="section active" id="development-section">
-        <div className="ws-head">
-          <div>
-            <div className="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Development Tracker</div>
-            <h2>The Workshop</h2>
-          </div>
-          <button className="btn btn--primary">+ New Task</button>
-        </div>
-
-        <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-alt)', border: 'var(--border-1)', fontSize: '13px', lineHeight: 1.6 }}>
-            <strong>Dev Tracker</strong> — Technical tasks, bugs, and feature requests. <em>Coming soon (requires DB migration).</em>
-        </div>
-
-        <div className="dev-tabs">
-          <button className="tab-btn active">Features</button>
-          <button className="tab-btn">Bugs</button>
-          <button className="tab-btn">Milestones</button>
-        </div>
-
-        <div className="tab-content active" id="features-tab">
-          <div className="dev-filters">
-            <select className="form-control">
-              <option value="">All Status</option>
-              <option value="Open">Open</option>
-              <option value="In Progress">In Progress</option>
-            </select>
-            <select className="form-control">
-              <option value="">All Priority</option>
-              <option value="High">High</option>
-            </select>
-          </div>
-          <div className="dev-tasks-grid">
-            <div className="dev-task-item">
-              <div>
-                <h4 className="dev-task-item__title">CMS Backend Integration</h4>
-                <div className="dev-task-item__description">Wire up the dashboard template to Supabase collections.</div>
-              </div>
-              <div className="dev-task-item__actions">
-                <span className="status status--testing">In Progress</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <DevelopmentClient initialTasks={devTasks || []} />
     </div>
   );
 }

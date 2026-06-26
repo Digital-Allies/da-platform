@@ -1,9 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { createClient } from '@/lib/supabase';
 import '@/styles/admin-dashboard.css';
+import { Search, Bell, LogOut, Check } from 'lucide-react';
 
 interface AdminShellProps {
   children: React.ReactNode;
@@ -12,6 +14,90 @@ interface AdminShellProps {
 
 export default function AdminShell({ children, userEmail }: AdminShellProps) {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+
+  const [notifications, setNotifications] = useState<any[]>([]);
+  const [notifOpen, setNotifOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const notifRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close menus on outside click
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (notifRef.current && !notifRef.current.contains(event.target as Node)) {
+        setNotifOpen(false);
+      }
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Fetch unread notifications
+  useEffect(() => {
+    async function loadNotifications() {
+      const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
+      if (!clientId) return;
+
+      const { data } = await supabase
+        .from('notifications')
+        .select('*')
+        .eq('client_id', clientId)
+        .eq('read_status', false)
+        .order('created_at', { ascending: false });
+
+      if (data) {
+        setNotifications(data);
+      }
+    }
+    loadNotifications();
+
+    // Set up realtime subscription
+    const channel = supabase
+      .channel('schema-db-changes')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'notifications' },
+        (payload) => {
+          setNotifications(prev => [payload.new, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const handleMarkRead = async (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const { error } = await supabase
+      .from('notifications')
+      .update({ read_status: true })
+      .eq('id', id);
+
+    if (!error) {
+      setNotifications(prev => prev.filter(n => n.id !== id));
+    }
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/admin/login');
+    router.refresh();
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && searchQuery.trim()) {
+      router.push(`/admin/content?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   const navItems = [
     { label: 'Dashboard', path: '/admin', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg> },
@@ -23,6 +109,8 @@ export default function AdminShell({ children, userEmail }: AdminShellProps) {
     { label: 'Settings', path: '/admin/settings', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M1 12h6m6 0h6m-1.78 7.78l-4.24-4.24m-5.08 0l-4.24 4.24"></path></svg> },
   ];
 
+  const liveSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://digitalallies.net';
+
   return (
     <div className="custom-widget ws" style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Top bar */}
@@ -33,27 +121,86 @@ export default function AdminShell({ children, userEmail }: AdminShellProps) {
           <span className="ws-top__tag">CMS</span>
         </div>
 
-        <div className="ws-client" id="da-client-switcher">
-          <button className="ws-client__btn" id="da-client-btn">
+        <div className="ws-client" id="da-client-switcher" ref={userMenuRef}>
+          <button className="ws-client__btn" id="da-client-btn" onClick={() => setUserMenuOpen(!userMenuOpen)}>
             <span className="ws-avatar" style={{ background: '#3A7BD5' }}>DA</span>
             <span className="ws-client__meta">
               <span className="ws-client__name">Digital Allies</span>
-              <span className="ws-client__dom">digitalallies.net</span>
+              <span className="ws-client__dom">{userEmail || 'digitalallies.net'}</span>
             </span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
+
+          {userMenuOpen && (
+            <div className="ws-client__menu" style={{ display: 'block', top: '100%', marginTop: '8px' }}>
+              <div className="ws-client__head">
+                <span>Account Settings</span>
+              </div>
+              <button className="ws-client__opt" onClick={handleLogout} style={{ color: 'var(--signal)', display: 'flex', alignItems: 'center', gap: '8px', border: 'none', background: 'none', cursor: 'pointer', width: '100%' }}>
+                <LogOut size={14}/>
+                <span>Log Out</span>
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="ws-top__spacer"></div>
         
-        <div className="search-container" style={{ marginRight: '16px' }}>
-          <input type="text" className="form-control search-input" placeholder="Search across all content..." style={{ background: 'rgba(255,255,255,.06)', borderColor: 'rgba(255,255,255,.16)', color: '#fff', width: '300px', padding: '6px 10px' }} />
+        <div className="search-container" style={{ marginRight: '16px', display: 'flex', alignItems: 'center', position: 'relative' }}>
+          <Search size={14} style={{ position: 'absolute', left: '10px', color: 'rgba(255,255,255,0.4)' }} />
+          <input 
+            type="text" 
+            className="form-control search-input" 
+            placeholder="Press Enter to search..." 
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            onKeyDown={handleSearchKeyDown}
+            style={{ background: 'rgba(255,255,255,.06)', borderColor: 'rgba(255,255,255,.16)', color: '#fff', width: '260px', padding: '6px 10px 6px 30px', fontSize: '12px' }} 
+          />
         </div>
 
-        <button className="ws-cmd btn btn--outline" style={{ minWidth: 'auto', padding: '6px 12px', position: 'relative' }}>
-          <span className="notification-badge">3</span>
-          🔔
-        </button>
+        <div style={{ position: 'relative' }} ref={notifRef}>
+          <button 
+            className="ws-cmd btn btn--outline" 
+            onClick={() => setNotifOpen(!notifOpen)}
+            style={{ minWidth: 'auto', padding: '6px 12px', position: 'relative', cursor: 'pointer' }}
+          >
+            {notifications.length > 0 && (
+              <span className="notification-badge">{notifications.length}</span>
+            )}
+            <Bell size={14} style={{ color: 'rgba(255,255,255,0.8)' }} />
+          </button>
+
+          {notifOpen && (
+            <div style={{ position: 'absolute', right: '0', top: '100%', marginTop: '8px', width: '320px', background: 'var(--bg)', border: 'var(--border-1)', boxShadow: 'var(--shadow-lg)', zIndex: '99999' }}>
+              <div style={{ padding: '12px', borderBottom: 'var(--border-hairline)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-soft)', fontWeight: 'bold' }}>
+                Unread Activity Notifications
+              </div>
+              <div style={{ maxHeight: '250px', overflowY: 'auto' }}>
+                {notifications.length === 0 ? (
+                  <div style={{ padding: '20px', textAlign: 'center', fontSize: '12px', color: 'var(--text-soft)' }}>
+                    No new notifications.
+                  </div>
+                ) : (
+                  notifications.map(notif => (
+                    <div key={notif.id} style={{ padding: '12px', borderBottom: 'var(--border-hairline)', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                      <div style={{ flex: '1', minWidth: '0' }}>
+                        <div style={{ fontSize: '12px', fontWeight: 'bold' }}>{notif.title}</div>
+                        <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>{notif.message}</div>
+                      </div>
+                      <button 
+                        onClick={(e) => handleMarkRead(notif.id, e)}
+                        style={{ border: 'none', background: 'rgba(45,45,45,0.05)', padding: '4px', cursor: 'pointer', display: 'flex', borderRadius: '2px' }}
+                      >
+                        <Check size={12} style={{ color: 'var(--accent)' }}/>
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         <span className="ws-sync ws-sync--on" style={{ marginLeft: '16px' }}>
           <span className="da-pulse"></span>Connected
@@ -81,7 +228,7 @@ export default function AdminShell({ children, userEmail }: AdminShellProps) {
           })}
 
           <div className="ws-nav__foot">
-            <a href="/" target="_blank" rel="noopener noreferrer" className="ws-nav__viewsite" style={{ textDecoration: 'none' }}>
+            <a href={liveSiteUrl} target="_blank" rel="noopener noreferrer" className="ws-nav__viewsite" style={{ textDecoration: 'none' }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
               <span>View live site</span>
             </a>
