@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Design System Landing" subtitle="One-page index linking foundations, kits, and assets" viewport="1100x900" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — Design System</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <style>
+    body { padding: 0; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    /* ---- Hero ---- */
+    .hero { padding: 72px 40px 40px; }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+    .brand-name { font-family: var(--font-headers); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; }
+    .eb { font-family: var(--font-details); font-size: 11px; color: var(--signal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+    h1 { font-size: clamp(38px, 4.4vw, 54px); margin: 14px 0 20px; max-width: 880px; line-height: 1.05; letter-spacing: -0.012em; }
+    .lede { font-family: var(--font-body); font-size: 16px; line-height: 1.7; max-width: 640px; color: var(--fg); }
+    code.inl { background: var(--bg-alt); padding: 1px 6px; font-family: var(--font-details); font-size: 13px; border: 1px solid var(--hairline); }
+
+    /* ---- Portals (top nav cards) ---- */
+    .portals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 8px 40px 8px; }
+    .portal { position: relative; border: 1px solid var(--charcoal); background: var(--charcoal); color: var(--fg-on-dark); text-decoration: none; padding: 20px 18px 18px; min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s var(--ease-snap); overflow: hidden; }
+    .portal:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .portal .p-num { font-family: var(--font-details); font-size: 10px; letter-spacing: 0.18em; color: var(--signal); text-transform: uppercase; font-weight: 700; }
+    .portal .p-name { font-family: var(--font-headers); font-weight: 700; font-size: 19px; line-height: 1.15; margin-top: auto; }
+    .portal .p-sub { display: block; font-family: var(--font-details); font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 6px; line-height: 1.4; }
+    .portal .p-arrow { position: absolute; top: 18px; right: 16px; font-size: 16px; color: rgba(255,255,255,0.5); transition: transform 0.2s var(--ease-snap); }
+    .portal:hover .p-arrow { transform: translate(3px,-3px); color: var(--signal); }
+
+    /* ---- Sections ---- */
+    .section { padding: 40px 40px 8px; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--charcoal); padding-bottom: 10px; margin-bottom: 24px; }
+    .section-head h2 { font-family: var(--font-headers); font-weight: 700; font-size: 22px; margin: 0; }
+    .section-head .cap { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); letter-spacing: 0.05em; }
+
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .tile { border: 1px solid var(--charcoal); background: var(--bg); padding: 22px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; min-height: 116px; transition: all 0.2s var(--ease-snap); }
+    .tile:hover { background: var(--bg-alt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .tile .t-tag { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; }
+    .tile .t-name { font-family: var(--font-headers); font-weight: 700; font-size: 17px; }
+    .tile .t-desc { font-family: var(--font-body); font-size: 12px; line-height: 1.55; color: var(--fg-muted); margin-top: 4px; }
+
+    /* ---- Marketing strip ---- */
+    .mkt { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .mkt-card { border: 1px solid var(--charcoal); background: var(--bg); text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: all 0.2s var(--ease-snap); }
+    .mkt-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .mkt-thumb { aspect-ratio: 1/1; background: var(--bg-alt); border-bottom: 1px solid var(--hairline); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+    .mkt-thumb .ct { font-family: var(--font-details); font-size: 10px; color: var(--fg-soft); letter-spacing: 0.16em; text-transform: uppercase; position: absolute; top: 12px; left: 12px; }
+    .mkt-thumb .big { font-family: var(--font-headers); font-weight: 800; font-size: 40px; letter-spacing: -0.02em; color: var(--charcoal); }
+    .mkt-body { padding: 16px 18px; }
+    .mkt-body .m-name { font-family: var(--font-headers); font-weight: 700; font-size: 16px; }
+    .mkt-body .m-desc { font-family: var(--font-body); font-size: 12px; line-height: 1.5; color: var(--fg-muted); margin-top: 5px; }
+
+    /* ---- Downloads ---- */
+    .dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .dl { border: 1px solid var(--charcoal); background: var(--bg); padding: 18px 20px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 4px; transition: all 0.2s var(--ease-snap); position: relative; }
+    .dl:hover { background: var(--bg-alt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .dl .d-top { display: flex; align-items: center; justify-content: space-between; }
+    .dl .d-tag { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; }
+    .dl .d-size { font-family: var(--font-details); font-size: 10px; color: var(--fg-soft); }
+    .dl .d-name { font-family: var(--font-headers); font-weight: 700; font-size: 16px; margin-top: 8px; }
+    .dl .d-desc { font-family: var(--font-body); font-size: 12px; line-height: 1.5; color: var(--fg-muted); }
+    .dl .d-cta { font-family: var(--font-details); font-size: 11px; font-weight: 700; color: var(--fg); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--grid-line-strong); display: flex; align-items: center; gap: 6px; }
+    .dl .d-cta .dot { color: var(--signal); }
+    .dl:hover .d-cta { color: var(--signal); }
+
+    footer { padding: 56px 40px; text-align: center; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); border-top: 1px solid var(--hairline); margin-top: 56px; }
+    footer .sep { color: var(--signal); margin: 0 14px; }
+
+    @media (max-width: 820px) {
+      .portals, .grid3, .mkt, .dl-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 540px) {
+      .portals, .grid3, .mkt, .dl-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="#2D2D2D"/>
+      <circle cx="50" cy="42" r="11" fill="#3A7BD5"/>
+      <text x="50" y="74" font-family="monospace" font-size="13" font-weight="700" fill="#F9F6F0" text-anchor="middle">DA</text>
+    </svg>
+  </template>
+
+  <div class="hero wrap">
+    <div class="brand">
+      <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+      <span class="brand-name">Digital Allies</span>
+    </div>
+    <div class="eb">Identity · Style Manual · Spec Sheet</div>
+    <h1>The Digital Allies Design System.</h1>
+    <p class="lede">Voice rules, color and type tokens, icon and logo assets, a UI kit recreating <code class="inl">digitalallies.net</code>, brand-correct slide templates, and the marketing design library — everything to design on-brand for Anthony's shop in Kingman, AZ.</p>
+  </div>
+
+  <!-- PORTALS -->
+  <div class="portals wrap">
+    <a class="portal" href="ui_kits/website/index.html">
+      <span class="p-arrow">↗</span>
+      <span class="p-num">Portal 01</span>
+      <span class="p-name">Live UI Kit<span class="p-sub">digitalallies.net, as components</span></span>
+    </a>
+    <a class="portal" href="templates/">
+      <span class="p-arrow">↗</span>
+      <span class="p-num">Portal 02</span>
+      <span class="p-name">All Templates<span class="p-sub">Slides, services, tools, &amp; more</span></span>
+    </a>
+    <a class="portal" href="cms/index.html">
+      <span class="p-arrow">↗</span>
+      <span class="p-num">Portal 03</span>
+      <span class="p-name">Marketing Hub<span class="p-sub">CMS · content calendar &amp; campaigns</span></span>
+    </a>
+    <a class="portal" href="brand-system-print.html">
+      <span class="p-arrow">↗</span>
+      <span class="p-num">Portal 04</span>
+      <span class="p-name">Brand Book<span class="p-sub">Complete visual &amp; voice system</span></span>
+    </a>
+  </div>
+
+  <!-- CMS PORTAL -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>CMS Portal</h2>
+      <span class="cap">Content management &amp; dashboards</span>
+    </div>
+    <div class="grid3">
+      <a class="tile" href="cms/index.html">
+        <span class="t-tag">UI</span>
+        <span class="t-name">CMS Dashboard</span>
+        <span class="t-desc">Complete dashboard interface for content management and analytics.</span>
+      </a>
+      <a class="tile" href="cms/content-calendar.html">
+        <span class="t-tag">CONTENT</span>
+        <span class="t-name">Content Calendar — 30-Day Run</span>
+        <span class="t-desc">The full 30-day marketing cycle: daily topics, hooks, captions, CTAs, and asset prompts.</span>
+      </a>
+      <a class="tile" href="CMS_IMPLEMENTATION_PLAN.html">
+        <span class="t-tag">PLAN</span>
+        <span class="t-name">Implementation Plan</span>
+        <span class="t-desc">Step-by-step integration guide for the CMS dashboard.</span>
+      </a>
+      <a class="tile" href="GLOBAL_CONTEXT_FOR_CLAUDE.md">
+        <span class="t-tag">CONTEXT</span>
+        <span class="t-name">Global Context</span>
+        <span class="t-desc">Complete design system context for Claude and development teams.</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- DOWNLOADS -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>Downloads</h2>
+      <span class="cap">Complete asset library</span>
+    </div>
+    <div class="dl-grid">
+      <a class="dl" href="downloads/da-logos.zip" download>
+        <span class="d-top"><span class="d-tag">Logos</span><span class="d-size">8.2 MB · 11 files</span></span>
+        <span class="d-name">Logo lockups</span>
+        <span class="d-desc">Pulse-dot lockups (blue + vermilion), wordmark, monogram, favicon.</span>
+        <span class="d-cta"><span class="dot">↓</span> Download .zip</span>
+      </a>
+      <a class="dl" href="downloads/da-icons.zip" download>
+        <span class="d-top"><span class="d-tag">Icons</span><span class="d-size">13 MB · 12 files</span></span>
+        <span class="d-name">The Artifact Icons</span>
+        <span class="d-desc">Topo, compass, rotary phone, metronome, engine, tension bridge + dept icons.</span>
+        <span class="d-cta"><span class="dot">↓</span> Download .zip</span>
+      </a>
+      <a class="dl" href="downloads/da-photos.zip" download>
+        <span class="d-top"><span class="d-tag">Imagery</span><span class="d-size">14 MB · 7 files</span></span>
+        <span class="d-name">Photos &amp; brand art</span>
+        <span class="d-desc">Kingman highway photo, wavy-line banners, luminous-dot tiles, diagrams.</span>
+        <span class="d-cta"><span class="dot">↓</span> Download .zip</span>
+      </a>
+      <a class="dl" href="downloads/da-components.zip" download>
+        <span class="d-top"><span class="d-tag">Components</span><span class="d-size">207 KB · 30 files</span></span>
+        <span class="d-name">Build kits (source)</span>
+        <span class="d-desc">UI kit JSX, slide templates, social carousels, plus the token stylesheet.</span>
+        <span class="d-cta"><span class="dot">↓</span> Download .zip</span>
+      </a>
+      <a class="dl" href="downloads/da-preview-specimens.zip" download>
+        <span class="d-top"><span class="d-tag">HTML</span><span class="d-size">80 KB · 27 files</span></span>
+        <span class="d-name">Preview specimens</span>
+        <span class="d-desc">Every single-purpose spec card — palette, type, spacing, components, brand.</span>
+        <span class="d-cta"><span class="dot">↓</span> Download .zip</span>
+      </a>
+      <a class="dl" href="downloads/da-fonts.zip" download>
+        <span class="d-top"><span class="d-tag">Fonts</span><span class="d-size">3 MB · 28 files</span></span>
+        <span class="d-name">Lexend Deca + JetBrains Mono</span>
+        <span class="d-desc">Full weight range, static + variable .ttf files, licensed open fonts.</span>
+        <span class="d-cta"><span class="dot">↓</span> Download .zip</span>
+      </a>
+      <a class="dl" href="README.md">
+        <span class="d-top"><span class="d-tag">Markdown</span><span class="d-size">~15 KB</span></span>
+        <span class="d-name">Brand Guidelines (README)</span>
+        <span class="d-desc">Voice, content fundamentals, visual foundations, and iconography guide.</span>
+        <span class="d-cta"><span class="dot">📄</span> Read online</span>
+      </a>
+      <a class="dl" href="colors_and_type.css">
+        <span class="d-top"><span class="d-tag">CSS</span><span class="d-size">~8 KB</span></span>
+        <span class="d-name">Design Tokens (CSS)</span>
+        <span class="d-desc">Complete token library — colors, type scale, spacing, and motion values.</span>
+        <span class="d-cta"><span class="dot">📄</span> View source</span>
+      </a>
+      <a class="dl" href="SKILL.md">
+        <span class="d-top"><span class="d-tag">Manifest</span><span class="d-size">~6 KB</span></span>
+        <span class="d-name">Claude Code Skill</span>
+        <span class="d-desc">Cross-compatible manifest for design-agent context and developer integration.</span>
+        <span class="d-cta"><span class="dot">📄</span> Read online</span>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Digital Allies · Est. 2024 · Kingman, AZ</span>
+    <span class="sep">·</span>
+    <span>contact@digitalallies.net</span>
+    <span class="sep">·</span>
+    <span>(928) 228-5769</span>
+  </footer>
+</body>
+</html>

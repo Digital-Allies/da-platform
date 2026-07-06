@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Type — Body & Mono" subtitle="Lexend Deca specimen + JetBrains Mono specimen" viewport="700x260" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Body & Mono</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .col { border: 1px solid var(--charcoal); padding: 16px; background: var(--bg); }
+    .col.alt { background: var(--bg-alt); }
+    .tag { font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+    .glyphs { font-family: var(--font-headers); font-weight: 700; font-size: 36px; line-height: 1; margin-bottom: 12px; color: var(--fg); }
+    .glyphs.mono { font-family: var(--font-details); font-weight: 400; }
+    .desc { font-family: var(--font-body); font-size: 11px; line-height: 1.6; color: var(--fg-muted); margin-bottom: 12px; }
+    .specs { font-family: var(--font-details); font-size: 11px; line-height: 1.7; padding-top: 12px; border-top: 1px solid var(--hairline); color: var(--fg); }
+    .specs b { font-family: var(--font-headers); }
+    .weight-strip { border: 1px solid var(--charcoal); padding: 14px 16px; background: var(--bg); }
+    .weight-strip .tag { margin-bottom: 10px; }
+    .weights { display: flex; gap: 0; flex-wrap: wrap; }
+    .wt { font-family: var(--font-details); font-size: 13px; padding: 5px 10px; border-right: 1px dashed var(--grid-line-strong); line-height: 1.4; }
+    .wt:last-child { border-right: none; }
+    .wt .n { font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.1em; display: block; }
+    .local-badge { display: inline-block; font-family: var(--font-details); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark); background: var(--charcoal); padding: 2px 5px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div style="display: flex; gap: 6px;">
+      <span class="local-badge">Lexend Deca · Local · 100–900</span>
+      <span class="local-badge">JetBrains Mono · Local · 100–800 + Italic</span>
+    </div>
+    <div class="cols">
+      <div class="col alt">
+        <span class="tag">Lexend Deca · Headers</span>
+        <div class="glyphs">Aa Bb Cc</div>
+        <p class="desc">High x-height for scannability under glare. Titles, card headers, action callouts.</p>
+        <div class="specs">
+          <div><b>H1 Title</b> · 700</div>
+          <div style="font-weight: 600;">H2 Subtitle · 600</div>
+          <div style="font-weight: 500;">H3 Body Lead · 500</div>
+        </div>
+      </div>
+      <div class="col">
+        <span class="tag">JetBrains Mono · Body</span>
+        <div class="glyphs mono">Aa Bb Cc</div>
+        <p class="desc">Enforces alignment. Body, prices, tables, system parameters, manual instructions.</p>
+        <div class="specs">
+          <div style="font-weight: 600;">SYSTEM = #2D2D2D</div>
+          <div>Phase 1 · ($0.00)</div>
+          <div style="font-style: italic;">Last updated 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="weight-strip">
+      <span class="tag">JetBrains Mono · Weight range + italic</span>
+      <div class="weights">
+        <div class="wt" style="font-weight: 100;"><span class="n">100</span>Thin</div>
+        <div class="wt" style="font-weight: 200;"><span class="n">200</span>ExtraLight</div>
+        <div class="wt" style="font-weight: 300;"><span class="n">300</span>Light</div>
+        <div class="wt" style="font-weight: 400;"><span class="n">400</span>Regular</div>
+        <div class="wt" style="font-weight: 500;"><span class="n">500</span>Medium</div>
+        <div class="wt" style="font-weight: 600;"><span class="n">600</span>SemiBold</div>
+        <div class="wt" style="font-weight: 700;"><span class="n">700</span>Bold</div>
+        <div class="wt" style="font-weight: 800;"><span class="n">800</span>ExtraBold</div>
+        <div class="wt" style="font-weight: 400; font-style: italic;"><span class="n">Italic</span>Phase→1</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

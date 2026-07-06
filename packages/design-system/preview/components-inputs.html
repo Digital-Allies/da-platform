@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Form Fields" subtitle="Inputs, textarea, EN|ES toggle, error state" viewport="700x380" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Fields</title>
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { margin: 0; padding: 0; background: transparent; background-image: none; }
+    .card { width: 700px; padding: 24px; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .label { font-family: var(--font-details); font-size: 10px; color: var(--fg); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; }
+    input, textarea, select { font-family: var(--font-details); font-size: 13px; padding: 10px 12px; border: 1px solid var(--charcoal); background: var(--bone-white); color: var(--fg); border-radius: 2px; outline: none; box-sizing: border-box; }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(58,123,213,0.15); }
+    .field.focused input { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(58,123,213,0.15); }
+    .field.error input { border-color: var(--signal); }
+    .help { font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+    .err { font-family: var(--font-details); font-size: 10px; color: var(--signal); display: flex; align-items: center; gap: 6px; }
+    .err::before { content: ""; width: 8px; height: 8px; background: var(--signal); border-radius: 50%; border: 1px solid var(--charcoal); }
+    textarea { resize: vertical; min-height: 60px; }
+    .toggle { display: inline-flex; border: 1px solid var(--charcoal); align-items: stretch; align-self: start; }
+    .toggle button { font-family: var(--font-details); font-size: 11px; font-weight: 700; padding: 8px 14px; border: none; background: var(--bone-white); color: var(--fg); cursor: default; }
+    .toggle button.on { background: var(--charcoal); color: var(--bone-white); }
+    .toggle .sep { width: 1px; background: var(--charcoal); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="field"><span class="label">Name</span><input type="text" placeholder="Your name"><span class="help">As you'd like to be greeted</span></div>
+    <div class="field focused"><span class="label">Email · focused</span><input type="email" value="anthony@digitalallies.net"></div>
+    <div class="field"><span class="label">What are you trying to do?</span><textarea placeholder="Give me the short version. We can fill in details later."></textarea></div>
+    <div class="field error"><span class="label">Phone · error</span><input type="tel" value="(928) 228-"><span class="err">Looks incomplete — try a full number.</span></div>
+    <div class="field"><span class="label">Language</span><div class="toggle"><button class="on">EN</button><div class="sep"></div><button>ES</button></div></div>
+    <div class="field"><span class="label">Newsletter</span>
+      <label style="display:flex; align-items:center; gap:8px; font-family:var(--font-details); font-size:12px"><input type="checkbox" style="width:14px; height:14px; padding:0">Yes, send me field notes.</label>
+    </div>
+  </div>
+</body>
+</html>

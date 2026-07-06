@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Installation & Setup — Digital Allies</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_doc.css">
+</head>
+<body>
+<div class="doc">
+  <a class="backlink" href="../00-master-index.html">← Master Index</a>
+  <div class="doc-head" style="margin-top:16px;">
+    <div class="eyebrow">Reference</div>
+    <h1>Installation &amp; Setup</h1>
+    <p class="lede">Everything you need to start building on-brand: load the tokens, get the fonts, and (optionally) pull in the components. Two files get you 90% of the way there.</p>
+    <div class="meta-row"><span>Doc <b>29 / 32</b></span><span>Group <b>Guides & Reference</b></span></div>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>The one stylesheet</h2>
+    <p>Link <code class="inl">colors_and_type.css</code>. It declares every token (colors, type scale, spacing, motion, borders) and registers the brand fonts via <code class="inl">@font-face</code>, with a Google Fonts network fallback so demos work without the local files.</p>
+    <pre><span class="c">&lt;!-- from a page at the project root --&gt;</span>
+&lt;link rel="stylesheet" href="colors_and_type.css"&gt;</pre>
+    <p>Then style with the variables — never hard-code hexes:</p>
+    <pre>.cta {
+  background: <span class="k">var(--signal)</span>;     <span class="c">/* Signal Red */</span>
+  color: <span class="k">var(--bone-white)</span>;
+  font-family: <span class="k">var(--font-headers)</span>;
+  border: 1px solid <span class="k">var(--charcoal)</span>;
+}</pre>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>Fonts</h2>
+    <p>The <code class="inl">fonts/</code> folder holds Lexend Deca and JetBrains Mono as variable <code class="inl">.ttf</code> files. Keep it as a sibling of <code class="inl">colors_and_type.css</code> so the <code class="inl">@font-face</code> <code class="inl">url("fonts/…")</code> paths resolve. Weights used: 400, 500, 600, 700.</p>
+    <div class="note"><p><b>Field note.</b> Lexend Deca carries headers, eyebrows, and titles. JetBrains Mono carries body, prices, tables, and system text. That split is the typographic signature — don't blur it.</p></div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Components (optional)</h2>
+    <p>The reusable React component(s) compile into <code class="inl">_ds_bundle.js</code>. Load it and read from the namespace:</p>
+    <pre>&lt;script src="_ds_bundle.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const { ContentCalendar } = window.DigitalAlliesDesignSystem_611984;
+&lt;/script&gt;</pre>
+    <p>Or, in a CMS page template, mount via <code class="inl">x-import</code>:</p>
+    <pre>&lt;x-import component="ContentCalendar"
+  from="ui_kits/website/ContentCalendar.jsx"
+  data="{{ cms.calendar }}" hint-size="100%,600px"&gt;&lt;/x-import&gt;</pre>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>What to copy into a new project</h2>
+    <table>
+      <thead><tr><th>You need…</th><th>Take</th></tr></thead>
+      <tbody>
+        <tr><th>Tokens + fonts</th><td><code class="inl">colors_and_type.css</code> + <code class="inl">fonts/</code></td></tr>
+        <tr><th>Logos / icons</th><td>the files you use from <code class="inl">assets/</code> (don't bulk-copy)</td></tr>
+        <tr><th>Components</th><td><code class="inl">_ds_bundle.js</code> (+ the source under <code class="inl">ui_kits/</code> to edit)</td></tr>
+        <tr><th>Page starts</th><td>a template from <code class="inl">templates/</code></td></tr>
+      </tbody>
+    </table>
+    <p>For the full token list and rules, read the <a href="../README.md">README</a>. For AI assistants, paste <a href="../GLOBAL_CONTEXT_FOR_CLAUDE.md">Global Context for Claude</a>.</p>
+  </section>
+
+  <footer>Digital Allies Design System · Installation & Setup · two files and you're on-brand.</footer>
+</div>
+</body>
+</html>

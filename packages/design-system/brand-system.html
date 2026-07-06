@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — Brand System</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="#F9F6F0"/>
+      <rect x="22" y="22" width="56" height="56" fill="none" stroke="#2D2D2D" stroke-width="2"/>
+      <circle cx="50" cy="50" r="7" fill="#3A7BD5"/>
+      <text x="50" y="90" font-family="monospace" font-size="6.5" fill="#2D2D2D" text-anchor="middle" letter-spacing="1">BRAND SYSTEM</text>
+    </svg>
+  </template>
+  <style>
+    /* ============ BOOK CHROME ============ */
+    body { margin: 0; background: #2D2D2D; }
+    .book {
+      width: 760px; margin: 0 auto; background: var(--bone-white);
+      background-image:
+        linear-gradient(var(--grid-line) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, var(--grid-line) 0.5px, transparent 0.5px);
+      background-size: var(--lace-step) var(--lace-step);
+      box-shadow: 0 0 60px rgba(0,0,0,0.35);
+    }
+
+    /* ---- Cover ---- */
+    .cover { padding: 92px 56px 72px; min-height: 940px; box-sizing: border-box; display: flex; flex-direction: column; }
+    .cover .brand { display: flex; align-items: center; gap: 14px; }
+    .cover .brand-name { font-family: var(--font-headers); font-weight: 700; font-size: 19px; letter-spacing: 0.01em; }
+    .cover .eb { font-family: var(--font-details); font-size: 12px; color: var(--signal); letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; margin-top: 64px; }
+    .cover h1 { font-family: var(--font-headers); font-weight: 700; font-size: 64px; line-height: 1.02; letter-spacing: -0.02em; margin: 18px 0 0; max-width: 600px; }
+    .cover .lede { font-family: var(--font-body); font-size: 15px; line-height: 1.7; max-width: 520px; color: var(--fg); margin-top: 26px; }
+    .cover .meta-row { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--charcoal); padding-top: 16px; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); letter-spacing: 0.04em; }
+    .cover .meta-row b { font-family: var(--font-headers); color: var(--fg); }
+    .toc { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+    .toc-item { display: flex; align-items: baseline; gap: 12px; font-family: var(--font-details); font-size: 12px; border-bottom: 1px dashed var(--grid-line-strong); padding: 7px 0; }
+    .toc-item .tn { color: var(--signal); font-weight: 700; letter-spacing: 0.1em; }
+    .toc-item .tt { font-family: var(--font-headers); font-weight: 700; font-size: 13px; color: var(--fg); }
+    .toc-item .td { margin-left: auto; color: var(--fg-soft); }
+
+    /* ---- Section divider ---- */
+    .sec-divider { padding: 40px 56px 24px; border-bottom: 1px solid var(--charcoal); margin-bottom: 28px; }
+    .sec-num { font-family: var(--font-details); font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--signal); }
+    .sec-title { font-family: var(--font-headers); font-weight: 700; font-size: 34px; letter-spacing: -0.015em; margin: 8px 0 4px; }
+    .sec-cap { font-family: var(--font-details); font-size: 12px; color: var(--fg-muted); letter-spacing: 0.04em; }
+
+    /* ---- Specimen frame ---- */
+    .book-section { padding-bottom: 24px; }
+    .specimen { margin: 0 28px 24px; break-inside: avoid; }
+    .spec-cap { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+    .spec-name { font-family: var(--font-headers); font-weight: 700; font-size: 14px; }
+    .spec-sub { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); letter-spacing: 0.02em; }
+    .spec-stage { border: 1px solid var(--charcoal); background: var(--bone-white); overflow: hidden; display: flex; justify-content: center; }
+    .spec-host { width: 700px; }
+    .spec-host > .card { width: 700px !important; }
+
+    /* ============ PRINT ============ */
+    @media print {
+      @page { size: 760px 1010px; margin: 0; }
+      html, body { background: #fff; }
+      .book { width: 760px; margin: 0; box-shadow: none; }
+      .cover { min-height: 1010px; break-after: page; }
+      .book-section { break-before: page; }
+      .sec-divider { padding-top: 48px; }
+      .specimen { break-inside: avoid; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      *, *::before, *::after {
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+
+    /* ============ SCOPED SPECIMEN STYLES ============ */
+
+/* voice-tone-spectrum */
+#spec-1{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-1 .card{ width: 700px; padding: 24px 28px; box-sizing: border-box; }
+#spec-1 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 18px; display: block; }
+#spec-1 .row{ margin-bottom: 16px; }
+#spec-1 .row:last-child{ margin-bottom: 0; }
+#spec-1 .row-head{ display: flex; justify-content: space-between; font-family: var(--font-details); font-size: 11px; font-weight: 700; margin-bottom: 6px; }
+#spec-1 .row-head .val{ color: var(--signal); }
+#spec-1 .track{ position: relative; height: 8px; background: var(--field-border); border: 1px solid var(--charcoal); }
+#spec-1 .thumb{ position: absolute; top: 50%; width: 14px; height: 14px; background: var(--signal); border: 1px solid var(--charcoal); border-radius: 50%; transform: translate(-50%, -50%); box-shadow: var(--shadow-pin); }
+
+
+/* voice-jargon-translation */
+#spec-2{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-2 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-2 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+#spec-2 table{ width: 100%; border-collapse: collapse; font-family: var(--font-details); font-size: 11px; }
+#spec-2 th{ text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--charcoal); font-family: var(--font-details); font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em; font-size: 9px; color: var(--fg-soft); }
+#spec-2 th.right{ color: var(--signal); }
+#spec-2 td{ padding: 9px 10px; border-bottom: 1px dashed var(--grid-line-strong); vertical-align: top; line-height: 1.5; }
+#spec-2 tr:last-child td{ border-bottom: none; }
+#spec-2 td.from{ color: var(--fg-muted); font-style: italic; text-decoration: line-through; text-decoration-color: rgba(45,45,45,0.3); }
+#spec-2 td.to{ color: var(--fg); font-weight: 600; }
+#spec-2 td.arrow{ width: 24px; color: var(--signal); text-align: center; }
+
+
+/* colors-core */
+#spec-3{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-3 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-3 .swatches{ display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+#spec-3 .sw{ display: flex; flex-direction: column; }
+#spec-3 .sw-chip{ height: 96px; border: 1px solid var(--charcoal); position: relative; }
+#spec-3 .sw-chip .da-signal-dot{ position: absolute; top: 8px; right: 8px; }
+#spec-3 .sw-meta{ display: flex; flex-direction: column; padding-top: 8px; gap: 2px; }
+#spec-3 .sw-name{ font-family: var(--font-headers); font-weight: 700; font-size: 12px; letter-spacing: 0.02em; }
+#spec-3 .sw-hex{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+#spec-3 .sw-role{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.1em; }
+
+
+/* colors-95-5-rule */
+#spec-4{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-4 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-4 .bar{ height: 56px; border: 1px solid var(--charcoal); display: flex; overflow: hidden; }
+#spec-4 .seg-bone{ background: var(--bone-white); flex: 0 0 75%; display: flex; align-items: center; justify-content: center; }
+#spec-4 .seg-char{ background: var(--charcoal); flex: 0 0 20%; }
+#spec-4 .seg-signal{ background: var(--signal-red); flex: 0 0 5%; }
+#spec-4 .seg-label{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); letter-spacing: 0.1em; text-transform: uppercase; }
+#spec-4 .legend{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+#spec-4 .leg{ display: flex; gap: 8px; align-items: flex-start; }
+#spec-4 .swat{ width: 12px; height: 12px; border: 1px solid var(--charcoal); margin-top: 2px; flex: 0 0 12px; }
+#spec-4 .leg-text{ font-family: var(--font-details); font-size: 11px; line-height: 1.5; }
+#spec-4 .leg-text strong{ font-family: var(--font-headers); font-weight: 700; display: block; font-size: 12px; color: var(--fg); }
+#spec-4 .quote{ font-family: var(--font-details); font-size: 11px; font-style: italic; color: var(--fg-muted); margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--grid-line-strong); line-height: 1.6; }
+
+
+/* colors-semantic */
+#spec-5{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-5 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-5 .row{ display: grid; grid-template-columns: 28px 1fr 1fr 1fr; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--grid-line-strong); }
+#spec-5 .row:last-child{ border-bottom: none; }
+#spec-5 .chip{ width: 28px; height: 28px; border: 1px solid var(--charcoal); }
+#spec-5 .name{ font-family: var(--font-headers); font-weight: 700; font-size: 13px; }
+#spec-5 .var{ font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); }
+#spec-5 .use{ font-family: var(--font-details); font-size: 11px; color: var(--fg-soft); }
+#spec-5 .header{ display: grid; grid-template-columns: 28px 1fr 1fr 1fr; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--charcoal); margin-bottom: 4px; }
+#spec-5 .h{ font-family: var(--font-details); font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--fg-soft); }
+
+
+/* type-headings */
+#spec-6{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-6 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-6 .row{ display: grid; grid-template-columns: 130px 1fr; gap: 16px; align-items: baseline; padding: 10px 0; border-bottom: 1px dashed var(--grid-line-strong); }
+#spec-6 .row:last-child{ border-bottom: none; }
+#spec-6 .meta{ font-family: var(--font-details); font-size: 10px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.1em; line-height: 1.3; }
+#spec-6 .meta b{ display: block; color: var(--fg); font-family: var(--font-headers); font-size: 11px; letter-spacing: 0.02em; text-transform: none; }
+#spec-6 .local-badge{ display: inline-block; font-family: var(--font-details); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark); background: var(--charcoal); padding: 2px 5px; margin-bottom: 10px; }
+
+
+/* type-body-mono */
+#spec-7{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-7 .card{ width: 700px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+#spec-7 .cols{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+#spec-7 .col{ border: 1px solid var(--charcoal); padding: 16px; background: var(--bg); }
+#spec-7 .col.alt{ background: var(--bg-alt); }
+#spec-7 .tag{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+#spec-7 .glyphs{ font-family: var(--font-headers); font-weight: 700; font-size: 36px; line-height: 1; margin-bottom: 12px; color: var(--fg); }
+#spec-7 .glyphs.mono{ font-family: var(--font-details); font-weight: 400; }
+#spec-7 .desc{ font-family: var(--font-body); font-size: 11px; line-height: 1.6; color: var(--fg-muted); margin-bottom: 12px; }
+#spec-7 .specs{ font-family: var(--font-details); font-size: 11px; line-height: 1.7; padding-top: 12px; border-top: 1px solid var(--hairline); color: var(--fg); }
+#spec-7 .specs b{ font-family: var(--font-headers); }
+#spec-7 .weight-strip{ border: 1px solid var(--charcoal); padding: 14px 16px; background: var(--bg); }
+#spec-7 .weight-strip .tag{ margin-bottom: 10px; }
+#spec-7 .weights{ display: flex; gap: 0; flex-wrap: wrap; }
+#spec-7 .wt{ font-family: var(--font-details); font-size: 13px; padding: 5px 10px; border-right: 1px dashed var(--grid-line-strong); line-height: 1.4; }
+#spec-7 .wt:last-child{ border-right: none; }
+#spec-7 .wt .n{ font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.1em; display: block; }
+#spec-7 .local-badge{ display: inline-block; font-family: var(--font-details); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark); background: var(--charcoal); padding: 2px 5px; }
+
+
+/* type-eyebrow-cta */
+#spec-8{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-8 .card{ width: 700px; padding: 32px 24px; box-sizing: border-box; }
+#spec-8 .ex{ padding: 20px 0; border-bottom: 1px dashed var(--grid-line-strong); }
+#spec-8 .ex:last-child{ border-bottom: none; }
+#spec-8 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 10px; display: block; }
+#spec-8 .display-mock{ font-family: var(--font-headers); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -0.005em; max-width: 480px; }
+#spec-8 .cta-mock{ font-family: var(--font-headers); font-weight: 700; font-size: 13px; }
+#spec-8 .spec-row{ display: flex; gap: 24px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+#spec-8 .spec-item{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+#spec-8 .spec-item b{ color: var(--fg); font-family: var(--font-headers); font-size: 11px; display: block; margin-bottom: 2px; }
+#spec-8 .local-badge{ display: inline-block; font-family: var(--font-details); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-on-dark); background: var(--charcoal); padding: 2px 5px; margin-bottom: 18px; }
+
+
+/* spacing-scale */
+#spec-9{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-9 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-9 .row{ display: grid; grid-template-columns: 80px 1fr 90px; gap: 16px; align-items: center; padding: 6px 0; }
+#spec-9 .name{ font-family: var(--font-headers); font-weight: 700; font-size: 12px; }
+#spec-9 .bar{ height: 14px; background: var(--charcoal); border: 1px solid var(--charcoal); }
+#spec-9 .px{ font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); text-align: right; }
+#spec-9 .note{ font-family: var(--font-details); font-size: 10px; color: var(--fg-soft); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--grid-line-strong); }
+
+
+/* spacing-technical-lace */
+#spec-10{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-10 .card{ width: 700px; padding: 0; box-sizing: border-box; border: 1px solid var(--charcoal); }
+#spec-10 .stage{ position: relative; background: var(--bone-white);
+      background-image:
+        linear-gradient(rgba(45,45,45,0.12) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, rgba(45,45,45,0.12) 0.5px, transparent 0.5px),
+        radial-gradient(rgba(45,45,45,0.35) 1px, transparent 1.5px);
+      background-size: 20px 20px, 20px 20px, 100px 100px;
+      background-position: 0 0, 0 0, 50px 50px;
+      height: 280px;
+      padding: 24px;
+    }
+#spec-10 .mini{ position: absolute; background: var(--bone-white); border: 1px solid var(--charcoal); padding: 14px; box-sizing: border-box; width: 220px; top: 70px; left: calc(50% - 110px); text-align: center; }
+#spec-10 .mini h4{ font-family: var(--font-headers); margin: 0 0 6px; font-size: 13px; font-weight:700; }
+#spec-10 .mini p{ font-family: var(--font-details); margin: 0 0 10px; font-size: 10px; line-height: 1.5; color: var(--fg-muted); }
+#spec-10 .mini .badge{ display: inline-block; padding: 4px 12px; background: var(--accent); color: #fff; font-family: var(--font-details); font-size: 9px; font-weight: 700; border: 1px solid var(--charcoal); letter-spacing: 0.1em; }
+#spec-10 .mini .dot{ position: absolute; top: -7px; left: calc(50% - 7px); width: 14px; height: 14px; background: var(--signal); border: 1px solid var(--charcoal); border-radius: 50%; }
+#spec-10 .mini.break .dot{ left: calc(50% + 1px); transition: left 0.4s var(--ease-out); }
+#spec-10 .ruler{ position: absolute; left: 24px; bottom: 14px; font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); letter-spacing: 0.18em; text-transform: uppercase; }
+#spec-10 .label{ position: absolute; right: 24px; bottom: 14px; font-family: var(--font-details); font-size: 9px; color: var(--signal); letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; }
+
+
+/* borders-shadows */
+#spec-11{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-11 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-11 .grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+#spec-11 .demo{ background: var(--bg); padding: 14px; height: 78px; display: flex; flex-direction: column; justify-content: space-between; }
+#spec-11 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.15em; }
+#spec-11 .name{ font-family: var(--font-headers); font-weight: 700; font-size: 12px; }
+#spec-11 .spec{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+#spec-11 .b1{ border: 1px solid var(--charcoal); }
+#spec-11 .bh{ border: 1px solid var(--hairline); }
+#spec-11 .bd{ border: 1px dashed var(--grid-line-strong); }
+#spec-11 .bl{ border: 1px solid var(--charcoal); border-left: 4px solid var(--signal); }
+#spec-11 .s-sm{ border: 1px solid var(--charcoal); box-shadow: var(--shadow-sm); }
+#spec-11 .s-md{ border: 1px solid var(--charcoal); box-shadow: var(--shadow-md); }
+#spec-11 .s-lg{ border: 1px solid var(--charcoal); box-shadow: var(--shadow-lg); }
+#spec-11 .s-pin{ border: 1px solid var(--charcoal); position: relative; }
+#spec-11 .s-pin .dot{ position: absolute; top: 8px; left: calc(50% - 7px); width: 14px; height: 14px; background: var(--signal); border-radius: 50%; border: 1px solid var(--charcoal); box-shadow: var(--shadow-pin); }
+#spec-11 .header{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin: 12px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--charcoal); }
+#spec-11 .header:first-child{ margin-top: 0; }
+
+
+/* components-buttons */
+#spec-12{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-12 .card{ width: 700px; padding: 28px 24px; box-sizing: border-box; }
+#spec-12 .grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px 14px; align-items: start; }
+#spec-12 .col{ display: flex; flex-direction: column; gap: 10px; }
+#spec-12 .tag{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; }
+#spec-12 .btn{ font-family: var(--font-headers); font-weight: 700; font-size: 13px; padding: 12px 24px; border: 1px solid var(--charcoal); cursor: default; display: inline-block; text-align: center; }
+#spec-12 .btn-primary{ background: var(--signal); color: #fff; }
+#spec-12 .btn-secondary{ background: var(--bone-white); color: var(--fg); }
+#spec-12 .btn-dark{ background: var(--charcoal); color: var(--bone-white); }
+#spec-12 .btn-hover{ background: var(--accent-soft); color: var(--fg); }
+#spec-12 .btn-invert{ background: var(--charcoal); color: var(--bone-white); }
+#spec-12 .btn-disabled{ background: var(--bone-white); color: var(--fg-soft); border-color: var(--hairline); }
+#spec-12 .btn-small{ font-size: 11px; padding: 8px 16px; }
+#spec-12 .btn-link{ background: transparent; border: none; color: var(--accent); padding: 4px 0; border-bottom: 1px solid var(--accent); }
+
+
+/* components-inputs */
+#spec-13{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-13 .card{ width: 700px; padding: 24px; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+#spec-13 .field{ display: flex; flex-direction: column; gap: 6px; }
+#spec-13 .label{ font-family: var(--font-details); font-size: 10px; color: var(--fg); text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; }
+#spec-13 input, #spec-13 textarea, #spec-13 select{ font-family: var(--font-details); font-size: 13px; padding: 10px 12px; border: 1px solid var(--charcoal); background: var(--bone-white); color: var(--fg); border-radius: 2px; outline: none; box-sizing: border-box; }
+#spec-13 input:focus, #spec-13 textarea:focus{ border-color: var(--accent); box-shadow: 0 0 0 2px rgba(58,123,213,0.15); }
+#spec-13 .field.focused input{ border-color: var(--accent); box-shadow: 0 0 0 2px rgba(58,123,213,0.15); }
+#spec-13 .field.error input{ border-color: var(--signal); }
+#spec-13 .help{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); }
+#spec-13 .err{ font-family: var(--font-details); font-size: 10px; color: var(--signal); display: flex; align-items: center; gap: 6px; }
+#spec-13 .err::before{ content: ""; width: 8px; height: 8px; background: var(--signal); border-radius: 50%; border: 1px solid var(--charcoal); }
+#spec-13 textarea{ resize: vertical; min-height: 60px; }
+#spec-13 .toggle{ display: inline-flex; border: 1px solid var(--charcoal); align-items: stretch; align-self: start; }
+#spec-13 .toggle button{ font-family: var(--font-details); font-size: 11px; font-weight: 700; padding: 8px 14px; border: none; background: var(--bone-white); color: var(--fg); cursor: default; }
+#spec-13 .toggle button.on{ background: var(--charcoal); color: var(--bone-white); }
+#spec-13 .toggle .sep{ width: 1px; background: var(--charcoal); }
+
+
+/* components-nav */
+#spec-14{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-14 .card{ width: 700px; padding: 0; box-sizing: border-box; border: 1px solid var(--charcoal); background: var(--bg); }
+#spec-14 nav{ padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; }
+#spec-14 .brand{ display: flex; align-items: center; gap: 10px; font-family: var(--font-headers); font-weight: 700; font-size: 14px; letter-spacing: 0.02em; }
+#spec-14 .links{ display: flex; gap: 16px; align-items: center; }
+#spec-14 .links a{ font-family: var(--font-details); font-weight: 700; font-size: 10px; color: var(--fg); text-decoration: none; letter-spacing: 0.05em; }
+#spec-14 .links a.active{ color: var(--accent); }
+#spec-14 .lang{ display: flex; border: 1px solid var(--charcoal); }
+#spec-14 .lang button{ font-family: var(--font-details); font-weight: 700; font-size: 10px; padding: 5px 9px; border: none; background: var(--bg); cursor: default; }
+#spec-14 .lang button.on{ background: var(--charcoal); color: var(--bone-white); }
+#spec-14 .lang .sep{ width: 1px; background: var(--charcoal); }
+
+
+/* components-dept-card */
+#spec-15{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-15 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-15 .grid{ display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--charcoal); overflow: hidden; }
+#spec-15 .dept{ padding: 24px 18px; text-align: center; background: var(--bg); border-top: 4px solid transparent; }
+#spec-15 .dept.b1{ border-right: 1px solid var(--charcoal); border-bottom: 1px solid var(--charcoal); }
+#spec-15 .dept.b2{ border-bottom: 1px solid var(--charcoal); }
+#spec-15 .dept.b3{ border-right: 1px solid var(--charcoal); }
+#spec-15 .dept.hover{ border-top-color: var(--signal); background: rgba(250,222,235,0.2); }
+#spec-15 .dept img{ width: 64px; height: 64px; object-fit: contain; margin-bottom: 8px; }
+#spec-15 .dept h3{ font-family: var(--font-headers); font-weight: 700; font-size: 14px; margin: 0 0 2px; }
+#spec-15 .dept .eb{ font-family: var(--font-details); font-size: 8px; color: var(--signal); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+#spec-15 .dept p{ font-family: var(--font-details); font-size: 10px; line-height: 1.5; margin: 0; color: var(--fg-muted); }
+
+
+/* components-jargon-card */
+#spec-16{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-16 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-16 .grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+#spec-16 .fc{ border: 1px solid var(--charcoal); height: 130px; padding: 14px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg); position: relative; }
+#spec-16 .fc.back{ background: var(--bg-alt); transform: none; }
+#spec-16 .fc h4{ font-family: var(--font-headers); font-weight: 700; font-size: 10px; margin: 0 0 6px; }
+#spec-16 .fc.front h4{ color: var(--signal); }
+#spec-16 .fc.back h4{ color: var(--accent); }
+#spec-16 .fc p{ font-family: var(--font-details); font-size: 10px; line-height: 1.4; margin: 0; font-weight: 700; }
+#spec-16 .arrow{ font-family: var(--font-headers); font-weight: 700; font-size: 18px; color: var(--fg-soft); align-self: center; justify-self: center; }
+#spec-16 .row{ display: contents; }
+#spec-16 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+
+
+/* components-pinned-note */
+#spec-17{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-17 .card{ width: 700px; padding: 28px 32px; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+#spec-17 .ex{ padding-top: 4px; }
+#spec-17 .heading{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 10px; }
+
+
+/* components-pulse-dot */
+#spec-18{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-18 .card{ width: 700px; padding: 28px 24px; box-sizing: border-box; display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; align-items: center; }
+#spec-18 .left{ display: flex; align-items: center; gap: 14px; justify-content: center; padding: 32px 0; border: 1px solid var(--hairline); background: var(--bg); }
+#spec-18 .wordmark{ font-family: var(--font-headers); font-weight: 700; font-size: 22px; letter-spacing: 0.02em; }
+#spec-18 .right{ font-family: var(--font-details); font-size: 11px; line-height: 1.7; color: var(--fg); }
+#spec-18 .right .row{ padding: 4px 0; border-bottom: 1px dashed var(--grid-line-strong); display: flex; justify-content: space-between; }
+#spec-18 .right .row:last-child{ border-bottom: none; }
+#spec-18 .right b{ font-family: var(--font-headers); font-weight: 700; }
+#spec-18 .heading{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 8px; }
+
+
+/* components-accordion */
+#spec-19{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-19 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-19 .item{ border: 1px solid var(--charcoal); background: var(--bg); margin-bottom: 10px; }
+#spec-19 .item:last-child{ margin-bottom: 0; }
+#spec-19 .head{ padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-headers); font-weight: 700; font-size: 14px; cursor: default; }
+#spec-19 .head .plus{ color: var(--accent); font-size: 22px; line-height: 1; transition: transform 0.3s; font-family: var(--font-details); }
+#spec-19 .item.open .head{ background: var(--accent-soft); border-bottom: 1px solid var(--hairline); }
+#spec-19 .item.open .plus{ transform: rotate(45deg); }
+#spec-19 .body{ padding: 14px 18px; border-top: 1px solid var(--hairline); font-family: var(--font-details); font-size: 11px; line-height: 1.6; color: var(--fg-muted); }
+#spec-19 .body strong{ font-family: var(--font-headers); font-weight: 600; color: var(--fg); }
+
+
+/* components-transparency-table */
+#spec-20{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-20 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-20 .table{ border: 1px solid var(--charcoal); display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); }
+#spec-20 .col{ padding: 20px 22px; }
+#spec-20 .col.left{ border-right: 1px solid var(--charcoal); }
+#spec-20 h3{ font-family: var(--font-headers); font-size: 15px; font-weight: 700; margin: 0 0 14px; text-align: center; }
+#spec-20 .row{ display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px dashed var(--grid-line-strong); font-family: var(--font-details); font-size: 12px; }
+#spec-20 .row:last-child{ border-bottom: none; }
+#spec-20 .row .price{ font-family: var(--font-headers); font-weight: 700; color: var(--fg); }
+#spec-20 .row.free .price{ color: var(--accent); }
+#spec-20 .foot{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); font-style: italic; margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--hairline); line-height: 1.5; }
+
+
+/* brand-logo-system */
+#spec-21{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-21 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-21 .grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#spec-21 .lbox{ border: 1px solid var(--charcoal); display: flex; flex-direction: column; }
+#spec-21 .lbox .img{ padding: 16px 18px; display: flex; align-items: center; justify-content: flex-start; min-height: 64px; background: var(--bg); }
+#spec-21 .lbox .img.dark{ background: var(--charcoal); }
+#spec-21 .lbox .img img{ max-height: 28px; width: auto; object-fit: contain; }
+#spec-21 .lbox .meta{ display: flex; justify-content: space-between; padding: 8px 12px; border-top: 1px solid var(--hairline); background: var(--bg); font-family: var(--font-details); font-size: 10px; }
+#spec-21 .meta b{ font-family: var(--font-headers); font-weight: 700; }
+#spec-21 .meta span{ color: var(--fg-soft); }
+#spec-21 .live{ padding: 16px 18px; display: flex; align-items: center; gap: 10px; }
+#spec-21 .wordmark{ font-family: var(--font-headers); font-weight: 700; font-size: 16px; letter-spacing: 0.02em; }
+
+
+/* brand-icon-system */
+#spec-22{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-22 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-22 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+#spec-22 .grid{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+#spec-22 .ic{ border: 1px solid var(--charcoal); padding: 12px 6px 8px; background: var(--bg); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+#spec-22 .ic img{ width: 56px; height: 56px; object-fit: contain; background: transparent; }
+#spec-22 .ic .icon-name{ font-family: var(--font-details); font-size: 8px; color: var(--fg-muted); text-transform: uppercase; letter-spacing: 0.1em; text-align: center; border-top: 1px dashed var(--grid-line-strong); padding-top: 5px; width: 100%; }
+#spec-22 .ic .dept{ font-family: var(--font-headers); font-size: 9px; font-weight: 700; color: var(--fg); text-transform: uppercase; letter-spacing: 0.06em; text-align: center; }
+#spec-22 .foot{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); line-height: 1.5; margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--grid-line-strong); }
+#spec-22 .foot strong{ font-family: var(--font-headers); font-weight: 700; color: var(--signal); }
+
+
+/* brand-dept-icons */
+#spec-23{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-23 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-23 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+#spec-23 .grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+#spec-23 .ic{ border: 1px solid var(--charcoal); padding: 12px; background: var(--bg); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+#spec-23 .ic img{ width: 80px; height: 80px; object-fit: contain; background: transparent; }
+#spec-23 .ic .name{ font-family: var(--font-headers); font-weight: 700; font-size: 11px; text-align: center; line-height: 1.3; }
+#spec-23 .ic .eb{ font-family: var(--font-details); font-size: 8px; color: var(--signal); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+
+
+/* brand-bridge-motif */
+#spec-24{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-24 .card{ width: 700px; padding: 24px; box-sizing: border-box; display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; }
+#spec-24 .img{ background: var(--bg-alt); border: 1px solid var(--charcoal); padding: 18px; display: flex; align-items: center; justify-content: center; }
+#spec-24 .img img{ width: 100%; max-width: 280px; height: auto; }
+#spec-24 .right{ font-family: var(--font-body); font-size: 11px; line-height: 1.65; }
+#spec-24 .right h3{ font-family: var(--font-headers); font-weight: 700; font-size: 16px; margin: 0 0 6px; }
+#spec-24 .right .eb{ font-family: var(--font-details); font-size: 9px; color: var(--signal); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; display: block; }
+#spec-24 .right p{ margin: 0 0 8px; color: var(--fg-muted); }
+#spec-24 .right p i{ color: var(--fg); font-style: italic; }
+
+
+/* brand-abstract-art */
+#spec-25{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-25 .card{ width: 700px; padding: 24px; box-sizing: border-box; }
+#spec-25 .label{ font-family: var(--font-details); font-size: 9px; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 12px; display: block; }
+#spec-25 .banner{ width: 100%; height: 130px; object-fit: cover; border: 1px solid var(--charcoal); display: block; margin-bottom: 10px; }
+#spec-25 .row{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#spec-25 .row .sq{ width: 100%; aspect-ratio: 1/1; object-fit: cover; border: 1px solid var(--charcoal); }
+#spec-25 .row .sq.tall{ aspect-ratio: 16/10; }
+#spec-25 .foot{ font-family: var(--font-details); font-size: 10px; color: var(--fg-muted); line-height: 1.5; margin-top: 12px; }
+
+
+/* brand-photography */
+#spec-26{ margin: 0; padding: 0; background: transparent; background-image: none; }
+#spec-26 .card{ width: 700px; padding: 0; box-sizing: border-box; border: 1px solid var(--charcoal); position: relative; overflow: hidden; }
+#spec-26 .photo{ width: 100%; height: 280px; object-fit: cover; display: block; filter: contrast(0.92) saturate(0.85); }
+#spec-26 .overlay{ position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 22px; background: linear-gradient(to top, rgba(45,45,45,0.55), transparent 65%); color: var(--bone-white); }
+#spec-26 .eb{ font-family: var(--font-details); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #FADEEB; margin-bottom: 8px; }
+#spec-26 h2{ font-family: var(--font-headers); font-size: 24px; font-weight: 700; margin: 0; letter-spacing: -0.005em; line-height: 1.15; max-width: 70%; }
+#spec-26 p{ font-family: var(--font-details); font-size: 11px; margin: 8px 0 0; max-width: 60%; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+
+  </style>
+</head>
+<body>
+  <main class="book">
+    <section class="cover" data-screen-label="Cover">
+      <div class="brand">
+        <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+        <span class="brand-name">Digital Allies</span>
+      </div>
+      <span class="eb">Brand System · Style Manual</span>
+      <h1>The Digital Allies Brand System.</h1>
+      <p class="lede">Voice, color, type, spacing, components, and brand assets — the complete operating manual for designing on-brand for Anthony's shop in Kingman, Arizona. "Technological solutions for people with better things to do."</p>
+      <div class="toc">
+        <div class="toc-item"><span class="tn">01</span><span class="tt">Voice &amp; Tone</span><span class="td">2 specimens</span></div>
+        <div class="toc-item"><span class="tn">02</span><span class="tt">Color</span><span class="td">3 specimens</span></div>
+        <div class="toc-item"><span class="tn">03</span><span class="tt">Typography</span><span class="td">3 specimens</span></div>
+        <div class="toc-item"><span class="tn">04</span><span class="tt">Spacing &amp; Structure</span><span class="td">3 specimens</span></div>
+        <div class="toc-item"><span class="tn">05</span><span class="tt">Components</span><span class="td">9 specimens</span></div>
+        <div class="toc-item"><span class="tn">06</span><span class="tt">Brand &amp; Assets</span><span class="td">6 specimens</span></div>
+      </div>
+      <div class="meta-row">
+        <span><b>Digital Allies</b> · Est. 2024 · Kingman, AZ</span>
+        <span>contact@digitalallies.net · (928) 228-5769</span>
+      </div>
+    </section>
+
+  <section class="book-section" data-screen-label="Voice & Tone">
+    <div class="sec-divider">
+      <span class="sec-num">Section 01</span>
+      <h2 class="sec-title">Voice & Tone</h2>
+      <span class="sec-cap">How Digital Allies sounds</span>
+    </div>
+    
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Voice · Tone Coordinates</span>
+          <span class="spec-sub">Casual 65 · Dry 55 · Plain 70 · Confident 75 · Authentic 100</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-1" class="spec-host">
+  <div class="card">
+    <span class="label">The Tone Coordinates — calibrated, not vague</span>
+    <div class="row">
+      <div class="row-head"><span>Formal ←→ Casual</span><span class="val">65% casual</span></div>
+      <div class="track"><div class="thumb" style="left:65%"></div></div>
+    </div>
+    <div class="row">
+      <div class="row-head"><span>Dry ←→ Warm</span><span class="val">55% dry</span></div>
+      <div class="track"><div class="thumb" style="left:45%"></div></div>
+    </div>
+    <div class="row">
+      <div class="row-head"><span>Technical ←→ Plain</span><span class="val">70% plain</span></div>
+      <div class="track"><div class="thumb" style="left:70%"></div></div>
+    </div>
+    <div class="row">
+      <div class="row-head"><span>Confident ←→ Eager</span><span class="val">75% confident</span></div>
+      <div class="track"><div class="thumb" style="left:25%"></div></div>
+    </div>
+    <div class="row">
+      <div class="row-head"><span>Performing ←→ Authentic</span><span class="val">100% authentic</span></div>
+      <div class="track"><div class="thumb" style="left:100%"></div></div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Voice · Jargon Table</span>
+          <span class="spec-sub">Corporate speak ↔ DA translation as a brand rule</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-2" class="spec-host">
+  <div class="card da-lace">
+    <span class="label">The Jargon Jar — the brand's translation rule</span>
+    <table>
+      <tr><th>Corporate Speak</th><th></th><th class="right">DA Translation</th></tr>
+      <tr><td class="from">"Leverage synergies"</td><td class="arrow">→</td><td class="to">"Make the parts work together."</td></tr>
+      <tr><td class="from">"Scalable solutions"</td><td class="arrow">→</td><td class="to">"It works now and won't fall apart later."</td></tr>
+      <tr><td class="from">"Robust backend"</td><td class="arrow">→</td><td class="to">"Quiet stuff so nothing crashes."</td></tr>
+      <tr><td class="from">"Holistic brand alignment"</td><td class="arrow">→</td><td class="to">"Your logo and site look like they know each other."</td></tr>
+      <tr><td class="from">"Onboarding optimization"</td><td class="arrow">→</td><td class="to">"Getting started without the runaround."</td></tr>
+    </table>
+  </div>
+</div></div>
+      </figure>
+  </section>
+  <section class="book-section" data-screen-label="Color">
+    <div class="sec-divider">
+      <span class="sec-num">Section 02</span>
+      <h2 class="sec-title">Color</h2>
+      <span class="sec-cap">The 95/5 rule</span>
+    </div>
+    
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Core Palette</span>
+          <span class="spec-sub">The five anchor colors — Bone White, Charcoal, Pulse Blue, Light Pink, Signal Red</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-3" class="spec-host">
+  <div class="card da-lace">
+    <div class="swatches">
+      <div class="sw">
+        <div class="sw-chip" style="background: var(--bone-white)"></div>
+        <div class="sw-meta"><span class="sw-name">Bone White</span><span class="sw-hex">#F9F6F0</span><span class="sw-role">Canvas · 75%</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background: var(--charcoal)"></div>
+        <div class="sw-meta"><span class="sw-name">Charcoal</span><span class="sw-hex">#2D2D2D</span><span class="sw-role">Structure · 20%</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background: var(--pulse-blue)"></div>
+        <div class="sw-meta"><span class="sw-name">Pulse Blue</span><span class="sw-hex">#3A7BD5</span><span class="sw-role">Action · live</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background: var(--light-pink)"></div>
+        <div class="sw-meta"><span class="sw-name">Light Pink</span><span class="sw-hex">#FADEEB</span><span class="sw-role">Hover wash</span></div>
+      </div>
+      <div class="sw">
+        <div class="sw-chip" style="background: var(--signal-red)"><span class="da-signal-dot" style="background:#fff; border-color:#fff"></span></div>
+        <div class="sw-meta"><span class="sw-name">Signal Red</span><span class="sw-hex">#C5301A</span><span class="sw-role">POI · 5%</span></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">The 95/5 Rule</span>
+          <span class="spec-sub">75% canvas + 20% structure + 5% signal — never stacked</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-4" class="spec-host">
+  <div class="card da-lace">
+    <div class="bar">
+      <div class="seg-bone"><span class="seg-label">75% Bone White</span></div>
+      <div class="seg-char"></div>
+      <div class="seg-signal"></div>
+    </div>
+    <div class="legend">
+      <div class="leg"><div class="swat" style="background:var(--bone-white)"></div><div class="leg-text"><strong>Canvas · 75%</strong>Bone White does the heavy lifting.</div></div>
+      <div class="leg"><div class="swat" style="background:var(--charcoal)"></div><div class="leg-text"><strong>Structure · 20%</strong>Charcoal text + 1 px borders.</div></div>
+      <div class="leg"><div class="swat" style="background:var(--signal-red)"></div><div class="leg-text"><strong>Signal · 5%</strong>The one moment of red, and only one.</div></div>
+    </div>
+    <p class="quote">"95% of the canvas serves the 5% masterpiece. When I signal the user, the signal is absolute."</p>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Semantic Tokens</span>
+          <span class="spec-sub">CSS vars: bg, fg, accent, signal, border</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-5" class="spec-host">
+  <div class="card da-lace">
+    <div class="header"><span></span><span class="h">Token</span><span class="h">CSS Var</span><span class="h">Use</span></div>
+    <div class="row"><div class="chip" style="background:var(--bg)"></div><span class="name">bg</span><span class="var">--bg / --bone-white</span><span class="use">page canvas</span></div>
+    <div class="row"><div class="chip" style="background:var(--bg-alt)"></div><span class="name">bg-alt</span><span class="var">--bg-alt</span><span class="use">pinned notes, quotes</span></div>
+    <div class="row"><div class="chip" style="background:var(--fg)"></div><span class="name">fg</span><span class="var">--fg / --charcoal</span><span class="use">all body + heading text</span></div>
+    <div class="row"><div class="chip" style="background:var(--fg-muted)"></div><span class="name">fg-muted</span><span class="var">--fg-muted</span><span class="use">secondary body, captions</span></div>
+    <div class="row"><div class="chip" style="background:var(--accent)"></div><span class="name">accent</span><span class="var">--accent / --pulse-blue</span><span class="use">links, live state, pulse dot</span></div>
+    <div class="row"><div class="chip" style="background:var(--accent-soft)"></div><span class="name">accent-soft</span><span class="var">--accent-soft / --light-pink</span><span class="use">hover wash, highlight plate</span></div>
+    <div class="row"><div class="chip" style="background:var(--signal)"></div><span class="name">signal</span><span class="var">--signal / --signal-red</span><span class="use">primary CTA, POI marker</span></div>
+    <div class="row"><div class="chip" style="background:var(--border); border-color:transparent"></div><span class="name">border</span><span class="var">--border (1 px solid)</span><span class="use">the structural-border</span></div>
+  </div>
+</div></div>
+      </figure>
+  </section>
+  <section class="book-section" data-screen-label="Typography">
+    <div class="sec-divider">
+      <span class="sec-num">Section 03</span>
+      <h2 class="sec-title">Typography</h2>
+      <span class="sec-cap">Lexend Deca + JetBrains Mono</span>
+    </div>
+    
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Type — Display & Headings</span>
+          <span class="spec-sub">Lexend Deca display + H1–H4 step-down</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-6" class="spec-host">
+  <div class="card da-lace">
+    <div style="margin-bottom: 14px;"><span class="local-badge">Lexend Deca · Local · Variable 100–900</span></div>
+    <div class="row">
+      <div class="meta"><b>Display</b>64 / 700 / −0.01em</div>
+      <h1 class="da-display" style="font-size: 44px; margin: 0;">Solutions.</h1>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H1</b>40 / 700 / −0.005em</div>
+      <h1 style="margin: 0; font-size: 32px;">The Departments</h1>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H2</b>30 / 700</div>
+      <h2 style="margin: 0; font-size: 24px;">Strategy is Free.</h2>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H3</b>18 / 600</div>
+      <h3 style="margin: 0;">Dept. of Cooperation</h3>
+    </div>
+    <div class="row">
+      <div class="meta"><b>H4</b>14 / 700</div>
+      <h4 style="margin: 0;">Corporate Speak</h4>
+    </div>
+    <div class="row">
+      <div class="meta"><b>Weight range</b>Thin → Black</div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline;">
+        <span style="font-family: var(--font-headers); font-weight: 100; font-size: 18px; color: var(--fg-muted);">Thin</span>
+        <span style="font-family: var(--font-headers); font-weight: 300; font-size: 18px; color: var(--fg-muted);">Light</span>
+        <span style="font-family: var(--font-headers); font-weight: 400; font-size: 18px;">Regular</span>
+        <span style="font-family: var(--font-headers); font-weight: 500; font-size: 18px;">Medium</span>
+        <span style="font-family: var(--font-headers); font-weight: 600; font-size: 18px;">SemiBold</span>
+        <span style="font-family: var(--font-headers); font-weight: 700; font-size: 18px;">Bold</span>
+        <span style="font-family: var(--font-headers); font-weight: 800; font-size: 18px;">ExtraBold</span>
+        <span style="font-family: var(--font-headers); font-weight: 900; font-size: 18px;">Black</span>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Type — Body & Mono</span>
+          <span class="spec-sub">Lexend Deca specimen + JetBrains Mono specimen</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-7" class="spec-host">
+  <div class="card">
+    <div style="display: flex; gap: 6px;">
+      <span class="local-badge">Lexend Deca · Local · 100–900</span>
+      <span class="local-badge">JetBrains Mono · Local · 100–800 + Italic</span>
+    </div>
+    <div class="cols">
+      <div class="col alt">
+        <span class="tag">Lexend Deca · Headers</span>
+        <div class="glyphs">Aa Bb Cc</div>
+        <p class="desc">High x-height for scannability under glare. Titles, card headers, action callouts.</p>
+        <div class="specs">
+          <div><b>H1 Title</b> · 700</div>
+          <div style="font-weight: 600;">H2 Subtitle · 600</div>
+          <div style="font-weight: 500;">H3 Body Lead · 500</div>
+        </div>
+      </div>
+      <div class="col">
+        <span class="tag">JetBrains Mono · Body</span>
+        <div class="glyphs mono">Aa Bb Cc</div>
+        <p class="desc">Enforces alignment. Body, prices, tables, system parameters, manual instructions.</p>
+        <div class="specs">
+          <div style="font-weight: 600;">SYSTEM = #2D2D2D</div>
+          <div>Phase 1 · ($0.00)</div>
+          <div style="font-style: italic;">Last updated 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="weight-strip">
+      <span class="tag">JetBrains Mono · Weight range + italic</span>
+      <div class="weights">
+        <div class="wt" style="font-weight: 100;"><span class="n">100</span>Thin</div>
+        <div class="wt" style="font-weight: 200;"><span class="n">200</span>ExtraLight</div>
+        <div class="wt" style="font-weight: 300;"><span class="n">300</span>Light</div>
+        <div class="wt" style="font-weight: 400;"><span class="n">400</span>Regular</div>
+        <div class="wt" style="font-weight: 500;"><span class="n">500</span>Medium</div>
+        <div class="wt" style="font-weight: 600;"><span class="n">600</span>SemiBold</div>
+        <div class="wt" style="font-weight: 700;"><span class="n">700</span>Bold</div>
+        <div class="wt" style="font-weight: 800;"><span class="n">800</span>ExtraBold</div>
+        <div class="wt" style="font-weight: 400; font-style: italic;"><span class="n">Italic</span>Phase→1</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Type — Eyebrow & CTA</span>
+          <span class="spec-sub">Uppercase tracked eyebrows + the bracketed-CTA pattern</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-8" class="spec-host">
+  <div class="card da-lace">
+    <div><span class="local-badge">All fonts local · No network request</span></div>
+
+    <div class="ex">
+      <span class="label">Eyebrow · signal-red, tracked widest · JetBrains Mono 700</span>
+      <span class="da-eyebrow">Based in Kingman, AZ &middot; Serving Everywhere Else</span>
+      <div class="spec-row">
+        <div class="spec-item"><b>Family</b>JetBrains Mono</div>
+        <div class="spec-item"><b>Size</b>10px</div>
+        <div class="spec-item"><b>Weight</b>700</div>
+        <div class="spec-item"><b>Tracking</b>0.18em</div>
+        <div class="spec-item"><b>Color</b>--signal-red</div>
+      </div>
+    </div>
+
+    <div class="ex">
+      <span class="label">Eyebrow + display headline — the brand's lobby pattern</span>
+      <span class="da-eyebrow" style="margin-bottom: 14px; display: block;">Identity &middot; Style Manual &middot; Spec Sheet</span>
+      <div class="display-mock">Technological Solutions for People with Better Things to Do.</div>
+    </div>
+
+    <div class="ex">
+      <span class="label">Bracketed CTA — the brand's button label convention · Lexend Deca 700 13px</span>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-top: 4px;">
+        <span class="cta-mock">[ Inquire Within ]</span>
+        <span class="cta-mock">[ View the Diagrams ]</span>
+        <span class="cta-mock" style="color: var(--signal);">[ Report a Signal ]</span>
+      </div>
+    </div>
+
+    <div class="ex">
+      <span class="label">Tagline — Lexend Deca 600 18px · used in card intros</span>
+      <span class="da-tagline">We translate the internet into plain English.</span>
+    </div>
+  </div>
+</div></div>
+      </figure>
+  </section>
+  <section class="book-section" data-screen-label="Spacing & Structure">
+    <div class="sec-divider">
+      <span class="sec-num">Section 04</span>
+      <h2 class="sec-title">Spacing & Structure</h2>
+      <span class="sec-cap">The 20px Technical Lace grid</span>
+    </div>
+    
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Spacing Scale</span>
+          <span class="spec-sub">4 px sub-units anchored to the 20 px Technical Lace grid</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-9" class="spec-host">
+  <div class="card da-lace">
+    <div class="row"><span class="name">space-1</span><div class="bar" style="width:4px"></div><span class="px">4px</span></div>
+    <div class="row"><span class="name">space-2</span><div class="bar" style="width:8px"></div><span class="px">8px</span></div>
+    <div class="row"><span class="name">space-3</span><div class="bar" style="width:12px"></div><span class="px">12px</span></div>
+    <div class="row"><span class="name">space-4</span><div class="bar" style="width:16px"></div><span class="px">16px</span></div>
+    <div class="row"><span class="name">space-5 ◆</span><div class="bar" style="width:20px; background: var(--signal)"></div><span class="px">20px · lace</span></div>
+    <div class="row"><span class="name">space-6</span><div class="bar" style="width:24px"></div><span class="px">24px</span></div>
+    <div class="row"><span class="name">space-8</span><div class="bar" style="width:32px"></div><span class="px">32px</span></div>
+    <div class="row"><span class="name">space-10</span><div class="bar" style="width:40px"></div><span class="px">40px</span></div>
+    <div class="row"><span class="name">space-12</span><div class="bar" style="width:48px"></div><span class="px">48px</span></div>
+    <div class="row"><span class="name">space-16</span><div class="bar" style="width:64px"></div><span class="px">64px</span></div>
+    <div class="row"><span class="name">space-20</span><div class="bar" style="width:80px"></div><span class="px">80px · section</span></div>
+    <p class="note">◆ 20 px is the Technical Lace baseline. Everything else is 4 px multiples derived from it. "2× the padding of a generic template" is the rule.</p>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Technical Lace & Symmetry Break</span>
+          <span class="spec-sub">Ruled-paper 20 px grid + the +8 px red-dot offset</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-10" class="spec-host">
+  <div class="card">
+    <div class="stage">
+      <div class="mini break">
+        <div class="dot"></div>
+        <h4>Visual Balance</h4>
+        <p>Red dot nudged +8 px right of center: a calculated "visual itch."</p>
+        <span class="badge">ALIGNED</span>
+      </div>
+      <span class="ruler">[ Technical Lace · 20 px ]</span>
+      <span class="label">◆ Symmetry Break</span>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Borders & Shadows</span>
+          <span class="spec-sub">Structural 1 px + hairline + dashed + pinned variants</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-11" class="spec-host">
+  <div class="card da-lace">
+    <div class="header">Borders — corners stay square</div>
+    <div class="grid">
+      <div class="demo b1"><span class="label">structural</span><span class="name">1 px</span><span class="spec">solid #2D2D2D</span></div>
+      <div class="demo bh"><span class="label">hairline</span><span class="name">15%</span><span class="spec">card divider</span></div>
+      <div class="demo bd"><span class="label">dashed</span><span class="name">price row</span><span class="spec">18% charcoal</span></div>
+      <div class="demo bl"><span class="label">pinned</span><span class="name">red 4 px</span><span class="spec">+ solid 1 px</span></div>
+    </div>
+    <div class="header">Shadows — used sparingly</div>
+    <div class="grid">
+      <div class="demo s-sm"><span class="label">resting</span><span class="name">shadow-sm</span><span class="spec">0 1 2 / 4%</span></div>
+      <div class="demo s-md"><span class="label">live demo</span><span class="name">shadow-md</span><span class="spec">0 6 12 / 6%</span></div>
+      <div class="demo s-lg"><span class="label">hover lift</span><span class="name">shadow-lg</span><span class="spec">0 16 32 / 8%</span></div>
+      <div class="demo s-pin"><div class="dot"></div><span class="label" style="margin-top:14px">red pin</span><span class="name">shadow-pin</span><span class="spec">0 2 4 / 20%</span></div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+  </section>
+  <section class="book-section" data-screen-label="Components">
+    <div class="sec-divider">
+      <span class="sec-num">Section 05</span>
+      <h2 class="sec-title">Components</h2>
+      <span class="sec-cap">The working parts</span>
+    </div>
+    
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Buttons</span>
+          <span class="spec-sub">Primary CTA, secondary, dark, hover, pressed, disabled</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-12" class="spec-host">
+  <div class="card da-lace">
+    <div class="grid">
+      <div class="col"><span class="tag">Primary · CTA</span><span class="btn btn-primary">[ Inquire Within ]</span></div>
+      <div class="col"><span class="tag">Secondary</span><span class="btn btn-secondary">[ View the Diagrams ]</span></div>
+      <div class="col"><span class="tag">Dark · Download</span><span class="btn btn-dark">Download PDF</span></div>
+      <div class="col"><span class="tag">Hover wash</span><span class="btn btn-hover">[ Inquire Within ]</span></div>
+      <div class="col"><span class="tag">Pressed · invert</span><span class="btn btn-invert">[ View the Diagrams ]</span></div>
+      <div class="col"><span class="tag">Disabled</span><span class="btn btn-disabled">[ Not Available ]</span></div>
+      <div class="col"><span class="tag">Small · pill row</span><span class="btn btn-secondary btn-small">Show All</span></div>
+      <div class="col"><span class="tag">Small · active</span><span class="btn btn-dark btn-small">Show All</span></div>
+      <div class="col"><span class="tag">Inline link</span><a class="btn-link">View the FAQ →</a></div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Form Fields</span>
+          <span class="spec-sub">Inputs, textarea, EN|ES toggle, error state</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-13" class="spec-host">
+  <div class="card">
+    <div class="field"><span class="label">Name</span><input type="text" placeholder="Your name"><span class="help">As you'd like to be greeted</span></div>
+    <div class="field focused"><span class="label">Email · focused</span><input type="email" value="anthony@digitalallies.net"></div>
+    <div class="field"><span class="label">What are you trying to do?</span><textarea placeholder="Give me the short version. We can fill in details later."></textarea></div>
+    <div class="field error"><span class="label">Phone · error</span><input type="tel" value="(928) 228-"><span class="err">Looks incomplete — try a full number.</span></div>
+    <div class="field"><span class="label">Language</span><div class="toggle"><button class="on">EN</button><div class="sep"></div><button>ES</button></div></div>
+    <div class="field"><span class="label">Newsletter</span>
+      <label style="display:flex; align-items:center; gap:8px; font-family:var(--font-details); font-size:12px"><input type="checkbox" style="width:14px; height:14px; padding:0">Yes, send me field notes.</label>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Top Nav</span>
+          <span class="spec-sub">Pulse dot lockup, link row, EN|ES toggle</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-14" class="spec-host">
+  <div class="card">
+    <nav>
+      <div class="brand">
+        <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+        <span>Digital Allies</span>
+      </div>
+      <div class="links">
+        <a href="#" class="active">Services</a>
+        <a href="#">Pricing</a>
+        <a href="#">Reviews</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+        <div class="lang"><button class="on">EN</button><div class="sep"></div><button>ES</button></div>
+      </div>
+    </nav>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Department Cards</span>
+          <span class="spec-sub">4-up services grid with hover-wash and red top-border</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-15" class="spec-host">
+  <div class="card">
+    <div class="grid">
+      <div class="dept b1">
+        <img src="assets/design-icon.png" alt="">
+        <h3>The Design Bureau</h3>
+        <span class="eb">Design &amp; Brand</span>
+        <p>Polished visuals that look like you meant it.</p>
+      </div>
+      <div class="dept b2 hover">
+        <img src="assets/integrations-icon.png" alt="">
+        <h3>Dept. of Cooperation</h3>
+        <span class="eb">Integrations</span>
+        <p>Your apps talk to each other without arguing.</p>
+      </div>
+      <div class="dept b3">
+        <img src="assets/automation-icon.png" alt="">
+        <h3>Self-Governing Bureau</h3>
+        <span class="eb">Automation</span>
+        <p>Boring repetitive stuff runs automatically.</p>
+      </div>
+      <div class="dept">
+        <img src="assets/support-icon.png" alt="">
+        <h3>Observation Post</h3>
+        <span class="eb">Support</span>
+        <p>If something breaks at 2am, that's my problem.</p>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Jargon Jar Card</span>
+          <span class="spec-sub">Flip-card pair — corporate speak ↔ DA translation</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-16" class="spec-host">
+  <div class="card da-lace">
+    <span class="label">Jargon Jar — click-to-flip card pair (front + back)</span>
+    <div class="grid">
+      <div class="fc front">
+        <h4>Corporate Speak</h4>
+        <p>"Leverage synergies across touchpoints"</p>
+      </div>
+      <div class="fc back">
+        <h4>DA Translation</h4>
+        <p>"Make the parts work together."</p>
+      </div>
+      <div class="fc front">
+        <h4>Corporate Speak</h4>
+        <p>"Robust backend infrastructure"</p>
+      </div>
+      <div class="fc back">
+        <h4>DA Translation</h4>
+        <p>"Quiet stuff running behind the scenes so nothing crashes."</p>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Pinned Note</span>
+          <span class="spec-sub">Yellow-paper card + red 4 px pin — used for pull quotes</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-17" class="spec-host">
+  <div class="card da-lace">
+    <div class="ex">
+      <div class="heading">The Pinned Note · pull quote</div>
+      <div class="da-pinned">
+        <p style="margin:0; font-style:italic; font-size:12px; line-height:1.6;">
+          "Clean engineering, clear communication, and follow-through that won't require follow up."
+        </p>
+      </div>
+    </div>
+    <div class="ex">
+      <div class="heading">Manual registry · field-note variant</div>
+      <div class="da-pinned" style="text-align:center; padding-top:36px">
+        <span class="da-spec" style="display:block; margin-bottom:8px; text-transform:uppercase; letter-spacing:0.18em; font-size:9px;">Manual Registry</span>
+        <p style="margin:0; font-style:italic; font-size:11px; line-height:1.5; color:var(--fg-muted)">
+          "If you need a glossary to read your website, you've already lost them."
+        </p>
+        <span class="da-spec" style="display:block; margin-top:10px; text-align:right; font-size:9px; font-weight:700">— Jargon Protocol</span>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Pulse Dot Logo</span>
+          <span class="spec-sub">Animated blue dot + ring — the only continuous animation</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-18" class="spec-host">
+  <div class="card">
+    <div class="left">
+      <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+      <span class="wordmark">Digital Allies</span>
+    </div>
+    <div class="right">
+      <div class="heading">The Pulse Dot</div>
+      <div class="row"><span><b>Dot</b></span><span>12 × 12 px · Pulse Blue</span></div>
+      <div class="row"><span><b>Ring</b></span><span>16 × 16 px · scale 1→2.4×</span></div>
+      <div class="row"><span><b>Border</b></span><span>1 px Charcoal</span></div>
+      <div class="row"><span><b>Pulse</b></span><span>3 s ease-in-out infinite</span></div>
+      <div class="row"><span><b>Ring</b></span><span>2.2 s ease-out infinite</span></div>
+      <div class="row"><span><b>Use</b></span><span>logo · live indicator</span></div>
+      <div class="row"><span><b>Rule</b></span><span>only continuous animation</span></div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Diagram Accordion</span>
+          <span class="spec-sub">Bordered details list with rotating + glyph</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-19" class="spec-host">
+  <div class="card da-lace">
+    <div class="item open">
+      <div class="head"><span>AEO &amp; SEO Architecture</span><span class="plus">+</span></div>
+      <div class="body">Getting found by search engines is a structural problem. I review the foundation and fix the parts that keep you invisible. <strong>Discover → Design → Build → Maintain.</strong></div>
+    </div>
+    <div class="item">
+      <div class="head"><span>The Four-Step Process</span><span class="plus">+</span></div>
+    </div>
+    <div class="item">
+      <div class="head"><span>Language &amp; Accessibility Architecture</span><span class="plus">+</span></div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Transparency Table</span>
+          <span class="spec-sub">Free / Paid split with dashed price rows</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-20" class="spec-host">
+  <div class="card">
+    <div class="table">
+      <div class="col left">
+        <h3>The Reciprocity Loop</h3>
+        <div class="row free"><span>Tech Consulting</span><span class="price">Free</span></div>
+        <div class="row free"><span>AI Consulting</span><span class="price">Free</span></div>
+        <div class="row free"><span>Brand Discovery</span><span class="price">Free</span></div>
+        <div class="row free"><span>AEO &amp; SEO Review</span><span class="price">Free</span></div>
+        <p class="foot">I do not charge for conversations or clarity. Call it a professional courtesy.</p>
+      </div>
+      <div class="col">
+        <h3>Tactical Deployments</h3>
+        <div class="row"><span>Website Design</span><span class="price">From $100</span></div>
+        <div class="row"><span>Graphic Design</span><span class="price">From $75</span></div>
+        <div class="row"><span>Full Project</span><span class="price">From $100</span></div>
+        <div class="row"><span>Monthly Maintenance</span><span class="price">From $50</span></div>
+        <p class="foot">All quotes given before work begins. No surprises. No silent scope creep.</p>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+  </section>
+  <section class="book-section" data-screen-label="Brand & Assets">
+    <div class="sec-divider">
+      <span class="sec-num">Section 06</span>
+      <h2 class="sec-title">Brand & Assets</h2>
+      <span class="sec-cap">Logo, icons, imagery</span>
+    </div>
+    
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Logo Lockups</span>
+          <span class="spec-sub">Live pulse-dot + horizontal banner variants + favicon</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-21" class="spec-host">
+  <div class="card da-lace">
+    <div class="grid">
+      <div class="lbox">
+        <div class="live"><span class="da-pulse-stack"><span class="da-pulse"></span></span><span class="wordmark">Digital Allies</span></div>
+        <div class="meta"><b>Pulse lockup (live)</b><span>Primary</span></div>
+      </div>
+      <div class="lbox">
+        <div class="img"><img src="assets/logo-banner-blue.png" alt=""></div>
+        <div class="meta"><b>Banner · blue</b><span>logo-banner-blue.png</span></div>
+      </div>
+      <div class="lbox">
+        <div class="img"><img src="assets/logo-banner-vermilion.png" alt=""></div>
+        <div class="meta"><b>Banner · vermilion</b><span>logo-banner-vermilion.png</span></div>
+      </div>
+      <div class="lbox">
+        <div class="img dark"><img src="assets/logo-banner-vermilion-glow.png" alt=""></div>
+        <div class="meta"><b>Banner · glow on dark</b><span>logo-banner-vermilion-glow.png</span></div>
+      </div>
+      <div class="lbox">
+        <div class="img"><img src="assets/logo-wordmark.png" alt="" style="max-height:24px"></div>
+        <div class="meta"><b>Wordmark only</b><span>logo-wordmark.png</span></div>
+      </div>
+      <div class="lbox">
+        <div class="img" style="justify-content:center"><img src="assets/favicon.svg" alt="" style="max-height:32px"></div>
+        <div class="meta"><b>Favicon · red square</b><span>favicon.svg</span></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Artifact Icons</span>
+          <span class="spec-sub">Topo, compass, rotary phone, metronome, engine, Route 66</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-22" class="spec-host">
+  <div class="card da-lace">
+    <span class="label">The Artifact Icons — 1 px line-art, optional red focal dot</span>
+    <div class="grid">
+      <div class="ic">
+        <img src="assets/icon-topo.png" alt="Topo map lines">
+        <span class="dept">Obs. Post</span>
+        <span class="icon-name">Topo Map</span>
+      </div>
+      <div class="ic">
+        <img src="assets/icon-compass.png" alt="Compass">
+        <span class="dept">SEO / AEP</span>
+        <span class="icon-name">Compass</span>
+      </div>
+      <div class="ic">
+        <img src="assets/icon-phone.png" alt="Rotary phone">
+        <span class="dept">Service</span>
+        <span class="icon-name">Rotary</span>
+      </div>
+      <div class="ic">
+        <img src="assets/icon-metronome.png" alt="Metronome">
+        <span class="dept">Integrations</span>
+        <span class="icon-name">Metronome</span>
+      </div>
+      <div class="ic">
+        <img src="assets/icon-engine.png" alt="Engine">
+        <span class="dept">&nbsp;</span>
+        <span class="icon-name">Engine</span>
+      </div>
+      <div class="ic">
+        <img src="assets/suspension-bridge.png" alt="Suspension bridge">
+        <span class="dept">Tension Bridge</span>
+        <span class="icon-name">Bridge</span>
+      </div>
+    </div>
+    <p class="foot"><strong>Hard rule:</strong> abstract tech shapes (clouds, gears, generic nodes) are forbidden. Replace with literal vintage artifacts. Lucide is the sanctioned CDN fallback for utility UI. <strong>Pending:</strong> monocle artifact not yet in asset library.</p>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Department Badges</span>
+          <span class="spec-sub">Circular badge variants for the four departments</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-23" class="spec-host">
+  <div class="card da-lace">
+    <span class="label">Department badges — used in the four-card services grid</span>
+    <div class="grid">
+      <div class="ic"><img src="assets/design-icon.png" alt=""><span class="name">The Design Bureau</span><span class="eb">Design</span></div>
+      <div class="ic"><img src="assets/integrations-icon.png" alt=""><span class="name">Dept. of Cooperation</span><span class="eb">Integrations</span></div>
+      <div class="ic"><img src="assets/automation-icon.png" alt=""><span class="name">Self-Governing Bureau</span><span class="eb">Automation</span></div>
+      <div class="ic"><img src="assets/support-icon.png" alt=""><span class="name">Observation Post</span><span class="eb">Support</span></div>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Suspension Bridge Motif</span>
+          <span class="spec-sub">Technology as a bridge — the mission illustration</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-24" class="spec-host">
+  <div class="card">
+    <div class="img"><img src="assets/suspension-bridge.svg" alt="Suspension bridge"></div>
+    <div class="right">
+      <span class="eb">The mission motif</span>
+      <h3>Technology as a bridge</h3>
+      <p>The suspension bridge is the brand's literal manifesto:
+      <i>"good technology connects people to opportunity."</i></p>
+      <p>Use on About / mission pages, year-end posts, manifesto banners. Never alongside red signal dots in the same eyeline.</p>
+    </div>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Abstract Brand Art</span>
+          <span class="spec-sub">Wavy-line banners + luminous-blue-dot tiles</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-25" class="spec-host">
+  <div class="card">
+    <span class="label">Abstract art — thin wavy lines + luminous blue dot</span>
+    <img class="banner" src="assets/brand-art-banner-lines.png" alt="">
+    <div class="row">
+      <img class="sq tall" src="assets/brand-art-dot-square.png" alt="">
+      <img class="sq tall" src="assets/brand-art-dot-glow.png" alt="">
+    </div>
+    <p class="foot">Used as full-bleed hero overlays, blog headers, and social tiles. Black + Pulse Blue only.</p>
+  </div>
+</div></div>
+      </figure>
+      <figure class="specimen">
+        <figcaption class="spec-cap">
+          <span class="spec-name">Photography Vibe</span>
+          <span class="spec-sub">Kingman highways · desert beige · warm analog</span>
+        </figcaption>
+        <div class="spec-stage"><div id="spec-26" class="spec-host">
+  <div class="card">
+    <img class="photo" src="assets/photo-kingman-highway.png" alt="Desert highway, Kingman AZ">
+    <div class="overlay">
+      <span class="eb">Photography vibe</span>
+      <h2>Desert beiges, dusk light, no people.</h2>
+      <p>Route 66, Kingman highways, museum off-whites. Warm, analog, slightly faded. Pulse Blue and Signal Red are the only colors that appear.</p>
+    </div>
+  </div>
+</div></div>
+      </figure>
+  </section>
+  </main>
+</body>
+</html>

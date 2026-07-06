@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies Design System — Master Index</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="colors_and_type.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F9F6F0;
+      color: #2D2D2D;
+      line-height: 1.6;
+    }
+    
+    .container { max-width: 1280px; margin: 0 auto; padding: 60px 40px; }
+    
+    header {
+      text-align: center;
+      margin-bottom: 80px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid #2D2D2D;
+    }
+    
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #3A7BD5;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    h1 {
+      font-family: 'Lexend Deca', serif;
+      font-size: 48px;
+      font-weight: 700;
+      margin: 0 0 16px 0;
+      line-height: 1.2;
+    }
+    
+    .tagline {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+      font-style: italic;
+    }
+    
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+    
+    .doc-card {
+      border: 1px solid #2D2D2D;
+      padding: 32px;
+      background: white;
+      transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .doc-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+    }
+    
+    .doc-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #3A7BD5;
+    }
+    
+    .doc-card.cta::before {
+      background: #C5301A;
+    }
+    
+    .doc-card.demo::before {
+      background: #FADEEB;
+    }
+    
+    .doc-category {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #999;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .doc-title {
+      font-family: 'Lexend Deca', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: #2D2D2D;
+    }
+    
+    .doc-description {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #666;
+      margin: 0 0 20px 0;
+    }
+    
+    .doc-link {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid #2D2D2D;
+      color: #2D2D2D;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 200ms ease;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    
+    .doc-link:hover {
+      background: #2D2D2D;
+      color: #F9F6F0;
+    }
+    
+    .section {
+      margin-bottom: 80px;
+    }
+    
+    .section-title {
+      font-family: 'Lexend Deca', serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #2D2D2D;
+    }
+    
+    .section-subtitle {
+      font-size: 13px;
+      color: #666;
+      margin: 0 0 32px 0;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid #2D2D2D;
+      margin-top: 80px;
+      font-size: 11px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="eyebrow">Digital Allies</div>
+      <h1>Design System<br>Master Index</h1>
+      <p class="tagline">All documents, guides, and resources in one place</p>
+    </header>
+
+    <!-- BRAND FOUNDATIONS -->
+    <section class="section">
+      <h2 class="section-title">Brand Foundations</h2>
+      <p class="section-subtitle">Core visual identity, colors, typography, and spacing system</p>
+      
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-category">Visual System</div>
+          <h3 class="doc-title">Colors & Palette</h3>
+          <p class="doc-description">The 95/5 rule, core colors, semantic colors, and how to apply them across all designs.</p>
+          <a href="preview/colors-core.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Visual System</div>
+          <h3 class="doc-title">Typography</h3>
+          <p class="doc-description">Font families, scales, line heights, weights, and usage rules for headers and body text.</p>
+          <a href="preview/type-headings.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Visual System</div>
+          <h3 class="doc-title">Spacing & Grid</h3>
+          <p class="doc-description">The 20px Technical Lace grid, whitespace rules, padding, and structural alignment.</p>
+          <a href="preview/spacing-technical-lace.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Visual System</div>
+          <h3 class="doc-title">Logos & Marks</h3>
+          <p class="doc-description">Logo system, banner lockups, circle marks, usage guidelines, and safety areas.</p>
+          <a href="preview/brand-logo-system.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Visual System</div>
+          <h3 class="doc-title">Icons</h3>
+          <p class="doc-description">Icon set, artifact collection, size specifications, and application guidelines.</p>
+          <a href="preview/brand-icon-system.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Visual System</div>
+          <h3 class="doc-title">Brand Art & Motion</h3>
+          <p class="doc-description">Abstract brand elements, suspension bridge motif, the Pulse Dot, and animation principles.</p>
+          <a href="preview/brand-abstract-art.html" class="doc-link">View Document →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOICE & MARKETING -->
+    <section class="section">
+      <h2 class="section-title">Voice & Marketing</h2>
+      <p class="section-subtitle">Brand voice, tone, audience, and content strategy</p>
+      
+      <div class="doc-grid">
+        <div class="doc-card cta">
+          <div class="doc-category">Messaging</div>
+          <h3 class="doc-title">Primary Brand Voice</h3>
+          <p class="doc-description">Core voice rules, tone coordinates, vocabulary, the Jargon Jar, and writing examples.</p>
+          <a href="preview/voice-tone-spectrum.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card cta">
+          <div class="doc-category">Messaging</div>
+          <h3 class="doc-title">Secondary Voice (Marketing)</h3>
+          <p class="doc-description">Marketing-specific tone, when to use it, social media examples, and audience-facing copy.</p>
+          <a href="preview/brand-voice-marketing.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card cta">
+          <div class="doc-category">Messaging</div>
+          <h3 class="doc-title">Target Audience</h3>
+          <p class="doc-description">Three core personas, pain points, motivations, and what they care about.</p>
+          <a href="preview/brand-voice-marketing.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card cta">
+          <div class="doc-category">Content Strategy</div>
+          <h3 class="doc-title">Content Calendar</h3>
+          <p class="doc-description">30-day repeating cycle, 4-week categories, scheduling structure, and CMS integration.</p>
+          <a href="cms/connected/Connected%20CMS%20-%2030-Day%20Run.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card cta">
+          <div class="doc-category">Content Strategy</div>
+          <h3 class="doc-title">Asset Prompts (Pamali)</h3>
+          <p class="doc-description">Visual direction briefs for all 30 calendar days, art direction, and composition notes.</p>
+          <a href="preview/brand-voice-marketing.html" class="doc-link">View Document →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS & PATTERNS -->
+    <section class="section">
+      <h2 class="section-title">Components & Patterns</h2>
+      <p class="section-subtitle">Reusable UI elements, interaction patterns, and component library</p>
+      
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-category">Components</div>
+          <h3 class="doc-title">Buttons & CTAs</h3>
+          <p class="doc-description">Button styles, states, sizing, the [ bracketed CTA ] convention, and interaction feedback.</p>
+          <a href="preview/components-buttons.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Components</div>
+          <h3 class="doc-title">Form Elements</h3>
+          <p class="doc-description">Inputs, selects, checkboxes, radio buttons, validation states, and accessibility.</p>
+          <a href="preview/components-inputs.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Components</div>
+          <h3 class="doc-title">Cards & Containers</h3>
+          <p class="doc-description">Card layouts, shadows, borders, spacing, and how to structure content blocks.</p>
+          <a href="preview/borders-shadows.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Patterns</div>
+          <h3 class="doc-title">Navigation</h3>
+          <p class="doc-description">Header nav, sidebar nav, breadcrumbs, footer, and responsive behavior.</p>
+          <a href="preview/components-nav.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Patterns</div>
+          <h3 class="doc-title">Data Tables & Lists</h3>
+          <p class="doc-description">Table layouts, sorting, filtering, row selection, and accessibility standards.</p>
+          <a href="preview/components-transparency-table.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Patterns</div>
+          <h3 class="doc-title">Modals & Overlays</h3>
+          <p class="doc-description">Modal structure, backdrop, dismissal, focus management, and stacking.</p>
+          <a href="docs/17-modals-overlays.html" class="doc-link">View Document →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEMPLATES & PAGES -->
+    <section class="section">
+      <h2 class="section-title">Templates & Pages</h2>
+      <p class="section-subtitle">CMS-ready page templates and design patterns</p>
+      
+      <div class="doc-grid">
+        <div class="doc-card demo">
+          <div class="doc-category">Templates</div>
+          <h3 class="doc-title">Services Index</h3>
+          <p class="doc-description">Hero + featured tools grid + "View all tools" link. CMS-driven, ready for your services landing page.</p>
+          <a href="templates/services-index/ServicesIndex.dc.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Templates</div>
+          <h3 class="doc-title">Tool Detail Page</h3>
+          <p class="doc-description">Complete product page: hero, problem/solution, features, pricing, FAQ, sidebar nav, prev/next.</p>
+          <a href="templates/tool-detail/ToolDetail.dc.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Slide Templates</div>
+          <h3 class="doc-title">Presentation Slides</h3>
+          <p class="doc-description">Seven 16:9 slide templates: title, section header, content, comparison, quote, stats, end card.</p>
+          <a href="slides/index.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Page Patterns</div>
+          <h3 class="doc-title">Hero Sections</h3>
+          <p class="doc-description">Hero layout variations, image placement, type sizing, and call-to-action positioning.</p>
+          <a href="ui_kits/website/index.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Page Patterns</div>
+          <h3 class="doc-title">Content Blocks</h3>
+          <p class="doc-description">Two-column layouts, feature grids, testimonial sections, and image + text combinations.</p>
+          <a href="docs/22-content-blocks.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Reference</div>
+          <h3 class="doc-title">Component Library</h3>
+          <p class="doc-description">Interactive demo of all components, copy-paste code snippets, and live previews.</p>
+          <a href="docs/23-component-library.html" class="doc-link">View Document →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CMS & INTEGRATIONS -->
+    <section class="section">
+      <h2 class="section-title">CMS & Integrations</h2>
+      <p class="section-subtitle">Connected CMS setup, API reference, and integration guides</p>
+      
+      <div class="doc-grid">
+        <div class="doc-card demo">
+          <div class="doc-category">CMS Demo</div>
+          <h3 class="doc-title">CMS Dashboard (Design Demo)</h3>
+          <p class="doc-description">Visual mockup of the Connected CMS interface. Design demo only — see setup guide for real implementation.</p>
+          <a href="cms/dashboard.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Documentation</div>
+          <h3 class="doc-title">CMS Integration Guide</h3>
+          <p class="doc-description">How to connect the design system templates to Barcelona (or any CMS). Collection setup, API endpoints, component mounting.</p>
+          <a href="cms/connected/CMS%20Build%20Plan.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card demo">
+          <div class="doc-category">Documentation</div>
+          <h3 class="doc-title">API Reference</h3>
+          <p class="doc-description">Content Calendar endpoints, Tool Manager endpoints, Service Manager endpoints, and authentication.</p>
+          <a href="docs/26-api-reference.html" class="doc-link">View Document →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUIDES & REFERENCE -->
+    <section class="section">
+      <h2 class="section-title">Guides & Reference</h2>
+      <p class="section-subtitle">Extended documentation and quick reference</p>
+      
+      <div class="doc-grid">
+        <div class="doc-card">
+          <div class="doc-category">Reference</div>
+          <h3 class="doc-title">Jargon Jar (Full)</h3>
+          <p class="doc-description">Complete translation guide: corporate speak → Digital Allies plain English. Print-friendly reference table.</p>
+          <a href="preview/voice-jargon-translation.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Reference</div>
+          <h3 class="doc-title">Global Context for Claude</h3>
+          <p class="doc-description">Brand brain information for AI assistants. Copy-paste into system prompts for Barcelona, social bots, email automation.</p>
+          <a href="GLOBAL_CONTEXT_FOR_CLAUDE.md" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Reference</div>
+          <h3 class="doc-title">Installation & Setup</h3>
+          <p class="doc-description">How to use the design system, import fonts, load CSS tokens, and set up a new project.</p>
+          <a href="docs/29-installation-setup.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Reference</div>
+          <h3 class="doc-title">FAQ</h3>
+          <p class="doc-description">Common questions about brand usage, component customization, and design system maintenance.</p>
+          <a href="docs/30-faq.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Reference</div>
+          <h3 class="doc-title">CHANGELOG</h3>
+          <p class="doc-description">Version history, updates, breaking changes, and deprecation notes.</p>
+          <a href="docs/31-changelog.html" class="doc-link">View Document →</a>
+        </div>
+
+        <div class="doc-card">
+          <div class="doc-category">Repository</div>
+          <h3 class="doc-title">GitHub Structure & Consolidation</h3>
+          <p class="doc-description">How to organize the design system for GitHub, the ideal folder structure, and consolidation workflow.</p>
+          <a href="docs/32-github-structure.html" class="doc-link">View Document →</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Digital Allies Design System · June 18, 2026<br>
+      All documents generated as standalone HTML files · Share individually or in groups<br>
+      <strong>Master Index:</strong> This page links to all 32 documents
+    </footer>
+  </div>
+</body>
+</html>

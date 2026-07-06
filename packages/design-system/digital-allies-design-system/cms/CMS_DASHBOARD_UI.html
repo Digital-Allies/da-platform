@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barcelona CMS — Dashboard UI</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F5F5F5; color: #2D2D2D; }
+    
+    .dashboard { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+    
+    /* Sidebar */
+    .sidebar {
+      background: #2D2D2D;
+      color: #F9F6F0;
+      padding: 0;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 240px;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid #3A7BD5;
+    }
+    
+    .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid #3A7BD5;
+      text-align: center;
+    }
+    
+    .logo { font-family: 'Lexend Deca', serif; font-size: 14px; font-weight: 700; margin: 0; color: #3A7BD5; }
+    .tagline { font-size: 10px; color: #999; margin: 4px 0 0 0; }
+    
+    .nav-section { padding: 20px 0; border-bottom: 1px solid #444; }
+    .nav-section:last-child { border-bottom: none; }
+    
+    .nav-title {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #C5301A;
+      font-weight: 700;
+      padding: 0 20px 8px 20px;
+    }
+    
+    .nav-item {
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: all 200ms ease;
+      border-left: 2px solid transparent;
+    }
+    
+    .nav-item:hover { background: #3A3A3A; border-left-color: #3A7BD5; }
+    .nav-item.active { background: #3A7BD5; border-left-color: #C5301A; font-weight: 700; }
+    .nav-item.active { color: #2D2D2D; }
+    
+    /* Main Content */
+    .main {
+      margin-left: 240px;
+      padding: 40px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #DDD;
+    }
+    
+    .header h1 { font-family: 'Lexend Deca', serif; font-size: 32px; margin: 0; }
+    .header-actions { display: flex; gap: 12px; }
+    
+    button {
+      padding: 10px 16px;
+      border: 1px solid #2D2D2D;
+      background: white;
+      color: #2D2D2D;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 200ms ease;
+    }
+    
+    button:hover { background: #2D2D2D; color: #F9F6F0; }
+    button.primary { background: #3A7BD5; color: white; border-color: #3A7BD5; }
+    button.primary:hover { background: #2A5BA8; }
+    button.danger { border-color: #C5301A; color: #C5301A; }
+    button.danger:hover { background: #C5301A; color: white; }
+    
+    /* Content Grid */
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+    .content-grid.full { grid-template-columns: 1fr; }
+    
+    /* Cards */
+    .card {
+      background: white;
+      border: 1px solid #DDD;
+      padding: 24px;
+      border-top: 3px solid #3A7BD5;
+    }
+    
+    .card h3 { font-family: 'Lexend Deca', serif; font-size: 16px; margin: 0 0 16px 0; }
+    
+    /* Tables */
+    .table-container { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    
+    th {
+      background: #F5F5F5;
+      padding: 12px;
+      text-align: left;
+      font-weight: 700;
+      border-bottom: 1px solid #DDD;
+    }
+    
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #DDD;
+    }
+    
+    tr:hover { background: #F9F6F0; }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 2px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .status-draft { background: #EEE; color: #666; }
+    .status-approved { background: #D4E8F7; color: #2A6FDB; }
+    .status-scheduled { background: #D9EBF7; color: #3A7BD5; }
+    .status-posted { background: #D4E8D8; color: #1F8A5B; }
+    
+    /* Forms */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #666;
+      margin-bottom: 6px;
+    }
+    
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #DDD;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #2D2D2D;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #3A7BD5;
+      box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.1);
+    }
+    
+    textarea { resize: vertical; min-height: 100px; }
+    
+    /* Stats */
+    .stat-box {
+      text-align: center;
+      padding: 16px;
+      background: #F9F6F0;
+      border: 1px solid #DDD;
+    }
+    
+    .stat-number { font-family: 'Lexend Deca', serif; font-size: 28px; font-weight: 700; color: #3A7BD5; }
+    .stat-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+    
+    /* Modals */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal.active { display: flex; }
+    
+    .modal-content {
+      background: white;
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid #DDD;
+    }
+    
+    .modal-header { font-family: 'Lexend Deca', serif; font-size: 20px; font-weight: 700; margin: 0 0 20px 0; }
+    .modal-footer { margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end; }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid #DDD;
+      margin-bottom: 24px;
+    }
+    
+    .tab {
+      padding: 12px 16px;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: all 200ms ease;
+    }
+    
+    .tab:hover { border-bottom-color: #DDD; }
+    .tab.active { border-bottom-color: #3A7BD5; color: #3A7BD5; }
+    
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    
+    /* Quick Actions */
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .action-card {
+      border: 1px solid #DDD;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+    
+    .action-card:hover { background: #F9F6F0; border-color: #3A7BD5; }
+    .action-icon { font-size: 24px; margin-bottom: 8px; }
+    .action-label { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="logo">Barcelona</h2>
+        <p class="tagline">Content Hub</p>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-title">Core</div>
+        <div class="nav-item active" onclick="switchView('dashboard')">Dashboard</div>
+        <div class="nav-item" onclick="switchView('tools')">Tools Manager</div>
+        <div class="nav-item" onclick="switchView('services')">Services Manager</div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-title">Marketing</div>
+        <div class="nav-item" onclick="switchView('calendar')">Content Calendar</div>
+        <div class="nav-item" onclick="switchView('templates')">Email Templates</div>
+      </div>
+      
+      <div class="nav-section">
+        <div class="nav-title">Admin</div>
+        <div class="nav-item" onclick="switchView('users')">Users</div>
+        <div class="nav-item" onclick="switchView('settings')">Settings</div>
+      </div>
+      
+      <div class="nav-section" style="border-bottom: none;">
+        <div class="nav-title">Account</div>
+        <div class="nav-item" onclick="showModal('profile')">Profile</div>
+        <div class="nav-item" onclick="logout()">Logout</div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+      <!-- DASHBOARD VIEW -->
+      <div id="dashboard-view" class="view-content active">
+        <div class="header">
+          <h1>Dashboard</h1>
+          <div class="header-actions">
+            <button class="primary" onclick="showModal('new-tool')">+ New Tool</button>
+            <button onclick="showModal('calendar-import')">Import Calendar</button>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <div class="action-card" onclick="switchView('tools')">
+            <div class="action-icon">🛠️</div>
+            <div class="action-label">New Tool</div>
+          </div>
+          <div class="action-card" onclick="switchView('calendar')">
+            <div class="action-icon">📅</div>
+            <div class="action-label">Calendar</div>
+          </div>
+          <div class="action-card" onclick="showModal('publish')">
+            <div class="action-icon">🚀</div>
+            <div class="action-label">Publish</div>
+          </div>
+          <div class="action-card" onclick="showModal('preview')">
+            <div class="action-icon">👁️</div>
+            <div class="action-label">Preview</div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <h3>Recent Edits</h3>
+            <table>
+              <tr>
+                <th>Item</th>
+                <th>Type</th>
+                <th>Modified</th>
+              </tr>
+              <tr>
+                <td><strong>Brand Discovery</strong></td>
+                <td>Tool</td>
+                <td>2 hours ago</td>
+              </tr>
+              <tr>
+                <td><strong>SEO Audit</strong></td>
+                <td>Tool</td>
+                <td>1 day ago</td>
+              </tr>
+              <tr>
+                <td><strong>Content Calendar</strong></td>
+                <td>Schedule</td>
+                <td>3 days ago</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3>Statistics</h3>
+            <div class="content-grid full">
+              <div class="stat-box">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Tools Published</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">30</div>
+                <div class="stat-label">Calendar Entries</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Active Editors</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Scheduled Posts</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLS MANAGER VIEW -->
+      <div id="tools-view" class="view-content">
+        <div class="header">
+          <h1>Tools Manager</h1>
+          <div class="header-actions">
+            <button class="primary" onclick="showModal('new-tool')">+ New Tool</button>
+            <button onclick="showModal('import-tools')">Import CSV</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>All Tools</h3>
+          <div class="table-container">
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Status</th>
+                <th>Featured</th>
+                <th>Actions</th>
+              </tr>
+              <tr>
+                <td><strong>Brand Discovery</strong></td>
+                <td>brand-discovery</td>
+                <td><span class="status-badge status-posted">Published</span></td>
+                <td>✓</td>
+                <td><button onclick="showModal('edit-tool')">Edit</button> <button class="danger" onclick="deleteItem()">Delete</button></td>
+              </tr>
+              <tr>
+                <td><strong>SEO / Audit</strong></td>
+                <td>seo-audit</td>
+                <td><span class="status-badge status-approved">Approved</span></td>
+                <td>✓</td>
+                <td><button onclick="showModal('edit-tool')">Edit</button> <button class="danger" onclick="deleteItem()">Delete</button></td>
+              </tr>
+              <tr>
+                <td><strong>Manuscript Editor</strong></td>
+                <td>manuscript-editor</td>
+                <td><span class="status-badge status-draft">Draft</span></td>
+                <td></td>
+                <td><button onclick="showModal('edit-tool')">Edit</button> <button class="danger" onclick="deleteItem()">Delete</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT CALENDAR VIEW -->
+      <div id="calendar-view" class="view-content">
+        <div class="header">
+          <h1>Content Calendar</h1>
+          <div class="header-actions">
+            <button class="primary" onclick="showModal('new-entry')">+ New Entry</button>
+            <button onclick="showModal('calendar-import')">Import CSV</button>
+            <button onclick="exportCalendar()">Export CSV</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab(event, 'cal-all')">All Entries</div>
+            <div class="tab" onclick="switchTab(event, 'cal-scheduled')">Scheduled</div>
+            <div class="tab" onclick="switchTab(event, 'cal-draft')">Drafts</div>
+            <div class="tab" onclick="switchTab(event, 'cal-posted')">Posted</div>
+          </div>
+
+          <div id="cal-all" class="tab-content active">
+            <h3>30-Day Schedule</h3>
+            <div class="table-container">
+              <table>
+                <tr>
+                  <th>Day</th>
+                  <th>Week</th>
+                  <th>Category</th>
+                  <th>Topic</th>
+                  <th>Status</th>
+                  <th>Scheduled</th>
+                  <th>Actions</th>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>Local data</td>
+                  <td>Mohave County market</td>
+                  <td><span class="status-badge status-scheduled">Scheduled</span></td>
+                  <td>2026-06-18</td>
+                  <td><button onclick="showModal('edit-entry')">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>1</td>
+                  <td>Local data</td>
+                  <td>Spanish-speaking market</td>
+                  <td><span class="status-badge status-approved">Approved</span></td>
+                  <td>2026-06-19</td>
+                  <td><button onclick="showModal('edit-entry')">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>Local data</td>
+                  <td>Buying power</td>
+                  <td><span class="status-badge status-draft">Draft</span></td>
+                  <td>—</td>
+                  <td><button onclick="showModal('edit-entry')">Edit</button></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div id="cal-scheduled" class="tab-content">
+            <p>8 scheduled entries for the next 30 days</p>
+          </div>
+
+          <div id="cal-draft" class="tab-content">
+            <p>5 draft entries awaiting approval</p>
+          </div>
+
+          <div id="cal-posted" class="tab-content">
+            <p>17 entries posted (archived)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- USERS VIEW -->
+      <div id="users-view" class="view-content">
+        <div class="header">
+          <h1>Users & Permissions</h1>
+          <div class="header-actions">
+            <button class="primary" onclick="showModal('invite-user')">+ Invite User</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Team Members</h3>
+          <div class="table-container">
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+              <tr>
+                <td>Anthony</td>
+                <td>anthony@digitalallies.net</td>
+                <td><strong>Admin</strong></td>
+                <td>Active</td>
+                <td><button onclick="showModal('user-settings')">Settings</button></td>
+              </tr>
+              <tr>
+                <td>Editor Name</td>
+                <td>editor@example.com</td>
+                <td><strong>Editor</strong></td>
+                <td>Active</td>
+                <td><button onclick="showModal('user-settings')">Settings</button> <button class="danger" onclick="removeUser()">Remove</button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS VIEW -->
+      <div id="settings-view" class="view-content">
+        <div class="header">
+          <h1>Settings</h1>
+        </div>
+
+        <div class="content-grid">
+          <div class="card">
+            <h3>Site Configuration</h3>
+            <div class="form-group">
+              <label>Site Name</label>
+              <input type="text" value="Digital Allies">
+            </div>
+            <div class="form-group">
+              <label>Tagline</label>
+              <input type="text" value="Technological Solutions for People with Better Things to Do">
+            </div>
+            <div class="form-group">
+              <label>Contact Email</label>
+              <input type="email" value="hello@digitalallies.net">
+            </div>
+            <div class="form-group">
+              <button class="primary" onclick="saveSettings()">Save Settings</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>API Configuration</h3>
+            <div class="form-group">
+              <label>API Base URL</label>
+              <input type="text" value="https://api.digitalallies.net">
+            </div>
+            <div class="form-group">
+              <label>Design System URL</label>
+              <input type="text" value="https://digitalallies.net">
+            </div>
+            <div class="form-group">
+              <button class="primary" onclick="testConnection()">Test Connection</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="new-tool-modal" class="modal">
+    <div class="modal-content">
+      <h2 class="modal-header">Create New Tool</h2>
+      <div class="form-group">
+        <label>Tool Name</label>
+        <input type="text" placeholder="e.g., Brand Discovery">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea placeholder="What does this tool do?"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Icon</label>
+        <input type="text" placeholder="🎨">
+      </div>
+      <div class="form-group">
+        <label>Pricing</label>
+        <input type="text" placeholder="From $475">
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select>
+          <option>Draft</option>
+          <option>Approved</option>
+          <option>Published</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('new-tool-modal')">Cancel</button>
+        <button class="primary" onclick="saveTool()">Create Tool</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="new-entry-modal" class="modal">
+    <div class="modal-content">
+      <h2 class="modal-header">New Calendar Entry</h2>
+      <div class="form-group">
+        <label>Day (1-30)</label>
+        <input type="number" min="1" max="30" placeholder="1">
+      </div>
+      <div class="form-group">
+        <label>Category</label>
+        <select>
+          <option>Local data</option>
+          <option>Machine translation</option>
+          <option>Trust & culture</option>
+          <option>Digital Allies standard</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Topic</label>
+        <input type="text" placeholder="e.g., Mohave County market">
+      </div>
+      <div class="form-group">
+        <label>Hook / Caption</label>
+        <textarea placeholder="Social media copy"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select>
+          <option>Draft</option>
+          <option>Approved</option>
+          <option>Scheduled</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button onclick="closeModal('new-entry-modal')">Cancel</button>
+        <button class="primary" onclick="saveEntry()">Create Entry</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchView(viewName) {
+      document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewName + '-view').classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function switchTab(e, tabName) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+      document.getElementById(tabName).classList.add('active');
+    }
+
+    function showModal(modalName) {
+      document.getElementById(modalName + '-modal').classList.add('active');
+    }
+
+    function closeModal(modalName) {
+      document.getElementById(modalName).classList.remove('active');
+    }
+
+    function saveTool() {
+      alert('Tool saved! (This is a mockup)');
+      closeModal('new-tool-modal');
+    }
+
+    function saveEntry() {
+      alert('Entry created! (This is a mockup)');
+      closeModal('new-entry-modal');
+    }
+
+    function saveSettings() {
+      alert('Settings saved!');
+    }
+
+    function testConnection() {
+      alert('API connection successful!');
+    }
+
+    function exportCalendar() {
+      alert('Calendar exported as CSV');
+    }
+
+    function logout() {
+      alert('Logged out');
+    }
+
+    // Close modals on outside click
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>

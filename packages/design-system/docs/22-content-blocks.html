@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Blocks — Digital Allies</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_doc.css">
+<style>
+  .ex { border: 1px solid var(--charcoal); background: var(--bg-alt); padding: 28px; margin: 8px 0 18px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+  .two-col .media { aspect-ratio: 4/3; background: var(--bg); border: 1px solid var(--charcoal); display: flex; align-items: center; justify-content: center; font-family: var(--font-details); font-size: 11px; color: var(--fg-soft); }
+  .feat { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .feat .f { background: var(--bg); border: 1px solid var(--charcoal); padding: 18px; }
+  .feat .f .fdot { width: 10px; height: 10px; background: var(--signal); border: 1px solid var(--charcoal); border-radius: 50%; margin-bottom: 12px; }
+  .feat .f h4 { font-family: var(--font-headers); font-size: 14px; margin: 0 0 6px; }
+  .feat .f p { font-size: 11.5px; color: var(--fg-muted); margin: 0; line-height: 1.6; }
+  .eb-lbl { font-family: var(--font-details); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--signal); }
+  .ex h3 { font-family: var(--font-headers); font-size: 22px; margin: 8px 0 10px; }
+  .ex p.body { font-size: 13px; line-height: 1.7; color: var(--fg); margin: 0; }
+  @media (max-width: 720px) { .two-col, .feat { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="doc">
+  <a class="backlink" href="../00-master-index.html">← Master Index</a>
+  <div class="doc-head" style="margin-top:16px;">
+    <div class="eyebrow">Templates & Pages</div>
+    <h1>Content Blocks</h1>
+    <p class="lede">The repeatable section layouts that pages are built from. Each one is a strict grid with 2× the whitespace you'd normally reach for — symmetry as a proxy for competence, then one red accent off-center.</p>
+    <div class="meta-row"><span>Doc <b>22 / 32</b></span><span>Group <b>Templates & Pages</b></span></div>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>Two-column (media + text)</h2>
+    <p class="sub">Image or diagram on one side, copy on the other. Alternate sides down the page for rhythm.</p>
+    <div class="ex">
+      <div class="two-col">
+        <div class="media">[ diagram / photo ]</div>
+        <div>
+          <div class="eb-lbl">The Diagrams</div>
+          <h3>Your apps talk to each other. You don't have to.</h3>
+          <p class="body">Lead with the plain-English benefit, support with one or two sentences, end with a bracketed CTA. Keep the column under 62 characters wide so it stays readable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>Feature grid</h2>
+    <p class="sub">Three or four equal cards — the Departments pattern. Each: a red dot, a Lexend title, a mono description.</p>
+    <div class="ex">
+      <div class="feat">
+        <div class="f"><div class="fdot"></div><h4>The Design Bureau</h4><p>Brand and interface work that looks like it knows itself.</p></div>
+        <div class="f"><div class="fdot"></div><h4>Dept. of Cooperation</h4><p>Integrations that make the parts work together.</p></div>
+        <div class="f"><div class="fdot"></div><h4>Observation Post</h4><p>Monitoring that runs while you do literally anything else.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Pinned testimonial (Field Note)</h2>
+    <p class="sub">Real words from real people. Cream card, red pin, no side border. See <a href="../preview/components-pinned-note.html">the pinned-note spec</a>.</p>
+    <div class="ex">
+      <div class="note" style="max-width:520px;margin:0 auto;">
+        <p style="font-style:italic;margin-bottom:14px;">"Clean engineering, clear communication, and follow-through that won't require follow up."</p>
+        <p style="font-family:var(--font-details);font-size:11px;color:var(--fg-muted);">— A client who'd rather be doing something else</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>Composition rules</h2>
+    <ul>
+      <li>Section padding is generous — typically <code class="inl">80px</code> top and bottom.</li>
+      <li>Max width <code class="inl">1024px</code> for prose, <code class="inl">1280px</code> for grids and footers.</li>
+      <li>One accent per view. Break symmetry only with the red dot or a red underline — never with blue or pink.</li>
+      <li>Everything sits on the 20&nbsp;px Technical Lace grid. See <a href="../preview/spacing-technical-lace.html">spacing</a>.</li>
+    </ul>
+  </section>
+
+  <footer>Digital Allies Design System · Content Blocks · strict grid, generous whitespace, one accent.</footer>
+</div>
+</body>
+</html>
