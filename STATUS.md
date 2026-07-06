@@ -110,6 +110,13 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production
   deploys come from the source of truth. Loose end — do before shipping changes.
 - Note: the DA `brand_color` fix lives in Supabase (live data), not in git.
+- **MAJOR NEED — admin login page is broken on mobile.** `/admin/login`
+  (`src/app/admin/login/page.tsx`) does not work well on phones: the layout
+  shifts and the interface is not usable/easy on a mobile device. Needs a
+  responsive optimize or a full mobile rebuild (proper viewport handling, no
+  layout shift, touch-friendly inputs/buttons). The admin is the tool clients log
+  into, so this matters for every client. Do before onboarding clients to the
+  admin. Admin stays DA-branded (decision #7); this is layout/UX, not theming.
 - `digitalallies.net` is **not yet connected** to Supabase.
 - Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
   — many overlapping old repos. Not urgent; leave untouched until we decide.
