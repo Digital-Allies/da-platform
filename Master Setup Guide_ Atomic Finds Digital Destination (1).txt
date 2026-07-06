@@ -1,0 +1,133 @@
+ATOMIC FINDS: MASTER SETUP DOC & BRAND BLUEPRINT
+
+Brand Identity & Visual Language Standards
+The "Celestial 70s Digital Bazaar" aesthetic is a curated gallery experience that achieves sensory parity with our physical inventory. The UI must project "professional precision" while maintaining "soulful charm."
+Color Palette Configuration (Dark-Mode)
+Apply the following hex codes to the global design settings to establish the Mid-Century Modern (MCM) Dark Mode environment:| Color Name | Hex Code | Functional Assignment || ------ | ------ | ------ || Deep Charcoal | #1E1E1E | Primary Site Background. || Rattan Black | #2A2017 | Secondary Section Backgrounds / Depth. || Celestial Yellow | #F5C842 | Primary Accent & Glow Elements. || Amber Orange | #D4822A | Primary UI Elements, Icons, and CTA Highlights. || Bone White | #F0E8D8 | Primary Typography (High Readability). || Woven Moss | #556B4A | Secondary Accents & "Austin Curated" Tones. |
+Signature Font Synthesis
+To bridge 1970s tiki playfulness with architectural authority, implement the following font pairing:
+	•	Headings:  Use a display serif like  Cooper Black  or  Kabel . This evokes the "sense of humor" and retro-tiki charm essential to the brand’s soul.
+	•	Body Text:  Use a clean, architectural sans-serif like  Montserrat  or  Lato . This signals 4.8-star professionalism and ensures descriptions of "sustainable soul" are legible and authoritative.
+Imagery & Textures
+To achieve tactile parity, utilize Digital Allies's  Row Background Overlay  feature.
+	•	Implementation:  Set overlays to  15-20% opacity . This ensures the "Warm Bamboo," "Solid Walnut," and "Vivid Yellow" (specifically linked to the  Celeste  sofa) textures provide sensory depth without sacrificing text readability.
+	•	Photography:  Merge Austin-landscape lifestyle shots (In-Situ) with studio-clean product photography to emphasize material grain and "Atomic" character.
+Reputation Anchors
+Prominently feature these trust signals on the homepage to leverage our 4.8-star rating:  Highly Responsive Communication ,  Accurate Descriptions , and  Smooth Local Pickup .
+Content Architecture: Internal Collections Setup
+Digital Allies’s Internal Collections will serve as our "Atomic Family" database.
+Collection Schema & Material Significance
+The "Shop" section must communicate that rattan, bamboo, and solid wood represent  tactile durability  and  sustainable soul . Configure the following fields:
+	•	Item Name:  The "Atomic" human name (e.g., Fran, Mabel).
+	•	Category:  Seating, Tables, Accent, Storage, or Apparel.
+	•	Material:  Explicitly list Rattan, Bamboo, or Wood to highlight "Material Significance."
+	•	Price:  Numerical value for schema mapping.
+	•	Description:  Narrative-driven text focusing on the piece's history and durability.
+	•	PayPal Link:  URL field for fee-avoidance checkout.
+Product Taxonomy Catalog
+Import the following curated inventory:
+	•	Nova:  MCM curved green sofa ($395).
+	•	Matching Green Chaise:  Companion to Nova ($395).
+	•	Celeste:  Vivid yellow tufted statement sofa.
+	•	Catalina:  Set of four boho bamboo dining chairs ($320).
+	•	Fran & Seguaro:  Rattan/bamboo glass-top dining tables ( $300–$ 320).
+	•	Mabel:  Bamboo side table ( $245–$ 275).
+	•	Maribel:  Rolling rattan accent/bar cart ( $245–$ 275).
+	•	Tall Vintage 70s Shelving:  Bamboo rattan units ($375).
+	•	Tanya:  1970s leather jacket with braided details.
+Technical Workflow: Bypassing Digital Allies Ecommerce Fees
+To maintain the "Digital Bazaar" model and avoid native store fees, we utilize Dynamic Pages and external payment links.
+Dynamic Page & PayPal Integration
+	•	Create Page:  Design a single "Product Detail" Dynamic Page layout.
+	•	Map Data:  Connect Collection fields to UI elements (e.g., Name to H1, Price to Text Block).
+	•	The PayPal Bind:  Add a Button widget. Click the  "Connect to Data"  icon (database symbol) and specifically select the  "PayPal Link"  field from the Internal Collection. This enables a unique checkout for every item without a traditional cart.
+The "Digital Bazaar" Model Justification
+Implement a  "Negotiable Pricing" CTA  next to the purchase button.
+	•	Strategist Note:  This mimics Austin’s community-driven market culture, fostering direct dialogue between curator and collector. It transforms a transaction into a "Digital Naming Registry" entry, building lifelong brand loyalty.
+Audience-Centric UX Design
+Persona Mapping & Lifestyle Visions
+"The ""Nova"" Collector (Architectural/Bold)","The ""Rattan Revivalist"" (Warm/Organic)"
+Vision:  Focal-point statements for a Zilker ranch house or high-concept East Side studio.,Vision:  Organic textures for a Hyde Park sunroom or a light-filled North Loop bungalow.
+"Values:  Rarity, sculptural MCM lines, and authoritative curation.","Values:  Tiki-inspired aesthetics, tactile warmth, and personal connection."
+Navigation: The Naming Registry
+Standard "Shop" labels are too clinical. Use  "Meet the Family"  or  "Adoption Gallery"  in the main navigation. This leans into the "Naming Quirk" pillar, making the user feel they are welcoming a new member into their home.
+AEO & Technical Wiring
+We are optimizing for Answer Engine Optimization (AEO) to ensure AI assistants (ChatGPT/Claude) recommend Atomic Finds.
+Schema Rigor & Metadata
+	•	LocalBusiness Schema:  Map the business name, Austin location, and 4.8-star rating. Use the primary email  jgomez6045@gmail.com  and phone  1 865-244-8130  as primary trust signals.
+	•	Product Schema:
+	•	Map the  Material  collection field to the material property.
+	•	Map the  Price  collection field to the offers.price property.
+	•	Data Weighting:  Use the Onboarding & Discovery Form as the absolute authority for all site-wide metadata fields. By providing structured, clear data, we ensure the back-end is as curated as the front-end gallery.
+
+
+
+
+
+PART 1: STUDIO GENERATION PROMPTS
+Copy and paste these directly into your AI generators, Slide Deck, or Report generation studios.
+Slide Deck Studio Prompt: "Generate a brand presentation for 'Atomic Finds' using the Mid-Century Modern Dark Mode layout as the ultimate source of truth. The aesthetic must use a dark mode palette featuring Deep Charcoal (#1E1E1E) and Rattan Black (#2A2017). Outline the specific UI components: neon glowing atomic orbits, retro starbursts, and bold pill-shaped buttons glowing in Celestial Yellow (#F5C842). Emphasize the brand's 'Atomic Naming Quirk' (giving pieces human names) and the 'Digital Allies Philosophy' (clarity over jargon). Include a dedicated technical slide on Answer Engine Optimization (AEO) and SEO strategy, utilizing LocalBusiness and Product schema to capture the Austin vintage market."
+Report / Digital Allies AI Generation Prompt: "Create a comprehensive Brand Identity and Web Architecture build for Atomic Finds. Target the 'Rattan Revivalist' archetype using a hybrid visual style that merges organic 1970s textures (woven rattan, bamboo) with a retro-futuristic digital UI (neon glowing borders, atomic rings). Use a bold 1970s retro-display serif font for headers and a clean modern sans-serif for body copy. The build must include a robust SEO and AEO foundation focusing on sensory-rich descriptions and structured data. Finally, outline the operational scale: build a 'Digital Bazaar' model using a dynamic database collection and external payment links to facilitate personal negotiation and bypass native e-commerce subscription fees."
+
+PART 2: BUSINESS PROFILE & CONTACT DATA
+Feed this exact information into the AI to ensure accurate local SEO and footer generation.
+	•	Business Name: Atomic Finds (Atomic Finds ATX)
+	•	Owner: Jennyfer Gomez
+	•	Physical Location: Austin, Texas, United States
+	•	Phone Number: 1 865-244-8130
+	•	Email Address: jgomez6045@gmail.com
+	•	Industry: Restores and sells curated vintage furniture, specializing in 1970s Bohemian (Boho) style, Mid-Century Modern (MCM), and retro tiki aesthetics. Heavy focus on bamboo, rattan, and wicker.
+	•	Core Value Proposition: "Good taste doesn't have to cost a fortune—Atomic Finds ATX brings you vintage pieces with presence, minus the boutique markup."
+
+PART 3: SOURCE OF TRUTH — BRAND IDENTITY & UI COMPONENTS
+This is the definitive visual guide for the Digital Allies UI build.
+Dark-Mode Color Palette
+	•	Deep Charcoal: #1E1E1E (Primary Site Backgrounds)
+	•	Rattan Black: #2A2017 (Secondary Backgrounds / Container Depth)
+	•	Celestial Yellow: #F5C842 (Primary Accents, Glowing Elements, Call-to-Action Buttons)
+	•	Amber Orange: #D4822A (Secondary Accents, Glowing Orbits)
+	•	Bone White: #F0E8D8 (Primary Text & Light UI Elements)
+	•	Woven Moss: #556B4A (Earthy Accents / Trust Badges)
+Specific UI Components & Glow Features
+	•	Adaptive Logos: The "AF" monogram and pill-shaped brand badges must be encased in a retro-futuristic neon glowing outline.
+	•	Visual Motifs: Integrate neon glowing atomic orbits, retro four-point starbursts, minimalist eye motifs, and glowing rockets overlapping the dark backgrounds.
+	•	Action Buttons: All primary buttons (e.g., "SHOP NOW", "DM TO CLAIM") must be pill-shaped and set in glowing Celestial Yellow or Amber Orange.
+	•	Texture Overlays: Layer repeating grid-like patterns of woven rattan/wicker squares and organic illustrations of raw bamboo stalks underneath the glowing digital elements.
+
+PART 4: TRUST SIGNALS & ACTUAL CUSTOMER REVIEWS
+Do not let the AI hallucinate reviews. Use these exact metrics and themes pulled from the shop's actual buyer feedback to build the "Testimonials" and "About" sections.
+The Reputation Anchor: Atomic Finds holds a 4.8 out of 5-star rating based on 17 buyer reviews. The website must highlight the following specific customer feedback themes:
+	•	Highly Responsive Communication: Buyers praise Jennyfer for speed and clarity, noting she is "very easy to communicate with" and quick to respond to inquiries. She handles all feedback gracefully and professionally.
+	•	Pricing & Negotiation: Customers appreciate the "fair and negotiable pricing," which perfectly supports the approachable "Digital Bazaar" model.
+	•	Accurate Item Descriptions: Reviews confirm that the shop provides highly accurate data for its listings (ensuring pieces like "Fran" and "Nova" match their online profiles perfectly).
+	•	Punctuality & Pickup: Buyers consistently report that the local Austin pickup process is "exceptionally smooth and easy" and highly punctual.
+
+PART 5: TECHNICAL WIRING — SEO & AEO FOUNDATION
+Keyword & Sensory Strategy
+	•	Primary Keywords: 1970s Boho, Mid-Century Modern, Curated Vintage, Austin Vintage Furniture, Rattan/Bamboo Decor.
+	•	Sensory Descriptions: All product copy must include tactile keywords like "warm bamboo," "solid wood grain," "plush velvet," and "woven rattan."
+Structured Data (Schema Markup) Requirements
+	•	LocalBusiness Schema: Must be deployed site-wide using the exact contact information in Part 2, anchoring the shop to Austin, Texas, and highlighting the 4.8-star reputation.
+	•	Product Schema: Must be applied to every dynamic product page. This schema must capture the "Atomic Naming Quirk" (e.g., "Nova - Curved Green MCM Sofa"), exact pricing, and material metadata.
+
+PART 6: Digital Allies.AI COLLECTIONS FOUNDATION & E-COMMERCE WORKAROUND
+To maintain the approachable charm of a "Digital Bazaar" and avoid costly monthly e-commerce subscription fees, build a custom pipeline using Collections and PayPal.
+Step 1: Build the Collections Foundation In the Digital Allies editor, navigate to Content > Collections. Create an Internal Collection named "Atomic Finds Inventory" with the following specific fields:
+	•	Item Name: Plain Text
+	•	Human Name: Plain Text (e.g., "Tulula", "Catalina")
+	•	Price: Plain Text
+	•	Main Image: Image
+	•	Gallery: Image List
+	•	Tactile Description: Rich Text (Include AEO sensory keywords here)
+	•	Checkout Link: URL (This is the critical workaround field)
+Step 2: Generate the PayPal Workaround Links
+	•	Log into your business PayPal account.
+	•	Generate a "Buy Now" smart link or a PayPal.me link for the exact price of the item.
+	•	Paste this exact URL into the Checkout Link field in your Digital Allies Collection for that specific item.
+Step 3: Construct the Dynamic Product Page
+	•	In Digital Allies, go to Pages > Dynamic Pages and generate a new page linked to the "Atomic Finds Inventory" collection.
+	•	Design the page using the Dark Mode UI specs (Deep Charcoal backgrounds, glowing Celestial Yellow accents).
+	•	Bind the page elements to your Collection fields.
+	•	The Action Button: Add a standard Digital Allies Button, style it as a pill-shaped Celestial Yellow UI component, and set the text to "Claim [Human Name]".
+	•	Link this button to "Connected to Data" and bind it directly to the Checkout Link URL field. Users will be safely routed to PayPal to complete the transaction.
+

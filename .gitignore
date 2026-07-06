@@ -46,3 +46,6 @@ logs/
 # Misc
 coverage/
 *.tsbuildinfo
+
+# Large asset export (redundant with assets/ folder)
+assets.zip
