@@ -66,15 +66,21 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   with RLS defined (Days 6–7); `lib/data.ts` fetchers (Day 10); admin routes for
   dashboard, posts, pages, services, testimonials, settings, messages, content,
   plus projects/research/development stubs (Days 11–15).
-- **The environment is stuck at Day 08.** Blocking gaps: Supabase is **not
-  seeded**, `security-fixes.sql` **not applied**, and there is **no admin user**
-  — so the admin can't be logged into and shows empty. Nothing works at runtime
-  until these run.
-- **Resume point = Day 08 → 09 → create admin user** (needs Supabase dashboard
-  clicks). That unlocks logging in and validating the already-built Days 11–15,
-  then Week 4 (public block-renderer, transmission loop, domain cutover).
-- Minor: `ARCHITECTURE.md` (Day 04) missing; Week 4 public renderer is minimal
-  (home + blog only, not the full block registry).
+- **Environment is FURTHER along than the docs claimed (verified against the live
+  Supabase 2026-07-06).** The old README saying "seed not run / no admin user" is
+  STALE. Reality:
+  - Supabase **is seeded** — DA settings (19), services (3), testimonials (2).
+  - Admin user **exists**: `contact@digitalallies.net`
+    (`492ac568-…`). Also present: `acinktown@gmail.com`, `vickiebuckholz@…`.
+  - **HCTC already has a client row** (`7896354c-…`) — two tenants live, not one.
+  - Fixed a drift: DA `brand_color` had become teal `#0F766E`; corrected to Signal
+    Red `#C5301A` per the design system.
+- **So the admin should already be loginable** (code + data + user all exist).
+  Anthony can log in at the Vercel URL as `contact@digitalallies.net`.
+- **Genuinely still open:** `security-fixes.sql` NOT applied (anon can still call
+  `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the
+  SQL editor. Week 4 public block-renderer is minimal (home + blog only). No
+  blog `posts`/`pages` rows yet. `ARCHITECTURE.md` (Day 04) missing.
 - `digitalallies.net` is **not yet connected** to Supabase.
 - Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
   — many overlapping old repos. Not urgent; leave untouched until we decide.
@@ -83,22 +89,23 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 
 ## Next steps (in order)
 
-1. **Day 08–09: seed + secure Supabase.** Run `supabase/seed-da.sql` and
-   `supabase/security-fixes.sql`, enable leaked-password protection, then invite
-   the first admin user. This is the resume point. *Needs Supabase dashboard
-   access — the one thing that needs Anthony's hands (or a Supabase token so the
-   agent can run it directly).*
-2. **Validate Days 11–15** by logging into the seeded admin — confirm the
-   already-built modules work against real data.
-3. **Week 4:** full public block-renderer + site parity, the transmission loop
-   (contact → message + email), then domain/DNS cutover and launch QA.
+1. **Confirm the admin actually works** — Anthony logs in once at the Vercel URL
+   as `contact@digitalallies.net` and sanity-checks the Press Office shows the
+   seeded data. (One hands-on login; everything else is in place.)
+2. **Apply `security-fixes.sql` + leaked-password toggle** — one paste into the
+   Supabase SQL editor + one Auth setting. The only real hardening gap.
+3. **Week 4 — the connected loop for DA:** build out the public block-renderer,
+   the transmission loop (contact → message + email), then connect the real
+   `digitalallies.net` to Supabase and do the domain/DNS cutover + launch QA.
 4. Backfill the Day-04 `ARCHITECTURE.md` at a convenient point.
 
-## Only-Anthony dependency (not a decision — just access)
+## Only-Anthony dependencies (not decisions — just hands-on)
 
-- Supabase steps in Day 08–09 need the dashboard (SQL editor + invite user), or a
-  Supabase access token / DB connection string added so the agent can run them.
-  Shared project: `auwhvicpyiwsubucanpb`.
+- **Supabase SQL editor:** paste `supabase/security-fixes.sql` and Run; then Auth
+  → Providers → Email → enable leaked-password protection. (Or add a Supabase
+  access token so the agent can run SQL/DDL directly in future.)
+- **One admin login** to confirm the Press Office works. Project:
+  `auwhvicpyiwsubucanpb`.
 
 ## Operating mode
 
