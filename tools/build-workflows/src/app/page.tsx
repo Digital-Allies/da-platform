@@ -8,6 +8,7 @@ import {
   Footer,
   RevealOnScroll,
 } from '@/components/site'
+import SiteTheme from '@/components/site/SiteTheme'
 import { getSiteSettings, getServices, getTestimonials } from '@/lib/data'
 
 export const revalidate = 60 // ISR — refresh every 60 seconds
@@ -20,7 +21,7 @@ export default async function HomePage() {
   ])
 
   return (
-    <>
+    <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
       <Navigation
         logoUrl={settings.logo_url || undefined}
         siteTitle={settings.site_title}
@@ -75,6 +76,6 @@ export default async function HomePage() {
       </main>
 
       <Footer settings={settings} />
-    </>
+    </SiteTheme>
   )
 }
