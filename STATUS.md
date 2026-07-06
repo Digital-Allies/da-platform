@@ -34,6 +34,14 @@ large step: what changed, what's true now, what's next. Keep it short and curren
    the **order of operations**. The **CMS Build Plan** (`CMS Build Plan.html`) is
    the **architecture reference** — what to build, not when. Follow the order;
    don't skip or reorder without a written reason.
+7. **Each client's OWN design system themes BOTH their website AND their admin
+   panel** (Anthony, 2026-07-06). DA's design system is for DA only. A client's
+   Press Office must look like *that client* (HCTC = navy/teal + Montserrat;
+   Atomic Finds = celestial-70s dark). The shared thing is the engine (code); the
+   look is per-client. **A client's admin/site must NEVER fall back to DA's
+   brand.** The engine must theme fully from per-client tokens (colors, fonts,
+   radius, etc.), not just a single `brand_color`. Source per client:
+   `sites/<site>/CLAUDE.md`.
 
 ## Shared-agent setup (Claude Code + Antigravity)
 
@@ -81,6 +89,14 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the
   SQL editor. Week 4 public block-renderer is minimal (home + blog only). No
   blog `posts`/`pages` rows yet. `ARCHITECTURE.md` (Day 04) missing.
+- **Per-client theming gap (from decision #7):** only DA has brand data, and only
+  a single `brand_color`. HCTC has none; Atomic Finds has none. `design_tokens`
+  is effectively empty. The engine themes off one color, not a full token set. To
+  meet "each client's admin+site uses their own design system," we must: (a)
+  extend per-client tokens (colors/fonts/radius) from each `sites/<site>/CLAUDE.md`
+  into the DB, (b) make admin + public renderer consume the full set, (c) ensure
+  no DA-brand fallback for a client. Do this as its own step before onboarding
+  HCTC/Atomic Finds visually.
 - `digitalallies.net` is **not yet connected** to Supabase.
 - Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
   — many overlapping old repos. Not urgent; leave untouched until we decide.
