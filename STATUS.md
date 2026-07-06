@@ -5,7 +5,7 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-06 — by Claude Code (Opus 4.8) — repo decision confirmed; "you are here" pinned
+**Last updated:** 2026-07-06 — by Claude Code (Opus 4.8) — Step 2 per-client theming foundation built; Major needs list added below
 
 ---
 
@@ -122,6 +122,24 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   — many overlapping old repos. Not urgent; leave untouched until we decide.
 
 ---
+
+## Major needs / known issues (prioritized)
+
+1. **Admin login page — broken on mobile.** `/admin/login`
+   (`src/app/admin/login/page.tsx`) shifts layout and isn't usable on phones.
+   Needs a responsive optimize or full mobile rebuild (viewport handling, no
+   layout shift, touch-friendly inputs/buttons). Every client logs in here — do
+   before onboarding clients. Layout/UX only; admin stays DA-branded.
+2. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase
+   SQL editor + one Auth toggle. The only real hardening gap.
+3. **Re-point Vercel at the monorepo** — the live app still deploys from the old
+   repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform`
+   (root `tools/build-workflows`). Do before shipping further changes.
+4. **Finish Step 2 theming** — the foundation (`lib/theme.ts` + `SiteTheme.tsx`,
+   wired into the public home) is done. Remaining: make the public components
+   (Hero, Nav, cards, Footer) consume the `--tok-*` vars, and load non-DA web
+   fonts (Montserrat/Inter, Lilita One/DM Sans) so client sites fully become
+   themselves.
 
 ## Next steps (in order)
 
