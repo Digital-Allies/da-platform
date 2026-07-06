@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#1E1E1E"/>
+    <circle cx="50" cy="35" r="18" fill="#F5C842"/>
+    <circle cx="50" cy="35" r="24" fill="none" stroke="#F5C842" stroke-width="1.5" opacity="0.6"/>
+    <rect x="30" y="55" width="40" height="30" rx="6" fill="#2A2017" stroke="#F5C842" stroke-width="1" opacity="0.4"/>
+    <text x="50" y="78" font-family="Georgia, serif" font-size="8" fill="#F0E8D8" text-anchor="middle" opacity="0.8">ATOMIC</text>
+  </svg>
+</template>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="atomic-finds-design-system/colors_and_type.css">
+  <link rel="stylesheet" href="atomic-finds-design-system/styles.css">
+  <style>
+    body { margin: 0; background: #1E1E1E; background-image: var(--weave); }
+    @media print { body { background: #1E1E1E !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  </style>
+</helmet>
+
+<div style="max-width: 880px; margin: 0 auto; padding: 80px 48px 120px; box-sizing: border-box;">
+
+  <!-- MASTHEAD -->
+  <div style="border-bottom: 1px solid rgba(245,200,66,0.18); padding-bottom: 40px; margin-bottom: 56px;">
+    <p class="af-eyebrow" style="margin-bottom: 16px;">DESIGN SYSTEM · START HERE</p>
+    <h1 class="af-display" style="font-size: clamp(40px,6vw,72px); margin-bottom: 10px;">Atomic Finds</h1>
+    <p class="af-script" style="margin-bottom: 22px;">your single source of truth</p>
+    <p class="af-p" style="max-width: 600px;">Dark-mode celestial 70s — deep charcoal canvas, golden-glow neon accents, vintage rattan texture, orbital-ring galaxy cards. Everything below is locked and ready to build with.</p>
+  </div>
+
+  <!-- WORKFLOW -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">THE WORKFLOW</p>
+    <h2 style="font-size: 30px; margin-bottom: 24px;">Build here → ship to Vercel</h2>
+    <p class="af-p" style="margin-bottom: 28px;">There is no live sync between Figma Make and this workspace. Importing a file either direction is a one-time static snapshot, not a connection — so keep one source of truth instead of two drifting apart. Since the goal is prototypes that go to Vercel, that source of truth is here.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch; margin-bottom: 28px;">
+      <div style="flex: 1; min-width: 150px; background: #23201b; border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 20px;">
+        <p class="af-eyebrow" style="color: #F5C842; margin-bottom: 8px;">01 · FOUNDATION</p>
+        <p class="af-small" style="color: #d9cfbf;">Tokens, type & components — already done, on this page.</p>
+      </div>
+      <div style="flex: 1; min-width: 150px; background: #23201b; border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 20px;">
+        <p class="af-eyebrow" style="color: #F5C842; margin-bottom: 8px;">02 · PROTOTYPE</p>
+        <p class="af-small" style="color: #d9cfbf;">Compose screens from the component library here.</p>
+      </div>
+      <div style="flex: 1; min-width: 150px; background: #23201b; border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 20px;">
+        <p class="af-eyebrow" style="color: #F5C842; margin-bottom: 8px;">03 · SHIP</p>
+        <p class="af-small" style="color: #d9cfbf;">Hand off to Vercel as production-ready code.</p>
+      </div>
+    </div>
+    <p class="af-small" style="color: #9a8f7d;">Bring Figma in only if other designers need to manipulate the system visually — treat it as a downstream mirror, never the master.</p>
+  </section>
+
+  <!-- COLOR -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">FOUNDATION · COLOR</p>
+    <h2 style="font-size: 30px; margin-bottom: 28px;">Six core, golden-glow palette</h2>
+    <div id="swatches" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px;"></div>
+  </section>
+
+  <!-- TYPE -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">FOUNDATION · TYPE</p>
+    <h2 style="font-size: 30px; margin-bottom: 28px;">Recoleta · Bromello · DM Sans</h2>
+    <div style="display: flex; flex-direction: column; gap: 4px; border: 1px solid rgba(245,200,66,0.12); border-radius: 16px; padding: 36px 32px; background: #1b1916;">
+      <p class="af-display" style="font-size: 52px;">Display — Recoleta</p>
+      <p class="af-script" style="font-size: 34px; margin: 6px 0 18px;">Script — Bromello</p>
+      <p class="af-p" style="font-size: 17px;">Body — DM Sans, the clean warm humanist sans that carries every paragraph, label and spec. Premium faces (Recoleta, Bromello) render where licensed; DM Serif Display and Kaushan Script are the in-preview substitutes.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 10px; margin-top: 18px;" id="typescale"></div>
+  </section>
+
+  <!-- SPACING / SHAPE / GLOW -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">FOUNDATION · SPACE, SHAPE & GLOW</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 18px;">
+      <div style="background: #23201b; border: 1px solid rgba(245,200,66,0.12); border-radius: 12px; padding: 24px;">
+        <p class="af-eyebrow" style="margin-bottom: 14px;">SPACING · 4PX BASE</p>
+        <p class="af-small" style="color: #d9cfbf;">4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64 · 80 · 120</p>
+      </div>
+      <div style="background: #23201b; border: 1px solid rgba(245,200,66,0.12); border-radius: 12px; padding: 24px;">
+        <p class="af-eyebrow" style="margin-bottom: 14px;">RADIUS · SOFT FRAMES</p>
+        <p class="af-small" style="color: #d9cfbf;">6 · 12 · 18 · 24 · pill (999) — never square.</p>
+      </div>
+      <div style="background: #23201b; border: 1px solid rgba(245,200,66,0.12); border-radius: 12px; padding: 24px;">
+        <p class="af-eyebrow" style="margin-bottom: 14px;">GLOW · REPLACES SHADOW</p>
+        <p class="af-small" style="color: #d9cfbf;">sm / md / lg yellow halos + amber + orbital ring.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FIGMA SETUP -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">IF YOU OPEN A FIGMA FILE</p>
+    <h2 style="font-size: 30px; margin-bottom: 24px;">Set these up as Variable collections</h2>
+    <p class="af-p" style="margin-bottom: 28px;">Recreate the tokens once as Figma variables and your file stays 1:1 with what ships. Map them like this:</p>
+    <div style="display: flex; flex-direction: column; gap: 1px; background: rgba(245,200,66,0.12); border: 1px solid rgba(245,200,66,0.12); border-radius: 12px; overflow: hidden;" id="figmamap"></div>
+  </section>
+
+  <!-- COMPONENTS · HERO -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">COMPONENTS · THE HERO</p>
+    <h2 style="font-size: 30px; margin-bottom: 24px;">Galaxy Card — the signature</h2>
+    <p class="af-p" style="margin-bottom: 28px;">A glowing orbital ring wraps one continuous rounded card. The moon rides a tilted orbit — sweeping in <em style="color:#F5C842; font-style:normal;">front</em> along the bottom, slipping <em style="color:#F5C842; font-style:normal;">behind</em> across the top. Image, title, script tagline, description, and price flow inside. Stars twinkle in the image well.</p>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; background: #23201b; border: 1px solid rgba(245,200,66,0.12); border-radius: 16px; padding: 40px; margin-bottom: 28px;" id="galaxy-showcase"></div>
+
+    <p class="af-small" style="color: #9a8f7d;">These are live components from the design system bundle. Use them in your prototypes by importing the AtomicFindsDesignSystem_af0620 namespace.</p>
+  </section>
+
+  <!-- COMPONENTS · SUPPORT -->
+  <section style="margin-bottom: 64px;">
+    <p class="af-eyebrow" style="margin-bottom: 18px;">COMPONENTS · SUPPORT PATTERNS</p>
+    <h2 style="font-size: 30px; margin-bottom: 28px;">Buttons, badges, cards, forms</h2>
+    
+    <div style="display: flex; flex-direction: column; gap: 36px;">
+      <!-- Buttons -->
+      <div>
+        <p class="af-eyebrow" style="margin-bottom: 14px; color: #F5C842;">BUTTONS</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; background: #1b1916; border-radius: 12px; padding: 20px; border: 1px solid rgba(245,200,66,0.12);">
+          <a class="af-btn af-btn-solid" href="#">[ Claim This Piece ]</a>
+          <a class="af-btn af-btn-primary" href="#">[ Explore Collection ]</a>
+          <a class="af-btn af-btn-amber" href="#">[ Schedule Viewing ]</a>
+        </div>
+        <p class="af-small" style="color: #9a8f7d; margin-top: 12px;">Fully rounded pills in solid yellow (primary action) and outlined primary/amber (secondary paths). Golden glow on hover.</p>
+      </div>
+
+      <!-- Badges -->
+      <div>
+        <p class="af-eyebrow" style="margin-bottom: 14px; color: #F5C842;">BADGES & LABELS</p>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; background: #1b1916; border-radius: 12px; padding: 20px; border: 1px solid rgba(245,200,66,0.12);">
+          <span class="af-badge af-badge-instock">In Stock</span>
+          <span class="af-badge af-badge-featured">Featured</span>
+          <span class="af-badge af-badge-out">Out of Stock</span>
+          <span class="af-badge af-badge-eco">Eco / Restored</span>
+        </div>
+        <p class="af-small" style="color: #9a8f7d; margin-top: 12px;">Status pills for inventory and product tags. Woven Moss (#556B4A) for eco-restored pieces.</p>
+      </div>
+
+      <!-- Cards -->
+      <div>
+        <p class="af-eyebrow" style="margin-bottom: 14px; color: #F5C842;">PRODUCT CARDS</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; background: #1b1916; border-radius: 12px; padding: 24px; border: 1px solid rgba(245,200,66,0.12);" id="card-showcase"></div>
+        <p class="af-small" style="color: #9a8f7d; margin-top: 12px;">Compact cards with image well, badge, title, description, and price. Use for grid layouts and collections.</p>
+      </div>
+
+      <!-- Forms -->
+      <div>
+        <p class="af-eyebrow" style="margin-bottom: 14px; color: #F5C842;">FORM ELEMENTS</p>
+        <div style="background: #1b1916; border-radius: 12px; padding: 24px; border: 1px solid rgba(245,200,66,0.12); max-width: 400px;">
+          <div class="af-field">
+            <label class="af-label">Product Name</label>
+            <input class="af-input" type="text" placeholder="e.g. Peacock Chair" />
+          </div>
+          <div class="af-field">
+            <label class="af-label">Category</label>
+            <select class="af-select">
+              <option>— Select —</option>
+              <option>Seating</option>
+              <option>Storage</option>
+              <option>Lighting</option>
+            </select>
+          </div>
+        </div>
+        <p class="af-small" style="color: #9a8f7d; margin-top: 12px;">Inputs and selects with a golden focus ring. DM Sans labels and placeholders.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section>
+    <p class="af-eyebrow" style="margin-bottom: 18px;">NEXT</p>
+    <h2 style="font-size: 30px; margin-bottom: 24px;">Where to go from here</h2>
+    <ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 12px;">
+      <li class="af-p"><strong style="color:#F0E8D8;">Reference</strong> — this page + Component Library.dc.html hold every pattern.</li>
+      <li class="af-p"><strong style="color:#F0E8D8;">Compose</strong> — build new screens by importing Galaxy Cards and components, not redrawing them.</li>
+      <li class="af-p"><strong style="color:#F0E8D8;">Ship</strong> — when a flow is right, hand it off to Vercel directly from here.</li>
+    </ol>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const swatches = [
+      ["Deep Charcoal", "#1E1E1E", "Primary background", "#F0E8D8"],
+      ["Rattan Black", "#2A2017", "Card surfaces", "#F0E8D8"],
+      ["Celestial Yellow", "#F5C842", "Primary accent · glow", "#1E1E1E"],
+      ["Amber Orange", "#D4822A", "Secondary · script", "#1E1E1E"],
+      ["Bone White", "#F0E8D8", "Body text", "#1E1E1E"],
+      ["Woven Moss", "#556B4A", "Eco tags · muted", "#F0E8D8"],
+    ];
+    const sEl = this.refs?.swatches || document.getElementById("swatches");
+    if (sEl) sEl.innerHTML = swatches.map(([n,hex,role,tx]) => `
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(245,200,66,0.12);">
+        <div style="background:${hex};height:88px;display:flex;align-items:flex-end;padding:12px;">
+          <span style="font-family:var(--font-body);font-size:12px;letter-spacing:0.04em;color:${tx};">${hex}</span>
+        </div>
+        <div style="padding:12px 14px;background:#1b1916;">
+          <div style="font-family:var(--font-body);font-weight:600;font-size:13px;color:#F0E8D8;margin-bottom:3px;">${n}</div>
+          <div style="font-family:var(--font-body);font-size:12px;color:#9a8f7d;">${role}</div>
+        </div>
+      </div>`).join("");
+
+    const scale = [
+      ["Display","88"],["H1","64"],["H2","48"],["H3","22"],
+      ["Script","38"],["Body","16"],["Small","14"],["Label","12"],
+    ];
+    const tEl = document.getElementById("typescale");
+    if (tEl) tEl.innerHTML = scale.map(([n,px]) => `
+      <div style="background:#23201b;border:1px solid rgba(245,200,66,0.1);border-radius:10px;padding:14px;">
+        <div style="font-family:var(--font-display);font-size:24px;color:#F5C842;line-height:1;margin-bottom:6px;">${px}</div>
+        <div style="font-family:var(--font-body);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#9a8f7d;">${n} · ${px}px</div>
+      </div>`).join("");
+
+    const map = [
+      ["Color", "6 core + support tints", "Primitives → semantic (bg, fg, accent)"],
+      ["Typography", "3 families, 8 sizes", "Text styles per role (display, h1–h3, body)"],
+      ["Spacing", "12-step 4px scale", "Number variables, used for auto-layout gaps"],
+      ["Radius", "6 / 12 / 18 / 24 / pill", "Number variables on frame corners"],
+      ["Effect", "Glow sm / md / lg", "Effect styles — outer glow, not drop shadow"],
+    ];
+    const fEl = document.getElementById("figmamap");
+    if (fEl) fEl.innerHTML = map.map(([col,prim,note]) => `
+      <div style="display:flex;gap:16px;align-items:baseline;background:#1b1916;padding:16px 20px;flex-wrap:wrap;">
+        <div style="flex:0 0 120px;font-family:var(--font-display);font-size:18px;color:#F5C842;">${col}</div>
+        <div style="flex:0 0 150px;font-family:var(--font-body);font-size:13px;color:#F0E8D8;">${prim}</div>
+        <div style="flex:1;min-width:180px;font-family:var(--font-body);font-size:13px;color:#9a8f7d;">${note}</div>
+      </div>`).join("");
+
+    // Galaxy card showcase
+    const galaxyEl = document.getElementById("galaxy-showcase");
+    if (galaxyEl) {
+      galaxyEl.innerHTML = `
+        <div style="text-align:center; padding:20px; background:#1b1916; border-radius:12px; border:1px solid rgba(245,200,66,0.15);">
+          <p class="af-eyebrow" style="color:#F5C842; margin-bottom:12px;">LIVE COMPONENT</p>
+          <p class="af-p" style="color:#d9cfbf; margin-bottom:14px;">Galaxy Cards render from the design system bundle. Import them into your prototypes with the AtomicFindsDesignSystem_af0620.GalaxyCard component.</p>
+          <p class="af-small" style="color:#9a8f7d;">See Galaxy Card.dc.html for live examples with real images and orbital moons.</p>
+        </div>
+      `;
+    }
+
+    // Product card showcase
+    const cardEl = document.getElementById("card-showcase");
+    if (cardEl) {
+      const cards = [
+        { icon: "▣", title: "Peacock Chair", desc: "1970s iconic · restored", price: "$1,450", badge: "instock" },
+        { icon: "✦", title: "Cane Étagère", desc: "Bamboo & brass shelving", price: "$920", badge: "featured" },
+        { icon: "☾", title: "Rattan Pendant", desc: "Woven dome lamp", price: "$340", badge: "eco" },
+      ];
+      cardEl.innerHTML = cards.map(c => `
+        <div style="background:#2A2017; border:1px solid rgba(245,200,66,0.1); border-radius:12px; overflow:hidden;">
+          <div style="height:100px; background:linear-gradient(135deg,rgba(245,200,66,0.15),rgba(212,130,42,0.1)); display:flex; align-items:center; justify-content:center; font-size:32px; border-bottom:1px solid rgba(245,200,66,0.1);">${c.icon}</div>
+          <div style="padding:14px;">
+            <span class="af-badge af-badge-${c.badge}" style="margin-bottom:8px; display:inline-block;">●</span>
+            <h4 style="font-family:var(--font-display); font-size:16px; color:#F0E8D8; margin:6px 0 4px;">${c.title}</h4>
+            <p style="font-family:var(--font-body); font-size:12px; color:#d9cfbf; margin:0 0 8px;">${c.desc}</p>
+            <p style="font-family:var(--font-body); font-size:14px; font-weight:600; color:#F5C842; margin:0;">${c.price}</p>
+          </div>
+        </div>
+      `).join("");
+    }
+  }
+}
+</script>
+</body>
+</html>

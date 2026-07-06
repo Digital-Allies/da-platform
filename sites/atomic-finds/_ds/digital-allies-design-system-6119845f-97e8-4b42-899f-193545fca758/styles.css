@@ -1,0 +1,13 @@
+/* ============================================================
+   Digital Allies — Design System entry point
+   Link THIS one file to pull in the full foundation:
+   colors, the 95/5 palette, type scale, spacing, motion,
+   structural utilities, and the @font-face declarations.
+
+   <link rel="stylesheet" href="styles.css">
+
+   (slides/_slide.css is a template-specific shell loaded only
+   by the 1280×720 slide deck — it is not part of the global
+   foundation and is intentionally not imported here.)
+   ============================================================ */
+@import url("colors_and_type.css");

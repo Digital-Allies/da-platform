@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="atomic-finds-design-system/colors_and_type.css">
+  <link rel="stylesheet" href="atomic-finds-design-system/styles.css">
+  <script src="atomic-finds-design-system/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--deep-charcoal); background-image: var(--weave); }
+    .gx-wrap { min-height: 100vh; box-sizing: border-box; padding: 72px 48px; }
+    .gx-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+    .gx-row { display: flex; flex-wrap: wrap; gap: 64px 56px; justify-content: center; align-items: start; }
+  </style>
+</helmet>
+
+<div class="gx-wrap">
+  <div class="gx-head">
+    <p class="af-eyebrow" style="margin-bottom:14px;">THE SIGNATURE COMPONENT</p>
+    <h1 style="font-size:clamp(36px,5vw,60px);">Galaxy Card</h1>
+    <p class="af-script" style="margin:10px 0 18px;">curated finds, in orbit</p>
+    <p class="af-p">A glowing orbital ring wraps one continuous rounded card — passing behind the image up top, in front along the bottom. Product name, cursive tagline, description, and price pill all flow down inside the single frame. No tag break.</p>
+  </div>
+
+  <div class="gx-row">
+    <x-import component-from-global-scope="AtomicFindsDesignSystem_af0620.GalaxyCard"
+              image="atomic-finds-design-system/assets/alien-ruso.png"
+              bg="assets/nebula-ochre.webp"
+              title="Peacock" script="vintage find" moon="{{ true }}"
+              desc="1970s rattan peacock chair, restored cane back."
+              price="1450" hint-size="360px,520px"></x-import>
+
+    <x-import component-from-global-scope="AtomicFindsDesignSystem_af0620.GalaxyCard"
+              image="atomic-finds-design-system/assets/alien-milo.png"
+              bg="assets/nebula-violet.webp"
+              title="Milo" script="vinyl guardian" moon="{{ true }}"
+              desc="Bamboo record stand with brass detail."
+              price="380" hint-size="360px,520px"></x-import>
+
+    <x-import component-from-global-scope="AtomicFindsDesignSystem_af0620.GalaxyCard"
+              image="atomic-finds-design-system/assets/alien-totiana.png"
+              bg="assets/nebula-cosmos.webp"
+              title="Totiana" script="glow keeper" moon="{{ true }}"
+              desc="Woven rattan pendant shade, rewired."
+              price="220" hint-size="360px,520px"></x-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Atomic Fines — CMS Admin</title>
+  <link rel="stylesheet" href="_ds/digital-allies-design-system-6119845f-97e8-4b42-899f-193545fca758/colors_and_type.css" />
+  <link rel="stylesheet" href="_ds/digital-allies-design-system-6119845f-97e8-4b42-899f-193545fca758/styles.css" />
+  <script src="_ds/digital-allies-design-system-6119845f-97e8-4b42-899f-193545fca758/_ds_bundle.js"></script>
+  <style>
+    body { background: #f9f6f0; }
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+    .sidebar {
+      background: #2D2D2D;
+      border-right: 1px solid #1a1a1a;
+      padding: 32px 0;
+      position: fixed;
+      width: 240px;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      font-family: var(--font-headers);
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffd966;
+      padding: 0 24px 32px;
+      border-bottom: 1px solid #444;
+      margin-bottom: 24px;
+    }
+    .sidebar-nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-nav li {
+      margin: 0;
+    }
+    .sidebar-nav a {
+      display: block;
+      font-family: var(--font-details);
+      font-size: 12px;
+      color: #999;
+      padding: 12px 24px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 200ms;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-nav a:hover {
+      background: #3a3a3a;
+      color: #ffd966;
+      border-left-color: #ffd966;
+    }
+    .sidebar-nav a.active {
+      background: #3a3a3a;
+      color: #ffd966;
+      border-left-color: #ffd966;
+    }
+    .main-content {
+      margin-left: 240px;
+      padding: 40px;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #E0DDD5;
+    }
+    .page-header h1 {
+      font-family: var(--font-headers);
+      font-size: 40px;
+      font-weight: 700;
+      color: #2D2D2D;
+      margin: 0;
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      font-family: var(--font-headers);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: 1px solid #2D2D2D;
+      cursor: pointer;
+      transition: all 200ms;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-primary {
+      background: #ffd966;
+      color: #1a1a1a;
+      border-color: #ffd966;
+    }
+    .btn-primary:hover {
+      background: #d4822a;
+      border-color: #d4822a;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #2D2D2D;
+      border-color: #2D2D2D;
+    }
+    .btn-secondary:hover {
+      background: #2D2D2D;
+      color: #fff;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .stat-card {
+      background: #fff;
+      border: 1px solid #E0DDD5;
+      padding: 24px;
+    }
+    .stat-label {
+      font-family: var(--font-details);
+      font-size: 12px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-family: var(--font-headers);
+      font-size: 36px;
+      font-weight: 700;
+      color: #ffd966;
+      margin: 0;
+    }
+    .table-container {
+      background: #fff;
+      border: 1px solid #E0DDD5;
+      margin-bottom: 40px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-details);
+    }
+    thead {
+      background: #f0e6d6;
+      border-bottom: 1px solid #E0DDD5;
+    }
+    th {
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      color: #2D2D2D;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #E0DDD5;
+      font-size: 13px;
+      color: #2D2D2D;
+    }
+    tbody tr:hover {
+      background: #faf8f3;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-published {
+      background: #ffd966;
+      color: #1a1a1a;
+    }
+    .status-draft {
+      background: #E0DDD5;
+      color: #2D2D2D;
+    }
+    .status-instock {
+      background: #ffd966;
+      color: #1a1a1a;
+    }
+    .status-lowstock {
+      background: #d4822a;
+      color: #1a1a1a;
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    label {
+      display: block;
+      font-family: var(--font-details);
+      font-size: 12px;
+      font-weight: 600;
+      color: #2D2D2D;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    input, textarea, select {
+      width: 100%;
+      font-family: var(--font-details);
+      font-size: 13px;
+      padding: 12px;
+      border: 1px solid #E0DDD5;
+      background: #fff;
+      color: #2D2D2D;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #ffd966;
+      box-shadow: 0 0 0 2px rgba(255, 217, 102, 0.1);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+  </style>
+</helmet>
+
+<div class="admin-layout">
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">Atomic Fines CMS</div>
+    <nav class="sidebar-nav">
+      <li><a href="#dashboard" class="active">Dashboard</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#blog">Blog Posts</a></li>
+      <li><a href="#pages">Pages</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#settings">Settings</a></li>
+      <li><a href="#users">Users</a></li>
+      <li style="margin-top: 32px; padding: 0 24px;"><a href="#logout" style="color: #888; border: none; padding: 0;">Logout</a></li>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Dashboard Section -->
+    <section id="dashboard" style="display: block;">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <div class="btn-group">
+          <button class="btn btn-secondary">Refresh</button>
+          <button class="btn btn-primary">+ New Item</button>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Products</div>
+          <p class="stat-value">47</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">In Stock</div>
+          <p class="stat-value">32</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Published Posts</div>
+          <p class="stat-value">12</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total Orders</div>
+          <p class="stat-value">156</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-headers); font-size: 24px; font-weight: 600; color: #2D2D2D; margin: 0 0 20px 0;">Recent Products</h2>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Peacock Chair - 1970s</td>
+                <td>Seating</td>
+                <td>$1,450</td>
+                <td>2</td>
+                <td><span class="status-badge status-instock">In Stock</span></td>
+                <td style="font-size: 12px;"><a href="#" style="color: #ffd966; text-decoration: none;">Edit</a></td>
+              </tr>
+              <tr>
+                <td>Rattan Storage Trunk</td>
+                <td>Storage</td>
+                <td>$385</td>
+                <td>1</td>
+                <td><span class="status-badge status-lowstock">Low Stock</span></td>
+                <td style="font-size: 12px;"><a href="#" style="color: #ffd966; text-decoration: none;">Edit</a></td>
+              </tr>
+              <tr>
+                <td>Sunburst Mirror Frame</td>
+                <td>Décor</td>
+                <td>$520</td>
+                <td>3</td>
+                <td><span class="status-badge status-instock">In Stock</span></td>
+                <td style="font-size: 12px;"><a href="#" style="color: #ffd966; text-decoration: none;">Edit</a></td>
+              </tr>
+              <tr>
+                <td>Mid-Century Plant Stand</td>
+                <td>Décor</td>
+                <td>$275</td>
+                <td>0</td>
+                <td><span class="status-badge status-draft">Out of Stock</span></td>
+                <td style="font-size: 12px;"><a href="#" style="color: #ffd966; text-decoration: none;">Edit</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h2 style="font-family: var(--font-headers); font-size: 24px; font-weight: 600; color: #2D2D2D; margin: 0 0 20px 0;">Create New Product</h2>
+        <div style="background: #fff; border: 1px solid #E0DDD5; padding: 40px; max-width: 600px;">
+          <div class="form-group">
+            <label>Product Name *</label>
+            <input type="text" placeholder="e.g., Peacock Chair - 1970s" />
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select>
+              <option>-- Select Category --</option>
+              <option>Seating</option>
+              <option>Storage</option>
+              <option>Décor</option>
+              <option>Mirrors</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price *</label>
+            <input type="number" placeholder="0.00" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label>Description *</label>
+            <textarea placeholder="Describe the piece, its era, condition, and special features..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Condition</label>
+            <select>
+              <option>Excellent</option>
+              <option>Very Good</option>
+              <option>Good</option>
+              <option>Fair</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Featured Item?</label>
+            <input type="checkbox" style="width: auto; margin-right: 8px;" /> 
+            <span style="font-family: var(--font-details); font-size: 13px; color: #888;">Show on homepage gallery</span>
+          </div>
+          <div class="form-group" style="margin-top: 32px;">
+            <button class="btn btn-primary" style="width: 100%; padding: 14px;">Create Product</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
