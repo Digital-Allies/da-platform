@@ -101,6 +101,12 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   (c) never fall back to DA's brand on a public site. The **admin stays
   DA-branded** — no per-client admin theming needed now. Do this before
   onboarding HCTC/Atomic Finds visually.
+- **Vercel deploys from the OLD repo, not the monorepo.** The live app
+  (`da-webwssite-build-workflows.vercel.app`) still builds from
+  `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel
+  at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production
+  deploys come from the source of truth. Loose end — do before shipping changes.
+- Note: the DA `brand_color` fix lives in Supabase (live data), not in git.
 - `digitalallies.net` is **not yet connected** to Supabase.
 - Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
   — many overlapping old repos. Not urgent; leave untouched until we decide.
