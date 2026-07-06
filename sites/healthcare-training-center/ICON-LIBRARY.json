@@ -1,0 +1,312 @@
+{
+  "name": "Healthcare Training Center Icon Library",
+  "version": "1.0",
+  "source": "Phosphor Icons (https://phosphoricons.com)",
+  "license": "MIT",
+  "description": "Curated Phosphor icons for Healthcare Training Center brand. All icons use regular weight (default), with fill/duotone variants available for large banner displays.",
+  "categories": {
+    "rooms": {
+      "name": "Training Room Icons",
+      "description": "One icon per training room — use these to represent each room's identity",
+      "icons": [
+        {
+          "room": "Customer Service",
+          "room_number": 1,
+          "room_color": "#3B7DD8",
+          "primary_icon": "ph-users",
+          "alternative": "ph-chat-circle",
+          "weight": "regular",
+          "usage": "Room header banner, course cards, progress indicators",
+          "notes": "Users shows teamwork & communication. Chat-circle emphasizes dialogue."
+        },
+        {
+          "room": "HIPAA, Privacy & Security",
+          "room_number": 2,
+          "room_color": "#2BA89A",
+          "primary_icon": "ph-shield-check",
+          "alternative": "ph-lock",
+          "weight": "regular",
+          "usage": "Room header banner, course cards, progress indicators",
+          "notes": "Shield-check signals protection & compliance. Lock emphasizes security."
+        },
+        {
+          "room": "Compliance",
+          "room_number": 3,
+          "room_color": "#2EAA6E",
+          "primary_icon": "ph-clipboard-text",
+          "alternative": "ph-check-circle",
+          "weight": "regular",
+          "usage": "Room header banner, course cards, progress indicators",
+          "notes": "Clipboard-text represents documentation & standards. Check-circle signals approval."
+        },
+        {
+          "room": "Medical Records",
+          "room_number": 4,
+          "room_color": "#7B5EA7",
+          "primary_icon": "ph-folder-open",
+          "alternative": "ph-archive",
+          "weight": "regular",
+          "usage": "Room header banner, course cards, progress indicators",
+          "notes": "Folder-open represents document management. Archive emphasizes storage & retrieval."
+        },
+        {
+          "room": "Finance",
+          "room_number": 5,
+          "room_color": "#D4A017",
+          "primary_icon": "ph-currency-dollar",
+          "alternative": "ph-coins",
+          "weight": "regular",
+          "usage": "Room header banner, course cards, progress indicators",
+          "notes": "Currency-dollar directly represents revenue & billing. Coins is softer alternative."
+        }
+      ]
+    },
+    "ui": {
+      "name": "General UI Icons",
+      "description": "Standard icons used throughout the interface for navigation and actions",
+      "icons": [
+        {
+          "name": "Home / Lobby",
+          "icon": "ph-house",
+          "weight": "regular",
+          "usage": "Nav home button, Lobby link",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Progress / Chart",
+          "icon": "ph-chart-bar",
+          "weight": "regular",
+          "usage": "My Progress section, progress dashboards",
+          "color": "#1E3A6E"
+        },
+        {
+          "name": "Certificate",
+          "icon": "ph-certificate",
+          "weight": "regular",
+          "usage": "Completion badges, certificates page",
+          "color": "#28A745"
+        },
+        {
+          "name": "Video / Live Class",
+          "icon": "ph-video-camera",
+          "weight": "regular",
+          "usage": "Live classroom link, video indicator",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Books / Study Lounge",
+          "icon": "ph-books",
+          "weight": "regular",
+          "usage": "Study Lounge, learning resources",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Archive / Resources",
+          "icon": "ph-archive",
+          "weight": "regular",
+          "usage": "Resource Center, document library",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Medal / Badge",
+          "icon": "ph-medal",
+          "weight": "regular",
+          "usage": "Achievement badges, earned badges indicator",
+          "color": "#D4A017"
+        },
+        {
+          "name": "Bell / Notifications",
+          "icon": "ph-bell",
+          "weight": "regular",
+          "usage": "Notification center, announcements",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Headset / Help Desk",
+          "icon": "ph-headset",
+          "weight": "regular",
+          "usage": "Help desk widget, customer support",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "User / Profile",
+          "icon": "ph-user",
+          "weight": "regular",
+          "usage": "User avatar, profile settings",
+          "color": "#1E3A6E"
+        },
+        {
+          "name": "Settings / Gear",
+          "icon": "ph-gear",
+          "weight": "regular",
+          "usage": "Settings page, configuration",
+          "color": "#1E3A6E"
+        },
+        {
+          "name": "Sign Out / Door",
+          "icon": "ph-sign-out",
+          "weight": "regular",
+          "usage": "Logout button, exit action",
+          "color": "#DC3545"
+        }
+      ]
+    },
+    "states": {
+      "name": "State Indicators",
+      "description": "Icons used to indicate status or state",
+      "icons": [
+        {
+          "name": "Check / Complete",
+          "icon": "ph-check",
+          "weight": "regular",
+          "usage": "Task completion, course done, assessments passed",
+          "color": "#28A745"
+        },
+        {
+          "name": "Circle with Check",
+          "icon": "ph-check-circle",
+          "weight": "regular",
+          "usage": "Completion badge, passed state",
+          "color": "#28A745"
+        },
+        {
+          "name": "Warning / Alert",
+          "icon": "ph-warning-circle",
+          "weight": "regular",
+          "usage": "Upcoming deadlines, incomplete modules",
+          "color": "#FFC107"
+        },
+        {
+          "name": "X / Error",
+          "icon": "ph-x-circle",
+          "weight": "regular",
+          "usage": "Failed assessments, errors, validation issues",
+          "color": "#DC3545"
+        },
+        {
+          "name": "Lock / Restricted",
+          "icon": "ph-lock",
+          "weight": "regular",
+          "usage": "Locked courses, restricted content",
+          "color": "#94A3B8"
+        },
+        {
+          "name": "Question / Help",
+          "icon": "ph-question-circle",
+          "weight": "regular",
+          "usage": "Help tooltips, FAQ indicators",
+          "color": "#17A2B8"
+        }
+      ]
+    },
+    "actions": {
+      "name": "Action Icons",
+      "description": "Icons for buttons and interactive elements",
+      "icons": [
+        {
+          "name": "Arrow Right",
+          "icon": "ph-arrow-right",
+          "weight": "regular",
+          "usage": "CTA buttons, 'Enter Room', next actions",
+          "color": "white (on colored backgrounds)"
+        },
+        {
+          "name": "Plus / Add",
+          "icon": "ph-plus",
+          "weight": "regular",
+          "usage": "Add new, create new, expand",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Minus / Remove",
+          "icon": "ph-minus",
+          "weight": "regular",
+          "usage": "Remove, collapse, delete",
+          "color": "#DC3545"
+        },
+        {
+          "name": "Hamburger Menu",
+          "icon": "ph-list",
+          "weight": "regular",
+          "usage": "Mobile nav toggle",
+          "color": "#1E3A6E"
+        },
+        {
+          "name": "Magnifying Glass",
+          "icon": "ph-magnifying-glass",
+          "weight": "regular",
+          "usage": "Search functionality",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Download",
+          "icon": "ph-download",
+          "weight": "regular",
+          "usage": "Download certificate, export report",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Share",
+          "icon": "ph-share-network",
+          "weight": "regular",
+          "usage": "Share achievement, share certificate",
+          "color": "#2B8FA9"
+        },
+        {
+          "name": "Trash / Delete",
+          "icon": "ph-trash",
+          "weight": "regular",
+          "usage": "Delete action, remove item",
+          "color": "#DC3545"
+        }
+      ]
+    }
+  },
+  "weight_notes": {
+    "regular": "Default weight for all UI icons (24–32px typical size)",
+    "fill": "Solid fill — use for large banner icons (48px+) or high-contrast backgrounds",
+    "duotone": "Two-tone effect — use for decorative large icons, room display icons",
+    "bold": "Thicker strokes — use for emphasis or icon buttons (available but not primary)"
+  },
+  "sizing_guide": {
+    "micro": {
+      "size": "16px",
+      "usage": "Inline badges, form labels, captions",
+      "weight": "regular"
+    },
+    "small": {
+      "size": "20px",
+      "usage": "Icon buttons, nav icons, list items",
+      "weight": "regular"
+    },
+    "default": {
+      "size": "24px",
+      "usage": "Most UI elements, course cards, buttons",
+      "weight": "regular"
+    },
+    "large": {
+      "size": "32px",
+      "usage": "Room header cards, progress indicators",
+      "weight": "regular"
+    },
+    "xlarge": {
+      "size": "48px–64px",
+      "usage": "Room display icons, hero sections",
+      "weight": "fill or duotone"
+    }
+  },
+  "usage_rules": {
+    "color": "Always inherit parent text color or use defined color palette (#1E3A6E navy, #2B8FA9 teal, room colors). Never use arbitrary colors.",
+    "spacing": "24px min padding around icons in clickable areas (touch target 44x44px minimum)",
+    "alt_text": "Always provide meaningful alt text for screen readers (e.g., 'Complete Room 1' not just 'checkmark')",
+    "animation": "Icons can transition color on hover (100ms ease-out). Never rotate or scale excessively.",
+    "source": "Import from Phosphor Icons CDN or self-hosted fonts. Font name: PhosphorRegular, PhosphorFill, etc.",
+    "no_decoration": "Never use emoji or custom graphics instead of Phosphor icons. Consistency is critical."
+  },
+  "import_instructions": {
+    "web": "Link to Phosphor stylesheet: <link rel='stylesheet' href='https://unpkg.com/@phosphor-icons/web'> or self-hosted from assets/phosphor/",
+    "usage_html": "<i class='ph ph-users'></i> for regular, <i class='ph-fill ph-shield-check'></i> for fill, <i class='ph-duotone ph-folder-open'></i> for duotone",
+    "figma": "Install Phosphor Icons plugin in Figma, search by name (e.g., 'ph-users')",
+    "svg": "Download SVGs from phosphoricons.com/get-started#svg-files, save to assets/icons/"
+  }
+}

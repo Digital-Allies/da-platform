@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Buttons" subtitle="Variants + sizes" viewport="700x150" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-white); box-sizing:border-box; }
+  .grp { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+  .grp:last-child { margin-bottom:0; }
+  .btn { font-family:var(--font-body); font-weight:600; font-size:14px; height:40px; padding:0 20px; border-radius:8px; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:7px; }
+  .primary { background:var(--color-navy); color:#fff; }
+  .secondary { background:var(--color-teal); color:#fff; }
+  .outline { background:transparent; color:var(--color-navy); border:2px solid var(--color-navy); }
+  .ghost { background:transparent; color:var(--color-teal); }
+  .danger { background:var(--color-error); color:#fff; }
+  .lg { height:48px; padding:0 24px; font-size:15px; }
+  .sm { height:32px; padding:0 16px; font-size:13px; }
+  .lbl { font-family:var(--font-body); font-size:11px; color:var(--fg-3); width:64px; }
+</style></head>
+<body>
+  <div class="grp">
+    <button class="btn primary">Primary</button>
+    <button class="btn secondary">Secondary</button>
+    <button class="btn outline">Outline</button>
+    <button class="btn ghost">Ghost</button>
+    <button class="btn danger">Danger</button>
+  </div>
+  <div class="grp">
+    <span class="lbl">Sizes</span>
+    <button class="btn primary lg">Large 48 →</button>
+    <button class="btn primary">Default 40 →</button>
+    <button class="btn primary sm">Small 32</button>
+  </div>
+</body></html>

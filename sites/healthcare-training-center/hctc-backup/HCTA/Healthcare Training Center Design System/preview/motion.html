@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Spacing — Motion Tokens" subtitle="fast / base / slow / spring (animated)" viewport="700x180" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-white); box-sizing:border-box; }
+  .row { display:flex; align-items:center; gap:14px; margin-bottom:11px; }
+  .row:last-child { margin-bottom:0; }
+  .tok { font-family:var(--font-body); font-size:11px; font-weight:600; color:var(--fg-1); width:120px; }
+  .track { flex:1; height:8px; background:var(--color-border); border-radius:99px; position:relative; overflow:hidden; }
+  .dot { position:absolute; top:-3px; width:14px; height:14px; border-radius:50%; background:var(--color-teal); }
+  .vl { font-family:var(--font-body); font-size:10px; color:var(--fg-3); width:150px; text-align:right; }
+  @keyframes slide { 0%{left:0;} 100%{left:calc(100% - 14px);} }
+  .a1 .dot{ animation:slide 1s linear infinite alternate; }
+  .a2 .dot{ animation:slide 2s ease-in-out infinite alternate; }
+  .a3 .dot{ animation:slide 3.5s ease-in-out infinite alternate; }
+  .a4 .dot{ animation:slide 4s cubic-bezier(0.34,1.56,0.64,1) infinite alternate; }
+</style></head>
+<body>
+  <div class="row a1"><span class="tok">fast · 100ms</span><span class="track"><span class="dot"></span></span><span class="vl">ease-out · hover</span></div>
+  <div class="row a2"><span class="tok">base · 200ms</span><span class="track"><span class="dot"></span></span><span class="vl">ease-in-out · panels</span></div>
+  <div class="row a3"><span class="tok">slow · 350ms</span><span class="track"><span class="dot"></span></span><span class="vl">page · modal entrance</span></div>
+  <div class="row a4"><span class="tok">spring · 400ms</span><span class="track"><span class="dot"></span></span><span class="vl">progress · badge unlock</span></div>
+</body></html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare Training Center — Step Inside. Step Up.</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../assets/phosphor/regular/style.css">
+<link rel="stylesheet" href="../../assets/phosphor/bold/style.css">
+<link rel="stylesheet" href="../../assets/phosphor/fill/style.css">
+<link rel="stylesheet" href="kit.css">
+<style>
+/* ---------- Print-ready overrides ---------- */
+@page { size: portrait; margin: 1cm; }
+
+html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    animation-delay: -99s !important; animation-duration: .001s !important;
+    animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+    animation-play-state: running !important; transition-duration: 0s !important;
+  }
+
+  /* Un-stick the nav so it doesn't overlap content / repeat */
+  .mk-nav { position: static !important; backdrop-filter: none !important; background: var(--bg-page) !important; }
+
+  /* Freeze any hover/transform states */
+  .mk-track, .mk-btn { transform: none !important; }
+
+  /* Keep meaningful blocks intact across page breaks */
+  .mk-track, .mk-aud-card, .mk-feature, .mk-price,
+  .mk-story-quote, .mk-hero-stats > div, .mk-section-head { break-inside: avoid; }
+
+  /* Give big color bands room and avoid splitting their heads */
+  .mk-hero, .mk-features, .mk-story, .mk-footer { break-inside: avoid-page; }
+
+  /* Tighten the very large hero so the fold reads well on paper */
+  .mk-hero-inner { padding: 60px 28px 56px !important; }
+  .mk-hero-title { font-size: 54px !important; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel">
+  function MarketingSite() {
+    return (
+      <React.Fragment>
+        <SiteNav />
+        <Hero />
+        <TracksRow />
+        <StorySection />
+        <AudienceSplit />
+        <FeatureGrid />
+        <Pricing />
+        <SiteFooter />
+      </React.Fragment>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<MarketingSite />);
+
+  // Auto-print once React has rendered and fonts/icons are ready.
+  (function autoPrint() {
+    const ready = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    ready.then(() => setTimeout(() => window.print(), 800));
+  })();
+</script>
+</body>
+</html>

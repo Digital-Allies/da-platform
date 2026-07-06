@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Help Desk & Announcement" subtitle="Banner + floating help widget" viewport="700x150" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../assets/phosphor/regular/style.css">
+<link rel="stylesheet" href="../assets/phosphor/fill/style.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-surface); box-sizing:border-box; display:flex; gap:20px; align-items:flex-start; }
+  .ann { flex:1; background:var(--color-info); color:#fff; border-radius:8px; padding:13px 16px; display:flex; align-items:center; gap:11px; font-family:var(--font-body); font-size:14px; }
+  .ann i.lead { font-size:19px; }
+  .ann .x { margin-left:auto; opacity:.85; font-size:16px; }
+  .ann b { font-weight:700; }
+  .help { width:200px; background:var(--color-teal); border-radius:12px; padding:14px 16px; color:#fff; box-shadow:var(--shadow-md); }
+  .help .hd { display:flex; align-items:center; gap:8px; font-family:var(--font-heading); font-weight:600; font-size:14px; }
+  .dot { width:8px; height:8px; border-radius:50%; background:#5ee08a; margin-left:auto; box-shadow:0 0 0 3px rgba(94,224,138,.3); }
+  .help p { font-family:var(--font-body); font-size:12px; color:rgba(255,255,255,.9); margin:9px 0 0; line-height:1.5; }
+</style></head>
+<body>
+  <div class="ann">
+    <i class="lead ph-fill ph-megaphone"></i>
+    <span><b>New course added:</b> Medical Records Mastery is now live in Room 4.</span>
+    <i class="x ph ph-x"></i>
+  </div>
+  <div class="help">
+    <div class="hd"><i class="ph-fill ph-headset"></i> Help Desk <span class="dot"></span></div>
+    <p>Hi! We're here to help you succeed. Staff online now.</p>
+  </div>
+</body></html>

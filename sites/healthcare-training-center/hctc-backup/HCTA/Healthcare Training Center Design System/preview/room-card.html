@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Room Entry Card" subtitle="The signature 'door' card" viewport="700x280" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../assets/phosphor/fill/style.css">
+<link rel="stylesheet" href="../assets/phosphor/regular/style.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-surface); box-sizing:border-box; display:flex; gap:20px; }
+  .card { width:300px; background:#fff; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-md); }
+  .band { height:96px; display:flex; align-items:center; justify-content:center; position:relative; }
+  .band i { font-size:42px; color:#fff; }
+  .rnum { position:absolute; top:12px; left:12px; font-family:var(--font-heading); font-weight:700; font-size:11px; color:#fff; background:rgba(255,255,255,.22); padding:3px 10px; border-radius:9999px; }
+  .check { position:absolute; top:12px; right:12px; background:#fff; color:var(--color-success); width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; }
+  .body { padding:16px 18px 18px; }
+  .nm { font-family:var(--font-heading); font-weight:600; font-size:18px; color:var(--fg-1); }
+  .ds { font-family:var(--font-body); font-size:13px; color:var(--fg-3); margin:5px 0 14px; line-height:1.5; }
+  .track { height:6px; background:var(--color-border); border-radius:99px; overflow:hidden; margin-bottom:14px; }
+  .cta { width:100%; height:40px; border:none; border-radius:8px; color:#fff; font-family:var(--font-body); font-weight:600; font-size:14px; }
+</style></head>
+<body>
+  <div class="card">
+    <div class="band" style="background:#3B7DD8;"><span class="rnum">ROOM 1</span><i class="ph-fill ph-users"></i></div>
+    <div class="body">
+      <div class="nm">Customer Service</div>
+      <div class="ds">Communication, empathy, and de-escalation for every patient interaction.</div>
+      <div class="track"><div style="width:75%;height:100%;background:#3B7DD8;"></div></div>
+      <button class="cta" style="background:#3B7DD8;">Continue →</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="band" style="background:#2EAA6E;"><span class="rnum">ROOM 3</span><i class="check ph ph-check"></i><i class="ph-fill ph-clipboard-text"></i></div>
+    <div class="body">
+      <div class="nm">Compliance</div>
+      <div class="ds">Laws, fraud/waste/abuse, and the ethics that keep care honest.</div>
+      <div class="track"><div style="width:100%;height:100%;background:var(--color-success);"></div></div>
+      <button class="cta" style="background:#2EAA6E;">Review →</button>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Services Index" description="Hero + featured tools grid + all tools link, CMS-driven" -->
+<helmet>
+  <script src="./ds-base.js"></script>
+  <style>
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .tool-card {
+      border: 1px solid #2D2D2D;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    }
+    .tool-icon {
+      width: 48px;
+      height: 48px;
+      background: #3A7BD5;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #F9F6F0;
+      font-size: 20px;
+    }
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #2D2D2D;
+    }
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .feature-bullet {
+      color: #C5301A;
+      font-weight: 600;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .brand-art {
+      position: absolute;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+  </style>
+</helmet>
+
+<div style="background: #F9F6F0; position: relative; overflow: hidden;">
+  <!-- Hero -->
+  <section style="position: relative; padding: 80px 40px; max-width: 1280px; margin: 0 auto; text-align: center;">
+    <div class="brand-art" style="top: -200px; right: -100px; width: 400px; height: 400px;">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs><pattern id="wavy" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M0,10 Q5,5 10,10 T20,10" stroke="#2D2D2D" stroke-width="0.5" fill="none"/>
+        </pattern></defs>
+        <rect width="400" height="400" fill="url(#wavy)"/>
+        <circle cx="200" cy="200" r="8" fill="#3A7BD5"/>
+      </svg>
+    </div>
+    
+    <div style="position: relative; z-index: 1;">
+      <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #666; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace;">
+        The Departments
+      </div>
+      <h1 style="font-size: 56px; font-weight: 700; line-height: 1.2; margin: 0 0 24px 0; font-family: 'Lexend Deca', sans-serif; color: #2D2D2D;">
+        {{ pageTitle }}
+      </h1>
+      <p style="font-size: 18px; line-height: 1.6; color: #2D2D2D; max-width: 600px; margin: 0 auto; font-family: 'JetBrains Mono', monospace;">
+        {{ pageSubtitle }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Tools Grid -->
+  <section style="padding: 60px 40px; max-width: 1280px; margin: 0 auto;">
+    <div style="margin-bottom: 40px;">
+      <h2 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0; font-family: 'Lexend Deca', sans-serif; color: #2D2D2D;">
+        {{ featuredSectionTitle }}
+      </h2>
+      <p style="font-size: 14px; color: #666; margin: 0; font-family: 'JetBrains Mono', monospace;">
+        {{ featuredSectionSubtitle }}
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-bottom: 60px;">
+      <sc-for list="{{ featuredTools }}" as="tool" hint-placeholder-count="3">
+        <a href="{{ tool.detailPageUrl }}" style="text-decoration: none; display: block; color: inherit;">
+          <div class="tool-card">
+            <div class="tool-icon">
+              {{ tool.icon }}
+            </div>
+            
+            <div>
+              <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 8px 0; font-family: 'Lexend Deca', sans-serif; color: #2D2D2D;">
+                {{ tool.name }}
+              </h3>
+              <p style="font-size: 14px; line-height: 1.6; color: #2D2D2D; margin: 0; font-family: 'JetBrains Mono', monospace;">
+                {{ tool.description }}
+              </p>
+            </div>
+
+            <div class="feature-list">
+              <sc-for list="{{ tool.features }}" as="feature" hint-placeholder-count="2">
+                <div class="feature-item">
+                  <span class="feature-bullet">+</span>
+                  <span>{{ feature }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 16px; border-top: 1px dashed #999;">
+              <div style="font-size: 14px; font-weight: 600; color: #3A7BD5; font-family: 'JetBrains Mono', monospace;">
+                {{ tool.pricing }} →
+              </div>
+            </div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+
+    <!-- View All Tools CTA -->
+    <div style="text-align: center; padding: 40px; border: 1px solid #2D2D2D; background: #fff;">
+      <a href="{{ allToolsUrl }}" style="display: inline-block; font-size: 16px; font-weight: 600; color: #2D2D2D; text-decoration: none; border: 1px solid #2D2D2D; padding: 12px 24px; transition: all 300ms ease; font-family: 'JetBrains Mono', monospace;">
+        [ View all tools → ]
+      </a>
+    </div>
+
+    <!-- Or use the direct link if no CMS data: https://digitalallies.net/tools -->
+  </section>
+
+  <!-- Footer callout -->
+  <section style="padding: 60px 40px; background: #2D2D2D; color: #F9F6F0; text-align: center; position: relative; overflow: hidden;">
+    <div class="brand-art" style="top: 50%; left: -100px; width: 400px; height: 400px; opacity: 0.05;">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <defs><pattern id="wavy2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M0,10 Q5,5 10,10 T20,10" stroke="#F9F6F0" stroke-width="0.5" fill="none"/>
+        </pattern></defs>
+        <rect width="400" height="400" fill="url(#wavy2)"/>
+      </svg>
+    </div>
+    
+    <div style="position: relative; z-index: 1; max-width: 600px; margin: 0 auto;">
+      <p style="font-size: 18px; line-height: 1.6; margin: 0; font-family: 'JetBrains Mono', monospace;">
+        {{ footerCopy }}
+      </p>
+    </div>
+  </section>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1200px&quot;,&quot;height&quot;:&quot;900px&quot;},&quot;pageTitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Choose Your Tool&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;pageSubtitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Four distinct operations. One point of contact.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;featuredSectionTitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Featured&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;featuredTools&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[],&quot;tsType&quot;:&quot;Array&lt;{icon:string; name:string; description:string; features:string[]; pricing:string; detailPageUrl:string}&gt;&quot;},&quot;allToolsUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;footerCopy&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Need a strategic ally? [ Contact us → ]&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      pageTitle: this.props.pageTitle ?? 'Choose Your Tool',
+      pageSubtitle: this.props.pageSubtitle ?? 'Four distinct operations. One point of contact.',
+      
+      featuredSectionTitle: this.props.featuredSectionTitle ?? 'Featured',
+      featuredSectionSubtitle: this.props.featuredSectionSubtitle ?? 'Our most-used solutions',
+      
+      featuredTools: this.props.featuredTools ?? [
+        {
+          icon: '📊',
+          name: 'SEO / Audit',
+          description: 'Find the gaps in 90 seconds.',
+          features: ['Meta tags & titles', 'Core Web Vitals', 'Schema markup'],
+          pricing: 'From $45/scan',
+          detailPageUrl: '#'
+        },
+        {
+          icon: '✍️',
+          name: 'Manuscript Editor',
+          description: 'Write the book. Track the world.',
+          features: ['Auto-save drafts', 'Character + world notes', 'Multi-volume support'],
+          pricing: 'From $25/mo',
+          detailPageUrl: '#'
+        },
+        {
+          icon: '🎨',
+          name: 'Brand Discovery',
+          description: 'From brief to brand board in one session.',
+          features: ['Logo variations', 'Color palette', 'Type + patterns'],
+          pricing: 'From $475',
+          detailPageUrl: '#'
+        }
+      ],
+      
+      allToolsUrl: 'https://digitalallies.net/tools',
+      
+      footerCopy: this.props.footerCopy ?? 'Need a strategic ally? <a href="https://digitalallies.net#contact" style="color: inherit; text-decoration: underline;">[ Contact us → ]</a>'
+    };
+  }
+}
+
+</script>
+</body>
+</html>

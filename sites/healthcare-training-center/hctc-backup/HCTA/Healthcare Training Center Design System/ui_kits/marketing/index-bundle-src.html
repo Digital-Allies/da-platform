@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare Training Center — Step Inside. Step Up.</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="ph-regular.css">
+<link rel="stylesheet" href="ph-bold.css">
+<link rel="stylesheet" href="ph-fill.css">
+<link rel="stylesheet" href="kit.css">
+<template id="__bundler_thumbnail" data-bg-color="#16336b">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Nav bar -->
+    <rect x="0" y="0" width="1200" height="60" fill="#1c3f7a"/>
+    <rect x="40" y="20" width="24" height="24" rx="6" fill="#2BA89A"/>
+    <rect x="72" y="26" width="120" height="12" rx="4" fill="rgba(255,255,255,0.6)"/>
+    <!-- Hero block -->
+    <rect x="0" y="60" width="1200" height="360" fill="#16336b"/>
+    <rect x="40" y="110" width="80" height="10" rx="3" fill="#7ed0e2"/>
+    <rect x="40" y="132" width="380" height="52" rx="6" fill="rgba(255,255,255,0.95)"/>
+    <rect x="40" y="196" width="260" height="42" rx="6" fill="rgba(255,255,255,0.95)"/>
+    <rect x="40" y="258" width="480" height="12" rx="3" fill="rgba(255,255,255,0.5)"/>
+    <rect x="40" y="278" width="400" height="12" rx="3" fill="rgba(255,255,255,0.4)"/>
+    <rect x="40" y="318" width="160" height="42" rx="8" fill="#2BA89A"/>
+    <rect x="212" y="318" width="140" height="42" rx="8" fill="rgba(255,255,255,0.15)"/>
+    <!-- Track cards -->
+    <rect x="0" y="420" width="1200" height="220" fill="#f4f6f9"/>
+    <rect x="40" y="440" width="200" height="10" rx="3" fill="#2BA89A"/>
+    <rect x="40" y="460" width="340" height="20" rx="4" fill="#16336b"/>
+    <!-- 5 track cards -->
+    <rect x="40"  y="500" width="210" height="120" rx="10" fill="white" stroke="#e2e6ef" stroke-width="1"/>
+    <rect x="40"  y="500" width="210" height="4" rx="2" fill="#3B7DD8"/>
+    <rect x="264" y="500" width="210" height="120" rx="10" fill="white" stroke="#e2e6ef" stroke-width="1"/>
+    <rect x="264" y="500" width="210" height="4" rx="2" fill="#2BA89A"/>
+    <rect x="488" y="500" width="210" height="120" rx="10" fill="white" stroke="#e2e6ef" stroke-width="1"/>
+    <rect x="488" y="500" width="210" height="4" rx="2" fill="#2EAA6E"/>
+    <rect x="712" y="500" width="210" height="120" rx="10" fill="white" stroke="#e2e6ef" stroke-width="1"/>
+    <rect x="712" y="500" width="210" height="4" rx="2" fill="#7B5EA7"/>
+    <rect x="936" y="500" width="224" height="120" rx="10" fill="white" stroke="#e2e6ef" stroke-width="1"/>
+    <rect x="936" y="500" width="224" height="4" rx="2" fill="#D4A017"/>
+    <!-- Footer strip -->
+    <rect x="0" y="700" width="1200" height="100" fill="#16243D"/>
+    <rect x="40" y="724" width="24" height="24" rx="6" fill="#2BA89A"/>
+    <rect x="72" y="730" width="130" height="12" rx="4" fill="rgba(255,255,255,0.5)"/>
+  </svg>
+</template>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel">
+  function MarketingSite() {
+    return (
+      <React.Fragment>
+        <SiteNav />
+        <Hero />
+        <TracksRow />
+        <StorySection />
+        <AudienceSplit />
+        <FeatureGrid />
+        <Pricing />
+        <SiteFooter />
+      </React.Fragment>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<MarketingSite />);
+</script>
+</body>
+</html>

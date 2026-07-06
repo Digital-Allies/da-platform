@@ -1,0 +1,9 @@
+/* styles.css — Design system root stylesheet.
+   Import this single file to pull in all tokens, fonts, and UI kit styles. */
+
+@import "./colors_and_type.css";
+@import "./assets/phosphor/regular/style.css";
+@import "./assets/phosphor/bold/style.css";
+@import "./assets/phosphor/fill/style.css";
+@import "./ui_kits/learner-app/kit.css";
+@import "./ui_kits/marketing/kit.css";

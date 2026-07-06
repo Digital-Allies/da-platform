@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!-- @dsCard group="UI Kit — Learner App" name="Learner App — UI Kit" subtitle="Lobby → Room → Course, click-through" viewport="1280x760" -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthcare Training Center — Learner App</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<link rel="stylesheet" href="../../assets/phosphor/regular/style.css">
+<link rel="stylesheet" href="../../assets/phosphor/bold/style.css">
+<link rel="stylesheet" href="../../assets/phosphor/fill/style.css">
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+// rooms.jsx — shared room data + small helpers for the Learner App kit
+// Exposed on window for the other babel scripts.
+
+const ROOMS = [
+  {
+    id: 'cs', n: 1, name: 'Customer Service', icon: 'ph-users',
+    color: '#3B7DD8', tint: '#ECF3FC',
+    desc: 'Communication, empathy, and de-escalation for every patient interaction.',
+    why: 'Patients remember how they were treated long after they forget a diagnosis. The first voice they hear sets the tone for their entire experience of care.',
+    done: 18, total: 24,
+    courses: [
+      { t: 'The Importance of Customer Service in Healthcare', min: 30, lvl: 'Beginner', pct: 100 },
+      { t: 'Communication Skills: Phone, Email & In-Person', min: 45, lvl: 'Beginner', pct: 100 },
+      { t: 'Active Listening & Empathy', min: 35, lvl: 'Core', pct: 80 },
+      { t: 'Handling Difficult Situations', min: 40, lvl: 'Core', pct: 40 },
+      { t: 'Cultural Competency', min: 30, lvl: 'Core', pct: 0 },
+      { t: 'Service Recovery & Best Practices', min: 25, lvl: 'Advanced', pct: 0 },
+    ],
+  },
+  {
+    id: 'hipaa', n: 2, name: 'HIPAA, Privacy & Security', icon: 'ph-shield-check',
+    color: '#2BA89A', tint: '#E7F6F4',
+    desc: 'PHI, the privacy rule, and the habits that keep patient data safe.',
+    why: 'A single careless click can expose thousands of patients. Protecting privacy is not paperwork — it is the trust that makes honest care possible.',
+    done: 6, total: 12,
+    courses: [
+      { t: 'Introduction to HIPAA', min: 30, lvl: 'Beginner', pct: 100 },
+      { t: 'Protected Health Information (PHI)', min: 45, lvl: 'Beginner', pct: 100 },
+      { t: 'The Privacy Rule & Patient Rights', min: 40, lvl: 'Core', pct: 60 },
+      { t: 'Minimum Necessary Standard', min: 25, lvl: 'Core', pct: 0 },
+      { t: 'Data Breach Prevention & Reporting', min: 35, lvl: 'Core', pct: 0 },
+      { t: 'Consequences of HIPAA Violations', min: 30, lvl: 'Advanced', pct: 0 },
+    ],
+  },
+  {
+    id: 'compliance', n: 3, name: 'Compliance', icon: 'ph-clipboard-text',
+    color: '#2EAA6E', tint: '#E8F7EF',
+    desc: 'Laws, fraud/waste/abuse, and the ethics that keep care honest.',
+    why: 'Compliance is how an organization proves — to patients and regulators alike — that it does the right thing even when no one is watching.',
+    done: 12, total: 12,
+    courses: [
+      { t: 'Introduction to Healthcare Compliance', min: 30, lvl: 'Beginner', pct: 100 },
+      { t: 'Laws & Regulations Overview', min: 45, lvl: 'Beginner', pct: 100 },
+      { t: 'Fraud, Waste & Abuse (FWA)', min: 40, lvl: 'Core', pct: 100 },
+      { t: 'The Anti-Kickback Statute & Stark Law', min: 50, lvl: 'Advanced', pct: 100 },
+      { t: 'Reporting Concerns (Whistleblowing)', min: 30, lvl: 'Core', pct: 100 },
+      { t: 'Internal Audits & Monitoring', min: 35, lvl: 'Advanced', pct: 100 },
+    ],
+  },
+  {
+    id: 'records', n: 4, name: 'Medical Records', icon: 'ph-folder-open',
+    color: '#7B5EA7', tint: '#F1ECF7',
+    desc: 'EHR, documentation standards, and reading a record with confidence.',
+    why: 'The record is the patient’s story in clinical form. Accurate documentation is what lets the next caregiver pick up exactly where the last one left off.',
+    done: 3, total: 14,
+    courses: [
+      { t: 'Introduction to Medical Records', min: 30, lvl: 'Beginner', pct: 100 },
+      { t: 'Electronic Health Records (EHR)', min: 45, lvl: 'Beginner', pct: 60 },
+      { t: 'Documenting Patient Information', min: 40, lvl: 'Core', pct: 0 },
+      { t: 'How to Read a Medical Record', min: 35, lvl: 'Core', pct: 0 },
+      { t: 'Retention & Destruction Policies', min: 30, lvl: 'Advanced', pct: 0 },
+      { t: 'Release of Information (ROI)', min: 35, lvl: 'Advanced', pct: 0 },
+    ],
+  },
+  {
+    id: 'finance', n: 5, name: 'Finance', icon: 'ph-currency-dollar',
+    color: '#D4A017', tint: '#FBF3DD',
+    desc: 'Revenue cycle, billing, and collections done accurately and fairly.',
+    why: 'Billing errors cost patients real money and erode their trust. Getting finance right is part of treating people with dignity.',
+    done: 0, total: 13,
+    courses: [
+      { t: 'Introduction to Healthcare Finance', min: 30, lvl: 'Beginner', pct: 0 },
+      { t: 'Revenue Cycle Overview', min: 45, lvl: 'Beginner', pct: 0 },
+      { t: 'Coding & Charge Capture (CPT/ICD-10)', min: 50, lvl: 'Core', pct: 0 },
+      { t: 'Claims Submission & Denials', min: 40, lvl: 'Core', pct: 0 },
+      { t: 'Patient Statements & Collections', min: 35, lvl: 'Advanced', pct: 0 },
+      { t: 'Fraud & Abuse in Billing', min: 30, lvl: 'Advanced', pct: 0 },
+    ],
+  },
+];
+
+function roomStatus(r) {
+  if (r.done === 0) return 'not-started';
+  if (r.done >= r.total) return 'complete';
+  return 'in-progress';
+}
+
+function roomCta(r) {
+  const s = roomStatus(r);
+  if (s === 'complete') return 'Review';
+  if (s === 'in-progress') return 'Continue';
+  return 'Enter Room';
+}
+
+Object.assign(window, { ROOMS, roomStatus, roomCta });
+
+
+// components.jsx — shared presentational components for the Learner App kit.
+// Relies on rooms.jsx being loaded first. Exports to window at the end.
+
+
+/* ---------- Top Navigation ---------- */
+function TopNav({ accent, onLogo, room }) {
+  const links = ['Lobby', 'My Progress', 'Live Classes', 'Study Lounge', 'Resources'];
+  const [active] = useState('Lobby');
+  return (
+    <header className="ln-nav" style={{ '--accent': accent || 'var(--color-teal)' }}>
+      <div className="ln-nav-bar">
+        <div className="ln-logo" onClick={onLogo} role="button" tabIndex={0}>
+          <span className="ln-logo-mark"><i className="ph-fill ph-first-aid"></i></span>
+          <span className="ln-logo-word">Healthcare Training Center</span>
+        </div>
+        <nav className="ln-links">
+          {links.map(l => (
+            <span key={l} className={'ln-link' + (l === active ? ' is-active' : '')}>{l}</span>
+          ))}
+        </nav>
+        <div className="ln-nav-right">
+          <button className="ln-iconbtn" aria-label="Notifications"><i className="ph-fill ph-bell"></i><span className="ln-dot"></span></button>
+          <div className="ln-avatar">MD</div>
+          <span className="ln-username">Maria D.</span>
+        </div>
+      </div>
+      <div className="ln-accentbar"></div>
+    </header>
+  );
+}
+
+/* ---------- Button ---------- */
+function Button({ variant = 'primary', size = 'md', accent, children, onClick, full }) {
+  const style = {};
+  if (variant === 'track' && accent) style.background = accent;
+  return (
+    <button
+      className={`ln-btn ln-btn-${variant} ln-btn-${size}${full ? ' ln-btn-full' : ''}`}
+      style={style} onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
+/* ---------- Progress bar ---------- */
+function ProgressBar({ pct, color }) {
+  return (
+    <div className="ln-track">
+      <div className="ln-fill" style={{ width: pct + '%', background: color || 'var(--color-teal)' }}></div>
+    </div>
+  );
+}
+
+/* ---------- Progress ring ---------- */
+function ProgressRing({ pct, size = 40, stroke = 5, color, label }) {
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const off = c * (1 - pct / 100);
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="ln-ring">
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="var(--color-border)" strokeWidth={stroke} />
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color || 'var(--color-teal)'} strokeWidth={stroke}
+        strokeLinecap="round" strokeDasharray={c} strokeDashoffset={off}
+        transform={`rotate(-90 ${size/2} ${size/2})`} style={{ transition: 'stroke-dashoffset .4s' }} />
+      {label && <text x="50%" y="52%" textAnchor="middle" dominantBaseline="middle"
+        fontFamily="Montserrat" fontWeight="800" fontSize={size*0.26} fill="var(--color-navy)">{label}</text>}
+    </svg>
+  );
+}
+
+/* ---------- Status pill ---------- */
+function StatusPill({ status }) {
+  const map = {
+    'complete':    { t: 'Completed', cls: 'is-success', icon: 'ph-check-circle' },
+    'in-progress': { t: 'In Progress', cls: 'is-warning', icon: null },
+    'not-started': { t: 'Not Started', cls: 'is-muted', icon: null },
+  };
+  const s = map[status] || map['not-started'];
+  return <span className={'ln-pill ' + s.cls}>{s.icon && <i className={'ph ' + s.icon}></i>}{s.t}</span>;
+}
+
+/* ---------- Room Entry Card (the "door") ---------- */
+function RoomCard({ room, onEnter }) {
+  const status = roomStatus(room);
+  const pct = Math.round((room.done / room.total) * 100);
+  const cta = roomCta(room);
+  return (
+    <article className={'ln-roomcard ln-status-' + status} onClick={() => onEnter(room)} role="button" tabIndex={0}>
+      <div className="ln-roomcard-band" style={{ background: room.color }}>
+        <span className="ln-roomnum">ROOM {room.n}</span>
+        {status === 'complete' && <span className="ln-roomcheck"><i className="ph-bold ph-check"></i></span>}
+        <i className={'ph-fill ' + room.icon}></i>
+      </div>
+      <div className="ln-roomcard-body">
+        <h3 className="ln-roomname">{room.name}</h3>
+        <p className="ln-roomdesc">{room.desc}</p>
+        {status !== 'not-started' && (
+          <div className="ln-roomprog">
+            <ProgressBar pct={pct} color={status === 'complete' ? 'var(--color-success)' : room.color} />
+            <span className="ln-roomprog-lbl">{room.done} of {room.total} courses</span>
+          </div>
+        )}
+        <Button variant="track" accent={room.color} full>{cta} <i className="ph-bold ph-arrow-right"></i></Button>
+      </div>
+    </article>
+  );
+}
+
+/* ---------- Course Card ---------- */
+function CourseCard({ course, room }) {
+  let action = 'Start', icon = 'ph-circle-dashed', label = 'Not started';
+  if (course.pct === 100) { action = 'Review'; icon = 'ph-check-circle'; label = 'Completed'; }
+  else if (course.pct > 0) { action = 'Continue'; label = course.pct + '% done'; }
+  return (
+    <article className="ln-course">
+      <div className="ln-course-thumb" style={{ background: room.color }}>
+        <i className={'ph ' + room.icon}></i>
+      </div>
+      <div className="ln-course-body">
+        <div className="ln-course-meta">
+          <span className="ln-tag">{course.min} MIN</span>
+          <span className="ln-tag">{course.lvl.toUpperCase()}</span>
+        </div>
+        <h4 className="ln-course-title">{course.t}</h4>
+        <div className="ln-course-foot">
+          <span className="ln-course-status"><i className={'ph ' + icon}></i> {label}</span>
+          <span className="ln-course-go" style={{ color: room.color }}>{action} →</span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+Object.assign(window, { TopNav, Button, ProgressBar, ProgressRing, StatusPill, RoomCard, CourseCard });
+
+
+// screens.jsx — Lobby + Room screens and the App shell.
+// Relies on rooms.jsx + components.jsx. Exports App to window.
+
+
+/* ---------- Lobby (Reception) ---------- */
+function LobbyScreen({ onEnter }) {
+  const overall = Math.round(
+    100 * ROOMS.reduce((a, r) => a + r.done, 0) / ROOMS.reduce((a, r) => a + r.total, 0)
+  );
+  return (
+    <div className="ln-lobby">
+      <div className="ln-lobby-head">
+        <div>
+          <p className="ln-eyebrow">Welcome back</p>
+          <h1 className="ln-lobby-title">Hello, Maria</h1>
+          <p className="ln-lobby-sub">Choose your training path — step into any room to pick up where you left off.</p>
+        </div>
+        <div className="ln-overall">
+          <ProgressRing pct={overall} size={108} stroke={12} color="var(--color-teal)" label={overall + '%'} />
+          <div className="ln-overall-meta">
+            <strong>Overall progress</strong>
+            <span>39 of 75 courses complete</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="ln-lobby-grid-wrap">
+        <div className="ln-section-label"><span>Choose Your Training Path</span></div>
+        <div className="ln-roomgrid">
+          {ROOMS.map(r => <RoomCard key={r.id} room={r} onEnter={onEnter} />)}
+          <aside className="ln-lobby-aside">
+            <div className="ln-aside-card ln-aside-live">
+              <span className="ln-live-badge"><span className="ln-live-dot"></span> LIVE NOW</span>
+              <h4>HIPAA Basics — Live Class</h4>
+              <p>With instructor Dr. Alan Reyes</p>
+              <Button variant="secondary" size="sm">Join Live Class</Button>
+            </div>
+            <div className="ln-aside-card">
+              <p className="ln-eyebrow">Upcoming</p>
+              <h4 className="ln-aside-h">Study Group Session</h4>
+              <p className="ln-aside-p"><i className="ph ph-calendar-blank"></i> May 22, 2026 · 6:00 PM EST</p>
+              <a className="ln-aside-link">View calendar →</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Room (immersive) ---------- */
+function RoomScreen({ room, onBack }) {
+  const pct = Math.round((room.done / room.total) * 100);
+  return (
+    <div className="ln-room" style={{ '--accent': room.color, '--tint': room.tint, background: room.tint }}>
+      <div className="ln-room-banner" style={{ background: room.color }}>
+        <div className="ln-room-banner-inner">
+          <button className="ln-back" onClick={onBack}><i className="ph-bold ph-arrow-left"></i> Back to Lobby</button>
+          <div className="ln-room-banner-main">
+            <span className="ln-room-banner-icon"><i className={'ph-fill ' + room.icon}></i></span>
+            <div>
+              <span className="ln-room-banner-num">ROOM {room.n}</span>
+              <h1 className="ln-room-banner-name">{room.name}</h1>
+              <p className="ln-room-banner-tag">{room.desc}</p>
+            </div>
+            <div className="ln-room-banner-prog">
+              <span className="ln-room-banner-pct">{room.done} of {room.total} complete</span>
+              <div className="ln-track ln-track-oncolor"><div className="ln-fill" style={{ width: pct + '%', background: '#fff' }}></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="ln-room-body">
+        <div className="ln-breadcrumb"><span onClick={onBack}>Lobby</span> <i className="ph ph-caret-right"></i> <strong>{room.name}</strong></div>
+        <div className="ln-room-cols">
+          <div className="ln-coursegrid">
+            {room.courses.map((c, i) => <CourseCard key={i} course={c} room={room} />)}
+          </div>
+          <aside className="ln-room-aside">
+            <div className="ln-why" style={{ borderTopColor: room.color }}>
+              <p className="ln-eyebrow" style={{ color: room.color }}>Why This Room Matters</p>
+              <p className="ln-why-text">{room.why}</p>
+            </div>
+            <div className="ln-forum" style={{ background: room.tint }}>
+              <i className={'ph-fill ' + room.icon} style={{ color: room.color }}></i>
+              <div>
+                <strong>Got questions?</strong>
+                <span>Ask in the {room.name} forum →</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <button className="ln-ask" style={{ background: room.color }}><i className="ph-fill ph-chat-circle-dots"></i> Ask a Question</button>
+    </div>
+  );
+}
+
+/* ---------- App shell with room-entry transition ---------- */
+function App() {
+  const [room, setRoom] = useState(null);
+  const [entering, setEntering] = useState(false);
+
+  const enter = (r) => {
+    setEntering(true);
+    setTimeout(() => { setRoom(r); setEntering(false); window.scrollTo(0, 0); }, 180);
+  };
+  const back = () => {
+    setEntering(true);
+    setTimeout(() => { setRoom(null); setEntering(false); window.scrollTo(0, 0); }, 150);
+  };
+
+  return (
+    <div className="ln-app">
+      <TopNav accent={room ? room.color : null} onLogo={back} room={room} />
+      <main className={'ln-main' + (entering ? ' is-entering' : '')}>
+        {room ? <RoomScreen room={room} onBack={back} /> : <LobbyScreen onEnter={enter} />}
+      </main>
+      <div className="ln-help"><i className="ph-fill ph-headset"></i></div>
+    </div>
+  );
+}
+
+window.App = App;
+
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Training Center — Brand Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #1E3A6E;
+            background: #F4F6F9;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+            color: white;
+            padding: 96px 24px;
+            text-align: center;
+            margin-bottom: 96px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        header .tagline {
+            font-size: 24px;
+            font-weight: 600;
+            opacity: 0.95;
+            margin-bottom: 8px;
+        }
+
+        header .mission {
+            font-size: 18px;
+            opacity: 0.85;
+        }
+
+        section {
+            margin-bottom: 96px;
+        }
+
+        section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 3px solid #2B8FA9;
+        }
+
+        section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+        }
+
+        .section-intro {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #475569;
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        /* BRAND FOUNDATION */
+        .brand-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .value-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border-left: 4px solid #2B8FA9;
+        }
+
+        .value-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1E3A6E;
+        }
+
+        .value-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #64748B;
+        }
+
+        /* COLOR SYSTEM */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .color-swatch {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+        }
+
+        .color-sample {
+            height: 120px;
+            width: 100%;
+        }
+
+        .color-info {
+            padding: 16px;
+        }
+
+        .color-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1E3A6E;
+        }
+
+        .color-token {
+            font-size: 12px;
+            font-family: monospace;
+            color: #64748B;
+            margin-bottom: 4px;
+        }
+
+        .color-hex {
+            font-size: 14px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #2B8FA9;
+        }
+
+        .color-note {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ROOMS */
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .room-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+            background: white;
+        }
+
+        .room-header {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .room-body {
+            padding: 20px;
+        }
+
+        .room-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            opacity: 0.7;
+        }
+
+        .room-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1E3A6E;
+        }
+
+        .room-description {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #64748B;
+        }
+
+        /* TYPOGRAPHY */
+        .type-sample {
+            background: white;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .type-label {
+            font-size: 12px;
+            font-family: monospace;
+            text-transform: uppercase;
+            color: #94A3B8;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .display { font-family: 'Montserrat', sans-serif; font-size: 48px; font-weight: 800; line-height: 1.2; }
+        .h1 { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 700; line-height: 1.2; }
+        .h2 { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 700; line-height: 1.2; }
+        .h3 { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 600; line-height: 1.2; }
+        .body-lg { font-size: 18px; line-height: 1.6; }
+        .body { font-size: 16px; line-height: 1.6; }
+        .body-sm { font-size: 14px; line-height: 1.6; }
+        .label { font-size: 12px; font-weight: 600; line-height: 1.4; letter-spacing: 0.5px; }
+
+        .certificate-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #7B5EA7;
+        }
+
+        /* COMPONENTS */
+        .component-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 32px;
+            align-items: flex-start;
+        }
+
+        .button {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 200ms ease-in-out;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary { background: #1E3A6E; color: white; }
+        .btn-primary:hover { background: #142550; }
+
+        .btn-secondary { background: #2B8FA9; color: white; }
+        .btn-secondary:hover { background: #1a5a73; }
+
+        .btn-outline { background: transparent; color: #1E3A6E; border: 2px solid #1E3A6E; }
+        .btn-outline:hover { background: #f0f4f8; }
+
+        .btn-room-cs { background: #3B7DD8; color: white; }
+        .btn-hipaa { background: #2BA89A; color: white; }
+        .btn-compliance { background: #2EAA6E; color: white; }
+        .btn-records { background: #7B5EA7; color: white; }
+        .btn-finance { background: #D4A017; color: white; }
+
+        /* ICONS */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .icon-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .icon-placeholder {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        .icon-name {
+            font-size: 12px;
+            font-family: monospace;
+            color: #64748B;
+            word-break: break-word;
+        }
+
+        /* USAGE */
+        .usage-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .usage-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .usage-list li {
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .usage-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2B8FA9;
+            font-weight: 700;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, rgba(43,143,169,0.1) 0%, rgba(62,170,110,0.1) 100%);
+            border-left: 4px solid #2B8FA9;
+            padding: 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-style: italic;
+            color: #1E3A6E;
+            margin: 32px 0;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #1E3A6E;
+            color: white;
+            padding: 48px 24px;
+            text-align: center;
+            margin-top: 96px;
+        }
+
+        footer p {
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .toc {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 48px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .toc h3 { margin-bottom: 16px; }
+        .toc ul { list-style: none; padding: 0; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #2B8FA9; text-decoration: none; }
+        .toc a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Healthcare Training Center</h1>
+        <div class="tagline">Step Inside. Step Up.</div>
+        <div class="mission">Learn. Grow. Make a Difference.</div>
+    </header>
+
+    <div class="container">
+        <!-- TABLE OF CONTENTS -->
+        <div class="toc">
+            <h3>Contents</h3>
+            <ul>
+                <li><a href="#foundation">Brand Foundation</a></li>
+                <li><a href="#colors">Color System</a></li>
+                <li><a href="#rooms">The Five Rooms</a></li>
+                <li><a href="#typography">Typography</a></li>
+                <li><a href="#components">Components & Buttons</a></li>
+                <li><a href="#icons">Iconography</a></li>
+                <li><a href="#voice">Voice & Tone</a></li>
+                <li><a href="#usage">Usage Guidelines</a></li>
+            </ul>
+        </div>
+
+        <!-- BRAND FOUNDATION -->
+        <section id="foundation">
+            <h2>Brand Foundation</h2>
+            <p class="section-intro">
+                Healthcare Training Center is a people-first training platform for healthcare professionals.
+                Built by a lawyer whose personal story drives the mission: this system is broken, but you can be the change in it.
+            </p>
+
+            <h3>Core Values</h3>
+            <div class="brand-values">
+                <div class="value-card">
+                    <h4>Trustworthy</h4>
+                    <p>Credentialed, legally sound, professionally authoritative. We know healthcare law and compliance inside out.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Warm</h4>
+                    <p>Patient-centered, human, never condescending. We speak like a trusted mentor who happens to be an expert.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Empowering</h4>
+                    <p>Learners leave more capable than when they arrived. We're here to help you succeed and make a difference.</p>
+                </div>
+                <div class="value-card">
+                    <h4>Clear</h4>
+                    <p>No jargon when avoidable, no confusion, no bureaucratic language. Direct communication, always.</p>
+                </div>
+            </div>
+
+            <h3>Core Promise</h3>
+            <div class="quote">
+                Healthcare professionals who complete training here treat people better — not because the law says they have to, but because they understand why it matters.
+            </div>
+        </section>
+
+        <!-- COLOR SYSTEM -->
+        <section id="colors">
+            <h2>Color System</h2>
+            <p class="section-intro">
+                The primary palette combines deep navy authority with teal interaction. The five training rooms each have a distinct accent color
+                that permeates the entire experience when entered.
+            </p>
+
+            <h3>Primary Palette</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: #1E3A6E;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Deep Navy</div>
+                        <div class="color-token">--color-navy</div>
+                        <div class="color-hex">#1E3A6E</div>
+                        <div class="color-note">Primary brand, nav, headers</div>
+                    </div>
+                </div>
+
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: #2B8FA9;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Teal</div>
+                        <div class="color-token">--color-teal</div>
+                        <div class="color-hex">#2B8FA9</div>
+                        <div class="color-note">Interactive, links, highlights</div>
+                    </div>
+                </div>
+
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: #FFFFFF; border: 1px solid #D0D8E8;"></div>
+                    <div class="color-info">
+                        <div class="color-name">White</div>
+                        <div class="color-token">--color-white</div>
+                        <div class="color-hex">#FFFFFF</div>
+                        <div class="color-note">Card backgrounds, content</div>
+                    </div>
+                </div>
+
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: #F4F6F9;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Surface Gray</div>
+                        <div class="color-token">--color-surface</div>
+                        <div class="color-hex">#F4F6F9</div>
+                        <div class="color-note">Page backgrounds, inactive states</div>
+                    </div>
+                </div>
+
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: #D0D8E8;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Border</div>
+                        <div class="color-token">--color-border</div>
+                        <div class="color-hex">#D0D8E8</div>
+                        <div class="color-note">Dividers, input borders</div>
+                    </div>
+                </div>
+
+                <div class="color-swatch">
+                    <div class="color-sample" style="background: #28A745;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Success</div>
+                        <div class="color-token">--color-success</div>
+                        <div class="color-hex">#28A745</div>
+                        <div class="color-note">Completion, passed assessments</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FIVE ROOMS -->
+        <section id="rooms">
+            <h2>The Five Training Rooms</h2>
+            <p class="section-intro">
+                Each room has its own color identity. When a learner enters a room, the entire UI shifts to reflect that room's subject and color.
+            </p>
+
+            <div class="room-grid">
+                <div class="room-card">
+                    <div class="room-header" style="background: #3B7DD8;">👥</div>
+                    <div class="room-body">
+                        <div class="room-number">Room 1</div>
+                        <div class="room-name">Customer Service</div>
+                        <div class="room-description">Communication, empathy, de-escalation</div>
+                        <div style="margin-top: 12px; font-size: 12px; color: #2B8FA9; font-weight: 600;">#3B7DD8</div>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-header" style="background: #2BA89A;">🛡️</div>
+                    <div class="room-body">
+                        <div class="room-number">Room 2</div>
+                        <div class="room-name">HIPAA, Privacy & Security</div>
+                        <div class="room-description">PHI, privacy rule, breach prevention</div>
+                        <div style="margin-top: 12px; font-size: 12px; color: #2B8FA9; font-weight: 600;">#2BA89A</div>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-header" style="background: #2EAA6E;">✓</div>
+                    <div class="room-body">
+                        <div class="room-number">Room 3</div>
+                        <div class="room-name">Compliance</div>
+                        <div class="room-description">Laws, fraud/waste/abuse, ethics</div>
+                        <div style="margin-top: 12px; font-size: 12px; color: #2B8FA9; font-weight: 600;">#2EAA6E</div>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-header" style="background: #7B5EA7;">📋</div>
+                    <div class="room-body">
+                        <div class="room-number">Room 4</div>
+                        <div class="room-name">Medical Records</div>
+                        <div class="room-description">EHR, documentation, retention</div>
+                        <div style="margin-top: 12px; font-size: 12px; color: #2B8FA9; font-weight: 600;">#7B5EA7</div>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-header" style="background: #D4A017;">💰</div>
+                    <div class="room-body">
+                        <div class="room-number">Room 5</div>
+                        <div class="room-name">Finance</div>
+                        <div class="room-description">Revenue cycle, billing, collections</div>
+                        <div style="margin-top: 12px; font-size: 12px; color: #2B8FA9; font-weight: 600;">#D4A017</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPOGRAPHY -->
+        <section id="typography">
+            <h2>Typography</h2>
+            <p class="section-intro">
+                The brand uses Montserrat for headings (geometric, authoritative) and Inter for body copy (screen-optimized, readable).
+                Playfair Display is reserved for certificates only.
+            </p>
+
+            <h3>Display Type</h3>
+            <div class="type-sample">
+                <div class="type-label">Display / 48px / ExtraBold / Montserrat</div>
+                <div class="display">Step Inside. Step Up.</div>
+            </div>
+
+            <h3>Headings</h3>
+            <div class="type-sample">
+                <div class="type-label">H1 / 36px / Bold / Montserrat</div>
+                <div class="h1">Choose Your Training Path</div>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">H2 / 28px / Bold / Montserrat</div>
+                <div class="h2">HIPAA, Privacy & Security</div>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">H3 / 22px / SemiBold / Montserrat</div>
+                <div class="h3">Your Progress Today</div>
+            </div>
+
+            <h3>Body Copy</h3>
+            <div class="type-sample">
+                <div class="type-label">Body Large / 18px / Regular / Inter</div>
+                <div class="body-lg">Healthcare professionals who complete training here treat people better — not because the law says they have to, but because they understand why it matters.</div>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">Body / 16px / Regular / Inter</div>
+                <div class="body">This room covers the HIPAA Privacy Rule, the Security Rule, and how to identify and report a potential breach. You'll learn practical strategies for protecting patient information in your daily work.</div>
+            </div>
+
+            <div class="type-sample">
+                <div class="type-label">Body Small / 14px / Regular / Inter</div>
+                <div class="body-sm">Last updated on June 4, 2026. Estimated completion time: 45 minutes. Difficulty: Intermediate.</div>
+            </div>
+
+            <h3>Certificate Display (Playfair Display)</h3>
+            <div class="type-sample">
+                <div class="type-label">Certificate Display / 28px / Bold / Playfair Display</div>
+                <div class="certificate-display">Certificate of Completion</div>
+            </div>
+        </section>
+
+        <!-- COMPONENTS -->
+        <section id="components">
+            <h2>Components & Buttons</h2>
+
+            <h3>Primary Buttons</h3>
+            <div class="component-row">
+                <button class="button btn-primary">Enter Room →</button>
+                <button class="button btn-secondary">Start Your Journey</button>
+                <button class="button btn-outline">Learn More</button>
+            </div>
+
+            <h3>Room-Specific Buttons</h3>
+            <div class="component-row">
+                <button class="button btn-room-cs">Customer Service</button>
+                <button class="button btn-hipaa">HIPAA & Privacy</button>
+                <button class="button btn-compliance">Compliance</button>
+                <button class="button btn-records">Medical Records</button>
+                <button class="button btn-finance">Finance</button>
+            </div>
+
+            <h3>Button Sizing</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li><strong>Large (48px):</strong> Hero CTAs, main call-to-action buttons</li>
+                    <li><strong>Default (40px):</strong> Most UI interactions, standard buttons</li>
+                    <li><strong>Small (32px):</strong> Inline actions, secondary controls</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ICONS -->
+        <section id="icons">
+            <h2>Iconography</h2>
+            <p class="section-intro">
+                All icons are from Phosphor Icons (free, open-source). Uses regular weight for UI, fill/duotone for large banner icons.
+            </p>
+
+            <h3>Room Icons (Phosphor)</h3>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon-placeholder">👥</div>
+                    <div class="icon-name">ph-users</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🛡️</div>
+                    <div class="icon-name">ph-shield-check</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">📋</div>
+                    <div class="icon-name">ph-clipboard-text</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">📂</div>
+                    <div class="icon-name">ph-folder-open</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">💵</div>
+                    <div class="icon-name">ph-currency-dollar</div>
+                </div>
+            </div>
+
+            <h3>General UI Icons (Phosphor)</h3>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon-placeholder">📊</div>
+                    <div class="icon-name">ph-chart-bar</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🏆</div>
+                    <div class="icon-name">ph-certificate</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🎥</div>
+                    <div class="icon-name">ph-video-camera</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">📚</div>
+                    <div class="icon-name">ph-books</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🏠</div>
+                    <div class="icon-name">ph-house</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🔔</div>
+                    <div class="icon-name">ph-bell</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🎖️</div>
+                    <div class="icon-name">ph-medal</div>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-placeholder">🎧</div>
+                    <div class="icon-name">ph-headset</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOICE & TONE -->
+        <section id="voice">
+            <h2>Voice & Tone</h2>
+            <p class="section-intro">
+                Warm authority. Credentialed and legally sound, but never bureaucratic or condescending.
+                The brand sounds like a trusted mentor who happens to be an expert.
+            </p>
+
+            <h3>Brand Personality</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li><strong>Trustworthy:</strong> Credentialed, legally sound, professionally authoritative</li>
+                    <li><strong>Warm:</strong> Patient-centered, human, never condescending</li>
+                    <li><strong>Empowering:</strong> Learners leave more capable than when they arrived</li>
+                    <li><strong>Clear:</strong> No jargon, no confusion, no bureaucratic language</li>
+                </ul>
+            </div>
+
+            <h3>Copy Guidelines</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li><strong>Person:</strong> Speak to learners as "you"; the organization is "we"</li>
+                    <li><strong>Casing:</strong> Title Case for headers, sentence case for body copy, UPPERCASE for badges and labels</li>
+                    <li><strong>Taglines:</strong> Love the rule of three — "Enter. Learn. Lead." / "Learn. Grow. Make a Difference."</li>
+                    <li><strong>Why framing:</strong> Every room carries a "Why This Room Matters" note written from a patient-advocacy lens</li>
+                    <li><strong>Emoji:</strong> Never used. The brand reads as professional.</li>
+                </ul>
+            </div>
+
+            <h3>Copy Examples</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li><em>"Your Path to Better Care Starts Here"</em> — lobby welcome</li>
+                    <li><em>"Where Healthcare Teams Get It Right"</em> — confidence without arrogance</li>
+                    <li><em>"Train With Purpose. Care With Confidence."</em> — outcome-focused</li>
+                    <li><em>"Hi! We're here to help you succeed."</em> — help desk voice</li>
+                    <li><em>"Ask your admin to unlock."</em> — locked room tooltip</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- USAGE GUIDELINES -->
+        <section id="usage">
+            <h2>Usage Guidelines</h2>
+
+            <h3>Do's</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li>Use navy + teal as your primary color combo</li>
+                    <li>Apply room colors purposefully — use them to show room identity, not decoration</li>
+                    <li>Keep layouts clean and spacious (generous section breaks)</li>
+                    <li>Respect the 8px spacing grid throughout</li>
+                    <li>Always include visible focus states for keyboard navigation</li>
+                    <li>Test color contrast — meet WCAG 2.1 AA minimum (4.5:1 text, 3:1 UI)</li>
+                    <li>Use Phosphor icons exclusively for all UI iconography</li>
+                    <li>Keep motion purposeful — respect prefers-reduced-motion</li>
+                </ul>
+            </div>
+
+            <h3>Don'ts</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li>Don't use heavy gradients or busy textures — keep the brand clean</li>
+                    <li>Don't invent new colors — stick to the palette provided</li>
+                    <li>Don't use emoji for iconography — use Phosphor icons instead</li>
+                    <li>Don't make marketing copy sound cold or clinical</li>
+                    <li>Don't sacrifice accessibility for aesthetics</li>
+                    <li>Don't use the room colors interchangeably — each room = one specific color</li>
+                    <li>Don't create decorative animations — motion signals state change only</li>
+                    <li>Don't use Playfair Display outside of certificates</li>
+                </ul>
+            </div>
+
+            <h3>Spacing & Layout</h3>
+            <div class="usage-section">
+                <ul class="usage-list">
+                    <li><strong>Base unit:</strong> 8px grid throughout</li>
+                    <li><strong>Section breaks:</strong> 48–96px vertical padding between major sections</li>
+                    <li><strong>Content width:</strong> 1280px maximum, centered</li>
+                    <li><strong>Mobile first:</strong> Design for 375px mobile up to desktop</li>
+                    <li><strong>Card padding:</strong> 24px (--space-5) default</li>
+                    <li><strong>Border radius:</strong> 16px for room/feature cards, 8px for buttons and course cards</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Healthcare Training Center — Brand Guide v1.0</strong></p>
+        <p>Created in collaboration with Claude Code</p>
+        <p style="margin-top: 24px; font-size: 12px; opacity: 0.6;">Step Inside. Step Up. · Learn. Grow. Make a Difference.</p>
+    </footer>
+</body>
+</html>

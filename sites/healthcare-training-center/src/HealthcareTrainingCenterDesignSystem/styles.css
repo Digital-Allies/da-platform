@@ -1,0 +1,144 @@
+:root {
+  --navy\/900: #1E3A6E;
+  --teal\/600: #2B8FA9;
+  --white\/1000: #FFF;
+  --gray\/100: #F4F6F9;
+  --gray\/200: #D0D8E8;
+  --gray\/500: #6B7280;
+  --gray\/700: #374151;
+  --gray\/900: #111827;
+  --black\/1000: #000;
+  --track\/cs: #3B7DD8;
+  --track\/hipaa: #2BA89A;
+  --track\/compliance: #2EAA6E;
+  --track\/records: #7B5EA7;
+  --track\/finance: #D4A017;
+  --status\/success: #28A745;
+  --status\/warning: #FFC107;
+  --status\/error: #DC3545;
+  --status\/info: #17A2B8;
+  --color\/bg\/primary: var(--navy\/900);
+  --color\/bg\/secondary: var(--teal\/600);
+  --color\/bg\/surface: var(--gray\/100);
+  --color\/bg\/white: var(--white\/1000);
+  --color\/bg\/track\/cs: var(--track\/cs);
+  --color\/bg\/track\/hipaa: var(--track\/hipaa);
+  --color\/bg\/track\/compliance: var(--track\/compliance);
+  --color\/bg\/track\/records: var(--track\/records);
+  --color\/bg\/track\/finance: var(--track\/finance);
+  --color\/text\/primary: var(--gray\/900);
+  --color\/text\/secondary: var(--gray\/500);
+  --color\/text\/inverse: var(--white\/1000);
+  --color\/text\/brand: var(--navy\/900);
+  --color\/border\/default: var(--gray\/200);
+  --color\/border\/brand: var(--teal\/600);
+  --color\/status\/success: var(--status\/success);
+  --color\/status\/warning: var(--status\/warning);
+  --color\/status\/error: var(--status\/error);
+  --color\/status\/info: var(--status\/info);
+  --spacing\/1: 4;
+  --spacing\/2: 8;
+  --spacing\/3: 12;
+  --spacing\/4: 16;
+  --spacing\/5: 24;
+  --spacing\/6: 32;
+  --spacing\/7: 48;
+  --spacing\/8: 64;
+  --spacing\/9: 96;
+  --radius\/sm: 4;
+  --radius\/md: 8;
+  --radius\/lg: 16;
+  --radius\/xl: 24;
+  --radius\/full: 9999;
+}
+
+.display-hero {
+  font-family: "Montserrat";
+  font-style: "ExtraBold";
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 58px;
+  letter-spacing: -1px;
+}
+
+.heading-h1 {
+  font-family: "Montserrat";
+  font-style: "Bold";
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 44px;
+  letter-spacing: -0.5px;
+}
+
+.heading-h2 {
+  font-family: "Montserrat";
+  font-style: "Bold";
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 34px;
+  letter-spacing: -0.3px;
+}
+
+.heading-h3 {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: 0px;
+}
+
+.heading-h4 {
+  font-family: "Montserrat";
+  font-style: "SemiBold";
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0px;
+}
+
+.body-large {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 29px;
+  letter-spacing: 0px;
+}
+
+.body-default {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0px;
+}
+
+.body-small {
+  font-family: "Inter";
+  font-style: "Regular";
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+}
+
+.label-default {
+  font-family: "Inter";
+  font-style: "Semi Bold";
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+.ui-button {
+  font-family: "Inter";
+  font-style: "Medium";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Badges & Pills" subtitle="Status pills, room numbers, tags" viewport="700x150" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../assets/phosphor/regular/style.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-white); box-sizing:border-box; display:flex; flex-direction:column; gap:14px; }
+  .grp { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .pill { font-family:var(--font-body); font-size:12px; font-weight:600; padding:5px 12px; border-radius:9999px; display:inline-flex; align-items:center; gap:5px; }
+  .num { font-family:var(--font-heading); font-weight:700; font-size:11px; padding:4px 11px; border-radius:9999px; color:#fff; }
+  .tag { font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:.04em; padding:3px 8px; border-radius:4px; text-transform:uppercase; }
+</style></head>
+<body>
+  <div class="grp">
+    <span class="pill" style="background:var(--color-success-tint);color:#1c7a32;"><i class="ph ph-check-circle"></i> Completed</span>
+    <span class="pill" style="background:var(--color-warning-tint);color:#8a6d00;">In Progress</span>
+    <span class="pill" style="background:var(--color-surface);color:var(--fg-3);">Not Started</span>
+    <span class="pill" style="background:var(--color-info-tint);color:#0e7d8f;"><i class="ph ph-broadcast"></i> Live Now</span>
+  </div>
+  <div class="grp">
+    <span class="num" style="background:#3B7DD8;">ROOM 1</span>
+    <span class="num" style="background:#2BA89A;">ROOM 2</span>
+    <span class="num" style="background:#7B5EA7;">ROOM 4</span>
+    <span class="tag" style="background:var(--color-teal-100);color:var(--color-teal-600);">NEW</span>
+    <span class="tag" style="background:var(--color-error-tint);color:var(--color-error);">REQUIRED</span>
+    <span class="tag" style="background:var(--color-surface);color:var(--fg-2);">45 MIN · BEGINNER</span>
+  </div>
+</body></html>

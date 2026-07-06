@@ -1,0 +1,352 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Room 3: Compliance Training | Healthcare Training Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .perspective-container {
+            perspective: 900px;
+        }
+        .perspective-pop-out {
+            transform: perspective(900px) rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .perspective-pop-out:hover {
+            transform: perspective(900px) rotateY(0deg) rotateX(0deg);
+        }
+        .video-glow {
+            box-shadow: 0 0 20px rgba(46, 170, 110, 0.2);
+        }
+        /* Sharp corners mandated for callouts/cards as per prompt */
+        .sharp-card {
+            border-radius: 0px !important;
+        }
+        /* Custom scrollbar for clinical gray appearance */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2EAA6E;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#79d3ef",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "info": "#17A2B8",
+                        "inverse-surface": "#2d3133",
+                        "error": "#DC3545",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#88e1fd",
+                        "surface-variant": "#e0e3e6",
+                        "success": "#28A745",
+                        "room-hipaa": "#2BA89A",
+                        "on-tertiary-container": "#a8a6a2",
+                        "on-surface-variant": "#44474f",
+                        "surface-tint": "#445d94",
+                        "primary-fixed-dim": "#aec6ff",
+                        "primary": "#002357",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#262623",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "on-primary-fixed-variant": "#2b467a",
+                        "on-primary-container": "#8ca5e0",
+                        "room-compliance": "#2EAA6E",
+                        "on-surface": "#191c1e",
+                        "surface": "#f7f9fc",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#006479",
+                        "tertiary-container": "#3c3c39",
+                        "on-primary-fixed": "#001a43",
+                        "on-tertiary-fixed-variant": "#474743",
+                        "inverse-primary": "#aec6ff",
+                        "inverse-on-surface": "#eff1f4",
+                        "secondary-fixed": "#b3ebff",
+                        "primary-fixed": "#d8e2ff",
+                        "border-muted": "#D0D8E8",
+                        "secondary": "#00677d",
+                        "outline-variant": "#c4c6d1",
+                        "surface-dim": "#d8dadd",
+                        "room-finance": "#D4A017",
+                        "on-secondary-fixed": "#001f27",
+                        "surface-container": "#eceef1",
+                        "on-background": "#191c1e",
+                        "surface-container-highest": "#e0e3e6",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "warning": "#FFC107",
+                        "surface-bright": "#f7f9fc",
+                        "room-records": "#7B5EA7",
+                        "primary-container": "#1e3a6e",
+                        "on-error-container": "#93000a",
+                        "ink-primary": "#16243D",
+                        "outline": "#747780",
+                        "surface-container-low": "#f2f4f7",
+                        "background": "#f7f9fc",
+                        "room-cs": "#3B7DD8",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-container-high": "#e6e8eb",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-6": "32px",
+                        "space-5": "24px",
+                        "space-2": "8px",
+                        "content-max": "1280px",
+                        "space-8": "64px",
+                        "space-9": "96px",
+                        "space-1": "4px",
+                        "space-7": "48px",
+                        "base": "8px",
+                        "space-4": "16px",
+                        "space-3": "12px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-h2": ["Montserrat"],
+                        "ui-text": ["Inter"],
+                        "headline-h1": ["Montserrat"],
+                        "headline-h3": ["Montserrat"],
+                        "body-base": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "accent-serif": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-h4": ["Montserrat"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-base text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-space-5 h-16 max-w-full bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-space-4">
+<span class="font-headline-h4 text-headline-h4 text-primary dark:text-primary-fixed">Healthcare Training Center</span>
+</div>
+<nav class="hidden md:flex items-center gap-space-6">
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Lobby</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">My Progress</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Live Classes</a>
+<a class="font-ui-text text-ui-text text-primary dark:text-secondary-fixed border-b-2 border-primary dark:border-secondary-fixed pb-1" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-space-4">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container-low border-none rounded-lg px-4 py-2 text-ui-text w-64 focus:ring-2 focus:ring-room-compliance transition-all" placeholder="Search resources..." type="text">
+<span class="material-symbols-outlined absolute right-3 top-2 text-outline">search</span>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed p-2 hover:bg-surface-container-low rounded-full transition-transform active:scale-90">account_circle</button>
+</div>
+</header>
+<main class="pt-16 pb-space-8">
+<!-- Hero Section -->
+<section class="bg-room-compliance text-white py-space-9">
+<div class="max-w-content-max mx-auto px-space-5 flex flex-col md:flex-row items-center gap-space-8">
+<div class="flex-1 space-y-space-4">
+<span class="font-label-caps text-label-caps uppercase tracking-widest opacity-80">Room 03</span>
+<h1 class="font-headline-h1 text-headline-h1">Compliance Training</h1>
+<p class="font-body-lg text-body-lg max-w-2xl opacity-90">Maintaining regulatory excellence and patient safety through rigorous operational standards.</p>
+<div class="pt-space-4 flex gap-space-4">
+<button class="bg-white text-room-compliance px-space-6 py-space-3 font-ui-text rounded-lg hover:bg-opacity-90 transition-all shadow-md active:scale-95">Start Room</button>
+<button class="border-2 border-white text-white px-space-6 py-space-3 font-ui-text rounded-lg hover:bg-white hover:text-room-compliance transition-all active:scale-95">View Syllabus</button>
+</div>
+</div>
+<!-- Mini Room Storefront -->
+<div class="hidden lg:block perspective-container shrink-0">
+<div class="perspective-pop-out w-80 h-80 bg-white p-space-2 shadow-2xl relative">
+<img alt="Compliance Training Isometric Room" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQTtg12KR5bmryZRsfRMo7vLe8rn9HgfbsaoCy9EpL-_U8Os2fcxDR1-BJ59_HaS2U44gbQiZmxoNhHY9wZx6VYzZ9mszglGqeA4zmIiJ61uZt9pnJORd8rbtGxKc2KKVN-sXqOHKe4rNOQdHqk2A7VBYUTx2KR7r03qEEswGrPQMXz3lrH9t6t8AvO5Oi40kjp62XNw0Ct4tuK8H-TOvZAUzyEDw0A6FoEM5voPmZNfEuoi16AmwZF_Q_f5gspNG1VBW4ZrXDzVjK">
+<div class="absolute -top-4 -right-4 bg-room-compliance text-white px-4 py-2 font-headline-h4 shadow-lg border-2 border-white">
+                            RM-03
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Layout -->
+<div class="max-w-content-max mx-auto px-space-5 mt-space-8 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-space-8">
+<!-- Primary Content Rail -->
+<div class="space-y-space-8">
+<!-- Video Section -->
+<div class="bg-surface-container-lowest video-glow sharp-card overflow-hidden">
+<div class="aspect-video relative group cursor-pointer bg-black">
+<div class="absolute inset-0 flex items-center justify-center z-10">
+<div class="w-20 h-20 bg-room-compliance text-white rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-xl">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full p-space-5 bg-gradient-to-t from-black/80 to-transparent">
+<h3 class="font-headline-h3 text-headline-h3 text-white">Watch Introduction Video</h3>
+<p class="text-white/80 font-body-sm text-body-sm">A brief overview of compliance essentials by Officer Sarah Jenkins.</p>
+</div>
+<!-- Placeholder for visual depth -->
+<div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-room-compliance via-transparent to-black"></div>
+</div>
+</div>
+<!-- Instructor Card -->
+<div class="flex flex-col md:flex-row gap-space-6 bg-white p-space-6 sharp-card shadow-sm border-l-4 border-room-compliance">
+<div class="w-32 h-48 shrink-0 overflow-hidden sharp-card">
+<img alt="Instructor Sarah Jenkins" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhrSJOTtPeyMIGrkPSIabjd_bmyq4tDWpRkuQ-54RGWAbOuiguOuW18I_SvAYpEcgJLgPlFle2MTa_BAaoq_2rU6A5eo7WMVPZ9mNPGdgao8vsfyZLO2fK9Yc6TFhdwBrlx7ttI8hpejKqu93YGTHgHeeafvV5lWwLu4yrKFWeLeve1lux3wCmkizdLP7scEGVynQUa-ZXHAS3g4itX1hp-_ZpfDjSvPLT3tSEKiPzfzZ_yX5GnvorusgfpQc6P1C2hzdgRxmDy_Ef">
+</div>
+<div class="space-y-space-2">
+<h4 class="font-headline-h4 text-headline-h4 text-room-compliance">Sarah Jenkins</h4>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Lead Compliance Officer</span>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-xl">
+                            Sarah brings over 15 years of healthcare regulatory experience, specializing in HIPAA governance and ethical clinical frameworks. Her practical approach ensures that complex standards become intuitive daily habits.
+                        </p>
+</div>
+</div>
+<!-- Modules Section -->
+<div class="space-y-space-4">
+<h2 class="font-headline-h2 text-headline-h2 text-primary">Training Modules</h2>
+<!-- Module 1 -->
+<div class="group flex items-center justify-between p-space-5 bg-white border border-border-muted sharp-card hover:border-room-compliance transition-all hover:shadow-md cursor-pointer">
+<div class="flex items-center gap-space-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center text-room-compliance">
+<span class="material-symbols-outlined">gavel</span>
+</div>
+<div>
+<h4 class="font-headline-h4 text-headline-h4">Regulatory Standards</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">45 mins • Video Lecture + Assessment</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-room-compliance group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+<!-- Module 2 -->
+<div class="group flex items-center justify-between p-space-5 bg-white border border-border-muted sharp-card hover:border-room-compliance transition-all hover:shadow-md cursor-pointer">
+<div class="flex items-center gap-space-4">
+<div class="w-12 h-12 bg-surface-container flex items-center justify-center text-room-compliance">
+<span class="material-symbols-outlined">sustainability</span>
+</div>
+<div>
+<h4 class="font-headline-h4 text-headline-h4">Ethics in Care</h4>
+<span class="font-body-sm text-body-sm text-on-surface-variant">60 mins • Case Studies</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-room-compliance group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+<!-- Module 3 -->
+<div class="group flex items-center justify-between p-space-5 bg-white border border-border-muted sharp-card hover:border-room-compliance transition-all hover:shadow-md cursor-pointer">
+<div class="flex items-center gap-space-4">
+<div class="w-12 h-12 bg-room-compliance/10 flex items-center justify-center text-room-compliance">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_late</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h4 class="font-headline-h4 text-headline-h4">Incident Reporting</h4>
+<span class="bg-room-compliance text-white text-[10px] px-2 py-0.5 font-bold tracking-tight">CORE</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Mandatory Core Competency</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-room-compliance group-hover:translate-x-1 transition-all">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<aside class="space-y-space-6">
+<!-- Quote Section -->
+<div class="bg-room-compliance/5 p-space-5 sharp-card border-t-4 border-room-compliance">
+<h5 class="font-label-caps text-label-caps text-room-compliance mb-space-2">WHY THIS MATTERS</h5>
+<p class="font-accent-serif text-accent-serif text-ink-primary italic">
+                        "Compliance isn't just about following rules; it's the invisible foundation of patient trust and safety."
+                    </p>
+<div class="mt-space-3 flex items-center gap-2">
+<div class="w-6 h-px bg-room-compliance"></div>
+<span class="font-ui-text text-[12px] text-on-surface-variant">Administrative Mandate</span>
+</div>
+</div>
+<!-- Progress Tracker -->
+<div class="bg-white p-space-5 sharp-card shadow-sm border border-border-muted">
+<h4 class="font-headline-h4 text-headline-h4 mb-space-4">Your Progress</h4>
+<div class="space-y-space-4">
+<div class="flex justify-between text-ui-text mb-1">
+<span>Room Completion</span>
+<span class="font-bold text-room-compliance">12%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-room-compliance w-[12%]"></div>
+</div>
+<p class="text-[12px] text-on-surface-variant italic">Next: Complete Introduction Video to unlock Regulatory Standards.</p>
+</div>
+</div>
+<!-- Resource Library -->
+<div class="space-y-space-3">
+<h4 class="font-headline-h4 text-headline-h4">Resource Library</h4>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-2 p-3 bg-white hover:bg-surface-container-low transition-colors text-ui-text sharp-card border border-transparent hover:border-border-muted group" href="#">
+<span class="material-symbols-outlined text-room-compliance">picture_as_pdf</span>
+<span class="flex-1">2024 HIPAA Guidelines</span>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity text-sm">download</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2 p-3 bg-white hover:bg-surface-container-low transition-colors text-ui-text sharp-card border border-transparent hover:border-border-muted group" href="#">
+<span class="material-symbols-outlined text-room-compliance">article</span>
+<span class="flex-1">Ethics Framework PDF</span>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity text-sm">download</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2 p-3 bg-white hover:bg-surface-container-low transition-colors text-ui-text sharp-card border border-transparent hover:border-border-muted group" href="#">
+<span class="material-symbols-outlined text-room-compliance">checklist</span>
+<span class="flex-1">Incident Report Form</span>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity text-sm">open_in_new</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Support Callout -->
+<div class="p-space-5 bg-primary text-white sharp-card">
+<h5 class="font-headline-h4 text-headline-h4 mb-2">Need Guidance?</h5>
+<p class="font-body-sm text-body-sm opacity-80 mb-4">Our compliance officers are available for live office hours every Tuesday.</p>
+<button class="w-full py-2 bg-room-compliance text-white font-ui-text sharp-card hover:brightness-110 transition-all">Book Consultation</button>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-tertiary">
+<div class="w-full py-space-6 px-space-5 flex flex-col md:flex-row justify-between items-center max-w-content-max mx-auto gap-space-4">
+<div class="space-y-1 text-center md:text-left">
+<span class="font-headline-h4 text-headline-h4 text-on-surface dark:text-on-tertiary">Healthcare Training Center</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container">© 2024 Healthcare Training Center. Empowering professionals through immersive education.</p>
+</div>
+<nav class="flex flex-wrap justify-center gap-space-4">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Compliance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">HIPAA Statement</a>
+</nav>
+</div>
+</footer>
+<!-- Interactive Layer: Hover logic for hotspots would go here in JS -->
+<script>
+        document.querySelectorAll('.perspective-pop-out').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for adding glow or dynamic shadows
+            });
+        });
+    </script>
+</body></html>

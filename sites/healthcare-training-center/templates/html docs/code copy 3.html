@@ -1,0 +1,357 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Healthcare Training Center - HIPAA &amp; Privacy Room</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#474743",
+                        "surface-bright": "#f7f9fc",
+                        "secondary-fixed-dim": "#79d3ef",
+                        "on-background": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#b3ebff",
+                        "on-surface-variant": "#44474f",
+                        "room-hipaa": "#2BA89A",
+                        "inverse-primary": "#aec6ff",
+                        "room-cs": "#3B7DD8",
+                        "ink-primary": "#16243D",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "on-error-container": "#93000a",
+                        "info": "#17A2B8",
+                        "border-muted": "#D0D8E8",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#445d94",
+                        "background": "#f7f9fc",
+                        "error": "#DC3545",
+                        "primary-fixed-dim": "#aec6ff",
+                        "tertiary": "#262623",
+                        "on-surface": "#191c1e",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#8ca5e0",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6d1",
+                        "on-tertiary": "#ffffff",
+                        "room-records": "#7B5EA7",
+                        "surface": "#f7f9fc",
+                        "success": "#28A745",
+                        "on-secondary-container": "#006479",
+                        "on-primary-fixed-variant": "#2b467a",
+                        "on-secondary-fixed": "#001f27",
+                        "room-finance": "#D4A017",
+                        "tertiary-container": "#3c3c39",
+                        "on-primary": "#ffffff",
+                        "warning": "#FFC107",
+                        "on-tertiary-container": "#a8a6a2",
+                        "tertiary-fixed": "#e5e2dd",
+                        "surface-dim": "#d8dadd",
+                        "inverse-on-surface": "#eff1f4",
+                        "error-container": "#ffdad6",
+                        "outline": "#747780",
+                        "primary": "#002357",
+                        "tertiary-fixed-dim": "#c8c6c2",
+                        "surface-container-low": "#f2f4f7",
+                        "surface-variant": "#e0e3e6",
+                        "secondary-container": "#88e1fd",
+                        "on-tertiary-fixed": "#1c1c19",
+                        "room-compliance": "#2EAA6E",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed": "#001a43",
+                        "surface-container-high": "#e6e8eb",
+                        "secondary": "#00677d",
+                        "primary-container": "#1e3a6e",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#e0e3e6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0rem",
+                        "lg": "0rem",
+                        "xl": "0rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "space-8": "64px",
+                        "space-6": "32px",
+                        "space-1": "4px",
+                        "content-max": "1280px",
+                        "space-7": "48px",
+                        "base": "8px",
+                        "space-9": "96px",
+                        "space-5": "24px",
+                        "space-2": "8px",
+                        "space-4": "16px",
+                        "space-3": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-h3": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "body-base": ["Inter"],
+                        "accent-serif": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "headline-h2": ["Montserrat"],
+                        "headline-h1": ["Montserrat"],
+                        "body-sm": ["Inter"],
+                        "ui-text": ["Inter"],
+                        "headline-h4": ["Montserrat"],
+                        "display-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-h3": ["22px", {"lineHeight": "26px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-base": ["16px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "accent-serif": ["19px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+                        "headline-h2": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                        "headline-h1": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+                        "ui-text": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-h4": ["18px", {"lineHeight": "22px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fc;
+        }
+        .perspective-pop {
+            perspective: 900px;
+            transform: rotateY(-8deg) rotateX(3deg);
+            transition: transform 0.4s ease-out;
+        }
+        .perspective-pop:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-pattern {
+            background-image: radial-gradient(#D0D8E8 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+        /* Override all border radius to be sharp */
+        * {
+            border-radius: 0 !important;
+        }
+        /* Exception for circular items like profile icons or action buttons that must be round */
+        .rounded-full, .rounded-full * {
+            border-radius: 9999px !important;
+        }
+    </style>
+</head>
+<body class="font-body-base text-on-surface selection:bg-room-hipaa selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-space-5 h-16 max-w-content-max mx-auto bg-surface dark:bg-inverse-surface shadow-sm transition-all duration-300">
+<div class="flex items-center gap-space-4">
+<span class="font-headline-h4 text-headline-h4 text-primary dark:text-primary-fixed">Healthcare Training Center</span>
+</div>
+<nav class="hidden md:flex gap-space-6 items-center">
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Lobby</a>
+<a class="font-ui-text text-ui-text text-primary dark:text-secondary-fixed border-b-2 border-primary dark:border-secondary-fixed pb-1" href="#">My Progress</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Live Classes</a>
+<a class="font-ui-text text-ui-text text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-space-3">
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-container-low transition-transform scale-95 active:scale-90" data-icon="search">search</button>
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-container-low transition-transform scale-95 active:scale-90" data-icon="account_circle">account_circle</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-space-9 px-space-5 max-w-content-max mx-auto bg-pattern min-h-screen">
+<!-- Hero Section with Integrated Video Preview and Storefront Tile -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0 mb-space-8 shadow-md border border-border-muted overflow-hidden">
+<!-- Left: Hero/Video Content -->
+<div class="lg:col-span-8 relative">
+<div class="absolute inset-0 bg-gradient-to-r from-room-hipaa/90 via-room-hipaa/40 to-transparent z-10"></div>
+<img class="w-full h-[400px] object-cover" data-alt="A sophisticated digital interior of a modern medical compliance training room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4RTup9prN6tt1WTYU3o2RH5lHqc9Kk5xJvqzSFNLzEKsspTixhzgEVOVNVmSCiIkOL_6-gxwYK4AutSWx_V7SU2q7kNDYIpMPMSMFeVS29T2qymSk5eWFIF3TWG4EJM7a106zI0czlmELAg6mgg0r8OBehDjqU-EAjWiHMz4qkyBLaTbjL9U8RbBJgDxkL5m8DkGyrNG9W4Z4SG4GjCjDVbPiTQj_GAtU-8MbB79BsF4ISAoAX1FJBct_mgHsqYM92FJDi2q_LTR1">
+<div class="absolute inset-0 z-20 p-space-6 flex flex-col justify-between">
+<div class="flex items-center gap-space-3">
+<span class="bg-white/20 backdrop-blur-md px-3 py-1 text-white font-label-caps text-label-caps border border-white/30">Room 2</span>
+<span class="text-white/80 font-ui-text text-ui-text drop-shadow-sm">2/5 Modules Completed</span>
+</div>
+<div class="space-y-4">
+<h1 class="font-headline-h1 text-headline-h1 text-white drop-shadow-md">HIPAA Privacy &amp; Security</h1>
+<!-- Video Preview Overlay -->
+<div class="group relative w-64 aspect-video bg-black/40 backdrop-blur-sm border border-white/20 cursor-pointer overflow-hidden shadow-2xl">
+<img alt="Video Preview" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4RTup9prN6tt1WTYU3o2RH5lHqc9Kk5xJvqzSFNLzEKsspTixhzgEVOVNVmSCiIkOL_6-gxwYK4AutSWx_V7SU2q7kNDYIpMPMSMFeVS29T2qymSk5eWFIF3TWG4EJM7a106zI0czlmELAg6mgg0r8OBehDjqU-EAjWiHMz4qkyBLaTbjL9U8RbBJgDxkL5m8DkGyrNG9W4Z4SG4GjCjDVbPiTQj_GAtU-8MbB79BsF4ISAoAX1FJBct_mgHsqYM92FJDi2q_LTR1">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="play_circle">play_circle</span>
+</div>
+<div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
+<p class="text-[10px] text-white font-label-caps uppercase tracking-wider">Video Introduction</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Mini Room Storefront Reference -->
+<div class="lg:col-span-4 bg-white p-space-6 flex flex-col items-center justify-center border-l border-border-muted">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-space-5 uppercase tracking-widest">Environment Preview</h4>
+<div class="relative group cursor-pointer flex flex-col items-center">
+<img class="w-48 h-48 object-contain transform group-hover:scale-105 transition-transform" data-alt="A detailed isometric icon representation of the HIPAA training room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAWtLzoCiQ5KDIIYrHtplEyXM1maatLwx9ZUQAFYvBxQBDjZnurnTOsiaQoyOhEV_uiEaUYgM6VtGjD-h9yD_pVcdUKzcbVqR0DYJQcX2FH2hawY7KS3JnRcyCMXIFVu98Di3HJzUgRuz7eLyoinsgaifnptDdyzc9X5hb4RlJF5NSlNCNZRjmLd-5CehKykym54oIyV9GoZ8ilybmrOaWanFLBIhB_Ne9pK_GFt0YGZhOu1vX2D0y-qwcUjaIwNnFUIppxnv2lNPn">
+<div class="mt-4 text-center">
+<p class="font-headline-h4 text-headline-h4 text-room-hipaa">Virtual Lab 02</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Active Learning Zone</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-space-7 items-start">
+<!-- Course Grid (Primary Rail) -->
+<section class="space-y-space-6">
+<div class="flex items-center justify-between border-b border-border-muted pb-4">
+<h2 class="font-headline-h2 text-headline-h2 text-ink-primary">Training Modules</h2>
+<span class="font-ui-text text-ui-text text-on-surface-variant">Estimated: 4.5 Hours</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-5">
+<!-- Module Card: Architecture of Privacy (Completed) -->
+<div class="group bg-white border border-border-muted p-space-5 shadow-sm hover:shadow-md transition-all cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-success"></div>
+<div class="flex justify-between items-start mb-space-3">
+<span class="material-symbols-outlined text-success" data-icon="check_circle">check_circle</span>
+<span class="text-on-surface-variant font-label-caps text-label-caps">Module 1</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 text-ink-primary mb-space-2">Architecture of Privacy</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-space-4">Understanding the structural foundations of HIPAA and the evolution of patient confidentiality.</p>
+<button class="w-full py-2 bg-surface-container-low text-on-surface font-ui-text text-ui-text hover:bg-surface-container transition-colors">Review Lesson</button>
+</div>
+<!-- Module Card: Patient Rights & Access (Active) -->
+<div class="group bg-white border-2 border-room-hipaa p-space-5 shadow-md hover:shadow-lg transition-all cursor-pointer relative">
+<div class="absolute top-0 left-0 w-1 h-full bg-room-hipaa"></div>
+<div class="flex justify-between items-start mb-space-3">
+<span class="material-symbols-outlined text-room-hipaa animate-pulse" data-icon="play_circle">play_circle</span>
+<span class="text-room-hipaa font-label-caps text-label-caps">In Progress</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 text-ink-primary mb-space-2">Patient Rights &amp; Access</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-space-4">Deep dive into Right of Access, disclosures, and managing patient information requests.</p>
+<button class="w-full py-2 bg-room-hipaa text-white font-ui-text text-ui-text hover:brightness-110 transition-all shadow-sm">Continue Learning</button>
+</div>
+<!-- Module Card: Digital Security (Locked) -->
+<div class="group bg-surface-container/30 border border-border-muted p-space-5 transition-all opacity-80">
+<div class="flex justify-between items-start mb-space-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="lock">lock</span>
+<span class="text-on-surface-variant font-label-caps text-label-caps">Module 3</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 text-on-surface-variant mb-space-2">Digital Security</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-space-4">Encryption protocols, workstation security, and identifying phishing threats in medical environments.</p>
+<div class="w-full h-1 bg-surface-container overflow-hidden"></div>
+</div>
+<!-- Module Card: Compliance Documentation -->
+<div class="group bg-surface-container/30 border border-border-muted p-space-5 transition-all opacity-80">
+<div class="flex justify-between items-start mb-space-3">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="lock">lock</span>
+<span class="text-on-surface-variant font-label-caps text-label-caps">Module 4</span>
+</div>
+<h3 class="font-headline-h4 text-headline-h4 text-on-surface-variant mb-space-2">Compliance Auditing</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-space-4">Methods for internal reporting and maintaining rigorous audit trails for HIPAA compliance.</p>
+<div class="w-full h-1 bg-surface-container overflow-hidden"></div>
+</div>
+</div>
+</section>
+<!-- Sidebar (Metadata Rail) -->
+<aside class="sticky top-24 space-y-space-6">
+<!-- Instructor Card -->
+<div class="bg-white p-space-5 shadow-sm border border-border-muted">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-space-4 uppercase tracking-widest">Track Instructor</h4>
+<div class="flex items-center gap-space-4 mb-space-4">
+<img alt="Elena Rodriguez" class="w-16 h-16 rounded-full object-cover border-2 border-room-hipaa" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg0ZZ-4Y-4nJ7VZZuo7FzrvqaigVVMEerm77Z_uoYIWcAz-dhbtiteIiDVNuD4Jy19zd2--PxtTKF87mrSQAJ8ViMOJxnv-RbW0flYffXd2eCtn2EbNDLG4xiQlNF0y42uAP4x-mn5aXaoxIxOxZtf5_aSReu-6f3CzQIVagrpT3JpAXNMHXljjf5Kt9C5n7xW2EDJJvRLPrlJg8dvM0Ej2yBiTXn93rSaw7nHSV3VK0IUEgq8MDgntxVwv7C3cMw5P0B3v2xSMTgJ">
+<div>
+<p class="font-headline-h4 text-headline-h4 text-ink-primary">Elena Rodriguez</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Compliance Lead</p>
+</div>
+</div>
+<button class="w-full py-2 border border-room-hipaa text-room-hipaa font-ui-text text-ui-text hover:bg-room-hipaa hover:text-white transition-all">Office Hours</button>
+</div>
+<!-- Why It Matters Block -->
+<div class="bg-room-hipaa/10 p-space-5 border-l-4 border-room-hipaa">
+<span class="material-symbols-outlined text-room-hipaa mb-space-2" data-icon="format_quote">format_quote</span>
+<p class="font-accent-serif text-accent-serif text-ink-primary mb-space-3 italic">"It's not just about rules and regulations; it's about protecting the real people behind the data."</p>
+<p class="font-ui-text text-ui-text text-room-hipaa">- Elena Rodriguez</p>
+</div>
+<!-- Course Metadata Summary -->
+<div class="bg-surface-container-low p-space-5 border border-border-muted space-y-3">
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Certification</span>
+<span class="text-ui-text font-ui-text text-room-hipaa">CME Level 1</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-body-sm text-on-surface-variant">Access</span>
+<span class="text-ui-text font-ui-text">Lifetime</span>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-space-6 px-space-5 flex flex-col md:flex-row justify-between items-center max-w-content-max mx-auto bg-surface-container-highest dark:bg-tertiary transition-colors duration-300">
+<div class="flex flex-col mb-space-5 md:mb-0">
+<span class="font-headline-h4 text-headline-h4 text-on-surface dark:text-on-tertiary mb-2">Healthcare Training Center</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container max-w-md">
+                © 2024 Healthcare Training Center. Empowering professionals through immersive education.
+            </p>
+</div>
+<div class="flex flex-wrap gap-space-5 justify-center md:justify-end">
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Compliance</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Privacy Policy</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">Terms of Service</a>
+<a class="font-body-sm text-body-sm text-on-surface-variant dark:text-on-tertiary-container hover:text-primary dark:hover:text-secondary-fixed underline transition-all" href="#">HIPAA Statement</a>
+</div>
+</footer>
+<!-- Mobile Bottom Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-[52px] bg-white border-t border-border-muted flex justify-around items-center z-50">
+<button class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant" data-icon="home">home</span>
+<span class="text-[10px] font-ui-text text-on-surface-variant">Lobby</span>
+</button>
+<button class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[20px] text-room-hipaa" data-icon="assignment" data-weight="fill" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="text-[10px] font-ui-text text-room-hipaa">Courses</span>
+</button>
+<button class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant" data-icon="school">school</span>
+<span class="text-[10px] font-ui-text text-on-surface-variant">Classes</span>
+</button>
+<button class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant" data-icon="account_circle">account_circle</span>
+<span class="text-[10px] font-ui-text text-on-surface-variant">Profile</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for cards (modified for sharp corners)
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'translateY(1px)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = '';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Scroll behavior for TopBar
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const header = document.querySelector('header');
+            
+            if (currentScroll > 50) {
+                header.classList.add('py-2', 'h-14', 'shadow-md');
+                header.classList.remove('h-16', 'shadow-sm');
+            } else {
+                header.classList.remove('py-2', 'h-14', 'shadow-md');
+                header.classList.add('h-16', 'shadow-sm');
+            }
+        });
+    </script>
+</body></html>

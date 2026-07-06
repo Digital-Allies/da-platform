@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Templates — Healthcare Training Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F4F6F9;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #1E3A6E;
+            text-align: center;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .template-preview {
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .template-preview.linkedin {
+            aspect-ratio: 1200 / 627;
+            background: linear-gradient(135deg, #1E3A6E 0%, #2B8FA9 100%);
+        }
+
+        .template-preview.instagram {
+            aspect-ratio: 1080 / 1350;
+            background: linear-gradient(135deg, #3B7DD8 0%, #2BA89A 100%);
+        }
+
+        .template-preview.twitter {
+            aspect-ratio: 1200 / 675;
+            background: linear-gradient(135deg, #2B8FA9 0%, #2EAA6E 100%);
+        }
+
+        .template-preview h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .template-preview p {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .template-info {
+            padding: 20px;
+        }
+
+        .template-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1E3A6E;
+            font-size: 16px;
+        }
+
+        .template-info p {
+            font-size: 13px;
+            color: #64748B;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .specs {
+            background: #F4F6F9;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #475569;
+            font-family: monospace;
+        }
+
+        .copy-examples {
+            background: white;
+            padding: 40px 24px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .copy-examples h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1E3A6E;
+        }
+
+        .copy-example {
+            background: #F4F6F9;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            border-left: 4px solid #2B8FA9;
+        }
+
+        .copy-example-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2B8FA9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .copy-example-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1E3A6E;
+        }
+
+        .color-accent {
+            color: #2B8FA9;
+            font-weight: 600;
+        }
+
+        .guide-section {
+            background: white;
+            padding: 32px;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .guide-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1E3A6E;
+        }
+
+        .guide-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guide-section li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #475569;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .guide-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #2B8FA9;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Social Media & Marketing Templates</h1>
+
+        <!-- TEMPLATE CARDS -->
+        <div class="templates-grid">
+            <!-- LINKEDIN -->
+            <div class="template-card">
+                <div class="template-preview linkedin">
+                    <h2>Enter Room 3</h2>
+                    <p>Compliance training that actually makes sense</p>
+                </div>
+                <div class="template-info">
+                    <h3>LinkedIn Post</h3>
+                    <p>Ideal for industry updates, course launches, and professional insights.</p>
+                    <div class="specs">
+                        Recommended: 1200×627px<br>
+                        Text: 100–150 characters<br>
+                        Hashtags: 3–5
+                    </div>
+                </div>
+            </div>
+
+            <!-- INSTAGRAM -->
+            <div class="template-card">
+                <div class="template-preview instagram">
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🛡️</div>
+                        <h2 style="font-size: 28px;">Privacy Matters</h2>
+                        <p style="font-size: 14px;">Room 2 launches today</p>
+                    </div>
+                </div>
+                <div class="template-info">
+                    <h3>Instagram Post / Story</h3>
+                    <p>Square format for feed, vertical for Stories. Bold, visual, emoji-light.</p>
+                    <div class="specs">
+                        Feed: 1080×1350px<br>
+                        Story: 1080×1920px<br>
+                        Text: 50–100 characters
+                    </div>
+                </div>
+            </div>
+
+            <!-- TWITTER/X -->
+            <div class="template-card">
+                <div class="template-preview twitter">
+                    <h2 style="font-size: 28px;">Step Inside. Step Up.</h2>
+                    <p style="font-size: 14px;">Join the Healthcare Training Center today</p>
+                </div>
+                <div class="template-info">
+                    <h3>Twitter / X Post</h3>
+                    <p>Short, punchy, conversational. Ideal for announcements and engagement.</p>
+                    <div class="specs">
+                        Image: 1200×675px<br>
+                        Text: 140–280 characters<br>
+                        Hashtags: 2–3
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COPY EXAMPLES -->
+        <div class="copy-examples">
+            <h2>Copy & Caption Examples</h2>
+
+            <div class="copy-example">
+                <div class="copy-example-label">LinkedIn — New Course Launch</div>
+                <div class="copy-example-text">
+                    New training alert: Room 5 (Finance) is now live. Master revenue cycle management, billing compliance, and financial best practices in healthcare.
+                    <span class="color-accent">#HealthcareTraining #ComplianceFirst</span>
+                </div>
+            </div>
+
+            <div class="copy-example">
+                <div class="copy-example-label">LinkedIn — Testimonial / Proof</div>
+                <div class="copy-example-text">
+                    "This training helped our entire team understand WHY compliance matters, not just that we have to do it."
+                    — Healthcare Manager, 500+ bed hospital<br>
+                    <span class="color-accent">Healthcare Training Center: Where Better Care Begins</span>
+                </div>
+            </div>
+
+            <div class="copy-example">
+                <div class="copy-example-label">Instagram — Room Highlight</div>
+                <div class="copy-example-text">
+                    Step inside Room 2 🛡️ Learn HIPAA, privacy rules, and real-world breach prevention. Your patients deserve your best.
+                    <span class="color-accent">#PatientSafety #HealthcareTraining #HIPAA</span>
+                </div>
+            </div>
+
+            <div class="copy-example">
+                <div class="copy-example-label">Instagram — Motivational / Founder Story</div>
+                <div class="copy-example-text">
+                    A family member's poor care experience started this. Now we train thousands of healthcare professionals to do better.
+                    Built by a lawyer. Designed for people.
+                    <span class="color-accent">#HealthcareHeroes #TrainForChange</span>
+                </div>
+            </div>
+
+            <div class="copy-example">
+                <div class="copy-example-label">Twitter — Announcement</div>
+                <div class="copy-example-text">
+                    🚀 LIVE NOW: Room 1 — Customer Service training is here. Empathy. De-escalation. Real healthcare communication skills.
+                    Step inside → <span class="color-accent">[link]</span>
+                </div>
+            </div>
+
+            <div class="copy-example">
+                <div class="copy-example-label">Twitter — Engagement / Question</div>
+                <div class="copy-example-text">
+                    What's the #1 thing healthcare teams struggle with most? Comment below. We're building training that solves real problems.
+                    <span class="color-accent">#HealthcareIT #Training</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOCIAL MEDIA GUIDELINES -->
+        <div class="guide-section">
+            <h3>Social Media Do's & Don'ts</h3>
+            <ul>
+                <li><strong>Do:</strong> Use bright, saturated room colors (they pop on social feeds)</li>
+                <li><strong>Do:</strong> Lead with the room name and icon (visual consistency across platforms)</li>
+                <li><strong>Do:</strong> Ask questions or encourage engagement ("What's your biggest challenge?")</li>
+                <li><strong>Do:</strong> Share quick wins and testimonials from real learners</li>
+                <li><strong>Do:</strong> Use the rule of three in captions ("Learn. Grow. Make a Difference.")</li>
+                <li><strong>Don't:</strong> Overuse emoji — keep it professional but warm</li>
+                <li><strong>Don't:</strong> Make posts too long on Twitter/Instagram (character limits matter)</li>
+                <li><strong>Don't:</strong> Use clinical jargon in social copy — stay accessible</li>
+                <li><strong>Don't:</strong> Post without proofing — this is brand-facing content</li>
+                <li><strong>Don't:</strong> Forget alt text on images (accessibility matters)</li>
+            </ul>
+        </div>
+
+        <!-- HASHTAG GUIDE -->
+        <div class="guide-section">
+            <h3>Recommended Hashtags</h3>
+            <ul>
+                <li><strong>Healthcare:</strong> #HealthcareTraining #HealthcareProfessionals #NursingCareers #HealthcareJobs</li>
+                <li><strong>Compliance:</strong> #ComplianceTraining #HIPAACompliance #HealthcareCompliance #RegulatoryCompliance</li>
+                <li><strong>Learning:</strong> #ProfessionalDevelopment #ContinuingEducation #OnlineLearning #TrainingAndDevelopment</li>
+                <li><strong>Brand:</strong> #HealthcareTrainingCenter #StepInside #StepUp #WhereHealthcareContinuesEducation</li>
+                <li><strong>Engagement:</strong> #HealthcareHeroes #PatientSafety #BetterCare #HealthcareMatters</li>
+            </ul>
+        </div>
+
+        <!-- POSTING SCHEDULE GUIDE -->
+        <div class="guide-section">
+            <h3>Posting Schedule Tips</h3>
+            <ul>
+                <li><strong>LinkedIn:</strong> Tuesday–Thursday, 8am–10am or 5pm–6pm (peak engagement for healthcare professionals)</li>
+                <li><strong>Instagram:</strong> Daily Stories, 3–4 Feed posts/week. Best times: 12pm–1pm, 5pm–6pm</li>
+                <li><strong>Twitter/X:</strong> 2–3 posts/day. Healthcare industry is active during work hours (7am–5pm)</li>
+                <li><strong>Consistency:</strong> Pick a schedule and stick to it. Your audience comes to expect you</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

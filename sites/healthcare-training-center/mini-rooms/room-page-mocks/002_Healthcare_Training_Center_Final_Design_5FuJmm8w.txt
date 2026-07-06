@@ -1,0 +1,184 @@
+# Healthcare Training Center — Final Design & Visual System Spec
+**Version 2.0 | Handoff package for Design Tool, Prototype Tool, and Client Review**
+
+---
+
+## 1. Project Summary (for the client)
+
+**What it is.** A virtual healthcare training platform structured as a 3D-feel "building." Learners arrive in a warm lobby, choose one of five training rooms (each its own subject + color identity), and step inside to learn. The experience is people-first, never clinical — a teaching hospital, not a law office.
+
+**Why it works.** Each room is a physical metaphor for a department. Progress is visible at a glance. Locked rooms tell students what to work toward. A consistent host character greets, teaches, and guides — building trust across the journey.
+
+**Tagline (primary):** *Step Inside. Step Up.*
+**Mission:** *Learn. Grow. Make a Difference.*
+**Footer / certificate line:** *Empowering Knowledge. Enhancing Care. Building a Better Future.*
+
+---
+
+## 2. The Five Rooms (locked)
+
+| # | Room | Accent | Hex | Icon |
+|---|---|---|---|---|
+| 1 | Customer Service | Sky Blue | `#3B7DD8` | headset / chat |
+| 2 | HIPAA Privacy & Security | Teal Green | `#2BA89A` | shield-check |
+| 3 | Compliance | Emerald | `#2EAA6E` | clipboard |
+| 4 | Medical Records | Indigo | `#7B5EA7` | folder |
+| 5 | Finance | Amber | `#D4A017` | currency |
+
+Brand frame: **Navy `#1E3A6E`** (primary) · **Teal `#2B8FA9`** (secondary) · **Cream `#FAF7F2`** (surface) · **Border `#D0D8E8`**.
+
+Type: **Montserrat** (headings) · **Inter** (UI/body) · **Playfair Display** (certificates only).
+
+Full token set lives in v1.0 spec (Section 14) — unchanged.
+
+---
+
+## 3. Visual System — Three Layers
+
+The prototype is built from three visual layers the prototyper can composite independently.
+
+### Layer A — The Hero Lobby (the scene)
+A premium isometric illustration of the full lobby: curved reception, host character, five storefronts in a gentle arc, warm wood floor, cream walls, navy accents, soft skylight.
+
+- **Master:** 4K hero, arc layout, extra breathing room between storefronts so each can scale/pop on selection.
+- **Alt angles:** low approach view, elevated dollhouse cutaway — for transitions or marketing.
+- **Use:** background plate for the Lobby route. Clickable hotspots + floating signs overlay this image.
+
+### Layer B — The Storefront Tiles (the doors)
+Five matched isometric "shop" tiles, 1:1, identical perspective and scale. Each shows the awning + icon + name plaque + a glimpse of classroom interior through the arch.
+
+- **States supplied:**
+  - **Default** — full color, lit interior
+  - **Locked** — desaturated palette, padlock motif, dimmed interior (for B2B locked rooms and student "work toward" framing)
+- **Use:** independently positioned in the lobby OR used as standalone room cards. Each can light up / hover / spin independently of the others.
+
+### Layer C — The Classroom Backdrops (the inside)
+Five 16:9 classroom interior scenes, one per room. Intentionally **text-free, label-free, image-free** — they are backdrops for menu overlays.
+
+- **Hotspot targets present in every backdrop:** blank whiteboard, podium, student desks, books on desks, secondary chalkboard, room-themed props in the accent color.
+- **Use:** when a learner enters a room, this becomes the page background. The prototyper overlays clickable hotspots on the whiteboard (course list), podium (instructor intro), books (resources), chalkboard (announcements), etc.
+
+---
+
+## 4. Interaction Model (for the prototyper)
+
+### Lobby route
+1. Load **Hero master** as the background scene.
+2. Overlay invisible hotspots aligned to each of the 5 storefronts.
+3. On hover: subtle scale (≈1.04) + accent glow + cursor shift.
+4. On select (the "pop-out"):
+   - The selected **storefront tile** lifts forward out of the scene with a soft shadow.
+   - It rotates gently (~20–25° spin, ease-in-out, return to center).
+   - An **info card panel** slides in from the LEFT — room icon, name, 2-sentence blurb, accent-colored "Enter Room →" CTA.
+   - Other storefronts dim ~30% to focus attention.
+   - **Visual target:** see the pop-out concept still + 8s reference clip on canvas.
+5. Confirm CTA → page transitions (250ms fade + slight upward slide, "stepping through a door") to the room.
+
+### Room route
+1. Load the matching **Classroom backdrop** as the page background.
+2. Top nav and accent surfaces switch to that room's color.
+3. Overlay menu hotspots on the in-scene props:
+   - **Whiteboard** → course list / module index
+   - **Podium** → instructor intro video / host message
+   - **Desk + book** → reading materials, downloads
+   - **Chalkboard / pinboard** → announcements, upcoming live sessions
+   - **Wall art / chart** → "Why this room matters" patient-advocacy context
+4. Breadcrumb: `Lobby → [Room Name]`. Back-to-Lobby reverses the transition.
+
+### Locked state
+Render the **locked-state tile** instead of default. Tooltip on hover: *"Ask your admin to unlock"* or *"Complete Room X to unlock."* Padlock badge visible; CTA disabled.
+
+---
+
+## 5. The Host Character
+
+A recurring on-platform face: receptionist in the lobby, instructor in courses, host in marketing.
+
+**Identity (locked):** warm, approachable healthcare educator; modest business-casual in navy/teal; lanyard name badge "Healthcare Training Center"; confident, patient-advocacy energy.
+
+**Reference library on canvas:**
+- Canonical portrait (identity anchor)
+- Standing 3/4 reference (turnaround base)
+- Instructor mode (teaching at board)
+- Welcoming host (open-arm greeter)
+- Seated at reception
+- 4-panel expression sheet
+
+**Usage rules:**
+- Always reference the canonical portrait when generating new poses.
+- Wardrobe stays in the brand palette (navy/teal/cream). Light variation allowed between desk-uniform and teaching-outfit.
+- Same illustration style as the lobby/tiles — do not shift her to photoreal in any context.
+- Pending: name and short bio (recommend establishing both before next render pass).
+
+---
+
+## 6. Asset Manifest (canvas references)
+
+> The prototyper and design tool should pull directly from these IDs.
+
+**Layer A — Hero Lobby**
+- Master (4K, arc, breathing room): `usoqucNV`
+- Alt angle — low approach: `48aIt4aI`
+- Alt angle — elevated dollhouse: `l6XcvD_i`
+- Original approved arc reference: `bPjq1cCe`
+
+**Layer B — Storefront Tiles (default, with classroom interior)**
+- Customer Service: `SQEIhjDY`
+- HIPAA: `DAYkDlTv`
+- Compliance: `CRYp8NAC`
+- Medical Records: `b7o0Ywzp`
+- Finance: `7o8hTVRS`
+
+**Layer B — Locked-State Tiles**
+- Customer Service: `lOqeS43v`
+- HIPAA: `LReW-lBf`
+- Compliance: `fY8U9L6u`
+- Medical Records: `rx6PUb8Z`
+- Finance: `HAgwW1Wv`
+
+**Layer C — Classroom Backdrops (16:9, text-free, hotspot-ready)**
+- Customer Service: `lg9loAe8`
+- HIPAA: `nczX2QgB`
+- Compliance: `gNp7JhPZ`
+- Medical Records: `PCxrvZsk`
+- Finance: `WNAaz9-B`
+
+**Interaction reference**
+- Pop-out concept still: `GF1f6ltI`
+- Pop-out 8s motion reference: *(rendering — see canvas)*
+- Marketing host 8s clip: *(rendering — see canvas)*
+
+**Host character**
+- Canonical portrait: `rkR6_O0Q`
+- Instructor mode: `DjAbHL2t`
+- Plus 4 additional poses + expression sheet on canvas
+- Character bible doc: `f-rIcK-8`
+
+**Foundational**
+- Design System Spec v1.0: `ZInh6hQ7`
+- Floor plan reference: `VwiSotdp`
+- Original flat mockup: `mLrYvn2C`
+
+---
+
+## 7. Handoff Notes
+
+**For the design tool (Claude Design / Figma):**
+- Pull tokens from v1.0 spec Section 14 (JSON block) — unchanged.
+- Build components against the three-layer model above.
+- Room-route pages share one template; only the backdrop, accent color, and host overlay swap.
+
+**For the prototype tool:**
+- Hero master is the lobby plate. Tiles are independently animated overlays.
+- Classroom backdrops are intentionally blank — all interactive content is your overlay, not baked into the image.
+- Pop-out motion reference clip on canvas is the visual target — match the easing, the lift, the side-panel slide-in.
+- Respect `prefers-reduced-motion`: disable lift/spin, just fade.
+
+**For the client:**
+- Read Section 1 + Section 4. The asset manifest shows everything that's been built so far.
+- Open questions still pending: business name confirmation, host character name, alternate palette choice (Section 2.4 in v1.0), B2B subdomain decision, third-party LMS integration question.
+
+---
+
+*Prepared by Luma | Healthcare Training Center | v2.0*
+*Supersedes nothing in v1.0 — extends it with the visual system + interaction model.*

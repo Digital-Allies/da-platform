@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Spacing — 8px Scale" subtitle="space-1 through space-9" viewport="700x250" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-white); box-sizing:border-box; }
+  .row { display:flex; align-items:center; gap:14px; margin-bottom:8px; }
+  .row:last-child { margin-bottom:0; }
+  .tok { font-family:var(--font-body); font-size:11px; font-weight:600; color:var(--fg-2); width:80px; }
+  .bar { background:var(--color-teal); height:14px; border-radius:3px; }
+  .val { font-family:var(--font-body); font-size:11px; color:var(--fg-3); }
+</style></head>
+<body>
+  <div class="row"><span class="tok">space-1</span><span class="bar" style="width:4px;"></span><span class="val">4px</span></div>
+  <div class="row"><span class="tok">space-2</span><span class="bar" style="width:8px;"></span><span class="val">8px</span></div>
+  <div class="row"><span class="tok">space-3</span><span class="bar" style="width:12px;"></span><span class="val">12px</span></div>
+  <div class="row"><span class="tok">space-4</span><span class="bar" style="width:16px;"></span><span class="val">16px · default padding</span></div>
+  <div class="row"><span class="tok">space-5</span><span class="bar" style="width:24px;"></span><span class="val">24px · card padding</span></div>
+  <div class="row"><span class="tok">space-6</span><span class="bar" style="width:32px;"></span><span class="val">32px</span></div>
+  <div class="row"><span class="tok">space-7</span><span class="bar" style="width:48px;"></span><span class="val">48px · section break</span></div>
+  <div class="row"><span class="tok">space-8</span><span class="bar" style="width:64px;"></span><span class="val">64px · hero padding</span></div>
+  <div class="row"><span class="tok">space-9</span><span class="bar" style="width:96px;"></span><span class="val">96px · page rhythm</span></div>
+</body></html>

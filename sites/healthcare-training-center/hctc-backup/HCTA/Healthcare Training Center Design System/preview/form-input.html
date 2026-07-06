@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Form Input" subtitle="Default / focus / error states" viewport="700x140" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-white); box-sizing:border-box; display:flex; gap:18px; }
+  .field { flex:1; }
+  label { display:block; font-family:var(--font-body); font-size:12px; font-weight:600; color:var(--fg-1); margin-bottom:6px; }
+  input { width:100%; height:44px; box-sizing:border-box; border-radius:8px; border:1px solid var(--color-border); padding:0 14px; font-family:var(--font-body); font-size:14px; color:var(--fg-1); }
+  input::placeholder { color:var(--fg-3); }
+  .focus input { border-color:var(--color-teal); box-shadow:var(--shadow-focus); outline:none; }
+  .err input { border-color:var(--color-error); }
+  .msg { font-family:var(--font-body); font-size:11px; color:var(--color-error); margin-top:6px; }
+</style></head>
+<body>
+  <div class="field"><label>Work email</label><input value="maria@stmarys.org" readonly></div>
+  <div class="field focus"><label>Password</label><input type="password" value="123456" readonly></div>
+  <div class="field err"><label>License #</label><input placeholder="Required" readonly><div class="msg">This field is required.</div></div>
+</body></html>

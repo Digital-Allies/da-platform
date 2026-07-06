@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Progress Indicators" subtitle="Linear bars + circular ring" viewport="700x170" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:22px 24px; background:var(--color-white); box-sizing:border-box; display:flex; align-items:center; gap:32px; }
+  .bars { flex:1; display:flex; flex-direction:column; gap:14px; }
+  .lbl { font-family:var(--font-body); font-size:11px; font-weight:600; color:var(--fg-2); margin-bottom:5px; display:flex; justify-content:space-between; }
+  .lbl span:last-child { color:var(--fg-3); font-weight:400; }
+  .track { height:6px; background:var(--color-border); border-radius:9999px; overflow:hidden; }
+  .fill { height:100%; border-radius:9999px; }
+  .ring { width:108px; height:108px; flex:none; }
+</style></head>
+<body>
+  <div class="bars">
+    <div><div class="lbl"><span>Customer Service</span><span>18 of 24</span></div><div class="track"><div class="fill" style="width:75%;background:#3B7DD8;"></div></div></div>
+    <div><div class="lbl"><span>HIPAA &amp; Privacy</span><span>6 of 12</span></div><div class="track"><div class="fill" style="width:50%;background:#2BA89A;"></div></div></div>
+    <div><div class="lbl"><span>Compliance</span><span>Complete</span></div><div class="track"><div class="fill" style="width:100%;background:var(--color-success);"></div></div></div>
+  </div>
+  <svg class="ring" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="52" fill="none" stroke="#D0D8E8" stroke-width="12"/>
+    <circle cx="60" cy="60" r="52" fill="none" stroke="#2B8FA9" stroke-width="12" stroke-linecap="round"
+      stroke-dasharray="326.7" stroke-dashoffset="81.7" transform="rotate(-90 60 60)"/>
+    <text x="60" y="58" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="26" fill="#1E3A6E">75%</text>
+    <text x="60" y="76" text-anchor="middle" font-family="Inter" font-size="10" fill="#7A89A3">overall</text>
+  </svg>
+</body></html>

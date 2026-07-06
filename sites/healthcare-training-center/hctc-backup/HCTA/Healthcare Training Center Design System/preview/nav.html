@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Components — Primary Navigation" subtitle="Authenticated navy nav bar" viewport="700x110" -->
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="../assets/phosphor/regular/style.css">
+<link rel="stylesheet" href="../assets/phosphor/fill/style.css">
+<style>
+  body { margin:0; padding:20px; background:var(--color-surface); box-sizing:border-box; }
+  .nav { height:64px; background:var(--color-navy); border-radius:10px; display:flex; align-items:center; padding:0 22px; gap:26px; }
+  .logo { font-family:var(--font-heading); font-weight:800; font-size:15px; color:#fff; letter-spacing:-.01em; }
+  .links { display:flex; gap:22px; margin-left:8px; }
+  .lk { font-family:var(--font-body); font-size:14px; font-weight:500; color:rgba(255,255,255,.72); padding:6px 2px; position:relative; }
+  .lk.active { color:#fff; }
+  .lk.active::after { content:""; position:absolute; left:0; right:0; bottom:-21px; height:3px; background:var(--color-teal); border-radius:3px 3px 0 0; }
+  .right { margin-left:auto; display:flex; align-items:center; gap:18px; color:#fff; }
+  .bell { font-size:20px; color:rgba(255,255,255,.8); }
+  .av { width:32px; height:32px; border-radius:50%; background:var(--color-teal); display:flex; align-items:center; justify-content:center; font-family:var(--font-heading); font-weight:700; font-size:13px; }
+  .un { font-family:var(--font-body); font-size:14px; font-weight:500; }
+</style></head>
+<body>
+  <div class="nav">
+    <div class="logo">Healthcare Training Center</div>
+    <div class="links">
+      <span class="lk active">Lobby</span>
+      <span class="lk">My Progress</span>
+      <span class="lk">Live Classes</span>
+      <span class="lk">Study Lounge</span>
+      <span class="lk">Resources</span>
+    </div>
+    <div class="right">
+      <i class="bell ph-fill ph-bell"></i>
+      <div class="av">MD</div>
+      <span class="un">Maria D.</span>
+    </div>
+  </div>
+</body></html>
