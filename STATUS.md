@@ -92,15 +92,18 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the
   SQL editor. Week 4 public block-renderer is minimal (home + blog only). No
   blog `posts`/`pages` rows yet. `ARCHITECTURE.md` (Day 04) missing.
-- **Per-client theming gap (from decision #7) — scoped to PUBLIC sites only:**
-  the public renderer must theme fully from each client's own tokens, but today
-  only DA has brand data and only a single `brand_color`; HCTC/Atomic Finds have
-  none; `design_tokens` is effectively empty. To do: (a) load per-client tokens
-  (colors/fonts/radius) from each `sites/<site>/CLAUDE.md` into the DB, (b) make
-  the **public renderer** consume the full set so each site looks like itself,
-  (c) never fall back to DA's brand on a public site. The **admin stays
-  DA-branded** — no per-client admin theming needed now. Do this before
-  onboarding HCTC/Atomic Finds visually.
+- **Per-client theming (decision #7) — FOUNDATION BUILT (Step 2, 2026-07-06):**
+  `src/lib/theme.ts` now holds typed design tokens for DA / HCTC / Atomic Finds
+  (transcribed from each `sites/<site>/CLAUDE.md`), mapped by `client_id`, with a
+  neutral non-DA fallback. `src/components/site/SiteTheme.tsx` injects the full
+  set as `--tok-*` CSS vars on the **public site only** (admin stays DA-branded);
+  it's wired into the public home `page.tsx`. Non-breaking (tsc clean, `/`→200).
+  **Remaining:** (a) make the site components (Hero, Nav, cards, Footer, etc.)
+  actually consume the `--tok-*` vars instead of hardcoded DA styles, so a client
+  site visually becomes itself; (b) tokens currently live in code — optionally
+  mirror to the `design_tokens` DB table so they're editable; (c) Atomic Finds
+  has no `client_id`/deployment yet — add when onboarded. Tokens are code-first
+  today, which is fine (design system = source of truth).
 - **Vercel deploys from the OLD repo, not the monorepo.** The live app
   (`da-webwssite-build-workflows.vercel.app`) still builds from
   `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel

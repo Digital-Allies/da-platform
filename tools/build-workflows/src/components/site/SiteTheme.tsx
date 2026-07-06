@@ -14,14 +14,18 @@ export default function SiteTheme({
   const tokens = getDesignTokens(clientId)
   return (
     <div
+      className="site-theme-scope"
       data-client-theme={tokens.name}
       style={{
         ...(tokensToCssVars(tokens) as React.CSSProperties),
         background: 'var(--tok-bg)',
         color: 'var(--tok-text)',
+        fontFamily: 'var(--tok-font-body)',
         minHeight: '100vh',
       }}
     >
+      {/* Headings adopt the client's heading font within the public scope */}
+      <style>{`.site-theme-scope :where(h1,h2,h3,h4,h5,h6){font-family:var(--tok-font-heading)}`}</style>
       {children}
     </div>
   )
