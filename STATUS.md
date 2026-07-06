@@ -5,7 +5,7 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-06 — by Claude Code (Opus 4.8)
+**Last updated:** 2026-07-06 — by Claude Code (Opus 4.8) — repo decision confirmed; "you are here" pinned
 
 ---
 
@@ -15,8 +15,7 @@ large step: what changed, what's true now, what's next. Keep it short and curren
    source of truth. The old individual repos still exist on GitHub but are
    **archive/backup only — do not commit to them.** Originals also sit in
    `../archive/pre-monorepo/`. Rationale: the multi-tenant model needs one shared
-   codebase, not one repo per site.  *(Pending Anthony's explicit confirm — see
-   Open questions.)*
+   codebase, not one repo per site.  **Confirmed by Anthony 2026-07-06.**
 2. **The model = one Platform, three faces per client.** Build the engine once;
    each client is configured, not rebuilt. Faces: **Admin** (their login +
    workspace), **Brand** (their tokens), **Website** (their pages). The Website
@@ -61,13 +60,21 @@ large step: what changed, what's true now, what's next. Keep it short and curren
   (auth gate live). Live twin: https://da-webwssite-build-workflows.vercel.app .
 - Local `.env.local` restored for dev (gitignored, never pushed).
 
-**Not done / important truths**
-- The **codebase is already well past Day 1** of the 30-Day Run (admin, public
-  components, schema, auth all scaffolded). We must **audit where we actually are
-  in the sequence and resume in order from the first incomplete step** — not
-  redo Days 1–N.
-- Supabase is **not seeded** and there is **no admin user yet**, so the admin
-  looks empty and can't be logged into. (README "Step 1".)
+**YOU ARE HERE (30-Day Run audit, 2026-07-06)**
+- **Code is built through ~Day 15 (all of Weeks 1–3), plus some Phase 2 stubs.**
+  Present: Next.js app + Vercel deploy + Supabase clients (Days 1–5); full schema
+  with RLS defined (Days 6–7); `lib/data.ts` fetchers (Day 10); admin routes for
+  dashboard, posts, pages, services, testimonials, settings, messages, content,
+  plus projects/research/development stubs (Days 11–15).
+- **The environment is stuck at Day 08.** Blocking gaps: Supabase is **not
+  seeded**, `security-fixes.sql` **not applied**, and there is **no admin user**
+  — so the admin can't be logged into and shows empty. Nothing works at runtime
+  until these run.
+- **Resume point = Day 08 → 09 → create admin user** (needs Supabase dashboard
+  clicks). That unlocks logging in and validating the already-built Days 11–15,
+  then Week 4 (public block-renderer, transmission loop, domain cutover).
+- Minor: `ARCHITECTURE.md` (Day 04) missing; Week 4 public renderer is minimal
+  (home + blog only, not the full block registry).
 - `digitalallies.net` is **not yet connected** to Supabase.
 - Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
   — many overlapping old repos. Not urgent; leave untouched until we decide.
@@ -76,20 +83,28 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 
 ## Next steps (in order)
 
-1. **Confirm repo direction** (monorepo vs individuals) — blocking, see below.
-2. **Pin "you are here" on the 30-Day Run** — audit current code vs the sequence,
-   mark the first genuinely-incomplete day.
-3. **Finish CMS admin setup** so the Press Office is usable: run `supabase/
-   seed-da.sql` + `security-fixes.sql`, enable leaked-password protection, invite
-   the first admin user. (Needs Supabase dashboard clicks.)
-4. Resume the 30-Day Run in order from the pinned point.
+1. **Day 08–09: seed + secure Supabase.** Run `supabase/seed-da.sql` and
+   `supabase/security-fixes.sql`, enable leaked-password protection, then invite
+   the first admin user. This is the resume point. *Needs Supabase dashboard
+   access — the one thing that needs Anthony's hands (or a Supabase token so the
+   agent can run it directly).*
+2. **Validate Days 11–15** by logging into the seeded admin — confirm the
+   already-built modules work against real data.
+3. **Week 4:** full public block-renderer + site parity, the transmission loop
+   (contact → message + email), then domain/DNS cutover and launch QA.
+4. Backfill the Day-04 `ARCHITECTURE.md` at a convenient point.
 
-## Open questions (waiting on Anthony)
+## Only-Anthony dependency (not a decision — just access)
 
-- [ ] Confirm: keep the **monorepo** as source of truth (recommended), and treat
-      the individual GitHub repos as archive-only? Or revert to individual repos?
-- [ ] Where do we run the Supabase steps — is the shared Supabase project
-      (`auwhvicpyiwsubucanpb`) still the one to use?
+- Supabase steps in Day 08–09 need the dashboard (SQL editor + invite user), or a
+  Supabase access token / DB connection string added so the agent can run them.
+  Shared project: `auwhvicpyiwsubucanpb`.
+
+## Operating mode
+
+Claude Code / Antigravity **drive and decide** — no decision-questions back to
+Anthony when there's a clear best move; override with a written reason and record
+it here. Pull Anthony in only for hands-on external clicks. He trusts the setup.
 
 ---
 
