@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design & Brand for Small Business — The Design Bureau · Digital Allies</title>
+    <meta name="description"
+        content="How color, typography, layout, and performance decisions shape whether your brand earns trust or loses it. Plain-talk design principles from Digital Allies in Kingman, AZ.">
+    <link rel="canonical" href="https://digitalallies.net/learn/design-bureau">
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Design & Brand for Small Business — The Design Bureau">
+    <meta property="og:description" content="Color, typography, layout, and performance decisions that shape whether your brand earns trust or loses it.">
+    <meta property="og:url" content="https://digitalallies.net/learn/design-bureau">
+
+        <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="../assets/css/a11y.css">
+
+    <script src="../assets/js/lucide-da.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bone-white': '#F9F6F0',
+                        'gray-dark': '#2D2D2D',
+                        'primary-blue': '#3A7BD5',
+                        'light-pink': '#FADEEB',
+                        'signal-red': '#C5301A'
+                    },
+                    fontFamily: {
+                        headers: ['"Lexend Deca"', 'sans-serif'],
+                        details: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45,45,45,0.07) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45,45,45,0.07) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #2D2D2D;
+        }
+        h1,h2,h3,h4 { font-family: 'Lexend Deca', sans-serif; }
+        .structural-border { border: 1px solid #2D2D2D; }
+        .brand-pulse { animation: brand-pulse 3s ease-in-out infinite; }
+        @keyframes brand-pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.5; transform:scale(1.25); }
+        }
+        .fab-ring { animation: fab-ring 2.2s ease-out infinite; }
+        @keyframes fab-ring {
+            0% { transform:scale(1); opacity:0.55; }
+            100% { transform:scale(2.4); opacity:0; }
+        }
+        .lang-active { background-color: #2D2D2D !important; color: #F9F6F0 !important; }
+
+        .prose-da p { font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.85; color: #2D2D2D; margin-bottom: 1.25rem; }
+        .prose-da strong { font-weight: 600; }
+
+        .layer-card { border-left: 3px solid #2D2D2D; }
+        .layer-card.blue { border-left-color: #3A7BD5; }
+        .layer-card.red { border-left-color: #C5301A; }
+        .layer-card.green { border-left-color: #2D7A4F; }
+
+        .check-row { border-bottom: 1px solid #E0DDD5; cursor: pointer; transition: background 0.15s; }
+        .check-row:last-child { border-bottom: none; }
+        .check-row:hover { background: #FADEEB; }
+        .check-row.done { background: #f0f8f0; }
+
+        .pinned-note { background-color: #FCFAED; position: relative; padding-top: 2.5rem; }
+        .red-pin { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; background-color: #C5301A; border-radius: 50%; border: 1px solid #2D2D2D; }
+
+        .progress-bar { height: 8px; background: #E0DDD5; border: 1px solid #2D2D2D; overflow: hidden; }
+        .progress-fill { height: 100%; background: #3A7BD5; transition: width 0.4s; }
+
+        .font-demo { border: 1px solid #2D2D2D; padding: 20px 24px; background: #fff; }
+        .symmetry-box { position: relative; border: 1px solid #2D2D2D; background: #fff; overflow: hidden; }
+
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0; }
+        html { scroll-behavior: smooth; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Website & Graphic Design",
+        "serviceType": "Design & Brand",
+        "description": "How color, typography, layout, and performance decisions shape whether your brand earns trust or loses it. Plain-talk design principles.",
+        "provider": {
+            "@type": "LocalBusiness",
+            "@id": "https://digitalallies.net/#business",
+            "name": "Digital Allies",
+            "url": "https://digitalallies.net",
+            "telephone": "+1-928-228-5769",
+            "sameAs": [
+                "https://www.instagram.com/digitalallies__",
+                "https://www.facebook.com/digitalallies",
+                "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+            ]
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "United States"
+        },
+        "url": "https://digitalallies.net/learn/design-bureau"
+    }
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Design & Brand for Small Business — The Design Bureau",
+  "description": "Color, typography, layout, and performance decisions that shape whether your brand earns trust or loses it.",
+  "url": "https://digitalallies.net/learn/design-bureau",
+  "author": {
+    "@type": "Person",
+    "name": "Anthony",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital Allies",
+      "telephone": "+1-928-228-5769",
+      "sameAs": [
+        "https://www.instagram.com/digitalallies__",
+        "https://www.facebook.com/digitalallies",
+        "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+      ]
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net"
+  },
+  "dateModified": "2026-05-01",
+  "mainEntityOfPage": "https://digitalallies.net/learn/design-bureau"
+}
+    </script>
+</head>
+
+<body class="antialiased">
+
+<div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<!-- NAV -->
+<nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/index.html" class="flex items-center space-x-3" aria-label="Digital Allies Home">
+            <div class="relative flex items-center justify-center w-5 h-5">
+                <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
+                <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
+            </div>
+            <span class="font-headers font-bold text-xl tracking-wide">Digital Allies</span>
+        </a>
+        <div class="flex items-center space-x-4 lg:space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Services" data-es="Servicios">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Pricing" data-es="Precios">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Reviews" data-es="Reseñas">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ"
+                    data-es="FAQ">FAQ</a>
+                <a href="/learn/" class="text-signal-red underline underline-offset-4 whitespace-nowrap"
+                    data-en="Learn" data-es="Aprender">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Contact" data-es="Contacto">Contact</a>
+            </div>
+            <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group">
+                <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active" aria-pressed="true">EN</button>
+                <div class="w-px h-5 bg-gray-dark" aria-hidden="true"></div>
+                <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink" aria-pressed="false">ES</button>
+            </div>
+        </div>
+
+                <!-- Hamburger button (mobile only) -->
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 flex-shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobileMenu()">
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                </button>
+    </div>
+
+        <!-- Mobile menu dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-dark/20 bg-bone-white" role="menu">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 text-sm font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition" data-en="Services" data-es="Servicios" onclick="closeMobileMenu()" role="menuitem">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition" data-en="Pricing" data-es="Precios" onclick="closeMobileMenu()" role="menuitem">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition" data-en="Reviews" data-es="Reseñas" onclick="closeMobileMenu()" role="menuitem">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition" data-en="FAQ" data-es="FAQ" onclick="closeMobileMenu()" role="menuitem">FAQ</a>
+                <a href="/learn/" class="hover:text-primary-blue transition" data-en="Learn" data-es="Aprender" onclick="closeMobileMenu()" role="menuitem">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition" data-en="Contact" data-es="Contacto" onclick="closeMobileMenu()" role="menuitem">Contact</a>
+            </div>
+        </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="max-w-5xl mx-auto px-6 pt-6">
+    <nav aria-label="Breadcrumb" class="text-xs font-bold tracking-widest uppercase">
+        <ol class="flex items-center gap-2 text-gray-dark/50">
+            <li><a href="/index.html" class="hover:text-primary-blue transition"
+                data-en="Home" data-es="Inicio">Home</a></li>
+            <li aria-hidden="true">·</li>
+            <li><a href="/learn/" class="hover:text-primary-blue transition"
+                data-en="Learn" data-es="Aprender">Learn</a></li>
+            <li aria-hidden="true">·</li>
+            <li class="text-signal-red"
+                data-en="The Design Bureau" data-es="La Oficina de Diseño">The Design Bureau</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- HERO -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-12">
+    <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+        data-en="The Design Bureau · Interactive Guide"
+        data-es="La Oficina de Diseño · Guía Interactiva">The Design Bureau · Interactive Guide</p>
+    <h1 class="font-headers font-bold text-4xl md:text-5xl leading-tight mb-6"
+        data-en="Design decisions that earn trust — or quietly lose it."
+        data-es="Decisiones de diseño que generan confianza — o la pierden en silencio.">
+        Design decisions that earn trust — or quietly lose it.
+    </h1>
+    <p class="text-sm leading-relaxed text-gray-dark/70 max-w-2xl mb-6"
+        data-en="Color, typography, layout, performance. Each one sends a signal before a word is read. This guide covers how those decisions work — and what they cost when they're made carelessly."
+        data-es="Color, tipografía, composición, rendimiento. Cada elemento envía una señal antes de que se lea una palabra. Esta guía explica cómo funcionan esas decisiones — y lo que cuestan cuando se toman sin cuidado.">
+        Color, typography, layout, performance. Each one sends a signal before a word is read. This guide covers how those decisions work — and what they cost when they're made carelessly.
+    </p>
+    <div class="flex flex-wrap gap-4 items-center text-xs text-gray-dark/50 font-bold tracking-widest uppercase">
+        <span data-en="By Anthony · Digital Allies" data-es="Por Anthony · Digital Allies">By Anthony · Digital Allies</span>
+        <span aria-hidden="true">·</span>
+        <span>Kingman, AZ</span>
+        <span aria-hidden="true">·</span>
+        <span data-en="Updated 2026" data-es="Actualizado 2026">Updated 2026</span>
+    </div>
+</header>
+
+<!-- STATS BAND -->
+<div class="border-y border-gray-dark/15 bg-white/50 py-8 mb-14">
+    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+            <div class="font-headers font-bold text-4xl text-signal-red mb-1">87.4%</div>
+            <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/60 mb-1"
+                data-en="Of local visits happen on a phone"
+                data-es="De las visitas locales ocurren desde un teléfono">Of local visits happen on a phone</div>
+            <div class="text-xs text-gray-dark/40"
+                data-en="GA4 · 17K users · Kingman client · 2025–26"
+                data-es="GA4 · 17K usuarios · cliente de Kingman · 2025–26">GA4 · 17K users · Kingman client · 2025–26</div>
+        </div>
+        <div>
+            <div class="font-headers font-bold text-4xl text-primary-blue mb-1">~85%</div>
+            <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/60 mb-1"
+                data-en="Smaller file size: WebP vs. unoptimized JPEG"
+                data-es="Tamaño de archivo menor: WebP vs. JPEG sin optimizar">Smaller file size: WebP vs. unoptimized JPEG</div>
+            <div class="text-xs text-gray-dark/40"
+                data-en="Every saved byte is energy not spent."
+                data-es="Cada byte ahorrado es energía no consumida.">Every saved byte is energy not spent.</div>
+        </div>
+        <div>
+            <div class="font-headers font-bold text-4xl text-gray-dark mb-1">95/5</div>
+            <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/60 mb-1"
+                data-en="The ratio that makes color work"
+                data-es="La proporción que hace que el color funcione">The ratio that makes color work</div>
+            <div class="text-xs text-gray-dark/40"
+                data-en="95% neutral canvas. 5% high-contrast signal."
+                data-es="95% lienzo neutro. 5% señal de alto contraste.">95% neutral canvas. 5% high-contrast signal.</div>
+        </div>
+    </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<main class="max-w-5xl mx-auto px-6 pb-20">
+
+    <!-- ============================================================
+         SECTION 1: THE 95/5 RULE
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="color-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="01 · Color" data-es="01 · Color">01 · Color</p>
+        <h2 id="color-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Color everywhere is color nowhere."
+            data-es="El color en todas partes no es color en ninguna parte.">
+            Color everywhere is color nowhere.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="The brands you actually remember follow a quiet rule. Roughly 95% of every canvas is neutral — white, off-white, charcoal. The remaining 5% is where color lives, and because it's rare, it works. When every button, header, icon, and border is a different color, the eye has nothing to follow. Nothing reads as important because everything is competing at the same volume."
+               data-es="Las marcas que realmente recuerdas siguen una regla silenciosa. Aproximadamente el 95% de cada lienzo es neutro: blanco, hueso, carbón. El 5% restante es donde vive el color, y porque es escaso, funciona. Cuando cada botón, encabezado, ícono y borde es un color diferente, el ojo no tiene nada que seguir. Nada parece importante porque todo compite al mismo volumen.">
+                The brands you actually remember follow a quiet rule. Roughly 95% of every canvas is neutral — white, off-white, charcoal. The remaining 5% is where color lives, and because it's rare, it works. When every button, header, icon, and border is a different color, the eye has nothing to follow. Nothing reads as important because everything is competing at the same volume.
+            </p>
+            <p data-en="Restraint is not a design limitation. It's the mechanism that makes the one accent land with full force. Reserve color for the one thing that must be noticed — your primary call to action, a critical alert, the single data point that changes the conversation."
+               data-es="La contención no es una limitación de diseño. Es el mecanismo que hace que el único acento aterrice con toda su fuerza. Reserva el color para la única cosa que debe ser notada: tu llamada a la acción principal, una alerta crítica, el único dato que cambia la conversación.">
+                Restraint is not a design limitation. It's the mechanism that makes the one accent land with full force. Reserve color for the one thing that must be noticed — your primary call to action, a critical alert, the single data point that changes the conversation.
+            </p>
+        </div>
+
+        <!-- Visual demo: 95/5 grid -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="structural-border p-6 bg-white">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/40 mb-4"
+                    data-en="Too much — the eye has nowhere to land"
+                    data-es="Demasiado — el ojo no tiene dónde posarse">Too much — the eye has nowhere to land</p>
+                <div class="space-y-2">
+                    <div class="h-8 bg-blue-500 rounded"></div>
+                    <div class="h-8 bg-red-500 rounded"></div>
+                    <div class="h-8 bg-green-500 rounded"></div>
+                    <div class="h-8 bg-yellow-400 rounded"></div>
+                </div>
+                <p class="text-xs mt-4 text-gray-dark/50 font-bold uppercase tracking-widest"
+                    data-en="Four signals. Zero priority." data-es="Cuatro señales. Cero prioridad.">Four signals. Zero priority.</p>
+            </div>
+            <div class="structural-border p-6 bg-white">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/40 mb-4"
+                    data-en="95/5 — one signal reads immediately"
+                    data-es="95/5 — una señal se lee de inmediato">95/5 — one signal reads immediately</p>
+                <div class="space-y-2">
+                    <div class="h-8 bg-gray-100 border border-gray-200 rounded"></div>
+                    <div class="h-8 bg-gray-100 border border-gray-200 rounded"></div>
+                    <div class="h-8 bg-[#C5301A] rounded"></div>
+                    <div class="h-8 bg-gray-100 border border-gray-200 rounded"></div>
+                </div>
+                <p class="text-xs mt-4 text-signal-red font-bold uppercase tracking-widest"
+                    data-en="One signal. Impossible to miss." data-es="Una señal. Imposible de ignorar.">One signal. Impossible to miss.</p>
+            </div>
+        </div>
+
+        <!-- Pinned note -->
+        <div class="pinned-note structural-border px-8 pb-6 max-w-2xl">
+            <div class="red-pin" aria-hidden="true"></div>
+            <p class="text-sm leading-relaxed font-details"
+                data-en="&ldquo;Your brand&rsquo;s color isn&rsquo;t the problem. Where you put it is.&rdquo;"
+                data-es="&ldquo;El color de tu marca no es el problema. El problema es dónde lo pones.&rdquo;">
+                &ldquo;Your brand&rsquo;s color isn&rsquo;t the problem. Where you put it is.&rdquo;
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: THE SYMMETRY BREAK
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="symmetry-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="02 · Attention" data-es="02 · Atención">02 · Attention</p>
+        <h2 id="symmetry-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="The symmetry break: a calculated decision about where attention goes."
+            data-es="La ruptura de simetría: una decisión calculada sobre hacia dónde va la atención.">
+            The symmetry break: a calculated decision about where attention goes.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="Perfect alignment feels safe. Safe feels forgettable. Shifting a single high-contrast element a few pixels off the grid creates a visual itch the brain cannot ignore. The eye moves directly to it — which means you get to decide where the eye goes."
+               data-es="La alineación perfecta se siente segura. Lo seguro se siente olvidable. Desplazar un único elemento de alto contraste unos pocos píxeles fuera de la cuadrícula crea una incomodidad visual que el cerebro no puede ignorar. El ojo se mueve directamente hacia él, lo que significa que puedes decidir hacia dónde va el ojo.">
+                Perfect alignment feels safe. Safe feels forgettable. Shifting a single high-contrast element a few pixels off the grid creates a visual itch the brain cannot ignore. The eye moves directly to it — which means you get to decide where the eye goes.
+            </p>
+            <p data-en="There's a rule: only one element breaks the symmetry per layout. And it must be Signal Red — never blue, never pink. Blue is structural. Red is urgency. When the red element is the only thing off-center, it earns that attention without shouting."
+               data-es="Hay una regla: solo un elemento rompe la simetría por diseño. Y debe ser Rojo Señal — nunca azul, nunca rosa. El azul es estructural. El rojo es urgencia. Cuando el elemento rojo es lo único que está descentrado, se gana esa atención sin gritar.">
+                There's a rule: only one element breaks the symmetry per layout. And it must be Signal Red — never blue, never pink. Blue is structural. Red is urgency. When the red element is the only thing off-center, it earns that attention without shouting.
+            </p>
+            <p data-en="This is not an accident. It is a calculated decision about where attention goes. On a website, that means your primary call to action — &ldquo;Book a call,&rdquo; &ldquo;Buy now,&rdquo; &ldquo;Get a quote&rdquo; — is the one element that breaks the grid, so the eye has no choice but to find it."
+               data-es="Esto no es un accidente. Es una decisión calculada sobre hacia dónde va la atención. En un sitio web, eso significa que tu llamada a la acción principal — &ldquo;Reserva una llamada,&rdquo; &ldquo;Compra ahora,&rdquo; &ldquo;Obtén un presupuesto&rdquo; — es el único elemento que rompe la cuadrícula, de modo que el ojo no tiene más remedio que encontrarlo.">
+                This is not an accident. It is a calculated decision about where attention goes. On a website, that means your primary call to action — &ldquo;Book a call,&rdquo; &ldquo;Buy now,&rdquo; &ldquo;Get a quote&rdquo; — is the one element that breaks the grid, so the eye has no choice but to find it.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: TYPOGRAPHY
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="type-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="03 · Typography" data-es="03 · Tipografía">03 · Typography</p>
+        <h2 id="type-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Your font is talking before the first word is read."
+            data-es="Tu fuente habla antes de que se lea la primera palabra.">
+            Your font is talking before the first word is read.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="Typography is the fastest trust signal in design. A poorly-chosen font — the wrong weight, the wrong spacing, the wrong pairing — reads as unprofessional before anyone processes a single sentence. And the wrong choice doesn't just look bad. It costs you something."
+               data-es="La tipografía es la señal de confianza más rápida en el diseño. Una fuente mal elegida — el peso incorrecto, el espaciado incorrecto, la combinación incorrecta — se lee como poco profesional antes de que nadie procese una sola oración. Y la elección incorrecta no solo se ve mal. Te cuesta algo.">
+                Typography is the fastest trust signal in design. A poorly-chosen font — the wrong weight, the wrong spacing, the wrong pairing — reads as unprofessional before anyone processes a single sentence. And the wrong choice doesn't just look bad. It costs you something.
+            </p>
+        </div>
+
+        <!-- Font demo cards -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div>
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/40 mb-3"
+                    data-en="Serif — established, editorial, traditional"
+                    data-es="Serif — establecida, editorial, tradicional">Serif — established, editorial, traditional</p>
+                <div class="font-demo">
+                    <p style="font-family: Georgia, serif; font-size: 28px; font-weight: 700; line-height: 1.2; color: #2D2D2D;">Design for the work that lasts.</p>
+                    <p style="font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #2D2D2D; margin-top: 12px;">Body copy inherits trust from the headline. The serif signals permanence — law firms, publishers, institutions.</p>
+                </div>
+            </div>
+            <div>
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/40 mb-3"
+                    data-en="Sans-serif — clean, direct, modern"
+                    data-es="Sans-serif — limpia, directa, moderna">Sans-serif — clean, direct, modern</p>
+                <div class="font-demo">
+                    <p style="font-family: 'Lexend Deca', sans-serif; font-size: 28px; font-weight: 700; line-height: 1.2; color: #2D2D2D;">Design for the work that lasts.</p>
+                    <p style="font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; color: #2D2D2D; margin-top: 12px;">Body copy in a monospaced font reads as precise and technical. Used here because precision is the point.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer-card blue bg-white px-6 py-5 mb-6">
+            <p class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-2"
+                data-en="The performance cost of fonts"
+                data-es="El costo de rendimiento de las fuentes">The performance cost of fonts</p>
+            <div class="prose-da">
+                <p data-en="Every custom font weight is a separate network request. If you load four weights of a custom font — regular, medium, semibold, bold — that&rsquo;s four files your visitor&rsquo;s browser has to fetch before the page can render properly. On a slow mobile connection in Kingman (87.4% of your traffic), that delay is visible. Users see a flash of unstyled text, or worse, they don&rsquo;t wait."
+                   data-es="Cada peso de fuente personalizada es una solicitud de red separada. Si cargas cuatro pesos de una fuente personalizada — regular, medium, semibold, bold — eso son cuatro archivos que el navegador de tu visitante debe descargar antes de que la página pueda renderizarse correctamente. En una conexión móvil lenta en Kingman (el 87.4% de tu tráfico), ese retraso es visible. Los usuarios ven un destello de texto sin estilo, o peor, no esperan.">
+                    Every custom font weight is a separate network request. If you load four weights of a custom font — regular, medium, semibold, bold — that&rsquo;s four files your visitor&rsquo;s browser has to fetch before the page can render properly. On a slow mobile connection in Kingman (87.4% of your traffic), that delay is visible. Users see a flash of unstyled text, or worse, they don&rsquo;t wait.
+                </p>
+                <p data-en="The fix: load only what you use. If your design only needs bold and regular, load bold and regular. Use <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>font-display: swap</code> so text shows immediately while the custom font loads. Consider system fonts for body copy — they&rsquo;re already on the device, zero download required, and often beautiful."
+                   data-es="La solución: carga solo lo que usas. Si tu diseño solo necesita negrita y regular, carga negrita y regular. Usa <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>font-display: swap</code> para que el texto aparezca de inmediato mientras se carga la fuente personalizada. Considera las fuentes del sistema para el cuerpo del texto — ya están en el dispositivo, no requieren descarga y suelen ser hermosas.">
+                    The fix: load only what you use. If your design only needs bold and regular, load bold and regular. Use <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>font-display: swap</code> so text shows immediately while the custom font loads. Consider system fonts for body copy — they&rsquo;re already on the device, zero download required, and often beautiful.
+                </p>
+            </div>
+        </div>
+
+        <!-- Typography rules -->
+        <div class="structural-border bg-white p-6">
+            <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-5"
+                data-en="Typography rules that hold across almost everything"
+                data-es="Reglas tipográficas que aplican en casi todo">Typography rules that hold across almost everything</p>
+            <div class="space-y-4">
+                <div class="flex items-start gap-4 border-b border-gray-dark/10 pb-4">
+                    <span class="text-signal-red font-bold text-xs mt-0.5 flex-shrink-0">→</span>
+                    <div>
+                        <p class="font-bold text-sm mb-1"
+                            data-en="One typeface family for headers. One for body. That's the whole system."
+                            data-es="Una familia tipográfica para encabezados. Una para el cuerpo. Eso es todo el sistema.">One typeface family for headers. One for body. That's the whole system.</p>
+                        <p class="text-xs text-gray-dark/60"
+                            data-en="Three or more fonts on a page reads as unfinished, not expressive."
+                            data-es="Tres o más fuentes en una página se ve inacabado, no expresivo.">Three or more fonts on a page reads as unfinished, not expressive.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 border-b border-gray-dark/10 pb-4">
+                    <span class="text-signal-red font-bold text-xs mt-0.5 flex-shrink-0">→</span>
+                    <div>
+                        <p class="font-bold text-sm mb-1"
+                            data-en="Line height for body copy: 1.6 minimum. 1.8 is better."
+                            data-es="Interlineado para el cuerpo del texto: mínimo 1.6. 1.8 es mejor.">Line height for body copy: 1.6 minimum. 1.8 is better.</p>
+                        <p class="text-xs text-gray-dark/60"
+                            data-en="Tight line spacing is the single most common readability mistake on small business sites."
+                            data-es="El interlineado apretado es el error de legibilidad más común en los sitios de pequeñas empresas.">Tight line spacing is the single most common readability mistake on small business sites.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4 border-b border-gray-dark/10 pb-4">
+                    <span class="text-signal-red font-bold text-xs mt-0.5 flex-shrink-0">→</span>
+                    <div>
+                        <p class="font-bold text-sm mb-1"
+                            data-en="Body font size: 14–16px minimum. 13px is a hard floor."
+                            data-es="Tamaño de fuente para el cuerpo: mínimo 14–16px. 13px es el límite inferior.">Body font size: 14–16px minimum. 13px is a hard floor.</p>
+                        <p class="text-xs text-gray-dark/60"
+                            data-en="26% of Kingman residents are 65 or older. Small text is not accessible and not optional."
+                            data-es="El 26% de los residentes de Kingman tienen 65 años o más. El texto pequeño no es accesible y no es opcional.">26% of Kingman residents are 65 or older. Small text is not accessible and not optional.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <span class="text-signal-red font-bold text-xs mt-0.5 flex-shrink-0">→</span>
+                    <div>
+                        <p class="font-bold text-sm mb-1"
+                            data-en="Sentence case for headings. Title Case for named departments or proper nouns."
+                            data-es="Minúsculas para encabezados. Mayúsculas en Títulos para departamentos con nombre o sustantivos propios.">Sentence case for headings. Title Case for named departments or proper nouns.</p>
+                        <p class="text-xs text-gray-dark/60"
+                            data-en="ALL CAPS works for short eyebrow labels (4–5 words max). Paragraphs in all caps are unreadable."
+                            data-es="LAS MAYÚSCULAS funcionan para etiquetas cortas de encabezado (máximo 4–5 palabras). Los párrafos en mayúsculas son ilegibles.">ALL CAPS works for short eyebrow labels (4–5 words max). Paragraphs in all caps are unreadable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: LAYOUT & WHITESPACE
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="layout-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="04 · Layout" data-es="04 · Composición">04 · Layout</p>
+        <h2 id="layout-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Whitespace is not empty. It&rsquo;s a decision."
+            data-es="El espacio en blanco no está vacío. Es una decisión.">
+            Whitespace is not empty. It&rsquo;s a decision.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="The most common instinct when building a website is to fill every inch. Contact info in the header. Promotions in a banner. A sidebar. A widget. A popup. The result looks like a yard sale — everything is available but nothing is findable. Generous whitespace is what separates a site that feels professional from one that feels like it was built in 2003."
+               data-es="El instinto más común al construir un sitio web es llenar cada centímetro. Información de contacto en el encabezado. Promociones en un banner. Una barra lateral. Un widget. Una ventana emergente. El resultado parece un mercado de pulgas — todo está disponible pero nada se puede encontrar. El espacio en blanco generoso es lo que separa un sitio que se siente profesional de uno que parece construido en 2003.">
+                The most common instinct when building a website is to fill every inch. Contact info in the header. Promotions in a banner. A sidebar. A widget. A popup. The result looks like a yard sale — everything is available but nothing is findable. Generous whitespace is what separates a site that feels professional from one that feels like it was built in 2003.
+            </p>
+            <p data-en="A reliable rule: double the padding you think you need. If your gut says 20 pixels of space above a heading, use 40. If it says a section needs 40px top and bottom, use 80. The discomfort of &ldquo;too much space&rdquo; usually means you&rsquo;re right."
+               data-es="Una regla confiable: duplica el relleno que crees necesitar. Si tu instinto dice 20 píxeles de espacio sobre un encabezado, usa 40. Si dice que una sección necesita 40px arriba y abajo, usa 80. La incomodidad de &ldquo;demasiado espacio&rdquo; generalmente significa que estás en lo correcto.">
+                A reliable rule: double the padding you think you need. If your gut says 20 pixels of space above a heading, use 40. If it says a section needs 40px top and bottom, use 80. The discomfort of &ldquo;too much space&rdquo; usually means you&rsquo;re right.
+            </p>
+            <p data-en="The other half of layout is the grid. A 20px baseline grid (the kind this page uses, visible as the faint ruled paper behind everything) means every element snaps to the same invisible system. Consistent alignment isn&rsquo;t just aesthetic — it&rsquo;s a signal that the same precision went into the engineering."
+               data-es="La otra mitad de la composición es la cuadrícula. Una cuadrícula base de 20px (como la que usa esta página, visible como el tenue papel pautado detrás de todo) significa que cada elemento se ajusta al mismo sistema invisible. La alineación consistente no es solo estética — es una señal de que la misma precisión se aplicó a la ingeniería.">
+                The other half of layout is the grid. A 20px baseline grid (the kind this page uses, visible as the faint ruled paper behind everything) means every element snaps to the same invisible system. Consistent alignment isn&rsquo;t just aesthetic — it&rsquo;s a signal that the same precision went into the engineering.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: PERFORMANCE & SUSTAINABILITY
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="perf-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="05 · Performance &amp; Sustainability"
+            data-es="05 · Rendimiento y Sostenibilidad">05 · Performance &amp; Sustainability</p>
+        <h2 id="perf-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="A fast website is a responsible one. They&rsquo;re the same thing."
+            data-es="Un sitio web rápido es un sitio responsable. Son lo mismo.">
+            A fast website is a responsible one. They&rsquo;re the same thing.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="Every time a page loads, energy moves. A request leaves a device, travels to a server, that server runs computation, and a response comes back. Multiply that by every visitor, every page, every day — and the energy cost of a poorly-optimized website is real and measurable. Data centers globally consume roughly 200–250 terawatt-hours of electricity per year, and a meaningful fraction of that is processing bloated, slow websites."
+               data-es="Cada vez que se carga una página, se mueve energía. Una solicitud sale de un dispositivo, viaja a un servidor, ese servidor ejecuta cómputo, y una respuesta regresa. Multiplica eso por cada visitante, cada página, cada día — y el costo energético de un sitio web mal optimizado es real y medible. Los centros de datos globalmente consumen aproximadamente 200–250 teravatios-hora de electricidad por año, y una fracción significativa de eso es procesando sitios web lentos e inflados.">
+                Every time a page loads, energy moves. A request leaves a device, travels to a server, that server runs computation, and a response comes back. Multiply that by every visitor, every page, every day — and the energy cost of a poorly-optimized website is real and measurable. Data centers globally consume roughly 200–250 terawatt-hours of electricity per year, and a meaningful fraction of that is processing bloated, slow websites.
+            </p>
+            <p data-en="The good news: the same decisions that make a site fast also make it sustainable. They&rsquo;re not two separate goals."
+               data-es="La buena noticia: las mismas decisiones que hacen un sitio rápido también lo hacen sostenible. No son dos objetivos separados.">
+                The good news: the same decisions that make a site fast also make it sustainable. They&rsquo;re not two separate goals.
+            </p>
+        </div>
+
+        <!-- Performance cost cards -->
+        <div class="space-y-4 mb-8">
+            <div class="layer-card red bg-white px-6 py-5">
+                <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-2"
+                    data-en="Images: the biggest offender"
+                    data-es="Imágenes: el mayor problema">Images: the biggest offender</p>
+                <div class="prose-da">
+                    <p data-en="An unoptimized hero photo straight from a phone camera can weigh 4–8 MB. The same image, exported as WebP at the right dimensions, comes in under 200 KB — roughly a 95% reduction. For a page with five such images, that&rsquo;s the difference between a 25 MB page that takes 12 seconds to load on mobile and a 1 MB page that loads in under 2."
+                       data-es="Una foto de portada sin optimizar directamente de una cámara de teléfono puede pesar 4–8 MB. La misma imagen, exportada como WebP en las dimensiones correctas, pesa menos de 200 KB — una reducción de aproximadamente el 95%. Para una página con cinco imágenes así, esa es la diferencia entre una página de 25 MB que tarda 12 segundos en cargar en móvil y una página de 1 MB que carga en menos de 2.">
+                        An unoptimized hero photo straight from a phone camera can weigh 4–8 MB. The same image, exported as WebP at the right dimensions, comes in under 200 KB — roughly a 95% reduction. For a page with five such images, that&rsquo;s the difference between a 25 MB page that takes 12 seconds to load on mobile and a 1 MB page that loads in under 2.
+                    </p>
+                    <p data-en="Every second saved is server cycles saved. Server cycles are energy. Energy has a carbon cost. Sustainable design starts with an export setting."
+                       data-es="Cada segundo ahorrado son ciclos de servidor ahorrados. Los ciclos del servidor son energía. La energía tiene un costo de carbono. El diseño sostenible comienza con una configuración de exportación.">
+                        Every second saved is server cycles saved. Server cycles are energy. Energy has a carbon cost. Sustainable design starts with an export setting.
+                    </p>
+                </div>
+            </div>
+
+            <div class="layer-card blue bg-white px-6 py-5">
+                <p class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-2"
+                    data-en="Custom fonts: load only what you use"
+                    data-es="Fuentes personalizadas: carga solo lo que usas">Custom fonts: load only what you use</p>
+                <div class="prose-da">
+                    <p data-en="A custom font loaded at four weights (regular, medium, semibold, bold) is four HTTP requests — even if your design only ever renders two of them. Each file is 20–150 KB. On a page that also loads images, scripts, and stylesheets, those font files are queuing behind everything else, delaying when text appears."
+                       data-es="Una fuente personalizada cargada en cuatro pesos (regular, medium, semibold, bold) son cuatro solicitudes HTTP — incluso si tu diseño solo renderiza dos de ellas. Cada archivo pesa entre 20–150 KB. En una página que también carga imágenes, scripts y hojas de estilo, esos archivos de fuente están haciendo cola detrás de todo lo demás, retrasando cuándo aparece el texto.">
+                        A custom font loaded at four weights (regular, medium, semibold, bold) is four HTTP requests — even if your design only ever renders two of them. Each file is 20–150 KB. On a page that also loads images, scripts, and stylesheets, those font files are queuing behind everything else, delaying when text appears.
+                    </p>
+                    <p data-en="The fix is a one-line change: specify exactly which weights to download. <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>wght@400;700</code> instead of <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>wght@100;200;300;400;500;600;700;800;900</code>. The latter is a variable font loaded at every possible weight, and it&rsquo;s rarely necessary."
+                       data-es="La solución es un cambio de una línea: especifica exactamente qué pesos descargar. <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>wght@400;700</code> en lugar de <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>wght@100;200;300;400;500;600;700;800;900</code>. Este último es una fuente variable cargada en todos los pesos posibles, y raramente es necesario.">
+                        The fix is a one-line change: specify exactly which weights to download. <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>wght@400;700</code> instead of <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>wght@100;200;300;400;500;600;700;800;900</code>. The latter is a variable font loaded at every possible weight, and it&rsquo;s rarely necessary.
+                    </p>
+                </div>
+            </div>
+
+            <div class="layer-card green bg-white px-6 py-5">
+                <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:#2D7A4F;"
+                    data-en="Third-party scripts: every one has a weight"
+                    data-es="Scripts de terceros: cada uno tiene un peso">Third-party scripts: every one has a weight</p>
+                <div class="prose-da">
+                    <p data-en="Chat widgets, social media embeds, analytics platforms, cookie consent banners — each one loads its own JavaScript, makes its own network requests, and runs its own processing on your visitor&rsquo;s device. A site with ten third-party scripts can triple its load time versus the same site with three. Ask: is this widget actually converting business, or is it just running?"
+                       data-es="Widgets de chat, incrustaciones de redes sociales, plataformas de análisis, banners de consentimiento de cookies — cada uno carga su propio JavaScript, hace sus propias solicitudes de red y ejecuta su propio procesamiento en el dispositivo de tu visitante. Un sitio con diez scripts de terceros puede triplicar su tiempo de carga en comparación con el mismo sitio con tres. Pregúntate: ¿este widget realmente está generando negocios, o simplemente está funcionando?">
+                        Chat widgets, social media embeds, analytics platforms, cookie consent banners — each one loads its own JavaScript, makes its own network requests, and runs its own processing on your visitor&rsquo;s device. A site with ten third-party scripts can triple its load time versus the same site with three. Ask: is this widget actually converting business, or is it just running?
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pinned note: the bottom line -->
+        <div class="pinned-note structural-border px-8 pb-6 max-w-2xl">
+            <div class="red-pin" aria-hidden="true"></div>
+            <p class="text-sm leading-relaxed font-details"
+                data-en="&ldquo;A lean site isn&rsquo;t a compromise. It&rsquo;s a faster experience for your visitors, a lower energy cost for the planet, and a better signal to search engines. Performance and sustainability are the same optimization, run twice.&rdquo;"
+                data-es="&ldquo;Un sitio liviano no es un compromiso. Es una experiencia más rápida para tus visitantes, un menor costo energético para el planeta y una mejor señal para los motores de búsqueda. Rendimiento y sostenibilidad son la misma optimización, ejecutada dos veces.&rdquo;">
+                &ldquo;A lean site isn&rsquo;t a compromise. It&rsquo;s a faster experience for your visitors, a lower energy cost for the planet, and a better signal to search engines. Performance and sustainability are the same optimization, run twice.&rdquo;
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: MOBILE-FIRST
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="mobile-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="06 · Mobile-First" data-es="06 · Mobile-First">06 · Mobile-First</p>
+        <h2 id="mobile-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Design for the screen your customers actually use."
+            data-es="Diseña para la pantalla que tus clientes realmente usan.">
+            Design for the screen your customers actually use.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="87.4% of visits to a Kingman-area website happen on a phone. That number is from real GA4 data, one local client, twelve months. It&rsquo;s not a national statistic adjusted for your market — it&rsquo;s your market. Designing for desktop first and then &ldquo;making it work&rdquo; on mobile is designing for the wrong 12.6%."
+               data-es="El 87.4% de las visitas a un sitio web del área de Kingman ocurren desde un teléfono. Ese número proviene de datos reales de GA4, un cliente local, doce meses. No es una estadística nacional ajustada para tu mercado — es tu mercado. Diseñar para escritorio primero y luego &ldquo;hacerlo funcionar&rdquo; en móvil es diseñar para el 12.6% incorrecto.">
+                87.4% of visits to a Kingman-area website happen on a phone. That number is from real GA4 data, one local client, twelve months. It&rsquo;s not a national statistic adjusted for your market — it&rsquo;s your market. Designing for desktop first and then &ldquo;making it work&rdquo; on mobile is designing for the wrong 12.6%.
+            </p>
+            <p data-en="Mobile-first isn&rsquo;t about shrinking a desktop layout. It&rsquo;s a discipline: start with the smallest screen, the slowest connection, the thumb-operated navigation. If the core content works there — readable text, obvious actions, fast load — it will work everywhere. The performance work from the previous section is directly tied to this. A page that loads 25MB of images is barely usable on mobile even on a good signal."
+               data-es="Mobile-first no se trata de encoger un diseño de escritorio. Es una disciplina: comienza con la pantalla más pequeña, la conexión más lenta, la navegación operada con el pulgar. Si el contenido central funciona allí — texto legible, acciones obvias, carga rápida — funcionará en todas partes. El trabajo de rendimiento de la sección anterior está directamente relacionado con esto. Una página que carga 25MB de imágenes apenas es usable en móvil incluso con buena señal.">
+                Mobile-first isn&rsquo;t about shrinking a desktop layout. It&rsquo;s a discipline: start with the smallest screen, the slowest connection, the thumb-operated navigation. If the core content works there — readable text, obvious actions, fast load — it will work everywhere. The performance work from the previous section is directly tied to this. A page that loads 25MB of images is barely usable on mobile even on a good signal.
+            </p>
+        </div>
+
+        <!-- Mobile checklist items -->
+        <div class="structural-border bg-white p-6">
+            <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-5"
+                data-en="Mobile design: what to check before you launch"
+                data-es="Diseño móvil: qué revisar antes de lanzar">Mobile design: what to check before you launch</p>
+            <div class="space-y-3 text-sm">
+                <div class="flex items-start gap-3 pb-3 border-b border-gray-dark/10">
+                    <span class="text-signal-red font-bold flex-shrink-0">→</span>
+                    <span data-en="Tap targets (buttons, links) are at least 44×44px. Thumbs are not cursors."
+                          data-es="Los objetivos táctiles (botones, enlaces) miden al menos 44×44px. Los pulgares no son cursores.">Tap targets (buttons, links) are at least 44×44px. Thumbs are not cursors.</span>
+                </div>
+                <div class="flex items-start gap-3 pb-3 border-b border-gray-dark/10">
+                    <span class="text-signal-red font-bold flex-shrink-0">→</span>
+                    <span data-en="No horizontal scroll. Content stays inside the viewport."
+                          data-es="Sin desplazamiento horizontal. El contenido permanece dentro del viewport.">No horizontal scroll. Content stays inside the viewport.</span>
+                </div>
+                <div class="flex items-start gap-3 pb-3 border-b border-gray-dark/10">
+                    <span class="text-signal-red font-bold flex-shrink-0">→</span>
+                    <span data-en="The phone number is a <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>tel:</code> link. Tapping it calls. No copying, no typing."
+                          data-es="El número de teléfono es un enlace <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>tel:</code>. Tocarlo llama. Sin copiar, sin escribir.">The phone number is a <code style='background:#F0F0F0;padding:1px 4px;font-size:12px;'>tel:</code> link. Tapping it calls. No copying, no typing.</span>
+                </div>
+                <div class="flex items-start gap-3 pb-3 border-b border-gray-dark/10">
+                    <span class="text-signal-red font-bold flex-shrink-0">→</span>
+                    <span data-en="Images are sized for their display container — not 2000px wide served to a 400px screen."
+                          data-es="Las imágenes están dimensionadas para su contenedor de visualización — no 2000px de ancho servidas a una pantalla de 400px.">Images are sized for their display container — not 2000px wide served to a 400px screen.</span>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-signal-red font-bold flex-shrink-0">→</span>
+                    <span data-en="The primary CTA is visible without scrolling on a 390px viewport (iPhone 14)."
+                          data-es="El CTA principal es visible sin desplazarse en un viewport de 390px (iPhone 14).">The primary CTA is visible without scrolling on a 390px viewport (iPhone 14).</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: GRAPHIC DESIGN BEYOND THE SCREEN
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="graphic-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="07 · Brand Consistency" data-es="07 · Consistencia de Marca">07 · Brand Consistency</p>
+        <h2 id="graphic-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Your logo, your site, and your social posts should look like they know each other."
+            data-es="Tu logo, tu sitio web y tus publicaciones en redes sociales deberían verse como si se conocieran.">
+            Your logo, your site, and your social posts should look like they know each other.
+        </h2>
+
+        <div class="prose-da mb-8">
+            <p data-en="Brand consistency doesn&rsquo;t require a 60-page style guide. It requires three things to be the same everywhere: your color, your typeface, and your spacing. When those three are consistent across your website, your business card, your Instagram posts, and your printed flyers, the brand compounds. People recognize it without consciously remembering where they saw it."
+               data-es="La consistencia de marca no requiere una guía de estilo de 60 páginas. Requiere que tres cosas sean iguales en todos lados: tu color, tu tipografía y tu espaciado. Cuando esos tres son consistentes en tu sitio web, tu tarjeta de presentación, tus publicaciones de Instagram y tus volantes impresos, la marca se acumula. La gente la reconoce sin recordar conscientemente dónde la vio.">
+                Brand consistency doesn&rsquo;t require a 60-page style guide. It requires three things to be the same everywhere: your color, your typeface, and your spacing. When those three are consistent across your website, your business card, your Instagram posts, and your printed flyers, the brand compounds. People recognize it without consciously remembering where they saw it.
+            </p>
+            <p data-en="The opposite is also true. A business with a hand-lettered logo, a WordPress site in Helvetica, Facebook posts in a Canva template with a completely different palette, and a printed menu in Comic Sans reads as four different businesses that happen to share a name. Every inconsistency is a tax on trust."
+               data-es="Lo opuesto también es verdad. Un negocio con un logo hecho a mano, un sitio WordPress en Helvetica, publicaciones de Facebook en una plantilla de Canva con una paleta completamente diferente, y un menú impreso en Comic Sans se lee como cuatro negocios diferentes que coinciden en tener el mismo nombre. Cada inconsistencia es un impuesto sobre la confianza.">
+                The opposite is also true. A business with a hand-lettered logo, a WordPress site in Helvetica, Facebook posts in a Canva template with a completely different palette, and a printed menu in Comic Sans reads as four different businesses that happen to share a name. Every inconsistency is a tax on trust.
+            </p>
+            <p data-en="Graphic design for small businesses is not about making things look &ldquo;cool.&rdquo; It&rsquo;s about making the same decision once, then applying it consistently everywhere. That&rsquo;s what a design system does. It removes the per-decision cost so the brand can show up the same way whether it&rsquo;s a social post on a Tuesday or a proposal going to a city contract."
+               data-es="El diseño gráfico para pequeñas empresas no se trata de hacer que las cosas parezcan &ldquo;cool&rdquo;. Se trata de tomar la misma decisión una vez y luego aplicarla consistentemente en todas partes. Eso es lo que hace un sistema de diseño. Elimina el costo por decisión para que la marca pueda mostrarse de la misma manera ya sea en una publicación social un martes o en una propuesta para un contrato municipal.">
+                Graphic design for small businesses is not about making things look &ldquo;cool.&rdquo; It&rsquo;s about making the same decision once, then applying it consistently everywhere. That&rsquo;s what a design system does. It removes the per-decision cost so the brand can show up the same way whether it&rsquo;s a social post on a Tuesday or a proposal going to a city contract.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         INTERACTIVE: DESIGN AUDIT CHECKLIST
+    ============================================================= -->
+    <section class="mb-20" aria-labelledby="audit-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+            data-en="Self-Assessment · Interactive"
+            data-es="Autoevaluación · Interactivo">Self-Assessment · Interactive</p>
+        <h2 id="audit-heading" class="font-headers font-bold text-3xl mb-6"
+            data-en="Quick design audit. Check what applies to your site."
+            data-es="Auditoría de diseño rápida. Marca lo que aplica a tu sitio.">
+            Quick design audit. Check what applies to your site.
+        </h2>
+
+        <div class="structural-border bg-white p-6 mb-4">
+            <!-- Progress -->
+            <div class="flex justify-between items-center mb-3">
+                <span id="audit-label" class="text-xs font-bold text-gray-dark/60 uppercase tracking-widest"
+                    data-en="Click each item you can confirm is true."
+                    data-es="Haz clic en cada elemento que puedas confirmar que es verdad.">Click each item you can confirm is true.</span>
+                <span id="audit-score" class="text-xs font-bold font-headers text-signal-red">0 / 10</span>
+            </div>
+            <div class="progress-bar mb-6">
+                <div id="audit-bar" class="progress-fill" style="width:0%"></div>
+            </div>
+
+            <!-- Checklist items -->
+            <div id="audit-list" class="divide-y divide-gray-dark/10">
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(0)" data-i="0">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-0 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="Color is used on no more than 1–2 elements per page section."
+                        data-es="El color se usa en no más de 1–2 elementos por sección de página.">Color is used on no more than 1–2 elements per page section.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(1)" data-i="1">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-1 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-1" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="The site uses no more than two typeface families."
+                        data-es="El sitio usa no más de dos familias tipográficas.">The site uses no more than two typeface families.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(2)" data-i="2">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-2 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-2" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="Body text is at least 14px with line-height of 1.6 or more."
+                        data-es="El texto del cuerpo es de al menos 14px con un interlineado de 1.6 o más.">Body text is at least 14px with line-height of 1.6 or more.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(3)" data-i="3">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-3 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="All images are compressed and served in WebP or AVIF format."
+                        data-es="Todas las imágenes están comprimidas y se sirven en formato WebP o AVIF.">All images are compressed and served in WebP or AVIF format.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(4)" data-i="4">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-4 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="Custom fonts load only the weights actually used in the design."
+                        data-es="Las fuentes personalizadas cargan solo los pesos que realmente se usan en el diseño.">Custom fonts load only the weights actually used in the design.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(5)" data-i="5">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-5 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="The phone number is a tappable <code style='background:#F0F0F0;padding:1px 3px;font-size:11px;'>tel:</code> link on mobile."
+                        data-es="El número de teléfono es un enlace <code style='background:#F0F0F0;padding:1px 3px;font-size:11px;'>tel:</code> táctil en móvil.">The phone number is a tappable <code style='background:#F0F0F0;padding:1px 3px;font-size:11px;'>tel:</code> link on mobile.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(6)" data-i="6">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-6 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-6" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="The primary call-to-action is visible without scrolling on mobile."
+                        data-es="La llamada a la acción principal es visible sin desplazarse en móvil.">The primary call-to-action is visible without scrolling on mobile.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(7)" data-i="7">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-7 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-7" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="The same logo, color, and typeface appear on the site, social profiles, and any print materials."
+                        data-es="El mismo logo, color y tipografía aparecen en el sitio, perfiles sociales y cualquier material impreso.">The same logo, color, and typeface appear on the site, social profiles, and any print materials.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(8)" data-i="8">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-8 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-8" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="Section padding is generous — content doesn&rsquo;t feel cramped."
+                        data-es="El relleno de sección es generoso — el contenido no se siente apretado.">Section padding is generous — content doesn&rsquo;t feel cramped.</span>
+                </div>
+                <div class="check-row flex items-center gap-4 py-3 px-2 rounded" onclick="toggleAudit(9)" data-i="9">
+                    <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0 check-box-9 bg-white">
+                        <svg class="w-3 h-3 text-signal-red hidden check-icon-9" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    </div>
+                    <span class="text-sm"
+                        data-en="There are fewer than five third-party scripts loading on the page."
+                        data-es="Hay menos de cinco scripts de terceros cargando en la página.">There are fewer than five third-party scripts loading on the page.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit result -->
+        <div id="audit-result" class="structural-border px-6 py-5 bg-white hidden">
+            <p id="audit-result-text" class="text-sm leading-relaxed"></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SERVICE SECTION: THE DESIGN BUREAU
+    ============================================================= -->
+    <section class="mb-0" aria-labelledby="service-heading" id="design-bureau-service">
+        <div class="border-t-2 border-gray-dark pt-16">
+            <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+                data-en="The Design Bureau · Digital Allies"
+                data-es="La Oficina de Diseño · Digital Allies">The Design Bureau · Digital Allies</p>
+            <h2 id="service-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+                data-en="This is what I build."
+                data-es="Esto es lo que construyo.">
+                This is what I build.
+            </h2>
+
+            <div class="prose-da mb-10">
+                <p data-en="The Design Bureau handles the visual side of the operation: the website, the brand identity, the social graphics, the document templates. Not as isolated artifacts, but as a system — one set of decisions applied consistently across everything that carries your name."
+                   data-es="La Oficina de Diseño maneja el lado visual de la operación: el sitio web, la identidad de marca, los gráficos para redes sociales, las plantillas de documentos. No como artefactos aislados, sino como un sistema — un conjunto de decisiones aplicadas consistentemente en todo lo que lleva tu nombre.">
+                    The Design Bureau handles the visual side of the operation: the website, the brand identity, the social graphics, the document templates. Not as isolated artifacts, but as a system — one set of decisions applied consistently across everything that carries your name.
+                </p>
+            </div>
+
+            <!-- Service table -->
+            <div class="structural-border bg-white mb-8">
+                <div class="px-6 py-4 border-b border-gray-dark/15">
+                    <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/50"
+                        data-en="What The Design Bureau covers"
+                        data-es="Qué cubre La Oficina de Diseño">What The Design Bureau covers</p>
+                </div>
+                <div class="divide-y divide-gray-dark/10">
+                    <div class="grid grid-cols-3 gap-4 px-6 py-4 items-start">
+                        <div class="col-span-1">
+                            <p class="text-sm font-bold"
+                                data-en="Website design" data-es="Diseño de sitio web">Website design</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-sm text-gray-dark/70"
+                                data-en="Mobile-first, WCAG 2.1 AA compliant, bilingual (EN/ES standard). Built to load fast and structured for AI discovery."
+                                data-es="Mobile-first, compatible con WCAG 2.1 AA, bilingüe (EN/ES estándar). Construido para cargar rápido y estructurado para descubrimiento por IA.">Mobile-first, WCAG 2.1 AA compliant, bilingual (EN/ES standard). Built to load fast and structured for AI discovery.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 px-6 py-4 items-start">
+                        <div class="col-span-1">
+                            <p class="text-sm font-bold"
+                                data-en="Brand identity" data-es="Identidad de marca">Brand identity</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-sm text-gray-dark/70"
+                                data-en="Logo system, color palette, typeface selection, and a reference file that travels with the brand forever."
+                                data-es="Sistema de logo, paleta de colores, selección tipográfica y un archivo de referencia que viaja con la marca para siempre.">Logo system, color palette, typeface selection, and a reference file that travels with the brand forever.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 px-6 py-4 items-start">
+                        <div class="col-span-1">
+                            <p class="text-sm font-bold"
+                                data-en="Social graphics" data-es="Gráficos para redes sociales">Social graphics</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-sm text-gray-dark/70"
+                                data-en="Post templates, carousel systems, cover images, and story formats — sized correctly and consistent with the brand."
+                                data-es="Plantillas de publicaciones, sistemas de carrusel, imágenes de portada y formatos de historias — dimensionados correctamente y consistentes con la marca.">Post templates, carousel systems, cover images, and story formats — sized correctly and consistent with the brand.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 px-6 py-4 items-start">
+                        <div class="col-span-1">
+                            <p class="text-sm font-bold"
+                                data-en="Print &amp; documents" data-es="Impresión y documentos">Print &amp; documents</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-sm text-gray-dark/70"
+                                data-en="Business cards, flyers, proposals, invoices, onboarding packets. The same brand, off-screen."
+                                data-es="Tarjetas de presentación, volantes, propuestas, facturas, paquetes de incorporación. La misma marca, fuera de pantalla.">Business cards, flyers, proposals, invoices, onboarding packets. The same brand, off-screen.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 px-6 py-4 items-start">
+                        <div class="col-span-1">
+                            <p class="text-sm font-bold"
+                                data-en="Performance audit" data-es="Auditoría de rendimiento">Performance audit</p>
+                        </div>
+                        <div class="col-span-2">
+                            <p class="text-sm text-gray-dark/70"
+                                data-en="Image optimization, font loading review, third-party script audit. I find what&rsquo;s slowing you down and fix it."
+                                data-es="Optimización de imágenes, revisión de carga de fuentes, auditoría de scripts de terceros. Encuentro lo que te está ralentizando y lo soluciono.">Image optimization, font loading review, third-party script audit. I find what&rsquo;s slowing you down and fix it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing reference -->
+            <div class="structural-border bg-white p-6 mb-8">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-4"
+                    data-en="How it&rsquo;s priced" data-es="Cómo se cobra">How it&rsquo;s priced</p>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center border-b border-dashed border-gray-dark/20 pb-3">
+                        <span class="text-sm font-bold"
+                            data-en="Custom website build" data-es="Construcción de sitio web personalizado">Custom website build</span>
+                        <span class="text-sm font-details text-signal-red font-bold"
+                            data-en="From $800" data-es="Desde $800">From $800</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-dashed border-gray-dark/20 pb-3">
+                        <span class="text-sm font-bold"
+                            data-en="Tactical Sprint — intensive project week" data-es="Sprint Táctico — semana de proyecto intensivo">Tactical Sprint — intensive project week</span>
+                        <span class="text-sm font-details text-signal-red font-bold">$625/week</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold"
+                            data-en="Strategy conversation" data-es="Conversación de estrategia">Strategy conversation</span>
+                        <span class="text-sm font-details text-primary-blue font-bold"
+                            data-en="Free" data-es="Gratis">Free</span>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-dark/50 mt-4 pt-4 border-t border-gray-dark/10"
+                    data-en="All quotes are given before work begins. No surprises. No silent scope creep."
+                    data-es="Todos los presupuestos se entregan antes de comenzar el trabajo. Sin sorpresas. Sin cambios de alcance silenciosos.">All quotes are given before work begins. No surprises. No silent scope creep.</p>
+            </div>
+
+            <!-- CTA -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="/index.html#contact"
+                    class="bg-signal-red text-white font-headers font-bold px-8 py-4 structural-border hover:bg-gray-dark transition text-sm tracking-wide text-center"
+                    data-en="[ Inquire Within ]" data-es="[ Consultar Aquí ]">[ Inquire Within ]</a>
+                <a href="/index.html#pricing"
+                    class="bg-bone-white font-headers font-bold px-8 py-4 structural-border hover:bg-light-pink transition text-sm tracking-wide text-center"
+                    data-en="[ View Full Pricing ]" data-es="[ Ver Precios Completos ]">[ View Full Pricing ]</a>
+            </div>
+
+            <!-- Source glossary -->
+            <div class="mt-16 pt-8 border-t border-gray-dark/10">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/40 mb-4"
+                    data-en="Sources &amp; References" data-es="Fuentes y Referencias">Sources &amp; References</p>
+                <ul class="space-y-2 text-xs text-gray-dark/50">
+                    <li>GA4 · 17K active users · Kingman client · May 2025 – May 2026 · <a href="https://www.facebook.com/digitalallies" class="hover:text-primary-blue underline">facebook.com/digitalallies</a></li>
+                    <li>IEA (2023) — Data Centres and Data Transmission Networks · <a href="https://www.iea.org/energy-system/buildings/data-centres-and-data-transmission-networks" class="hover:text-primary-blue underline" target="_blank" rel="noopener">iea.org</a></li>
+                    <li>Google Web.dev — Core Web Vitals · <a href="https://web.dev/explore/learn-core-web-vitals" class="hover:text-primary-blue underline" target="_blank" rel="noopener">web.dev</a></li>
+                    <li>Kinsta — WebP vs JPEG file size benchmarks · <a href="https://kinsta.com/blog/webp/" class="hover:text-primary-blue underline" target="_blank" rel="noopener">kinsta.com</a></li>
+                    <li>U.S. Census Bureau — Kingman, AZ demographics · <a href="https://data.census.gov/" class="hover:text-primary-blue underline" target="_blank" rel="noopener">data.census.gov</a></li>
+                </ul>
+                <div class="mt-6 pt-4 border-t border-gray-dark/10 flex flex-wrap gap-4 text-xs text-gray-dark/40 font-bold tracking-widest uppercase">
+                    <a href="https://www.facebook.com/digitalallies" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Facebook</a>
+                    <span>·</span>
+                    <a href="https://www.instagram.com/digitalallies__" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Instagram</a>
+                    <span>·</span>
+                    <a href="https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Google Business</a>
+                    <span>·</span>
+                    <a href="https://blog.digitalallies.net/" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Blog</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+        <div>
+            <a href="/" class="flex items-center space-x-3 mb-10" aria-label="Digital Allies">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                    <div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div>
+                    <div class="w-3 h-3 bg-white rounded-full brand-pulse" style="border: 1px solid rgba(255,255,255,0.4);"></div>
+                </div>
+                <span class="font-headers font-bold text-2xl tracking-wide text-white">Digital Allies</span>
+            </a>
+
+            <h2 id="footer-heading" class="font-headers text-3xl font-bold mb-5"
+                data-en="The Command Center" data-es="El Centro de Mando">The Command Center</h2>
+
+            <p class="text-sm leading-relaxed mb-8 text-white/75"
+                data-en="Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three."
+                data-es="Dime qué intentas hacer. Responderé con próximos pasos, un rango de costos o una pregunta rápida. Generalmente las tres.">
+                Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three.
+            </p>
+
+            <div class="space-y-3 text-sm mb-10">
+                <p>
+                    <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Location" data-es="Ubicación">Location</span>
+                    Kingman, Arizona
+                </p>
+                <p>
+                    <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Direct Line" data-es="Línea Directa">Direct Line</span>
+                    <a href="tel:9282285769" class="text-primary-blue hover:underline">(928) 228-5769</a>
+                </p>
+                <p>
+                    <span class="text-white/60 uppercase text-xs tracking-widest mr-3">Email</span>
+                    <a href="mailto:contact@digitalallies.net" class="text-primary-blue hover:underline">contact@digitalallies.net</a>
+                </p>
+            </div>
+
+            <p class="text-xs border-l-4 border-signal-red pl-4 text-white/65 leading-relaxed"
+                data-en="I am historically easy to reach. I live in Kingman. If you call, I answer."
+                data-es="Soy históricamente fácil de contactar. Vivo en Kingman. Si llamas, contesto.">
+                I am historically easy to reach. I live in Kingman. If you call, I answer.
+            </p>
+
+            <div class="mt-12 pt-6 border-t border-white/10">
+                <p class="text-xs text-white/50"
+                    data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
+                    data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">&copy; 2026 Digital Allies. Based in Kingman, AZ.</p>
+                <div class="flex flex-wrap gap-4 mt-3 text-xs">
+                    <a href="/privacy.html" class="text-white/50 hover:text-white transition" data-en="Privacy" data-es="Privacidad">Privacy</a>
+                    <a href="/terms.html" class="text-white/50 hover:text-white transition" data-en="Terms" data-es="Términos">Terms</a>
+                    <a href="/cookies.html" class="text-white/50 hover:text-white transition" data-en="Cookies" data-es="Cookies">Cookies</a>
+                    <a href="/sitemap.html" class="text-white/50 hover:text-white transition" data-en="Sitemap" data-es="Mapa del Sitio">Sitemap</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-bone-white p-8 structural-border text-gray-dark self-start">
+            <h3 class="font-headers font-bold text-xl mb-6"
+                data-en="Send a Transmission" data-es="Enviar una Transmisión">Send a Transmission</h3>
+            <form action="https://formsubmit.co/contact@digitalallies.net" method="POST" class="space-y-4" novalidate>
+                <input type="hidden" name="_subject" value="New inquiry from Digital Allies">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://digitalallies.net/">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_autoresponse" value="Thanks for reaching out to Digital Allies! I received your message and will reply with next steps shortly. — Anthony">
+                <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off">
+                <div>
+                    <label for="f-name" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                        data-en="Name" data-es="Nombre">Name</label>
+                    <input id="f-name" type="text" name="name" required aria-required="true" autocomplete="name"
+                        class="w-full structural-border p-3 bg-white text-sm outline-none transition"
+                        placeholder="Your name">
+                </div>
+                <div>
+                    <label for="f-email" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                        data-en="Email" data-es="Correo Electrónico">Email</label>
+                    <input id="f-email" type="email" name="email" required aria-required="true" autocomplete="email"
+                        class="w-full structural-border p-3 bg-white text-sm outline-none transition"
+                        placeholder="your@email.com">
+                </div>
+                <div>
+                    <label for="f-message" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                        data-en="What are you trying to do?" data-es="¿Qué intentas hacer?">What are you trying to do?</label>
+                    <textarea id="f-message" name="message" rows="4" required aria-required="true"
+                        class="w-full structural-border p-3 bg-white text-sm outline-none resize-y transition"
+                        placeholder="Give me the short version. We can fill in details later."></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-sm tracking-wide"
+                    data-en="Submit Transmission" data-es="Enviar Transmisión">Submit Transmission</button>
+                <p class="text-xs text-center text-gray-500 mt-1"
+                    data-en="I do not share your details. I use your message to reply. That is it."
+                    data-es="No comparto tus datos. Uso tu mensaje para responder. Eso es todo.">
+                    I do not share your details. I use your message to reply. That is it.
+                </p>
+            </form>
+        </div>
+    </div>
+</footer>
+
+<!-- FAB -->
+<a href="#contact"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition"
+    aria-label="Need a strategic ally? Contact us">
+    <span class="text-xs font-bold" data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">Need a strategic ally?</span>
+    <div class="relative flex items-center justify-center w-4 h-4 flex-shrink-0">
+        <div class="absolute w-4 h-4 bg-signal-red rounded-full opacity-30 fab-ring"></div>
+        <div class="w-2.5 h-2.5 bg-signal-red rounded-full brand-pulse"></div>
+    </div>
+</a>
+
+<!-- AUDIT LOGIC -->
+<script>
+const auditState = new Array(10).fill(false);
+const resultMessages = {
+    en: [
+        { min: 9, text: "Strong. Your site is built with intention. These principles are already working for you." },
+        { min: 7, text: "Solid foundation. A few optimizations — especially around images and font loading — would close the remaining gaps." },
+        { min: 5, text: "Good start. The performance and mobile items tend to be the highest-leverage fixes. Start there." },
+        { min: 3, text: "There's real work to do, but it's fixable. Typography and color restraint are the fastest wins." },
+        { min: 0, text: "This is worth a conversation. Most of these issues are solvable without rebuilding from scratch." }
+    ],
+    es: [
+        { min: 9, text: "Excelente. Tu sitio está construido con intención. Estos principios ya están funcionando para ti." },
+        { min: 7, text: "Base sólida. Algunas optimizaciones — especialmente en imágenes y carga de fuentes — cerrarían las brechas restantes." },
+        { min: 5, text: "Buen comienzo. Los elementos de rendimiento y móvil tienden a ser las correcciones de mayor impacto. Empieza por ahí." },
+        { min: 3, text: "Hay trabajo real por hacer, pero es solucionable. Tipografía y contención de color son las ganancias más rápidas." },
+        { min: 0, text: "Vale la pena una conversación. La mayoría de estos problemas se pueden resolver sin reconstruir desde cero." }
+    ]
+};
+
+function getResultMessage(score, lang) {
+    const msgs = resultMessages[lang] || resultMessages.en;
+    return msgs.find(m => score >= m.min)?.text || msgs[msgs.length - 1].text;
+}
+
+function renderAudit() {
+    const count = auditState.filter(Boolean).length;
+    const total = auditState.length;
+    const pct = Math.round((count / total) * 100);
+    const lang = document.documentElement.lang || 'en';
+
+    document.getElementById('audit-score').textContent = count + ' / ' + total;
+    document.getElementById('audit-bar').style.width = pct + '%';
+
+    for (let i = 0; i < total; i++) {
+        const box = document.querySelector('.check-box-' + i);
+        const icon = document.querySelector('.check-icon-' + i);
+        const row = document.querySelector('[data-i="' + i + '"]');
+        if (auditState[i]) {
+            box.style.background = '#F0F8F0';
+            box.style.borderColor = '#2D7A4F';
+            icon.classList.remove('hidden');
+            row.classList.add('done');
+        } else {
+            box.style.background = '#fff';
+            box.style.borderColor = '#2D2D2D';
+            icon.classList.add('hidden');
+            row.classList.remove('done');
+        }
+    }
+
+    const resultEl = document.getElementById('audit-result');
+    const resultText = document.getElementById('audit-result-text');
+    if (count > 0) {
+        resultEl.classList.remove('hidden');
+        resultText.textContent = getResultMessage(count, lang);
+        resultEl.style.borderLeft = '4px solid ' + (count >= 8 ? '#2D7A4F' : count >= 5 ? '#3A7BD5' : '#C5301A');
+    } else {
+        resultEl.classList.add('hidden');
+    }
+}
+
+function toggleAudit(i) {
+    auditState[i] = !auditState[i];
+    renderAudit();
+}
+
+renderAudit();
+</script>
+
+<!-- LANGUAGE CONTROLLER -->
+<script>
+class LanguageController {
+    constructor() {
+        this.currentLang = localStorage.getItem('da-language') || 'en';
+        this.init();
+    }
+    init() { this.applyLanguage(this.currentLang, false); }
+    toggleLanguage(lang) {
+        if (lang === this.currentLang) return;
+        this.currentLang = lang;
+        localStorage.setItem('da-language', lang);
+        this.applyLanguage(lang, true);
+    }
+    applyLanguage(lang, announce) {
+        this.updateContent(lang);
+        this.updateButtons(lang);
+        document.documentElement.lang = lang;
+        if (announce) this.announceLanguageChange(lang);
+    }
+    updateContent(lang) {
+        document.querySelectorAll('[data-en][data-es]').forEach(el => {
+            const val = el.getAttribute('data-' + lang);
+            if (!val) return;
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = val;
+            } else {
+                const preservedChildren = [];
+                el.querySelectorAll('[data-lucide], .transition-transform').forEach(child => {
+                    preservedChildren.push(child.cloneNode(true));
+                });
+                el.innerHTML = val;
+                preservedChildren.forEach(child => {
+                    if (child.classList.contains('transition-transform')) {
+                        el.appendChild(child);
+                    }
+                });
+            }
+        });
+        // Re-render audit result in new language
+        if (typeof renderAudit === 'function') renderAudit();
+    }
+    updateButtons(lang) {
+        const enBtn = document.getElementById('lang-en');
+        const esBtn = document.getElementById('lang-es');
+        if (!enBtn || !esBtn) return;
+        if (lang === 'en') {
+            enBtn.classList.add('lang-active'); enBtn.setAttribute('aria-pressed', 'true');
+            esBtn.classList.remove('lang-active'); esBtn.setAttribute('aria-pressed', 'false');
+        } else {
+            esBtn.classList.add('lang-active'); esBtn.setAttribute('aria-pressed', 'true');
+            enBtn.classList.remove('lang-active'); enBtn.setAttribute('aria-pressed', 'false');
+        }
+    }
+    announceLanguageChange(lang) {
+        const announcer = document.getElementById('lang-announcer');
+        if (announcer) announcer.textContent = lang === 'es' ? 'Idioma cambiado a Español' : 'Language changed to English';
+    }
+}
+const LC = new LanguageController();
+lucide.createIcons();
+</script>
+
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        }
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.add('hidden');
+            btn && btn.setAttribute('aria-expanded', 'false');
+        }
+    </script>
+
+</body>
+</html>

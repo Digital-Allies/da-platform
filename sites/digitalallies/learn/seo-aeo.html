@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Search Visibility, SEO &amp; AEO Services — Kingman, AZ | Digital Allies</title>
+<meta name="description" content="Learn the difference between SEO and AEO — and how Digital Allies helps small businesses in Kingman, AZ show up in both Google search and AI assistants like ChatGPT and Gemini.">
+<meta name="keywords" content="SEO Kingman AZ, AEO Kingman Arizona, AI search visibility, answer engine optimization, AI consultant Kingman, show up in ChatGPT, Google AI Overviews small business">
+    <link rel="canonical" href="https://digitalallies.net/learn/seo-aeo">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="SEO vs AEO: Make Your Business Visible to AI Search">
+    <meta property="og:description" content="Schema markup, directory consistency, answer formatting — what AI actually reads when it recommends businesses.">
+    <meta property="og:url" content="https://digitalallies.net/learn/seo-aeo">
+
+        <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="../assets/css/a11y.css">
+
+    <script src="../assets/js/lucide-da.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bone-white': '#F9F6F0',
+                        'gray-dark': '#2D2D2D',
+                        'primary-blue': '#3A7BD5',
+                        'light-pink': '#FADEEB',
+                        'signal-red': '#C5301A'
+                    },
+                    fontFamily: {
+                        headers: ['"Lexend Deca"', 'sans-serif'],
+                        details: ['"JetBrains Mono"', 'monospace']
+  }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45,45,45,0.07) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45,45,45,0.07) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #2D2D2D;
+        }
+        h1,h2,h3,h4 { font-family: 'Lexend Deca', sans-serif; }
+        .structural-border { border: 1px solid #2D2D2D; }
+        .brand-pulse { animation: brand-pulse 3s ease-in-out infinite; }
+        @keyframes brand-pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.5; transform:scale(1.25); }
+        }
+        .fab-ring { animation: fab-ring 2.2s ease-out infinite; }
+        @keyframes fab-ring {
+            0% { transform:scale(1); opacity:0.55; }
+            100% { transform:scale(2.4); opacity:0; }
+        }
+        .lang-active { background-color: #2D2D2D !important; color: #F9F6F0 !important; }
+
+        /* Prose */
+        .prose-da p { font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.85; color: #2D2D2D; margin-bottom: 1.25rem; }
+        .prose-da strong { font-weight: 600; }
+
+        /* Layer cards */
+        .layer-card { border-left: 3px solid #2D2D2D; }
+        .layer-card.blue { border-left-color: #3A7BD5; }
+        .layer-card.red { border-left-color: #C5301A; }
+
+        /* Checklist */
+        .check-row { border-bottom: 1px solid #E0DDD5; cursor: pointer; transition: background 0.15s; }
+        .check-row:last-child { border-bottom: none; }
+        .check-row:hover { background: #FADEEB; }
+
+        /* Schema output */
+        .schema-output {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: #2D2D2D;
+            color: #F9F6F0;
+            padding: 20px;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.6;
+            border: 1px solid #2D2D2D;
+        }
+
+        /* Progress bar */
+        .progress-bar { height: 8px; background: #E0DDD5; border: 1px solid #2D2D2D; overflow: hidden; }
+        .progress-fill { height: 100%; background: #3A7BD5; transition: width 0.3s; }
+
+        /* Pinned note */
+        .pinned-note { background-color: #FCFAED; position: relative; padding-top: 2.5rem; }
+        .red-pin { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 14px; height: 14px; background-color: #C5301A; border-radius: 50%; border: 1px solid #2D2D2D; }
+
+        /* Rhythm table */
+        .rhythm-row { border-bottom: 1px dashed rgba(45,45,45,0.15); padding-bottom: 12px; margin-bottom: 12px; }
+        .rhythm-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0; }
+        html { scroll-behavior: smooth; }
+
+        /* Copy button flash */
+        .copy-flash { animation: flash 0.4s ease; }
+        @keyframes flash { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+        input.field, textarea.field, select.field {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #2D2D2D;
+            padding: 10px 14px;
+            width: 100%;
+            outline: none;
+            color: #2D2D2D;
+            transition: border-color 0.15s;
+        }
+        input.field:focus, textarea.field:focus, select.field:focus {
+            border-color: #3A7BD5;
+        }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SEO and AEO Services — Search and AI Visibility",
+  "description": "Digital Allies offers SEO and Answer Engine Optimization (AEO) for small businesses in Kingman, AZ. We structure your site so it appears in both traditional search results and AI assistant responses.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://digitalallies.net/#business",
+    "name": "Digital Allies",
+    "telephone": "+1-928-228-5769",
+    "sameAs": [
+      "https://www.instagram.com/digitalallies__",
+      "https://www.facebook.com/digitalallies",
+      "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+    ]
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Kingman, AZ"
+  },
+  "serviceType": "SEO, AEO, Answer Engine Optimization, AI Search Visibility",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free initial SEO/AEO audit"
+  },
+  "url": "https://digitalallies.net/learn/seo-aeo",
+  "dateModified": "2026-06-01"
+}
+</script>
+</head>
+
+<body class="antialiased">
+
+<div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<!-- NAV -->
+<nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/index.html" class="flex items-center space-x-3" aria-label="Digital Allies Home">
+            <div class="relative flex items-center justify-center w-5 h-5">
+                <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
+                <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
+            </div>
+            <span class="font-headers font-bold text-xl tracking-wide">Digital Allies</span>
+        </a>
+        <div class="flex items-center space-x-4 lg:space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Services" data-es="Servicios">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Pricing" data-es="Precios">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Reviews" data-es="Reseñas">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ"
+                    data-es="FAQ">FAQ</a>
+                <a href="/learn/" class="text-signal-red underline underline-offset-4 whitespace-nowrap"
+                    data-en="Learn" data-es="Aprender">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Contact" data-es="Contacto">Contact</a>
+            </div>
+            <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group">
+                <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active" aria-pressed="true">EN</button>
+                <div class="w-px h-5 bg-gray-dark" aria-hidden="true"></div>
+                <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink" aria-pressed="false">ES</button>
+            </div>
+        </div>
+
+                <!-- Hamburger button (mobile only) -->
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 flex-shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobileMenu()">
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                </button>
+    </div>
+
+        <!-- Mobile menu dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-dark/20 bg-bone-white" role="menu">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 text-sm font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition" data-en="Services" data-es="Servicios" onclick="closeMobileMenu()" role="menuitem">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition" data-en="Pricing" data-es="Precios" onclick="closeMobileMenu()" role="menuitem">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition" data-en="Reviews" data-es="Reseñas" onclick="closeMobileMenu()" role="menuitem">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition" data-en="FAQ" data-es="FAQ" onclick="closeMobileMenu()" role="menuitem">FAQ</a>
+                <a href="/learn/" class="hover:text-primary-blue transition" data-en="Learn" data-es="Aprender" onclick="closeMobileMenu()" role="menuitem">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition" data-en="Contact" data-es="Contacto" onclick="closeMobileMenu()" role="menuitem">Contact</a>
+            </div>
+        </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="max-w-5xl mx-auto px-6 pt-6">
+    <nav aria-label="Breadcrumb" class="text-xs font-bold tracking-widest uppercase">
+        <ol class="flex items-center gap-2 text-gray-dark/50">
+            <li><a href="/index.html" class="hover:text-primary-blue transition">Home</a></li>
+            <li aria-hidden="true">·</li>
+            <li><a href="/learn/" class="hover:text-primary-blue transition">Learn</a></li>
+            <li aria-hidden="true">·</li>
+            <li class="text-signal-red">SEO vs AEO</li>
+        </ol>
+    </nav>
+<main id="main-content" tabindex="-1">
+
+</div>
+
+<!-- HERO -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-12">
+    <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+        data-en="Search Visibility · Interactive Guide"
+        data-es="Visibilidad en Búsqueda · Guía Interactiva">Search Visibility · Interactive Guide</p>
+    <h1 class="font-headers font-bold text-4xl md:text-5xl leading-tight mb-6"
+        data-en="What AI Actually Reads When It Recommends Businesses"
+        data-es="Qué Lee la IA Realmente Cuando Recomienda Negocios">
+        What AI Actually Reads When It<br class="hidden md:block"> Recommends Businesses
+    </h1>
+    <div class="flex flex-wrap gap-4 items-center text-xs text-gray-dark/50 font-bold tracking-widest uppercase">
+        <span data-en="By Anthony · Digital Allies" data-es="Por Anthony · Digital Allies">By Anthony · Digital Allies</span>
+        <span aria-hidden="true">·</span>
+        <span>Kingman, AZ</span>
+        <span aria-hidden="true">·</span>
+        <span data-en="Updated 2026" data-es="Actualizado 2026">Updated 2026</span>
+    </div>
+</header>
+
+<!-- ARTICLE BODY -->
+<article class="max-w-5xl mx-auto px-6" aria-label="SEO vs AEO guide">
+
+    <!-- INTRO -->
+    <section class="mb-16 prose-da max-w-3xl">
+        <p data-en='When someone asks "best coffee shop in Kingman" or "where should I get my car fixed near me," AI assistants don&apos;t browse your website the way humans do. They&apos;re looking for structured signals they can parse quickly.'
+           data-es='Cuando alguien pregunta "mejor cafetería en Kingman" o "dónde reparar mi auto cerca de mí," los asistentes de IA no navegan por tu sitio web como lo hacen los humanos. Buscan señales estructuradas que puedan analizar rápidamente.'>When someone asks "best coffee shop in Kingman" or "where should I get my car fixed near me," AI assistants don't browse your website the way humans do. They're looking for structured signals they can parse quickly.</p>
+        <p data-en="Think of it like this: AI reads your digital presence the way a screen reader interprets a website for someone with visual impairment. If the structure isn't there, the meaning gets lost — no matter how good your content is."
+           data-es="Piénsalo así: la IA lee tu presencia digital de la misma manera que un lector de pantalla interpreta un sitio web para alguien con discapacidad visual. Si la estructura no está ahí, el significado se pierde — sin importar qué tan bueno sea tu contenido.">Think of it like this: AI reads your digital presence the way a screen reader interprets a website for someone with visual impairment. If the structure isn't there, the meaning gets lost — no matter how good your content is.</p>
+        <p data-en="The good news is the fix isn't complicated. It's just tedious. And tedious is exactly the kind of work most businesses skip — which is why doing it gives you a real edge."
+           data-es="La buena noticia es que la solución no es complicada. Solo es tediosa. Y lo tedioso es exactamente el tipo de trabajo que la mayoría de las empresas omite — por eso hacerlo te da una ventaja real.">The good news is the fix isn't complicated. It's just tedious. And tedious is exactly the kind of work most businesses skip — which is why doing it gives you a real edge.</p>
+        <p data-en="Below are the four layers that determine whether AI recommends you or skips you. Each section includes a plain-language explanation and a working tool to help you actually implement it."
+           data-es="A continuación están las cuatro capas que determinan si la IA te recomienda o te omite. Cada sección incluye una explicación en lenguaje sencillo y una herramienta funcional para ayudarte a implementarla.">Below are the four layers that determine whether AI recommends you or skips you. Each section includes a plain-language explanation and a working tool to help you actually implement it.</p>
+    </section>
+
+    <!-- SEO vs AEO COMPARISON -->
+    <section class="mb-16" aria-labelledby="comparison-heading">
+        <h2 id="comparison-heading" class="font-headers font-bold text-2xl mb-6"
+            data-en="The Difference, Plainly Stated" data-es="La Diferencia, Claramente Explicada">The Difference, Plainly Stated</h2>
+        <div class="grid md:grid-cols-2 gap-px structural-border overflow-hidden mb-6">
+            <div class="bg-bone-white p-8 border-r border-gray-dark">
+                <div class="font-headers font-bold text-3xl mb-2">SEO</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+                    data-en="Search Engine Optimization" data-es="Optimización para Motores de Búsqueda">Search Engine Optimization</div>
+                <p class="text-sm leading-relaxed mb-4"
+                    data-en="Gets you ranked in Google search results. Someone types a query, a list of links appears, yours is one of them. The job is the same as it's been for 20 years: be the link someone clicks first."
+                    data-es="Te posiciona en los resultados de búsqueda de Google. Alguien escribe una consulta, aparece una lista de enlaces, el tuyo es uno de ellos. El trabajo es el mismo que durante los últimos 20 años: ser el enlace que alguien hace clic primero.">Gets you ranked in Google search results. Someone types a query, a list of links appears, yours is one of them. The job is the same as it's been for 20 years: be the link someone clicks first.</p>
+                <div class="border-t border-gray-dark/10 pt-4 text-xs text-gray-dark/60 italic"
+                    data-en='"Mexican restaurant in Kingman" → list of results'
+                    data-es='"Restaurante mexicano en Kingman" → lista de resultados'>"Mexican restaurant in Kingman" → list of results</div>
+            </div>
+            <div class="bg-gray-dark p-8">
+                <div class="font-headers font-bold text-3xl text-primary-blue mb-2">AEO</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+                    data-en="Answer Engine Optimization" data-es="Optimización para Motores de Respuesta">Answer Engine Optimization</div>
+                <p class="text-sm leading-relaxed text-bone-white mb-4"
+                    data-en="Gets you featured when AI assistants answer questions. No list. No clicking. The AI gives one answer — and your business is it."
+                    data-es="Te destaca cuando los asistentes de IA responden preguntas. Sin lista. Sin clics. La IA da una respuesta — y tu negocio es esa respuesta.">Gets you featured when AI assistants answer questions. No list. No clicking. The AI gives one answer — and your business is it.</p>
+                <div class="border-t border-bone-white/10 pt-4 text-xs text-bone-white/50 italic"
+                    data-en='"Best Mexican near me?" → AI says your name'
+                    data-es='"¿Mejor restaurante mexicano cerca de mí?" → La IA dice tu nombre'>"Best Mexican near me?" → AI says your name</div>
+            </div>
+        </div>
+        <!-- Symmetry break -->
+        <div class="border-l-4 border-signal-red pl-5 py-1 ml-1">
+            <p class="text-sm font-bold leading-relaxed"
+                data-en="The businesses that adapt now gain visibility. The ones that wait stay invisible to the next generation of search — even when they're exactly what the customer is looking for."
+                data-es="Los negocios que se adaptan ahora ganan visibilidad. Los que esperan permanecen invisibles para la próxima generación de búsqueda — incluso cuando son exactamente lo que el cliente busca.">The businesses that adapt now gain visibility. The ones that wait stay invisible to the next generation of search — even when they're exactly what the customer is looking for.</p>
+        </div>
+    </section>
+
+    <!-- LAYER 1: SCHEMA -->
+    <section class="mb-16" id="schema" aria-labelledby="schema-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-primary-blue leading-none">01</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-1"
+                    data-en="Layer One" data-es="Capa Uno">Layer One</div>
+                <h2 id="schema-heading" class="font-headers font-bold text-2xl"
+                    data-en="Schema Markup — Your Digital Foundation"
+                    data-es="Schema Markup — Tu Fundamento Digital">Schema Markup — Your Digital Foundation</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="Schema markup is structured data that lives in your website's code. It explicitly labels what things are — so AI doesn't have to guess. Without it, an AI might know you have a website. With it, the AI knows you're a restaurant, you're open until 9pm on Fridays, you accept credit cards, and you're on Stockton Hill Rd."
+               data-es="El schema markup son datos estructurados que viven en el código de tu sitio web. Etiqueta explícitamente qué son las cosas — para que la IA no tenga que adivinar. Sin él, una IA podría saber que tienes un sitio web. Con él, la IA sabe que eres un restaurante, que estás abierto hasta las 9pm los viernes, que aceptas tarjetas de crédito y que estás en Stockton Hill Rd.">Schema markup is structured data that lives in your website's code. It explicitly labels what things are — so AI doesn't have to guess. Without it, an AI might know you have a website. With it, the AI knows you're a restaurant, you're open until 9pm on Fridays, you accept credit cards, and you're on Stockton Hill Rd.</p>
+            <p data-en="That's the difference between being read and being understood."
+               data-es="Esa es la diferencia entre ser leído y ser entendido.">That's the difference between being read and being understood.</p>
+            <p data-en="For a local business, you need &lt;strong&gt;LocalBusiness schema&lt;/strong&gt; at minimum. If you have services, add Service schema for each one. If you publish articles, use Article schema. If you have FAQs — and you should — implement FAQPage schema."
+               data-es="Para un negocio local, necesitas como mínimo &lt;strong&gt;LocalBusiness schema&lt;/strong&gt;. Si tienes servicios, agrega Service schema para cada uno. Si publicas artículos, usa Article schema. Si tienes FAQs — y deberías tenerlas — implementa FAQPage schema.">For a local business, you need <strong>LocalBusiness schema</strong> at minimum. If you have services, add Service schema for each one. If you publish articles, use Article schema. If you have FAQs — and you should — implement FAQPage schema.</p>
+            <p class="text-xs text-gray-dark/60 border-l-2 border-signal-red pl-3">Note: Google stopped showing FAQ rich results in search listings as of May 2026. But AI platforms like ChatGPT, Perplexity, and Google's AI Overviews still actively use FAQ schema to extract and cite information. So while it won't make your Google listing bigger, it absolutely helps you get cited when AI answers questions about your industry.</p>
+        </div>
+
+        <!-- SCHEMA GENERATOR -->
+        <div class="structural-border bg-bone-white" id="schema-generator">
+            <div class="border-b border-gray-dark px-8 py-5 flex justify-between items-center">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                        data-en="Interactive Tool" data-es="Herramienta Interactiva">Interactive Tool</div>
+                    <h3 class="font-headers font-bold text-lg"
+                        data-en="LocalBusiness Schema Generator" data-es="Generador de Schema para Negocio Local">LocalBusiness Schema Generator</h3>
+                </div>
+                <div class="text-xs text-gray-dark/40 font-bold tracking-widest uppercase hidden md:block"
+                    data-en="JSON-LD Output" data-es="Salida JSON-LD">JSON-LD Output</div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-0">
+                <!-- Inputs -->
+                <div class="p-8 border-r border-gray-dark space-y-4">
+                    <div>
+                        <label for="sg-name" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Business Name" data-es="Nombre del Negocio">Business Name</label>
+                        <input id="sg-name" class="field" type="text" placeholder="El Palacio Kingman" oninput="SG.generate()">
+                    </div>
+                    <div>
+                        <label for="sg-type" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Business Type" data-es="Tipo de Negocio">Business Type</label>
+                        <select id="sg-type" class="field" onchange="SG.generate()">
+                            <option value="LocalBusiness">Local Business (General)</option>
+                            <option value="Restaurant">Restaurant</option>
+                            <option value="AutoRepair">Auto Repair</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Attorney">Attorney</option>
+                            <option value="HVACBusiness">HVAC</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="RealEstateAgent">Real Estate</option>
+                            <option value="BeautySalon">Beauty Salon / Barber</option>
+                            <option value="MedicalBusiness">Medical / Health</option>
+                            <option value="ProfessionalService">Professional Services</option>
+                            <option value="Store">Retail Store</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sg-address" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Street Address" data-es="Dirección">Street Address</label>
+                        <input id="sg-address" class="field" type="text" placeholder="1234 Stockton Hill Rd" oninput="SG.generate()">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label for="sg-city" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="City" data-es="Ciudad">City</label>
+                            <input id="sg-city" class="field" type="text" placeholder="Kingman" oninput="SG.generate()">
+                        </div>
+                        <div>
+                            <label for="sg-state" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="State" data-es="Estado">State</label>
+                            <input id="sg-state" class="field" type="text" placeholder="AZ" oninput="SG.generate()">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="sg-phone" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Phone" data-es="Teléfono">Phone</label>
+                        <input id="sg-phone" class="field" type="tel" placeholder="+1-928-555-0100" oninput="SG.generate()">
+                    </div>
+                    <div>
+                        <label for="sg-url" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Website URL" data-es="URL del Sitio Web">Website URL</label>
+                        <input id="sg-url" class="field" type="url" placeholder="https://yoursite.com" oninput="SG.generate()">
+                    </div>
+                    <div>
+                        <label for="sg-desc" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Description (1–2 sentences)" data-es="Descripción (1–2 oraciones)">Description (1–2 sentences)</label>
+                        <textarea id="sg-desc" class="field" rows="2" placeholder="Family-owned restaurant serving Sonoran-style Mexican food in Kingman, AZ since 1998." oninput="SG.generate()"></textarea>
+                    </div>
+                    <div>
+                        <label for="sg-price" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Price Range" data-es="Rango de Precios">Price Range</label>
+                        <select id="sg-price" class="field" onchange="SG.generate()">
+                            <option value="$">$ — Inexpensive</option>
+                            <option value="$$" selected>$$ — Moderate</option>
+                            <option value="$$$">$$$ — Upscale</option>
+                            <option value="$$$$">$$$$ — Fine Dining / Premium</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sg-open" class="block text-xs font-bold tracking-widest uppercase mb-2" data-en="Hours (Mon–Fri)" data-es="Horario (Lun–Vie)">Hours (Mon–Fri)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input id="sg-open" class="field" type="time" value="09:00" aria-label="Opening time" oninput="SG.generate()">
+                            <input id="sg-close" class="field" type="time" value="17:00" aria-label="Closing time" oninput="SG.generate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output -->
+                <div class="p-8 flex flex-col gap-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold tracking-widest uppercase text-gray-dark/50"
+                            data-en="Generated Schema" data-es="Schema Generado">Generated Schema</span>
+                        <button onclick="SG.copy()" id="sg-copy-btn"
+                            class="text-xs font-bold tracking-widest uppercase bg-gray-dark text-bone-white px-4 py-2 hover:bg-signal-red transition structural-border"
+                            data-en="Copy JSON-LD" data-es="Copiar JSON-LD">
+                            Copy JSON-LD
+                        </button>
+                    </div>
+                    <div class="schema-output flex-1 min-h-64" id="sg-output"><!-- generated --></div>
+                    <div class="text-xs text-gray-dark/50 leading-relaxed border-t border-gray-dark/10 pt-4"
+                        data-en='Paste this inside a <code>&lt;script type="application/ld+json"&gt;</code> tag in your page\'s <code>&lt;head&gt;</code>. Then validate at <a href="https://validator.schema.org" target="_blank" rel="noopener" class="text-primary-blue hover:underline">validator.schema.org</a>.'
+                        data-es='Pega esto dentro de una etiqueta <code>&lt;script type="application/ld+json"&gt;</code> en el <code>&lt;head&gt;</code> de tu página. Luego valídalo en <a href="https://validator.schema.org" target="_blank" rel="noopener" class="text-primary-blue hover:underline">validator.schema.org</a>.'>
+                        Paste this inside a <code>&lt;script type="application/ld+json"&gt;</code> tag in your page's <code>&lt;head&gt;</code>. Then validate at <a href="https://validator.schema.org" target="_blank" rel="noopener" class="text-primary-blue hover:underline">validator.schema.org</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYER 2: DIRECTORY CONSISTENCY -->
+    <section class="mb-16" id="directories" aria-labelledby="directory-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-signal-red leading-none">02</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                    data-en="Layer Two" data-es="Capa Dos">Layer Two</div>
+                <h2 id="directory-heading" class="font-headers font-bold text-2xl"
+                    data-en="Directory Consistency — Building AI Confidence"
+                    data-es="Consistencia de Directorios — Construyendo Confianza con la IA">Directory Consistency — Building AI Confidence</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="AI pulls business information from multiple sources to cross-reference accuracy. When your name, address, phone number, and hours match across platforms, that builds confidence. When they conflict, AI either skips you or serves outdated information."
+               data-es="La IA extrae información comercial de múltiples fuentes para verificar la precisión. Cuando tu nombre, dirección, número de teléfono y horario coinciden en todas las plataformas, eso genera confianza. Cuando hay conflictos, la IA te omite o proporciona información desactualizada.">AI pulls business information from multiple sources to cross-reference accuracy. When your name, address, phone number, and hours match across platforms, that builds confidence. When they conflict, AI either skips you or serves outdated information.</p>
+            <p data-en='Even small variations create friction. "St." vs "Street." Different phone formats. An old address from three years ago sitting on a directory you forgot about. These aren&apos;t cosmetic problems — they&apos;re credibility problems.'
+               data-es='Incluso pequeñas variaciones crean fricción. "St." vs "Street". Diferentes formatos de teléfono. Una dirección antigua de hace tres años en un directorio que olvidaste. Estos no son problemas cosméticos — son problemas de credibilidad.'>Even small variations create friction. "St." vs "Street." Different phone formats. An old address from three years ago sitting on a directory you forgot about. These aren't cosmetic problems — they're credibility problems.</p>
+            <p data-en="The five platforms below are the ones that matter most for AI recommendations. Verify each one. Update your hours for holidays, temporary closures, and seasonal changes. Outdated hours kill trust faster than almost anything else."
+               data-es="Las cinco plataformas a continuación son las que más importan para las recomendaciones de IA. Verifica cada una. Actualiza tus horarios para días festivos, cierres temporales y cambios estacionales. Los horarios desactualizados destruyen la confianza más rápido que casi cualquier otra cosa.">The five platforms below are the ones that matter most for AI recommendations. Verify each one. Update your hours for holidays, temporary closures, and seasonal changes. Outdated hours kill trust faster than almost anything else.</p>
+        </div>
+
+        <!-- DIRECTORY CHECKLIST -->
+        <div class="structural-border bg-bone-white">
+            <div class="border-b border-gray-dark px-8 py-5">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                    data-en="Self-Audit Checklist" data-es="Lista de Autoauditoría">Self-Audit Checklist</div>
+                <h3 class="font-headers font-bold text-lg"
+                    data-en="Directory Consistency Check" data-es="Verificación de Consistencia de Directorios">Directory Consistency Check</h3>
+            </div>
+            <div id="dir-list" class="px-8 py-4">
+                <!-- injected by JS -->
+            </div>
+            <div class="px-8 py-6 border-t border-gray-dark/10">
+                <div class="flex items-center gap-4 mb-3">
+                    <div class="font-headers font-bold text-2xl" id="dir-score">0%</div>
+                    <div class="flex-1 progress-bar">
+                        <div class="progress-fill" id="dir-bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="text-xs text-gray-dark/50" id="dir-label">Check off each platform once verified.</div>
+                <!-- dir-label text is set by JS renderDir() -->
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYER 3: ANSWER FORMATTING -->
+    <section class="mb-16" id="formatting" aria-labelledby="formatting-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-primary-blue leading-none">03</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-1"
+                    data-en="Layer Three" data-es="Capa Tres">Layer Three</div>
+                <h2 id="formatting-heading" class="font-headers font-bold text-2xl"
+                    data-en="Clear Answer Formatting — Making Your Expertise Extractable"
+                    data-es="Formato de Respuesta Claro — Haciendo Tu Experiencia Extraíble">Clear Answer Formatting — Making Your Expertise Extractable</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="AI doesn't interpret subtle expertise well. It looks for clear, direct answers to questions people actually ask. If your site buries the answer in three paragraphs, AI moves on to the next source that answers it in one sentence."
+               data-es="La IA no interpreta bien la experiencia sutil. Busca respuestas claras y directas a las preguntas que la gente realmente hace. Si tu sitio entierra la respuesta en tres párrafos, la IA pasa al siguiente sitio que la responde en una oración.">AI doesn't interpret subtle expertise well. It looks for clear, direct answers to questions people actually ask. If your site buries the answer in three paragraphs, AI moves on to the next source that answers it in one sentence.</p>
+            <p data-en="The best format for this is FAQ sections with proper heading structure. Not because FAQ pages are interesting — they aren't — but because they're the most efficient way to structure content that AI can extract and cite."
+               data-es="El mejor formato para esto son las secciones de FAQ con estructura de encabezados adecuada. No porque las páginas de FAQ sean interesantes — no lo son — sino porque son la forma más eficiente de estructurar contenido que la IA puede extraer y citar.">The best format for this is FAQ sections with proper heading structure. Not because FAQ pages are interesting — they aren't — but because they're the most efficient way to structure content that AI can extract and cite.</p>
+            <p data-en="&lt;strong&gt;The structure that works:&lt;/strong&gt; Use H2 or H3 headings for each question. Answer the question in the first sentence, directly. Add supporting detail in the next two or three sentences. Implement FAQPage schema so AI knows this is question-and-answer content."
+               data-es="&lt;strong&gt;La estructura que funciona:&lt;/strong&gt; Usa encabezados H2 o H3 para cada pregunta. Responde la pregunta en la primera oración, directamente. Agrega detalles de apoyo en las siguientes dos o tres oraciones. Implementa FAQPage schema para que la IA sepa que este es contenido de preguntas y respuestas."><strong>The structure that works:</strong> Use H2 or H3 headings for each question. Answer the question in the first sentence, directly. Add supporting detail in the next two or three sentences. Implement FAQPage schema so AI knows this is question-and-answer content.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+                    data-en="What AI Can't Use" data-es="Lo Que la IA No Puede Usar">What AI Can't Use</div>
+                <div class="text-xs leading-relaxed bg-gray-dark/5 p-4 border-l-2 border-gray-dark/20 mb-3 italic">
+                    "At our family-owned establishment, we pride ourselves on providing exceptional service to the Kingman community. Our team of dedicated professionals has years of experience helping customers find the solutions they need..."
+                </div>
+                <p class="text-xs text-gray-dark/60"
+                    data-en="No answer. No specifics. Nothing to cite."
+                    data-es="Sin respuesta. Sin especificaciones. Nada que citar.">No answer. No specifics. Nothing to cite.</p>
+            </div>
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4"
+                    data-en="What AI Can Use" data-es="Lo Que la IA Puede Usar">What AI Can Use</div>
+                <div class="text-xs leading-relaxed bg-light-pink p-4 border-l-2 border-primary-blue mb-3">
+                    <strong>Do you offer same-day repair?</strong><br><br>
+                    Yes, we offer same-day appliance repair in Kingman when you call before noon. We stock parts for most major brands. Emergency service is available 24/7 for refrigerator failure.
+                </div>
+                <p class="text-xs text-gray-dark/60"
+                    data-en="Direct answer. Specific. Citable. AI can pull this and attribute it to you."
+                    data-es="Respuesta directa. Específica. Citable. La IA puede extraer esto y atribuírselo.">Direct answer. Specific. Citable. AI can pull this and attribute it to you.</p>
+            </div>
+        </div>
+
+        <!-- AEO READINESS CHECKLIST -->
+        <div class="structural-border bg-bone-white">
+            <div class="border-b border-gray-dark px-8 py-5">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                    data-en="Self-Assessment" data-es="Autoevaluación">Self-Assessment</div>
+                <h3 class="font-headers font-bold text-lg"
+                    data-en="AEO Content Readiness Check" data-es="Verificación de Preparación de Contenido AEO">AEO Content Readiness Check</h3>
+            </div>
+            <div id="aeo-list" class="px-8 py-4"><!-- injected --></div>
+            <div class="px-8 py-6 border-t border-gray-dark/10">
+                <div class="flex items-center gap-4 mb-3">
+                    <div class="font-headers font-bold text-2xl" id="aeo-score">0%</div>
+                    <div class="flex-1 progress-bar">
+                        <div class="progress-fill" id="aeo-bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="text-xs p-3 border structural-border" id="aeo-label" style="background:#E0DDD5;">
+                    Check off what you've implemented.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYER 4: FRESH CONTENT -->
+    <section class="mb-16" id="content" aria-labelledby="content-heading">
+        <div class="flex gap-4 items-baseline mb-6">
+            <span class="font-headers font-bold text-5xl text-signal-red leading-none">04</span>
+            <div>
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                    data-en="Layer Four" data-es="Capa Cuatro">Layer Four</div>
+                <h2 id="content-heading" class="font-headers font-bold text-2xl"
+                    data-en="Fresh, Specific Content — Showing You're Actively Operating"
+                    data-es="Contenido Fresco y Específico — Demostrando Que Estás Activo">Fresh, Specific Content — Showing You're Actively Operating</h2>
+            </div>
+        </div>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="AI prioritizes recent content because it signals an active, current business. Roughly 65% of AI bot crawls target content published within the past year. You don't need to publish daily — but you do need to update your site regularly with content that demonstrates current expertise."
+               data-es="La IA prioriza el contenido reciente porque señala un negocio activo y actual. Aproximadamente el 65% de los rastreos de bots de IA apuntan a contenido publicado en el último año. No necesitas publicar diariamente — pero sí necesitas actualizar tu sitio regularmente con contenido que demuestre experiencia actual.">AI prioritizes recent content because it signals an active, current business. Roughly 65% of AI bot crawls target content published within the past year. You don't need to publish daily — but you do need to update your site regularly with content that demonstrates current expertise.</p>
+            <p data-en="The key word is &lt;strong&gt;specific&lt;/strong&gt;. AI cites content that provides concrete data, real examples, and detailed explanations — not generic advice. &quot;We provide excellent customer service&quot; tells AI nothing. &quot;We respond to all service requests within 2 hours and provide a 30-minute arrival window&quot; gives AI something to cite when someone asks about responsive local service providers."
+               data-es="La palabra clave es &lt;strong&gt;específico&lt;/strong&gt;. La IA cita contenido que proporciona datos concretos, ejemplos reales y explicaciones detalladas — no consejos genéricos. &quot;Brindamos un excelente servicio al cliente&quot; no le dice nada a la IA. &quot;Respondemos a todas las solicitudes de servicio dentro de las 2 horas y proporcionamos una ventana de llegada de 30 minutos&quot; le da a la IA algo que citar cuando alguien pregunta sobre proveedores de servicios locales responsivos.">The key word is <strong>specific</strong>. AI cites content that provides concrete data, real examples, and detailed explanations — not generic advice. "We provide excellent customer service" tells AI nothing. "We respond to all service requests within 2 hours and provide a 30-minute arrival window" gives AI something to cite when someone asks about responsive local service providers.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4"
+                    data-en="Content Types That Work" data-es="Tipos de Contenido Que Funcionan">Content Types That Work</div>
+                <div class="space-y-3">
+                    <div class="rhythm-row">
+                        <div class="font-headers font-bold text-sm mb-1" data-en="Case Studies" data-es="Casos de Estudio">Case Studies</div>
+                        <div class="text-xs text-gray-dark/70" data-en="Specific results for real clients. Before/after. Numbers." data-es="Resultados específicos para clientes reales. Antes/después. Números.">Specific results for real clients. Before/after. Numbers.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="font-headers font-bold text-sm mb-1" data-en="Seasonal Guides" data-es="Guías Estacionales">Seasonal Guides</div>
+                        <div class="text-xs text-gray-dark/70" data-en='"Preparing your HVAC for Arizona summer." Locally relevant, current.' data-es='"Cómo preparar tu HVAC para el verano en Arizona." Localmente relevante y actual.'>"Preparing your HVAC for Arizona summer." Locally relevant, current.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="font-headers font-bold text-sm mb-1" data-en="Problem Breakdowns" data-es="Análisis de Problemas">Problem Breakdowns</div>
+                        <div class="text-xs text-gray-dark/70" data-en='"Why your dishwasher isn&apos;t draining." Specific problem, clear answer.' data-es='"Por qué tu lavavajillas no drena." Problema específico, respuesta clara.'>"Why your dishwasher isn't draining." Specific problem, clear answer.</div>
+                    </div>
+                    <div>
+                        <div class="font-headers font-bold text-sm mb-1" data-en="Local Area Content" data-es="Contenido de Área Local">Local Area Content</div>
+                        <div class="text-xs text-gray-dark/70" data-en="Community connection. Demonstrates you're actually here." data-es="Conexión comunitaria. Demuestra que realmente estás aquí.">Community connection. Demonstrates you're actually here.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="structural-border pinned-note p-8">
+                <div class="red-pin" aria-hidden="true"></div>
+                <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4 text-center"
+                    data-en="The Specificity Test" data-es="La Prueba de Especificidad">The Specificity Test</p>
+                <p class="text-sm leading-relaxed italic mb-4"
+                    data-en='"We provide excellent customer service."'
+                    data-es='"Brindamos un excelente servicio al cliente."'>"We provide excellent customer service."</p>
+                <p class="text-xs text-gray-dark/50 mb-6"
+                    data-en="AI can't cite this. It's not information. It's a promise."
+                    data-es="La IA no puede citar esto. No es información. Es una promesa.">AI can't cite this. It's not information. It's a promise.</p>
+                <div class="border-t border-gray-dark/10 pt-5">
+                    <p class="text-sm leading-relaxed italic mb-3"
+                        data-en='"We respond to all requests within 2 hours during business hours and provide a 30-minute arrival window."'
+                        data-es='"Respondemos a todas las solicitudes dentro de las 2 horas durante el horario comercial y proporcionamos una ventana de llegada de 30 minutos."'>"We respond to all requests within 2 hours during business hours and provide a 30-minute arrival window."</p>
+                    <p class="text-xs text-primary-blue font-bold"
+                        data-en="Now AI has something to work with."
+                        data-es="Ahora la IA tiene algo con qué trabajar.">Now AI has something to work with.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAINTENANCE RHYTHM -->
+    <section class="mb-16" id="maintenance" aria-labelledby="maintenance-heading">
+        <h2 id="maintenance-heading" class="font-headers font-bold text-2xl mb-6"
+            data-en="The Maintenance Rhythm That Actually Works"
+            data-es="El Ritmo de Mantenimiento Que Realmente Funciona">The Maintenance Rhythm That Actually Works</h2>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="This isn't set-and-forget infrastructure. It needs periodic maintenance to stay effective. The good news: the rhythm isn't demanding. A few focused hours a month keeps everything current."
+               data-es="Esta no es una infraestructura que se configura y se olvida. Necesita mantenimiento periódico para seguir siendo efectiva. La buena noticia: el ritmo no es exigente. Unas pocas horas enfocadas al mes mantiene todo actualizado.">This isn't set-and-forget infrastructure. It needs periodic maintenance to stay effective. The good news: the rhythm isn't demanding. A few focused hours a month keeps everything current.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-px structural-border overflow-hidden">
+            <div class="bg-bone-white p-8">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4"
+                    data-en="Monthly" data-es="Mensual">Monthly</div>
+                <div class="space-y-4">
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Verify GBP info" data-es="Verificar info de GBP">Verify GBP info</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Still correct? Hours, address, phone." data-es="¿Sigue siendo correcto? Horario, dirección, teléfono.">Still correct? Hours, address, phone.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Check directory hours" data-es="Verificar horarios en directorios">Check directory hours</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Holidays, seasonal changes, closures." data-es="Días festivos, cambios estacionales, cierres.">Holidays, seasonal changes, closures.</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold mb-1" data-en="Respond to new reviews" data-es="Responder a nuevas reseñas">Respond to new reviews</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Signals active management to AI." data-es="Señala gestión activa a la IA.">Signals active management to AI.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-bone-white p-8 border-t md:border-t-0 md:border-l border-gray-dark">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+                    data-en="Quarterly" data-es="Trimestral">Quarterly</div>
+                <div class="space-y-4">
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Publish new content" data-es="Publicar nuevo contenido">Publish new content</div>
+                        <div class="text-xs text-gray-dark/60" data-en="One specific, detailed piece minimum." data-es="Mínimo una pieza específica y detallada.">One specific, detailed piece minimum.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Update FAQ sections" data-es="Actualizar secciones de FAQ">Update FAQ sections</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Add new questions you've received." data-es="Agrega nuevas preguntas que hayas recibido.">Add new questions you've received.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Test AI search results" data-es="Probar resultados de búsqueda de IA">Test AI search results</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Ask ChatGPT and Perplexity about your category." data-es="Pregunta a ChatGPT y Perplexity sobre tu categoría.">Ask ChatGPT and Perplexity about your category.</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold mb-1" data-en="Validate schema" data-es="Validar schema">Validate schema</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Check it's still passing at validator.schema.org." data-es="Verifica que siga aprobando en validator.schema.org.">Check it's still passing at validator.schema.org.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-bone-white p-8 border-t md:border-t-0 md:border-l border-gray-dark">
+                <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-4"
+                    data-en="Annually" data-es="Anualmente">Annually</div>
+                <div class="space-y-4">
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Full directory audit" data-es="Auditoría completa de directorios">Full directory audit</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Comprehensive consistency check across all platforms." data-es="Verificación integral de consistencia en todas las plataformas.">Comprehensive consistency check across all platforms.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Refresh service descriptions" data-es="Actualizar descripciones de servicios">Refresh service descriptions</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Update pricing ranges, offerings." data-es="Actualiza rangos de precios y ofertas.">Update pricing ranges, offerings.</div>
+                    </div>
+                    <div class="rhythm-row">
+                        <div class="text-sm font-bold mb-1" data-en="Update case studies" data-es="Actualizar casos de estudio">Update case studies</div>
+                        <div class="text-xs text-gray-dark/60" data-en="Feature recent work, retire old examples." data-es="Destaca trabajo reciente, retira ejemplos antiguos.">Feature recent work, retire old examples.</div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-bold mb-1" data-en="Expand schema coverage" data-es="Ampliar cobertura de schema">Expand schema coverage</div>
+                        <div class="text-xs text-gray-dark/60" data-en="New services, new offerings, new schema types." data-es="Nuevos servicios, nuevas ofertas, nuevos tipos de schema.">New services, new offerings, new schema types.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW TO TEST -->
+    <section class="mb-16" aria-labelledby="test-heading">
+        <h2 id="test-heading" class="font-headers font-bold text-2xl mb-4"
+            data-en="How to Test What AI Sees" data-es="Cómo Probar Lo Que Ve la IA">How to Test What AI Sees</h2>
+        <div class="prose-da max-w-3xl mb-6">
+            <p data-en="Once you've implemented these layers, test how AI actually represents your business. Don't wait for customers to tell you something's wrong."
+               data-es="Una vez que hayas implementado estas capas, prueba cómo la IA representa realmente tu negocio. No esperes a que los clientes te digan que algo está mal.">Once you've implemented these layers, test how AI actually represents your business. Don't wait for customers to tell you something's wrong.</p>
+        </div>
+        <div class="structural-border bg-gray-dark text-bone-white p-8">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4"
+                        data-en="What to Ask" data-es="Qué Preguntar">What to Ask</div>
+                    <div class="space-y-3 text-sm">
+                        <div class="border-b border-bone-white/10 pb-3 font-details italic"
+                            data-en='"What are the best [your business type] in [your city]?"'
+                            data-es='"¿Cuáles son los mejores [tu tipo de negocio] en [tu ciudad]?"'>"What are the best [your business type] in [your city]?"</div>
+                        <div class="border-b border-bone-white/10 pb-3 font-details italic"
+                            data-en='"Where should I go for [your service] near [your location]?"'
+                            data-es='"¿Adónde debo ir para [tu servicio] cerca de [tu ubicación]?"'>"Where should I go for [your service] near [your location]?"</div>
+                        <div class="border-b border-bone-white/10 pb-3 font-details italic"
+                            data-en='"Hey Siri, find me a [your type] nearby."'
+                            data-es='"Oye Siri, encuéntrame un [tu tipo] cerca."'>"Hey Siri, find me a [your type] nearby."</div>
+                        <div class="font-details italic"
+                            data-en='"Who does [your specific service] in Kingman?"'
+                            data-es='"¿Quién hace [tu servicio específico] en Kingman?"'>"Who does [your specific service] in Kingman?"</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+                        data-en="Where to Ask It" data-es="Dónde Preguntarlo">Where to Ask It</div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 border-b border-bone-white/10 pb-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm" data-en="ChatGPT — general AI recommendations" data-es="ChatGPT — recomendaciones generales de IA">ChatGPT — general AI recommendations</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-b border-bone-white/10 pb-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm" data-en="Perplexity — cites sources, shows what it's pulling" data-es="Perplexity — cita fuentes, muestra de dónde extrae información">Perplexity — cites sources, shows what it's pulling</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-b border-bone-white/10 pb-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm" data-en="Siri / voice search — local intent queries" data-es="Siri / búsqueda por voz — consultas de intención local">Siri / voice search — local intent queries</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-2 h-2 bg-primary-blue rounded-full flex-shrink-0"></div>
+                            <span class="text-sm" data-en="Google AI Overviews — check your category queries" data-es="Google AI Overviews — verifica las consultas de tu categoría">Google AI Overviews — check your category queries</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mb-20">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="structural-border bg-bone-white p-8 md:col-span-2">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+                    data-en="The Bottom Line" data-es="La Conclusión">The Bottom Line</div>
+                <h2 class="font-headers font-bold text-2xl mb-4"
+                    data-en="The setup work is tedious. Do it anyway."
+                    data-es="El trabajo de configuración es tedioso. Hazlo de todas formas.">The setup work is tedious. Do it anyway.</h2>
+                <p class="text-sm leading-relaxed text-gray-dark/75 mb-0"
+                    data-en="Schema markup, directory audits, FAQ structuring, content updates — this boring operational work is what creates sustainable visibility. Build it right once, maintain it consistently, and you'll show up when it matters."
+                    data-es="Schema markup, auditorías de directorios, estructuración de FAQs, actualizaciones de contenido — este trabajo operativo aburrido es lo que crea visibilidad sostenible. Constrúyelo bien una vez, mantenlo consistentemente, y aparecerás cuando importa.">Schema markup, directory audits, FAQ structuring, content updates — this boring operational work is what creates sustainable visibility. Build it right once, maintain it consistently, and you'll show up when it matters.</p>
+            </div>
+            <div class="structural-border bg-gray-dark text-bone-white p-8 flex flex-col justify-between">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3"
+                        data-en="Free Audit" data-es="Auditoría Gratuita">Free Audit</div>
+                    <p class="text-sm leading-relaxed opacity-70 mb-6"
+                        data-en="Not sure where you stand? I'll map what's already working and what needs attention. No phases, no upsells."
+                        data-es="¿No sabes dónde estás parado? Mapearé lo que ya está funcionando y lo que necesita atención. Sin fases, sin ventas adicionales.">Not sure where you stand? I'll map what's already working and what needs attention. No phases, no upsells.</p>
+                </div>
+                <a href="/index.html#contact"
+                    class="block text-center bg-signal-red text-bone-white font-headers font-bold py-3 structural-border hover:bg-bone-white hover:text-gray-dark transition text-sm tracking-wide"
+                    data-en="[ Book a Free Audit ]" data-es="[ Reservar Auditoría Gratuita ]">
+                    [ Book a Free Audit ]
+                </a>
+            </div>
+        </div>
+    </section>
+
+<section class="max-w-5xl mx-auto px-6 mb-16" aria-label="Service: SEO and AEO">
+  <div class="structural-border bg-bone-white p-8">
+    <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+        data-en="Digital Allies Can Help" data-es="Digital Allies Puede Ayudar">Digital Allies Can Help</div>
+    <h2 class="font-headers font-bold text-2xl mb-4"
+        data-en="Not showing up in search — or in AI assistants? That's fixable."
+        data-es="¿No apareces en la búsqueda — ni en los asistentes de IA? Eso tiene solución.">Not showing up in search — or in AI assistants? That's fixable.</h2>
+    <p class="text-sm leading-relaxed mb-4"
+        data-en="If you're a small business in Kingman or Mojave County, Digital Allies offers free SEO and AEO audits that show exactly where you're invisible and why. Every engagement includes structured data markup, content strategy, and ongoing support so your site stays readable by both humans and AI systems."
+        data-es="Si eres una pequeña empresa en Kingman o el Condado Mojave, Digital Allies ofrece auditorías gratuitas de SEO y AEO que muestran exactamente dónde eres invisible y por qué. Cada proyecto incluye marcado de datos estructurados, estrategia de contenido y soporte continuo para que tu sitio siga siendo legible tanto para humanos como para sistemas de IA.">If you're a small business in Kingman or Mojave County, Digital Allies offers free SEO and AEO audits that show exactly where you're invisible and why. Every engagement includes structured data markup, content strategy, and ongoing support so your site stays readable by both humans and AI systems.</p>
+    <p class="text-sm leading-relaxed mb-6"
+        data-en="You don't need a big budget or a marketing team. You need the right setup."
+        data-es="No necesitas un gran presupuesto ni un equipo de marketing. Necesitas la configuración correcta.">You don't need a big budget or a marketing team. You need the right setup.</p>
+    <a href="/index.html#contact" class="inline-block px-8 py-3 bg-signal-red text-white font-headers font-bold structural-border hover:bg-gray-dark transition text-sm"
+        data-en="[ Get a Free SEO/AEO Audit ]" data-es="[ Obtener una Auditoría SEO/AEO Gratuita ]">
+      [ Get a Free SEO/AEO Audit ]
+    </a>
+  </div>
+</section>
+
+</article>
+
+<!-- SCRIPTS -->
+<script>
+// ── SCHEMA GENERATOR ─────────────────────────────────────────────
+const SG = {
+    generate() {
+        const name = document.getElementById('sg-name').value || 'Your Business Name';
+        const type = document.getElementById('sg-type').value;
+        const address = document.getElementById('sg-address').value || '123 Main St';
+        const city = document.getElementById('sg-city').value || 'Kingman';
+        const state = document.getElementById('sg-state').value || 'AZ';
+        const phone = document.getElementById('sg-phone').value || '+1-928-555-0000';
+        const url = document.getElementById('sg-url').value || 'https://yoursite.com';
+        const desc = document.getElementById('sg-desc').value || 'Local business serving the Kingman, AZ area.';
+        const price = document.getElementById('sg-price').value;
+        const open = document.getElementById('sg-open').value || '09:00';
+        const close = document.getElementById('sg-close').value || '17:00';
+
+        const schema = {
+            "@context": "https://schema.org",
+            "@type": type,
+            "name": name,
+            "description": desc,
+            "url": url,
+            "telephone": phone,
+            "priceRange": price,
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": address,
+                "addressLocality": city,
+                "addressRegion": state,
+                "addressCountry": "US"
+            },
+            "areaServed": {
+                "@type": "City",
+                "name": city
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+                    "opens": open,
+                    "closes": close
+                }
+            ]
+        };
+
+        document.getElementById('sg-output').textContent =
+            '<script type="application/ld+json">\n' +
+            JSON.stringify(schema, null, 2) +
+            '\n<\/script>';
+    },
+    copy() {
+        const lang = (window.LC && LC.currentLang) || localStorage.getItem('da-language') || 'en';
+        const isEs = lang === 'es';
+        const text = document.getElementById('sg-output').textContent;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('sg-copy-btn');
+            btn.textContent = isEs ? '¡Copiado!' : 'Copied!';
+            btn.classList.add('copy-flash');
+            setTimeout(() => { btn.textContent = isEs ? 'Copiar JSON-LD' : 'Copy JSON-LD'; btn.classList.remove('copy-flash'); }, 2000);
+        });
+    }
+};
+SG.generate();
+
+// ── DIRECTORY CHECKLIST ───────────────────────────────────────────
+const dirItems = [
+    { id: 'gbp',   label: 'Google Business Profile',  label_es: 'Google Business Profile',
+                   note:  'Most important for local visibility and AI recommendations.', note_es: 'Lo más importante para la visibilidad local y las recomendaciones de IA.' },
+    { id: 'bing',  label: 'Bing Places for Business', label_es: 'Bing Places for Business',
+                   note:  'Powers ChatGPT local recommendations.',  note_es: 'Impulsa las recomendaciones locales de ChatGPT.' },
+    { id: 'apple', label: 'Apple Maps',               label_es: 'Apple Maps',
+                   note:  'Powers Siri and all Apple device searches.', note_es: 'Impulsa Siri y todas las búsquedas en dispositivos Apple.' },
+    { id: 'yelp',  label: 'Yelp',                     label_es: 'Yelp',
+                   note:  'Cited heavily by AI for reviews and recommendations.', note_es: 'La IA lo cita frecuentemente para reseñas y recomendaciones.' },
+    { id: 'fb',    label: 'Facebook Business Page',   label_es: 'Facebook Business Page',
+                   note:  'Another cross-reference source for AI.', note_es: 'Otra fuente de verificación cruzada para la IA.' },
+];
+const dirState = {};
+function renderDir() {
+    const lang = (window.LC && LC.currentLang) || localStorage.getItem('da-language') || 'en';
+    const isEs = lang === 'es';
+    const list = document.getElementById('dir-list');
+    list.innerHTML = dirItems.map(item => `
+        <div class="check-row flex items-start gap-4 py-4 px-2" onclick="toggleDir('${item.id}')">
+            <div style="width:20px;height:20px;border:1.5px solid ${dirState[item.id] ? '#2D2D2D' : '#E0DDD5'};background:${dirState[item.id] ? '#2D2D2D' : 'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;border-radius:2px;color:#F9F6F0;font-size:11px;font-weight:700;">
+                ${dirState[item.id] ? '✓' : ''}
+            </div>
+            <div>
+                <div style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:14px;margin-bottom:3px;">${isEs ? item.label_es : item.label}</div>
+                <div style="font-size:12px;opacity:0.6;line-height:1.5;">${isEs ? item.note_es : item.note}</div>
+            </div>
+        </div>
+    `).join('');
+    const count = Object.values(dirState).filter(Boolean).length;
+    const pct = Math.round((count / dirItems.length) * 100);
+    document.getElementById('dir-score').textContent = pct + '%';
+    document.getElementById('dir-bar').style.width = pct + '%';
+    const labels = isEs
+        ? ['Marca cada plataforma cuando hayas verificado que la información coincide.', 'Vas bien — sigue verificando.', 'Sólido. Casi ahí.', 'Casi terminado.', 'Todo verificado. La confianza de la IA es alta.', 'Todas las plataformas verificadas. Tus datos NAP son consistentes.']
+        : ['Check off each platform once you\'ve verified the info matches.', 'Getting there — keep checking.', 'Solid. Almost there.', 'Almost done.', 'Fully verified. AI confidence is high.', 'All platforms verified. Your NAP data is consistent.'];
+    document.getElementById('dir-label').textContent = labels[count] || labels[0];
+}
+function toggleDir(id) { dirState[id] = !dirState[id]; renderDir(); }
+renderDir();
+
+// ── AEO READINESS CHECKLIST ───────────────────────────────────────
+const aeoItems = [
+    { id: 'schema_added',  label: 'Schema markup added to site pages',                           label_es: 'Schema markup agregado a las páginas del sitio' },
+    { id: 'faq_section',   label: 'FAQ section with structured headings',                        label_es: 'Sección de FAQ con encabezados estructurados' },
+    { id: 'faq_schema',    label: 'FAQPage schema implemented',                                  label_es: 'FAQPage schema implementado' },
+    { id: 'direct_ans',    label: 'Content answers common questions directly in the first sentence', label_es: 'El contenido responde preguntas comunes directamente en la primera oración' },
+    { id: 'no_fluff',      label: 'No filler paragraphs that bury the actual answer',            label_es: 'Sin párrafos de relleno que entierren la respuesta real' },
+    { id: 'case_studies',  label: 'Case studies or success stories published',                   label_es: 'Casos de estudio o historias de éxito publicados' },
+    { id: 'reviews_vis',   label: 'Customer reviews and testimonials visible on site',           label_es: 'Reseñas de clientes y testimonios visibles en el sitio' },
+    { id: 'mobile_fast',   label: 'Site is mobile-friendly and loads quickly',                   label_es: 'El sitio es compatible con dispositivos móviles y carga rápidamente' },
+];
+const aeoState = {};
+function renderAeo() {
+    const lang = (window.LC && LC.currentLang) || localStorage.getItem('da-language') || 'en';
+    const isEs = lang === 'es';
+    const list = document.getElementById('aeo-list');
+    list.innerHTML = aeoItems.map(item => `
+        <div class="check-row flex items-center gap-4 py-4 px-2" onclick="toggleAeo('${item.id}')">
+            <div style="width:20px;height:20px;border:1.5px solid ${aeoState[item.id] ? '#2D2D2D' : '#E0DDD5'};background:${aeoState[item.id] ? '#2D2D2D' : 'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;border-radius:2px;color:#F9F6F0;font-size:11px;font-weight:700;">
+                ${aeoState[item.id] ? '✓' : ''}
+            </div>
+            <span style="font-size:13px;font-weight:${aeoState[item.id] ? '600' : '400'};">${isEs ? item.label_es : item.label}</span>
+        </div>
+    `).join('');
+    const count = Object.values(aeoState).filter(Boolean).length;
+    const pct = Math.round((count / aeoItems.length) * 100);
+    document.getElementById('aeo-score').textContent = pct + '%';
+    document.getElementById('aeo-bar').style.width = pct + '%';
+    const lbl = document.getElementById('aeo-label');
+    if (count >= 7) {
+        lbl.textContent = isEs ? 'Listo para AEO. La estructura de tu contenido le da señales claras a la IA con qué trabajar.' : 'AEO-ready. Your content structure gives AI clear signals to work with.';
+        lbl.style.background = '#FADEEB';
+        lbl.style.borderColor = '#2D2D2D';
+    } else if (count >= 4) {
+        lbl.textContent = isEs ? 'Vas bien. El schema markup y la estructura de FAQ son tu próxima prioridad.' : 'Getting there. Schema markup and FAQ structure are your next priority.';
+        lbl.style.background = '#F9F6F0';
+    } else {
+        lbl.textContent = isEs ? 'Comienza con schema markup y una sección de FAQ sólida. Ese es el movimiento de mayor impacto.' : 'Start with schema markup and one solid FAQ section. That\'s the highest leverage move.';
+        lbl.style.background = '#E0DDD5';
+    }
+}
+function toggleAeo(id) { aeoState[id] = !aeoState[id]; renderAeo(); }
+renderAeo();
+</script>
+
+    <!-- ============================================================
+         THE COMMAND CENTER (FOOTER)
+    ============================================================= -->
+    </main>
+<footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+
+            <!-- Left: Info -->
+            <div>
+                <!-- Inverted logo -->
+                <a href="/" class="flex items-center space-x-3 mb-10" aria-label="Digital Allies">
+                    <div class="relative flex items-center justify-center w-5 h-5">
+                        <div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div>
+                        <div class="w-3 h-3 bg-white rounded-full brand-pulse"
+                            style="border: 1px solid rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <span class="font-headers font-bold text-2xl tracking-wide text-white">Digital Allies</span>
+                </a>
+
+                <h2 id="footer-heading" class="font-headers text-3xl font-bold mb-5" data-en="The Command Center"
+                    data-es="El Centro de Mando">The Command Center</h2>
+
+                <p class="text-sm leading-relaxed mb-8 text-white/75"
+                    data-en="Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three."
+                    data-es="Dime qué intentas hacer. Responderé con próximos pasos, un rango de costos o una pregunta rápida. Generalmente las tres.">
+                    Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question.
+                    Usually all three.
+                </p>
+
+                <div class="space-y-3 text-sm mb-10">
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Location"
+                            data-es="Ubicación">Location</span>
+                        Kingman, Arizona
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Direct Line"
+                            data-es="Línea Directa">Direct Line</span>
+                        <a href="tel:9282285769" class="text-primary-blue hover:underline">(928) 228-5769</a>
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3">Email</span>
+                        <a href="mailto:contact@digitalallies.net"
+                            class="text-primary-blue hover:underline">contact@digitalallies.net</a>
+                    </p>
+                </div>
+
+                <p class="text-xs border-l-4 border-signal-red pl-4 text-white/65 leading-relaxed"
+                    data-en="I am historically easy to reach. I live in Kingman. If you call, I answer."
+                    data-es="Soy históricamente fácil de contactar. Vivo en Kingman. Si llamas, contesto.">
+                    I am historically easy to reach. I live in Kingman. If you call, I answer.
+                </p>
+
+                <div class="mt-12 pt-6 border-t border-white/10">
+                    <p class="text-xs text-white/50" data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
+                        data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">
+                        &copy; 2026 Digital Allies. Based in Kingman, AZ.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-3 text-xs">
+                        <a href="/privacy.html" class="text-white/50 hover:text-white transition" data-en="Privacy" data-es="Privacidad">Privacy</a>
+                        <a href="/terms.html" class="text-white/50 hover:text-white transition" data-en="Terms" data-es="Términos">Terms</a>
+                        <a href="/cookies.html" class="text-white/50 hover:text-white transition" data-en="Cookies" data-es="Cookies">Cookies</a>
+                        <a href="/sitemap.html" class="text-white/50 hover:text-white transition" data-en="Sitemap" data-es="Mapa del Sitio">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="bg-bone-white p-8 structural-border text-gray-dark self-start">
+                <h3 class="font-headers font-bold text-xl mb-6" data-en="Send a Transmission"
+                    data-es="Enviar una Transmisión">Send a Transmission</h3>
+
+                <form action="https://formsubmit.co/contact@digitalallies.net" method="POST" class="space-y-4"
+                    novalidate>
+                    <input type="hidden" name="_subject" value="New inquiry from Digital Allies">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://digitalallies.net/">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_autoresponse"
+                        value="Thanks for reaching out to Digital Allies! I received your message and will reply with next steps shortly. — Anthony">
+                    <!-- Honeypot -->
+                    <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off">
+
+                    <div>
+                        <label for="f-name" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="Name" data-es="Nombre">Name</label>
+                        <input id="f-name" type="text" name="name" required aria-required="true" autocomplete="name"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition"
+                            placeholder="Your name">
+                    </div>
+
+                    <div>
+                        <label for="f-email" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="Email" data-es="Correo Electrónico">Email</label>
+                        <input id="f-email" type="email" name="email" required aria-required="true" autocomplete="email"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition"
+                            placeholder="your@email.com">
+                    </div>
+
+                    <div>
+                        <label for="f-message" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="What are you trying to do?" data-es="¿Qué intentas hacer?">What are you trying to
+                            do?</label>
+                        <textarea id="f-message" name="message" rows="4" required aria-required="true"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition resize-y"
+                            placeholder="Give me the short version. We can fill in details later."></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-sm tracking-wide"
+                        data-en="Submit Transmission" data-es="Enviar Transmisión">
+                        Submit Transmission
+                    </button>
+
+                    <p class="text-xs text-center text-gray-500 mt-1"
+                        data-en="I do not share your details. I use your message to reply. That is it."
+                        data-es="No comparto tus datos. Uso tu mensaje para responder. Eso es todo.">
+                        I do not share your details. I use your message to reply. That is it.
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ============================================================
+         FLOATING ACTION BUTTON
+    ============================================================= -->
+    <a href="#contact"
+        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition"
+        aria-label="Need a strategic ally? Contact us">
+        <span class="text-xs font-bold" data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">
+            Need a strategic ally?
+        </span>
+        <div class="relative flex items-center justify-center w-4 h-4 flex-shrink-0">
+            <div class="absolute w-4 h-4 bg-signal-red rounded-full opacity-30 fab-ring"></div>
+            <div class="w-2.5 h-2.5 bg-signal-red rounded-full brand-pulse"></div>
+        </div>
+    </a>
+
+
+    <!-- ============================================================
+         LANGUAGE CONTROLLER
+    ============================================================= -->
+    <script>
+        class LanguageController {
+            constructor() {
+                this.currentLang = localStorage.getItem('da-language') || 'en';
+                this.init();
+            }
+
+            init() {
+                this.applyLanguage(this.currentLang, false);
+            }
+
+            toggleLanguage(lang) {
+                if (lang === this.currentLang) return;
+                this.currentLang = lang;
+                localStorage.setItem('da-language', lang);
+                this.applyLanguage(lang, true);
+            }
+
+            applyLanguage(lang, announce) {
+                this.updateContent(lang);
+                this.updateButtons(lang);
+                document.documentElement.lang = lang;
+                if (announce) this.announceLanguageChange(lang);
+            }
+
+            updateContent(lang) {
+                document.querySelectorAll('[data-en][data-es]').forEach(el => {
+                    const val = el.getAttribute('data-' + lang);
+                    if (!val) return;
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = val;
+                    } else {
+                        // Preserve child elements that don't have data-en/data-es (like icons)
+                        const preservedChildren = [];
+                        el.querySelectorAll('[data-lucide], .transition-transform').forEach(child => {
+                            preservedChildren.push(child.cloneNode(true));
+                        });
+                        el.innerHTML = val;
+                        preservedChildren.forEach(child => {
+                            if (child.classList.contains('transition-transform')) {
+                                el.appendChild(child);
+                            } else {
+                                el.insertBefore(child, el.firstChild);
+                            }
+                        });
+                    }
+                });
+                // Re-initialize Lucide icons after content update
+                }
+
+            updateButtons(lang) {
+                ['en', 'es'].forEach(l => {
+                    const btn = document.getElementById('lang-' + l);
+                    if (!btn) return;
+                    const active = l === lang;
+                    btn.classList.toggle('lang-active', active);
+                    btn.setAttribute('aria-pressed', String(active));
+                });
+            }
+
+            announceLanguageChange(lang) {
+                const msg = lang === 'es'
+                    ? 'Idioma cambiado a español'
+                    : 'Language changed to English';
+                const announcer = document.getElementById('lang-announcer');
+                if (!announcer) return;
+                announcer.textContent = '';
+                setTimeout(() => { announcer.textContent = msg; }, 60);
+            }
+        }
+
+        const LC = new LanguageController();
+
+        // Re-render JS-injected checklists when language changes
+        const _origApply = LC.applyLanguage.bind(LC);
+        LC.applyLanguage = function(lang, announce) {
+            _origApply(lang, announce);
+            if (typeof renderDir === 'function') renderDir();
+            if (typeof renderAeo === 'function') renderAeo();
+        };
+
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+
+    <!-- STRUCTURED DATA -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SEO vs AEO: What AI Actually Reads When It Recommends Businesses",
+  "description": "Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps local businesses visible to AI search.",
+  "url": "https://digitalallies.net/learn/seo-aeo",
+  "author": {
+    "@type": "Person",
+    "name": "Anthony",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital Allies",
+      "telephone": "+1-928-228-5769",
+      "sameAs": [
+        "https://www.instagram.com/digitalallies__",
+        "https://www.facebook.com/digitalallies",
+        "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+      ]
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net"
+  },
+  "dateModified": "2026-06-01",
+  "mainEntityOfPage": "https://digitalallies.net/learn/seo-aeo"
+}
+</script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is AEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AEO stands for Answer Engine Optimization. It structures your content so AI assistants like ChatGPT, Google AI Overviews, and Siri can find and recommend your business directly in their answers — not just in a list of search results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is schema markup?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema markup is structured data in your website's code that explicitly labels what your business is — type, location, hours, services, prices. It tells AI exactly what you offer without requiring it to interpret your content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does FAQ schema still matter after Google's 2026 update?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Google stopped showing FAQ rich results in search listings as of May 2026, but AI platforms including ChatGPT, Perplexity, and Google's AI Overviews still actively use FAQ schema to extract and cite information from business websites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I update my site for AEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Monthly: verify directory listings and respond to reviews. Quarterly: publish new content and test AI search results. Annually: comprehensive directory audit and schema expansion."
+      }
+    }
+  ],
+  "dateModified": "2026-06-01"
+}
+</script>
+
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        }
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.add('hidden');
+            btn && btn.setAttribute('aria-expanded', 'false');
+        }
+    </script>
+
+</body>
+</html>

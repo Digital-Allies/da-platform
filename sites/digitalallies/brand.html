@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand System & Guide — Digital Allies</title>
+    <meta name="description"
+        content="The official brand specifications and style guide for Digital Allies. Systems built with visual balance, Technical Lace grids, and direct plainspoken language. Based in Kingman, AZ.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://digitalallies.net/brand">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                                })(window,document,'script','dataLayer','GTM-W8ZC2TMW');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Fonts -->
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/a11y.css">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+    <!-- Lucide Icons -->
+    <script src="assets/js/lucide-da.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bone-white': '#F9F6F0',
+                        'gray-dark': '#2D2D2D',
+                        'primary-blue': '#3A7BD5',
+                        'light-pink': '#FADEEB',
+                        'signal-red': '#C5301A'
+                    },
+                    fontFamily: {
+                        headers: ['"Lexend Deca"', 'sans-serif'],
+                        details: ['"JetBrains Mono"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #2D2D2D;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Lexend Deca', sans-serif;
+        }
+
+        .brand-pulse {
+            animation: brand-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes brand-pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.25);
+            }
+        }
+
+        .fab-ring {
+            animation: fab-ring 2.2s ease-out infinite;
+        }
+
+        @keyframes fab-ring {
+            0% {
+                transform: scale(1);
+                opacity: 0.55;
+            }
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        .structural-border {
+            border: 1px solid #2D2D2D;
+        }
+
+        .lang-active {
+            background-color: #2D2D2D !important;
+            color: #F9F6F0 !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Technical Lace grid canvas visualizer */
+        .grid-canvas-demo {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45, 45, 45, 0.08) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45, 45, 45, 0.08) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            position: relative;
+        }
+
+        /* 3D Flip Jargon Cards */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background-color: #FCFAED; /* Pinned note yellow */
+        }
+
+        /* Custom range sliders */
+        .spectrum-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #E0DDD5;
+            outline: none;
+            border: 1px solid #2D2D2D;
+        }
+
+        .spectrum-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #C5301A;
+            border: 1px solid #2D2D2D;
+            border-radius: 50%;
+            cursor: not-allowed;
+        }
+
+        .spectrum-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #C5301A;
+            border: 1px solid #2D2D2D;
+            border-radius: 50%;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8ZC2TMW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <!-- Aria announcer for language changes -->
+    <div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <!-- ============================================================
+         NAVIGATION
+    ============================================================= -->
+    <nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center w-5 h-5">
+                    <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
+                    <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
+                </div>
+                <span class="font-headers font-bold text-xl tracking-wide">Digital Allies</span>
+            </a>
+
+            <div class="flex items-center space-x-4 lg:space-x-8">
+                <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
+                    <a href="/index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Services" data-es="Servicios">Services</a>
+                    <a href="/index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Pricing" data-es="Precios">Pricing</a>
+                    <a href="/index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Reviews" data-es="Reseñas">Reviews</a>
+                    <a href="/index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ" data-es="FAQ">FAQ</a>
+                    <a href="/brand.html" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Brand" data-es="Marca">Brand</a>
+                    <a href="/learn/" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Learn" data-es="Aprender">Learn</a>
+                    <a href="/index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap" data-en="Contact" data-es="Contacto">Contact</a>
+                </div>
+
+                <!-- Language switcher -->
+                <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group">
+                    <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active">EN</button>
+                    <div class="w-px h-5 bg-gray-dark"></div>
+                    <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink">ES</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+<main id="main-content" tabindex="-1">
+
+
+    <!-- ============================================================
+         HERO / TITLE
+    ============================================================= -->
+    <header class="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center" aria-labelledby="brand-heading">
+        <p class="text-xs font-bold tracking-widest uppercase mb-6 text-signal-red"
+            data-en="Identity · Style Manual · Spec Sheet"
+            data-es="Identidad · Manual de Estilo · Ficha Técnica">
+            Identity · Style Manual · Spec Sheet
+        </p>
+        <h1 id="brand-heading" class="text-4xl md:text-6xl font-headers font-bold mb-6 leading-tight tracking-tight"
+            data-en="The Digital Allies Brand Guide"
+            data-es="Guía de Marca de Digital Allies">
+            The Digital Allies Brand Guide
+        </h1>
+        <p class="text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-4"
+            data-en="Visual layout meets straight-talking systems. Here is how we manifest our craft, typography, colors, and unified voice."
+            data-es="El diseño visual se encuentra con sistemas francos. Así es como manifestamos nuestro oficio, tipografía, colores y voz unificada.">
+            Visual layout meets straight-talking systems. Here is how we manifest our craft, typography, colors, and unified voice.
+        </p>
+        <p class="text-xs font-bold text-gray-500 tracking-wider uppercase font-details"
+            data-en="Est. 2024 · Kingman, Arizona · Anthony"
+            data-es="Est. 2024 · Kingman, Arizona · Anthony">
+            Est. 2024 · Kingman, Arizona · Anthony
+        </p>
+    </header>
+
+    <!-- ============================================================
+         SECTION 1: GRID & SYMMETRY BREAK
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 py-12" aria-labelledby="grid-heading">
+        <div class="structural-border bg-bone-white p-8 md:p-12">
+            <h2 id="grid-heading" class="font-headers text-2xl md:text-3xl font-bold mb-6 border-b border-gray-dark/15 pb-4"
+                data-en="1. Grid Architecture & Symmetry Break"
+                data-es="1. Arquitectura de Rejilla y Ruptura de Simetría">
+                1. Grid Architecture & Symmetry Break
+            </h2>
+            
+            <p class="text-sm leading-relaxed mb-8"
+                data-en="Aesthetic symmetry serves as a visual proxy for technical competence. We construct layouts on a rigid 12-column grid to prove structural discipline. However, to guide focus, we employ the <strong>Symmetry Break</strong> strategy: we nudge a single high-contrast highlight exactly 5px to 10px off-center to create a calculated visual itch that draws the human eye directly to our objective."
+                data-es="La simetría estética sirve como un proxy visual de competencia técnica. Construimos diseños sobre una cuadrícula rígida de 12 columnas para demostrar disciplina estructural. Sin embargo, para guiar el enfoque, empleamos la estrategia de <strong>Ruptura de Simetría</strong>: desviamos un solo elemento de alto contraste exactamente de 5px a 10px fuera del centro para crear una picazón visual calculada que atrae la mirada humana directamente al objetivo estratégico.">
+                Aesthetic symmetry serves as a visual proxy for technical competence. We construct layouts on a rigid 12-column grid to prove structural discipline. However, to guide focus, we employ the <strong>Symmetry Break</strong> strategy: we nudge a single high-contrast highlight exactly 5px to 10px off-center to create a calculated visual itch that draws the human eye directly to our objective.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <!-- Live Demo Grid -->
+                <div class="structural-border p-6 bg-bone-white grid-canvas-demo min-h-[300px] flex flex-col justify-between">
+                    <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: radial-gradient(#2D2D2D 1px, transparent 1px); background-size: 20px 20px;"></div>
+                    
+                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest block mb-4 relative z-10"
+                        data-en="[ Technical Lace Grid Preview ]"
+                        data-es="[ Vista Previa de la Rejilla Técnica ]">
+                        [ Technical Lace Grid Preview ]
+                    </span>
+
+                    <div class="flex flex-col items-center justify-center flex-grow py-8 relative z-10">
+                        <div id="demo-card" class="bg-bone-white structural-border p-6 max-w-xs text-center transition-all duration-300 shadow-sm relative">
+                            <!-- Symmetry break red dot -->
+                            <div id="demo-dot" class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-signal-red rounded-full structural-border transition-all duration-300"></div>
+                            
+                            <h4 class="font-headers font-bold text-sm mb-2" data-en="Visual Balance" data-es="Balance Visual">Visual Balance</h4>
+                            <p class="text-[11px] leading-relaxed text-gray-600 mb-4"
+                                data-en="Notice the red indicator dot at the top of this card container."
+                                data-es="Observa el punto indicador rojo en la parte superior de esta tarjeta.">
+                                Notice the red indicator dot at the top of this card container.
+                            </p>
+                            <span class="inline-block px-4 py-1.5 bg-primary-blue text-white text-[10px] font-bold structural-border"
+                                data-en="Aligned"
+                                data-es="Alineado">
+                                Aligned
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center relative z-10 border-t border-gray-dark/15 pt-4 mt-4">
+                        <span class="text-[11px] font-bold" data-en="Interactive Alignment Toggle:" data-es="Control de Alineación:">Interactive Alignment Toggle:</span>
+                        <button onclick="LC.toggleSymmetry()" class="px-4 py-1.5 bg-signal-red text-white text-xs font-bold structural-border hover:bg-gray-dark transition"
+                            data-en="Break Symmetry"
+                            data-es="Romper Simetría">
+                            Break Symmetry
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Specs -->
+                <div class="space-y-6 text-sm">
+                    <div class="border-l-2 border-signal-red pl-4">
+                        <h4 class="font-headers font-bold text-base mb-1" data-en="The Technical Lace Spec" data-es="La Ficha de Encaje Técnico">The Technical Lace Spec</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed"
+                            data-en="Our canvas is Bone White (#F9F6F0). Grid spacing is locked at 20px, with 0.5px solid borders in #E0DDD5 mapping horizontal and vertical axes."
+                            data-es="Nuestro lienzo es Bone White (#F9F6F0). El espaciado de la rejilla está bloqueado en 20px, con bordes sólidos de 0.5px en #E0DDD5 que trazan los ejes.">
+                            Our canvas is Bone White (#F9F6F0). Grid spacing is locked at 20px, with 0.5px solid borders in #E0DDD5 mapping horizontal and vertical axes.
+                        </p>
+                    </div>
+                    <div class="border-l-2 border-primary-blue pl-4">
+                        <h4 class="font-headers font-bold text-base mb-1" data-en="Extreme Whitespace" data-es="Espacio en Blanco Extremo">Extreme Whitespace</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed"
+                            data-en="We mandate twice the whitespace of standard web templates. Generous margin and padding rules signal confidence, allowing high-contrast points of interest to breathe."
+                            data-es="Exigimos el doble de espacio en blanco que las plantillas estándar. Las reglas generosas de margen y relleno indican confianza, permitiendo que respiren los puntos de interés.">
+                            We mandate twice the whitespace of standard web templates. Generous margin and padding rules signal confidence, allowing high-contrast points of interest to breathe.
+                        </p>
+                    </div>
+                    <div class="border-l-2 border-gray-dark pl-4">
+                        <h4 class="font-headers font-bold text-base mb-1" data-en="Visual Itch in Practice" data-es="La Picazón Visual en la Práctica">Visual Itch in Practice</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed"
+                            data-en="By shifting the red indicator dot exactly 8px to the right, we break perfect alignment. The subconscious immediately registers the asymmetry, pulling visual focus effortlessly."
+                            data-es="Al desplazar el punto rojo exactamente 8px a la derecha, rompemos la alineación perfecta. El subconsciente registra inmediatamente la asimetría, atrayendo el enfoque visual sin esfuerzo.">
+                            By shifting the red indicator dot exactly 8px to the right, we break perfect alignment. The subconscious immediately registers the asymmetry, pulling visual focus effortlessly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: COLOR HIERARCHY
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 py-12" aria-labelledby="colors-heading">
+        <div class="structural-border bg-bone-white p-8 md:p-12">
+            <h2 id="colors-heading" class="font-headers text-2xl md:text-3xl font-bold mb-6 border-b border-gray-dark/15 pb-4"
+                data-en="2. Color System: The 95/5 Rule"
+                data-es="2. Sistema de Color: La Regla 95/5">
+                2. Color System: The 95/5 Rule
+            </h2>
+
+            <p class="text-sm leading-relaxed mb-10"
+                data-en="To ensure signals are absolute, we restrict color usage to a 95/5 split. Ninety-five percent of our layout remains purely neutral (Bone White and Charcoal), serving as the quiet frame that empowers the five percent colored alerts (Pulse Blue, Signal Red, or Light Pink highlights) to trigger immediate, non-competitive reactions."
+                data-es="Para garantizar que las señales sean absolutas, restringimos el uso del color a una proporción de 95/5. El noventa y cinco por ciento de nuestro diseño permanece puramente neutral (Bone White y Charcoal), sirviendo como un marco silencioso que permite que las alertas coloreadas del cinco por ciento (Pulse Blue, Signal Red o Light Pink) activen reacciones inmediatas.">
+                To ensure signals are absolute, we restrict color usage to a 95/5 split. Ninety-five percent of our layout remains purely neutral (Bone White and Charcoal), serving as the quiet frame that empowers the five percent colored alerts (Pulse Blue, Signal Red, or Light Pink highlights) to trigger immediate, non-competitive reactions.
+            </p>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Bone White -->
+                <div class="structural-border bg-bone-white p-4 flex flex-col justify-between h-48 shadow-sm">
+                    <div>
+                        <div class="w-full h-12 bg-[#F9F6F0] structural-border mb-3"></div>
+                        <span class="font-headers font-bold text-xs block mb-1">Bone White</span>
+                        <span class="text-[10px] text-gray-500 font-details">#F9F6F0</span>
+                    </div>
+                    <button onclick="LC.copyHex('#F9F6F0', this)" class="w-full py-1 border border-gray-dark/30 hover:border-gray-dark text-[10px] font-bold uppercase transition tracking-wider"
+                        data-en="Copy Hex" data-es="Copiar Hex">Copy Hex</button>
+                </div>
+
+                <!-- Charcoal -->
+                <div class="structural-border bg-bone-white p-4 flex flex-col justify-between h-48 shadow-sm">
+                    <div>
+                        <div class="w-full h-12 bg-[#2D2D2D] structural-border mb-3"></div>
+                        <span class="font-headers font-bold text-xs block mb-1">Charcoal Grey</span>
+                        <span class="text-[10px] text-gray-500 font-details">#2D2D2D</span>
+                    </div>
+                    <button onclick="LC.copyHex('#2D2D2D', this)" class="w-full py-1 border border-gray-dark/30 hover:border-gray-dark text-[10px] font-bold uppercase transition tracking-wider"
+                        data-en="Copy Hex" data-es="Copiar Hex">Copy Hex</button>
+                </div>
+
+                <!-- Pulse Blue -->
+                <div class="structural-border bg-bone-white p-4 flex flex-col justify-between h-48 shadow-sm">
+                    <div>
+                        <div class="w-full h-12 bg-[#3A7BD5] structural-border mb-3"></div>
+                        <span class="font-headers font-bold text-xs block mb-1">Pulse Blue</span>
+                        <span class="text-[10px] text-gray-500 font-details">#3A7BD5</span>
+                    </div>
+                    <button onclick="LC.copyHex('#3A7BD5', this)" class="w-full py-1 border border-gray-dark/30 hover:border-gray-dark text-[10px] font-bold uppercase transition tracking-wider"
+                        data-en="Copy Hex" data-es="Copiar Hex">Copy Hex</button>
+                </div>
+
+                <!-- Light Pink -->
+                <div class="structural-border bg-bone-white p-4 flex flex-col justify-between h-48 shadow-sm">
+                    <div>
+                        <div class="w-full h-12 bg-[#FADEEB] structural-border mb-3"></div>
+                        <span class="font-headers font-bold text-xs block mb-1">Light Pink</span>
+                        <span class="text-[10px] text-gray-500 font-details">#FADEEB</span>
+                    </div>
+                    <button onclick="LC.copyHex('#FADEEB', this)" class="w-full py-1 border border-gray-dark/30 hover:border-gray-dark text-[10px] font-bold uppercase transition tracking-wider"
+                        data-en="Copy Hex" data-es="Copiar Hex">Copy Hex</button>
+                </div>
+
+                <!-- Signal Red -->
+                <div class="structural-border bg-bone-white p-4 flex flex-col justify-between h-48 shadow-sm">
+                    <div>
+                        <div class="w-full h-12 bg-[#C5301A] structural-border mb-3"></div>
+                        <span class="font-headers font-bold text-xs block mb-1">Signal Red</span>
+                        <span class="text-[10px] text-gray-500 font-details">#C5301A</span>
+                    </div>
+                    <button onclick="LC.copyHex('#C5301A', this)" class="w-full py-1 border border-gray-dark/30 hover:border-gray-dark text-[10px] font-bold uppercase transition tracking-wider"
+                        data-en="Copy Hex" data-es="Copiar Hex">Copy Hex</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: TYPOGRAPHY
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 py-12" aria-labelledby="type-heading">
+        <div class="structural-border bg-bone-white p-8 md:p-12">
+            <h2 id="type-heading" class="font-headers text-2xl md:text-3xl font-bold mb-6 border-b border-gray-dark/15 pb-4"
+                data-en="3. Typography Hierarchy"
+                data-es="3. Jerarquía Tipográfica">
+                3. Typography Hierarchy
+            </h2>
+
+            <p class="text-sm leading-relaxed mb-10"
+                data-en="Typefaces are selected to eliminate cognitive load in high-glare, mobile environments. Lexend Deca is our heading font, while JetBrains Mono handles technical details, pricing, and system parameters."
+                data-es="Las tipografías se seleccionan para eliminar la carga cognitiva en entornos móviles con mucho brillo. Lexend Deca es nuestra fuente para títulos, mientras que JetBrains Mono maneja detalles técnicos, precios y parámetros del sistema.">
+                Typefaces are selected to eliminate cognitive load in high-glare, mobile environments. Lexend Deca is our heading font, while JetBrains Mono handles technical details, pricing, and system parameters.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Lexend Deca -->
+                <div class="structural-border p-8 bg-[#FCFAED]">
+                    <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-4">Lexend Deca · Headings & Action Cues</span>
+                    <h3 class="text-4xl font-bold leading-tight mb-4 text-gray-dark">Aa Bb Cc</h3>
+                    <p class="font-headers text-xs leading-relaxed text-gray-600 mb-6">
+                        Designed with expanded breathing room and high x-height to maximize scannability. Used primarily for titles, subtitles, card headers, and button callouts.
+                    </p>
+                    <div class="space-y-2 border-t border-gray-dark/10 pt-4">
+                        <p class="font-headers text-2xl font-bold">Heading Level 1</p>
+                        <p class="font-headers text-xl font-semibold">Heading Level 2</p>
+                        <p class="font-headers text-sm font-medium">Heading Level 3</p>
+                    </div>
+                </div>
+
+                <!-- JetBrains Mono -->
+                <div class="structural-border p-8 bg-bone-white">
+                    <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-4">JetBrains Mono · Technical Details & Tables</span>
+                    <h3 class="text-4xl font-details mb-4 text-gray-dark">Aa Bb Cc</h3>
+                    <p class="text-xs leading-relaxed text-gray-600 mb-6">
+                        A highly legible monospaced typeface that enforces structured alignment. Used for system body copy, transparent pricing structures, lists, and manual instructions.
+                    </p>
+                    <div class="space-y-2 border-t border-gray-dark/10 pt-4 font-details text-xs">
+                        <p class="font-bold">SYSTEM CONSTANT = #2D2D2D</p>
+                        <p>Phase 1 Reconnaissance ($0.00)</p>
+                        <p class="italic">Last updated: February 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: JARGON JAR 2.0
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 py-12" aria-labelledby="jargon-heading">
+        <div class="structural-border bg-bone-white p-8 md:p-12">
+            <h2 id="jargon-heading" class="font-headers text-2xl md:text-3xl font-bold mb-3 border-b border-gray-dark/15 pb-4"
+                data-en="4. The Jargon Jar 2.0"
+                data-es="4. El Tarro de la Jerga 2.0">
+                4. The Jargon Jar 2.0
+            </h2>
+            <p class="text-xs font-bold text-signal-red uppercase tracking-wider mb-6"
+                data-en="Click any card below to translate corporate posture into straight talk."
+                data-es="Haz clic en cualquier tarjeta para traducir la postura corporativa en lenguaje directo.">
+                Click any card below to translate corporate posture into straight talk.
+            </p>
+
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Item 1 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Leverage synergies across touchpoints"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Make the parts work together."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"End-to-end digital transformation"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"We fix what's broken and build what's missing."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Scalable solutions for your growth journey"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"It works now and won't fall apart later."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"SEO-optimized content ecosystems"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Your site shows up when people search. That's the goal."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Robust backend infrastructure"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"The stuff running quietly in the background so nothing crashes."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Holistic brand alignment"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Your logo, site, and words look like they know each other."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="flip-card h-40" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner structural-border">
+                        <div class="flip-card-front bg-bone-white">
+                            <h4 class="font-headers font-bold text-xs text-signal-red mb-1">Corporate Speak</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Onboarding workflow optimization"</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h4 class="font-headers font-bold text-xs text-primary-blue mb-1">DA Translation</h4>
+                            <p class="text-[11px] leading-relaxed font-bold">"Getting started without the runaround."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pinned Note placeholder for balance -->
+                <div class="bg-[#FCFAED] structural-border p-5 h-40 flex flex-col justify-between relative shadow-sm">
+                    <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-3.5 h-3.5 bg-signal-red rounded-full structural-border"></div>
+                    <span class="text-[8px] font-bold text-gray-500 uppercase tracking-widest block text-center mt-3">Manual Registry</span>
+                    <p class="text-[10px] leading-relaxed italic text-gray-600 text-center">
+                        "If you need a glossary to read your website, you've already lost them."
+                    </p>
+                    <span class="text-[8px] font-bold text-right block">— Jargon Protocol</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: VERBAL IDENTITY & SPECTRUM
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 py-12 mb-20" aria-labelledby="voice-heading">
+        <div class="structural-border bg-bone-white p-8 md:p-12">
+            <h2 id="voice-heading" class="font-headers text-2xl md:text-3xl font-bold mb-6 border-b border-gray-dark/15 pb-4"
+                data-en="5. Verbal Identity & Tone Spectrum"
+                data-es="5. Identidad Verbal y Espectro de Tono">
+                5. Verbal Identity & Tone Spectrum
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Tone Spectrum Meters -->
+                <div class="space-y-8">
+                    <h3 class="font-headers font-bold text-base mb-2 uppercase tracking-wide text-gray-500" data-en="The Tone Coordinates" data-es="Las Coordenadas de Tono">The Tone Coordinates</h3>
+                    
+                    <!-- Casual -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-2">
+                            <span data-en="Formal" data-es="Formal">Formal</span>
+                            <span class="text-signal-red">65% Casual</span>
+                        </div>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="65" readonly>
+                    </div>
+
+                    <!-- Dry -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-2">
+                            <span data-en="Dry" data-es="Seco">Dry</span>
+                            <span class="text-signal-red">55% Dry</span>
+                        </div>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="45" readonly>
+                    </div>
+
+                    <!-- Plain -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-2">
+                            <span data-en="Technical" data-es="Técnico">Technical</span>
+                            <span class="text-signal-red">70% Plain</span>
+                        </div>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="70" readonly>
+                    </div>
+
+                    <!-- Confident -->
+                    <div>
+                        <div class="flex justify-between text-xs font-bold mb-2">
+                            <span data-en="Confident" data-es="Seguro">Confident</span>
+                            <span class="text-signal-red">75% Confident</span>
+                        </div>
+                        <input type="range" class="spectrum-slider pointer-events-none" aria-hidden="true" tabindex="-1" min="0" max="100" value="75" readonly>
+                    </div>
+                </div>
+
+                <!-- Voice Evolution -->
+                <div class="space-y-6">
+                    <h3 class="font-headers font-bold text-base mb-2 uppercase tracking-wide text-gray-500" data-en="Voice Evolution" data-es="Evolución de la Voz">Voice Evolution</h3>
+                    
+                    <div class="border-t border-gray-dark/10 pt-4">
+                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-1">Old Deadpan (Too aloof)</span>
+                        <p class="text-xs italic text-gray-600">"High-end engineering delivered with the enthusiasm of a librarian on a Tuesday."</p>
+                    </div>
+
+                    <div class="border-t border-gray-dark/10 pt-4">
+                        <span class="text-[9px] font-bold text-primary-blue uppercase tracking-widest block mb-1">Old Fluffy (Too corporate)</span>
+                        <p class="text-xs italic text-gray-600">"We nurture your digital presence like a garden, helping your brand blossom into its fullest potential."</p>
+                    </div>
+
+                    <div class="border-t border-signal-red pt-4 border-t-2">
+                        <span class="text-[9px] font-bold text-signal-red uppercase tracking-widest block mb-1" data-en="Unified Voice (Active & Direct)" data-es="Voz Unificada (Activa y Directa)">Unified Voice (Active & Direct)</span>
+                        <p class="text-xs font-bold text-gray-dark"
+                            data-en="&ldquo;Clean engineering, clear communication, and follow-through that won't require follow up.&rdquo;"
+                            data-es="&ldquo;Ingeniería limpia, comunicación clara y un seguimiento que no requerirá seguimiento.&rdquo;">
+                            &ldquo;Clean engineering, clear communication, and follow-through that won't require follow up.&rdquo;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: BRAND RESOURCE PORTAL (DOWNLOADS)
+    ============================================================= -->
+    <section class="max-w-5xl mx-auto px-6 py-12 mb-20" aria-labelledby="downloads-heading">
+        <div class="structural-border bg-bone-white p-8 md:p-12">
+            <h2 id="downloads-heading" class="font-headers text-2xl md:text-3xl font-bold mb-3 border-b border-gray-dark/15 pb-4"
+                data-en="6. Brand Resource Portal"
+                data-es="6. Portal de Recursos de Marca">
+                6. Brand Resource Portal
+            </h2>
+            <p class="text-sm leading-relaxed mb-8"
+                data-en="Official brand assets, voice manuals, templates, and marketing media packages. Click any file to download directly to your local system."
+                data-es="Activos de marca oficiales, manuales de voz, plantillas y paquetes de medios de marketing. Haz clic en cualquier archivo para descargarlo directamente a tu sistema local.">
+                Official brand assets, voice manuals, templates, and marketing media packages. Click any file to download directly to your local system.
+            </p>
+
+            <!-- Interactive Category Filter Tab Buttons -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b border-gray-dark/10 pb-6" role="tablist">
+                <button onclick="LC.selectTab('all')" id="tab-all" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="true" data-en="Show All" data-es="Mostrar Todo">Show All</button>
+                <button onclick="LC.selectTab('guides')" id="tab-guides" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="false" data-en="Guides &amp; Voice" data-es="Guías y Voz">Guides &amp; Voice</button>
+                <button onclick="LC.selectTab('logos')" id="tab-logos" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="false" data-en="Logo System" data-es="Sistema de Logos">Logo System</button>
+                <button onclick="LC.selectTab('icons')" id="tab-icons" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="false" data-en="Icon System" data-es="Sistema de Iconos">Icon System</button>
+                <button onclick="LC.selectTab('documents')" id="tab-documents" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="false" data-en="Document Templates" data-es="Plantillas de Docs">Document Templates</button>
+                <button onclick="LC.selectTab('folder-designs')" id="tab-folder-designs" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="false" data-en="Graphic Designs" data-es="Diseños Gráficos">Graphic Designs</button>
+                <button onclick="LC.selectTab('media-marketing')" id="tab-media-marketing" class="px-4 py-2 text-xs font-bold transition structural-border flex items-center gap-1.5" role="tab" aria-selected="false" data-en="Media &amp; Marketing" data-es="Medios y Marketing">Media &amp; Marketing</button>
+            </div>
+
+            <!-- Tab Content Panels -->
+            <div id="portal-panels" class="space-y-12">
+                
+                <!-- PANEL: GUIDES & VOICE -->
+                <div id="panel-guides" class="portal-panel space-y-6">
+                    <h3 class="font-headers font-bold text-lg mb-4 text-signal-red" data-en="Core Guides &amp; Voice Manuals" data-es="Guías Core y Manuales de Voz">Core Guides &amp; Voice Manuals</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Official Style Guide PDF -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="text-[9px] font-bold text-primary-blue uppercase tracking-widest block mb-2">PDF Document</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Official Brand Style Guide (PDF)" data-es="Guía Oficial de Estilo de la Marca (PDF)">Official Brand Style Guide (PDF)</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="Standard specifications for grids, fonts, spacing, margins, and tone." data-es="Especificaciones estándar para rejillas, fuentes, espaciado, márgenes y tono.">Standard specifications for grids, fonts, spacing, margins, and tone.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/001_Digital_Allies_The_Official_Brand_Style_Guide_T_tbFq5cNW.pdf" download="Digital_Allies_Official_Brand_Style_Guide.pdf" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download PDF" data-es="Descargar PDF">Download PDF</a>
+                        </div>
+
+                        <!-- System Variables TXT -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-2">TXT Config File</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Style Guide System Variables (TXT)" data-es="Variables del Sistema de Guía (TXT)">Style Guide System Variables (TXT)</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="Raw style tokens, hex codes, and baseline alignment constants." data-es="Tokens de estilo sin procesar, códigos hexadecimales y constantes de alineación.">Raw style tokens, hex codes, and baseline alignment constants.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/style_guide.txt" download="Digital_Allies_Style_Guide_Variables.txt" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download TXT" data-es="Descargar TXT">Download TXT</a>
+                        </div>
+
+                        <!-- Voice Guide TXT Detailed -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-2">TXT Voice Manual</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Detailed Brand Voice Manual (TXT)" data-es="Manual Detallado de Voz de Marca (TXT)">Detailed Brand Voice Manual (TXT)</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="Deep dive into the transition from dry deadpan copy to active, straight-talking copy." data-es="Análisis profundo de la transición de copy seco e indiferente a copy activo y directo.">Deep dive into the transition from dry deadpan copy to active, straight-talking copy.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/002_Digital_Allies_Brand_Voice_Guide_Your_yDs7XJLs.txt" download="Digital_Allies_Brand_Voice_Manual_Detailed.txt" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download TXT" data-es="Descargar TXT">Download TXT</a>
+                        </div>
+
+                        <!-- Voice Guide TXT One-Pager -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-2">TXT Voice One-Pager</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Brand Voice Guide — One-Pager (TXT)" data-es="Guía de Voz de Marca — Resumen (TXT)">Brand Voice Guide — One-Pager (TXT)</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="A concise quick-reference list of copy writing rules, do's, and don'ts." data-es="Una lista concisa de referencia rápida de reglas de redacción, qué hacer y qué evitar.">A concise quick-reference list of copy writing rules, do's, and don'ts.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/005_Digital_Allies_Brand_Voice_Guide_One_LHqQl8Pn.txt" download="Digital_Allies_Brand_Voice_Guide_One_Pager.txt" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download TXT" data-es="Descargar TXT">Download TXT</a>
+                        </div>
+
+                        <!-- Brand Blueprint -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest block mb-2">TXT Blueprint</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Brand Implementation Blueprint" data-es="Plano de Implementación de Marca">Brand Implementation Blueprint</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="Technical workflow guidelines for engineering design and copy handoffs." data-es="Pautas de flujo de trabajo técnico para el diseño de ingeniería y entrega de copy.">Technical workflow guidelines for engineering design and copy handoffs.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/blueprint.txt" download="Digital_Allies_Brand_Blueprint.txt" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download TXT" data-es="Descargar TXT">Download TXT</a>
+                        </div>
+
+                        <!-- Technological Solutions Booklet PDF -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <span class="text-[9px] font-bold text-primary-blue uppercase tracking-widest block mb-2">PDF Booklet</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Solutions Booklet (PDF)" data-es="Folleto de Soluciones (PDF)">Solutions Booklet (PDF)</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="Bilingual collateral outlining our core direct high-end engineering values." data-es="Folleto bilingüe que describe nuestros valores centrales de ingeniería directa.">Bilingual collateral outlining our core direct high-end engineering values.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/004_Digital_Allies_Technological_Solutions_for_Peopl_MS-z6hYW.pdf" download="Digital_Allies_Technological_Solutions_Booklet.pdf" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download PDF" data-es="Descargar PDF">Download PDF</a>
+                        </div>
+
+                        <!-- Style Guide Poster Concept (PNG) -->
+                        <div class="structural-border p-5 bg-bone-white flex flex-col justify-between shadow-sm border-gray-dark/15">
+                            <div>
+                                <span class="text-[9px] font-bold text-primary-blue uppercase tracking-widest block mb-2">PNG Poster Concept</span>
+                                <h4 class="font-headers font-bold text-sm mb-2" data-en="Style Guide Poster Concept (PNG)" data-es="Concepto de Póster de Guía de Estilo (PNG)">Style Guide Poster Concept (PNG)</h4>
+                                <p class="text-[11px] leading-relaxed text-gray-600" data-en="Visual summary poster displaying color palettes, grid lines, and typography specifications." data-es="Póster de resumen visual que muestra paletas de colores, líneas de cuadrícula y especificaciones de tipografía.">Visual summary poster displaying color palettes, grid lines, and typography specifications.</p>
+                            </div>
+                            <a href="assets/Brand System/Brand/003_A_clean_and_modern_brand_style_guide_features_a_QsfRWYDG.png" download="Digital_Allies_Brand_Style_Guide_Poster.png" class="mt-4 w-full py-2 bg-gray-dark text-[#F9F6F0] text-xs font-bold text-center structural-border hover:bg-signal-red transition block" data-en="Download PNG" data-es="Descargar PNG">Download PNG</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL: LOGOS -->
+                <div id="panel-logos" class="portal-panel space-y-6">
+                    <h3 class="font-headers font-bold text-lg mb-4 text-signal-red" data-en="Official Logo System Assets" data-es="Activos del Sistema de Logos Oficiales">Official Logo System Assets</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+                        
+                        <!-- Loop 1 to 16 logos -->
+                        <!-- Logo 1 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/001_15_wmFt_8iS.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Translucent Gray Circle</span>
+                            <a href="assets/Brand System/Frame/Logo System/001_15_wmFt_8iS.png" download="DA_Logo_Translucent_Gray.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 2 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/002_DA_small_banner_xov0T3kl.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">DA Small Banner</span>
+                            <a href="assets/Brand System/Frame/Logo System/002_DA_small_banner_xov0T3kl.png" download="DA_Small_Banner.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 3 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/003_A_large_bright_red_circle_is_centered_against_a_cLNU5-3w.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Stark Red Circle</span>
+                            <a href="assets/Brand System/Frame/Logo System/003_A_large_bright_red_circle_is_centered_against_a_cLNU5-3w.png" download="DA_Logo_Red_Circle.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 4 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/004_DA_lrg_banner_blue_2kNl2mMj.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Large Banner Blue</span>
+                            <a href="assets/Brand System/Frame/Logo System/004_DA_lrg_banner_blue_2kNl2mMj.png" download="DA_Large_Banner_Blue.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 5 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/005_The_text_DA_appears_in_large_dark_gray_HlnFeuwT.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">DA Stark Letters</span>
+                            <a href="assets/Brand System/Frame/Logo System/005_The_text_DA_appears_in_large_dark_gray_HlnFeuwT.png" download="DA_Logo_Letters_Dark_Gray.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 6 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/006_A_stark_deep_blue_circle_is_centrally_positioned_gCsWA3C-.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Deep Blue Circle</span>
+                            <a href="assets/Brand System/Frame/Logo System/006_A_stark_deep_blue_circle_is_centrally_positioned_gCsWA3C-.png" download="DA_Logo_Deep_Blue_Circle.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 7 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/007_In_a_minimalist_graphic_design_style_a_solid_vC8fZH0z.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Minimal Circle Red</span>
+                            <a href="assets/Brand System/Frame/Logo System/007_In_a_minimalist_graphic_design_style_a_solid_vC8fZH0z.png" download="DA_Logo_Minimalist_Red.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 8 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/008_In_a_minimalist_graphic_design_style_the_letters_u-NLHy-T.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Minimalist Letters</span>
+                            <a href="assets/Brand System/Frame/Logo System/008_In_a_minimalist_graphic_design_style_the_letters_u-NLHy-T.png" download="DA_Logo_Minimalist_Letters.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 9 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/009_DA_med_banner_vermilion_VIG9XwTY.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Med Banner Vermilion</span>
+                            <a href="assets/Brand System/Frame/Logo System/009_DA_med_banner_vermilion_VIG9XwTY.png" download="DA_Medium_Banner_Vermilion.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 10 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/010_006_A_solid_red_circle_is_centered_on_a_black_54HA_f43RuoBy.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Red Circle on Black</span>
+                            <a href="assets/Brand System/Frame/Logo System/010_006_A_solid_red_circle_is_centered_on_a_black_54HA_f43RuoBy.png" download="DA_Logo_Red_Circle_Black_BG.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 11 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/011_007_In_a_minimalist_style_a_solid_blue_circle_is_K_ZretAZ5b.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Solid Blue Circle</span>
+                            <a href="assets/Brand System/Frame/Logo System/011_007_In_a_minimalist_style_a_solid_blue_circle_is_K_ZretAZ5b.png" download="DA_Logo_Solid_Blue_Circle.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 12 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/012_008_In_a_minimalist_style_a_bright_blue_circle_cys_EkD3noXU.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Bright Blue Circle</span>
+                            <a href="assets/Brand System/Frame/Logo System/012_008_In_a_minimalist_style_a_bright_blue_circle_cys_EkD3noXU.png" download="DA_Logo_Bright_Blue_Circle.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 13 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/013_004_In_a_minimalist_graphic_design_style_bold_dark_x3KLopmV.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Bold Dark Circle</span>
+                            <a href="assets/Brand System/Frame/Logo System/013_004_In_a_minimalist_graphic_design_style_bold_dark_x3KLopmV.png" download="DA_Logo_Bold_Dark_Circle.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 14 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/014_005_A_solid_rich_blue_circle_is_centered_on_a_star_K3_NscJ1.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Rich Blue Stark</span>
+                            <a href="assets/Brand System/Frame/Logo System/014_005_A_solid_rich_blue_circle_is_centered_on_a_star_K3_NscJ1.png" download="DA_Logo_Rich_Blue_Circle.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 15 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/015_DA_med_banner_blue_kv0oP3vI.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Med Banner Blue</span>
+                            <a href="assets/Brand System/Frame/Logo System/015_DA_med_banner_blue_kv0oP3vI.png" download="DA_Medium_Banner_Blue.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+
+                        <!-- Logo 16 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Logo System/016_DA_lrg_banner_vermilion_glow_RCSHFtz.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[9px] font-details truncate w-full mb-2">Banner Vermilion Glow</span>
+                            <a href="assets/Brand System/Frame/Logo System/016_DA_lrg_banner_vermilion_glow_RCSHFtz.png" download="DA_Large_Banner_Vermilion_Glow.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Image" data-es="Obtener">Get Image</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL: ICONS -->
+                <div id="panel-icons" class="portal-panel space-y-6">
+                    <h3 class="font-headers font-bold text-lg mb-4 text-signal-red" data-en="Official Icon System Assets" data-es="Activos del Sistema de Iconos Oficiales">Official Icon System Assets</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                        
+                        <!-- Icon 1 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/001_014_In_a_minimalist_style_concentric_gray_circles_dpWvhLiC.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Integrations" data-es="Integraciones">Integrations</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Concentric Circles</span>
+                            <a href="assets/Brand System/Frame/Icon System/001_014_In_a_minimalist_style_concentric_gray_circles_dpWvhLiC.png" download="DA_Icon_Concentric_Circles.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+
+                        <!-- Icon 2 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/002_012_A_detailed_illustration_showcases_the_intricat_7F5xD8Bv.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Cogs &amp; Circuits" data-es="Engranajes y Circuitos">Cogs &amp; Circuits</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Intricate Cogs</span>
+                            <a href="assets/Brand System/Frame/Icon System/002_012_A_detailed_illustration_showcases_the_intricat_7F5xD8Bv.png" download="DA_Icon_Cogs_Circuits.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+
+                        <!-- Icon 3 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/003_011_A_simple_dark_background_frames_a_grey_line_66_fq27wSo.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Abstract System" data-es="Sistema Abstracto">Abstract System</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Line Geometry</span>
+                            <a href="assets/Brand System/Frame/Icon System/003_011_A_simple_dark_background_frames_a_grey_line_66_fq27wSo.png" download="DA_Icon_Line_Geometry.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+
+                        <!-- Icon 4 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/004_016_A_dark_grey_compass_rose_with_sharp_points_is_MbJDvBiJ.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Design Bureau" data-es="Buró de Diseño">Design Bureau</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Compass Rose</span>
+                            <a href="assets/Brand System/Frame/Icon System/004_016_A_dark_grey_compass_rose_with_sharp_points_is_MbJDvBiJ.png" download="DA_Icon_Compass_Rose.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+
+                        <!-- Icon 5 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/005_010_A_classic_rotary_phone_is_depicted_in_a_clean_6zT3M52x.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Support Post" data-es="Puesto de Soporte">Support Post</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Rotary Phone</span>
+                            <a href="assets/Brand System/Frame/Icon System/005_010_A_classic_rotary_phone_is_depicted_in_a_clean_6zT3M52x.png" download="DA_Icon_Rotary_Phone.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+
+                        <!-- Icon 6 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/006_015_In_a_minimalist_line_art_style_a_diagram_of_an_En1ci-J1.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Process Abacus" data-es="Ábaco de Procesos">Process Abacus</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Diagram Abacus</span>
+                            <a href="assets/Brand System/Frame/Icon System/006_015_In_a_minimalist_line_art_style_a_diagram_of_an_En1ci-J1.png" download="DA_Icon_Process_Diagram.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+
+                        <!-- Icon 7 -->
+                        <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                            <div class="w-full aspect-square border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                <img src="assets/Brand System/Frame/Icon System/007_009_A_metronome_is_depicted_in_a_minimalist_line_a_EZnDxBEN.png" alt="" class="max-w-full max-h-full object-contain">
+                            </div>
+                            <span class="text-[10px] font-bold w-full truncate" data-en="Automation" data-es="Automatización">Automation</span>
+                            <span class="text-[8px] font-details truncate w-full text-gray-500 mb-2">Metronome / Clock</span>
+                            <a href="assets/Brand System/Frame/Icon System/007_009_A_metronome_is_depicted_in_a_minimalist_line_a_EZnDxBEN.png" download="DA_Icon_Metronome_Clock.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Icon" data-es="Obtener">Get Icon</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL: DOCUMENTS -->
+                <div id="panel-documents" class="portal-panel space-y-6">
+                    <h3 class="font-headers font-bold text-lg mb-4 text-signal-red" data-en="Professional Document Templates" data-es="Plantillas de Documentos Profesionales">Professional Document Templates</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        
+                        <!-- Interactive Document Suite HTML Utility -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm col-span-2 md:col-span-2 bg-[#FCFAED] border-primary-blue/30">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex flex-col justify-between p-4 bg-white relative overflow-hidden mb-3">
+                                    <div class="absolute top-0 left-0 right-0 h-1 bg-primary-blue"></div>
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-[8px] font-bold text-primary-blue font-headers uppercase tracking-wider">Estimate</span>
+                                        <span class="text-[8px] font-details text-gray-400">EST-2026</span>
+                                    </div>
+                                    <div class="space-y-2 mt-4">
+                                        <div class="h-2 w-1/3 bg-gray-dark/20 rounded"></div>
+                                        <div class="h-1.5 w-full bg-gray-dark/10 rounded"></div>
+                                        <div class="h-1.5 w-5/6 bg-gray-dark/10 rounded"></div>
+                                        <div class="h-1.5 w-4/6 bg-gray-dark/10 rounded"></div>
+                                    </div>
+                                    <div class="border-t border-gray-dark/15 pt-2 mt-4 space-y-1">
+                                        <div class="flex justify-between text-[7px] font-bold text-gray-600">
+                                            <span>Subtotal</span>
+                                            <span>$1,250.00</span>
+                                        </div>
+                                        <div class="flex justify-between text-[8px] font-bold text-signal-red">
+                                            <span>Total Due</span>
+                                            <span>$1,250.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Interactive Document Suite (HTML Utility)" data-es="Suite de Documentos Interactivos (Utilidad HTML)">Interactive Document Suite (HTML Utility)</h4>
+                                <p class="text-[10px] leading-relaxed text-gray-600 mb-2" data-en="Interactive browser-based generator for invoices, onboarding guides, proposals, meeting notes, and estimates with print-to-PDF formatting." data-es="Generador interactivo basado en navegador para facturas, guías de inducción, propuestas, notas de reunión y presupuestos con formato PDF inmediato.">Interactive browser-based generator for invoices, onboarding guides, proposals, meeting notes, and estimates with print-to-PDF formatting.</p>
+                            </div>
+                            <a href="assets/digital-allies-doc-kit.html" download="digital-allies-doc-kit.html" class="w-full py-1.5 bg-primary-blue text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Interactive Suite" data-es="Descargar Suite Interactiva">Download Interactive Suite</a>
+                        </div>
+
+                        <!-- Doc 1 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/001_005_A_service_agreement_document_is_presented_with_uGe_ccve.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Service Agreement Template" data-es="Plantilla de Contrato de Servicio">Service Agreement Template</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Agreement Template Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/001_005_A_service_agreement_document_is_presented_with_uGe_ccve.png" download="DA_Template_Service_Agreement.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+
+                        <!-- Doc 2 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/002_009_This_is_a_receipt_template_from_Digital_Allies_7p6SXBRG.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Receipt &amp; Invoice Template" data-es="Plantilla de Recibo y Factura">Receipt &amp; Invoice Template</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Receipt Template Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/002_009_This_is_a_receipt_template_from_Digital_Allies_7p6SXBRG.png" download="DA_Template_Receipt_Invoice.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+
+                        <!-- Doc 3 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/003_004_A_professional_client_onboarding_document_irgk_GHNI5kd0.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Client Onboarding Guide" data-es="Guía de Onboarding de Clientes">Client Onboarding Guide</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Onboarding Checklist Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/003_004_A_professional_client_onboarding_document_irgk_GHNI5kd0.png" download="DA_Template_Onboarding_Checklist.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+
+                        <!-- Doc 4 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/004_008_In_a_clean_professional_style_this_image_jq8eO_EGI-t8WR.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Report &amp; Factsheet Layout" data-es="Diseño de Reporte y Ficha">Report &amp; Factsheet Layout</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Technical Factsheet Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/004_008_In_a_clean_professional_style_this_image_jq8eO_EGI-t8WR.png" download="DA_Template_Report_Factsheet.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+
+                        <!-- Doc 5 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/005_003_This_is_a_meeting_notes_template_with_sections_qXawQPFH.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Meeting Notes &amp; Agenda" data-es="Notas de Reunión y Agenda">Meeting Notes &amp; Agenda</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Meeting Notes Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/005_003_This_is_a_meeting_notes_template_with_sections_qXawQPFH.png" download="DA_Template_Meeting_Notes.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+
+                        <!-- Doc 6 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/006_002_In_a_minimalist_corporate_style_this_proposal_sgoeQKr.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Project Proposal Cover" data-es="Portada de Propuesta de Proyecto">Project Proposal Cover</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Proposal Presentation Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/006_002_In_a_minimalist_corporate_style_this_proposal_sgoeQKr.png" download="DA_Template_Proposal_Cover.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+
+                        <!-- Doc 7 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-[3/4] border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Document Suite/007_006_This_graphic_features_the_text_Digital_Allies_zSKI5p6z.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Official Letterhead Set" data-es="Juego de Membrete Oficial">Official Letterhead Set</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Company Letterhead Layout (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Document Suite/007_006_This_graphic_features_the_text_Digital_Allies_zSKI5p6z.png" download="DA_Template_Letterhead.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Template" data-es="Descargar">Download Template</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL: FOLDER DESIGNS -->
+                <div id="panel-folder-designs" class="portal-panel space-y-6">
+                    <h3 class="font-headers font-bold text-lg mb-4 text-signal-red" data-en="Minimalist Graphic Designs" data-es="Diseños Gráficos Minimalistas">Minimalist Graphic Designs</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        
+                        <!-- Design 1 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Folder/001_In_a_graphic_design_style_this_image_presents_a_mTBYMs8s.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Geometry Poster" data-es="Póster de Geometría">Geometry Poster</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Minimalist Geometry Poster (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Folder/001_In_a_graphic_design_style_this_image_presents_a_mTBYMs8s.png" download="DA_Design_Geometry_Poster.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Graphic" data-es="Descargar">Download Graphic</a>
+                        </div>
+
+                        <!-- Design 2 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Folder/002_In_a_minimalist_illustrative_style_a_desert_MeYmvsb8.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Southwest Line Art" data-es="Arte de Línea del Sudoeste">Southwest Line Art</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Desert Landscape Minimal Art (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Folder/002_In_a_minimalist_illustrative_style_a_desert_MeYmvsb8.png" download="DA_Design_Desert_Line_Art.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Graphic" data-es="Descargar">Download Graphic</a>
+                        </div>
+
+                        <!-- Design 3 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Folder/003_In_a_minimalist_graphic_design_style_this_image_5gx30YZI.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Vector Grid Blueprint" data-es="Plano de Rejilla Vectorial">Vector Grid Blueprint</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Vector Grid Construction Art (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Folder/003_In_a_minimalist_graphic_design_style_this_image_5gx30YZI.png" download="DA_Design_Grid_Blueprint.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Graphic" data-es="Descargar">Download Graphic</a>
+                        </div>
+
+                        <!-- Design 4 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Folder/004_In_a_minimalist_graphic_design_style_the_text_JpzHu0wn.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Text Typography Poster" data-es="Póster Tipográfico de Texto">Text Typography Poster</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Typography Poster Concept (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Folder/004_In_a_minimalist_graphic_design_style_the_text_JpzHu0wn.png" download="DA_Design_Typography_Poster.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Graphic" data-es="Descargar">Download Graphic</a>
+                        </div>
+
+                        <!-- Design 5 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Folder/005_In_a_flat_design_style_the_image_displays_OayBxIz.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Modern Workspace Art" data-es="Arte del Espacio de Trabajo">Modern Workspace Art</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Workspace Perspective Artwork (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Folder/005_In_a_flat_design_style_the_image_displays_OayBxIz.png" download="DA_Design_Workspace_Illustration.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Graphic" data-es="Descargar">Download Graphic</a>
+                        </div>
+
+                        <!-- Design 6 -->
+                        <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                            <div>
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-3 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Folder/006_In_a_minimalist_graphic_design_style_complex_7QtikuIo.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <h4 class="font-headers font-bold text-xs mb-1" data-en="Technical Flow Concept" data-es="Concepto de Flujo Técnico">Technical Flow Concept</h4>
+                                <span class="text-[9px] font-details text-gray-500 block mb-2">Logical Diagram Artwork (PNG)</span>
+                            </div>
+                            <a href="assets/Brand System/Folder/006_In_a_minimalist_graphic_design_style_complex_7QtikuIo.png" download="DA_Design_Flow_Diagram.png" class="w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Graphic" data-es="Descargar">Download Graphic</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PANEL: MEDIA & MARKETING -->
+                <div id="panel-media-marketing" class="portal-panel space-y-8">
+                    
+                    <!-- Educational Infographics Kit ZIP -->
+                    <div class="structural-border p-6 md:p-8 bg-[#FCFAED] shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-[#FADEEB] border border-gray-dark/20 text-signal-red">
+                                <i data-lucide="archive" class="w-8 h-8" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <span class="text-[9px] font-bold text-signal-red uppercase tracking-widest block mb-1">ZIP Archive package (264 MB)</span>
+                                <h4 class="font-headers font-bold text-lg mb-1" data-en="Educational Infographics Complete Kit" data-es="Kit Completo de Infografías Educativas">Educational Infographics Complete Kit</h4>
+                                <p class="text-xs text-gray-600 max-w-xl" data-en="A massive high-resolution package containing vector blueprints, educational diagrams, and infographics for tech training." data-es="Un paquete masivo de alta resolución que contiene planos vectoriales y diagramas educativos.">A massive high-resolution package containing vector blueprints, educational diagrams, and infographics for tech training.</p>
+                            </div>
+                        </div>
+                        <a href="assets/Brand System/Educational_Infographic_Design.zip" download="DA_Educational_Infographics_Complete_Kit.zip" class="px-6 py-3 bg-signal-red text-[#F9F6F0] text-xs font-bold text-center hover:bg-gray-dark transition structural-border whitespace-nowrap" data-en="Download Complete ZIP" data-es="Descargar ZIP Completo">Download Complete ZIP</a>
+                    </div>
+
+                    <!-- Podcasts -->
+                    <div>
+                        <h4 class="font-headers font-bold text-base mb-4 text-primary-blue border-b border-gray-dark/10 pb-2" data-en="Podcast Audio Resource Package" data-es="Paquete de Recursos de Audio de Podcast">Podcast Audio Resource Package</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            
+                            <!-- Podcast 1 -->
+                            <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                                <div>
+                                    <div class="flex items-center gap-2.5 mb-3">
+                                        <i data-lucide="mic" class="w-5 h-5 text-gray-dark" aria-hidden="true"></i>
+                                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Episode 001</span>
+                                    </div>
+                                    <h5 class="font-headers font-bold text-xs mb-1">From Crowd Control to Web Design</h5>
+                                    <p class="text-[10px] text-gray-600" data-en="Uncompressed broadcast audio discuss local community web engineering." data-es="Audio de transmisión sin comprimir que discute la ingeniería web local.">Uncompressed broadcast audio discuss local community web engineering.</p>
+                                </div>
+                                <a href="assets/Brand System/Media/Podcast Episodes/001_From_Crowd_Control_to_Web_Design_03mZ0FSg" download="DA_Podcast_001_From_Crowd_Control_to_Web_Design.mp3" class="mt-4 w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Audio" data-es="Descargar Audio">Download Audio</a>
+                            </div>
+
+                            <!-- Podcast 2 -->
+                            <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                                <div>
+                                    <div class="flex items-center gap-2.5 mb-3">
+                                        <i data-lucide="mic" class="w-5 h-5 text-gray-dark" aria-hidden="true"></i>
+                                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Episode 002</span>
+                                    </div>
+                                    <h5 class="font-headers font-bold text-xs mb-1">Build Aetheris with Vite &amp; Tailwind</h5>
+                                    <p class="text-[10px] text-gray-600" data-en="Technical workflow breakdown on bundling, compiling, and rapid layout design." data-es="Análisis del flujo técnico sobre empaquetado, compilación y diseño rápido.">Technical workflow breakdown on bundling, compiling, and rapid layout design.</p>
+                                </div>
+                                <a href="assets/Brand System/Media/Podcast Episodes/002_Build_Aetheris_With_Vite_And_Tailwind_Cbb-HeZF" download="DA_Podcast_002_Build_Aetheris_Vite_Tailwind.mp3" class="mt-4 w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Audio" data-es="Descargar Audio">Download Audio</a>
+                            </div>
+
+                            <!-- Podcast 3 -->
+                            <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                                <div>
+                                    <div class="flex items-center gap-2.5 mb-3">
+                                        <i data-lucide="mic" class="w-5 h-5 text-gray-dark" aria-hidden="true"></i>
+                                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Episode 003</span>
+                                    </div>
+                                    <h5 class="font-headers font-bold text-xs mb-1">Why Local AI Beats the Cloud</h5>
+                                    <p class="text-[10px] text-gray-600" data-en="Deep dive into processing latency, private nodes, and community independence." data-es="Análisis profundo de latencia, nodos privados e independencia comunitaria.">Deep dive into processing latency, private nodes, and community independence.</p>
+                                </div>
+                                <a href="assets/Brand System/Media/Podcast Episodes/003_Why_Local_AI_Beats_the_Cloud_WkK3lxfA" download="DA_Podcast_003_Why_Local_AI_Beats_Cloud.mp3" class="mt-4 w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download Audio" data-es="Descargar Audio">Download Audio</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Videos -->
+                    <div>
+                        <h4 class="font-headers font-bold text-base mb-4 text-primary-blue border-b border-gray-dark/10 pb-2" data-en="Video Clips Package" data-es="Paquete de Videoclips">Video Clips Package</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            
+                            <!-- Video 1 -->
+                            <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                                <div>
+                                    <div class="flex items-center gap-2.5 mb-3">
+                                        <i data-lucide="video" class="w-5 h-5 text-gray-dark" aria-hidden="true"></i>
+                                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Video 01</span>
+                                    </div>
+                                    <h5 class="font-headers font-bold text-xs mb-1">Websites for Everyone</h5>
+                                    <p class="text-[10px] text-gray-600" data-en="High-quality video feature demonstrating direct structural design principles." data-es="Video de alta calidad que demuestra principios de diseño estructural directo.">High-quality video feature demonstrating direct structural design principles.</p>
+                                </div>
+                                <a href="assets/Brand System/Media/Youtube Posts - needs style update/001_Build_a_Website_That_Speaks_to_Everyone_ArAS6Mf5.mp4" download="DA_Video_Websites_For_Everyone.mp4" class="mt-4 w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download MP4" data-es="Descargar MP4">Download MP4</a>
+                            </div>
+
+                            <!-- Video 2 -->
+                            <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                                <div>
+                                    <div class="flex items-center gap-2.5 mb-3">
+                                        <i data-lucide="video" class="w-5 h-5 text-gray-dark" aria-hidden="true"></i>
+                                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Video 02</span>
+                                    </div>
+                                    <h5 class="font-headers font-bold text-xs mb-1">Aetheris: A Magical App</h5>
+                                    <p class="text-[10px] text-gray-600" data-en="Production walk-through of the Aetheris magical application UI system." data-es="Recorrido de producción del sistema de interfaz de la aplicación Aetheris.">Production walk-through of the Aetheris magical application UI system.</p>
+                                </div>
+                                <a href="assets/Brand System/Media/Youtube Posts - needs style update/002_Aetheris_Build_a_Magical_App_3VBN_tJ0.mp4" download="DA_Video_Aetheris_Magical_App.mp4" class="mt-4 w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download MP4" data-es="Descargar MP4">Download MP4</a>
+                            </div>
+
+                            <!-- Video 3 -->
+                            <div class="structural-border p-4 bg-bone-white flex flex-col justify-between shadow-sm">
+                                <div>
+                                    <div class="flex items-center gap-2.5 mb-3">
+                                        <i data-lucide="video" class="w-5 h-5 text-gray-dark" aria-hidden="true"></i>
+                                        <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest">Video 03</span>
+                                    </div>
+                                    <h5 class="font-headers font-bold text-xs mb-1">Local AI: Community Superpower</h5>
+                                    <p class="text-[10px] text-gray-600" data-en="Visual overview covering local model nodes and processing workflows." data-es="Resumen visual sobre nodos de modelos locales y flujos de procesamiento.">Visual overview covering local model nodes and processing workflows.</p>
+                                </div>
+                                <a href="assets/Brand System/Media/Youtube Posts - needs style update/003_Local_AI_Your_Community_s_Superpower_L-6do2hg.mp4" download="DA_Video_Local_AI_Superpower.mp4" class="mt-4 w-full py-1.5 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Download MP4" data-es="Descargar MP4">Download MP4</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ads -->
+                    <div>
+                        <h4 class="font-headers font-bold text-base mb-4 text-primary-blue border-b border-gray-dark/10 pb-2" data-en="Promotional Advertising Package (PNG)" data-es="Paquete de Publicidad Promocional (PNG)">Promotional Advertising Package (PNG)</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            
+                            <!-- Ad 1 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/001_14_H4yDrec3.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #001</span>
+                                <a href="assets/Brand System/Ads/001_14_H4yDrec3.png" download="DA_Ad_Campaign_001.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 2 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/002_11_EVIyUXoH.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #002</span>
+                                <a href="assets/Brand System/Ads/002_11_EVIyUXoH.png" download="DA_Ad_Campaign_002.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 3 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/003_16_vsRRMuln.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #003</span>
+                                <a href="assets/Brand System/Ads/003_16_vsRRMuln.png" download="DA_Ad_Campaign_003.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 4 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/004_18_3BtUN8dX.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #004</span>
+                                <a href="assets/Brand System/Ads/004_18_3BtUN8dX.png" download="DA_Ad_Campaign_004.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 5 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/005_10_rGpT_24w.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #005</span>
+                                <a href="assets/Brand System/Ads/005_10_rGpT_24w.png" download="DA_Ad_Campaign_005.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 6 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/006_4_IoNHak7C.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #006</span>
+                                <a href="assets/Brand System/Ads/006_4_IoNHak7C.png" download="DA_Ad_Campaign_006.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 7 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/007_19_5aH2A7c6.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #007</span>
+                                <a href="assets/Brand System/Ads/007_19_5aH2A7c6.png" download="DA_Ad_Campaign_007.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+
+                            <!-- Ad 8 -->
+                            <div class="structural-border p-3 bg-bone-white flex flex-col justify-between items-center text-center shadow-sm">
+                                <div class="w-full aspect-video border border-gray-dark/10 flex items-center justify-center p-2 mb-2 bg-[#FCFAED]">
+                                    <img src="assets/Brand System/Ads/008_5_HhkYYX_T.png" alt="" class="max-w-full max-h-full object-contain">
+                                </div>
+                                <span class="text-[9px] font-details truncate w-full mb-2">Campaign Ad #008</span>
+                                <a href="assets/Brand System/Ads/008_5_HhkYYX_T.png" download="DA_Ad_Campaign_008.png" class="w-full py-1 bg-gray-dark text-white text-[10px] font-bold text-center hover:bg-signal-red transition structural-border" data-en="Get Ad" data-es="Obtener">Get Ad</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FOOTER
+    ============================================================= -->
+    </main>
+<footer class="bg-gray-dark text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-10 mb-10">
+                <div>
+                    <a href="index.html" class="flex items-center space-x-3 mb-4" aria-label="Digital Allies">
+                        <div class="relative flex items-center justify-center w-5 h-5">
+                            <div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div>
+                            <div class="w-3 h-3 bg-white rounded-full brand-pulse"
+                                style="border: 1px solid rgba(255,255,255,0.4);"></div>
+                        </div>
+                        <span class="font-headers font-bold text-xl tracking-wide text-white">Digital Allies</span>
+                    </a>
+                    <p class="text-sm text-white/60 max-w-xs leading-relaxed"
+                        data-en="Technological solutions for people with better things to do."
+                        data-es="Soluciones tecnológicas para personas con cosas mejores que hacer.">
+                        Technological solutions for people with better things to do.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-6 text-xs">
+                    <a href="index.html" class="text-white/60 hover:text-white transition">Home</a>
+                    <a href="privacy.html" class="text-white/60 hover:text-white transition">Privacy</a>
+                    <a href="terms.html" class="text-white/60 hover:text-white transition">Terms</a>
+                    <a href="cookies.html" class="text-white/60 hover:text-white transition">Cookies</a>
+                    <a href="sitemap.xml" class="text-white/60 hover:text-white transition">Sitemap</a>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-6">
+                <p class="text-xs text-white/40">&copy; 2026 Digital Allies. Based in Kingman, AZ.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LANGUAGE & DEMO CONTROLLER -->
+    <script>
+        class BrandController {
+            constructor() {
+                this.currentLang = localStorage.getItem('da-language') || 'en';
+                this.symmetryOffset = false;
+                this.currentTab = 'all';
+                this.init();
+            }
+
+            init() {
+                this.applyLanguage(this.currentLang, false);
+                this.selectTab(this.currentTab);
+            }
+
+            toggleLanguage(lang) {
+                if (lang === this.currentLang) return;
+                this.currentLang = lang;
+                localStorage.setItem('da-language', lang);
+                this.applyLanguage(lang, true);
+            }
+
+            toggleSymmetry() {
+                this.symmetryOffset = !this.symmetryOffset;
+                const dot = document.getElementById('demo-dot');
+                const btn = document.querySelector('[onclick="LC.toggleSymmetry()"]');
+                const badge = document.querySelector('#demo-card span');
+
+                if (this.symmetryOffset) {
+                    dot.style.transform = 'translateX(5px)';
+                    badge.textContent = this.currentLang === 'en' ? 'Symmetry Broken (5px offset)' : 'Simetría Rota (desvío 5px)';
+                    badge.classList.remove('bg-primary-blue');
+                    badge.classList.add('bg-signal-red');
+                    btn.textContent = this.currentLang === 'en' ? 'Reset Symmetry' : 'Restaurar Simetría';
+                } else {
+                    dot.style.transform = 'translateX(-50%)';
+                    badge.textContent = this.currentLang === 'en' ? 'Aligned' : 'Alineado';
+                    badge.classList.remove('bg-signal-red');
+                    badge.classList.add('bg-primary-blue');
+                    btn.textContent = this.currentLang === 'en' ? 'Break Symmetry' : 'Romper Simetría';
+                }
+            }
+
+            copyHex(hex, button) {
+                navigator.clipboard.writeText(hex).then(() => {
+                    const originalText = button.getAttribute('data-' + this.currentLang) || "Copy Hex";
+                    button.textContent = this.currentLang === 'en' ? 'Copied!' : '¡Copiado!';
+                    button.style.backgroundColor = '#FADEEB';
+                    button.style.color = '#2D2D2D';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                        button.style.color = '';
+                    }, 1500);
+                });
+            }
+
+            selectTab(tabId) {
+                this.currentTab = tabId;
+                const tabs = ['all', 'guides', 'logos', 'icons', 'documents', 'folder-designs', 'media-marketing'];
+                
+                tabs.forEach(t => {
+                    const btn = document.getElementById('tab-' + t);
+                    if (!btn) return;
+                    if (t === tabId) {
+                        btn.style.backgroundColor = '#2D2D2D';
+                        btn.style.color = '#F9F6F0';
+                        btn.setAttribute('aria-selected', 'true');
+                    } else {
+                        btn.style.backgroundColor = '#F9F6F0';
+                        btn.style.color = '#2D2D2D';
+                        btn.setAttribute('aria-selected', 'false');
+                    }
+                });
+
+                const panels = document.querySelectorAll('.portal-panel');
+                panels.forEach(p => {
+                    if (tabId === 'all') {
+                        p.style.display = 'block';
+                    } else {
+                        if (p.id === 'panel-' + tabId) {
+                            p.style.display = 'block';
+                        } else {
+                            p.style.display = 'none';
+                        }
+                    }
+                });
+            }
+
+            applyLanguage(lang, announce) {
+                this.updateContent(lang);
+                this.updateButtons(lang);
+                document.documentElement.lang = lang;
+                if (announce) this.announceLanguageChange(lang);
+            }
+
+            updateContent(lang) {
+                document.querySelectorAll('[data-en][data-es]').forEach(el => {
+                    const val = el.getAttribute('data-' + lang);
+                    if (!val) return;
+                    el.innerHTML = val;
+                });
+                }
+
+            updateButtons(lang) {
+                ['en', 'es'].forEach(l => {
+                    const btn = document.getElementById('lang-' + l);
+                    if (!btn) return;
+                    const active = l === lang;
+                    btn.classList.toggle('lang-active', active);
+                });
+            }
+
+            announceLanguageChange(lang) {
+                const msg = lang === 'es' ? 'Idioma cambiado a español' : 'Language changed to English';
+                const announcer = document.getElementById('lang-announcer');
+                if (announcer) {
+                    announcer.textContent = '';
+                    setTimeout(() => { announcer.textContent = msg; }, 60);
+                }
+            }
+        }
+
+        const LC = new BrandController();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+</body>
+
+</html>

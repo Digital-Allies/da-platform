@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Site Map — Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="HTML Site Map for Digital Allies — a complete index of all pages on digitalallies.net.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W8ZC2TMW');</script>
+<!-- End Google Tag Manager -->
+
+    <!-- Fonts -->
+        <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="assets/css/a11y.css">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #2D2D2D;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-headers {
+            font-family: 'Lexend Deca', sans-serif;
+        }
+
+        .structural-border {
+            border: 1px solid #2D2D2D;
+        }
+
+        /* ---- Navigation ---- */
+        .site-nav {
+            border-bottom: 1px solid #2D2D2D;
+            background: #F9F6F0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 1rem 1.5rem;
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #2D2D2D;
+        }
+
+        .nav-logo span {
+            font-family: 'Lexend Deca', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.025em;
+        }
+
+        .pulse-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #3A7BD5;
+            border-radius: 50%;
+            border: 1px solid #2D2D2D;
+            animation: brand-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes brand-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.25);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #2D2D2D;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #3A7BD5;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            border: 1px solid #2D2D2D;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #2D2D2D;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: #FDF1EE;
+        }
+
+        .lang-active {
+            background: #2D2D2D !important;
+            color: #F9F6F0 !important;
+        }
+
+        .lang-divider {
+            width: 1px;
+            height: 1rem;
+            background: #2D2D2D;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem 3rem;
+            text-align: center;
+        }
+
+        .hero .tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #C5301A;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero .meta {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        /* ---- Sitemap Content ---- */
+        .sitemap-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem 6rem;
+        }
+
+        .sitemap-box {
+            border: 1px solid #2D2D2D;
+            background: #F9F6F0;
+            padding: 2rem;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .collapse {
+            text-decoration-style: dashed;
+            text-decoration-line: underline;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul.ultree {
+            border: 1px solid #2D2D2D;
+            border-bottom: none;
+        }
+
+        li {
+            margin: 0;
+        }
+
+        li ul {
+            margin-left: 1.25rem;
+        }
+
+        li.lhead {
+            background: #2D2D2D;
+            color: #F9F6F0;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        li.lhead:hover {
+            background: #444;
+        }
+
+        .lcount {
+            padding: 0 0.625rem;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .lpage {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(45, 45, 45, 0.15);
+        }
+
+        .lpage a:link,
+        .lpage a:visited {
+            color: #3A7BD5;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .lpage a:hover {
+            text-decoration: underline;
+        }
+
+        .lpage small {
+            color: #666;
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .last-page {
+            border: none;
+        }
+
+        /* ---- Footer ---- */
+        .site-footer {
+            background: #2D2D2D;
+            color: white;
+            padding: 3rem 1.5rem;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand p {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 280px;
+            line-height: 1.6;
+            margin-top: 0.75rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-links a.active {
+            color: white;
+            font-weight: 700;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-credits {
+            margin-top: 0.5rem;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .footer-credits a {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .site-footer .lang-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+            border: none;
+            overflow: visible;
+        }
+
+        .site-footer .lang-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 0;
+        }
+
+        .site-footer .lang-active {
+            color: white !important;
+            background: none !important;
+            font-weight: 700;
+        }
+
+        .site-footer .lang-divider {
+            width: 1px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8ZC2TMW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <!-- Aria announcer for language changes -->
+    <div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo" aria-label="Digital Allies — return to home">
+                <div class="pulse-dot"></div>
+                <span>Digital Allies</span>
+            </a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="/index.html#departments" data-en="Services" data-es="Servicios">Services</a>
+                    <a href="/index.html#pricing" data-en="Pricing" data-es="Precios">Pricing</a>
+                    <a href="/index.html#field-notes" data-en="Reviews" data-es="Reseñas">Reviews</a>
+                    <a href="/index.html#faq" data-en="FAQ" data-es="FAQ">FAQ</a>
+                    <a href="/learn/" data-en="Learn" data-es="Aprender">Learn</a>
+                    <a href="/index.html#contact" data-en="Contact" data-es="Contacto">Contact</a>
+                </div>
+                <div class="lang-switcher" role="group">
+                    <button id="lang-en" onclick="LC.toggleLanguage('en')" class="lang-btn lang-active">EN</button>
+                    <div class="lang-divider"></div>
+                    <button id="lang-es" onclick="LC.toggleLanguage('es')" class="lang-btn">ES</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+<main id="main-content" tabindex="-1">
+
+
+    <!-- HERO -->
+    <div class="hero">
+        <p class="tag" data-en="Index · All Pages" data-es="Índice · Todas las Páginas">Index · All Pages</p>
+        <h1 data-en="Site Map" data-es="Mapa del Sitio">Site Map</h1>
+        <p class="meta">
+            <span data-en="Last updated: 2026, June 1" data-es="Última actualización: 1 de junio de 2026">Last updated: 2026, June 1</span> &middot;
+            <a href="https://digitalallies.net/" style="color: #3A7BD5; text-decoration: none; font-weight: 600;"
+                data-en="digitalallies.net Homepage" data-es="Página de Inicio de digitalallies.net">digitalallies.net
+                Homepage</a>
+        </p>
+    </div>
+
+    <!-- SITEMAP CONTENT (functional structure preserved from PRO Sitemaps) -->
+    <div class="sitemap-container">
+        <div class="sitemap-box">
+
+            <ul class="ultree level-1 has-pages">
+                <li class="lhead" title="Click to toggle">https://digitalallies.net/<span class="lcount">12 pages</span>
+                </li>
+
+                <li class="lpagelist">
+                    <ul class="ulpages">
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/"
+                                data-en="Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ"
+                                data-es="Digital Allies | Soluciones Tecnológicas para Personas con Mejores Cosas que Hacer — Kingman, AZ"
+                                title="Digital Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ">Digital
+                                Allies | Technological Solutions for People with Better Things to Do — Kingman, AZ</a>
+                            <br /><small
+                                data-en="Digital Allies — Technological solutions for people with better things to do. Integrations, automation, and support based in Kingman, AZ. Free consulting. No ghosting guarantee."
+                                data-es="Digital Allies — Soluciones tecnológicas para personas con mejores cosas que hacer. Integraciones, automatización y soporte con sede en Kingman, AZ. Consultoría gratuita. Garantía de no abandono.">Digital
+                                Allies — Technological solutions for people with better things to do. Integrations,
+                                automation, and support based in Kingman, AZ. Free consulting. No ghosting
+                                guarantee.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/"
+                                data-en="Learn Hub &amp; DIY Guides — Digital Allies"
+                                data-es="Centro de Aprendizaje y Guías DIY — Digital Allies"
+                                title="Learn Hub &amp; DIY Guides — Digital Allies">Learn Hub &amp; DIY Guides — Digital
+                                Allies</a>
+                            <br /><small
+                                data-en="Free guides, tools, and video tutorials for small business owners. SEO, AEO, accessibility, and more — explained without the jargon. From Digital Allies in Kingman, AZ."
+                                data-es="Guías, herramientas y video tutoriales gratuitos para propietarios de pequeños negocios. SEO, AEO, accesibilidad y más, explicados sin tecnicismos. De Digital Allies en Kingman, AZ.">Free
+                                guides, tools, and video tutorials for small business owners. SEO, AEO, accessibility,
+                                and more — explained without the jargon. From Digital Allies in Kingman, AZ.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/seo-aeo"
+                                data-en="SEO vs AEO: Make Your Business Visible to AI Search"
+                                data-es="SEO vs AEO: Haz tu Negocio Visible para la Búsqueda de IA"
+                                title="SEO vs AEO: Make Your Business Visible to AI Search">SEO vs AEO: Make Your
+                                Business Visible to AI Search</a>
+                            <br /><small
+                                data-en="What AI actually reads when it recommends businesses. Schema markup, directory consistency, answer formatting, and the maintenance rhythm that keeps you showing up. Free tools included."
+                                data-es="Lo que la IA realmente lee cuando recomienda empresas. Marcado de esquema, consistencia de directorios, formato de respuestas y el ritmo de mantenimiento que te mantiene visible. Herramientas gratuitas incluidas.">What
+                                AI actually reads when it recommends businesses. Schema markup, directory consistency,
+                                answer formatting, and the maintenance rhythm that keeps you showing up. Free tools
+                                included.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/alttext"
+                                data-en="Mastering Alt-Text: Good vs. Bad &amp; Why It Matters"
+                                data-es="Dominando el Texto Alternativo: Bueno vs. Malo y Por Qué Importa"
+                                title="Mastering Alt-Text: Good vs. Bad &amp; Why It Matters">Mastering Alt-Text: Good
+                                vs. Bad &amp; Why It Matters</a>
+                            <br /><small
+                                data-en="Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker. From Digital Allies in Kingman, AZ."
+                                data-es="El texto alternativo no es opcional: es cómo sirves a toda tu comunidad. Aprende cómo es un buen texto alternativo, qué evitar y prueba el tuyo con un verificador en vivo. De Digital Allies en Kingman, AZ.">Alt-text
+                                isn't optional — it's how you serve your whole community. Learn what good alt-text looks
+                                like, what to avoid, and test yours with a live checker. From Digital Allies in Kingman,
+                                AZ.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/privacy.html" data-en="Privacy Policy — Digital Allies"
+                                data-es="Política de Privacidad — Digital Allies"
+                                title="Privacy Policy — Digital Allies">Privacy Policy</a>
+                            <br /><small data-en="Privacy policy for Digital Allies website and services."
+                                data-es="Política de privacidad para el sitio web y los servicios de Digital Allies.">Privacy
+                                policy for Digital Allies website and services.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/terms.html" data-en="Terms of Service — Digital Allies"
+                                data-es="Términos de Servicio — Digital Allies"
+                                title="Terms of Service — Digital Allies">Terms of Service</a>
+                            <br /><small data-en="Terms and conditions for Digital Allies services."
+                                data-es="Términos y condiciones para los servicios de Digital Allies.">Terms and
+                                conditions for Digital Allies services.</small>
+                        </li>
+
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/ada-compliance"
+                                data-en="ADA Compliance for Websites — Accessible Web Design · Digital Allies"
+                                data-es="Cumplimiento de la ADA para Sitios Web — Diseño Web Accesible · Digital Allies"
+                                title="ADA Compliance for Websites — Accessible Web Design · Digital Allies">ADA
+                                Compliance for Websites — Accessible Web Design · Digital Allies</a>
+                            <br /><small
+                                data-en="Website accessibility isn't just the right thing to do — it's a legal requirement and a business advantage. WCAG 2.1 AA, ADA compliance, and what it actually means for small businesses in Kingman and beyond."
+                                data-es="La accesibilidad del sitio web no es solo lo correcto, es un requisito legal y una ventaja comercial. WCAG 2.1 AA, cumplimiento de la ADA y lo que realmente significa para las pequeñas empresas en Kingman y más allá.">Website
+                                accessibility isn't just the right thing to do — it's a legal requirement and a business
+                                advantage. WCAG 2.1 AA, ADA compliance, and what it actually means for small businesses
+                                in Kingman and beyond.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/bilingual-web"
+                                data-en="Why Your Business Needs a Bilingual Website — Digital Allies"
+                                data-es="Por Qué Tu Negocio Necesita un Sitio Web Bilingüe — Digital Allies"
+                                title="Why Your Business Needs a Bilingual Website — Digital Allies">Why Your Business
+                                Needs a Bilingual Website — Digital Allies</a>
+                            <br /><small
+                                data-en="Hispanic consumers represent $1.7 trillion in U.S. buying power. If your website is English-only, you're leaving that market to competitors who showed up. Bilingual web design for Kingman and Mohave County businesses."
+                                data-es="Los consumidores hispanos representan $1.7 billones en poder adquisitivo en EE. UU. Si tu sitio web está solo en inglés, estás dejando ese mercado a los competidores que sí se presentaron. Diseño web bilingüe para empresas de Kingman y el condado de Mohave.">Hispanic
+                                consumers represent $1.7 trillion in U.S. buying power. If your website is English-only,
+                                you're leaving that market to competitors who showed up. Bilingual web design for
+                                Kingman and Mohave County businesses.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/dept-cooperation"
+                                data-en="App Integrations for Small Business — Dept. of Cooperation · Digital Allies"
+                                data-es="Integraciones de Aplicaciones para Pequeñas Empresas — Departamento de Cooperación · Digital Allies"
+                                title="App Integrations for Small Business — Dept. of Cooperation · Digital Allies">App
+                                Integrations for Small Business — Dept. of Cooperation · Digital Allies</a>
+                            <br /><small
+                                data-en="Your apps don't have to fight each other. Integrations connect your booking system, POS, CRM, email, and accounting so data moves without you touching it. From Digital Allies in Kingman, AZ."
+                                data-es="Tus aplicaciones no tienen que pelear entre sí. Las integraciones conectan tu sistema de reservas, POS, CRM, correo electrónico y contabilidad para que los datos se muevan sin que los toques. De Digital Allies en Kingman, AZ.">Your
+                                apps don't have to fight each other. Integrations connect your booking system, POS, CRM,
+                                email, and accounting so data moves without you touching it. From Digital Allies in
+                                Kingman, AZ.</small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/design-bureau"
+                                data-en="Design & Brand for Small Business — The Design Bureau · Digital Allies"
+                                data-es="Diseño y Marca para Pequeñas Empresas — El Buró de Diseño · Digital Allies"
+                                title="Design & Brand for Small Business — The Design Bureau · Digital Allies">Design &
+                                Brand for Small Business — The Design Bureau · Digital Allies</a>
+                            <br /><small
+                                data-en="Professional web design and brand identity services for small businesses. Stand out with a consistent and memorable look. From Digital Allies in Kingman, AZ."
+                                data-es="Diseño web profesional y servicios de identidad de marca para pequeñas empresas. Destácate con una imagen consistente y memorable. De Digital Allies en Kingman, AZ."></small>
+                        </li>
+
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/learn/self-governing-bureau"
+                                data-en="Business Automation for Small Business — The Self-Governing Bureau · Digital Allies"
+                                data-es="Business Automation for Small Business — The Self-Governing Bureau · Digital Allies"
+                                title="Business Automation for Small Business — The Self-Governing Bureau · Digital Allies">Business
+                                Automation for Small Business — The Self-Governing Bureau · Digital Allies</a>
+                            <br /><small
+                                data-en="Repetitive tasks are for machines. Automation handles appointment reminders, invoice follow-ups, social posts, and data entry while you focus on the work that actually needs you. From Digital Allies in Kingman, AZ."
+                                data-es="Repetitive tasks are for machines. Automation handles appointment reminders, invoice follow-ups, social posts, and data entry while you focus on the work that actually needs you. From Digital Allies in Kingman, AZ.">Repetitive
+                                tasks are for machines. Automation handles appointment reminders, invoice follow-ups,
+                                social posts, and data entry while you focus on the work that actually needs you. From
+                                Digital Allies in Kingman, AZ.</small>
+                        </li>
+                        <li class="lpage">
+                            <a href="https://digitalallies.net/cookies.html" data-en="Cookie Policy — Digital Allies"
+                                data-es="Política de Cookies — Digital Allies"
+                                title="Cookie Policy — Digital Allies">Cookie Policy</a>
+                            <br /><small data-en="Cookie usage and preferences for digitalallies.net."
+                                data-es="Uso de cookies y preferencias para digitalallies.net.">Cookie usage and
+                                preferences for digitalallies.net.</small>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    </main>
+<footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="/" class="nav-logo" style="color: white;" aria-label="Digital Allies">
+                        <div class="pulse-dot" style="background: white; border-color: rgba(255,255,255,0.4);"></div>
+                        <span class="font-headers" style="color: white;">Digital Allies</span>
+                    </a>
+                    <p data-en="Technological solutions for people with better things to do."
+                        data-es="Soluciones tecnológicas para personas con mejores cosas que hacer.">Technological
+                        solutions for people with better things to do.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="/index.html" data-en="Home" data-es="Inicio">Home</a>
+                    <a href="/privacy.html" data-en="Privacy" data-es="Privacidad">Privacy</a>
+                    <a href="/terms.html" data-en="Terms" data-es="Términos">Terms</a>
+                    <a href="/cookies.html" data-en="Cookies" data-es="Cookies">Cookies</a>
+                    <a href="/sitemap.html" class="active" data-en="Sitemap" data-es="Mapa del Sitio">Sitemap</a>
+                    <a href="/sitemap.xml" data-en="Sitemap XML" data-es="Sitemap XML">Sitemap XML</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
+                    data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">&copy; 2026 Digital Allies. Based in
+                    Kingman, AZ.</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (PRO Sitemaps toggle preserved & LanguageController implemented) -->
+    <script type="text/javascript">
+        function el_t(el, cl) { if (el) el.classList.toggle(cl); }
+        window.addEventListener('load', (event) => {
+            let alh = document.getElementsByClassName('lhead');
+            for (let lh of alh) {
+                lh.addEventListener('click', function (event) {
+                    el_t(this, 'collapse');
+                    el_t(this.nextElementSibling, 'hide');
+                });
+            }
+        });
+
+        class LanguageController {
+            constructor() {
+                this.currentLang = localStorage.getItem('da-language') || 'en';
+                this.init();
+            }
+
+            init() {
+                this.applyLanguage(this.currentLang, false);
+            }
+
+            toggleLanguage(lang) {
+                if (lang === this.currentLang) return;
+                this.currentLang = lang;
+                localStorage.setItem('da-language', lang);
+                this.applyLanguage(lang, true);
+            }
+
+            applyLanguage(lang, announce) {
+                this.updateContent(lang);
+                this.updateButtons(lang);
+                document.documentElement.lang = lang;
+                if (announce) this.announceLanguageChange(lang);
+            }
+
+            updateContent(lang) {
+                document.querySelectorAll('[data-en][data-es]').forEach(el => {
+                    const val = el.getAttribute('data-' + lang);
+                    if (!val) return;
+                    el.innerHTML = val;
+                });
+            }
+
+            updateButtons(lang) {
+                ['en', 'es'].forEach(l => {
+                    const btn = document.getElementById('lang-' + l);
+                    if (!btn) return;
+                    const active = l === lang;
+                    btn.classList.toggle('lang-active', active);
+                });
+            }
+
+            announceLanguageChange(lang) {
+                const msg = lang === 'es' ? 'Idioma cambiado a español' : 'Language changed to English';
+                const announcer = document.getElementById('lang-announcer');
+                if (announcer) {
+                    announcer.textContent = '';
+                    setTimeout(() => { announcer.textContent = msg; }, 60);
+                }
+            }
+        }
+
+        const LC = new LanguageController();
+    </script>
+
+</body>
+
+</html>

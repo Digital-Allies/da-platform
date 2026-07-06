@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Accessibility &amp; ADA Compliance Services — Kingman, AZ | Digital Allies</title>
+<meta name="description" content="Learn how alt text works — and find out how Digital Allies helps small businesses in Kingman, AZ meet WCAG 2.1 AA accessibility standards without the jargon.">
+<meta name="keywords" content="ADA compliance Kingman AZ, web accessibility Arizona, WCAG 2.1 small business, alt text, screen reader optimization, accessible website Kingman">
+    <link rel="canonical" href="https://digitalallies.net/learn/alttext">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/favicon.svg">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Mastering Alt-Text: Good vs. Bad & Why It Matters">
+    <meta property="og:description" content="24.1% of Kingman residents are over 65. Alt-text isn't optional — it's how you serve your whole community.">
+    <meta property="og:url" content="https://digitalallies.net/learn/alttext">
+
+        <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="../assets/css/a11y.css">
+
+    <script src="../assets/js/lucide-da.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bone-white': '#F9F6F0',
+                        'gray-dark': '#2D2D2D',
+                        'primary-blue': '#3A7BD5',
+                        'light-pink': '#FADEEB',
+                        'signal-red': '#C5301A'
+                    },
+                    fontFamily: {
+                        headers: ['"Lexend Deca"', 'sans-serif'],
+                        details: ['"JetBrains Mono"', 'monospace']
+  }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9F6F0;
+            background-image:
+                linear-gradient(rgba(45,45,45,0.07) 0.5px, transparent 0.5px),
+                linear-gradient(90deg, rgba(45,45,45,0.07) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            color: #2D2D2D;
+        }
+        h1,h2,h3,h4 { font-family: 'Lexend Deca', sans-serif; }
+        .structural-border { border: 1px solid #2D2D2D; }
+
+        .brand-pulse { animation: brand-pulse 3s ease-in-out infinite; }
+        @keyframes brand-pulse {
+            0%,100% { opacity:1; transform:scale(1); }
+            50% { opacity:0.5; transform:scale(1.25); }
+        }
+        .fab-ring { animation: fab-ring 2.2s ease-out infinite; }
+        @keyframes fab-ring {
+            0% { transform:scale(1); opacity:0.55; }
+            100% { transform:scale(2.4); opacity:0; }
+        }
+        .lang-active { background-color: #2D2D2D !important; color: #F9F6F0 !important; }
+
+        /* Prose */
+        .prose-da p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.85;
+            color: #2D2D2D;
+            margin-bottom: 1.25rem;
+        }
+        .prose-da strong { font-weight: 600; }
+
+        /* Example cards */
+        .ex-bad  { border-left: 3px solid #C5301A; background: #fff5f4; }
+        .ex-good { border-left: 3px solid #3A7BD5; background: #f0f6ff; }
+
+        /* Checker textarea */
+        textarea.checker-field {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #2D2D2D;
+            padding: 12px 16px;
+            width: 100%;
+            outline: none;
+            color: #2D2D2D;
+            resize: vertical;
+            transition: border-color 0.15s;
+        }
+        textarea.checker-field:focus { border-color: #3A7BD5; }
+
+        /* Progress */
+        .progress-bar { height: 8px; background: #E0DDD5; border: 1px solid #2D2D2D; overflow: hidden; }
+        .progress-fill { height: 100%; transition: width 0.3s, background 0.3s; }
+
+        /* Checklist rows */
+        .check-row {
+            border-bottom: 1px solid #E0DDD5;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .check-row:last-child { border-bottom: none; }
+        .check-row:hover { background: #FADEEB; }
+
+        /* Pinned note */
+        .pinned-note { background-color: #FCFAED; position: relative; padding-top: 2.5rem; }
+        .red-pin {
+            position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+            width: 14px; height: 14px; background-color: #C5301A;
+            border-radius: 50%; border: 1px solid #2D2D2D;
+        }
+
+        /* Rhythm rows */
+        .rhythm-row { border-bottom: 1px dashed rgba(45,45,45,0.15); padding-bottom: 12px; margin-bottom: 12px; }
+        .rhythm-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border-width:0; }
+        html { scroll-behavior: smooth; }
+    </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "ADA Compliance and Web Accessibility Services",
+  "description": "Digital Allies audits and remediates small business websites for WCAG 2.1 AA compliance. Services include screen reader optimization, alt text, color contrast, keyboard navigation, and form accessibility.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "@id": "https://digitalallies.net/#business",
+    "name": "Digital Allies",
+    "telephone": "+1-928-228-5769",
+    "sameAs": [
+      "https://www.instagram.com/digitalallies__",
+      "https://www.facebook.com/digitalallies",
+      "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+    ]
+  },
+  "areaServed": {
+    "@type": "Place",
+    "name": "Kingman, AZ"
+  },
+  "serviceType": "ADA Compliance, Web Accessibility, WCAG 2.1",
+  "url": "https://digitalallies.net/learn/alttext",
+  "dateModified": "2026-06-01"
+}
+</script>
+</head>
+
+<body class="antialiased">
+
+<div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<!-- NAV -->
+<nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/index.html" class="flex items-center space-x-3" aria-label="Digital Allies Home">
+            <div class="relative flex items-center justify-center w-5 h-5">
+                <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
+                <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
+            </div>
+            <span class="font-headers font-bold text-xl tracking-wide">Digital Allies</span>
+        </a>
+        <div class="flex items-center space-x-4 lg:space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Services" data-es="Servicios">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Pricing" data-es="Precios">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Reviews" data-es="Reseñas">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition whitespace-nowrap" data-en="FAQ"
+                    data-es="FAQ">FAQ</a>
+                <a href="/learn/" class="text-signal-red underline underline-offset-4 whitespace-nowrap"
+                    data-en="Learn" data-es="Aprender">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition whitespace-nowrap"
+                    data-en="Contact" data-es="Contacto">Contact</a>
+            </div>
+            <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group" aria-label="Language selector">
+                <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active" aria-pressed="true">EN</button>
+                <div class="w-px h-5 bg-gray-dark" aria-hidden="true"></div>
+                <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink" aria-pressed="false">ES</button>
+            </div>
+        </div>
+
+                <!-- Hamburger button (mobile only) -->
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 flex-shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobileMenu()">
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                </button>
+    </div>
+
+        <!-- Mobile menu dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-dark/20 bg-bone-white" role="menu">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 text-sm font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition" data-en="Services" data-es="Servicios" onclick="closeMobileMenu()" role="menuitem">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition" data-en="Pricing" data-es="Precios" onclick="closeMobileMenu()" role="menuitem">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition" data-en="Reviews" data-es="Reseñas" onclick="closeMobileMenu()" role="menuitem">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition" data-en="FAQ" data-es="FAQ" onclick="closeMobileMenu()" role="menuitem">FAQ</a>
+                <a href="/learn/" class="hover:text-primary-blue transition" data-en="Learn" data-es="Aprender" onclick="closeMobileMenu()" role="menuitem">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition" data-en="Contact" data-es="Contacto" onclick="closeMobileMenu()" role="menuitem">Contact</a>
+            </div>
+        </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="max-w-5xl mx-auto px-6 pt-6">
+    <nav aria-label="Breadcrumb" class="text-xs font-bold tracking-widest uppercase">
+        <ol class="flex items-center gap-2 text-gray-dark/50">
+            <li><a href="/index.html" class="hover:text-primary-blue transition">Home</a></li>
+            <li aria-hidden="true">·</li>
+            <li><a href="/learn/" class="hover:text-primary-blue transition">Learn</a></li>
+            <li aria-hidden="true">·</li>
+            <li class="text-signal-red">Alt-Text Guide</li>
+        </ol>
+    </nav>
+<main id="main-content" tabindex="-1">
+
+</div>
+
+<!-- HERO -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-12">
+    <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4"
+        data-en="Accessibility · Interactive Guide"
+        data-es="Accesibilidad · Guía Interactiva">Accessibility · Interactive Guide</p>
+    <h1 class="font-headers font-bold text-4xl md:text-5xl leading-tight mb-6"
+        data-en="Mastering Alt-Text: Good vs. Bad &amp; Why It Matters"
+        data-es="Dominando el Alt-Text: Bueno vs. Malo y Por Qué Importa">
+        Mastering Alt-Text:<br class="hidden md:block"> Good vs. Bad &amp; Why It Matters
+    </h1>
+    <div class="flex flex-wrap gap-4 items-center text-xs text-gray-dark/50 font-bold tracking-widest uppercase">
+        <span data-en="By Anthony · Digital Allies" data-es="Por Anthony · Digital Allies">By Anthony · Digital Allies</span>
+        <span aria-hidden="true">·</span>
+        <span>Kingman, AZ</span>
+        <span aria-hidden="true">·</span>
+        <span data-en="Updated 2026" data-es="Actualizado 2026">Updated 2026</span>
+    </div>
+</header>
+
+<!-- ARTICLE -->
+<article class="max-w-5xl mx-auto px-6" aria-label="Alt-text guide">
+
+    <!-- INTRO -->
+    <section class="mb-16 prose-da max-w-3xl">
+        <p data-en="A screen reader hits an image without alt-text and skips right past it. Your gallery becomes invisible. Product photos disappear. Content you worked on — gone, from the perspective of anyone navigating your site with assistive technology."
+           data-es="Un lector de pantalla encuentra una imagen sin alt-text y la omite por completo. Tu galería se vuelve invisible. Las fotos de productos desaparecen. El contenido en el que trabajaste — desaparecido, desde la perspectiva de cualquiera que navegue tu sitio con tecnología de asistencia.">A screen reader hits an image without alt-text and skips right past it. Your gallery becomes invisible. Product photos disappear. Content you worked on — gone, from the perspective of anyone navigating your site with assistive technology.</p>
+        <p data-en="This isn't an edge case. &lt;strong&gt;24.1% of Kingman residents are over 65.&lt;/strong&gt; Vision changes are a normal part of aging. Screen readers, high-contrast modes, and keyboard navigation aren't accessibility features for a small minority — they're how a significant chunk of your actual customer base interacts with the web."
+           data-es="Esto no es un caso extremo. &lt;strong&gt;El 24.1% de los residentes de Kingman tiene más de 65 años.&lt;/strong&gt; Los cambios en la visión son una parte normal del envejecimiento. Los lectores de pantalla, los modos de alto contraste y la navegación por teclado no son funciones de accesibilidad para una pequeña minoría — son la forma en que una parte significativa de tu base de clientes real interactúa con la web.">This isn't an edge case. <strong>24.1% of Kingman residents are over 65.</strong> Vision changes are a normal part of aging. Screen readers, high-contrast modes, and keyboard navigation aren't accessibility features for a small minority — they're how a significant chunk of your actual customer base interacts with the web.</p>
+        <p data-en="Alt-text bridges your visual content to everyone who accesses information differently. It also feeds into SEO — search engines read alt-text to understand image content. And it shows up as visible text when images fail to load on a slow connection."
+           data-es="El alt-text conecta tu contenido visual con todos los que acceden a la información de manera diferente. También alimenta el SEO — los motores de búsqueda leen el alt-text para entender el contenido de las imágenes. Y aparece como texto visible cuando las imágenes no cargan en una conexión lenta.">Alt-text bridges your visual content to everyone who accesses information differently. It also feeds into SEO — search engines read alt-text to understand image content. And it shows up as visible text when images fail to load on a slow connection.</p>
+        <p data-en="The fix is straightforward. The rules are simple. Most people just don't know them."
+           data-es="La solución es sencilla. Las reglas son simples. La mayoría de las personas simplemente no las conocen.">The fix is straightforward. The rules are simple. Most people just don't know them.</p>
+    </section>
+
+    <!-- THE STAT CALLOUT -->
+    <section class="mb-16">
+        <div class="grid md:grid-cols-3 gap-px structural-border overflow-hidden">
+            <div class="bg-gray-dark text-bone-white p-8">
+                <div class="font-headers font-bold text-4xl text-signal-red mb-2">24.1%</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-bone-white/60 mb-2"
+                    data-en="Kingman residents over 65" data-es="Residentes de Kingman mayores de 65">Kingman residents over 65</div>
+                <div class="text-xs text-bone-white/40"
+                    data-en="Vision changes are a normal part of aging. This is your market."
+                    data-es="Los cambios en la visión son una parte normal del envejecimiento. Este es tu mercado.">Vision changes are a normal part of aging. This is your market.</div>
+            </div>
+            <div class="bg-gray-dark text-bone-white p-8 border-t md:border-t-0 md:border-l border-bone-white/10">
+                <div class="font-headers font-bold text-4xl text-primary-blue mb-2">1 in 12</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-bone-white/60 mb-2"
+                    data-en="Men have some form of color blindness" data-es="Los hombres tienen algún tipo de daltonismo">Men have some form of color blindness</div>
+                <div class="text-xs text-bone-white/40"
+                    data-en="Accessibility affects more people than most businesses realize."
+                    data-es="La accesibilidad afecta a más personas de lo que la mayoría de las empresas se da cuenta.">Accessibility affects more people than most businesses realize.</div>
+            </div>
+            <div class="bg-gray-dark text-bone-white p-8 border-t md:border-t-0 md:border-l border-bone-white/10">
+                <div class="font-headers font-bold text-4xl text-bone-white mb-2">WCAG</div>
+                <div class="text-xs font-bold tracking-widest uppercase text-bone-white/60 mb-2"
+                    data-en="2.1 AA — the standard to meet" data-es="2.1 AA — el estándar a cumplir">2.1 AA — the standard to meet</div>
+                <div class="text-xs text-bone-white/40"
+                    data-en="Alt-text on meaningful images is a hard requirement, not a suggestion."
+                    data-es="El alt-text en imágenes significativas es un requisito obligatorio, no una sugerencia.">Alt-text on meaningful images is a hard requirement, not a suggestion.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE RULES -->
+    <section class="mb-16" aria-labelledby="rules-heading">
+        <h2 id="rules-heading" class="font-headers font-bold text-2xl mb-6"
+            data-en="The Rules, Plainly Stated" data-es="Las Reglas, Claramente Explicadas">The Rules, Plainly Stated</h2>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="Alt-text has four rules. They're not complicated — but most people either don't know them or don't apply them consistently."
+               data-es="El alt-text tiene cuatro reglas. No son complicadas — pero la mayoría de las personas o no las conocen o no las aplican de manera consistente.">Alt-text has four rules. They're not complicated — but most people either don't know them or don't apply them consistently.</p>
+        </div>
+
+        <div class="space-y-3">
+
+            <div class="structural-border bg-bone-white p-6 grid md:grid-cols-5 gap-4 items-start">
+                <div class="md:col-span-1">
+                    <div class="font-headers font-bold text-3xl text-primary-blue leading-none mb-1">01</div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue"
+                        data-en="Write what you see" data-es="Escribe lo que ves">Write what you see</div>
+                </div>
+                <div class="md:col-span-4 prose-da">
+                    <p class="mb-0"
+                        data-en="Describe what's actually in the image. Be specific. Include context that matters to understanding the content. If the image shows a chart of mobile traffic data, say that — not &quot;chart&quot; or &quot;graph.&quot;"
+                        data-es="Describe lo que realmente hay en la imagen. Sé específico. Incluye el contexto que importa para entender el contenido. Si la imagen muestra un gráfico de datos de tráfico móvil, di eso — no &quot;gráfico&quot; o &quot;imagen&quot;.">Describe what's actually in the image. Be specific. Include context that matters to understanding the content. If the image shows a chart of mobile traffic data, say that — not "chart" or "graph."</p>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6 grid md:grid-cols-5 gap-4 items-start">
+                <div class="md:col-span-1">
+                    <div class="font-headers font-bold text-3xl text-primary-blue leading-none mb-1">02</div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue"
+                        data-en="Stay under 125 characters" data-es="Mantente bajo los 125 caracteres">Stay under 125 characters</div>
+                </div>
+                <div class="md:col-span-4 prose-da">
+                    <p class="mb-0"
+                        data-en="Most screen readers truncate after 125 characters. If your alt-text is a paragraph, most of it disappears. Be specific, but be concise. If an image genuinely needs a long description, use a caption or the surrounding text instead."
+                        data-es="La mayoría de los lectores de pantalla truncan después de 125 caracteres. Si tu alt-text es un párrafo, la mayor parte desaparece. Sé específico, pero conciso. Si una imagen realmente necesita una descripción larga, usa un pie de foto o el texto circundante.">Most screen readers truncate after 125 characters. If your alt-text is a paragraph, most of it disappears. Be specific, but be concise. If an image genuinely needs a long description, use a caption or the surrounding text instead.</p>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6 grid md:grid-cols-5 gap-4 items-start">
+                <div class="md:col-span-1">
+                    <div class="font-headers font-bold text-3xl text-signal-red leading-none mb-1">03</div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-signal-red"
+                        data-en='Skip "image of" or "photo of"' data-es='Omite "imagen de" o "foto de"'>Skip "image of" or "photo of"</div>
+                </div>
+                <div class="md:col-span-4 prose-da">
+                    <p class="mb-0"
+                        data-en='Screen readers already announce that it&apos;s an image before reading the alt-text. Starting with "image of" means the user hears "image, image of..." — redundant and mildly annoying. Just describe the content directly.'
+                        data-es='Los lectores de pantalla ya anuncian que es una imagen antes de leer el alt-text. Comenzar con "imagen de" significa que el usuario escucha "imagen, imagen de..." — redundante e irritante. Solo describe el contenido directamente.'>Screen readers already announce that it's an image before reading the alt-text. Starting with "image of" means the user hears "image, image of..." — redundant and mildly annoying. Just describe the content directly.</p>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6 grid md:grid-cols-5 gap-4 items-start">
+                <div class="md:col-span-1">
+                    <div class="font-headers font-bold text-3xl text-signal-red leading-none mb-1">04</div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-signal-red"
+                        data-en="File names ≠ alt-text" data-es="Nombres de archivo ≠ alt-text">File names ≠ alt-text</div>
+                </div>
+                <div class="md:col-span-4 prose-da">
+                    <p class="mb-2"
+                        data-en="File names help you organize folders. Descriptive file names help SEO. Alt-text describes content for screen readers and shows up when images fail to load. These are two different jobs — do both."
+                        data-es="Los nombres de archivo te ayudan a organizar carpetas. Los nombres descriptivos ayudan al SEO. El alt-text describe el contenido para los lectores de pantalla y aparece cuando las imágenes no cargan. Son dos trabajos diferentes — haz ambos.">File names help you organize folders. Descriptive file names help SEO. Alt-text describes content for screen readers and shows up when images fail to load. These are two different jobs — do both.</p>
+                    <p class="mb-0 text-xs border-l-2 border-signal-red pl-3 text-gray-dark/70">Good file name: <code>kingman-mobile-traffic-2026.png</code><br>Good alt-text: <code>Bar chart showing 87.4% of Kingman website visits occurring on mobile devices, May 2025 to May 2026</code></p>
+                </div>
+            </div>
+
+            <!-- Decorative images rule -->
+            <div class="structural-border bg-light-pink p-6 grid md:grid-cols-5 gap-4 items-start">
+                <div class="md:col-span-1">
+                    <div class="font-headers font-bold text-3xl text-gray-dark leading-none mb-1">+1</div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-dark"
+                        data-en="Decorative images" data-es="Imágenes decorativas">Decorative images</div>
+                </div>
+                <div class="md:col-span-4 prose-da">
+                    <p class="mb-0"
+                        data-en='If an image is purely decorative — a background texture, a divider line, a repeated pattern — use an empty alt attribute: &lt;code&gt;alt=""&lt;/code&gt;. This tells the screen reader to skip it entirely, which is the right call. Only skip alt-text intentionally, never by accident.'
+                        data-es='Si una imagen es puramente decorativa — una textura de fondo, una línea divisoria, un patrón repetido — usa un atributo alt vacío: &lt;code&gt;alt=""&lt;/code&gt;. Esto le dice al lector de pantalla que la omita por completo, que es lo correcto. Solo omite el alt-text intencionalmente, nunca por accidente.'>If an image is purely decorative — a background texture, a divider line, a repeated pattern — use an empty alt attribute: <code>alt=""</code>. This tells the screen reader to skip it entirely, which is the right call. Only skip alt-text intentionally, never by accident.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EXAMPLES: GOOD VS BAD -->
+    <section class="mb-16" aria-labelledby="examples-heading">
+        <h2 id="examples-heading" class="font-headers font-bold text-2xl mb-4"
+            data-en="Examples: Good vs. Bad" data-es="Ejemplos: Bueno vs. Malo">Examples: Good vs. Bad</h2>
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="Theory is easy. Here's what it actually looks like in practice — using real image types you probably have on your site right now."
+               data-es="La teoría es fácil. Así es como se ve realmente en la práctica — usando tipos de imágenes reales que probablemente tienes en tu sitio ahora mismo.">Theory is easy. Here's what it actually looks like in practice — using real image types you probably have on your site right now.</p>
+        </div>
+
+        <div class="space-y-4">
+
+            <!-- Example 1 -->
+            <div class="structural-border bg-bone-white overflow-hidden">
+                <div class="border-b border-gray-dark/10 px-6 py-4">
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50" data-en="Example 01 · Button Image" data-es="Ejemplo 01 · Imagen de Botón">Example 01 · Button Image</div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-px">
+                    <div class="ex-bad p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="❌ Bad" data-es="❌ Mal">❌ Bad</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Button Image"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="Vague. Doesn't describe the button's purpose, label, or state. A screen reader user has no idea what this button does." data-es="Vago. No describe el propósito, la etiqueta ni el estado del botón. Un usuario de lector de pantalla no tiene idea de lo que hace este botón.">Vague. Doesn't describe the button's purpose, label, or state. A screen reader user has no idea what this button does.</p>
+                    </div>
+                    <div class="ex-good p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3" data-en="✓ Good" data-es="✓ Bien">✓ Good</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Blue 'Contáctenos' button showing 30% text expansion for Spanish localization"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="Specific, descriptive, conveys function and context. Someone who can't see the image still understands exactly what it shows and why it matters." data-es="Específico, descriptivo y transmite función y contexto. Alguien que no puede ver la imagen aún entiende exactamente qué muestra y por qué importa.">Specific, descriptive, conveys function and context. Someone who can't see the image still understands exactly what it shows and why it matters.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 2 -->
+            <div class="structural-border bg-bone-white overflow-hidden">
+                <div class="border-b border-gray-dark/10 px-6 py-4">
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50" data-en="Example 02 · Code Screenshot" data-es="Ejemplo 02 · Captura de Código">Example 02 · Code Screenshot</div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-px">
+                    <div class="ex-bad p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="❌ Bad" data-es="❌ Mal">❌ Bad</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Code screenshot"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="Tells the reader nothing about what the code does, what file it's from, or why it's there. Completely useless context." data-es="No le dice al lector nada sobre qué hace el código, de qué archivo proviene o por qué está ahí. Contexto completamente inútil.">Tells the reader nothing about what the code does, what file it's from, or why it's there. Completely useless context.</p>
+                    </div>
+                    <div class="ex-good p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3" data-en="✓ Good" data-es="✓ Bien">✓ Good</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="LegalRouter.js snippet showing dynamic routing to legal documents based on detected language preference"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="Explains the file, function, and purpose. Useful for screen reader users and for search engines trying to understand technical content." data-es="Explica el archivo, la función y el propósito. Útil para usuarios de lectores de pantalla y para motores de búsqueda que intentan entender contenido técnico.">Explains the file, function, and purpose. Useful for screen reader users and for search engines trying to understand technical content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 3 -->
+            <div class="structural-border bg-bone-white overflow-hidden">
+                <div class="border-b border-gray-dark/10 px-6 py-4">
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50" data-en="Example 03 · Data Chart" data-es="Ejemplo 03 · Gráfico de Datos">Example 03 · Data Chart</div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-px">
+                    <div class="ex-bad p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="❌ Bad" data-es="❌ Mal">❌ Bad</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Chart"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="What chart? Showing what? For what time period? The entire point of the data is lost." data-es="¿Qué gráfico? ¿Mostrando qué? ¿Para qué período? El punto entero de los datos se pierde.">What chart? Showing what? For what time period? The entire point of the data is lost.</p>
+                    </div>
+                    <div class="ex-good p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3" data-en="✓ Good" data-es="✓ Bien">✓ Good</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Bar chart showing 87.4% mobile, 9% desktop, and 3.6% tablet traffic for a Kingman business, May 2025 to May 2026"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="The key finding is communicated. A screen reader user gets the actual data point — not just the knowledge that a chart exists." data-es="Se comunica el hallazgo clave. Un usuario de lector de pantalla obtiene el dato real — no solo el conocimiento de que existe un gráfico.">The key finding is communicated. A screen reader user gets the actual data point — not just the knowledge that a chart exists.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Example 4 -->
+            <div class="structural-border bg-bone-white overflow-hidden">
+                <div class="border-b border-gray-dark/10 px-6 py-4">
+                    <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50" data-en="Example 04 · Product Photo" data-es="Ejemplo 04 · Foto de Producto">Example 04 · Product Photo</div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-px">
+                    <div class="ex-bad p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="❌ Bad" data-es="❌ Mal">❌ Bad</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Product photo"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="Which product? What color? What size? No purchasing decision can be made from this." data-es="¿Cuál producto? ¿Qué color? ¿Qué tamaño? No se puede tomar ninguna decisión de compra a partir de esto.">Which product? What color? What size? No purchasing decision can be made from this.</p>
+                    </div>
+                    <div class="ex-good p-6">
+                        <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3" data-en="✓ Good" data-es="✓ Bien">✓ Good</div>
+                        <code class="text-xs block bg-white border border-gray-dark/10 p-3 mb-3 leading-relaxed">alt="Handmade turquoise ceramic mug with matte glaze and wide handle, 12oz capacity"</code>
+                        <p class="text-xs text-gray-dark/70 leading-relaxed" data-en="Material, color, finish, size — everything a customer needs to make a decision without seeing the image." data-es="Material, color, acabado, tamaño — todo lo que un cliente necesita para tomar una decisión sin ver la imagen.">Material, color, finish, size — everything a customer needs to make a decision without seeing the image.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WHERE TO ADD ALT-TEXT -->
+    <section class="mb-16" aria-labelledby="where-heading">
+        <h2 id="where-heading" class="font-headers font-bold text-2xl mb-6"
+            data-en="Where to Add It — Platform by Platform"
+            data-es="Dónde Agregarlo — Plataforma por Plataforma">Where to Add It — Platform by Platform</h2>
+
+        <div class="prose-da max-w-3xl mb-8">
+            <p data-en="Every platform handles alt-text slightly differently. Here's where to find the field on the most common ones."
+               data-es="Cada plataforma maneja el alt-text de manera ligeramente diferente. Aquí está dónde encontrar el campo en las más comunes.">Every platform handles alt-text slightly differently. Here's where to find the field on the most common ones.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">WordPress</div>
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <div class="rhythm-row" data-en='Upload image → Media Library → click image → "Alternative Text" field on the right panel.' data-es='Sube la imagen → Biblioteca de Medios → haz clic en la imagen → campo "Texto Alternativo" en el panel derecho.'>Upload image → Media Library → click image → "Alternative Text" field on the right panel.</div>
+                    <div class="rhythm-row" data-en='Or: when adding an image block in the editor, check the right sidebar for the Alt Text field.' data-es='O: al agregar un bloque de imagen en el editor, revisa la barra lateral derecha para el campo de Texto Alternativo.'>Or: when adding an image block in the editor, check the right sidebar for the Alt Text field.</div>
+                    <div data-en="Block editor also supports bulk alt-text via the Media Library." data-es="El editor de bloques también admite alt-text en bloque a través de la Biblioteca de Medios.">Block editor also supports bulk alt-text via the Media Library.</div>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Wix / Squarespace</div>
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <div class="rhythm-row" data-en='Click any image in the editor → look for "Settings" or the pencil/edit icon → "Alt Text" or "Image Description" field.' data-es='Haz clic en cualquier imagen en el editor → busca "Configuración" o el icono de lápiz/editar → campo "Texto Alt" o "Descripción de Imagen".'>Click any image in the editor → look for "Settings" or the pencil/edit icon → "Alt Text" or "Image Description" field.</div>
+                    <div data-en="Wix also lets you set alt-text from the Media Manager before images are placed on a page." data-es="Wix también te permite establecer el alt-text desde el Administrador de Medios antes de que las imágenes se coloquen en una página.">Wix also lets you set alt-text from the Media Manager before images are placed on a page.</div>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Shopify</div>
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <div class="rhythm-row" data-en='Products → click the product → click an image → "Add alt text" link appears below the image preview.' data-es='Productos → haz clic en el producto → haz clic en una imagen → el enlace "Agregar alt text" aparece debajo de la vista previa de la imagen.'>Products → click the product → click an image → "Add alt text" link appears below the image preview.</div>
+                    <div data-en="Also available in the Files section for non-product images." data-es="También disponible en la sección de Archivos para imágenes que no son de productos.">Also available in the Files section for non-product images.</div>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Raw HTML</div>
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <div class="rhythm-row" data-en="Add the <code>alt</code> attribute directly to the <code>&lt;img&gt;</code> tag." data-es="Agrega el atributo <code>alt</code> directamente a la etiqueta <code>&lt;img&gt;</code>.">Add the <code>alt</code> attribute directly to the <code>&lt;img&gt;</code> tag.</div>
+                    <div class="bg-gray-dark text-bone-white p-3 text-xs font-details">
+                        &lt;img src="mug.jpg"<br>
+                        &nbsp;&nbsp;alt="Turquoise ceramic mug, 12oz"&gt;
+                    </div>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Social Media</div>
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <div class="rhythm-row" data-en='<strong>Instagram:</strong> Advanced Settings when posting → "Write Alt Text."' data-es='<strong>Instagram:</strong> Configuración Avanzada al publicar → "Escribir Texto Alternativo".'>><strong>Instagram:</strong> Advanced Settings when posting → "Write Alt Text."</div>
+                    <div class="rhythm-row" data-en='<strong>Twitter/X:</strong> Add image → "Add description" before posting.' data-es='<strong>Twitter/X:</strong> Agrega imagen → "Agregar descripción" antes de publicar.'><strong>Twitter/X:</strong> Add image → "Add description" before posting.</div>
+                    <div data-en='<strong>Facebook:</strong> Click the image after uploading → "Edit" → "Alternative Text."' data-es='<strong>Facebook:</strong> Haz clic en la imagen después de subirla → "Editar" → "Texto Alternativo".'><strong>Facebook:</strong> Click the image after uploading → "Edit" → "Alternative Text."</div>
+                </div>
+            </div>
+
+            <div class="structural-border bg-bone-white p-6">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4">Google Docs / Slides</div>
+                <div class="space-y-2 text-sm leading-relaxed">
+                    <div class="rhythm-row" data-en='Right-click any image → "Alt text" → fill in Title and Description fields.' data-es='Haz clic derecho en cualquier imagen → "Texto alt" → completa los campos de Título y Descripción.'>Right-click any image → "Alt text" → fill in Title and Description fields.</div>
+                    <div data-en="Use the Description field — it's what screen readers actually read aloud." data-es="Usa el campo de Descripción — es el que los lectores de pantalla realmente leen en voz alta.">Use the Description field — it's what screen readers actually read aloud.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIVE CHECKER -->
+    <section class="mb-16" id="checker" aria-labelledby="checker-heading">
+        <div class="structural-border bg-bone-white">
+            <div class="border-b border-gray-dark px-8 py-5">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                    data-en="Interactive Tool" data-es="Herramienta Interactiva">Interactive Tool</div>
+                <h2 id="checker-heading" class="font-headers font-bold text-xl"
+                    data-en="Alt-Text Checker" data-es="Verificador de Alt-Text">Alt-Text Checker</h2>
+                <p class="text-xs text-gray-dark/60 mt-1"
+                    data-en="Paste your alt-text and get instant feedback on what's working and what to fix."
+                    data-es="Pega tu alt-text y obtén retroalimentación instantánea sobre lo que está funcionando y lo que debes corregir.">Paste your alt-text and get instant feedback on what's working and what to fix.</p>
+            </div>
+
+            <div class="p-8">
+                <div class="mb-4">
+                    <label for="alt-input" class="block text-xs font-bold tracking-widest uppercase mb-3"
+                        data-en="Your Alt-Text" data-es="Tu Alt-Text">Your Alt-Text</label>
+                    <textarea
+                        id="alt-input"
+                        class="checker-field"
+                        rows="4"
+                        placeholder="Paste your alt-text here..."
+                        data-en="Paste your alt-text here..."
+                        data-es="Pega tu alt-text aquí..."
+                        oninput="ATC.analyze()"
+                    ></textarea>
+                    <div class="flex justify-between mt-2">
+                        <span class="text-xs text-gray-dark/50" id="char-count">0 characters</span>
+                        <span class="text-xs font-bold" id="char-status"></span>
+                    </div>
+                </div>
+
+                <div id="atc-result" class="hidden">
+                    <!-- Score -->
+                    <div class="mb-6 structural-border p-5 bg-bone-white">
+                        <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-3"
+                            data-en="Accessibility Score" data-es="Puntuación de Accesibilidad">Accessibility Score</div>
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="font-headers font-bold text-4xl" id="atc-score-num">0</div>
+                            <div class="flex-1 progress-bar">
+                                <div class="progress-fill" id="atc-score-bar" style="width:0%"></div>
+                            </div>
+                            <div class="text-xs font-bold" id="atc-score-label"></div>
+                        </div>
+                    </div>
+
+                    <!-- Issues -->
+                    <div id="atc-issues" class="mb-4 hidden">
+                        <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+                            data-en="Fix These" data-es="Corrígelos">Fix These</div>
+                        <div id="atc-issues-list" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Wins -->
+                    <div id="atc-wins" class="hidden">
+                        <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3"
+                            data-en="What's Working" data-es="Lo Que Está Funcionando">What's Working</div>
+                        <div id="atc-wins-list" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <div id="atc-empty" class="text-xs text-gray-dark/40 italic mt-2"
+                    data-en="Start typing to see feedback."
+                    data-es="Empieza a escribir para ver retroalimentación.">
+                    Start typing to see feedback.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCESSIBILITY CHECKLIST -->
+    <section class="mb-16" aria-labelledby="checklist-heading">
+        <div class="structural-border bg-bone-white">
+            <div class="border-b border-gray-dark px-8 py-5">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-1"
+                    data-en="Self-Audit" data-es="Autoauditoría">Self-Audit</div>
+                <h2 id="checklist-heading" class="font-headers font-bold text-xl"
+                    data-en="Image Accessibility Checklist" data-es="Lista de Verificación de Accesibilidad de Imágenes">Image Accessibility Checklist</h2>
+                <p class="text-xs text-gray-dark/60 mt-1"
+                    data-en="Run through your site and check off each item as you verify it."
+                    data-es="Revisa tu sitio y marca cada elemento a medida que lo verificas.">Run through your site and check off each item as you verify it.</p>
+            </div>
+            <div id="acc-list" class="px-8 py-4"><!-- injected --></div>
+            <div class="px-8 py-6 border-t border-gray-dark/10">
+                <div class="flex items-center gap-4 mb-3">
+                    <div class="font-headers font-bold text-2xl" id="acc-score">0%</div>
+                    <div class="flex-1 progress-bar">
+                        <div class="progress-fill" id="acc-bar" style="width:0%"></div>
+                    </div>
+                </div>
+                <div class="text-xs structural-border p-3" id="acc-label" style="background:#E0DDD5;">
+                    Check off each item as you verify it on your site.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO BONUS -->
+    <section class="mb-16" aria-labelledby="seo-heading">
+        <h2 id="seo-heading" class="font-headers font-bold text-2xl mb-4"
+            data-en="The SEO Bonus You Weren't Expecting"
+            data-es="El Beneficio SEO Que No Esperabas">The SEO Bonus You Weren't Expecting</h2>
+        <div class="prose-da max-w-3xl mb-6">
+            <p data-en="Alt-text isn't just for screen readers. Search engines use it to understand image content, which affects how your images appear in Google Image Search and how your pages rank for related queries."
+               data-es="El alt-text no es solo para lectores de pantalla. Los motores de búsqueda lo usan para entender el contenido de las imágenes, lo que afecta cómo aparecen tus imágenes en la Búsqueda de Imágenes de Google y cómo se clasifican tus páginas para consultas relacionadas.">Alt-text isn't just for screen readers. Search engines use it to understand image content, which affects how your images appear in Google Image Search and how your pages rank for related queries.</p>
+            <p data-en="A product page with descriptive alt-text on every image gives search engines more signal to work with than one with empty or generic alt-text. This is a small, consistent advantage that compounds over time."
+               data-es="Una página de producto con alt-text descriptivo en cada imagen le da a los motores de búsqueda más señales con las que trabajar que una con alt-text vacío o genérico. Esta es una ventaja pequeña y consistente que se acumula con el tiempo.">A product page with descriptive alt-text on every image gives search engines more signal to work with than one with empty or generic alt-text. This is a small, consistent advantage that compounds over time.</p>
+            <p data-en="It's not a silver bullet — but it's free, it's right, and it takes ten seconds per image. There's no reason not to do it."
+               data-es="No es una solución mágica — pero es gratis, es correcto y toma diez segundos por imagen. No hay razón para no hacerlo.">It's not a silver bullet — but it's free, it's right, and it takes ten seconds per image. There's no reason not to do it.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="structural-border pinned-note p-8">
+                <div class="red-pin" aria-hidden="true"></div>
+                <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4 text-center"
+                    data-en="The Test" data-es="La Prueba">The Test</p>
+                <p class="text-sm leading-relaxed italic mb-4"
+                    data-en='"Close your eyes. Have someone read your alt-text out loud. Does the image make sense without seeing it?"'
+                    data-es='"Cierra los ojos. Pídele a alguien que lea tu alt-text en voz alta. ¿La imagen tiene sentido sin verla?"'>"Close your eyes. Have someone read your alt-text out loud. Does the image make sense without seeing it?"</p>
+                <p class="text-xs text-gray-dark/60 text-center"
+                    data-en="If yes — you're done. If no — rewrite it."
+                    data-es="Si es así — ya terminaste. Si no — reescríbelo.">If yes — you're done. If no — rewrite it.</p>
+            </div>
+            <div class="structural-border bg-gray-dark text-bone-white p-8">
+                <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-4"
+                    data-en="Quick Reference" data-es="Referencia Rápida">Quick Reference</div>
+                <div class="space-y-3 text-sm">
+                    <div class="rhythm-row text-bone-white/80" data-en="✓ Under 125 characters" data-es="✓ Menos de 125 caracteres">✓ Under 125 characters</div>
+                    <div class="rhythm-row text-bone-white/80" data-en='✓ No "image of" or "photo of"' data-es='✓ Sin "image of" ni "photo of"'>✓ No "image of" or "photo of"</div>
+                    <div class="rhythm-row text-bone-white/80" data-en="✓ Specific, not generic" data-es="✓ Específico, no genérico">✓ Specific, not generic</div>
+                    <div class="rhythm-row text-bone-white/80" data-en="✓ Describes function for buttons/icons" data-es="✓ Describe la función para botones/iconos">✓ Describes function for buttons/icons</div>
+                    <div class="rhythm-row text-bone-white/80" data-en='✓ Empty <code>alt=""</code> for decorative images' data-es='✓ <code>alt=""</code> vacío para imágenes decorativas'>✓ Empty <code>alt=""</code> for decorative images</div>
+                    <div class="text-bone-white/80" data-en="✓ File names are descriptive (separate from alt-text)" data-es="✓ Los nombres de archivo son descriptivos (distinto del alt-text)">✓ File names are descriptive (separate from alt-text)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mb-20">
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="structural-border bg-bone-white p-8 md:col-span-2">
+                <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+                    data-en="The Bottom Line" data-es="La Conclusión">The Bottom Line</div>
+                <h2 class="font-headers font-bold text-2xl mb-4"
+                    data-en="Making your site accessible isn't good practice.<br>It's how you reach your entire community."
+                    data-es="Hacer tu sitio accesible no es buena práctica.<br>Es cómo llegas a toda tu comunidad.">Making your site accessible isn't good practice.<br>It's how you reach your entire community.</h2>
+                <p class="text-sm leading-relaxed text-gray-dark/75"
+                    data-en="Alt-text takes ten seconds per image. An accessibility audit takes a few hours. The alternative is a site that's invisible to a meaningful percentage of the people you're trying to serve — including a quarter of Kingman's population."
+                    data-es="El alt-text toma diez segundos por imagen. Una auditoría de accesibilidad toma unas pocas horas. La alternativa es un sitio invisible para un porcentaje significativo de las personas a las que intentas servir — incluyendo un cuarto de la población de Kingman.">Alt-text takes ten seconds per image. An accessibility audit takes a few hours. The alternative is a site that's invisible to a meaningful percentage of the people you're trying to serve — including a quarter of Kingman's population.</p>
+            </div>
+            <div class="structural-border bg-gray-dark text-bone-white p-8 flex flex-col justify-between">
+                <div>
+                    <div class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-3"
+                        data-en="Free Audit" data-es="Auditoría Gratuita">Free Audit</div>
+                    <p class="text-sm leading-relaxed opacity-70 mb-6"
+                        data-en="Want me to run a quick accessibility check on your site? I'll tell you exactly what's missing and what to fix first."
+                        data-es="¿Quieres que haga una revisión rápida de accesibilidad en tu sitio? Te diré exactamente qué falta y qué corregir primero.">Want me to run a quick accessibility check on your site? I'll tell you exactly what's missing and what to fix first.</p>
+                </div>
+                <a href="/index.html#contact"
+                    class="block text-center bg-signal-red text-bone-white font-headers font-bold py-3 structural-border hover:bg-bone-white hover:text-gray-dark transition text-sm tracking-wide"
+                    data-en="[ Book a Free Audit ]" data-es="[ Reserva una Auditoría Gratuita ]">
+                    [ Book a Free Audit ]
+                </a>
+            </div>
+        </div>
+    </section>
+
+<section class="max-w-5xl mx-auto px-6 mb-16" aria-label="Service: Accessibility and ADA Compliance">
+  <div class="structural-border bg-bone-white p-8">
+    <div class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3"
+        data-en="Digital Allies Can Help" data-es="Digital Allies Puede Ayudar">Digital Allies Can Help</div>
+    <h2 class="font-headers font-bold text-2xl mb-4"
+        data-en="ADA compliance isn't just about avoiding liability — it's about reaching your whole community."
+        data-es="El cumplimiento de la ADA no es solo para evitar responsabilidades — es para llegar a toda tu comunidad.">ADA compliance isn't just about avoiding liability — it's about reaching your whole community.</h2>
+    <p class="text-sm leading-relaxed mb-4"
+        data-en="Digital Allies offers WCAG 2.1 AA audits and full remediation for small business websites in Kingman and across Mojave County. We check color contrast, keyboard navigation, screen reader compatibility, alt text, form labels, and more."
+        data-es="Digital Allies ofrece auditorías WCAG 2.1 AA y remediación completa para sitios web de pequeñas empresas en Kingman y todo el Condado Mojave. Revisamos el contraste de color, la navegación por teclado, la compatibilidad con lectores de pantalla, el alt text, las etiquetas de formularios y más.">Digital Allies offers WCAG 2.1 AA audits and full remediation for small business websites in Kingman and across Mojave County. We check color contrast, keyboard navigation, screen reader compatibility, alt text, form labels, and more.</p>
+    <p class="text-sm leading-relaxed mb-6"
+        data-en="You get a plain-language report and we handle the fixes. No tech background needed on your end."
+        data-es="Recibes un informe en lenguaje sencillo y nosotros nos encargamos de las correcciones. No necesitas conocimientos técnicos de tu parte.">You get a plain-language report and we handle the fixes. No tech background needed on your end.</p>
+    <a href="/index.html#contact" class="inline-block px-8 py-3 bg-signal-red text-white font-headers font-bold structural-border hover:bg-gray-dark transition text-sm"
+        data-en="[ Request an Accessibility Audit ]" data-es="[ Solicita una Auditoría de Accesibilidad ]">
+      [ Request an Accessibility Audit ]
+    </a>
+  </div>
+</section>
+
+</article>
+
+<!-- SCRIPTS -->
+<script>
+
+// ── ALT-TEXT CHECKER ─────────────────────────────────────────────
+const ATC = {
+    analyze() {
+        const lang = (window.LC && LC.currentLang) || localStorage.getItem('da-language') || 'en';
+        const isEs = lang === 'es';
+        const text = document.getElementById('alt-input').value;
+        const len = text.length;
+        const countEl = document.getElementById('char-count');
+        const statusEl = document.getElementById('char-status');
+        const resultEl = document.getElementById('atc-result');
+        const emptyEl = document.getElementById('atc-empty');
+
+        countEl.textContent = len + (isEs ? ' caracteres' : ' characters');
+
+        if (len === 0) {
+            resultEl.classList.add('hidden');
+            emptyEl.classList.remove('hidden');
+            statusEl.textContent = '';
+            return;
+        }
+
+        emptyEl.classList.add('hidden');
+        resultEl.classList.remove('hidden');
+
+        // Character status
+        if (len > 125) {
+            statusEl.textContent = (len - 125) + (isEs ? ' sobre el límite' : ' over limit');
+            statusEl.style.color = '#C5301A';
+        } else if (len >= 80) {
+            statusEl.textContent = isEs ? 'Buena longitud' : 'Good length';
+            statusEl.style.color = '#3A7BD5';
+        } else {
+            statusEl.textContent = '';
+        }
+
+        // Scoring
+        let score = 100;
+        const issues = [];
+        const wins = [];
+        const lower = text.toLowerCase().trim();
+
+        // Length checks
+        if (len > 125) {
+            score -= 20;
+            issues.push(isEs
+                ? 'Demasiado largo (' + len + ' caracteres). Los lectores de pantalla truncan después de 125. Recórtalo.'
+                : 'Too long (' + len + ' characters). Screen readers truncate after 125. Trim it down.');
+        } else if (len < 5) {
+            score -= 30;
+            issues.push(isEs
+                ? 'Demasiado corto. Incluso una frase descriptiva breve es mejor que esto.'
+                : 'Too short. Even one good descriptive phrase is better than this.');
+        } else if (len >= 40 && len <= 125) {
+            wins.push(isEs
+                ? 'Buena longitud — lo suficientemente específico para ser útil, lo suficientemente corto para leerse completo.'
+                : 'Good length — specific enough to be useful, short enough to be read in full.');
+        }
+
+        // Redundant phrases
+        if (lower.startsWith('image of ') || lower.startsWith('image of,')) {
+            score -= 15;
+            issues.push(isEs
+                ? '"Image of" es redundante — los lectores de pantalla ya anuncian que es una imagen. Comienza con la descripción.'
+                : '"Image of" is redundant — screen readers already announce it\'s an image. Start with the description.');
+        }
+        if (lower.startsWith('picture of ') || lower.startsWith('photo of ')) {
+            score -= 15;
+            issues.push(isEs
+                ? '"Picture of / Photo of" es redundante. Simplemente describe lo que ves.'
+                : '"Picture of / Photo of" is redundant. Just describe what you see.');
+        }
+
+        // Meaningless single words
+        if (['image','photo','picture','graphic','icon','logo','banner','thumbnail','img'].includes(lower.trim())) {
+            score -= 40;
+            issues.push(isEs
+                ? 'Una sola palabra genérica no es una descripción. ¿Qué muestra exactamente?'
+                : 'Single generic word is not a description. What does it actually show?');
+        }
+
+        // Positive signals
+        if (/\d+/.test(text)) {
+            wins.push(isEs
+                ? 'Incluye números o datos específicos — la IA y los lectores de pantalla pueden citarlos.'
+                : 'Includes specific numbers or data — AI and screen readers can cite this.');
+        }
+        if (text.includes(',')) {
+            wins.push(isEs ? 'Múltiples descriptores — buena especificidad.' : 'Multiple descriptors — good specificity.');
+        }
+        if (lower.includes('showing') || lower.includes('displaying') || lower.includes('depicting')) {
+            wins.push(isEs ? 'Buen verbo de acción — añade contexto útil.' : 'Good action verb — adds useful context.');
+        }
+        if (len >= 20 && !lower.startsWith('image') && !lower.startsWith('photo') && !lower.startsWith('picture')) {
+            wins.push(isEs
+                ? 'Sin prefijo redundante — va directo a la descripción.'
+                : 'No redundant prefix — goes straight to the description.');
+        }
+
+        score = Math.max(0, Math.min(100, score));
+
+        // Render score
+        const scoreNum = document.getElementById('atc-score-num');
+        const scoreBar = document.getElementById('atc-score-bar');
+        const scoreLbl = document.getElementById('atc-score-label');
+        scoreNum.textContent = score;
+        scoreBar.style.width = score + '%';
+        if (score >= 80) {
+            scoreBar.style.background = '#3A7BD5';
+            scoreLbl.textContent = isEs ? 'Fuerte' : 'Strong';
+            scoreLbl.style.color = '#3A7BD5';
+        } else if (score >= 55) {
+            scoreBar.style.background = '#2D2D2D';
+            scoreLbl.textContent = isEs ? 'Aceptable' : 'Okay';
+            scoreLbl.style.color = '#2D2D2D';
+        } else {
+            scoreBar.style.background = '#C5301A';
+            scoreLbl.textContent = isEs ? 'Necesita mejorar' : 'Needs work';
+            scoreLbl.style.color = '#C5301A';
+        }
+
+        // Render issues
+        const issuesEl = document.getElementById('atc-issues');
+        const issuesList = document.getElementById('atc-issues-list');
+        if (issues.length > 0) {
+            issuesEl.classList.remove('hidden');
+            issuesList.innerHTML = issues.map(i =>
+                `<div class="ex-bad p-3 text-xs leading-relaxed">${i}</div>`
+            ).join('');
+        } else {
+            issuesEl.classList.add('hidden');
+        }
+
+        // Render wins
+        const winsEl = document.getElementById('atc-wins');
+        const winsList = document.getElementById('atc-wins-list');
+        if (wins.length > 0) {
+            winsEl.classList.remove('hidden');
+            winsList.innerHTML = wins.map(w =>
+                `<div class="ex-good p-3 text-xs leading-relaxed">${w}</div>`
+            ).join('');
+        } else {
+            winsEl.classList.add('hidden');
+        }
+    }
+};
+
+// ── ACCESSIBILITY CHECKLIST ───────────────────────────────────────
+const accItems = [
+    { id: 'all_imgs',    label: 'All meaningful images have alt-text',                   label_es: 'Todas las imágenes significativas tienen alt-text',
+                         note:  'Every image that conveys information needs a description.', note_es: 'Cada imagen que transmite información necesita una descripción.' },
+    { id: 'decorative',  label: 'Decorative images use empty alt=""',                    label_es: 'Las imágenes decorativas usan alt="" vacío',
+                         note:  'Backgrounds, dividers, and pure decoration should be skipped by screen readers.', note_es: 'Los fondos, divisores y elementos puramente decorativos deben ser omitidos por los lectores de pantalla.' },
+    { id: 'no_image_of', label: 'No alt-text starts with "image of" or "photo of"',     label_es: 'Ningún alt-text comienza con "image of" o "photo of"',
+                         note:  'Screen readers announce it\'s an image — no need to repeat it.', note_es: 'Los lectores de pantalla anuncian que es una imagen — no es necesario repetirlo.' },
+    { id: 'under_125',   label: 'All alt-text is under 125 characters',                  label_es: 'Todo el alt-text tiene menos de 125 caracteres',
+                         note:  'Most screen readers truncate after this limit.',          note_es: 'La mayoría de los lectores de pantalla truncan después de este límite.' },
+    { id: 'specific',    label: 'Alt-text is specific, not generic',                     label_es: 'El alt-text es específico, no genérico',
+                         note:  'No single words like "chart," "photo," or "icon."',      note_es: 'Sin palabras sueltas como "chart", "photo" o "icon".' },
+    { id: 'buttons',     label: 'Buttons and icons describe their function',              label_es: 'Los botones e iconos describen su función',
+                         note:  'A search icon\'s alt-text should say "Search" — not "magnifying glass."', note_es: 'El alt-text de un icono de búsqueda debe decir "Buscar" — no "lupa".' },
+    { id: 'file_names',  label: 'Image file names are descriptive',                      label_es: 'Los nombres de archivo de imagen son descriptivos',
+                         note:  'kingman-mobile-traffic.png, not IMG_0042.png.',           note_es: 'kingman-mobile-traffic.png, no IMG_0042.png.' },
+    { id: 'social',      label: 'Social media posts include alt-text where available',   label_es: 'Las publicaciones en redes sociales incluyen alt-text donde sea posible',
+                         note:  'Instagram, Twitter/X, and Facebook all support it.',     note_es: 'Instagram, Twitter/X y Facebook lo admiten.' },
+];
+const accState = {};
+
+function renderAcc() {
+    const lang = (window.LC && LC.currentLang) || localStorage.getItem('da-language') || 'en';
+    const isEs = lang === 'es';
+    const list = document.getElementById('acc-list');
+    list.innerHTML = accItems.map(item => `
+        <div class="check-row flex items-start gap-4 py-4 px-2" onclick="toggleAcc('${item.id}')">
+            <div style="width:20px;height:20px;border:1.5px solid ${accState[item.id] ? '#2D2D2D' : '#E0DDD5'};background:${accState[item.id] ? '#2D2D2D' : 'transparent'};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;border-radius:2px;color:#F9F6F0;font-size:11px;font-weight:700;">
+                ${accState[item.id] ? '✓' : ''}
+            </div>
+            <div>
+                <div style="font-family:'Lexend Deca',sans-serif;font-weight:700;font-size:14px;margin-bottom:3px;">${isEs ? item.label_es : item.label}</div>
+                <div style="font-size:12px;opacity:0.6;line-height:1.5;">${isEs ? item.note_es : item.note}</div>
+            </div>
+        </div>
+    `).join('');
+
+    const count = Object.values(accState).filter(Boolean).length;
+    const pct = Math.round((count / accItems.length) * 100);
+    document.getElementById('acc-score').textContent = pct + '%';
+    document.getElementById('acc-bar').style.width = pct + '%';
+    document.getElementById('acc-bar').style.background = pct >= 75 ? '#3A7BD5' : pct >= 40 ? '#2D2D2D' : '#C5301A';
+
+    const lbl = document.getElementById('acc-label');
+    if (count >= 7) {
+        lbl.textContent = isEs ? 'Excelente. Tus imágenes son accesibles para toda tu audiencia.' : 'Excellent. Your images are accessible to your full audience.';
+        lbl.style.background = '#FADEEB';
+    } else if (count >= 4) {
+        lbl.textContent = isEs ? 'Vas bien. Enfócate en alt-text específico y el manejo de imágenes decorativas.' : 'Getting there. Focus on specific alt-text and decorative image handling next.';
+        lbl.style.background = '#F9F6F0';
+    } else {
+        lbl.textContent = isEs ? 'Empieza con los primeros tres elementos — cubren el 80% del impacto de accesibilidad.' : 'Start with the first three items — they cover 80% of accessibility impact.';
+        lbl.style.background = '#E0DDD5';
+    }
+}
+
+function toggleAcc(id) { accState[id] = !accState[id]; renderAcc(); }
+renderAcc();
+</script>
+
+    <!-- ============================================================
+         THE COMMAND CENTER (FOOTER)
+    ============================================================= -->
+    </main>
+<footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+
+            <!-- Left: Info -->
+            <div>
+                <!-- Inverted logo -->
+                <a href="/" class="flex items-center space-x-3 mb-10" aria-label="Digital Allies">
+                    <div class="relative flex items-center justify-center w-5 h-5">
+                        <div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div>
+                        <div class="w-3 h-3 bg-white rounded-full brand-pulse"
+                            style="border: 1px solid rgba(255,255,255,0.4);"></div>
+                    </div>
+                    <span class="font-headers font-bold text-2xl tracking-wide text-white">Digital Allies</span>
+                </a>
+
+                <h2 id="footer-heading" class="font-headers text-3xl font-bold mb-5" data-en="The Command Center"
+                    data-es="El Centro de Mando">The Command Center</h2>
+
+                <p class="text-sm leading-relaxed mb-8 text-white/75"
+                    data-en="Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three."
+                    data-es="Dime qué intentas hacer. Responderé con próximos pasos, un rango de costos o una pregunta rápida. Generalmente las tres.">
+                    Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question.
+                    Usually all three.
+                </p>
+
+                <div class="space-y-3 text-sm mb-10">
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Location"
+                            data-es="Ubicación">Location</span>
+                        Kingman, Arizona
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Direct Line"
+                            data-es="Línea Directa">Direct Line</span>
+                        <a href="tel:9282285769" class="text-primary-blue hover:underline">(928) 228-5769</a>
+                    </p>
+                    <p>
+                        <span class="text-white/60 uppercase text-xs tracking-widest mr-3">Email</span>
+                        <a href="mailto:contact@digitalallies.net"
+                            class="text-primary-blue hover:underline">contact@digitalallies.net</a>
+                    </p>
+                </div>
+
+                <p class="text-xs border-l-4 border-signal-red pl-4 text-white/65 leading-relaxed"
+                    data-en="I am historically easy to reach. I live in Kingman. If you call, I answer."
+                    data-es="Soy históricamente fácil de contactar. Vivo en Kingman. Si llamas, contesto.">
+                    I am historically easy to reach. I live in Kingman. If you call, I answer.
+                </p>
+
+                <div class="mt-12 pt-6 border-t border-white/10">
+                    <p class="text-xs text-white/50" data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ."
+                        data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">
+                        &copy; 2026 Digital Allies. Based in Kingman, AZ.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-3 text-xs">
+                        <a href="/privacy.html" class="text-white/50 hover:text-white transition" data-en="Privacy" data-es="Privacidad">Privacy</a>
+                        <a href="/terms.html" class="text-white/50 hover:text-white transition" data-en="Terms" data-es="Términos">Terms</a>
+                        <a href="/cookies.html" class="text-white/50 hover:text-white transition" data-en="Cookies" data-es="Cookies">Cookies</a>
+                        <a href="/sitemap.html" class="text-white/50 hover:text-white transition" data-en="Sitemap" data-es="Mapa del Sitio">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Contact Form -->
+            <div class="bg-bone-white p-8 structural-border text-gray-dark self-start">
+                <h3 class="font-headers font-bold text-xl mb-6" data-en="Send a Transmission"
+                    data-es="Enviar una Transmisión">Send a Transmission</h3>
+
+                <form action="https://formsubmit.co/contact@digitalallies.net" method="POST" class="space-y-4"
+                    novalidate>
+                    <input type="hidden" name="_subject" value="New inquiry from Digital Allies">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://digitalallies.net/">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_autoresponse"
+                        value="Thanks for reaching out to Digital Allies! I received your message and will reply with next steps shortly. — Anthony">
+                    <!-- Honeypot -->
+                    <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off">
+
+                    <div>
+                        <label for="f-name" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="Name" data-es="Nombre">Name</label>
+                        <input id="f-name" type="text" name="name" required aria-required="true" autocomplete="name"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition"
+                            placeholder="Your name">
+                    </div>
+
+                    <div>
+                        <label for="f-email" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="Email" data-es="Correo Electrónico">Email</label>
+                        <input id="f-email" type="email" name="email" required aria-required="true" autocomplete="email"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition"
+                            placeholder="your@email.com">
+                    </div>
+
+                    <div>
+                        <label for="f-message" class="block text-xs font-bold mb-2 uppercase tracking-widest"
+                            data-en="What are you trying to do?" data-es="¿Qué intentas hacer?">What are you trying to
+                            do?</label>
+                        <textarea id="f-message" name="message" rows="4" required aria-required="true"
+                            class="w-full structural-border p-3 bg-white text-sm outline-none form-field transition resize-y"
+                            placeholder="Give me the short version. We can fill in details later."></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-sm tracking-wide"
+                        data-en="Submit Transmission" data-es="Enviar Transmisión">
+                        Submit Transmission
+                    </button>
+
+                    <p class="text-xs text-center text-gray-500 mt-1"
+                        data-en="I do not share your details. I use your message to reply. That is it."
+                        data-es="No comparto tus datos. Uso tu mensaje para responder. Eso es todo.">
+                        I do not share your details. I use your message to reply. That is it.
+                    </p>
+
+                </form>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ============================================================
+         FLOATING ACTION BUTTON
+    ============================================================= -->
+    <a href="#contact"
+        class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition"
+        aria-label="Need a strategic ally? Contact us">
+        <span class="text-xs font-bold" data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">
+            Need a strategic ally?
+        </span>
+        <div class="relative flex items-center justify-center w-4 h-4 flex-shrink-0">
+            <div class="absolute w-4 h-4 bg-signal-red rounded-full opacity-30 fab-ring"></div>
+            <div class="w-2.5 h-2.5 bg-signal-red rounded-full brand-pulse"></div>
+        </div>
+    </a>
+
+
+    <!-- ============================================================
+         LANGUAGE CONTROLLER
+    ============================================================= -->
+    <script>
+        class LanguageController {
+            constructor() {
+                this.currentLang = localStorage.getItem('da-language') || 'en';
+                this.init();
+            }
+
+            init() {
+                this.applyLanguage(this.currentLang, false);
+            }
+
+            toggleLanguage(lang) {
+                if (lang === this.currentLang) return;
+                this.currentLang = lang;
+                localStorage.setItem('da-language', lang);
+                this.applyLanguage(lang, true);
+            }
+
+            applyLanguage(lang, announce) {
+                this.updateContent(lang);
+                this.updateButtons(lang);
+                document.documentElement.lang = lang;
+                if (announce) this.announceLanguageChange(lang);
+            }
+
+            updateContent(lang) {
+                document.querySelectorAll('[data-en][data-es]').forEach(el => {
+                    const val = el.getAttribute('data-' + lang);
+                    if (!val) return;
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = val;
+                    } else {
+                        // Preserve child elements that don't have data-en/data-es (like icons)
+                        const preservedChildren = [];
+                        el.querySelectorAll('[data-lucide], .transition-transform').forEach(child => {
+                            preservedChildren.push(child.cloneNode(true));
+                        });
+                        el.innerHTML = val;
+                        preservedChildren.forEach(child => {
+                            if (child.classList.contains('transition-transform')) {
+                                el.appendChild(child);
+                            } else {
+                                el.insertBefore(child, el.firstChild);
+                            }
+                        });
+                    }
+                });
+                // Re-initialize Lucide icons after content update
+                }
+
+            updateButtons(lang) {
+                ['en', 'es'].forEach(l => {
+                    const btn = document.getElementById('lang-' + l);
+                    if (!btn) return;
+                    const active = l === lang;
+                    btn.classList.toggle('lang-active', active);
+                    btn.setAttribute('aria-pressed', String(active));
+                });
+            }
+
+            announceLanguageChange(lang) {
+                const msg = lang === 'es'
+                    ? 'Idioma cambiado a español'
+                    : 'Language changed to English';
+                const announcer = document.getElementById('lang-announcer');
+                if (!announcer) return;
+                announcer.textContent = '';
+                setTimeout(() => { announcer.textContent = msg; }, 60);
+            }
+        }
+
+        const LC = new LanguageController();
+
+        // Re-render JS-injected content when language changes
+        const _origApply = LC.applyLanguage.bind(LC);
+        LC.applyLanguage = function(lang, announce) {
+            _origApply(lang, announce);
+            if (typeof renderAcc === 'function') renderAcc();
+            if (typeof ATC !== 'undefined' && document.getElementById('alt-input')?.value) ATC.analyze();
+        };
+
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+
+    <!-- STRUCTURED DATA -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mastering Alt-Text: Good vs. Bad & Why It Matters",
+  "description": "Alt-text isn't optional — it's how you serve your whole community. Learn what good alt-text looks like, what to avoid, and test yours with a live checker.",
+  "url": "https://digitalallies.net/learn/alttext",
+  "author": {
+    "@type": "Person",
+    "name": "Anthony",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital Allies",
+      "telephone": "+1-928-228-5769",
+      "sameAs": [
+        "https://www.instagram.com/digitalallies__",
+        "https://www.facebook.com/digitalallies",
+        "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+      ]
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net"
+  },
+  "dateModified": "2026-06-01",
+  "mainEntityOfPage": "https://digitalallies.net/learn/alttext"
+}
+</script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is alt-text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Alt-text (alternative text) is a written description added to an image's HTML that screen readers read aloud for visually impaired users, and that appears as visible text when an image fails to load. It also helps search engines understand image content."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long should alt-text be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Alt-text should be under 125 characters. Most screen readers truncate after this limit. Be specific and descriptive, but concise. If an image requires a longer explanation, use a caption or surrounding body text instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I write 'image of' at the start of alt-text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Screen readers already announce that the element is an image before reading the alt-text. Starting with 'image of' or 'photo of' is redundant and makes the experience worse for users. Start directly with the description."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What alt-text should decorative images have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Decorative images — backgrounds, dividers, purely visual elements that add no informational value — should use an empty alt attribute: alt=\"\". This tells screen readers to skip the image entirely, which is the correct behavior."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does alt-text affect SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Search engines use alt-text to understand image content, which affects how images appear in Google Image Search and contributes to page relevance for related queries. Descriptive alt-text on product and content images provides additional ranking signal."
+      }
+    }
+  ],
+  "dateModified": "2026-06-01"
+}
+</script>
+
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        }
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.add('hidden');
+            btn && btn.setAttribute('aria-expanded', 'false');
+        }
+    </script>
+
+</body>
+</html>

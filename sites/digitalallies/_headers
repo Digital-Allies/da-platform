@@ -1,0 +1,11 @@
+# Cloudflare Pages headers
+# 1-year immutable cache for all assets (they're content-hashed or versioned)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# No cache for HTML pages
+/*.html
+  Cache-Control: no-cache, must-revalidate
+
+/learn/*.html
+  Cache-Control: no-cache, must-revalidate

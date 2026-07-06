@@ -1,0 +1,7 @@
+# Large assets to prevent GitHub file size limit errors
+assets/Brand System/Educational_Infographic_Design.zip
+assets/Brand System/Media/
+
+# OS-specific files
+.DS_Store
+Thumbs.db

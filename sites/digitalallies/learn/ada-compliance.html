@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADA Compliance for Websites — Accessible Web Design · Digital Allies</title>
+    <meta name="description" content="Website accessibility isn't just the right thing to do — it's a legal requirement and a business advantage. WCAG 2.1 AA, ADA compliance, and what it actually means for small businesses in Kingman and beyond.">
+    <link rel="canonical" href="https://digitalallies.net/learn/ada-compliance">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="ADA Compliance for Websites — Accessible Web Design · Digital Allies">
+    <meta property="og:description" content="Legal requirements, real numbers, and what compliance actually costs vs. what a lawsuit costs. From Digital Allies in Kingman, AZ.">
+    <meta property="og:url" content="https://digitalallies.net/learn/ada-compliance">
+        <link rel="stylesheet" href="../assets/fonts/fonts.css">
+    <link rel="stylesheet" href="../assets/css/tailwind.min.css">
+    <link rel="stylesheet" href="../assets/css/a11y.css">
+
+    <script src="../assets/js/lucide-da.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'bone-white': '#F9F6F0', 'gray-dark': '#2D2D2D', 'primary-blue': '#3A7BD5', 'light-pink': '#FADEEB', 'signal-red': '#C5301A' },
+                    fontFamily: { headers: ['"Lexend Deca"', 'sans-serif'], details: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color:#F9F6F0; background-image:linear-gradient(rgba(45,45,45,0.07) 0.5px,transparent 0.5px),linear-gradient(90deg,rgba(45,45,45,0.07) 0.5px,transparent 0.5px); background-size:20px 20px; font-family:'JetBrains Mono',monospace; color:#2D2D2D; }
+        h1,h2,h3,h4 { font-family:'Lexend Deca',sans-serif; }
+        .structural-border { border:1px solid #2D2D2D; }
+        .brand-pulse { animation:brand-pulse 3s ease-in-out infinite; }
+        @keyframes brand-pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.25);} }
+        .fab-ring { animation:fab-ring 2.2s ease-out infinite; }
+        @keyframes fab-ring { 0%{transform:scale(1);opacity:0.55;}100%{transform:scale(2.4);opacity:0;} }
+        .lang-active { background-color:#2D2D2D !important; color:#F9F6F0 !important; }
+        .prose-da p { font-size:14px; line-height:1.85; margin-bottom:1.25rem; }
+        .prose-da strong { font-weight:600; }
+        .layer-card { border-left:3px solid #2D2D2D; }
+        .layer-card.blue { border-left-color:#3A7BD5; }
+        .layer-card.red { border-left-color:#C5301A; }
+        .pinned-note { background-color:#FCFAED; position:relative; padding-top:2.5rem; }
+        .red-pin { position:absolute; top:12px; left:50%; transform:translateX(-50%); width:14px; height:14px; background-color:#C5301A; border-radius:50%; border:1px solid #2D2D2D; }
+        .check-row { border-bottom:1px solid #E0DDD5; cursor:pointer; transition:background 0.15s; }
+        .check-row:last-child { border-bottom:none; }
+        .check-row:hover { background:#FADEEB; }
+        .progress-bar { height:8px; background:#E0DDD5; border:1px solid #2D2D2D; overflow:hidden; }
+        .progress-fill { height:100%; background:#3A7BD5; transition:width 0.4s; }
+        .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0; }
+        html { scroll-behavior:smooth; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "ADA Compliance & Web Accessibility",
+        "serviceType": "Accessibility",
+        "description": "Website accessibility isn't just the right thing to do — it's a legal requirement and a business advantage. WCAG 2.1 AA and ADA compliance.",
+        "provider": {
+            "@type": "LocalBusiness",
+            "@id": "https://digitalallies.net/#business",
+            "name": "Digital Allies",
+            "url": "https://digitalallies.net",
+            "telephone": "+1-928-228-5769",
+            "sameAs": [
+                "https://www.instagram.com/digitalallies__",
+                "https://www.facebook.com/digitalallies",
+                "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+            ]
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "United States"
+        },
+        "url": "https://digitalallies.net/learn/ada-compliance"
+    }
+    </script>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "ADA Compliance for Websites — Accessible Web Design",
+  "description": "Legal requirements, real numbers, and what compliance actually costs vs. what a lawsuit costs. From Digital Allies in Kingman, AZ.",
+  "url": "https://digitalallies.net/learn/ada-compliance",
+  "author": {
+    "@type": "Person",
+    "name": "Anthony",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Digital Allies",
+      "telephone": "+1-928-228-5769",
+      "sameAs": [
+        "https://www.instagram.com/digitalallies__",
+        "https://www.facebook.com/digitalallies",
+        "https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6"
+      ]
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Digital Allies",
+    "url": "https://digitalallies.net"
+  },
+  "dateModified": "2026-05-01",
+  "mainEntityOfPage": "https://digitalallies.net/learn/ada-compliance"
+}
+    </script>
+</head>
+<body class="antialiased">
+<div id="lang-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
+<!-- NAV -->
+<nav class="structural-border bg-bone-white sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/index.html" class="flex items-center space-x-3" aria-label="Digital Allies Home">
+            <div class="relative flex items-center justify-center w-5 h-5">
+                <div class="absolute w-4 h-4 bg-primary-blue rounded-full opacity-25 fab-ring"></div>
+                <div class="w-3 h-3 bg-primary-blue rounded-full brand-pulse structural-border"></div>
+            </div>
+            <span class="font-headers font-bold text-xl tracking-wide">Digital Allies</span>
+        </a>
+        <div class="flex items-center space-x-4 lg:space-x-8">
+            <div class="hidden md:flex items-center space-x-4 lg:space-x-6 text-xs font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition" data-en="Services" data-es="Servicios">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition" data-en="Pricing" data-es="Precios">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition" data-en="Reviews" data-es="Reseñas">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition" data-en="FAQ" data-es="FAQ">FAQ</a>
+                <a href="/learn/" class="text-signal-red underline underline-offset-4" data-en="Learn" data-es="Aprender">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition" data-en="Contact" data-es="Contacto">Contact</a>
+            </div>
+            <div class="flex items-center structural-border overflow-hidden flex-shrink-0" role="group">
+                <button id="lang-en" onclick="LC.toggleLanguage('en')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink lang-active" aria-pressed="true">EN</button>
+                <div class="w-px h-5 bg-gray-dark" aria-hidden="true"></div>
+                <button id="lang-es" onclick="LC.toggleLanguage('es')" class="px-3 py-1.5 text-xs font-bold transition hover:bg-light-pink" aria-pressed="false">ES</button>
+            </div>
+        </div>
+
+                <!-- Hamburger button (mobile only) -->
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 flex-shrink-0" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobileMenu()">
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                    <span class="block w-5 h-0.5 bg-gray-dark transition-all duration-200"></span>
+                </button>
+    </div>
+
+        <!-- Mobile menu dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-dark/20 bg-bone-white" role="menu">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 text-sm font-bold">
+                <a href="/index.html#departments" class="hover:text-primary-blue transition" data-en="Services" data-es="Servicios" onclick="closeMobileMenu()" role="menuitem">Services</a>
+                <a href="/index.html#pricing" class="hover:text-primary-blue transition" data-en="Pricing" data-es="Precios" onclick="closeMobileMenu()" role="menuitem">Pricing</a>
+                <a href="/index.html#field-notes" class="hover:text-primary-blue transition" data-en="Reviews" data-es="Reseñas" onclick="closeMobileMenu()" role="menuitem">Reviews</a>
+                <a href="/index.html#faq" class="hover:text-primary-blue transition" data-en="FAQ" data-es="FAQ" onclick="closeMobileMenu()" role="menuitem">FAQ</a>
+                <a href="/learn/" class="hover:text-primary-blue transition" data-en="Learn" data-es="Aprender" onclick="closeMobileMenu()" role="menuitem">Learn</a>
+                <a href="/index.html#contact" class="hover:text-primary-blue transition" data-en="Contact" data-es="Contacto" onclick="closeMobileMenu()" role="menuitem">Contact</a>
+            </div>
+        </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="max-w-5xl mx-auto px-6 pt-6">
+    <nav aria-label="Breadcrumb" class="text-xs font-bold tracking-widest uppercase">
+        <ol class="flex items-center gap-2 text-gray-dark/50">
+            <li><a href="/index.html" class="hover:text-primary-blue transition" data-en="Home" data-es="Inicio">Home</a></li>
+            <li aria-hidden="true">·</li>
+            <li><a href="/learn/" class="hover:text-primary-blue transition" data-en="Learn" data-es="Aprender">Learn</a></li>
+            <li aria-hidden="true">·</li>
+            <li class="text-signal-red" data-en="ADA Compliance" data-es="Cumplimiento ADA">ADA Compliance</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- HERO -->
+<header class="max-w-5xl mx-auto px-6 pt-14 pb-12">
+    <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-4" data-en="Accessible Web Design · Guide" data-es="Diseño Web Accesible · Guía">Accessible Web Design · Guide</p>
+    <h1 class="font-headers font-bold text-4xl md:text-5xl leading-tight mb-6"
+        data-en="Your website has to work for everyone. That&rsquo;s not optional anymore."
+        data-es="Tu sitio web tiene que funcionar para todos. Eso ya no es opcional.">
+        Your website has to work for everyone. That&rsquo;s not optional anymore.
+    </h1>
+    <p class="text-sm leading-relaxed text-gray-dark/70 max-w-2xl mb-6"
+        data-en="Website accessibility protects your business legally and opens your doors to the 1 in 4 adults who have a disability. This guide covers what WCAG 2.1 AA actually requires, why overlays don&rsquo;t save you, and how to fix the most common problems."
+        data-es="La accesibilidad web protege tu negocio legalmente y abre tus puertas a 1 de cada 4 adultos que tienen una discapacidad. Esta guía cubre qué requiere realmente WCAG 2.1 AA, por qué los widgets no te salvan, y cómo corregir los problemas más comunes.">
+        Website accessibility protects your business legally and opens your doors to the 1 in 4 adults who have a disability. This guide covers what WCAG 2.1 AA actually requires, why overlays don&rsquo;t save you, and how to fix the most common problems.
+    </p>
+    <div class="flex flex-wrap gap-4 items-center text-xs text-gray-dark/50 font-bold tracking-widest uppercase">
+        <span data-en="By Anthony · Digital Allies" data-es="Por Anthony · Digital Allies">By Anthony · Digital Allies</span>
+        <span>·</span><span>Kingman, AZ</span><span>·</span>
+        <span data-en="Updated 2026" data-es="Actualizado 2026">Updated 2026</span>
+    </div>
+</header>
+
+<!-- STATS BAND -->
+<div class="border-y border-gray-dark/15 bg-white/50 py-8 mb-14">
+    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+            <div class="font-headers font-bold text-4xl text-signal-red mb-1">1 in 4</div>
+            <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/60 mb-1" data-en="U.S. adults have a disability" data-es="Adultos en EE.UU. tienen una discapacidad">U.S. adults have a disability</div>
+            <div class="text-xs text-gray-dark/40">CDC · 2023</div>
+        </div>
+        <div>
+            <div class="font-headers font-bold text-4xl text-primary-blue mb-1">4,500+</div>
+            <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/60 mb-1" data-en="Web accessibility lawsuits filed in 2023" data-es="Demandas de accesibilidad web presentadas en 2023">Web accessibility lawsuits filed in 2023</div>
+            <div class="text-xs text-gray-dark/40">UsableNet · Federal + State</div>
+        </div>
+        <div>
+            <div class="font-headers font-bold text-4xl text-gray-dark mb-1">71%</div>
+            <div class="text-xs font-bold tracking-widest uppercase text-gray-dark/60 mb-1" data-en="Of users with disabilities leave inaccessible sites" data-es="De usuarios con discapacidades abandonan sitios inaccesibles">Of users with disabilities leave inaccessible sites</div>
+            <div class="text-xs text-gray-dark/40">Netguru · 2023</div>
+        </div>
+    </div>
+</div>
+
+<main class="max-w-5xl mx-auto px-6 pb-20">
+
+    <!-- SECTION 1: Legal landscape -->
+    <section class="mb-20" aria-labelledby="legal-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="01 · The Legal Picture" data-es="01 · El panorama legal">01 · The Legal Picture</p>
+        <h2 id="legal-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Courts have been clear for years. Most small businesses still don&rsquo;t know."
+            data-es="Los tribunales han sido claros durante años. La mayoría de las pequeñas empresas aún no lo saben.">
+            Courts have been clear for years. Most small businesses still don&rsquo;t know.
+        </h2>
+        <div class="prose-da mb-8">
+            <p data-en="Websites are places of public accommodation under the Americans with Disabilities Act. That ruling has held up across hundreds of cases. If your business serves the public — a restaurant, a salon, a contractor, a retailer — your website falls under the same rules as your physical location. You wouldn&rsquo;t block a wheelchair ramp. A site that a screen reader can&rsquo;t navigate is the same problem."
+               data-es="Los sitios web son lugares de acomodación pública bajo la Ley de Estadounidenses con Discapacidades. Esa decisión se ha mantenido en cientos de casos. Si tu negocio sirve al público — un restaurante, un salón, un contratista, un minorista — tu sitio web cae bajo las mismas reglas que tu ubicación física. No bloquearías una rampa para sillas de ruedas. Un sitio que un lector de pantalla no puede navegar es el mismo problema.">
+                Websites are places of public accommodation under the Americans with Disabilities Act. That ruling has held up across hundreds of cases. If your business serves the public — a restaurant, a salon, a contractor, a retailer — your website falls under the same rules as your physical location. You wouldn&rsquo;t block a wheelchair ramp. A site that a screen reader can&rsquo;t navigate is the same problem.
+            </p>
+        </div>
+        <div class="space-y-4 mb-8">
+            <div class="layer-card red bg-white px-6 py-5">
+                <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-2" data-en="Overlays do not protect you" data-es="Los widgets de accesibilidad no te protegen">Overlays do not protect you</p>
+                <div class="prose-da">
+                    <p data-en="Accessibility overlay widgets — those small toolbar buttons that claim to &ldquo;fix&rdquo; your site automatically — do not make a site accessible. In 2023, over 900 businesses using these widgets were still sued, a 62% jump from 2022. Courts have consistently ruled that automated overlays do not satisfy ADA requirements. They patch the visible symptom. They don&rsquo;t fix the underlying code."
+                       data-es="Los widgets de superposición de accesibilidad — esos pequeños botones en la barra de herramientas que dicen &ldquo;corregir&rdquo; tu sitio automáticamente — no hacen un sitio accesible. En 2023, más de 900 empresas que usaban estos widgets fueron demandadas, un salto del 62% desde 2022. Los tribunales han dictaminado consistentemente que las superposiciones automáticas no satisfacen los requisitos de la ADA. Parchean el síntoma visible. No corrigen el código subyacente.">
+                        Accessibility overlay widgets — those small toolbar buttons that claim to &ldquo;fix&rdquo; your site automatically — do not make a site accessible. In 2023, over 900 businesses using these widgets were still sued, a 62% jump from 2022. Courts have consistently ruled that automated overlays do not satisfy ADA requirements. They patch the visible symptom. They don&rsquo;t fix the underlying code.
+                    </p>
+                </div>
+            </div>
+            <div class="layer-card blue bg-white px-6 py-5">
+                <p class="text-xs font-bold tracking-widest uppercase text-primary-blue mb-2" data-en="WCAG 2.1 AA is the standard" data-es="WCAG 2.1 AA es el estándar">WCAG 2.1 AA is the standard</p>
+                <div class="prose-da">
+                    <p data-en="The DOJ now explicitly requires WCAG 2.1 Level AA compliance for public entities under ADA. For private businesses, WCAG 2.1 AA is the de facto benchmark courts use to evaluate whether a site is accessible. It&rsquo;s not a checklist you run once — it&rsquo;s a set of technical standards that have to be built into the site from the start."
+                       data-es="El DOJ ahora requiere explícitamente el cumplimiento de WCAG 2.1 Nivel AA para entidades públicas bajo la ADA. Para empresas privadas, WCAG 2.1 AA es el punto de referencia de facto que los tribunales usan para evaluar si un sitio es accesible. No es una lista de verificación que ejecutas una vez — es un conjunto de estándares técnicos que deben integrarse en el sitio desde el principio.">
+                        The DOJ now explicitly requires WCAG 2.1 Level AA compliance for public entities under ADA. For private businesses, WCAG 2.1 AA is the de facto benchmark courts use to evaluate whether a site is accessible. It&rsquo;s not a checklist you run once — it&rsquo;s a set of technical standards that have to be built into the site from the start.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Business case -->
+    <section class="mb-20" aria-labelledby="business-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="02 · Why It&rsquo;s Also Good Business" data-es="02 · Por qué también es buen negocio">02 · Why It&rsquo;s Also Good Business</p>
+        <h2 id="business-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="Accessibility isn&rsquo;t a cost. It&rsquo;s a wider net."
+            data-es="La accesibilidad no es un costo. Es una red más amplia.">
+            Accessibility isn&rsquo;t a cost. It&rsquo;s a wider net.
+        </h2>
+        <div class="prose-da mb-8">
+            <p data-en="1 in 4 U.S. adults has a disability. 71% of them leave a site that doesn&rsquo;t work for them. That&rsquo;s not a niche market — it&rsquo;s a quarter of every person who might have looked you up. In Kingman, where roughly 26% of residents are over 65, that number is even more significant. Vision, motor, and cognitive changes come with age. A site designed with accessibility in mind serves that population by default."
+               data-es="1 de cada 4 adultos estadounidenses tiene una discapacidad. El 71% de ellos abandona un sitio que no funciona para ellos. Eso no es un nicho de mercado — es un cuarto de cada persona que pudo haberte buscado. En Kingman, donde aproximadamente el 26% de los residentes tienen más de 65 años, ese número es aún más significativo. Los cambios visuales, motores y cognitivos vienen con la edad. Un sitio diseñado con accesibilidad en mente sirve a esa población por defecto.">
+                1 in 4 U.S. adults has a disability. 71% of them leave a site that doesn&rsquo;t work for them. That&rsquo;s not a niche market — it&rsquo;s a quarter of every person who might have looked you up. In Kingman, where roughly 26% of residents are over 65, that number is even more significant. Vision, motor, and cognitive changes come with age. A site designed with accessibility in mind serves that population by default.
+            </p>
+            <p data-en="The SEO overlap is real too. Semantic HTML, meaningful alt text, logical heading structure, fast load times — every accessibility best practice is also a search ranking signal. A site built to WCAG 2.1 AA is, by design, easier for both humans and AI to read."
+               data-es="La superposición con SEO también es real. HTML semántico, texto alternativo significativo, estructura de encabezados lógica, tiempos de carga rápidos — cada práctica recomendada de accesibilidad también es una señal de clasificación en búsquedas. Un sitio construido según WCAG 2.1 AA es, por diseño, más fácil de leer tanto para humanos como para IA.">
+                The SEO overlap is real too. Semantic HTML, meaningful alt text, logical heading structure, fast load times — every accessibility best practice is also a search ranking signal. A site built to WCAG 2.1 AA is, by design, easier for both humans and AI to read.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Most common issues -->
+    <section class="mb-20" aria-labelledby="issues-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="03 · The Most Common Failures" data-es="03 · Las fallas más comunes">03 · The Most Common Failures</p>
+        <h2 id="issues-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+            data-en="95.9% of top websites have detectable accessibility errors. These are the usual suspects."
+            data-es="El 95.9% de los sitios web principales tienen errores de accesibilidad detectables. Estos son los sospechosos habituales.">
+            95.9% of top websites have detectable accessibility errors. These are the usual suspects.
+        </h2>
+        <div class="structural-border bg-white mb-8">
+            <div class="px-6 py-4 border-b border-gray-dark/15">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/50" data-en="Issue · Who it affects · The fix" data-es="Problema · A quién afecta · La solución">Issue · Who it affects · The fix</p>
+            </div>
+            <div class="divide-y divide-gray-dark/10">
+                <div class="grid grid-cols-3 gap-4 px-6 py-4 text-sm">
+                    <div class="font-bold" data-en="Missing alt text" data-es="Texto alt faltante">Missing alt text</div>
+                    <div class="text-gray-dark/70" data-en="Screen reader users" data-es="Usuarios de lector de pantalla">Screen reader users</div>
+                    <div class="text-gray-dark/70" data-en="Add meaningful alt to all images. Use alt=&quot;&quot; for decorative ones." data-es="Agrega alt significativo a todas las imágenes. Usa alt=&quot;&quot; para las decorativas.">Add meaningful alt to all images. Use alt="" for decorative ones.</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 px-6 py-4 text-sm">
+                    <div class="font-bold" data-en="Low color contrast" data-es="Bajo contraste de color">Low color contrast</div>
+                    <div class="text-gray-dark/70" data-en="Low-vision, outdoor mobile users" data-es="Usuarios con baja visión, móvil al aire libre">Low-vision, outdoor mobile users</div>
+                    <div class="text-gray-dark/70" data-en="4.5:1 ratio for body text. 3:1 for large text." data-es="Proporción 4.5:1 para cuerpo de texto. 3:1 para texto grande.">4.5:1 ratio for body text. 3:1 for large text.</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 px-6 py-4 text-sm">
+                    <div class="font-bold" data-en="No keyboard navigation" data-es="Sin navegación por teclado">No keyboard navigation</div>
+                    <div class="text-gray-dark/70" data-en="Motor-impaired users" data-es="Usuarios con discapacidad motora">Motor-impaired users</div>
+                    <div class="text-gray-dark/70" data-en="All menus, modals, and forms must be reachable by Tab key." data-es="Todos los menús, modales y formularios deben ser accesibles con la tecla Tab.">All menus, modals, and forms must be reachable by Tab key.</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 px-6 py-4 text-sm">
+                    <div class="font-bold" data-en="Unlabeled form fields" data-es="Campos de formulario sin etiqueta">Unlabeled form fields</div>
+                    <div class="text-gray-dark/70" data-en="Screen reader users" data-es="Usuarios de lector de pantalla">Screen reader users</div>
+                    <div class="text-gray-dark/70" data-en="Use &lt;label&gt; or aria-label linked to every input." data-es="Usa &lt;label&gt; o aria-label vinculado a cada campo de entrada.">Use &lt;label&gt; or aria-label linked to every input.</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 px-6 py-4 text-sm">
+                    <div class="font-bold" data-en="No skip navigation" data-es="Sin navegación de omisión">No skip navigation</div>
+                    <div class="text-gray-dark/70" data-en="Keyboard and screen reader users" data-es="Usuarios de teclado y lector de pantalla">Keyboard and screen reader users</div>
+                    <div class="text-gray-dark/70" data-en="Add a &ldquo;Skip to main content&rdquo; link as the first focusable element." data-es="Agrega un enlace &ldquo;Ir al contenido principal&rdquo; como primer elemento enfocable.">Add a "Skip to main content" link as the first focusable element.</div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 px-6 py-4 text-sm">
+                    <div class="font-bold" data-en="Videos without captions" data-es="Videos sin subtítulos">Videos without captions</div>
+                    <div class="text-gray-dark/70" data-en="Deaf / hard-of-hearing users" data-es="Usuarios sordos / con dificultades auditivas">Deaf / hard-of-hearing users</div>
+                    <div class="text-gray-dark/70" data-en="Provide captions and transcripts for all video content." data-es="Proporciona subtítulos y transcripciones para todo el contenido de video.">Provide captions and transcripts for all video content.</div>
+                </div>
+            </div>
+        </div>
+        <div class="pinned-note structural-border px-8 pb-6 max-w-2xl">
+            <div class="red-pin" aria-hidden="true"></div>
+            <p class="text-sm leading-relaxed"
+                data-en="&ldquo;A WebAIM study found 95.9% of top websites had detectable accessibility errors — averaging 56.8 errors per homepage. Most were fixable in under an hour with the right audit.&rdquo;"
+                data-es="&ldquo;Un estudio de WebAIM encontró que el 95.9% de los principales sitios web tenían errores de accesibilidad detectables — un promedio de 56.8 errores por página de inicio. La mayoría eran corregibles en menos de una hora con la auditoría correcta.&rdquo;">
+                &ldquo;A WebAIM study found 95.9% of top websites had detectable accessibility errors — averaging 56.8 errors per homepage. Most were fixable in under an hour with the right audit.&rdquo;
+            </p>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE: Accessibility Checklist -->
+    <section class="mb-20" aria-labelledby="checklist-heading">
+        <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="Self-Assessment · Interactive" data-es="Autoevaluación · Interactivo">Self-Assessment · Interactive</p>
+        <h2 id="checklist-heading" class="font-headers font-bold text-3xl mb-6"
+            data-en="Accessibility checklist. Check what your site already has."
+            data-es="Lista de verificación de accesibilidad. Marca lo que tu sitio ya tiene.">
+            Accessibility checklist. Check what your site already has.
+        </h2>
+        <div class="structural-border bg-white p-6 mb-4">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-bold text-gray-dark/60 uppercase tracking-widest" data-en="Click each item that applies to your site." data-es="Haz clic en cada elemento que aplique a tu sitio.">Click each item that applies to your site.</span>
+                <span id="a11y-score" class="text-xs font-bold font-headers text-signal-red">0 / 9</span>
+            </div>
+            <div class="progress-bar mb-6"><div id="a11y-bar" class="progress-fill" style="width:0%"></div></div>
+            <div id="a11y-list" class="divide-y divide-gray-dark/10">
+                <!-- items injected by JS -->
+            </div>
+        </div>
+        <div id="a11y-result" class="structural-border px-6 py-5 bg-white hidden">
+            <p id="a11y-result-text" class="text-sm leading-relaxed"></p>
+        </div>
+    </section>
+
+    <!-- SERVICE SECTION -->
+    <section aria-labelledby="service-heading" id="accessibility-service">
+        <div class="border-t-2 border-gray-dark pt-16">
+            <p class="text-xs font-bold tracking-widest uppercase text-signal-red mb-3" data-en="The Design Bureau · Accessible Web Design" data-es="La Oficina de Diseño · Diseño Web Accesible">The Design Bureau · Accessible Web Design</p>
+            <h2 id="service-heading" class="font-headers font-bold text-3xl md:text-4xl mb-6"
+                data-en="Every site I build is WCAG 2.1 AA compliant. That&rsquo;s the floor, not the ceiling."
+                data-es="Cada sitio que construyo cumple con WCAG 2.1 AA. Eso es el mínimo, no el máximo.">
+                Every site I build is WCAG 2.1 AA compliant. That&rsquo;s the floor, not the ceiling.
+            </h2>
+            <div class="prose-da mb-8">
+                <p data-en="Accessibility isn&rsquo;t a bolt-on I add at the end. It&rsquo;s built into the HTML from the first line — semantic structure, proper labels, contrast ratios, keyboard navigation, skip links. For existing sites, I run a full WCAG 2.1 AA audit, document every failure, and fix them. For new builds, compliance is standard across every tier."
+                   data-es="La accesibilidad no es algo que agrego al final. Está integrada en el HTML desde la primera línea — estructura semántica, etiquetas adecuadas, proporciones de contraste, navegación por teclado, enlaces de omisión. Para sitios existentes, realizo una auditoría completa de WCAG 2.1 AA, documento cada falla y las corrijo. Para nuevas construcciones, el cumplimiento es estándar en cada nivel.">
+                    Accessibility isn&rsquo;t a bolt-on I add at the end. It&rsquo;s built into the HTML from the first line — semantic structure, proper labels, contrast ratios, keyboard navigation, skip links. For existing sites, I run a full WCAG 2.1 AA audit, document every failure, and fix them. For new builds, compliance is standard across every tier.
+                </p>
+            </div>
+            <div class="structural-border bg-white p-6 mb-8">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/50 mb-4" data-en="What&rsquo;s included" data-es="Qué está incluido">What's included</p>
+                <div class="space-y-3 text-sm divide-y divide-gray-dark/10">
+                    <div class="flex justify-between items-center pb-3">
+                        <span data-en="Full WCAG 2.1 AA audit (existing sites)" data-es="Auditoría completa WCAG 2.1 AA (sitios existentes)">Full WCAG 2.1 AA audit (existing sites)</span>
+                        <span class="text-signal-red font-bold" data-en="Included in all builds" data-es="Incluido en todas las construcciones">Included in all builds</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3">
+                        <span data-en="Semantic HTML, skip links, ARIA labels" data-es="HTML semántico, enlaces de omisión, etiquetas ARIA">Semantic HTML, skip links, ARIA labels</span>
+                        <span class="text-signal-red font-bold" data-en="Standard" data-es="Estándar">Standard</span>
+                    </div>
+                    <div class="flex justify-between items-center py-3">
+                        <span data-en="Color contrast compliance (4.5:1 minimum)" data-es="Cumplimiento de contraste de color (mínimo 4.5:1)">Color contrast compliance (4.5:1 minimum)</span>
+                        <span class="text-signal-red font-bold" data-en="Standard" data-es="Estándar">Standard</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-3">
+                        <span data-en="Keyboard navigation testing" data-es="Pruebas de navegación por teclado">Keyboard navigation testing</span>
+                        <span class="text-signal-red font-bold" data-en="Standard" data-es="Estándar">Standard</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="/index.html#contact" class="bg-signal-red text-white font-headers font-bold px-8 py-4 structural-border hover:bg-gray-dark transition text-sm tracking-wide text-center" data-en="[ Request an Accessibility Audit ]" data-es="[ Solicitar una Auditoría de Accesibilidad ]">[ Request an Accessibility Audit ]</a>
+                <a href="/index.html#pricing" class="bg-bone-white font-headers font-bold px-8 py-4 structural-border hover:bg-light-pink transition text-sm tracking-wide text-center" data-en="[ View Full Pricing ]" data-es="[ Ver Precios Completos ]">[ View Full Pricing ]</a>
+            </div>
+            <div class="mt-16 pt-8 border-t border-gray-dark/10">
+                <p class="text-xs font-bold tracking-widest uppercase text-gray-dark/40 mb-4" data-en="Sources &amp; References" data-es="Fuentes y Referencias">Sources &amp; References</p>
+                <ul class="space-y-2 text-xs text-gray-dark/50">
+                    <li>CDC (2023) — Disability and Health · <a href="https://www.cdc.gov/ncbddd/disabilityandhealth/infographic-disability-impacts-all.html" class="hover:text-primary-blue underline" target="_blank" rel="noopener">cdc.gov</a></li>
+                    <li>UsableNet (2024) — ADA Web &amp; App Accessibility Lawsuit Report · <a href="https://info.usablenet.com/ada-website-compliance-lawsuit-tracker" class="hover:text-primary-blue underline" target="_blank" rel="noopener">usablenet.com</a></li>
+                    <li>3Play Media (2023) — Key Takeaways: UsableNet ADA Report · <a href="https://www.3playmedia.com/blog/key-takeaways-usablenets-ada-web-app-report/" class="hover:text-primary-blue underline" target="_blank" rel="noopener">3playmedia.com</a></li>
+                    <li>WebAIM (2024) — Million Accessibility Report · <a href="https://webaim.org/projects/million/" class="hover:text-primary-blue underline" target="_blank" rel="noopener">webaim.org</a></li>
+                    <li>Netguru (2023) — Web Accessibility Statistics · <a href="https://www.netguru.com/blog/web-accessibility" class="hover:text-primary-blue underline" target="_blank" rel="noopener">netguru.com</a></li>
+                    <li>U.S. DOJ (2024) — Web Accessibility Guidance under ADA · <a href="https://www.ada.gov/resources/web-guidance/" class="hover:text-primary-blue underline" target="_blank" rel="noopener">ada.gov</a></li>
+                </ul>
+                <div class="mt-6 pt-4 border-t border-gray-dark/10 flex flex-wrap gap-4 text-xs text-gray-dark/40 font-bold tracking-widest uppercase">
+                    <a href="https://www.facebook.com/digitalallies" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Facebook</a><span>·</span>
+                    <a href="https://www.instagram.com/digitalallies__" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Instagram</a><span>·</span>
+                    <a href="https://maps.app.goo.gl/a9uGv4JSVHWEUZhQ6" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Google Business</a><span>·</span>
+                    <a href="https://blog.digitalallies.net/" target="_blank" rel="noopener" class="hover:text-primary-blue transition">Blog</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer id="contact" class="bg-gray-dark text-white py-24 px-6 mt-16" aria-labelledby="footer-heading">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+        <div>
+            <a href="/" class="flex items-center space-x-3 mb-10"><div class="relative flex items-center justify-center w-5 h-5"><div class="absolute w-4 h-4 bg-white rounded-full opacity-20 fab-ring"></div><div class="w-3 h-3 bg-white rounded-full brand-pulse" style="border:1px solid rgba(255,255,255,0.4);"></div></div><span class="font-headers font-bold text-2xl tracking-wide text-white">Digital Allies</span></a>
+            <h2 id="footer-heading" class="font-headers text-3xl font-bold mb-5" data-en="The Command Center" data-es="El Centro de Mando">The Command Center</h2>
+            <p class="text-sm leading-relaxed mb-8 text-white/75" data-en="Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three." data-es="Dime qué intentas hacer. Responderé con próximos pasos, un rango de costos o una pregunta rápida. Generalmente las tres.">Tell me what you are trying to do. I will reply with next steps, a cost range, or a quick question. Usually all three.</p>
+            <div class="space-y-3 text-sm mb-10">
+                <p><span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Location" data-es="Ubicación">Location</span>Kingman, Arizona</p>
+                <p><span class="text-white/60 uppercase text-xs tracking-widest mr-3" data-en="Direct Line" data-es="Línea Directa">Direct Line</span><a href="tel:9282285769" class="text-primary-blue hover:underline">(928) 228-5769</a></p>
+                <p><span class="text-white/60 uppercase text-xs tracking-widest mr-3">Email</span><a href="mailto:contact@digitalallies.net" class="text-primary-blue hover:underline">contact@digitalallies.net</a></p>
+            </div>
+            <p class="text-xs border-l-4 border-signal-red pl-4 text-white/65 leading-relaxed" data-en="I am historically easy to reach. I live in Kingman. If you call, I answer." data-es="Soy históricamente fácil de contactar. Vivo en Kingman. Si llamas, contesto.">I am historically easy to reach. I live in Kingman. If you call, I answer.</p>
+            <div class="mt-12 pt-6 border-t border-white/10">
+                <p class="text-xs text-white/50" data-en="&copy; 2026 Digital Allies. Based in Kingman, AZ." data-es="&copy; 2026 Digital Allies. Con sede en Kingman, AZ.">&copy; 2026 Digital Allies. Based in Kingman, AZ.</p>
+                <div class="flex flex-wrap gap-4 mt-3 text-xs">
+                    <a href="/privacy.html" class="text-white/50 hover:text-white transition" data-en="Privacy" data-es="Privacidad">Privacy</a>
+                    <a href="/terms.html" class="text-white/50 hover:text-white transition" data-en="Terms" data-es="Términos">Terms</a>
+                    <a href="/cookies.html" class="text-white/50 hover:text-white transition" data-en="Cookies" data-es="Cookies">Cookies</a>
+                    <a href="/sitemap.html" class="text-white/50 hover:text-white transition" data-en="Sitemap" data-es="Mapa del Sitio">Sitemap</a>
+                </div>
+            </div>
+        </div>
+        <div class="bg-bone-white p-8 structural-border text-gray-dark self-start">
+            <h3 class="font-headers font-bold text-xl mb-6" data-en="Send a Transmission" data-es="Enviar una Transmisión">Send a Transmission</h3>
+            <form action="https://formsubmit.co/contact@digitalallies.net" method="POST" class="space-y-4" novalidate>
+                <input type="hidden" name="_subject" value="New inquiry — Accessibility"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://digitalallies.net/"><input type="hidden" name="_template" value="table"><input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off">
+                <div><label for="f-name" class="block text-xs font-bold mb-2 uppercase tracking-widest" data-en="Name" data-es="Nombre">Name</label><input id="f-name" type="text" name="name" required class="w-full structural-border p-3 bg-white text-sm outline-none" placeholder="Your name"></div>
+                <div><label for="f-email" class="block text-xs font-bold mb-2 uppercase tracking-widest" data-en="Email" data-es="Correo Electrónico">Email</label><input id="f-email" type="email" name="email" required class="w-full structural-border p-3 bg-white text-sm outline-none" placeholder="your@email.com"></div>
+                <div><label for="f-message" class="block text-xs font-bold mb-2 uppercase tracking-widest" data-en="What are you trying to do?" data-es="¿Qué intentas hacer?">What are you trying to do?</label><textarea id="f-message" name="message" rows="4" required class="w-full structural-border p-3 bg-white text-sm outline-none resize-y" placeholder="Give me the short version."></textarea></div>
+                <button type="submit" class="w-full bg-signal-red text-white font-headers font-bold py-3 hover:bg-gray-dark transition structural-border text-sm" data-en="Submit Transmission" data-es="Enviar Transmisión">Submit Transmission</button>
+                <p class="text-xs text-center text-gray-500" data-en="I do not share your details. I use your message to reply. That is it." data-es="No comparto tus datos. Uso tu mensaje para responder. Eso es todo.">I do not share your details. I use your message to reply. That is it.</p>
+            </form>
+        </div>
+    </div>
+</footer>
+
+<a href="#contact" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-bone-white structural-border py-2.5 px-4 rounded-full shadow-md hover:bg-light-pink transition" aria-label="Contact Digital Allies">
+    <span class="text-xs font-bold" data-en="Need a strategic ally?" data-es="¿Necesitas un aliado?">Need a strategic ally?</span>
+    <div class="relative flex items-center justify-center w-4 h-4 flex-shrink-0"><div class="absolute w-4 h-4 bg-signal-red rounded-full opacity-30 fab-ring"></div><div class="w-2.5 h-2.5 bg-signal-red rounded-full brand-pulse"></div></div>
+</a>
+
+<script>
+const A11Y_ITEMS = [
+    { en: "All images have meaningful alt text (or alt=\"\" if decorative).", es: "Todas las imágenes tienen texto alt significativo (o alt=\"\" si son decorativas)." },
+    { en: "Text contrast meets 4.5:1 for body copy and 3:1 for large headings.", es: "El contraste de texto cumple con 4.5:1 para cuerpo de texto y 3:1 para encabezados grandes." },
+    { en: "Every form field has a visible, linked &lt;label&gt;.", es: "Cada campo de formulario tiene una &lt;etiqueta&gt; visible y vinculada." },
+    { en: "The entire site is navigable by keyboard (Tab, Enter, Escape).", es: "Todo el sitio es navegable por teclado (Tab, Enter, Escape)." },
+    { en: "There is a \"Skip to main content\" link as the first focusable element.", es: "Hay un enlace \"Ir al contenido principal\" como primer elemento enfocable." },
+    { en: "Heading structure is logical: h1 → h2 → h3 (no skipped levels).", es: "La estructura de encabezados es lógica: h1 → h2 → h3 (sin niveles omitidos)." },
+    { en: "Videos have captions or transcripts.", es: "Los videos tienen subtítulos o transcripciones." },
+    { en: "Focus states are visible on all interactive elements.", es: "Los estados de enfoque son visibles en todos los elementos interactivos." },
+    { en: "No content relies on color alone to convey meaning.", es: "Ningún contenido depende únicamente del color para transmitir significado." }
+];
+const a11yState = new Array(A11Y_ITEMS.length).fill(false);
+const A11Y_MSGS = {
+    en: [
+        { min:8, text:"Excellent accessibility posture. Your site is open to everyone." },
+        { min:6, text:"Solid foundation. A few gaps — the keyboard navigation and focus state items tend to be the most overlooked." },
+        { min:4, text:"Good start. Alt text and contrast are usually the fastest wins. Start there." },
+        { min:0, text:"There's real work to do, but nothing here is unfixable. An audit would tell you exactly where to start." }
+    ],
+    es: [
+        { min:8, text:"Excelente postura de accesibilidad. Tu sitio está abierto para todos." },
+        { min:6, text:"Base sólida. Algunas brechas — los elementos de navegación por teclado y estado de enfoque tienden a ser los más descuidados." },
+        { min:4, text:"Buen comienzo. El texto alt y el contraste suelen ser las ganancias más rápidas. Empieza por ahí." },
+        { min:0, text:"Hay trabajo real por hacer, pero nada aquí es irreparable. Una auditoría te diría exactamente por dónde empezar." }
+    ]
+};
+function renderA11y() {
+    const count = a11yState.filter(Boolean).length;
+    const lang = document.documentElement.lang || 'en';
+    document.getElementById('a11y-score').textContent = count + ' / ' + A11Y_ITEMS.length;
+    document.getElementById('a11y-bar').style.width = Math.round((count/A11Y_ITEMS.length)*100) + '%';
+    const list = document.getElementById('a11y-list');
+    list.innerHTML = A11Y_ITEMS.map((item, i) => `
+        <div class="check-row flex items-center gap-4 py-3 px-2 rounded${a11yState[i]?' done':''}" onclick="toggleA11y(${i})">
+            <div class="w-5 h-5 structural-border flex items-center justify-center flex-shrink-0" style="background:${a11yState[i]?'#F0F8F0':'#fff'};border-color:${a11yState[i]?'#2D7A4F':'#2D2D2D'}">
+                <svg class="w-3 h-3 ${a11yState[i]?'':'hidden'}" fill="none" stroke="#2D7A4F" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <span class="text-sm">${item[lang] || item.en}</span>
+        </div>`).join('');
+    const resultEl = document.getElementById('a11y-result');
+    const resultText = document.getElementById('a11y-result-text');
+    if (count > 0) {
+        resultEl.classList.remove('hidden');
+        const msgs = A11Y_MSGS[lang] || A11Y_MSGS.en;
+        resultText.textContent = msgs.find(m => count >= m.min)?.text || msgs[msgs.length-1].text;
+        resultEl.style.borderLeft = '4px solid ' + (count >= 7 ? '#2D7A4F' : count >= 4 ? '#3A7BD5' : '#C5301A');
+    } else { resultEl.classList.add('hidden'); }
+}
+function toggleA11y(i) { a11yState[i] = !a11yState[i]; renderA11y(); }
+renderA11y();
+</script>
+
+<script>
+class LanguageController {
+    constructor() { this.currentLang = localStorage.getItem('da-language') || 'en'; this.init(); }
+    init() { this.applyLanguage(this.currentLang, false); }
+    toggleLanguage(lang) { if (lang === this.currentLang) return; this.currentLang = lang; localStorage.setItem('da-language', lang); this.applyLanguage(lang, true); }
+    applyLanguage(lang, announce) { this.updateContent(lang); this.updateButtons(lang); document.documentElement.lang = lang; if (announce) this.announceLanguageChange(lang); }
+    updateContent(lang) {
+        document.querySelectorAll('[data-en][data-es]').forEach(el => {
+            const val = el.getAttribute('data-' + lang); if (!val) return;
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = val; } else { el.innerHTML = val; }
+        });
+        if (typeof renderA11y === 'function') renderA11y();
+    }
+    updateButtons(lang) {
+        const en = document.getElementById('lang-en'), es = document.getElementById('lang-es');
+        if (!en || !es) return;
+        if (lang === 'en') { en.classList.add('lang-active'); en.setAttribute('aria-pressed','true'); es.classList.remove('lang-active'); es.setAttribute('aria-pressed','false'); }
+        else { es.classList.add('lang-active'); es.setAttribute('aria-pressed','true'); en.classList.remove('lang-active'); en.setAttribute('aria-pressed','false'); }
+    }
+    announceLanguageChange(lang) { const a = document.getElementById('lang-announcer'); if (a) a.textContent = lang === 'es' ? 'Idioma cambiado a Español' : 'Language changed to English'; }
+}
+const LC = new LanguageController();
+lucide.createIcons();
+</script>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            const isOpen = !menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        }
+        function closeMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            menu.classList.add('hidden');
+            btn && btn.setAttribute('aria-expanded', 'false');
+        }
+    </script>
+
+</body>
+</html>

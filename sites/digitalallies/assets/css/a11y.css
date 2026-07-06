@@ -1,0 +1,8 @@
+/*
+ * WCAG 2.1 AA compliance overrides for Digital Allies
+ * text-primary-blue #3A7BD5 (3.7:1) → #1D5FAD (5.4:1 on bone-white)
+ */
+.text-primary-blue,
+.hover\:text-primary-blue:hover {
+  color: #1D5FAD;
+}
