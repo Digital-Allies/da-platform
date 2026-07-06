@@ -1,0 +1,51 @@
+import { createServerClient } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
+import type { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies'
+
+type CookieToSet = { name: string; value: string; options?: Partial<ResponseCookie> }
+
+export async function middleware(request: NextRequest) {
+  let supabaseResponse = NextResponse.next({ request })
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return request.cookies.getAll() },
+        setAll(cookiesToSet: CookieToSet[]) {
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
+          supabaseResponse = NextResponse.next({ request })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          )
+        },
+      },
+    }
+  )
+
+  const { data: { user } } = await supabase.auth.getUser()
+  const { pathname } = request.nextUrl
+
+  // Only protect /admin pages that are NOT the login page.
+  // When redirecting, copy Supabase session cookies so the token state
+  // survives the redirect — without this, the redirect response drops the
+  // refreshed tokens and causes an infinite redirect loop.
+  if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !user) {
+    const loginUrl = request.nextUrl.clone()
+    loginUrl.pathname = '/admin/login'
+    const redirectResponse = NextResponse.redirect(loginUrl)
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value)
+    })
+    return redirectResponse
+  }
+
+  return supabaseResponse
+}
+
+export const config = {
+  // Exclude /admin/login from middleware entirely so it always renders.
+  // The login page handles post-auth redirect itself.
+  matcher: ['/admin', '/admin/((?!login$).+)'],
+}

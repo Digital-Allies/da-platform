@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Digital Allies CMS — Build Plan</title>
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<style>
+  body { margin: 0; }
+  .doc { max-width: 860px; margin: 0 auto; padding: 72px 56px 120px; }
+  .doc h1, .doc h2, .doc h3 { text-wrap: balance; }
+  .eyebrow { font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--signal); }
+  .lede { font-size: 16px; line-height: 1.7; color: var(--fg); max-width: 62ch; }
+  .muted { color: var(--fg-muted); }
+  .doc-head { border-bottom: 2px solid var(--charcoal); padding-bottom: 28px; margin-bottom: 44px; }
+  .doc-head h1 { font-size: 42px; margin: 14px 0 18px; line-height: 1.08; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); margin-top: 20px; }
+  .meta-row b { color: var(--fg); font-weight: 600; }
+  section { margin: 0 0 52px; }
+  section > h2 { font-size: 24px; margin: 0 0 6px; }
+  .sub { font-family: var(--font-details); font-size: 12px; color: var(--fg-muted); margin: 0 0 22px; }
+  h2 .num { font-family: var(--font-details); font-size: 14px; color: var(--signal); margin-right: 10px; font-weight: 400; }
+  p { font-size: 13.5px; line-height: 1.7; }
+  .card { border: 1px solid var(--charcoal); background: var(--bg); padding: 22px 24px; margin-bottom: 16px; }
+  .card h3 { font-size: 15px; margin: 0 0 4px; display: flex; align-items: baseline; gap: 10px; }
+  .card h3 .tag { font-family: var(--font-details); font-size: 10px; font-weight: 400; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; }
+  .card p { margin: 0; font-size: 12.5px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  /* matrix */
+  table { width: 100%; border-collapse: collapse; font-family: var(--font-details); font-size: 12px; }
+  th, td { border: 1px solid var(--hairline); padding: 9px 12px; text-align: left; }
+  thead th { background: var(--charcoal); color: var(--bone-white); font-weight: 600; border-color: var(--charcoal); }
+  tbody th { font-weight: 600; background: var(--pinned-note); }
+  td.y { color: var(--accent); font-weight: 700; }
+  td.n { color: var(--fg-soft); }
+  .price-cell { font-size: 11px; }
+  /* code/tree */
+  pre { font-family: var(--font-details); font-size: 12px; line-height: 1.7; background: var(--charcoal); color: var(--bone-white); padding: 22px 24px; overflow-x: auto; border: 1px solid var(--charcoal); }
+  pre .c { color: #9fb8d8; }
+  pre .k { color: #e7a07f; }
+  /* phases */
+  .phase { display: grid; grid-template-columns: 92px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  .phase:last-child { border-bottom: 0; }
+  .phase .p-tag { font-family: var(--font-details); font-size: 11px; font-weight: 700; color: var(--signal); }
+  .phase .p-tag span { display: block; color: var(--fg-soft); font-weight: 400; margin-top: 4px; }
+  .phase h3 { font-size: 14px; margin: 0 0 6px; }
+  .phase ul { margin: 0; padding-left: 18px; }
+  .phase li { font-size: 12.5px; line-height: 1.6; margin-bottom: 3px; }
+  .pinned { position: relative; background: var(--pinned-note); border: 1px solid var(--charcoal); border-left: 4px solid var(--signal); padding: 24px 24px 18px; }
+  .pinned strong { font-family: var(--font-headers); }
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; font-family: var(--font-details); font-size: 12px; margin: 8px 0 0; }
+  .flow .node { border: 1px solid var(--charcoal); padding: 8px 14px; background: var(--bg); }
+  .flow .node.accent { background: var(--pulse-blue); color: #fff; border-color: var(--pulse-blue); }
+  .flow .arr { color: var(--signal); padding: 0 10px; font-weight: 700; }
+  .footer { margin-top: 80px; padding-top: 22px; border-top: 1px solid var(--hairline); font-family: var(--font-details); font-size: 11px; color: var(--fg-soft); display: flex; justify-content: space-between; }
+  @media print { .doc { padding: 32px; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#F9F6F0">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F9F6F0"/>
+    <g transform="translate(420,180)">
+      <rect x="0" y="0" width="360" height="440" fill="none" stroke="#2D2D2D" stroke-width="4"/>
+      <line x1="40" y1="80" x2="320" y2="80" stroke="#2D2D2D" stroke-width="4"/>
+      <line x1="40" y1="140" x2="260" y2="140" stroke="#2D2D2D" stroke-width="3"/>
+      <line x1="40" y1="180" x2="300" y2="180" stroke="#2D2D2D" stroke-width="3"/>
+      <line x1="40" y1="240" x2="260" y2="240" stroke="#2D2D2D" stroke-width="3"/>
+      <line x1="40" y1="280" x2="300" y2="280" stroke="#2D2D2D" stroke-width="3"/>
+      <line x1="40" y1="340" x2="220" y2="340" stroke="#2D2D2D" stroke-width="3"/>
+      <circle cx="300" cy="40" r="14" fill="#C5301A"/>
+    </g>
+    <text x="600" y="700" text-anchor="middle" fill="#2D2D2D" font-family="monospace" font-size="34" letter-spacing="5">BUILD PLAN</text>
+  </svg>
+</template>
+<div class="doc">
+
+  <header class="doc-head">
+    <span class="eyebrow">Build Plan · Internal · v1</span>
+    <h1>The Connected CMS</h1>
+    <p class="lede">A multi-client content platform for Digital Allies. One workspace runs <b>digitalallies.net</b> and every client site after it — pages, articles, projects, and research, gated by subscription plan, all reading from a single connected source.</p>
+    <div class="meta-row">
+      <span><b>Owner</b> Anthony · Kingman, AZ</span>
+      <span><b>Stack</b> Next.js on Vercel</span>
+      <span><b>Prototype</b> Digital Allies CMS.html</span>
+    </div>
+  </header>
+
+  <!-- 1. The model -->
+  <section>
+    <h2><span class="num">01</span>The connected model</h2>
+    <p class="sub">Not a copy of the site — the source of it.</p>
+    <p>The admin and the public site are not two systems kept in sync. They read and write the same store. An edit in the workspace is the site changing. The prototype proves the loop end-to-end; production swaps the in-memory store for a database and the preview iframe for the real deployment.</p>
+    <div class="flow">
+      <span class="node accent">CMS Workspace</span>
+      <span class="arr">→</span>
+      <span class="node">Content store (per client)</span>
+      <span class="arr">→</span>
+      <span class="node">Published site</span>
+      <span class="arr">→</span>
+      <span class="node">digitalallies.net</span>
+    </div>
+  </section>
+
+  <!-- 2. Module map -->
+  <section>
+    <h2><span class="num">02</span>The five modules</h2>
+    <p class="sub">Public-facing areas carry brand names; internal tools stay plainly named.</p>
+    <div class="grid2">
+      <div class="card"><h3>Dashboard <span class="tag">all plans</span></h3><p>Per-client overview — pages, drafts, open tasks, unread transmissions. The landing screen on every login.</p></div>
+      <div class="card"><h3>The Press Office <span class="tag">content</span></h3><p>The heart. Page builder, articles (The Journal), Departments, Field Notes, the Command Center, and site settings — folded into one tabbed module. Everything that publishes to the site lives here.</p></div>
+      <div class="card"><h3>Projects <span class="tag">studio+</span></h3><p>Kanban boards per client. Drag tasks across columns, inline-edit titles, cycle priority, set due dates. The build tracker for client work.</p></div>
+      <div class="card"><h3>Research <span class="tag">studio+</span></h3><p>Notebook archive — tagged notes, search, export. The same connected store pattern, scoped to internal knowledge rather than published content.</p></div>
+      <div class="card" style="grid-column: 1 / -1;"><h3>The Workshop <span class="tag">agency</span></h3><p>Development tracker — features, bugs, and launch milestones logged against each site. The engineering counterpart to Projects, reserved for the full-service Agency tier.</p></div>
+    </div>
+  </section>
+
+  <!-- 3. Plans + gating -->
+  <section>
+    <h2><span class="num">03</span>Subscription tiers &amp; module gating</h2>
+    <p class="sub">Plan lives on the client record. The nav locks anything the plan doesn't include and routes to an in-context upgrade screen.</p>
+    <table>
+      <thead>
+        <tr><th>Module</th><th>Starter<br><span class="price-cell">$0</span></th><th>Studio<br><span class="price-cell">From $49/mo</span></th><th>Agency<br><span class="price-cell">From $149/mo</span></th></tr>
+      </thead>
+      <tbody>
+        <tr><th>Dashboard</th><td class="y">●</td><td class="y">●</td><td class="y">●</td></tr>
+        <tr><th>The Press Office</th><td class="y">●</td><td class="y">●</td><td class="y">●</td></tr>
+        <tr><th>Projects</th><td class="n">—</td><td class="y">●</td><td class="y">●</td></tr>
+        <tr><th>Research</th><td class="n">—</td><td class="y">●</td><td class="y">●</td></tr>
+        <tr><th>The Workshop</th><td class="n">—</td><td class="n">—</td><td class="y">●</td></tr>
+        <tr><th>Multi-client + white-label</th><td class="n">—</td><td class="n">—</td><td class="y">●</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="margin-top:14px;">Gating is a single helper: <code>can(client, module)</code> checks the plan's module list. Drives the nav lock icon, the route guard, and the upsell screen — one source of truth, no scattered checks.</p>
+  </section>
+
+  <!-- 4. Multi-client -->
+  <section>
+    <h2><span class="num">04</span>Multi-client architecture</h2>
+    <p class="sub">You at the top; each client a tenant with its own site, plan, and brand.</p>
+    <p>Every client is a self-contained record: identity, domain, plan, brand color, and a <code>site</code> object holding all its content. The client switcher in the top bar swaps the active tenant; nothing else in the UI changes. Digital Allies is simply the first client (flagged <code>owner</code>, on Agency).</p>
+    <div class="card" style="margin-top:8px;">
+      <h3>Per-client isolation</h3>
+      <p>Content, projects, and messages never cross tenants. In production this maps to a <code>client_id</code> foreign key on every row and row-level security — the same boundary the prototype enforces by scoping all mutations to the active client.</p>
+    </div>
+  </section>
+
+  <!-- 5. Data model -->
+  <section>
+    <h2><span class="num">05</span>Data model</h2>
+    <p class="sub">One shape per client. The site object is what the public renderer consumes.</p>
+<pre><span class="c">// client</span>
+{
+  id, name, domain, initials, brand_color,
+  plan: <span class="k">'starter' | 'studio' | 'agency'</span>,
+  live_url, admin_url,
+  site: {
+    settings:     { site_title, tagline, hero_*, about_*, phone, email, … },
+    pages:        [ { id, title, slug, status, blocks: [ … ] } ],
+    articles:     [ { id, title, slug, excerpt, content, status, … } ],
+    departments:  [ { id, title, icon, price, description, order } ],
+    fieldNotes:   [ { id, author_name, author_role, rating, content } ],
+    messages:     [ { id, name, email, subject, message, read, … } ],
+    projects:     [ { id, name, columns, tasks: [ … ] } ],
+  }
+}
+
+<span class="c">// page block — the page builder unit</span>
+{ id, type: <span class="k">'hero'|'richtext'|'departments'|'fieldNotes'|'cta'</span>, data: { … } }</pre>
+    <p class="muted">Blocks render in both the builder and the public site from the same array — reorder is a splice, publish is a status flag. Departments and Field Notes blocks pull live from their own collections so they're never duplicated.</p>
+  </section>
+
+  <!-- 6. Wiring -->
+  <section>
+    <h2><span class="num">06</span>Wiring to the live site &amp; admin</h2>
+    <p class="sub">digitalallies.net + the existing admin panel, linked in context.</p>
+    <p>The workspace's <b>View live site</b> opens the real deployment inline, with a toggle between the public site and the existing admin panel and a one-click open-in-tab. In production the published site reads the same store the workspace writes, so "preview" and "live" converge.</p>
+    <div class="flow">
+      <span class="node">Workspace edit</span>
+      <span class="arr">→</span>
+      <span class="node">Store / DB</span>
+      <span class="arr">→</span>
+      <span class="node accent">digitalallies.net</span>
+      <span class="arr">·</span>
+      <span class="node">admin panel</span>
+    </div>
+  </section>
+
+  <!-- 7. Vercel structure -->
+  <section>
+    <h2><span class="num">07</span>Vercel project structure</h2>
+    <p class="sub">A suggested Next.js layout — admin and public site in one deployment.</p>
+<pre>digital-allies-cms/
+  app/
+    (admin)/                <span class="c"># the workspace — auth-gated</span>
+      dashboard/
+      content/              <span class="c"># Press Office: pages, articles, …</span>
+      projects/             <span class="c"># Studio+</span>
+      research/             <span class="c"># Studio+</span>
+      workshop/             <span class="c"># Agency</span>
+    (site)/[client]/        <span class="c"># public renderer, per domain</span>
+    api/                    <span class="c"># store reads/writes, auth, billing</span>
+  lib/
+    store.ts                <span class="c"># data access (swap for Postgres)</span>
+    plans.ts                <span class="c"># tiers + can() gating helper</span>
+    blocks/                 <span class="c"># block type registry + renderers</span>
+  components/               <span class="c"># shared UI (lifted from prototype)</span>
+  middleware.ts             <span class="c"># tenant + plan routing</span></pre>
+    <p class="muted">The prototype maps almost 1:1: <code>store.js</code> → <code>lib/store.ts</code>, the module components → route folders, <code>plans</code> → <code>lib/plans.ts</code>. Billing (Stripe) and auth slot into <code>api/</code>.</p>
+  </section>
+
+  <!-- 8. Roadmap -->
+  <section>
+    <h2><span class="num">08</span>Build roadmap</h2>
+    <p class="sub">Ship the connected loop first; layer modules and billing after.</p>
+    <div class="phase">
+      <div class="p-tag">PHASE 1<span>Foundation</span></div>
+      <div>
+        <h3>The connected loop, one client</h3>
+        <ul>
+          <li>Auth + the Digital Allies tenant</li>
+          <li>Press Office: page builder, articles, settings</li>
+          <li>Public renderer reads the same store → digitalallies.net</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="p-tag">PHASE 2<span>Multi-client</span></div>
+      <div>
+        <h3>Tenants, plans &amp; gating</h3>
+        <ul>
+          <li>Client switcher + per-tenant isolation</li>
+          <li><code>can()</code> gating, lock states, upgrade screens</li>
+          <li>Onboard the first paying client site</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="p-tag">PHASE 3<span>Modules</span></div>
+      <div>
+        <h3>Projects &amp; Research</h3>
+        <ul>
+          <li>Kanban boards (Studio) with drag + inline edit</li>
+          <li>Research notebooks + export (Studio)</li>
+          <li>Command palette across all content</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="p-tag">PHASE 4<span>Agency</span></div>
+      <div>
+        <h3>The Workshop, billing &amp; white-label</h3>
+        <ul>
+          <li>Dev tracker (features / bugs / milestones)</li>
+          <li>Stripe billing tied to plan tiers</li>
+          <li>White-label admin for resold client sites</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="pinned">
+    <strong>One quote before work begins.</strong>
+    <p style="margin:8px 0 0; font-size:12.5px;">This plan is the map, not the contract. Phase 1 stands on its own — a connected CMS running the real site. Everything after it is additive, gated, and sellable. No surprises, no silent scope creep.</p>
+  </div>
+
+  <div class="footer">
+    <span>Digital Allies · Connected CMS · Build Plan v1</span>
+    <span>Kingman, AZ · Serving Everywhere Else</span>
+  </div>
+
+</div>
+</body>
+</html>

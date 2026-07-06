@@ -1,0 +1,597 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Digital Allies//Connected CMS 30-Day Run//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:DA CMS — 30-Day Run
+X-WR-TIMEZONE:America/Phoenix
+BEGIN:VEVENT
+UID:da-cms-20260629-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260629T090000
+DTEND:20260629T111500
+SUMMARY:Day 01 · Repo + Next.js skeleton
+DESCRIPTION:WEEK 1 · Lay the rails\nGoal: A real codebase\, version-contro
+ lled.\n(~120 min)\n\nCHECKLIST:\n☐ Create the private digital-allies-cms r
+ epo on GitHub.\n☐ In Claude Code\, scaffold a Next.js app (App Router\, Ty
+ peScript\, Tailwind) in your local project folder.\n   Done when — npm run
+  dev serves the starter on localhost.\n☐ First commit\, push to main. Add 
+ a develop branch for day-to-day work.\n   Done when — GitHub shows the Nex
+ t.js starter on a green first commit.\n\n— HAND TO CLAUDE —\nYou're helpin
+ g me build the Digital Allies Connected CMS — Next.js (App Router\, TypeSc
+ ript\, Tailwind) on Vercel\, Supabase for data + auth. Scaffold a fresh Ne
+ xt.js app in this folder. Set up a clean folder structure I can grow into 
+ (an (admin) group for the auth-gated workspace\, a (site) group for the pu
+ blic renderer\, lib/ for data + plans). Get it running locally\, then give
+  me the exact git commands to make the first commit on `main` and create a
+  `develop` branch. Keep explanations short — I'm driving you\, not writing
+  the code myself.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 01 · Repo + Next.js skeleton
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260630-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260630T090000
+DTEND:20260630T111500
+SUMMARY:Day 02 · Vercel auto-deploy + previews
+DESCRIPTION:WEEK 1 · Lay the rails\nGoal: Every push deploys itself.\n(~90
+  min)\n\nCHECKLIST:\n☐ Import the GitHub repo into Vercel (New Project → f
+ rom Git).\n☐ Confirm main deploys to a *.vercel.app URL that loads.\n   Do
+ ne when — The live URL shows your starter.\n☐ Open a PR from a branch → co
+ nfirm Vercel posts a Preview deploy link on it.\n   Done when — Pushing ma
+ in redeploys prod\; a PR gives a preview URL.\n\n— HAND TO CLAUDE —\nMy Ne
+ xt.js repo is on GitHub and imported into Vercel. Walk me through confirmi
+ ng auto-deploy works: how to verify `main` is the production branch\, how 
+ to trigger and find a Preview deploy from a pull request\, and where build
+  settings live. Give me a tiny throwaay change to push on a branch so I ca
+ n see a preview URL appear. List the exact clicks in the Vercel dashboard 
+ — assume I'm looking at it right now.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 02 · Vercel auto-deploy + previews
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260701-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260701T090000
+DTEND:20260701T111500
+SUMMARY:Day 03 · Supabase project + wiring
+DESCRIPTION:WEEK 1 · Lay the rails\nGoal: Database created and reachable f
+ rom the deploy.\n(~135 min)\n\nCHECKLIST:\n☐ Create a new Supabase project
+  (region us-west\, closest to AZ). Save the DB password somewhere safe.\n☐
+  Copy Project URL + anon key + service-role key.\n☐ Add them as env vars i
+ n Vercel for Production\, Preview\, and Development.\n   Done when — NEXT_
+ PUBLIC_SUPABASE_URL\, anon key\, and service key all present.\n☐ Have Clau
+ de install the Supabase client (@supabase/supabase-js + @supabase/ssr) and
+  add the client helpers.\n☐ Run vercel env pull .env.local so local dev ma
+ tches production.\n   Done when — A deployed test page reads a value from 
+ Supabase with no errors.\n\n— HAND TO CLAUDE —\nHelp me connect Supabase t
+ o my Next.js app on Vercel. I've created a Supabase project. Tell me exact
+ ly which keys to copy (URL\, anon\, service-role) and which to mark public
+  vs server-only. Install `@supabase/supabase-js` and `@supabase/ssr` and c
+ reate the browser + server client helpers in lib/. Then give me the Vercel
+  CLI commands to set the env vars for all three environments and to pull t
+ hem locally with `vercel env pull`. Finish by writing me a one-line test t
+ hat proves the deployed app can reach Supabase.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 03 · Supabase project + wiring
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260702-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260702T090000
+DTEND:20260702T111500
+SUMMARY:Day 04 · The map + brand tokens in-repo
+DESCRIPTION:WEEK 1 · Lay the rails\nGoal: Claude can re-read the plan and 
+ build to the brand each day.\n(~110 min)\n\nCHECKLIST:\n☐ In the design ap
+ p\, confirm the visual you're building to — the prototype + design system 
+ are your pixel target. Note anything still unsettled.\n☐ Drop the brand to
+ kens into the app: colors_and_type.css\, the fonts\, and global styles.\n 
+   Done when — A page styled with brand vars renders in Lexend Deca + JetBr
+ ains Mono.\n☐ Copy store.js + the Build Plan into a /reference folder (not
+  shipped) for Claude to read.\n☐ Have Claude write a short ARCHITECTURE.md
+  from the Build Plan's Vercel layout.\n   Done when — Repo has brand token
+ s loaded and an architecture note.\n\n— HAND TO CLAUDE —\nRead the files i
+ n /reference (store.js and the Build Plan) so you understand the data mode
+ l and target architecture. Then: (1) wire the Digital Allies brand tokens 
+ into the app — add colors_and_type.css and the Lexend Deca + JetBrains Mon
+ o fonts to global styles so pages render in the brand\; (2) write a short 
+ ARCHITECTURE.md from the Build Plan's Vercel layout that you and I can bot
+ h re-read each day. Show me a single styled test page proving the fonts an
+ d charcoal/bone colors are live.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 04 · The map + brand tokens in-repo
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260703-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260703T090000
+DTEND:20260703T111500
+SUMMARY:Day 05 · Magic-link auth
+DESCRIPTION:WEEK 1 · Lay the rails\nGoal: You can log in\; strangers can't
+ .\n(~135 min)\n\nCHECKLIST:\n☐ In Supabase Auth\, enable the Email provide
+ r and turn on magic links.\n☐ Set Site URL + redirect URLs (localhost + th
+ e vercel.app URL).\n☐ Have Claude build a /login page\, the sign-in flow w
+ ith @supabase/ssr\, and middleware that protects the admin routes.\n☐ Add 
+ yourself as the first user and request a link.\n   Done when — You click t
+ he email link\, land on a protected /dashboard stub\; logged-out users bou
+ nce to /login.\n\n— HAND TO CLAUDE —\nSet up magic-link auth for the Digit
+ al Allies CMS using Supabase + @supabase/ssr. Build a /login page (brand-s
+ tyled\, square corners\, JetBrains Mono)\, the sign-in action that sends a
+  magic link\, the callback handler\, and middleware that protects every ro
+ ute in the (admin) group and redirects logged-out users to /login. Tell me
+  exactly what to set for Site URL and redirect URLs in the Supabase Auth d
+ ashboard (localhost + my vercel.app URL) and how to add myself as the firs
+ t user.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 05 · Magic-link auth
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260704-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260704T100000
+DTEND:20260704T101500
+SUMMARY:Review — Week 1 (Sat)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Skim the week's commits. 
+ Confirm prod + a preview both deploy green.\n☐ Jot anything that felt shak
+ y into a notes file.
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260705-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260705T100000
+DTEND:20260705T101500
+SUMMARY:Review — Week 1 (Sun)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Read next week's five day
+ s so Monday starts warm.\n☐ No building. The rails are down — that's the h
+ ard part.
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260706-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260706T090000
+DTEND:20260706T111500
+SUMMARY:Day 06 · Schema: clients + settings
+DESCRIPTION:WEEK 2 · The store\nGoal: The tenant record the whole model ha
+ ngs off.\n(~120 min)\n\nCHECKLIST:\n☐ Have Claude turn the store.js shape 
+ into SQL: a clients table (name\, domain\, initials\, brand_color\, plan\,
+  owner flag) and a settings store.\n☐ Run the migration in the Supabase SQ
+ L editor.\n☐ Seed the Digital Allies client row (owner\, agency) + its set
+ tings from the prototype's DA_SETTINGS.\n   Done when — The clients + sett
+ ings rows are visible in the Table editor.\n\n— HAND TO CLAUDE —\nUsing st
+ ore.js in /reference as the source of truth for shape\, write the SQL to c
+ reate a `clients` table (id\, name\, domain\, initials\, brand_color\, pla
+ n enum starter|studio|agency\, owner boolean\, live_url\, admin_url) and a
+  place to store per-client site settings (hero\, about\, phone\, email\, h
+ ours — JSONB is fine). Give me the migration to paste into the Supabase SQ
+ L editor\, then a seed insert for the Digital Allies client (owner=true\, 
+ plan=agency) using the DA_SETTINGS values from store.js.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 06 · Schema: clients + settings
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260707-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260707T090000
+DTEND:20260707T111500
+SUMMARY:Day 07 · Schema: content collections
+DESCRIPTION:WEEK 2 · The store\nGoal: Somewhere for every kind of content 
+ to live.\n(~120 min)\n\nCHECKLIST:\n☐ Tables\, each with a client_id FK: p
+ ages (blocks as JSONB)\, articles\, departments\, field_notes\, messages.\
+ n☐ Run the migration\; add indexes on client_id + slug + status.\n   Done 
+ when — All five tables exist with the right columns + FKs.\n\n— HAND TO CL
+ AUDE —\nContinue the Supabase schema for the Digital Allies CMS. Create th
+ e content tables\, each with a `client_id` foreign key to clients: `pages`
+  (with a `blocks` JSONB column)\, `articles`\, `departments`\, `field_note
+ s`\, `messages`. Add the columns the prototype uses (slug\, status\, excer
+ pt\, etc.) and indexes on (client_id\, slug) and (client_id\, status). Giv
+ e me one migration to paste into the SQL editor and a quick checklist to c
+ onfirm the tables and FKs in the Table editor.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 07 · Schema: content collections
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260708-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260708T090000
+DTEND:20260708T111500
+SUMMARY:Day 08 · Seed the real site
+DESCRIPTION:WEEK 2 · The store\nGoal: The actual Digital Allies content\, 
+ in the database.\n(~110 min)\n\nCHECKLIST:\n☐ Have Claude write a seed scr
+ ipt that loads the prototype's pages\, articles\, departments\, and field 
+ notes into Supabase.\n☐ Run it\; spot-check Home / About / Services and th
+ eir blocks.\n   Done when — Querying pages for DA returns the Home page wi
+ th its hero / departments / fieldNotes / cta blocks intact.\n\n— HAND TO C
+ LAUDE —\nWrite a seed script that loads the real Digital Allies content fr
+ om /reference/store.js (DA_PAGES\, plus its articles\, departments\, and f
+ ield notes) into my Supabase tables for the Digital Allies client. Preserv
+ e the page blocks exactly as JSONB. Make it idempotent so I can re-run it 
+ safely. Tell me how to run it and give me one SQL query I can paste to con
+ firm the Home page came back with its hero / departments / fieldNotes / ct
+ a blocks intact.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 08 · Seed the real site
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260709-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260709T090000
+DTEND:20260709T111500
+SUMMARY:Day 09 · RLS — the security boundary
+DESCRIPTION:WEEK 2 · The store\nGoal: Drafts stay private\; published is p
+ ublic\; tenants never cross.\n(~135 min)\n\nCHECKLIST:\n☐ Add a membership
+ s table (user ↔ client) to drive access.\n☐ Turn on Row Level Security for
+  every content table.\n☐ Policies: your user reads/writes its client's row
+ s\; anon reads only published rows.\n   Done when — The anon key can read 
+ published pages but cannot see drafts or write anything.\n\n— HAND TO CLAU
+ DE —\nLock down the Digital Allies CMS database with Row Level Security. F
+ irst add a `memberships` table linking auth users to clients. Then enable 
+ RLS on clients and all content tables and write policies so: (a) a member 
+ can read and write rows for their client\; (b) the anon role can read ONLY
+  rows where status = 'published'\; (c) nobody can read another client's da
+ ta. Give me the SQL to paste\, then exact steps to verify with the anon ke
+ y that drafts are invisible and writes are rejected. This is irreversible-
+ ish — explain anything risky before I run it.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 09 · RLS — the security boundary
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260710-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260710T090000
+DTEND:20260710T111500
+SUMMARY:Day 10 · lib/store.ts — the swap
+DESCRIPTION:WEEK 2 · The store\nGoal: The prototype's data functions\, now
+  backed by Postgres.\n(~135 min)\n\nCHECKLIST:\n☐ Have Claude build lib/st
+ ore.ts with the same reads/writes the prototype exposed (getPages\, savePa
+ ge\, getArticles…)\, backed by Supabase.\n☐ Add lib/plans.ts with the tier
+ s + the can(client\, module) helper — keep the seam even though Phase 1 is
+  one client.\n☐ Render the DA page titles from the database in a server co
+ mponent.\n   Done when — A page calls getPages() and lists the real page t
+ itles from Supabase.\n\n— HAND TO CLAUDE —\nBuild lib/store.ts — the data-
+ access layer for the Digital Allies CMS — exposing the same functions the 
+ prototype's store.js had (getSite\, getPages\, getPage\, savePage\, getArt
+ icles\, saveArticle\, getDepartments\, getFieldNotes\, getMessages\, getSe
+ ttings\, saveSettings)\, but backed by Supabase queries scoped to a client
+ _id. Also write lib/plans.ts with the three tiers and a `can(client\, modu
+ le)` helper. Then show me a server component that calls getPages() and ren
+ ders the real Digital Allies page titles from the database.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 10 · lib/store.ts — the swap
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260711-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260711T100000
+DTEND:20260711T101500
+SUMMARY:Review — Week 2 (Sat)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Open Supabase\, eyeball t
+ he seeded data\; confirm RLS didn't break the published reads.\n☐ Confirm 
+ the deploy is still green.
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260712-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260712T100000
+DTEND:20260712T101500
+SUMMARY:Review — Week 2 (Sun)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Take a manual database ba
+ ckup from Supabase.\n☐ Light read-ahead. The data layer is done — the rest
+  is UI.
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260713-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260713T090000
+DTEND:20260713T111500
+SUMMARY:Day 11 · Admin shell + dashboard
+DESCRIPTION:WEEK 3 · The Press Office\nGoal: The workspace frame\, with re
+ al numbers.\n(~120 min)\n\nCHECKLIST:\n☐ In the design app\, confirm the a
+ dmin shell layout (nav\, top bar\, client identity) you're matching.\n☐ Ha
+ ve Claude port the shell into the (admin) layout and wire the dashboard co
+ unts (pages\, drafts\, unread messages) to store.ts.\n   Done when — Logge
+ d-in /dashboard shows real counts from Supabase in the brand shell.\n\n— H
+ AND TO CLAUDE —\nPort the admin workspace shell from the prototype into th
+ e (admin) layout: the side nav\, top bar\, and client identity\, all brand
+ -styled (charcoal/bone\, square corners\, Lexend Deca headers). Build the 
+ Dashboard as the landing screen with live counts — total pages\, drafts\, 
+ unread transmissions — read through lib/store.ts. Match the look of the pr
+ ototype in /reference. Show me /dashboard rendering real numbers from Supa
+ base.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 11 · Admin shell + dashboard
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260714-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260714T090000
+DTEND:20260714T111500
+SUMMARY:Day 12 · Pages list + builder (read)
+DESCRIPTION:WEEK 3 · The Press Office\nGoal: See the real pages and their 
+ blocks.\n(~120 min)\n\nCHECKLIST:\n☐ In the design app\, lock the page-bui
+ lder block visuals (hero\, richtext\, departments\, fieldNotes\, cta) as t
+ he build reference.\n☐ Have Claude build the Pages list (title\, slug\, st
+ atus\, updated) and a read-only block renderer.\n   Done when — Opening th
+ e Home page shows its blocks in order.\n\n— HAND TO CLAUDE —\nBuild the Pr
+ ess Office Pages module for the Digital Allies CMS. A list view of pages (
+ title\, slug\, status badge\, last updated) and\, on opening a page\, a bl
+ ock renderer that shows its blocks (hero\, richtext\, departments\, fieldN
+ otes\, cta) read-only for now\, reading through lib/store.ts. Keep it bran
+ d-styled. Show me the seeded Home page rendering its blocks in the correct
+  order.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 12 · Pages list + builder (read)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260715-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260715T090000
+DTEND:20260715T111500
+SUMMARY:Day 13 · Page builder (write)
+DESCRIPTION:WEEK 3 · The Press Office\nGoal: Edits that stick.\n(~135 min)
+ \n\nCHECKLIST:\n☐ Wire it up: reorder blocks\, edit block data\, add/remov
+ e blocks\, save → writes JSONB back to Supabase.\n☐ Add the draft / publis
+ hed status toggle.\n   Done when — Editing the hero heading and saving cha
+ nges the row and survives a reload.\n\n— HAND TO CLAUDE —\nMake the Digita
+ l Allies page builder editable. Wire up: reordering blocks (drag or up/dow
+ n)\, editing each block's data inline\, adding and removing blocks\, and a
+  Save that writes the blocks array back to the page's JSONB column via lib
+ /store.ts. Add a draft/published status toggle. Optimistic UI is fine. Sho
+ w me that editing the hero heading and saving changes the row in Supabase 
+ and survives a page reload.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 13 · Page builder (write)
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260716-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260716T090000
+DTEND:20260716T111500
+SUMMARY:Day 14 · Articles + Settings
+DESCRIPTION:WEEK 3 · The Press Office\nGoal: The Journal and the site's ow
+ n knobs.\n(~135 min)\n\nCHECKLIST:\n☐ Articles (The Journal) list + editor
+  (title\, slug\, excerpt\, content\, status).\n☐ Site Settings form writin
+ g the settings record (hero\, about\, phone\, email\, hours).\n   Done whe
+ n — You can publish an article and edit settings\, both persisting.\n\n— H
+ AND TO CLAUDE —\nBuild two more Press Office areas for the Digital Allies 
+ CMS. (1) Articles (The Journal): a list plus an editor with title\, slug\,
+  excerpt\, content\, and a draft/published toggle\, all through lib/store.
+ ts. (2) Site Settings: a form bound to the client's settings record (hero 
+ title/subtitle\, about\, phone\, email\, hours) that saves back to Supabas
+ e. Brand-styled. Show me publishing an article and editing a setting\, bot
+ h persisting after reload.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 14 · Articles + Settings
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260717-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260717T090000
+DTEND:20260717T111500
+SUMMARY:Day 15 · Command Center + polish
+DESCRIPTION:WEEK 3 · The Press Office\nGoal: The inbox\, and a workspace t
+ hat feels finished.\n(~120 min)\n\nCHECKLIST:\n☐ Read-only inbox of transm
+ issions (messages) with read / unread state.\n☐ Tidy nav\, empty states\, 
+ and stub the lock icon for Studio+ modules (the gating seam).\n☐ Walk the 
+ full edit → save → reload loop end to end.\n   Done when — The admin match
+ es the prototype and is backed entirely by the database.\n\n— HAND TO CLAU
+ DE —\nFinish the Press Office. Build the Command Center: a read-only inbox
+  listing transmissions (the `messages` table) with read/unread state and a
+  detail view. Then polish the workspace — tidy the nav\, add empty states 
+ in the brand voice\, and stub a lock icon next to Studio+ modules (Project
+ s\, Research\, Workshop) using the can() helper\, even though they're hidd
+ en in Phase 1. Walk the whole edit → save → reload loop with me and flag a
+ nything rough.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 15 · Command Center + polish
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260718-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260718T100000
+DTEND:20260718T101500
+SUMMARY:Review — Week 3 (Sat)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Click through the whole a
+ dmin as your own user\; note rough edges.\n☐ Confirm the deploy is green.
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260719-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260719T100000
+DTEND:20260719T101500
+SUMMARY:Review — Week 3 (Sun)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Write next week's launch-
+ day list in your own words.\n☐ Confirm you have registrar access to digita
+ lallies.net's DNS — you'll need it.
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260720-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260720T090000
+DTEND:20260720T111500
+SUMMARY:Day 16 · Public renderer
+DESCRIPTION:WEEK 4 · Go live\nGoal: The site\, drawn from the database.\n(
+ ~135 min)\n\nCHECKLIST:\n☐ In the design app\, finalize the public page de
+ signs (hero\, departments\, field notes) as the renderer's reference.\n☐ H
+ ave Claude build the (site)/[client] route + a block registry (hero\, rich
+ text\, departments\, fieldNotes\, cta)\, each reading published data.\n   
+ Done when — A public URL renders the real Home page from Supabase\, no aut
+ h.\n\n— HAND TO CLAUDE —\nBuild the public site renderer for the Digital A
+ llies CMS at (site)/[client]. Create a block registry that maps each block
+  type (hero\, richtext\, departments\, fieldNotes\, cta) to a brand-styled
+  React component\, reading ONLY published data through lib/store.ts (no au
+ th). The departments and fieldNotes blocks should pull their live collecti
+ ons. Render the real Digital Allies Home page from Supabase at a public UR
+ L and show it to me.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 16 · Public renderer
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260721-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260721T090000
+DTEND:20260721T111500
+SUMMARY:Day 17 · Full site parity
+DESCRIPTION:WEEK 4 · Go live\nGoal: It looks like digitalallies.net — beca
+ use it is.\n(~135 min)\n\nCHECKLIST:\n☐ Render About\, Services (when publ
+ ished)\, and article pages\; departments + field notes pull their live col
+ lections.\n☐ Match the brand using the design system components\, not hand
+ -rolled CSS.\n   Done when — The public site matches the brand and reads e
+ ntirely from the store.\n\n— HAND TO CLAUDE —\nExtend the public renderer 
+ to full parity with digitalallies.net. Render the About page\, the Service
+ s page when published\, and individual article pages. Make sure department
+ s and field notes pull live from their tables. Use the Digital Allies desi
+ gn system components and tokens so it matches the brand exactly — don't ha
+ nd-roll CSS where a brand component exists. Show me the public site readin
+ g entirely from the store and looking like the real site.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 17 · Full site parity
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260722-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260722T090000
+DTEND:20260722T111500
+SUMMARY:Day 18 · The transmission loop
+DESCRIPTION:WEEK 4 · Go live\nGoal: The contact form actually reaches you.
+ \n(~120 min)\n\nCHECKLIST:\n☐ Pick the email path (Resend or Supabase SMTP
+ )\; add the API key to Vercel env.\n☐ Have Claude wire the contact form (S
+ end a Transmission) to write a messages row and fire an email to contact@d
+ igitalallies.net.\n   Done when — Submitting the form creates a row\, emai
+ ls you\, and shows in the admin inbox.\n\n— HAND TO CLAUDE —\nWire the con
+ tact form (Send a Transmission) on the public Digital Allies site to do tw
+ o things on submit: insert a row into the `messages` table\, and send a tr
+ ansactional email to contact@digitalallies.net. Recommend Resend vs Supaba
+ se SMTP for a one-person setup and set up whichever is simpler. Put the AP
+ I key in Vercel env. Use a server action. Show me that a submission create
+ s a message row\, emails me\, and appears in the admin Command Center inbo
+ x.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 18 · The transmission loop
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260723-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260723T090000
+DTEND:20260723T111500
+SUMMARY:Day 19 · Domain + DNS cutover
+DESCRIPTION:WEEK 4 · Go live\nGoal: The real address\, pointed at the new 
+ site. Do this early in the day.\n(~110 min)\n\nCHECKLIST:\n☐ Add digitalal
+ lies.net (+ www) as a domain in Vercel.\n☐ Update the A / CNAME records at
+  the registrar per Vercel's instructions. Keep the old site reachable unti
+ l verified.\n☐ Update Supabase Auth Site URL + redirect URLs to the real d
+ omain.\n   Done when — https://digitalallies.net serves the new site over 
+ HTTPS and magic-link login still works.\n\n— HAND TO CLAUDE —\nHelp me poi
+ nt digitalallies.net at this Vercel deployment safely — this is a live cut
+ over\, so go slow and tell me what's reversible. Walk me through: adding d
+ igitalallies.net and www to the Vercel project\, the exact A/CNAME records
+  to set at my registrar\, how to verify propagation\, and updating Supabas
+ e Auth Site URL + redirect URLs to the real domain. Keep the old site reac
+ hable until the new one is verified over HTTPS and magic-link login works 
+ on the real domain.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 19 · Domain + DNS cutover
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260724-9@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260724T090000
+DTEND:20260724T111500
+SUMMARY:Day 20 · Launch QA + cut over
+DESCRIPTION:WEEK 4 · Go live\nGoal: Close the loop. Ship it.\n(~135 min)\n
+ \nCHECKLIST:\n☐ Full pass: every page loads\, forms work\, login works\, d
+ rafts stay hidden\, mobile looks right\, Lighthouse is sane.\n☐ Production
+  deploy from main\; tag a v1 release in GitHub.\n☐ Edit a page in the Pres
+ s Office and watch digitalallies.net change.\n   Done when — The connected
+  loop is live. Phase 1 shipped.\n\n— HAND TO CLAUDE —\nRun final launch QA
+  on the Digital Allies CMS with me. Give me a tight checklist to verify: e
+ very public page loads\, the contact form works end-to-end\, login works o
+ n digitalallies.net\, drafts stay hidden from anon\, mobile layout holds\,
+  and Lighthouse is reasonable. Then give me the commands to do a clean pro
+ duction deploy from `main` and tag a `v1` release on GitHub. Finally\, con
+ firm the connected loop: I edit a page in the Press Office and digitalalli
+ es.net changes.
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Day 20 · Launch QA + cut over
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260725-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260725T100000
+DTEND:20260725T101500
+SUMMARY:Land it — Week 4 (Sat)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Watch it: Vercel logs + S
+ upabase logs for errors. Take a fresh DB backup.\n☐ Write down what's left
+  for Phase 2 (multi-client\, plans\, billing).
+END:VEVENT
+BEGIN:VEVENT
+UID:da-cms-20260726-10@digitalallies.net
+DTSTAMP:20260624T120000Z
+DTSTART:20260726T100000
+DTEND:20260726T101500
+SUMMARY:Land it — Week 4 (Sun)
+DESCRIPTION:Lighter day — review & breathe.\n\n☐ Off. You shipped a connec
+ ted CMS running your real site.\n☐ It is a very avant-garde concept called
+  'Doing My Job.'
+END:VEVENT
+END:VCALENDAR

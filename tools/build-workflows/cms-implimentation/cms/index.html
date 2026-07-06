@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="CMS / Marketing Hub" subtitle="Connected CMS, the 30-day run, dashboards, and integration docs" viewport="1100x900" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — CMS / Marketing Hub</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { padding: 0; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    .hero { padding: 64px 40px 36px; }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .brand-name { font-family: var(--font-headers); font-weight: 700; font-size: 18px; }
+    .eb { font-family: var(--font-details); font-size: 11px; color: var(--signal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+    .back { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); text-decoration: none; letter-spacing: 0.04em; }
+    .back:hover { color: var(--signal); }
+    h1 { font-size: clamp(34px, 4vw, 48px); margin: 12px 0 18px; max-width: 820px; line-height: 1.06; letter-spacing: -0.012em; }
+    .lede { font-family: var(--font-body); font-size: 15px; line-height: 1.7; max-width: 640px; color: var(--fg); }
+
+    .section { padding: 36px 40px 8px; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--charcoal); padding-bottom: 10px; margin-bottom: 22px; }
+    .section-head h2 { font-family: var(--font-headers); font-weight: 700; font-size: 21px; margin: 0; }
+    .section-head .cap { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); letter-spacing: 0.05em; }
+
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    .card { position: relative; border: 1px solid var(--charcoal); background: var(--charcoal); color: var(--fg-on-dark); text-decoration: none; padding: 24px 22px; min-height: 132px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.2s var(--ease-snap); overflow: hidden; }
+    .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .card .tag { font-family: var(--font-details); font-size: 10px; letter-spacing: 0.18em; color: var(--signal); text-transform: uppercase; font-weight: 700; }
+    .card .live { color: var(--accent); }
+    .card .name { font-family: var(--font-headers); font-weight: 700; font-size: 20px; line-height: 1.15; margin-top: auto; }
+    .card .sub { display: block; font-family: var(--font-details); font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 6px; line-height: 1.45; }
+    .card .arrow { position: absolute; top: 18px; right: 16px; font-size: 16px; color: rgba(255,255,255,0.5); transition: transform 0.2s var(--ease-snap); }
+    .card:hover .arrow { transform: translate(3px,-3px); color: var(--signal); }
+
+    .tile { border: 1px solid var(--charcoal); background: var(--bg); padding: 20px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; min-height: 104px; transition: all 0.2s var(--ease-snap); }
+    .tile:hover { background: var(--bg-alt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .tile .t-tag { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; letter-spacing: 0.16em; font-weight: 700; }
+    .tile .t-name { font-family: var(--font-headers); font-weight: 700; font-size: 16px; }
+    .tile .t-desc { font-family: var(--font-body); font-size: 12px; line-height: 1.55; color: var(--fg-muted); }
+
+    footer { padding: 52px 40px; text-align: center; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); border-top: 1px solid var(--hairline); margin-top: 52px; }
+    footer .sep { color: var(--signal); margin: 0 12px; }
+
+    @media (max-width: 820px) { .grid, .grid3 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#2D2D2D">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="800" fill="#2D2D2D"/>
+      <circle cx="600" cy="330" r="34" fill="#3A7BD5"/>
+      <text x="600" y="470" text-anchor="middle" fill="#F9F6F0" font-family="monospace" font-size="64" font-weight="700" letter-spacing="6">CMS</text>
+      <text x="600" y="540" text-anchor="middle" fill="#9a9a9a" font-family="monospace" font-size="22" letter-spacing="8">DIGITAL ALLIES</text>
+    </svg>
+  </template>
+  <div class="hero wrap">
+    <div class="brand">
+      <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+      <span class="brand-name">Digital Allies</span>
+    </div>
+    <a class="back" href="../index.html">← Design System</a>
+    <div class="eb" style="margin-top:16px;">Digital Allies · CMS</div>
+    <h1>The CMS.</h1>
+    <p class="lede">One dashboard runs the website — pages, the blog, the content calendar, and the global brand settings. The canonical CMS is the Connected CMS Dashboard below; send your developer straight there.</p>
+  </div>
+
+  <!-- THE CMS -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>The CMS</h2>
+      <span class="cap">One dashboard — the source of truth</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="dashboard.html">
+        <span class="arrow">↗</span>
+        <span class="tag live">● Connected</span>
+        <span class="name">Connected CMS Dashboard<span class="sub">The live admin: Pages, The Press Office, Projects, Research, The Workshop, and Settings. This is the canonical CMS — send your developer here.</span></span>
+      </a>
+      <a class="card" href="../CMS_IMPLEMENTATION_PLAN.html" style="background: var(--bg); color: var(--fg);">
+        <span class="arrow" style="color: var(--signal);">↗</span>
+        <span class="tag">Spec</span>
+        <span class="name" style="color: var(--fg);">What it must include<span class="sub" style="color: var(--fg-muted);">The full scope — website page editing, global design-token editing, and blog publishing — plus the build plan.</span></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- WHAT IT DOES -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>What the CMS does</h2>
+      <span class="cap">Three core jobs</span>
+    </div>
+    <div class="grid3">
+      <div class="tile" style="cursor: default;">
+        <span class="t-tag">01</span>
+        <span class="t-name">Website page editing</span>
+        <span class="t-desc">Build and edit pages by stacking sections from a component library — hero, departments, field notes, rich text, CTA, and more. Reorder, edit inline, draft/publish.</span>
+      </div>
+      <div class="tile" style="cursor: default;">
+        <span class="t-tag">02</span>
+        <span class="t-name">Global design editing</span>
+        <span class="t-desc">Edit the brand tokens the whole site reads — colors, type, spacing — from one place. Change once, update every page.</span>
+      </div>
+      <div class="tile" style="cursor: default;">
+        <span class="t-tag">03</span>
+        <span class="t-name">Blog &amp; articles</span>
+        <span class="t-desc">The Press Office: write, schedule, and publish blog posts, press releases, and case studies that appear on the site.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFERENCE -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>Reference</h2>
+      <span class="cap">Spec &amp; integration docs</span>
+    </div>
+    <div class="grid3">
+      <a class="tile" href="../CMS_IMPLEMENTATION_PLAN.html">
+        <span class="t-tag">Spec</span>
+        <span class="t-name">Specification &amp; Build Plan</span>
+        <span class="t-desc">What the CMS must include and the phased plan to build it against a backend.</span>
+      </a>
+      <a class="tile" href="WIRING_GUIDE.md">
+        <span class="t-tag">Guide</span>
+        <span class="t-name">Wiring Guide</span>
+        <span class="t-desc">How the website, dashboard, and database connect — Supabase env, queries, and data flow.</span>
+      </a>
+      <a class="tile" href="INTEGRATION_OVERVIEW.md">
+        <span class="t-tag">Overview</span>
+        <span class="t-name">Integration Overview</span>
+        <span class="t-desc">The big picture: the public site, the admin dashboard, and the database.</span>
+      </a>
+      <a class="tile" href="../ui_kits/website/content-calendar.html">
+        <span class="t-tag">Component</span>
+        <span class="t-name">Content Calendar</span>
+        <span class="t-desc">The live, sortable 30-day calendar component the CMS calendar tab is based on.</span>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Digital Allies · CMS &amp; Marketing Hub</span>
+    <span class="sep">·</span>
+    <span>contact@digitalallies.net</span>
+  </footer>
+</body>
+</html>
