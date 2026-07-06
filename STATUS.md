@@ -46,13 +46,22 @@ large step: what changed, what's true now, what's next. Keep it short and curren
    - Net: per-client theming work is scoped to the **public site renderer only**,
      not the admin. Less work than theming both.
 
-## Shared-agent setup (Claude Code + Antigravity)
+## Shared-agent setup + what actually syncs (READ THIS)
 
-- `AGENTS.md` is the single shared brain; `CLAUDE.md` and `GEMINI.md` symlink to
-  it (workspace root and here). Antigravity reads `AGENTS.md`, Claude Code reads
-  `CLAUDE.md`, Gemini reads `GEMINI.md` — same file. Either agent can drive.
-- Auto-sync (launchd, every 15 min + at login) keeps GitHub current, so both
-  agents on both Macs always see the latest code and this status.
+- **Conversations do NOT sync between devices — only files do.** This `STATUS.md`
+  is how work carries across devices, sessions, and agents. Keep it current.
+- **What syncs: the `da-platform` repo** (this STATUS.md, its `AGENTS.md`, all
+  code) — pushed to GitHub and pulled by launchd every 15 min on both Macs. This
+  is the reliable cross-device record.
+- **What does NOT sync: the workspace-root files** `../AGENTS.md` / `../CLAUDE.md`
+  / `../GEMINI.md`. Their repo (`/Users/cuus/Claude`) has **no remote** (bad
+  remotes were removed to fix a sync hang), so edits there stay on one device.
+  Do not rely on them for cross-device continuity — put it here instead.
+- Within da-platform, `AGENTS.md` is the shared brain; `CLAUDE.md`/`GEMINI.md`
+  symlink to it. Antigravity reads AGENTS.md, Claude Code reads CLAUDE.md — same
+  file. Either agent can drive.
+- Open gap: the workspace-root shared brain no longer has a sync path. Fix later
+  if we want workspace-wide conventions to travel between Macs.
 
 ---
 
