@@ -1,5 +1,9 @@
 # da-platform — Digital Allies CMS monorepo
 
+> **Read `STATUS.md` first.** It is the shared running status for every AI agent
+> (Claude Code + Antigravity) and Anthony — current state, decisions, next steps.
+> Update it after every large step.
+
 One repo, five codebases, full history preserved.
 
 - sites/digitalallies — Digital Allies' own website
