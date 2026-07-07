@@ -5,7 +5,23 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-06 — by Claude Code (Opus 4.8) — Step 2 per-client theming foundation built; Major needs list added below
+**Last updated:** 2026-07-06 (late) — by Claude Code (Opus 4.8) — Sync health
+automation added; 11 stale git locks cleared; dated `BUILD-SCHEDULE.md` written
+(remaining run = backlog + Week 4). Earlier today: Step 2 theming foundation built.
+
+## Automation + ops (2026-07-06)
+- **Sync health monitor installed.** `../sync-health.sh` + launchd agent
+  `com.digitalallies.sync-health` (every 3 hr) reads the sync logs, walks every
+  repo, and **notifies only on problems** (stale sync, push failures, stuck git
+  locks, oversized tracked files, missing remotes). Details + known issues:
+  `../SYNC-NOTES.md`. Run `./sync-health.sh` anytime (read-only).
+- **Fixed:** cleared 11 stale git `*.lock` files across repos that were silently
+  blocking commits (cms-suite + 9 HEAD.lock from a Jun-15 batch op + 1 packed-refs).
+- **Known ops issues** (tracked in `../SYNC-NOTES.md`): headless GitHub auth
+  dropped ~2 hrs this morning then recovered; `atomic-finds` remote half-wired
+  (no `main`, LFS errors); 3 tracked files ≥49 MB should move to Git LFS.
+- **The dated plan for the remaining build is `BUILD-SCHEDULE.md`** (backlog
+  hardening Jul 7–10, then Week 4 / Days 16–20 Jul 13–17 to Phase 1 launch).
 
 ---
 
