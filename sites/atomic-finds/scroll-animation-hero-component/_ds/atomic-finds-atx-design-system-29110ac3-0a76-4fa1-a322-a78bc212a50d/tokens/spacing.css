@@ -1,0 +1,126 @@
+/* ============================================================
+   Atomic Finds — Spacing, Shape & Effect Tokens
+   ============================================================ */
+
+:root {
+  /* ---- SPACING SCALE (4px base) ---- */
+  --space-1:  4px;    --space-2:  8px;    --space-3:  12px;   --space-4:  16px;
+  --space-5:  20px;   --space-6:  24px;   --space-8:  32px;   --space-10: 40px;
+  --space-12: 48px;   --space-16: 64px;   --space-20: 80px;   --space-30: 120px;
+
+  /* ---- BORDER RADIUS (soft, never square) ---- */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+  --radius-pill: 999px;
+
+  /* ---- BORDER STYLES ---- */
+  --border-1:      1px solid var(--border);
+  --border-glow:   2px solid var(--celestial-yellow);
+  --border-dashed: 1px dashed var(--rich-brown);
+
+  /* ---- GLOW EFFECTS (replaces shadow) ---- */
+  --glow-sm:    0 0 8px rgba(245, 200, 66, 0.35);
+  --glow-md:    0 0 16px rgba(245, 200, 66, 0.50);
+  --glow-lg:    0 0 30px rgba(245, 200, 66, 0.60);
+  --glow-amber: 0 0 12px rgba(212, 130, 42, 0.55);
+  --glow-ring:  0 0 12px rgba(245, 200, 66, 0.9), 0 0 32px rgba(212, 130, 42, 0.6);
+
+  /* ---- MOTION ---- */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);  /* @kind other */
+  --dur-quick:  180ms;  /* @kind other */
+  --dur-base:   300ms;  /* @kind other */
+  --dur-slow:   600ms;  /* @kind other */
+
+  /* ---- LAYOUT ---- */
+  --content-max: 820px;  /* @kind spacing */
+  --wide-max:    1280px;  /* @kind spacing */
+
+  /* ---- BACKGROUNDS ---- */
+  --weave:
+    repeating-linear-gradient(45deg, transparent 0 5px, rgba(196, 149, 106, 0.035) 5px 6px),
+    repeating-linear-gradient(-45deg, transparent 0 5px, rgba(196, 149, 106, 0.035) 5px 6px);  /* @kind other */
+  
+  --hero-gradient:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212, 130, 42, 0.10) 0%, transparent 60%),
+    linear-gradient(180deg, var(--charcoal-3) 0%, var(--deep-charcoal) 55%, var(--charcoal-2) 100%);  /* @kind other */
+  
+  --galaxy-bg:
+    radial-gradient(ellipse at 25% 25%, rgba(245, 200, 66, 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 78% 72%, rgba(212, 130, 42, 0.10) 0%, transparent 45%),
+    linear-gradient(160deg, #211C14 0%, #16140F 60%, #1A160F 100%);  /* @kind other */
+}
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
+
+.af-wrap {
+  max-width: var(--wide-max);
+  margin: 0 auto;
+  padding-left: var(--space-12);
+  padding-right: var(--space-12);
+  box-sizing: border-box;
+}
+
+.af-prose {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.af-section {
+  padding-top: var(--space-30);
+  padding-bottom: var(--space-30);
+}
+
+/* ============================================================
+   ANIMATION KEYFRAMES
+   ============================================================ */
+
+@keyframes af-glow-pulse {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(245, 200, 66, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(245, 200, 66, 0.6);
+  }
+}
+
+@keyframes af-twinkle {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "animations.jsx",
+              "components/**",
+              "previews/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Tilda Script|DM Serif Display|DM Sans|Agbalumo|Lilita One))/i]",
+        "message": "Font not provided by the design system. Available: Tilda Script, DM Serif Display, DM Sans, Agbalumo, Lilita One."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|children|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: variant, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:instock|featured|out|eco)$/]",
+        "message": "<Badge> variant must be one of 'instock' | 'featured' | 'out' | 'eco'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|disabled|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, size, disabled, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:solid|primary|amber)$/]",
+        "message": "<Button> variant must be one of 'solid' | 'primary' | 'amber'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|className|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: children, className."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='GalaxyCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|script|desc|price|image|imageBg|bg|dimensions|origin|era|key|ref|className|style|children)$/]",
+        "message": "<GalaxyCard> doesn't accept that prop. Declared props: title, script, desc, price, image, imageBg, bg, dimensions, origin, era."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Icon'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|size|className|style|key|ref|className|style|children)$/]",
+        "message": "<Icon> doesn't accept that prop. Declared props: name, size, className, style."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "GalaxyCard": {
+        "replaces": []
+      },
+      "Icon": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent",
+      "--accent-2",
+      "--accent-soft",
+      "--amber-orange",
+      "--austin-clay",
+      "--bamboo-honey",
+      "--bg",
+      "--bg-alt",
+      "--bg-card",
+      "--bg-card-2",
+      "--bg-inset",
+      "--bone-white",
+      "--border",
+      "--border-1",
+      "--border-dashed",
+      "--border-glow",
+      "--border-soft",
+      "--border-strong",
+      "--celestial-yellow",
+      "--charcoal-2",
+      "--charcoal-3",
+      "--content-max",
+      "--deep-charcoal",
+      "--dur-base",
+      "--dur-quick",
+      "--dur-slow",
+      "--ease-out",
+      "--fg",
+      "--fg-body",
+      "--fg-label",
+      "--fg-muted",
+      "--fg-soft",
+      "--font-accent",
+      "--font-body",
+      "--font-details",
+      "--font-display",
+      "--font-expressive",
+      "--font-script",
+      "--fs-body",
+      "--fs-display",
+      "--fs-h1",
+      "--fs-h2",
+      "--fs-h3",
+      "--fs-label",
+      "--fs-script",
+      "--fs-small",
+      "--galaxy-bg",
+      "--glow-amber",
+      "--glow-lg",
+      "--glow-md",
+      "--glow-ring",
+      "--glow-sm",
+      "--hero-gradient",
+      "--lh-normal",
+      "--lh-relaxed",
+      "--lh-snug",
+      "--lh-tight",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-pill",
+      "--radius-sm",
+      "--radius-xl",
+      "--rattan-black",
+      "--rattan-tan",
+      "--rich-brown",
+      "--space-1",
+      "--space-10",
+      "--space-12",
+      "--space-16",
+      "--space-2",
+      "--space-20",
+      "--space-3",
+      "--space-30",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-8",
+      "--tracking-wide",
+      "--tracking-wider",
+      "--tracking-widest",
+      "--warm-gold",
+      "--weave",
+      "--wide-max",
+      "--woven-moss"
+    ],
+    "tokenKinds": {
+      "--deep-charcoal": "color",
+      "--rattan-black": "color",
+      "--celestial-yellow": "color",
+      "--amber-orange": "color",
+      "--bone-white": "color",
+      "--woven-moss": "color",
+      "--warm-gold": "color",
+      "--rattan-tan": "color",
+      "--bamboo-honey": "color",
+      "--austin-clay": "color",
+      "--charcoal-2": "color",
+      "--charcoal-3": "color",
+      "--rich-brown": "color",
+      "--bg": "color",
+      "--bg-alt": "color",
+      "--bg-card": "color",
+      "--bg-card-2": "color",
+      "--bg-inset": "color",
+      "--fg": "color",
+      "--fg-body": "color",
+      "--fg-muted": "color",
+      "--fg-soft": "color",
+      "--fg-label": "color",
+      "--border": "color",
+      "--border-strong": "color",
+      "--border-soft": "color",
+      "--accent": "color",
+      "--accent-2": "color",
+      "--accent-soft": "color",
+      "--font-display": "font",
+      "--font-script": "font",
+      "--font-accent": "font",
+      "--font-expressive": "font",
+      "--font-body": "font",
+      "--font-details": "font",
+      "--fs-display": "font",
+      "--fs-h1": "font",
+      "--fs-h2": "font",
+      "--fs-h3": "font",
+      "--fs-script": "font",
+      "--fs-body": "font",
+      "--fs-small": "font",
+      "--fs-label": "font",
+      "--lh-tight": "other",
+      "--lh-snug": "other",
+      "--lh-normal": "other",
+      "--lh-relaxed": "other",
+      "--tracking-wide": "other",
+      "--tracking-wider": "other",
+      "--tracking-widest": "other",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-8": "spacing",
+      "--space-10": "spacing",
+      "--space-12": "spacing",
+      "--space-16": "spacing",
+      "--space-20": "spacing",
+      "--space-30": "spacing",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-xl": "radius",
+      "--radius-pill": "radius",
+      "--border-1": "color",
+      "--border-glow": "color",
+      "--border-dashed": "color",
+      "--glow-sm": "shadow",
+      "--glow-md": "shadow",
+      "--glow-lg": "shadow",
+      "--glow-amber": "shadow",
+      "--glow-ring": "shadow",
+      "--ease-out": "other",
+      "--dur-quick": "other",
+      "--dur-base": "other",
+      "--dur-slow": "other",
+      "--content-max": "spacing",
+      "--wide-max": "spacing",
+      "--weave": "other",
+      "--hero-gradient": "other",
+      "--galaxy-bg": "other"
+    },
+    "fontFamilies": [
+      "Agbalumo",
+      "DM Sans",
+      "DM Serif Display",
+      "Lilita One",
+      "Tilda Script"
+    ]
+  }
+}
