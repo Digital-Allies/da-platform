@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celestial Hero — Layered Look (static)</title>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#F5C842;--amber:#D4822A;--ink:#F0E8D8;--night:#121016;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#1E1E1E;color:var(--ink);font-family:'DM Sans',sans-serif;padding:32px}
+  h1{font-family:'Lilita One',cursive;color:var(--gold);font-weight:400;font-size:30px;margin-bottom:4px}
+  .sub{opacity:.82;max-width:940px;line-height:1.5;margin-bottom:22px;font-size:14px}
+  .row{display:flex;gap:18px;flex-wrap:wrap}
+  .col{flex:1;min-width:300px}
+  .label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+  .layers{font-family:monospace;font-size:11px;opacity:.65;margin-top:7px}
+
+  /* a fixed stage that mimics the real hero viewport */
+  .stage{position:relative;width:100%;aspect-ratio:4/5;border-radius:14px;overflow:hidden;background:var(--night);
+         border:1px solid rgba(245,200,66,.18)}
+  .stage img{position:absolute;user-select:none;-webkit-user-drag:none}
+  .sky{inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}
+  .char{left:50%;bottom:0;height:100%;width:auto;transform:translateX(-50%)}
+  .wisp{pointer-events:none}
+  .scrim{position:absolute;inset:0;pointer-events:none;
+         background:radial-gradient(120% 90% at 50% 40%,transparent 46%,rgba(18,16,22,.4) 100%),
+                    linear-gradient(180deg,rgba(18,16,22,.45) 0%,transparent 26%,transparent 60%,rgba(18,16,22,.85) 100%)}
+</style>
+</head>
+<body>
+  <h1>Layered look — three points in the scroll (static, no animation yet)</h1>
+  <p class="sub">Each panel is the real layer stack composited: <b>sky painting behind</b> → <b>her cutout</b> → <b>foreground cloud wisp in front of her</b> → legibility scrim. In the built version the sky parallaxes slowly, she pushes in, and the wisps drift across at their own faster rate so she reads as moving <i>through</i> the clouds. This is just to confirm the depth/feel.</p>
+
+  <div class="row">
+    <div class="col">
+      <div class="label">Opening — emerging, gazing away</div>
+      <div class="stage">
+        <img class="sky"  src="assets/kai/sky-1.jpg">
+        <img class="char" src="assets/kai/web/cutout-A.png" style="transform:translateX(-50%) scale(1.15);transform-origin:50% 100%">
+        <img class="wisp" src="assets/kai/wisp-a.png" style="left:-8%;bottom:-4%;width:116%;opacity:.85">
+        <img class="wisp" src="assets/kai/wisp-a.png" style="left:30%;top:-6%;width:70%;opacity:.5;transform:scaleX(-1)">
+        <div class="scrim"></div>
+      </div>
+      <div class="layers">sky-1 · cutout-A · wisp-a ×2</div>
+    </div>
+
+    <div class="col">
+      <div class="label">Turn — three-quarter, light warming</div>
+      <div class="stage">
+        <img class="sky"  src="assets/kai/sky-3.jpg">
+        <img class="char" src="assets/kai/web/cutout-3.png" style="transform:translateX(-50%) scale(1.06);transform-origin:50% 100%">
+        <img class="wisp" src="assets/kai/wisp-b.png" style="left:-14%;bottom:-6%;width:130%;opacity:.8">
+        <div class="scrim"></div>
+      </div>
+      <div class="layers">sky-3 · cutout-3 · wisp-b</div>
+    </div>
+
+    <div class="col">
+      <div class="label">Eye contact — close-up, golden glow</div>
+      <div class="stage">
+        <img class="sky"  src="assets/kai/sky-4.jpg">
+        <img class="char" src="assets/kai/web/cutout-5.png" style="transform:translateX(-50%) scale(1.0);transform-origin:50% 100%">
+        <img class="wisp" src="assets/kai/wisp-c.png" style="left:-10%;bottom:-8%;width:120%;opacity:.6;mix-blend-mode:screen">
+        <div class="scrim"></div>
+      </div>
+      <div class="layers">sky-4 · cutout-5 · wisp-c (screen blend)</div>
+    </div>
+  </div>
+</body>
+</html>
