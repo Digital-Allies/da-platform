@@ -10,259 +10,184 @@
 
 <!--
   ==========================================================================
-  Atomic Finds — Celestial Scroll Hero  (v2, full-bleed rebuild)
+  Atomic Finds — Celestial Scroll Hero  (v3, LAYERED cutout + parallax)
   ==========================================================================
-  A scroll-scrubbed cinematic hero. Full-bleed frames crossfade while a
-  continuous camera push-in zooms toward the subject's face — the visitor
-  scrolls and the owner turns from gazing at the stars to meeting your eyes.
+  The owner moves THROUGH the clouds as you scroll. Real depth, not a photo:
 
-  WHY THIS VERSION FEELS SMOOTH (and the old one didn't):
-    1. FULL-BLEED FRAMES, object-fit: cover  — the six 4:5 frames fill the
-       whole viewport instead of being shrunken cutouts on a gradient. This
-       is the fix for "photos 4/5/6 are cropped too much / should span the
-       background." They now span everything.
-    2. CONTINUOUS CAMERA under the crossfades — the whole frame stack zooms
-       from 1.0 → 1+push across the entire scroll, so motion never stops even
-       between frame swaps. That constant drift is what reads as "cinematic."
-    3. LERPED (smoothed) progress — raw scroll deltas are eased toward a target
-       every animation frame, so even chunky trackpad/wheel scrolls render as
-       buttery continuous motion. This is the single biggest smoothness win.
-    4. TWO-FRAME CROSSFADE that always sums to 1 opacity — no flash, no dip,
-       softened with smootherstep.
+    z5   sky        — 5 painterly night-sky stills, crossfade + slow parallax
+    z20  cutouts    — 9 transparent character cutouts, push-in + per-frame size,
+                      snappy two-frame dissolve (the scrub)
+    z25  disc       — one reusable constellation disc, lerped to her hand per
+                      keyframe, with a wall-clock shimmer (it "reflects & moves")
+    z30  wisps      — foreground cloud wisps drifting across IN FRONT of her at
+                      their own faster rate — this is what sells "through" clouds
+    z35  mist  z40 scrim  z50 copy beats  z60 scroll cue
 
-  CONFIG (data-attributes on .cf-hero):
-    data-cf-ending  "smile" | "playful"   (default smile)
-    data-cf-screens number of viewport-heights of scroll (default 8; lower = faster)
-    data-cf-push    zoom intensity, 0.15–0.5 (default 0.34)
-    data-cf-mode    "hero" | "about" | "social"  (default hero)
-    data-cf-mist    "on" | "off"          foreground rising haze (default on)
-    data-cf-assets  path to the frame folder (default assets/kai/web)
+  Smoothness engine (kept from v2): lerped scroll progress + continuous motion
+  under the crossfades + snappy dissolves. The dissolve math is frame-count
+  agnostic, so the ~30 in-between frames added later just extend the array.
 
-  Copy is authored as normal DOM inside .cf-hero__beats — edit the text,
-  or drive it from a CMS/React. Nothing here is locked to a framework.
+  Per-frame character sizing lives in data-cf-s / data-cf-x / data-cf-y on each
+  cutout <img> (tuned live in the preview). Disc keyframe anchors live in the
+  DISC_ANCHORS constant. Config via data-cf-* on .cf-hero.
   ==========================================================================
 -->
 <style>
-  /* --- Design-system tokens: consume Atomic Finds vars when the token CSS is
-         loaded, else fall back to the documented CLAUDE.md values so the
-         component is fully self-contained on its own. --- */
   .cf-hero {
     --cf-ink:          var(--bone-white, #F0E8D8);
     --cf-gold:         var(--celestial-yellow, #F5C842);
     --cf-amber:        var(--amber-orange, #D4822A);
-    --cf-night:        #121016;   /* cinematic frame backdrop — a touch deeper than --deep-charcoal */
+    --cf-night:        #121016;
     --cf-ease:         var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
     --cf-font-display: var(--font-display, 'Lilita One', cursive);
     --cf-font-script:  var(--font-script, 'Tilda Script', 'Brush Script MT', cursive);
     --cf-font-body:    var(--font-body, 'DM Sans', system-ui, sans-serif);
-    --cf-face-x:       50%;   /* where her face sits horizontally in the frames */
-    --cf-face-y:       38%;   /* ...and vertically — the zoom pushes toward this */
   }
-
   .cf-hero, .cf-hero * { box-sizing: border-box; }
 
-  /* The scroll track: its height defines how long the animation lasts. */
   .cf-hero {
     position: relative;
     background: var(--cf-night);
     font-family: var(--cf-font-body);
     color: var(--cf-ink);
   }
-
-  /* The pinned stage — stays put while the track scrolls past it. */
   .cf-hero__stage {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    overflow: hidden;
+    position: sticky; top: 0; height: 100svh; overflow: hidden;
     background: var(--cf-night);
   }
+  .cf-hero__canvas { position: absolute; inset: 0; }
 
-  /* z10 — full-bleed frame stack. Gets the continuous zoom. */
-  .cf-hero__frames {
-    position: absolute;
-    inset: 0;
-    z-index: 10;
-    transform-origin: var(--cf-face-x) var(--cf-face-y);
-    will-change: transform;
+  /* z5 — sky background (parallax). Oversized so the translate never reveals an edge. */
+  .cf-hero__sky { position: absolute; inset: -3%; z-index: 5; will-change: transform; }
+  .cf-hero__sky img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 38%; opacity: 0; will-change: opacity;
   }
-  .cf-hero__frames img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: var(--cf-face-x) var(--cf-face-y);
-    opacity: 0;
-    will-change: opacity;
-    -webkit-user-drag: none;
-    user-select: none;
-  }
-  .cf-hero__frames img:first-child { opacity: 1; }
+  .cf-hero__sky img:first-child { opacity: 1; }
 
-  /* z20 — legibility scrims: vignette + top/bottom gradients. */
-  .cf-hero__scrim {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    pointer-events: none;
-    background:
-      radial-gradient(120% 90% at 50% 42%, transparent 44%, rgba(18,16,22,0.34) 100%),
-      linear-gradient(180deg, rgba(18,16,22,0.55) 0%, transparent 22%, transparent 55%, rgba(18,16,22,0.82) 100%);
+  /* z20 — character cutouts. Wrapper does the push-in; each img carries its own size/pos. */
+  .cf-hero__cutouts { position: absolute; inset: 0; z-index: 20; transform-origin: 50% 88%; will-change: transform; }
+  .cf-hero__cutouts img {
+    position: absolute; left: 50%; bottom: 0; height: 100%; width: auto;
+    transform-origin: 50% 100%; opacity: 0; will-change: opacity;
+    -webkit-user-drag: none; user-select: none;
   }
 
-  /* z30 — foreground haze that falls away as we "rise". */
+  /* z25 — the constellation disc (reusable overlay). Wrapper = position/scale; inner = shimmer. */
+  .cf-hero__disc { position: absolute; left: 50%; top: 40%; z-index: 25; width: 22%; aspect-ratio: 1;
+                   transform: translate(-50%, -50%); opacity: 0; pointer-events: none; will-change: transform, opacity; }
+  .cf-hero__disc img { width: 100%; height: 100%; display: block; animation: cf-disc-spin 26s linear infinite; }
+  .cf-hero__disc::after { /* moving glint that reads as a reflection sliding across */
+    content: ""; position: absolute; inset: 6%; border-radius: 50%;
+    background: linear-gradient(115deg, transparent 38%, rgba(245,200,66,.28) 50%, transparent 62%);
+    mix-blend-mode: screen; animation: cf-disc-glint 5.5s var(--cf-ease) infinite; }
+  @keyframes cf-disc-spin  { to { transform: rotate(360deg); } }
+  @keyframes cf-disc-glint { 0%,100% { transform: translateX(-30%); opacity: .3; } 50% { transform: translateX(30%); opacity: .9; } }
+
+  /* z30 — foreground cloud wisps (drift IN FRONT of her) */
+  .cf-hero__wisps { position: absolute; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+  .cf-hero__wisps img { position: absolute; opacity: 0; will-change: transform, opacity; }
+
+  /* z35 — rising haze */
   .cf-hero__mist {
-    position: absolute;
-    inset: -12% 0 0 0;
-    z-index: 30;
-    pointer-events: none;
-    opacity: 0.8;
-    background: linear-gradient(180deg, rgba(18,16,22,0) 38%, rgba(18,16,22,0.5) 74%, rgba(18,16,22,0.96) 100%);
+    position: absolute; inset: -12% 0 0 0; z-index: 35; pointer-events: none; opacity: 0.7;
+    background: linear-gradient(180deg, rgba(18,16,22,0) 42%, rgba(18,16,22,0.45) 76%, rgba(18,16,22,0.95) 100%);
     will-change: transform, opacity;
   }
 
-  /* z40 — copy beats */
-  .cf-hero__beats { position: absolute; inset: 0; z-index: 40; }
-  .cf-hero__beat {
-    position: absolute;
-    opacity: 0;
-    will-change: opacity, transform;
+  /* z40 — legibility scrim */
+  .cf-hero__scrim {
+    position: absolute; inset: 0; z-index: 40; pointer-events: none;
+    background:
+      radial-gradient(120% 90% at 50% 40%, transparent 46%, rgba(18,16,22,0.34) 100%),
+      linear-gradient(180deg, rgba(18,16,22,0.5) 0%, transparent 24%, transparent 56%, rgba(18,16,22,0.84) 100%);
   }
 
-  .cf-hero__eyebrow {
-    font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--cf-amber);
-  }
+  /* z50 — copy beats */
+  .cf-hero__beats { position: absolute; inset: 0; z-index: 50; }
+  .cf-hero__beat { position: absolute; opacity: 0; will-change: opacity, transform; }
+  .cf-hero__eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cf-amber); }
 
-  /* Beat 1 — opening headline, upper-left over negative space.
-     Top-aligned (not centered) so it sits above her face on the opening frames. */
-  .cf-hero__beat--1 {
-    inset: 0; display: flex; align-items: flex-start;
-    padding-top: clamp(40px, 11vh, 150px);
-  }
+  .cf-hero__beat--1 { inset: 0; display: flex; align-items: flex-start; padding-top: clamp(40px, 11vh, 150px); }
   .cf-hero__beat--1 .cf-hero__panel {
     display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
     max-width: 560px; padding: 44px; margin-left: 4vw;
-    background: linear-gradient(90deg, rgba(18,16,22,0.55), rgba(18,16,22,0));
-    border-radius: 24px;
+    background: linear-gradient(90deg, rgba(18,16,22,0.5), rgba(18,16,22,0)); border-radius: 24px;
   }
   .cf-hero__h1 {
     margin: 0; font-family: var(--cf-font-display); font-weight: 400;
     font-size: clamp(46px, 5.4vw, 84px); line-height: 1.02;
     color: var(--cf-gold); text-shadow: 0 0 22px rgba(245,200,66,0.5);
   }
-  .cf-hero__script {
-    font-family: var(--cf-font-script);
-    font-size: clamp(24px, 2.6vw, 38px);
-    color: var(--cf-amber); text-shadow: 0 0 12px rgba(212,130,42,0.55);
-  }
+  .cf-hero__script { font-family: var(--cf-font-script); font-size: clamp(24px, 2.6vw, 38px); color: var(--cf-amber); text-shadow: 0 0 12px rgba(212,130,42,0.55); }
 
-  /* Beats 2 & 3 — lower third, centered */
   .cf-hero__beat--2, .cf-hero__beat--3 {
-    left: 0; right: 0; bottom: 0;
-    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; gap: 24px;
     padding: 0 24px 12vh; text-align: center;
   }
-  .cf-hero__body {
-    margin: 0; max-width: 640px;
-    font-size: clamp(20px, 2vw, 28px); line-height: 1.5;
-    text-shadow: 0 2px 20px rgba(18,16,22,0.92);
-  }
-  .cf-hero__beat--3 .cf-hero__body {
-    font-size: clamp(22px, 2.2vw, 32px); line-height: 1.4;
-  }
+  .cf-hero__body { margin: 0; max-width: 640px; font-size: clamp(20px, 2vw, 28px); line-height: 1.5; text-shadow: 0 2px 20px rgba(18,16,22,0.92); }
+  .cf-hero__beat--3 .cf-hero__body { font-size: clamp(22px, 2.2vw, 32px); line-height: 1.4; }
 
-  /* CTA — Atomic Finds pill button */
   .cf-hero__cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 15px 30px; border: 0; border-radius: 999px; cursor: pointer;
-    font-family: var(--cf-font-body); font-size: 14px; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--cf-night); background: var(--cf-gold);
-    box-shadow: 0 0 16px rgba(245,200,66,0.5);
-    transition: transform .3s var(--cf-ease), box-shadow .3s var(--cf-ease), background .3s var(--cf-ease);
-    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; border: 0; border-radius: 999px; cursor: pointer;
+    font-family: var(--cf-font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--cf-night); background: var(--cf-gold); box-shadow: 0 0 16px rgba(245,200,66,0.5);
+    transition: transform .3s var(--cf-ease), box-shadow .3s var(--cf-ease), background .3s var(--cf-ease); text-decoration: none;
   }
-  .cf-hero__cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(245,200,66,0.65);
-    background: #ffd766;
-  }
+  .cf-hero__cta:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(245,200,66,0.65); background: #ffd766; }
 
-  /* z50 — scroll cue */
-  .cf-hero__cue {
-    position: absolute; left: 0; right: 0; bottom: 26px; z-index: 50;
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
-    pointer-events: none; will-change: opacity;
-  }
-  .cf-hero__cue span {
-    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--cf-amber);
-  }
-  .cf-hero__cue i {
-    display: block; width: 1px; height: 34px;
-    background: linear-gradient(180deg, var(--cf-gold), rgba(245,200,66,0));
-    animation: cf-cue 2s var(--cf-ease) infinite;
-  }
-  @keyframes cf-cue {
-    0%, 100% { transform: translateY(0); opacity: 0.9; }
-    50%      { transform: translateY(8px); opacity: 0.4; }
-  }
+  /* z60 — scroll cue */
+  .cf-hero__cue { position: absolute; left: 0; right: 0; bottom: 26px; z-index: 60; display: flex; flex-direction: column; align-items: center; gap: 8px; pointer-events: none; will-change: opacity; }
+  .cf-hero__cue span { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cf-amber); }
+  .cf-hero__cue i { display: block; width: 1px; height: 34px; background: linear-gradient(180deg, var(--cf-gold), rgba(245,200,66,0)); animation: cf-cue 2s var(--cf-ease) infinite; }
+  @keyframes cf-cue { 0%,100% { transform: translateY(0); opacity: 0.9; } 50% { transform: translateY(8px); opacity: 0.4; } }
 
-  /* --- SOCIAL mode: a centred 9:16 canvas instead of full-bleed --- */
-  .cf-hero[data-cf-mode="social"] .cf-hero__stage {
-    display: flex; align-items: center; justify-content: center;
-    background: radial-gradient(120% 120% at 50% 30%, #241d2e 0%, #121016 70%);
-  }
-  .cf-hero[data-cf-mode="social"] .cf-hero__canvas {
-    position: relative; height: 100svh; aspect-ratio: 9 / 16;
-    max-height: 100svh; overflow: hidden; border-radius: 18px;
-    box-shadow: 0 0 40px rgba(245,200,66,0.25);
-  }
-  .cf-hero:not([data-cf-mode="social"]) .cf-hero__canvas { position: absolute; inset: 0; }
-
-  /* --- Reduced motion: static resolved end-state, no scrub --- */
-  @media (prefers-reduced-motion: reduce) {
-    .cf-hero__mist, .cf-hero__cue { display: none; }
-  }
+  @media (prefers-reduced-motion: reduce) { .cf-hero__mist, .cf-hero__cue { display: none; } }
 </style>
 </head>
 <body style="margin:0; background:#1E1E1E;">
 
-<!-- ============================ COMPONENT ============================ -->
-<section class="cf-hero"
-         data-cf-ending="smile"
-         data-cf-screens="8"
-         data-cf-push="0.34"
-         data-cf-mode="hero"
-         data-cf-mist="on"
-         data-cf-assets="assets/kai/web">
+<section class="cf-hero" data-cf-screens="11" data-cf-push="0.12" data-cf-mist="on" data-cf-disc="off" data-cf-wisps="on">
   <div class="cf-hero__stage">
     <div class="cf-hero__canvas">
 
-      <!-- z10: full-bleed frame sequence (author order = scroll order)
-           data-cf-y = vertical framing for object-fit:cover, so her face stays
-           well-placed as the camera pushes in (wide shots sit lower, close-ups higher). -->
-      <div class="cf-hero__frames" data-cf-frames>
-        <img data-cf-frame data-cf-y="48%" src="assets/kai/web/frame-1.jpg" alt="The founder amid night clouds, holding a constellation disc to her temple, gazing out at the stars">
-        <img data-cf-frame data-cf-y="44%" src="assets/kai/web/frame-2.jpg" alt="She begins to turn, the galaxy welling up behind her">
-        <img data-cf-frame data-cf-y="40%" src="assets/kai/web/frame-3.jpg" alt="Three-quarter turn, closer now, constellation disc at her shoulder">
-        <img data-cf-frame data-cf-y="38%" src="assets/kai/web/frame-4.jpg" alt="Closer still, nearly meeting your eyes">
-        <img data-cf-frame data-cf-y="36%" src="assets/kai/web/frame-5.jpg" alt="Close-up, steady direct eye contact">
-        <img data-cf-frame data-cf-end="smile"   data-cf-y="36%" src="assets/kai/web/frame-6.jpg" alt="Close-up with a warm, welcoming smile">
-        <img data-cf-frame data-cf-end="playful" data-cf-y="36%" src="assets/kai/web/frame-7.jpg" alt="Close-up, playful — peace sign and a grin">
+      <!-- z5: sky background (5 stills crossfade + parallax) -->
+      <div class="cf-hero__sky" data-cf-sky>
+        <img data-cf-skyi="1" src="assets/kai/sky-1.jpg" alt="Deep night clouds, distant milky-way glow">
+        <img data-cf-skyi="2" src="assets/kai/sky-2.jpg" alt="Night clouds with golden constellations">
+        <img data-cf-skyi="3" src="assets/kai/sky-3.jpg" alt="Warm nebula breaking through the clouds">
+        <img data-cf-skyi="4" src="assets/kai/sky-4.jpg" alt="Golden light welling up between the clouds">
+        <img data-cf-skyi="5" src="assets/kai/sky-5.jpg" alt="Radiant golden starburst amid the clouds">
       </div>
 
-      <!-- z30: rising haze -->
-      <div class="cf-hero__mist" data-cf-mist></div>
+      <!-- z20: character cutouts (scroll order). data-cf-s = size, x/y = offset % -->
+      <div class="cf-hero__cutouts" data-cf-cutouts>
+        <img data-cf-frame data-cf-s="0.60" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-A.png"  alt="Kai amid the clouds, holding the star-disc, gazing away">
+        <img data-cf-frame data-cf-s="0.66" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-1b.png" alt="Kai raising the star-disc in both hands, gazing up">
+        <img data-cf-frame data-cf-s="0.80" data-cf-x="-2" data-cf-y="0"  src="assets/kai/web/cutout-1.png"  alt="Kai in profile, star-disc at her temple">
+        <img data-cf-frame data-cf-s="0.90" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-2.png"  alt="Kai turning inward, galaxy welling up behind her">
+        <img data-cf-frame data-cf-s="0.98" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-3.png"  alt="Kai at three-quarter angle, star-disc at her shoulder">
+        <img data-cf-frame data-cf-s="1.02" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-4.png"  alt="Kai in close-up, nearly meeting your eyes">
+        <img data-cf-frame data-cf-s="1.06" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-5.png"  alt="Kai in close-up, steady direct eye contact">
+        <img data-cf-frame data-cf-s="1.04" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-6.png"  alt="Kai with a warm, welcoming smile">
+        <img data-cf-frame data-cf-s="1.12" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-7.png"  alt="Kai, playful — tongue out and a peace sign">
+      </div>
 
-      <!-- z20: legibility scrim -->
+      <!-- z25: reusable constellation disc (position lerped per keyframe) -->
+      <div class="cf-hero__disc" data-cf-disc-el><img src="assets/kai/web/disc.png" alt=""></div>
+
+      <!-- z30: foreground cloud wisps (drift in front). data-cf-w* = band + drift -->
+      <div class="cf-hero__wisps" data-cf-wisps-el>
+        <img src="assets/kai/wisp-a.png" data-cf-w="0.04,0.34" data-cf-wx="-25,20" data-cf-wy="8,2"   style="bottom:-4%; width:120%;" data-cf-wo="0.85">
+        <img src="assets/kai/wisp-a.png" data-cf-w="0.02,0.24" data-cf-wx="40,-15" data-cf-wy="-4,-8" style="top:-8%; width:80%; transform:scaleX(-1);" data-cf-wo="0.45">
+        <img src="assets/kai/wisp-b.png" data-cf-w="0.38,0.68" data-cf-wx="-30,25" data-cf-wy="6,0"   style="bottom:-6%; width:135%;" data-cf-wo="0.8">
+        <img src="assets/kai/wisp-c.png" data-cf-w="0.72,1.0"  data-cf-wx="-15,15" data-cf-wy="4,-6"  style="bottom:-8%; width:125%; mix-blend-mode:screen;" data-cf-wo="0.6">
+      </div>
+
+      <div class="cf-hero__mist" data-cf-mist></div>
       <div class="cf-hero__scrim"></div>
 
-      <!-- z40: copy beats -->
       <div class="cf-hero__beats">
-        <!-- Beat 1 — top, gazing away -->
         <div class="cf-hero__beat cf-hero__beat--1" data-cf-beat="1">
           <div class="cf-hero__panel">
             <div class="cf-hero__eyebrow">Atomic Finds ATX</div>
@@ -270,117 +195,99 @@
             <div class="cf-hero__script">handpicked under night skies</div>
           </div>
         </div>
-
-        <!-- Beat 2 — push-in, turning toward you -->
         <div class="cf-hero__beat cf-hero__beat--2" data-cf-beat="2">
           <p class="cf-hero__body">Curated rattan &amp; bamboo treasures, restored in Austin — and sent your way from across the galaxy.</p>
         </div>
-
-        <!-- Beat 3 — eye contact, the invitation -->
         <div class="cf-hero__beat cf-hero__beat--3" data-cf-beat="3">
           <p class="cf-hero__body">Every piece has a name, a past, and a place in your orbit.</p>
           <a class="cf-hero__cta" href="#collection">[ Meet the Family ]</a>
         </div>
       </div>
 
-      <!-- z50: scroll cue -->
-      <div class="cf-hero__cue" data-cf-cue>
-        <span>Scroll</span>
-        <i></i>
-      </div>
+      <div class="cf-hero__cue" data-cf-cue><span>Scroll</span><i></i></div>
 
     </div>
   </div>
 </section>
 
-<!-- a little page below, so the sticky release is visible in preview -->
 <section style="min-height:60vh; padding:120px 48px; background:#1E1E1E; color:#F0E8D8; font-family:'DM Sans',sans-serif;">
   <div style="max-width:820px; margin:0 auto;">
     <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#D4822A;">The Collection</div>
     <h2 style="font-family:'Lilita One',cursive;font-weight:400;color:#F5C842;font-size:clamp(32px,4vw,48px);margin:.3em 0;">Restored, one orbit at a time</h2>
-    <p style="max-width:60ch;line-height:1.6;opacity:.85;">Page content picks up here once the hero releases. This block only exists so you can watch the sticky stage let go in preview.</p>
+    <p style="max-width:60ch;line-height:1.6;opacity:.85;">Page content picks up here once the hero releases.</p>
   </div>
 </section>
 
 <script>
-/* ==========================================================================
-   CelestialScrollHero — framework-free scroll scrubber
-   Auto-inits every .cf-hero on the page. Also exported for manual init.
-   ========================================================================== */
 (function () {
-  var smoother = function (t) {           // smootherstep, C2-continuous
-    t = t < 0 ? 0 : t > 1 ? 1 : t;
-    return t * t * t * (t * (t * 6 - 15) + 10);
-  };
-  var band = function (p, a, b) {         // clamped linear ramp a→b
-    return Math.min(Math.max((p - a) / (b - a), 0), 1);
-  };
+  var smoother = function (t) { t = t<0?0:t>1?1:t; return t*t*t*(t*(t*6-15)+10); };
+  var band = function (p,a,b) { return Math.min(Math.max((p-a)/(b-a),0),1); };
+  var lerp = function (a,b,t) { return a+(b-a)*t; };
+
+  // Disc keyframe anchors — where the disc sits (as % of stage) in each cutout, and its size/opacity.
+  // Index matches the cutout order: A,1b,1,2,3,4,5,6,7. op:0 = disc out of frame.
+  var DISC_ANCHORS = [
+    { x: 63, y: 22, s: 0.15, op: 1 },   // A  — at temple, small/far
+    { x: 60, y: 15, s: 0.20, op: 1 },   // 1b — raised in both hands
+    { x: 63, y: 40, s: 0.22, op: 1 },   // 1  — profile, at temple
+    { x: 58, y: 42, s: 0.24, op: 1 },   // 2  — turning
+    { x: 66, y: 55, s: 0.26, op: 0.9 }, // 3  — at shoulder
+    { x: 86, y: 64, s: 0.28, op: 0.4 }, // 4  — sliver at edge, fading
+    { x: 96, y: 70, s: 0.30, op: 0 },   // 5  — gone
+    { x: 96, y: 70, s: 0.30, op: 0 },   // 6
+    { x: 96, y: 70, s: 0.30, op: 0 }    // 7
+  ];
 
   function CelestialScrollHero(root) {
-    this.root   = root;
-    this.stage  = root.querySelector('.cf-hero__stage');
-    this.framesEl = root.querySelector('[data-cf-frames]');
+    this.root = root;
+    this.stage = root.querySelector('.cf-hero__stage');
+    this.skyEl = root.querySelector('[data-cf-sky]');
+    this.cutoutsEl = root.querySelector('[data-cf-cutouts]');
+    this.discEl = root.querySelector('[data-cf-disc-el]');
+    this.wispsEl = root.querySelector('[data-cf-wisps-el]');
     this.mistEl = root.querySelector('[data-cf-mist]');
-    this.cueEl  = root.querySelector('[data-cf-cue]');
-    this.beats  = {
-      1: root.querySelector('[data-cf-beat="1"]'),
-      2: root.querySelector('[data-cf-beat="2"]'),
-      3: root.querySelector('[data-cf-beat="3"]')
-    };
+    this.cueEl = root.querySelector('[data-cf-cue]');
+    this.beats = { 1: root.querySelector('[data-cf-beat="1"]'), 2: root.querySelector('[data-cf-beat="2"]'), 3: root.querySelector('[data-cf-beat="3"]') };
+    this.frames = Array.prototype.slice.call(this.cutoutsEl.querySelectorAll('[data-cf-frame]'));
+    this.skies = Array.prototype.slice.call(this.skyEl.querySelectorAll('img'));
+    this.wisps = Array.prototype.slice.call(this.wispsEl.querySelectorAll('img'));
+
     this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    this.smoothP = 0;
-    this.targetP = 0;
-    this.running = false;
-    this.inView  = true;
+    this.smoothP = 0; this.targetP = 0; this.running = false; this.inView = true;
 
     this.readConfig();
-    this.pickFrames();
+    this.applyAnchors();
     this.layout();
 
     if (this.reduced) { this.renderStatic(); return; }
-
     this.tick = this.tick.bind(this);
-    // Only animate while the hero is on screen.
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        this.inView = entries[0].isIntersecting;
-        if (this.inView) this.start();
-      }.bind(this), { threshold: 0 }).observe(root);
+      new IntersectionObserver(function (e) { this.inView = e[0].isIntersecting; if (this.inView) this.start(); }.bind(this), { threshold: 0 }).observe(root);
     }
-    window.addEventListener('resize', this.layout.bind(this));
+    window.addEventListener('resize', function () { this.layout(); this.start(); }.bind(this));
     this.start();
   }
 
   CelestialScrollHero.prototype.readConfig = function () {
     var d = this.root.dataset;
-    this.ending  = d.cfEnding === 'playful' ? 'playful' : 'smile';
-    this.screens = Math.max(4, parseFloat(d.cfScreens) || 8);
-    this.push    = Math.min(0.6, Math.max(0.1, parseFloat(d.cfPush) || 0.34));
+    this.screens = Math.max(4, parseFloat(d.cfScreens) || 11);
+    this.push = Math.min(0.5, Math.max(0.05, parseFloat(d.cfPush) || 0.12));
     this.showMist = d.cfMist !== 'off';
+    if (d.cfDisc === 'off' && this.discEl) this.discEl.style.display = 'none';
+    if (d.cfWisps === 'off' && this.wispsEl) this.wispsEl.style.display = 'none';
   };
 
-  // Keep only the chosen ending frame in the active sequence.
-  CelestialScrollHero.prototype.pickFrames = function () {
-    var all = Array.prototype.slice.call(this.framesEl.querySelectorAll('[data-cf-frame]'));
-    this.frames = all.filter(function (img) {
-      var end = img.getAttribute('data-cf-end');
-      if (!end) return true;
-      if (end === this.ending) return true;
-      img.style.display = 'none';        // hide the unused ending
-      return false;
-    }.bind(this));
-    // Per-frame vertical framing keeps her face placed as the camera pushes in.
+  // Set each cutout's static base transform (size + offset). The wrapper adds the push-in.
+  CelestialScrollHero.prototype.applyAnchors = function () {
     this.frames.forEach(function (img) {
-      var y = img.getAttribute('data-cf-y');
-      if (y) img.style.objectPosition = '50% ' + y;
+      var s = parseFloat(img.getAttribute('data-cf-s')) || 1;
+      var x = parseFloat(img.getAttribute('data-cf-x')) || 0;
+      var y = parseFloat(img.getAttribute('data-cf-y')) || 0;
+      img.style.transform = 'translateX(' + (-50 + x) + '%) translateY(' + y + '%) scale(' + s + ')';
     });
-    if (!this.showMist && this.mistEl) this.mistEl.style.display = 'none';
   };
 
-  CelestialScrollHero.prototype.layout = function () {
-    // Track height = screens × viewport. Sticky stage does the rest.
-    if (!this.reduced) this.root.style.height = (this.screens * 100) + 'vh';
-  };
+  CelestialScrollHero.prototype.layout = function () { if (!this.reduced) this.root.style.height = (this.screens * 100) + 'vh'; };
 
   CelestialScrollHero.prototype.progress = function () {
     var rect = this.root.getBoundingClientRect();
@@ -389,101 +296,94 @@
     return Math.min(Math.max(-rect.top / total, 0), 1);
   };
 
-  CelestialScrollHero.prototype.start = function () {
-    if (this.running) return;
-    this.running = true;
-    requestAnimationFrame(this.tick);
-  };
+  CelestialScrollHero.prototype.start = function () { if (this.running) return; this.running = true; requestAnimationFrame(this.tick); };
 
   CelestialScrollHero.prototype.tick = function () {
     this.targetP = this.progress();
-    // Lerp toward the target — this is the buttery bit.
     this.smoothP += (this.targetP - this.smoothP) * 0.12;
     if (Math.abs(this.targetP - this.smoothP) < 0.0002) this.smoothP = this.targetP;
     this.render(this.smoothP);
-
-    // Keep looping while in view OR still settling; otherwise idle.
-    if (this.inView || Math.abs(this.targetP - this.smoothP) > 0.0002) {
-      requestAnimationFrame(this.tick);
-    } else {
-      this.running = false;
-    }
+    if (this.inView || Math.abs(this.targetP - this.smoothP) > 0.0002) requestAnimationFrame(this.tick);
+    else this.running = false;
   };
 
   CelestialScrollHero.prototype.render = function (p) {
     var N = this.frames.length;
 
-    // --- Continuous camera push-in (eased across the whole track) ---
-    var scale = 1 + smoother(p) * this.push;
-    this.framesEl.style.transform = 'scale(' + scale.toFixed(4) + ')';
-
-    // --- Two-frame crossfade (opacities always sum to 1) ---
-    // Snappy dissolve: hold each frame, then cross-dissolve inside a narrow
-    // window (35%–65% of the segment). With only 6 distinct poses this keeps
-    // the double-exposure "ghost" brief — you dissolve past it while scrolling
-    // instead of lingering at a static 50/50 blend.
+    // --- Cutouts: continuous push-in + snappy two-frame dissolve ---
+    this.cutoutsEl.style.transform = 'scale(' + (1 + smoother(p) * this.push).toFixed(4) + ')';
     var fpos = p * (N - 1);
-    var i = Math.floor(fpos);
-    if (i >= N - 1) i = N - 2;            // guard the tail
-    if (i < 0) i = 0;
-    var f = smoother(Math.min(Math.max((fpos - i - 0.35) / 0.30, 0), 1));
+    var i = Math.floor(fpos); if (i >= N - 1) i = N - 2; if (i < 0) i = 0;
+    var fRaw = fpos - i;
+    var f = smoother(Math.min(Math.max((fRaw - 0.35) / 0.30, 0), 1));   // snappy dissolve
     for (var k = 0; k < N; k++) {
       var o = k === i ? 1 - f : (k === i + 1 ? f : 0);
       if (p >= 1 && k === N - 1) o = 1;
       this.frames[k].style.opacity = o;
     }
 
-    // --- Foreground haze: rises and clears ---
+    // --- Sky: independent crossfade (quintile bands) + slow parallax ---
+    var skyOp = [
+      1 - band(p, 0.14, 0.22),
+      band(p, 0.14, 0.22) * (1 - band(p, 0.36, 0.44)),
+      band(p, 0.36, 0.44) * (1 - band(p, 0.56, 0.64)),
+      band(p, 0.56, 0.64) * (1 - band(p, 0.76, 0.84)),
+      band(p, 0.76, 0.84)
+    ];
+    for (var s = 0; s < this.skies.length; s++) this.skies[s].style.opacity = skyOp[s];
+    this.skyEl.style.transform = 'scale(' + (1 + smoother(p) * 0.08).toFixed(4) + ') translateY(' + (-p * 2.2).toFixed(3) + '%)';
+
+    // --- Disc: smooth position lerp between the two nearest keyframe anchors ---
+    if (this.discEl) {
+      var a = DISC_ANCHORS[i], b = DISC_ANCHORS[Math.min(i + 1, N - 1)];
+      var dx = lerp(a.x, b.x, fRaw), dy = lerp(a.y, b.y, fRaw), ds = lerp(a.s, b.s, fRaw), doo = lerp(a.op, b.op, fRaw);
+      this.discEl.style.left = dx + '%';
+      this.discEl.style.top = dy + '%';
+      this.discEl.style.width = (ds * 100) + '%';
+      this.discEl.style.transform = 'translate(-50%, -50%)';
+      this.discEl.style.opacity = doo;
+    }
+
+    // --- Wisps: each drifts across its own band, in front of her ---
+    for (var w = 0; w < this.wisps.length; w++) {
+      var el = this.wisps[w];
+      var bnd = (el.getAttribute('data-cf-w') || '0,1').split(',').map(Number);
+      var wx = (el.getAttribute('data-cf-wx') || '0,0').split(',').map(Number);
+      var wy = (el.getAttribute('data-cf-wy') || '0,0').split(',').map(Number);
+      var wo = parseFloat(el.getAttribute('data-cf-wo')) || 0.8;
+      var t = band(p, bnd[0], bnd[1]);
+      var flip = /scaleX\(-1\)/.test(el.getAttribute('style') || '') ? ' scaleX(-1)' : '';
+      el.style.transform = 'translate(' + lerp(wx[0], wx[1], t).toFixed(1) + '%,' + lerp(wy[0], wy[1], t).toFixed(1) + '%)' + flip;
+      // fade in/out at the band edges (bell curve), so wisps enter and leave softly
+      el.style.opacity = (wo * Math.sin(Math.PI * t)).toFixed(3);
+    }
+
+    // --- Mist / beats / cue ---
     if (this.showMist && this.mistEl) {
       this.mistEl.style.transform = 'translateY(' + (p * 16).toFixed(2) + '%)';
-      this.mistEl.style.opacity = Math.max(0, 0.8 - p * 1.3).toFixed(3);
+      this.mistEl.style.opacity = Math.max(0, 0.7 - p * 1.2).toFixed(3);
     }
-
-    // --- Copy beats (independent ranges) ---
     var b1 = this.beats[1], b2 = this.beats[2], b3 = this.beats[3];
-    if (b1) {
-      var o1 = 1 - band(p, 0.14, 0.30);
-      b1.style.opacity = o1;
-      b1.style.transform = 'translateY(' + (-p * 80).toFixed(1) + 'px)';
-      b1.style.pointerEvents = o1 > 0.1 ? 'auto' : 'none';
-    }
-    if (b2) {
-      var o2 = band(p, 0.40, 0.50) * (1 - band(p, 0.66, 0.74));
-      b2.style.opacity = o2;
-      b2.style.transform = 'translateY(' + ((1 - band(p, 0.40, 0.52)) * 22).toFixed(1) + 'px)';
-    }
-    if (b3) {
-      var o3 = band(p, 0.80, 0.90);
-      b3.style.opacity = o3;
-      b3.style.transform = 'translateY(' + ((1 - o3) * 26).toFixed(1) + 'px)';
-      b3.style.pointerEvents = o3 > 0.5 ? 'auto' : 'none';
-    }
-
-    // --- Scroll cue fades on first nudge ---
+    if (b1) { var o1 = 1 - band(p, 0.12, 0.26); b1.style.opacity = o1; b1.style.transform = 'translateY(' + (-p * 80).toFixed(1) + 'px)'; b1.style.pointerEvents = o1 > 0.1 ? 'auto' : 'none'; }
+    if (b2) { b2.style.opacity = band(p, 0.36, 0.46) * (1 - band(p, 0.62, 0.70)); b2.style.transform = 'translateY(' + ((1 - band(p, 0.36, 0.48)) * 22).toFixed(1) + 'px)'; }
+    if (b3) { var o3 = band(p, 0.82, 0.92); b3.style.opacity = o3; b3.style.transform = 'translateY(' + ((1 - o3) * 26).toFixed(1) + 'px)'; b3.style.pointerEvents = o3 > 0.5 ? 'auto' : 'none'; }
     if (this.cueEl) this.cueEl.style.opacity = Math.min(Math.max(1 - p * 6, 0), 1);
   };
 
-  // Reduced motion: freeze on the resolved close-up + invitation.
   CelestialScrollHero.prototype.renderStatic = function () {
     this.root.style.height = '100svh';
-    this.framesEl.style.transform = 'scale(' + (1 + this.push).toFixed(3) + ')';
-    for (var k = 0; k < this.frames.length; k++) {
-      this.frames[k].style.opacity = k === this.frames.length - 1 ? 1 : 0;
-    }
+    this.cutoutsEl.style.transform = 'scale(' + (1 + this.push) + ')';
+    this.frames.forEach(function (img, k) { img.style.opacity = k === this.frames.length - 1 ? 1 : 0; }.bind(this));
+    this.skies.forEach(function (img, k) { img.style.opacity = k === this.skies.length - 1 ? 1 : 0; });
+    if (this.discEl) this.discEl.style.display = 'none';
+    if (this.wispsEl) this.wispsEl.style.display = 'none';
     if (this.beats[1]) this.beats[1].style.opacity = 0;
     if (this.beats[2]) this.beats[2].style.opacity = 0;
     if (this.beats[3]) { this.beats[3].style.opacity = 1; this.beats[3].style.pointerEvents = 'auto'; }
   };
 
-  function initAll() {
-    document.querySelectorAll('.cf-hero').forEach(function (el) {
-      if (!el.__cfHero) el.__cfHero = new CelestialScrollHero(el);
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAll);
-  } else { initAll(); }
-
+  function initAll() { document.querySelectorAll('.cf-hero').forEach(function (el) { if (!el.__cfHero) el.__cfHero = new CelestialScrollHero(el); }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll); else initAll();
   window.CelestialScrollHero = CelestialScrollHero;
 })();
 </script>
