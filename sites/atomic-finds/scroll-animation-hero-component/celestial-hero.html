@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atomic Finds — Celestial Scroll Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+
+<!--
+  ==========================================================================
+  Atomic Finds — Celestial Scroll Hero  (v2, full-bleed rebuild)
+  ==========================================================================
+  A scroll-scrubbed cinematic hero. Full-bleed frames crossfade while a
+  continuous camera push-in zooms toward the subject's face — the visitor
+  scrolls and the owner turns from gazing at the stars to meeting your eyes.
+
+  WHY THIS VERSION FEELS SMOOTH (and the old one didn't):
+    1. FULL-BLEED FRAMES, object-fit: cover  — the six 4:5 frames fill the
+       whole viewport instead of being shrunken cutouts on a gradient. This
+       is the fix for "photos 4/5/6 are cropped too much / should span the
+       background." They now span everything.
+    2. CONTINUOUS CAMERA under the crossfades — the whole frame stack zooms
+       from 1.0 → 1+push across the entire scroll, so motion never stops even
+       between frame swaps. That constant drift is what reads as "cinematic."
+    3. LERPED (smoothed) progress — raw scroll deltas are eased toward a target
+       every animation frame, so even chunky trackpad/wheel scrolls render as
+       buttery continuous motion. This is the single biggest smoothness win.
+    4. TWO-FRAME CROSSFADE that always sums to 1 opacity — no flash, no dip,
+       softened with smootherstep.
+
+  CONFIG (data-attributes on .cf-hero):
+    data-cf-ending  "smile" | "playful"   (default smile)
+    data-cf-screens number of viewport-heights of scroll (default 8; lower = faster)
+    data-cf-push    zoom intensity, 0.15–0.5 (default 0.34)
+    data-cf-mode    "hero" | "about" | "social"  (default hero)
+    data-cf-mist    "on" | "off"          foreground rising haze (default on)
+    data-cf-assets  path to the frame folder (default assets/kai/web)
+
+  Copy is authored as normal DOM inside .cf-hero__beats — edit the text,
+  or drive it from a CMS/React. Nothing here is locked to a framework.
+  ==========================================================================
+-->
+<style>
+  /* --- Atomic Finds tokens (inlined so the component is self-contained) --- */
+  .cf-hero {
+    --cf-bg:        #1E1E1E;
+    --cf-ink:       #F0E8D8;
+    --cf-gold:      #F5C842;
+    --cf-amber:     #D4822A;
+    --cf-night:     #121016;
+    --cf-ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    --cf-face-x:    50%;   /* where her face sits horizontally in the frames */
+    --cf-face-y:    38%;   /* ...and vertically — the zoom pushes toward this */
+  }
+
+  .cf-hero, .cf-hero * { box-sizing: border-box; }
+
+  /* The scroll track: its height defines how long the animation lasts. */
+  .cf-hero {
+    position: relative;
+    background: var(--cf-night);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: var(--cf-ink);
+  }
+
+  /* The pinned stage — stays put while the track scrolls past it. */
+  .cf-hero__stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    background: var(--cf-night);
+  }
+
+  /* z10 — full-bleed frame stack. Gets the continuous zoom. */
+  .cf-hero__frames {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    transform-origin: var(--cf-face-x) var(--cf-face-y);
+    will-change: transform;
+  }
+  .cf-hero__frames img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--cf-face-x) var(--cf-face-y);
+    opacity: 0;
+    will-change: opacity;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  .cf-hero__frames img:first-child { opacity: 1; }
+
+  /* z20 — legibility scrims: vignette + top/bottom gradients. */
+  .cf-hero__scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 90% at 50% 42%, transparent 44%, rgba(18,16,22,0.34) 100%),
+      linear-gradient(180deg, rgba(18,16,22,0.55) 0%, transparent 22%, transparent 55%, rgba(18,16,22,0.82) 100%);
+  }
+
+  /* z30 — foreground haze that falls away as we "rise". */
+  .cf-hero__mist {
+    position: absolute;
+    inset: -12% 0 0 0;
+    z-index: 30;
+    pointer-events: none;
+    opacity: 0.8;
+    background: linear-gradient(180deg, rgba(18,16,22,0) 38%, rgba(18,16,22,0.5) 74%, rgba(18,16,22,0.96) 100%);
+    will-change: transform, opacity;
+  }
+
+  /* z40 — copy beats */
+  .cf-hero__beats { position: absolute; inset: 0; z-index: 40; }
+  .cf-hero__beat {
+    position: absolute;
+    opacity: 0;
+    will-change: opacity, transform;
+  }
+
+  .cf-hero__eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--cf-amber);
+  }
+
+  /* Beat 1 — opening headline, upper-left over negative space */
+  .cf-hero__beat--1 {
+    inset: 0; display: flex; align-items: center;
+  }
+  .cf-hero__beat--1 .cf-hero__panel {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+    max-width: 560px; padding: 44px; margin-left: 4vw;
+    background: linear-gradient(90deg, rgba(18,16,22,0.55), rgba(18,16,22,0));
+    border-radius: 24px;
+  }
+  .cf-hero__h1 {
+    margin: 0; font-family: 'Lilita One', cursive; font-weight: 400;
+    font-size: clamp(46px, 5.4vw, 84px); line-height: 1.02;
+    color: var(--cf-gold); text-shadow: 0 0 22px rgba(245,200,66,0.5);
+  }
+  .cf-hero__script {
+    font-family: 'Tilda Script', 'Brush Script MT', cursive;
+    font-size: clamp(24px, 2.6vw, 38px);
+    color: var(--cf-amber); text-shadow: 0 0 12px rgba(212,130,42,0.55);
+  }
+
+  /* Beats 2 & 3 — lower third, centered */
+  .cf-hero__beat--2, .cf-hero__beat--3 {
+    left: 0; right: 0; bottom: 0;
+    display: flex; flex-direction: column; align-items: center; gap: 24px;
+    padding: 0 24px 12vh; text-align: center;
+  }
+  .cf-hero__body {
+    margin: 0; max-width: 640px;
+    font-size: clamp(20px, 2vw, 28px); line-height: 1.5;
+    text-shadow: 0 2px 20px rgba(18,16,22,0.92);
+  }
+  .cf-hero__beat--3 .cf-hero__body {
+    font-size: clamp(22px, 2.2vw, 32px); line-height: 1.4;
+  }
+
+  /* CTA — Atomic Finds pill button */
+  .cf-hero__cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 15px 30px; border: 0; border-radius: 999px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--cf-night); background: var(--cf-gold);
+    box-shadow: 0 0 16px rgba(245,200,66,0.5);
+    transition: transform .3s var(--cf-ease), box-shadow .3s var(--cf-ease), background .3s var(--cf-ease);
+    text-decoration: none;
+  }
+  .cf-hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(245,200,66,0.65);
+    background: #ffd766;
+  }
+
+  /* z50 — scroll cue */
+  .cf-hero__cue {
+    position: absolute; left: 0; right: 0; bottom: 26px; z-index: 50;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    pointer-events: none; will-change: opacity;
+  }
+  .cf-hero__cue span {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--cf-amber);
+  }
+  .cf-hero__cue i {
+    display: block; width: 1px; height: 34px;
+    background: linear-gradient(180deg, var(--cf-gold), rgba(245,200,66,0));
+    animation: cf-cue 2s var(--cf-ease) infinite;
+  }
+  @keyframes cf-cue {
+    0%, 100% { transform: translateY(0); opacity: 0.9; }
+    50%      { transform: translateY(8px); opacity: 0.4; }
+  }
+
+  /* --- SOCIAL mode: a centred 9:16 canvas instead of full-bleed --- */
+  .cf-hero[data-cf-mode="social"] .cf-hero__stage {
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(120% 120% at 50% 30%, #241d2e 0%, #121016 70%);
+  }
+  .cf-hero[data-cf-mode="social"] .cf-hero__canvas {
+    position: relative; height: 100svh; aspect-ratio: 9 / 16;
+    max-height: 100svh; overflow: hidden; border-radius: 18px;
+    box-shadow: 0 0 40px rgba(245,200,66,0.25);
+  }
+  .cf-hero:not([data-cf-mode="social"]) .cf-hero__canvas { position: absolute; inset: 0; }
+
+  /* --- Reduced motion: static resolved end-state, no scrub --- */
+  @media (prefers-reduced-motion: reduce) {
+    .cf-hero__mist, .cf-hero__cue { display: none; }
+  }
+</style>
+</head>
+<body style="margin:0; background:#1E1E1E;">
+
+<!-- ============================ COMPONENT ============================ -->
+<section class="cf-hero"
+         data-cf-ending="smile"
+         data-cf-screens="8"
+         data-cf-push="0.34"
+         data-cf-mode="hero"
+         data-cf-mist="on"
+         data-cf-assets="assets/kai/web">
+  <div class="cf-hero__stage">
+    <div class="cf-hero__canvas">
+
+      <!-- z10: full-bleed frame sequence (author order = scroll order) -->
+      <div class="cf-hero__frames" data-cf-frames>
+        <img data-cf-frame src="assets/kai/web/frame-1.jpg" alt="The founder amid night clouds, holding a constellation disc to her temple, gazing out at the stars">
+        <img data-cf-frame src="assets/kai/web/frame-2.jpg" alt="She begins to turn, the galaxy welling up behind her">
+        <img data-cf-frame src="assets/kai/web/frame-3.jpg" alt="Three-quarter turn, closer now, constellation disc at her shoulder">
+        <img data-cf-frame src="assets/kai/web/frame-4.jpg" alt="Closer still, nearly meeting your eyes">
+        <img data-cf-frame src="assets/kai/web/frame-5.jpg" alt="Close-up, steady direct eye contact">
+        <img data-cf-frame data-cf-end="smile"   src="assets/kai/web/frame-6.jpg" alt="Close-up with a warm, welcoming smile">
+        <img data-cf-frame data-cf-end="playful" src="assets/kai/web/frame-7.jpg" alt="Close-up, playful — peace sign and a grin">
+      </div>
+
+      <!-- z30: rising haze -->
+      <div class="cf-hero__mist" data-cf-mist></div>
+
+      <!-- z20: legibility scrim -->
+      <div class="cf-hero__scrim"></div>
+
+      <!-- z40: copy beats -->
+      <div class="cf-hero__beats">
+        <!-- Beat 1 — top, gazing away -->
+        <div class="cf-hero__beat cf-hero__beat--1" data-cf-beat="1">
+          <div class="cf-hero__panel">
+            <div class="cf-hero__eyebrow">Atomic Finds ATX</div>
+            <h1 class="cf-hero__h1">Vintage, written<br>in the stars</h1>
+            <div class="cf-hero__script">handpicked under night skies</div>
+          </div>
+        </div>
+
+        <!-- Beat 2 — push-in, turning toward you -->
+        <div class="cf-hero__beat cf-hero__beat--2" data-cf-beat="2">
+          <p class="cf-hero__body">Curated rattan &amp; bamboo treasures, restored in Austin — and sent your way from across the galaxy.</p>
+        </div>
+
+        <!-- Beat 3 — eye contact, the invitation -->
+        <div class="cf-hero__beat cf-hero__beat--3" data-cf-beat="3">
+          <p class="cf-hero__body">Every piece has a name, a past, and a place in your orbit.</p>
+          <a class="cf-hero__cta" href="#collection">[ Meet the Family ]</a>
+        </div>
+      </div>
+
+      <!-- z50: scroll cue -->
+      <div class="cf-hero__cue" data-cf-cue>
+        <span>Scroll</span>
+        <i></i>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- a little page below, so the sticky release is visible in preview -->
+<section style="min-height:60vh; padding:120px 48px; background:#1E1E1E; color:#F0E8D8; font-family:'DM Sans',sans-serif;">
+  <div style="max-width:820px; margin:0 auto;">
+    <div style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#D4822A;">The Collection</div>
+    <h2 style="font-family:'Lilita One',cursive;font-weight:400;color:#F5C842;font-size:clamp(32px,4vw,48px);margin:.3em 0;">Restored, one orbit at a time</h2>
+    <p style="max-width:60ch;line-height:1.6;opacity:.85;">Page content picks up here once the hero releases. This block only exists so you can watch the sticky stage let go in preview.</p>
+  </div>
+</section>
+
+<script>
+/* ==========================================================================
+   CelestialScrollHero — framework-free scroll scrubber
+   Auto-inits every .cf-hero on the page. Also exported for manual init.
+   ========================================================================== */
+(function () {
+  var smoother = function (t) {           // smootherstep, C2-continuous
+    t = t < 0 ? 0 : t > 1 ? 1 : t;
+    return t * t * t * (t * (t * 6 - 15) + 10);
+  };
+  var band = function (p, a, b) {         // clamped linear ramp a→b
+    return Math.min(Math.max((p - a) / (b - a), 0), 1);
+  };
+
+  function CelestialScrollHero(root) {
+    this.root   = root;
+    this.stage  = root.querySelector('.cf-hero__stage');
+    this.framesEl = root.querySelector('[data-cf-frames]');
+    this.mistEl = root.querySelector('[data-cf-mist]');
+    this.cueEl  = root.querySelector('[data-cf-cue]');
+    this.beats  = {
+      1: root.querySelector('[data-cf-beat="1"]'),
+      2: root.querySelector('[data-cf-beat="2"]'),
+      3: root.querySelector('[data-cf-beat="3"]')
+    };
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.smoothP = 0;
+    this.targetP = 0;
+    this.running = false;
+    this.inView  = true;
+
+    this.readConfig();
+    this.pickFrames();
+    this.layout();
+
+    if (this.reduced) { this.renderStatic(); return; }
+
+    this.tick = this.tick.bind(this);
+    // Only animate while the hero is on screen.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        this.inView = entries[0].isIntersecting;
+        if (this.inView) this.start();
+      }.bind(this), { threshold: 0 }).observe(root);
+    }
+    window.addEventListener('resize', this.layout.bind(this));
+    this.start();
+  }
+
+  CelestialScrollHero.prototype.readConfig = function () {
+    var d = this.root.dataset;
+    this.ending  = d.cfEnding === 'playful' ? 'playful' : 'smile';
+    this.screens = Math.max(4, parseFloat(d.cfScreens) || 8);
+    this.push    = Math.min(0.6, Math.max(0.1, parseFloat(d.cfPush) || 0.34));
+    this.showMist = d.cfMist !== 'off';
+  };
+
+  // Keep only the chosen ending frame in the active sequence.
+  CelestialScrollHero.prototype.pickFrames = function () {
+    var all = Array.prototype.slice.call(this.framesEl.querySelectorAll('[data-cf-frame]'));
+    this.frames = all.filter(function (img) {
+      var end = img.getAttribute('data-cf-end');
+      if (!end) return true;
+      if (end === this.ending) return true;
+      img.style.display = 'none';        // hide the unused ending
+      return false;
+    }.bind(this));
+    if (!this.showMist && this.mistEl) this.mistEl.style.display = 'none';
+  };
+
+  CelestialScrollHero.prototype.layout = function () {
+    // Track height = screens × viewport. Sticky stage does the rest.
+    if (!this.reduced) this.root.style.height = (this.screens * 100) + 'vh';
+  };
+
+  CelestialScrollHero.prototype.progress = function () {
+    var rect = this.root.getBoundingClientRect();
+    var total = this.root.offsetHeight - window.innerHeight;
+    if (total <= 0) return 0;
+    return Math.min(Math.max(-rect.top / total, 0), 1);
+  };
+
+  CelestialScrollHero.prototype.start = function () {
+    if (this.running) return;
+    this.running = true;
+    requestAnimationFrame(this.tick);
+  };
+
+  CelestialScrollHero.prototype.tick = function () {
+    this.targetP = this.progress();
+    // Lerp toward the target — this is the buttery bit.
+    this.smoothP += (this.targetP - this.smoothP) * 0.12;
+    if (Math.abs(this.targetP - this.smoothP) < 0.0002) this.smoothP = this.targetP;
+    this.render(this.smoothP);
+
+    // Keep looping while in view OR still settling; otherwise idle.
+    if (this.inView || Math.abs(this.targetP - this.smoothP) > 0.0002) {
+      requestAnimationFrame(this.tick);
+    } else {
+      this.running = false;
+    }
+  };
+
+  CelestialScrollHero.prototype.render = function (p) {
+    var N = this.frames.length;
+
+    // --- Continuous camera push-in (eased across the whole track) ---
+    var scale = 1 + smoother(p) * this.push;
+    this.framesEl.style.transform = 'scale(' + scale.toFixed(4) + ')';
+
+    // --- Two-frame crossfade (opacities always sum to 1) ---
+    var fpos = p * (N - 1);
+    var i = Math.floor(fpos);
+    if (i >= N - 1) i = N - 2;            // guard the tail
+    if (i < 0) i = 0;
+    var f = smoother(fpos - i);
+    for (var k = 0; k < N; k++) {
+      var o = k === i ? 1 - f : (k === i + 1 ? f : 0);
+      if (p >= 1 && k === N - 1) o = 1;
+      this.frames[k].style.opacity = o;
+    }
+
+    // --- Foreground haze: rises and clears ---
+    if (this.showMist && this.mistEl) {
+      this.mistEl.style.transform = 'translateY(' + (p * 16).toFixed(2) + '%)';
+      this.mistEl.style.opacity = Math.max(0, 0.8 - p * 1.3).toFixed(3);
+    }
+
+    // --- Copy beats (independent ranges) ---
+    var b1 = this.beats[1], b2 = this.beats[2], b3 = this.beats[3];
+    if (b1) {
+      var o1 = 1 - band(p, 0.14, 0.30);
+      b1.style.opacity = o1;
+      b1.style.transform = 'translateY(' + (-p * 80).toFixed(1) + 'px)';
+      b1.style.pointerEvents = o1 > 0.1 ? 'auto' : 'none';
+    }
+    if (b2) {
+      var o2 = band(p, 0.40, 0.50) * (1 - band(p, 0.66, 0.74));
+      b2.style.opacity = o2;
+      b2.style.transform = 'translateY(' + ((1 - band(p, 0.40, 0.52)) * 22).toFixed(1) + 'px)';
+    }
+    if (b3) {
+      var o3 = band(p, 0.80, 0.90);
+      b3.style.opacity = o3;
+      b3.style.transform = 'translateY(' + ((1 - o3) * 26).toFixed(1) + 'px)';
+      b3.style.pointerEvents = o3 > 0.5 ? 'auto' : 'none';
+    }
+
+    // --- Scroll cue fades on first nudge ---
+    if (this.cueEl) this.cueEl.style.opacity = Math.min(Math.max(1 - p * 6, 0), 1);
+  };
+
+  // Reduced motion: freeze on the resolved close-up + invitation.
+  CelestialScrollHero.prototype.renderStatic = function () {
+    this.root.style.height = '100svh';
+    this.framesEl.style.transform = 'scale(' + (1 + this.push).toFixed(3) + ')';
+    for (var k = 0; k < this.frames.length; k++) {
+      this.frames[k].style.opacity = k === this.frames.length - 1 ? 1 : 0;
+    }
+    if (this.beats[1]) this.beats[1].style.opacity = 0;
+    if (this.beats[2]) this.beats[2].style.opacity = 0;
+    if (this.beats[3]) { this.beats[3].style.opacity = 1; this.beats[3].style.pointerEvents = 'auto'; }
+  };
+
+  function initAll() {
+    document.querySelectorAll('.cf-hero').forEach(function (el) {
+      if (!el.__cfHero) el.__cfHero = new CelestialScrollHero(el);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else { initAll(); }
+
+  window.CelestialScrollHero = CelestialScrollHero;
+})();
+</script>
+</body>
+</html>
