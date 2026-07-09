@@ -162,15 +162,14 @@
 
       <!-- z20: character cutouts (scroll order). data-cf-s = size, x/y = offset % -->
       <div class="cf-hero__cutouts" data-cf-cutouts>
-        <img data-cf-frame data-cf-s="0.60" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-A.png"  alt="Kai amid the clouds, holding the star-disc, gazing away">
-        <img data-cf-frame data-cf-s="0.66" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-1b.png" alt="Kai raising the star-disc in both hands, gazing up">
-        <img data-cf-frame data-cf-s="0.80" data-cf-x="-2" data-cf-y="0"  src="assets/kai/web/cutout-1.png"  alt="Kai in profile, star-disc at her temple">
-        <img data-cf-frame data-cf-s="0.90" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-2.png"  alt="Kai turning inward, galaxy welling up behind her">
-        <img data-cf-frame data-cf-s="0.98" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-3.png"  alt="Kai at three-quarter angle, star-disc at her shoulder">
-        <img data-cf-frame data-cf-s="1.02" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-4.png"  alt="Kai in close-up, nearly meeting your eyes">
-        <img data-cf-frame data-cf-s="1.06" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-5.png"  alt="Kai in close-up, steady direct eye contact">
-        <img data-cf-frame data-cf-s="1.04" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-6.png"  alt="Kai with a warm, welcoming smile">
-        <img data-cf-frame data-cf-s="1.12" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-7.png"  alt="Kai, playful — tongue out and a peace sign">
+        <img data-cf-frame data-cf-s="0.74" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-A.png?v=2"  alt="Kai amid the clouds, holding the star-disc, gazing away">
+        <img data-cf-frame data-cf-s="0.82" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-1b.png?v=2" alt="Kai raising the star-disc in both hands, gazing up">
+        <img data-cf-frame data-cf-s="0.90" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-2.png?v=2"  alt="Kai turning inward, galaxy welling up behind her">
+        <img data-cf-frame data-cf-s="0.98" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-3.png?v=2"  alt="Kai at three-quarter angle, star-disc at her shoulder">
+        <img data-cf-frame data-cf-s="1.02" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-4.png?v=2"  alt="Kai in close-up, nearly meeting your eyes">
+        <img data-cf-frame data-cf-s="1.06" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-5.png?v=2"  alt="Kai in close-up, steady direct eye contact">
+        <img data-cf-frame data-cf-s="1.04" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-6.png?v=2"  alt="Kai with a warm, welcoming smile">
+        <img data-cf-frame data-cf-s="1.12" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-7.png?v=2"  alt="Kai, playful — tongue out and a peace sign">
       </div>
 
       <!-- z25: reusable constellation disc (position lerped per keyframe) -->
@@ -178,8 +177,8 @@
 
       <!-- z30: foreground cloud wisps (drift in front). data-cf-w* = band + drift -->
       <div class="cf-hero__wisps" data-cf-wisps-el>
-        <img src="assets/kai/wisp-a.png" data-cf-w="0.04,0.34" data-cf-wx="-25,20" data-cf-wy="8,2"   style="bottom:-4%; width:120%;" data-cf-wo="0.85">
-        <img src="assets/kai/wisp-a.png" data-cf-w="0.02,0.24" data-cf-wx="40,-15" data-cf-wy="-4,-8" style="top:-8%; width:80%; transform:scaleX(-1);" data-cf-wo="0.45">
+        <img src="assets/kai/wisp-a.png" data-cf-w="0.04,0.34" data-cf-wx="-25,20" data-cf-wy="8,2"   style="bottom:-4%; width:120%;" data-cf-wo="0.42">
+        <img src="assets/kai/wisp-a.png" data-cf-w="0.02,0.24" data-cf-wx="40,-15" data-cf-wy="-4,-8" style="top:-8%; width:80%; transform:scaleX(-1);" data-cf-wo="0.22">
         <img src="assets/kai/wisp-b.png" data-cf-w="0.38,0.68" data-cf-wx="-30,25" data-cf-wy="6,0"   style="bottom:-6%; width:135%;" data-cf-wo="0.8">
         <img src="assets/kai/wisp-c.png" data-cf-w="0.72,1.0"  data-cf-wx="-15,15" data-cf-wy="4,-6"  style="bottom:-8%; width:125%; mix-blend-mode:screen;" data-cf-wo="0.6">
       </div>
@@ -224,12 +223,29 @@
   var band = function (p,a,b) { return Math.min(Math.max((p-a)/(b-a),0),1); };
   var lerp = function (a,b,t) { return a+(b-a)*t; };
 
+  // Per-transition scroll weight (7 transitions between 8 keyframes: A-1b, 1b-2, 2-3, 3-4, 4-5, 5-6, 6-7).
+  // >1 = more scroll distance / dwell time on that transition. Frame 2 (1b) gets extra room.
+  var SEGMENT_WEIGHTS = [1.6, 1.8, 1, 1, 1, 1, 1];
+  var SEGMENT_BOUNDS = (function () {
+    var sum = SEGMENT_WEIGHTS.reduce(function (a, b) { return a + b; }, 0);
+    var bounds = [0]; var acc = 0;
+    for (var i = 0; i < SEGMENT_WEIGHTS.length; i++) { acc += SEGMENT_WEIGHTS[i] / sum; bounds.push(acc); }
+    return bounds;
+  })();
+  // Maps global progress p (0..1) to {i, fRaw} — which segment we're in and how far through it (0..1) — honoring SEGMENT_BOUNDS instead of uniform spacing.
+  var segmentAt = function (p) {
+    var i = 0;
+    while (i < SEGMENT_BOUNDS.length - 2 && p >= SEGMENT_BOUNDS[i + 1]) i++;
+    var segStart = SEGMENT_BOUNDS[i], segEnd = SEGMENT_BOUNDS[i + 1];
+    var fRaw = segEnd > segStart ? (p - segStart) / (segEnd - segStart) : 0;
+    return { i: i, fRaw: Math.min(Math.max(fRaw, 0), 1) };
+  };
+
   // Disc keyframe anchors — where the disc sits (as % of stage) in each cutout, and its size/opacity.
-  // Index matches the cutout order: A,1b,1,2,3,4,5,6,7. op:0 = disc out of frame.
+  // Index matches the cutout order: A,1b,2,3,4,5,6,7. op:0 = disc out of frame.
   var DISC_ANCHORS = [
     { x: 63, y: 22, s: 0.15, op: 1 },   // A  — at temple, small/far
     { x: 60, y: 15, s: 0.20, op: 1 },   // 1b — raised in both hands
-    { x: 63, y: 40, s: 0.22, op: 1 },   // 1  — profile, at temple
     { x: 58, y: 42, s: 0.24, op: 1 },   // 2  — turning
     { x: 66, y: 55, s: 0.26, op: 0.9 }, // 3  — at shoulder
     { x: 86, y: 64, s: 0.28, op: 0.4 }, // 4  — sliver at edge, fading
@@ -318,9 +334,8 @@
 
     // --- Cutouts: continuous push-in + snappy two-frame dissolve ---
     this.cutoutsEl.style.transform = 'scale(' + (1 + smoother(p) * this.push).toFixed(4) + ')';
-    var fpos = p * (N - 1);
-    var i = Math.floor(fpos); if (i >= N - 1) i = N - 2; if (i < 0) i = 0;
-    var fRaw = fpos - i;
+    var seg = segmentAt(p);
+    var i = seg.i, fRaw = seg.fRaw;
     var f = smoother(Math.min(Math.max((fRaw - 0.35) / 0.30, 0), 1));   // snappy dissolve
     for (var k = 0; k < N; k++) {
       var o = k === i ? 1 - f : (k === i + 1 ? f : 0);
