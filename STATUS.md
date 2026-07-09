@@ -26,10 +26,27 @@ theming foundation built.
 - **Configurable** (one component, three uses per Anthony): `mode` = hero / about /
   social; ending = smile / playful; screens, push, mist, and all copy as props.
 - **Two open items for Anthony** (in `COMPONENT.md`): (1) to go fully silky, add
-  identity-locked in-between frames (nano-banana) — engine handles any count;
+  identity-locked in-between frames — engine handles any count;
   (2) **font conflict** — CLAUDE.md says Lilita One/Tilda Script, but the AF
   design-system package ships Recoleta/Bromello. Component consumes the token vars
   w/ fallbacks so it renders either way, but the brand needs one source of truth.
+
+### v3 layered rebuild — APPROVED, IN PROGRESS (resume here)
+The user decided v2's flat full-bleed photos lost the "she's moving THROUGH the
+clouds" feeling, and approved a **v3 layered rebuild**: character cutout +
+multi-rate cloud parallax + foreground wisps that partially occlude her +
+independently-animated constellation disc + dozens of AI in-between frames.
+- **Approved plan (full detail):** `~/.claude/plans/cheerful-waddling-meteor.md`
+- **Done so far:** 7 of 9 keyframe cutouts already existed as real-alpha `pose-*`
+  files, copied to `assets/kai/cutout-A/1b/2/3/4/6/7.png`.
+- **Next:** cutouts for frame-1 + frame-5, disc extraction, 3 wisp sprites,
+  in-between generation (gated pilot first), then rebuild `celestial-hero.html`
+  + `CelestialScrollHero.tsx` with the layer stack, then verify in preview.
+- **Image tooling:** nano-banana is DEAD (retired Gemini model → 404). Use
+  **higgsfield** (Pro trial active — prioritize) or **openart** for generation;
+  Adobe `image_remove_background` works for one-off cutouts (manual picker only).
+  `sips -Z` (no `-s format`) preserves alpha. Character must follow the guidelines
+  in the scroll-animation-hero-component directory.
 
 ## Automation + ops (2026-07-06)
 - **Sync health monitor installed.** `../sync-health.sh` + launchd agent
