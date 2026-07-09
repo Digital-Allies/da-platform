@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
+import { DEFAULT_SETTINGS } from '@/lib/types'
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -11,6 +12,21 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [businessName, setBusinessName] = useState(DEFAULT_SETTINGS.site_title)
+
+  useEffect(() => {
+    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
+    if (!clientId) return
+    createClient()
+      .from('settings')
+      .select('key, value')
+      .eq('client_id', clientId)
+      .eq('key', 'site_title')
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data?.value) setBusinessName(data.value)
+      })
+  }, [])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -73,7 +89,7 @@ export default function AdminLoginPage() {
               <span className="da-pulse" />
             </div>
             <span style={{ fontFamily: 'var(--font-headers)', fontWeight: 700, fontSize: 14, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--charcoal)' }}>
-              Digital Allies
+              {businessName}
             </span>
           </div>
 

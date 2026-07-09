@@ -70,11 +70,11 @@ export const NEUTRAL_TOKENS: DesignTokens = {
   radius: '8px', radiusLg: '12px',
 }
 
-// Map real Supabase client_id → tokens. (Atomic Finds has no client row yet;
-// add its UUID here when it is onboarded.)
+// Map real Supabase client_id → tokens.
 export const TOKENS_BY_CLIENT: Record<string, DesignTokens> = {
-  '3d76b896-e1fb-49f0-a8db-f62fdd5bc258': DA_TOKENS,   // Digital Allies
-  '7896354c-1d34-4649-85f5-51f2e5a7df6c': HCTC_TOKENS, // Healthcare Training Center
+  '3d76b896-e1fb-49f0-a8db-f62fdd5bc258': DA_TOKENS,     // Digital Allies
+  '7896354c-1d34-4649-85f5-51f2e5a7df6c': HCTC_TOKENS,   // Healthcare Training Center
+  '443936d5-f92e-480b-b206-c65cfb52bdfc': ATOMIC_TOKENS, // Atomic Finds
 }
 
 export function getDesignTokens(clientId: string | undefined): DesignTokens {

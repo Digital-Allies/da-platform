@@ -10,9 +10,18 @@ import { Search, Bell, LogOut, Check } from 'lucide-react';
 interface AdminShellProps {
   children: React.ReactNode;
   userEmail: string;
+  businessName: string;
+  accentColor: string;
 }
 
-export default function AdminShell({ children, userEmail }: AdminShellProps) {
+function initialsFor(name: string): string {
+  const words = name.trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return '?';
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+
+export default function AdminShell({ children, userEmail, businessName, accentColor }: AdminShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -109,7 +118,7 @@ export default function AdminShell({ children, userEmail }: AdminShellProps) {
     { label: 'Settings', path: '/admin/settings', icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M1 12h6m6 0h6m-1.78 7.78l-4.24-4.24m-5.08 0l-4.24 4.24"></path></svg> },
   ];
 
-  const liveSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://digitalallies.net';
+  const liveSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || '/';
 
   return (
     <div className="custom-widget ws" style={{ height: '100vh', overflow: 'hidden' }}>
@@ -117,16 +126,16 @@ export default function AdminShell({ children, userEmail }: AdminShellProps) {
       <div className="ws-top">
         <div className="ws-top__brand">
           <span className="da-pulse" style={{ borderColor: 'rgba(255,255,255,.4)' }}></span>
-          <span className="ws-top__name">Digital Allies</span>
+          <span className="ws-top__name">{businessName}</span>
           <span className="ws-top__tag">CMS</span>
         </div>
 
         <div className="ws-client" id="da-client-switcher" ref={userMenuRef}>
           <button className="ws-client__btn" id="da-client-btn" onClick={() => setUserMenuOpen(!userMenuOpen)}>
-            <span className="ws-avatar" style={{ background: '#3A7BD5' }}>DA</span>
+            <span className="ws-avatar" style={{ background: accentColor }}>{initialsFor(businessName)}</span>
             <span className="ws-client__meta">
-              <span className="ws-client__name">Digital Allies</span>
-              <span className="ws-client__dom">{userEmail || 'digitalallies.net'}</span>
+              <span className="ws-client__name">{businessName}</span>
+              <span className="ws-client__dom">{userEmail}</span>
             </span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>

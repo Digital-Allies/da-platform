@@ -162,14 +162,13 @@
 
       <!-- z20: character cutouts (scroll order). data-cf-s = size, x/y = offset % -->
       <div class="cf-hero__cutouts" data-cf-cutouts>
-        <img data-cf-frame data-cf-s="0.74" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-A.png?v=2"  alt="Kai amid the clouds, holding the star-disc, gazing away">
+        <img data-cf-frame data-cf-s="0.95" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-A.png?v=2"  alt="Kai amid the clouds, holding the star-disc, gazing away">
         <img data-cf-frame data-cf-s="0.82" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-1b.png?v=2" alt="Kai raising the star-disc in both hands, gazing up">
         <img data-cf-frame data-cf-s="0.90" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-2.png?v=2"  alt="Kai turning inward, galaxy welling up behind her">
         <img data-cf-frame data-cf-s="0.98" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-3.png?v=2"  alt="Kai at three-quarter angle, star-disc at her shoulder">
-        <img data-cf-frame data-cf-s="1.02" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-4.png?v=2"  alt="Kai in close-up, nearly meeting your eyes">
         <img data-cf-frame data-cf-s="1.06" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-5.png?v=2"  alt="Kai in close-up, steady direct eye contact">
         <img data-cf-frame data-cf-s="1.04" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-6.png?v=2"  alt="Kai with a warm, welcoming smile">
-        <img data-cf-frame data-cf-s="1.12" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-7.png?v=2"  alt="Kai, playful — tongue out and a peace sign">
+        <img data-cf-frame data-cf-s="0.90" data-cf-x="0"  data-cf-y="0"  src="assets/kai/web/cutout-7.png?v=2"  alt="Kai, playful — tongue out and a peace sign">
       </div>
 
       <!-- z25: reusable constellation disc (position lerped per keyframe) -->
@@ -225,7 +224,7 @@
 
   // Per-transition scroll weight (7 transitions between 8 keyframes: A-1b, 1b-2, 2-3, 3-4, 4-5, 5-6, 6-7).
   // >1 = more scroll distance / dwell time on that transition. Frame 2 (1b) gets extra room.
-  var SEGMENT_WEIGHTS = [1.6, 1.8, 1, 1, 1, 1, 1];
+  var SEGMENT_WEIGHTS = [1.6, 1.8, 1, 1, 1, 1];
   var SEGMENT_BOUNDS = (function () {
     var sum = SEGMENT_WEIGHTS.reduce(function (a, b) { return a + b; }, 0);
     var bounds = [0]; var acc = 0;
@@ -242,13 +241,12 @@
   };
 
   // Disc keyframe anchors — where the disc sits (as % of stage) in each cutout, and its size/opacity.
-  // Index matches the cutout order: A,1b,2,3,4,5,6,7. op:0 = disc out of frame.
+  // Index matches the cutout order: A,1b,2,3,5,6,7. op:0 = disc out of frame.
   var DISC_ANCHORS = [
     { x: 63, y: 22, s: 0.15, op: 1 },   // A  — at temple, small/far
     { x: 60, y: 15, s: 0.20, op: 1 },   // 1b — raised in both hands
     { x: 58, y: 42, s: 0.24, op: 1 },   // 2  — turning
     { x: 66, y: 55, s: 0.26, op: 0.9 }, // 3  — at shoulder
-    { x: 86, y: 64, s: 0.28, op: 0.4 }, // 4  — sliver at edge, fading
     { x: 96, y: 70, s: 0.30, op: 0 },   // 5  — gone
     { x: 96, y: 70, s: 0.30, op: 0 },   // 6
     { x: 96, y: 70, s: 0.30, op: 0 }    // 7
