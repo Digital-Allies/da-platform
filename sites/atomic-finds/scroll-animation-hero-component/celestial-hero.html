@@ -43,16 +43,20 @@
   ==========================================================================
 -->
 <style>
-  /* --- Atomic Finds tokens (inlined so the component is self-contained) --- */
+  /* --- Design-system tokens: consume Atomic Finds vars when the token CSS is
+         loaded, else fall back to the documented CLAUDE.md values so the
+         component is fully self-contained on its own. --- */
   .cf-hero {
-    --cf-bg:        #1E1E1E;
-    --cf-ink:       #F0E8D8;
-    --cf-gold:      #F5C842;
-    --cf-amber:     #D4822A;
-    --cf-night:     #121016;
-    --cf-ease:      cubic-bezier(0.16, 1, 0.3, 1);
-    --cf-face-x:    50%;   /* where her face sits horizontally in the frames */
-    --cf-face-y:    38%;   /* ...and vertically — the zoom pushes toward this */
+    --cf-ink:          var(--bone-white, #F0E8D8);
+    --cf-gold:         var(--celestial-yellow, #F5C842);
+    --cf-amber:        var(--amber-orange, #D4822A);
+    --cf-night:        #121016;   /* cinematic frame backdrop — a touch deeper than --deep-charcoal */
+    --cf-ease:         var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+    --cf-font-display: var(--font-display, 'Lilita One', cursive);
+    --cf-font-script:  var(--font-script, 'Tilda Script', 'Brush Script MT', cursive);
+    --cf-font-body:    var(--font-body, 'DM Sans', system-ui, sans-serif);
+    --cf-face-x:       50%;   /* where her face sits horizontally in the frames */
+    --cf-face-y:       38%;   /* ...and vertically — the zoom pushes toward this */
   }
 
   .cf-hero, .cf-hero * { box-sizing: border-box; }
@@ -61,7 +65,7 @@
   .cf-hero {
     position: relative;
     background: var(--cf-night);
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: var(--cf-font-body);
     color: var(--cf-ink);
   }
 
@@ -142,12 +146,12 @@
     border-radius: 24px;
   }
   .cf-hero__h1 {
-    margin: 0; font-family: 'Lilita One', cursive; font-weight: 400;
+    margin: 0; font-family: var(--cf-font-display); font-weight: 400;
     font-size: clamp(46px, 5.4vw, 84px); line-height: 1.02;
     color: var(--cf-gold); text-shadow: 0 0 22px rgba(245,200,66,0.5);
   }
   .cf-hero__script {
-    font-family: 'Tilda Script', 'Brush Script MT', cursive;
+    font-family: var(--cf-font-script);
     font-size: clamp(24px, 2.6vw, 38px);
     color: var(--cf-amber); text-shadow: 0 0 12px rgba(212,130,42,0.55);
   }
@@ -171,7 +175,7 @@
   .cf-hero__cta {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 15px 30px; border: 0; border-radius: 999px; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+    font-family: var(--cf-font-body); font-size: 14px; font-weight: 700;
     letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--cf-night); background: var(--cf-gold);
     box-shadow: 0 0 16px rgba(245,200,66,0.5);
@@ -235,15 +239,17 @@
   <div class="cf-hero__stage">
     <div class="cf-hero__canvas">
 
-      <!-- z10: full-bleed frame sequence (author order = scroll order) -->
+      <!-- z10: full-bleed frame sequence (author order = scroll order)
+           data-cf-y = vertical framing for object-fit:cover, so her face stays
+           well-placed as the camera pushes in (wide shots sit lower, close-ups higher). -->
       <div class="cf-hero__frames" data-cf-frames>
-        <img data-cf-frame src="assets/kai/web/frame-1.jpg" alt="The founder amid night clouds, holding a constellation disc to her temple, gazing out at the stars">
-        <img data-cf-frame src="assets/kai/web/frame-2.jpg" alt="She begins to turn, the galaxy welling up behind her">
-        <img data-cf-frame src="assets/kai/web/frame-3.jpg" alt="Three-quarter turn, closer now, constellation disc at her shoulder">
-        <img data-cf-frame src="assets/kai/web/frame-4.jpg" alt="Closer still, nearly meeting your eyes">
-        <img data-cf-frame src="assets/kai/web/frame-5.jpg" alt="Close-up, steady direct eye contact">
-        <img data-cf-frame data-cf-end="smile"   src="assets/kai/web/frame-6.jpg" alt="Close-up with a warm, welcoming smile">
-        <img data-cf-frame data-cf-end="playful" src="assets/kai/web/frame-7.jpg" alt="Close-up, playful — peace sign and a grin">
+        <img data-cf-frame data-cf-y="48%" src="assets/kai/web/frame-1.jpg" alt="The founder amid night clouds, holding a constellation disc to her temple, gazing out at the stars">
+        <img data-cf-frame data-cf-y="44%" src="assets/kai/web/frame-2.jpg" alt="She begins to turn, the galaxy welling up behind her">
+        <img data-cf-frame data-cf-y="40%" src="assets/kai/web/frame-3.jpg" alt="Three-quarter turn, closer now, constellation disc at her shoulder">
+        <img data-cf-frame data-cf-y="38%" src="assets/kai/web/frame-4.jpg" alt="Closer still, nearly meeting your eyes">
+        <img data-cf-frame data-cf-y="36%" src="assets/kai/web/frame-5.jpg" alt="Close-up, steady direct eye contact">
+        <img data-cf-frame data-cf-end="smile"   data-cf-y="36%" src="assets/kai/web/frame-6.jpg" alt="Close-up with a warm, welcoming smile">
+        <img data-cf-frame data-cf-end="playful" data-cf-y="36%" src="assets/kai/web/frame-7.jpg" alt="Close-up, playful — peace sign and a grin">
       </div>
 
       <!-- z30: rising haze -->
@@ -361,6 +367,11 @@
       img.style.display = 'none';        // hide the unused ending
       return false;
     }.bind(this));
+    // Per-frame vertical framing keeps her face placed as the camera pushes in.
+    this.frames.forEach(function (img) {
+      var y = img.getAttribute('data-cf-y');
+      if (y) img.style.objectPosition = '50% ' + y;
+    });
     if (!this.showMist && this.mistEl) this.mistEl.style.display = 'none';
   };
 
@@ -405,11 +416,15 @@
     this.framesEl.style.transform = 'scale(' + scale.toFixed(4) + ')';
 
     // --- Two-frame crossfade (opacities always sum to 1) ---
+    // Snappy dissolve: hold each frame, then cross-dissolve inside a narrow
+    // window (35%–65% of the segment). With only 6 distinct poses this keeps
+    // the double-exposure "ghost" brief — you dissolve past it while scrolling
+    // instead of lingering at a static 50/50 blend.
     var fpos = p * (N - 1);
     var i = Math.floor(fpos);
     if (i >= N - 1) i = N - 2;            // guard the tail
     if (i < 0) i = 0;
-    var f = smoother(fpos - i);
+    var f = smoother(Math.min(Math.max((fpos - i - 0.35) / 0.30, 0), 1));
     for (var k = 0; k < N; k++) {
       var o = k === i ? 1 - f : (k === i + 1 ? f : 0);
       if (p >= 1 && k === N - 1) o = 1;

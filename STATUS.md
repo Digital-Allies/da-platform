@@ -5,9 +5,31 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-06 (late) — by Claude Code (Opus 4.8) — Sync health
-automation added; 11 stale git locks cleared; dated `BUILD-SCHEDULE.md` written
-(remaining run = backlog + Week 4). Earlier today: Step 2 theming foundation built.
+**Last updated:** 2026-07-08 — by Claude Code (Opus 4.8) — Atomic Finds
+**Celestial Scroll Hero** rebuilt + added to the design system (see below).
+Prior (2026-07-06 late): Sync health automation added; 11 stale git locks cleared;
+dated `BUILD-SCHEDULE.md` written (remaining run = backlog + Week 4); Step 2
+theming foundation built.
+
+## Atomic Finds — Celestial Scroll Hero (2026-07-08)
+- **What:** the scroll-scrubbed hero of the AF owner (celestial-70s styling) was
+  rebuilt from the ground up. Root cause of the old "not smooth" + "photos 4/5/6
+  cropped" complaints: it crossfaded transparent *cutouts* on separate sky
+  gradients at `object-fit: contain`. New build scrubs the original full 2K frames
+  as **full-bleed `cover`** with a continuous camera push-in + lerped progress +
+  snappy dissolves (breedlove.xyz-style). Both issues fixed, verified in-browser.
+- **Deliverables:** HTML component `sites/atomic-finds/scroll-animation-hero-component/celestial-hero.html`
+  (canonical, framework-free); React port `tools/build-workflows/src/components/site/CelestialScrollHero.tsx`
+  (typechecks clean; frames in `public/celestial-hero/`); web-optimized frames
+  `assets/kai/web/frame-1..7.jpg` (~400 KB ea, from 5 MB masters); registered in
+  `atomic-finds-design-system/_ds_manifest.json`; full doc `COMPONENT.md`.
+- **Configurable** (one component, three uses per Anthony): `mode` = hero / about /
+  social; ending = smile / playful; screens, push, mist, and all copy as props.
+- **Two open items for Anthony** (in `COMPONENT.md`): (1) to go fully silky, add
+  identity-locked in-between frames (nano-banana) — engine handles any count;
+  (2) **font conflict** — CLAUDE.md says Lilita One/Tilda Script, but the AF
+  design-system package ships Recoleta/Bromello. Component consumes the token vars
+  w/ fallbacks so it renders either way, but the brand needs one source of truth.
 
 ## Automation + ops (2026-07-06)
 - **Sync health monitor installed.** `../sync-health.sh` + launchd agent
