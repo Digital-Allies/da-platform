@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "da-platform-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "tools/build-workflows", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}
