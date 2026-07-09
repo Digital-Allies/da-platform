@@ -265,6 +265,12 @@
       new IntersectionObserver(function (e) { this.inView = e[0].isIntersecting; if (this.inView) this.start(); }.bind(this), { threshold: 0 }).observe(root);
     }
     window.addEventListener('resize', function () { this.layout(); this.start(); }.bind(this));
+    // Scroll listener as the primary driver: renders immediately (no rAF wait) and
+    // also makes sure the smoothing loop is running, in case it ever stalled.
+    var onScroll = function () { this.render(this.progress()); this.start(); }.bind(this);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    this.smoothP = this.progress();
+    this.render(this.smoothP);
     this.start();
   }
 
