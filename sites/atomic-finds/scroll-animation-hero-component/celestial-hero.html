@@ -135,9 +135,11 @@
     text-transform: uppercase; color: var(--cf-amber);
   }
 
-  /* Beat 1 — opening headline, upper-left over negative space */
+  /* Beat 1 — opening headline, upper-left over negative space.
+     Top-aligned (not centered) so it sits above her face on the opening frames. */
   .cf-hero__beat--1 {
-    inset: 0; display: flex; align-items: center;
+    inset: 0; display: flex; align-items: flex-start;
+    padding-top: clamp(40px, 11vh, 150px);
   }
   .cf-hero__beat--1 .cf-hero__panel {
     display: flex; flex-direction: column; align-items: flex-start; gap: 16px;

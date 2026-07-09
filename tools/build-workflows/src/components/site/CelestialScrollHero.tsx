@@ -289,7 +289,7 @@ const CF_CSS = `
 .cf-hero__beats{position:absolute;inset:0;z-index:40}
 .cf-hero__beat{position:absolute;opacity:0;will-change:opacity,transform}
 .cf-hero__eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cf-amber)}
-.cf-hero__beat--1{inset:0;display:flex;align-items:center}
+.cf-hero__beat--1{inset:0;display:flex;align-items:flex-start;padding-top:clamp(40px,11vh,150px)}
 .cf-hero__beat--1 .cf-hero__panel{display:flex;flex-direction:column;align-items:flex-start;gap:16px;max-width:560px;padding:44px;margin-left:4vw;background:linear-gradient(90deg,rgba(18,16,22,0.55),rgba(18,16,22,0));border-radius:24px}
 .cf-hero__h1{margin:0;font-family:var(--cf-font-display);font-weight:400;font-size:clamp(46px,5.4vw,84px);line-height:1.02;color:var(--cf-gold);text-shadow:0 0 22px rgba(245,200,66,0.5)}
 .cf-hero__script{font-family:var(--cf-font-script);font-size:clamp(24px,2.6vw,38px);color:var(--cf-amber);text-shadow:0 0 12px rgba(212,130,42,0.55)}
