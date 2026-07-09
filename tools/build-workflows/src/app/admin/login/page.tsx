@@ -31,25 +31,42 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div
-      className="da-lace"
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '24px',
-      }}
-    >
+    <div className="da-lace login-page-container">
+      <style>{`
+        .login-page-container {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+        .login-card {
+          width: 100%;
+          max-width: 380px;
+          border: 1px solid var(--charcoal);
+          background-color: #ffffff;
+          padding: 48px 40px;
+          box-shadow: var(--shadow-md);
+        }
+        @media (max-width: 480px) {
+          .login-page-container {
+            padding: 16px;
+          }
+          .login-card {
+            padding: 32px 20px;
+          }
+          .ainput {
+            font-size: 16px !important;
+            padding: 11px 12px !important;
+          }
+          .login-submit-btn {
+            padding: 14px 20px !important;
+            font-size: 14px !important;
+          }
+        }
+      `}</style>
       <div style={{ width: '100%', maxWidth: 380 }}>
-        <div
-          style={{
-            border: '1px solid var(--charcoal)',
-            backgroundColor: '#ffffff',
-            padding: '48px 40px',
-            boxShadow: 'var(--shadow-md)',
-          }}
-        >
+        <div className="login-card">
           {/* Brand */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32 }}>
             <div className="da-pulse-stack">
@@ -117,7 +134,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="abtn abtn--primary"
+              className="abtn abtn--primary login-submit-btn"
               style={{
                 width: '100%',
                 justifyContent: 'center',

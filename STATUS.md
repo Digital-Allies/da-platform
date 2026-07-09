@@ -5,11 +5,9 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-08 — by Claude Code (Opus 4.8) — Atomic Finds
-**Celestial Scroll Hero** rebuilt + added to the design system (see below).
-Prior (2026-07-06 late): Sync health automation added; 11 stale git locks cleared;
-dated `BUILD-SCHEDULE.md` written (remaining run = backlog + Week 4); Step 2
-theming foundation built.
+**Last updated:** 2026-07-09 — by Antigravity (Gemini 3.5 Flash)
+**Mobile login layout fixed** + **Step 2 client theming finished** with Google Fonts loaded and CSS scope overrides scoped to `.site-theme-scope`.
+Prior: (2026-07-08) Celestial Scroll Hero v3 rebuild designed; (2026-07-06 late) Sync health automation added; dated `BUILD-SCHEDULE.md` written.
 
 ## Atomic Finds — Celestial Scroll Hero (2026-07-08)
 - **What:** the scroll-scrubbed hero of the AF owner (celestial-70s styling) was
@@ -134,6 +132,8 @@ independently-animated constellation disc + dozens of AI in-between frames.
   `tsc --noEmit` exit 0, dev server serves `/`→200, `/blog`→200, `/admin`→307
   (auth gate live). Live twin: https://da-webwssite-build-workflows.vercel.app .
 - Local `.env.local` restored for dev (gitignored, never pushed).
+- **Admin login page mobile fix:** `/admin/login` and `/admin/reset-password` responsive cards + prevent iOS input zoom-shift (Jul 9).
+- **Step 2 Client Theming (complete):** client Google Fonts imported; CSS variable overrides scoped to `.site-theme-scope` in `globals.css` map Nav, Hero, Footer, and Cards to HCTC and Atomic Finds design tokens (Jul 9).
 
 **YOU ARE HERE (30-Day Run audit, 2026-07-06)**
 - **Code is built through ~Day 15 (all of Weeks 1–3), plus some Phase 2 stubs.**
@@ -156,31 +156,15 @@ independently-animated constellation disc + dozens of AI in-between frames.
   `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the
   SQL editor. Week 4 public block-renderer is minimal (home + blog only). No
   blog `posts`/`pages` rows yet. `ARCHITECTURE.md` (Day 04) missing.
-- **Per-client theming (decision #7) — FOUNDATION BUILT (Step 2, 2026-07-06):**
-  `src/lib/theme.ts` now holds typed design tokens for DA / HCTC / Atomic Finds
-  (transcribed from each `sites/<site>/CLAUDE.md`), mapped by `client_id`, with a
-  neutral non-DA fallback. `src/components/site/SiteTheme.tsx` injects the full
-  set as `--tok-*` CSS vars on the **public site only** (admin stays DA-branded);
-  it's wired into the public home `page.tsx`. Non-breaking (tsc clean, `/`→200).
-  **Remaining:** (a) make the site components (Hero, Nav, cards, Footer, etc.)
-  actually consume the `--tok-*` vars instead of hardcoded DA styles, so a client
-  site visually becomes itself; (b) tokens currently live in code — optionally
-  mirror to the `design_tokens` DB table so they're editable; (c) Atomic Finds
-  has no `client_id`/deployment yet — add when onboarded. Tokens are code-first
-  today, which is fine (design system = source of truth).
+- **Per-client theming (decision #7) — COMPLETED (Step 2, 2026-07-09):**
+  `src/lib/theme.ts` holds design tokens mapped by `client_id`. `SiteTheme.tsx` injects them as `--tok-*` CSS variables on the public site scope. Public components (Hero, Nav, cards, Footer) now consume these tokens through `.site-theme-scope` variable overrides in `globals.css`. Client fonts (Montserrat, Lilita One, DM Sans) are imported.
+  **Remaining:** (a) tokens currently live in code — optionally mirror to the `design_tokens` DB table so they're editable; (b) Atomic Finds has no `client_id`/deployment yet — add when onboarded.
 - **Vercel deploys from the OLD repo, not the monorepo.** The live app
   (`da-webwssite-build-workflows.vercel.app`) still builds from
   `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel
   at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production
   deploys come from the source of truth. Loose end — do before shipping changes.
 - Note: the DA `brand_color` fix lives in Supabase (live data), not in git.
-- **MAJOR NEED — admin login page is broken on mobile.** `/admin/login`
-  (`src/app/admin/login/page.tsx`) does not work well on phones: the layout
-  shifts and the interface is not usable/easy on a mobile device. Needs a
-  responsive optimize or a full mobile rebuild (proper viewport handling, no
-  layout shift, touch-friendly inputs/buttons). The admin is the tool clients log
-  into, so this matters for every client. Do before onboarding clients to the
-  admin. Admin stays DA-branded (decision #7); this is layout/UX, not theming.
 - `digitalallies.net` is **not yet connected** to Supabase.
 - Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
   — many overlapping old repos. Not urgent; leave untouched until we decide.
@@ -189,21 +173,11 @@ independently-animated constellation disc + dozens of AI in-between frames.
 
 ## Major needs / known issues (prioritized)
 
-1. **Admin login page — broken on mobile.** `/admin/login`
-   (`src/app/admin/login/page.tsx`) shifts layout and isn't usable on phones.
-   Needs a responsive optimize or full mobile rebuild (viewport handling, no
-   layout shift, touch-friendly inputs/buttons). Every client logs in here — do
-   before onboarding clients. Layout/UX only; admin stays DA-branded.
-2. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase
-   SQL editor + one Auth toggle. The only real hardening gap.
-3. **Re-point Vercel at the monorepo** — the live app still deploys from the old
+1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase
+   SQL editor + one Auth toggle. The only real hardening gap. (Anthony Dependency)
+2. **Re-point Vercel at the monorepo** — the live app still deploys from the old
    repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform`
-   (root `tools/build-workflows`). Do before shipping further changes.
-4. **Finish Step 2 theming** — the foundation (`lib/theme.ts` + `SiteTheme.tsx`,
-   wired into the public home) is done. Remaining: make the public components
-   (Hero, Nav, cards, Footer) consume the `--tok-*` vars, and load non-DA web
-   fonts (Montserrat/Inter, Lilita One/DM Sans) so client sites fully become
-   themselves.
+   (root `tools/build-workflows`). Do before shipping further changes. (Anthony Dependency)
 
 ## Next steps (in order)
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@400;500;600&family=Montserrat:wght@400;500;600;700&family=Lilita+One&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -555,3 +555,127 @@ textarea.ainput { resize: vertical; line-height: 1.6; }
 .cc__reply { display: flex; align-items: center; gap: 16px; }
 .cc__received { font-family: var(--font-details); font-size: 11px; color: var(--text-soft); }
 .cc__empty { display: flex; align-items: center; justify-content: center; color: var(--text-soft); font-family: var(--font-body); font-size: 13px; }
+
+/* ─── Client Theme overrides for public site (SiteTheme scope) ─── */
+.site-theme-scope {
+  background-color: var(--tok-bg) !important;
+  color: var(--tok-text) !important;
+  font-family: var(--tok-font-body) !important;
+}
+
+/* Background overrides */
+.site-theme-scope .bg-canvas {
+  background-color: var(--tok-bg) !important;
+}
+.site-theme-scope .bg-white {
+  background-color: var(--tok-surface) !important;
+}
+
+/* Text overrides */
+.site-theme-scope .text-charcoal {
+  color: var(--tok-text) !important;
+}
+.site-theme-scope .text-neutral-600 {
+  color: var(--tok-text-muted) !important;
+}
+.site-theme-scope .text-neutral-500 {
+  color: var(--tok-text-muted) !important;
+}
+.site-theme-scope .text-neutral-400 {
+  color: var(--tok-text-muted) !important;
+}
+
+/* Border overrides */
+.site-theme-scope .border-charcoal {
+  border-color: var(--tok-border) !important;
+}
+.site-theme-scope .border-neutral-light {
+  border-color: var(--tok-border) !important;
+}
+.site-theme-scope .border-t,
+.site-theme-scope .border-b,
+.site-theme-scope .border {
+  border-color: var(--tok-border) !important;
+}
+
+/* Headings font */
+.site-theme-scope :where(h1, h2, h3, h4, h5, h6, .section-title, .font-headline) {
+  font-family: var(--tok-font-heading) !important;
+  color: var(--tok-text) !important;
+}
+
+/* Cards & Widgets */
+.site-theme-scope .card,
+.site-theme-scope .testimonial-card,
+.site-theme-scope blockquote {
+  background-color: var(--tok-surface) !important;
+  border-color: var(--tok-border) !important;
+  border-radius: var(--tok-radius-lg) !important;
+  color: var(--tok-text) !important;
+}
+
+/* Forms & Fields */
+.site-theme-scope .field {
+  background-color: var(--tok-surface) !important;
+  border-color: var(--tok-border) !important;
+  border-radius: var(--tok-radius) !important;
+  color: var(--tok-text) !important;
+}
+.site-theme-scope .field:focus {
+  border-color: var(--tok-primary) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--tok-primary) 20%, transparent) !important;
+}
+.site-theme-scope .label {
+  color: var(--tok-text) !important;
+}
+
+/* Buttons */
+.site-theme-scope .btn {
+  border-radius: var(--tok-radius) !important;
+  border-color: var(--tok-border) !important;
+  font-family: var(--tok-font-heading) !important;
+}
+.site-theme-scope .btn-primary {
+  background-color: var(--tok-primary) !important;
+  border-color: var(--tok-primary) !important;
+  color: #ffffff !important;
+}
+.site-theme-scope .btn-primary:hover {
+  opacity: 0.9 !important;
+}
+.site-theme-scope .btn-secondary {
+  background-color: transparent !important;
+  color: var(--tok-text) !important;
+  border-color: var(--tok-border) !important;
+}
+.site-theme-scope .btn-secondary:hover {
+  background-color: var(--tok-surface) !important;
+}
+
+/* Footer overrides */
+.site-theme-scope footer {
+  background-color: var(--tok-surface) !important;
+  border-color: var(--tok-border) !important;
+  color: var(--tok-text) !important;
+}
+.site-theme-scope footer a {
+  color: var(--tok-secondary) !important;
+}
+.site-theme-scope footer .text-neutral-400 {
+  color: var(--tok-text-muted) !important;
+}
+.site-theme-scope footer .border-neutral-700 {
+  border-color: var(--tok-border) !important;
+}
+
+/* Navigation overrides */
+.site-theme-scope header {
+  background-color: var(--tok-surface) !important;
+  border-color: var(--tok-border) !important;
+}
+.site-theme-scope header a {
+  color: var(--tok-text) !important;
+}
+.site-theme-scope header a:hover {
+  color: var(--tok-primary) !important;
+}
