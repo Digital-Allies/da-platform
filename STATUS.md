@@ -6,8 +6,8 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 — stale status is worse than none.
 
 **Last updated:** 2026-07-09 — by Antigravity (Gemini 3.5 Flash)
-**Mobile login layout fixed** + **Step 2 client theming finished** with Google Fonts loaded and CSS scope overrides scoped to `.site-theme-scope`.
-Prior: (2026-07-08) Celestial Scroll Hero v3 rebuild designed; (2026-07-06 late) Sync health automation added; dated `BUILD-SCHEDULE.md` written.
+**Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
+Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
 
 ## Atomic Finds — Celestial Scroll Hero (2026-07-08)
 - **What:** the scroll-scrubbed hero of the AF owner (celestial-70s styling) was
@@ -128,67 +128,40 @@ independently-animated constellation disc + dozens of AI in-between frames.
   `templates/BUILD-BRIEF.template.md` + `templates/CLIENT-ONBOARDING.template.md`.
 - Per-site design references dropped in: `sites/*/CLAUDE.md` (each carries its
   source Claude Design project id).
-- **Engine baseline verified (30-Day Run Day 1 done-state):** deps install clean,
-  `tsc --noEmit` exit 0, dev server serves `/`→200, `/blog`→200, `/admin`→307
-  (auth gate live). Live twin: https://da-webwssite-build-workflows.vercel.app .
-- Local `.env.local` restored for dev (gitignored, never pushed).
 - **Admin login page mobile fix:** `/admin/login` and `/admin/reset-password` responsive cards + prevent iOS input zoom-shift (Jul 9).
 - **Step 2 Client Theming (complete):** client Google Fonts imported; CSS variable overrides scoped to `.site-theme-scope` in `globals.css` map Nav, Hero, Footer, and Cards to HCTC and Atomic Finds design tokens (Jul 9).
+- **Week of July 13 Renderer & Routing (complete):** `BlockRenderer.tsx` built; root dynamic routing `[slug]` configured; contact form block added to Pages admin builder & visual preview (Jul 9).
 
-**YOU ARE HERE (30-Day Run audit, 2026-07-06)**
-- **Code is built through ~Day 15 (all of Weeks 1–3), plus some Phase 2 stubs.**
-  Present: Next.js app + Vercel deploy + Supabase clients (Days 1–5); full schema
-  with RLS defined (Days 6–7); `lib/data.ts` fetchers (Day 10); admin routes for
-  dashboard, posts, pages, services, testimonials, settings, messages, content,
-  plus projects/research/development stubs (Days 11–15).
-- **Environment is FURTHER along than the docs claimed (verified against the live
-  Supabase 2026-07-06).** The old README saying "seed not run / no admin user" is
-  STALE. Reality:
+**YOU ARE HERE (30-Day Run audit, 2026-07-09)**
+- **Code is built through Day 18 (all core features of Weeks 1–4 are coded).**
+  Present: Next.js app + Vercel deploy + Supabase clients (Days 1–5); schema + RLS (Days 6–7); dynamic page/settings/collections fetchers (Days 10, 16); admin pages builder (Days 11–15); public block renderer (Day 16); dynamic route pages (Day 17); contact form block (Day 18).
+- **Environment is FURTHER along than the docs claimed (verified against the live Supabase).** Reality:
   - Supabase **is seeded** — DA settings (19), services (3), testimonials (2).
-  - Admin user **exists**: `contact@digitalallies.net`
-    (`492ac568-…`). Also present: `acinktown@gmail.com`, `vickiebuckholz@…`.
-  - **HCTC already has a client row** (`7896354c-…`) — two tenants live, not one.
-  - Fixed a drift: DA `brand_color` had become teal `#0F766E`; corrected to Signal
-    Red `#C5301A` per the design system.
+  - Admin user **exists**: `contact@digitalallies.net` (`492ac568-…`).
+  - **HCTC already has a client row** (`7896354c-…`) — two tenants live.
+  - Fixed a drift: DA `brand_color` corrected to Signal Red `#C5301A` per the design system.
 - **So the admin should already be loginable** (code + data + user all exist).
   Anthony can log in at the Vercel URL as `contact@digitalallies.net`.
-- **Genuinely still open:** `security-fixes.sql` NOT applied (anon can still call
-  `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the
-  SQL editor. Week 4 public block-renderer is minimal (home + blog only). No
-  blog `posts`/`pages` rows yet. `ARCHITECTURE.md` (Day 04) missing.
+- **Genuinely still open:** `security-fixes.sql` NOT applied (anon can still call `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the SQL editor. `ARCHITECTURE.md` (Day 04) missing.
 - **Per-client theming (decision #7) — COMPLETED (Step 2, 2026-07-09):**
   `src/lib/theme.ts` holds design tokens mapped by `client_id`. `SiteTheme.tsx` injects them as `--tok-*` CSS variables on the public site scope. Public components (Hero, Nav, cards, Footer) now consume these tokens through `.site-theme-scope` variable overrides in `globals.css`. Client fonts (Montserrat, Lilita One, DM Sans) are imported.
-  **Remaining:** (a) tokens currently live in code — optionally mirror to the `design_tokens` DB table so they're editable; (b) Atomic Finds has no `client_id`/deployment yet — add when onboarded.
-- **Vercel deploys from the OLD repo, not the monorepo.** The live app
-  (`da-webwssite-build-workflows.vercel.app`) still builds from
-  `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel
-  at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production
-  deploys come from the source of truth. Loose end — do before shipping changes.
+- **Vercel deploys from the OLD repo, not the monorepo.** The live app (`da-webwssite-build-workflows.vercel.app`) still builds from `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production deploys come from the source of truth. Loose end — do before shipping changes.
 - Note: the DA `brand_color` fix lives in Supabase (live data), not in git.
 - `digitalallies.net` is **not yet connected** to Supabase.
-- Repo sprawl on GitHub (da-cms, DigitalAllies_CMS, Branddigitalalliesnet, etc.)
-  — many overlapping old repos. Not urgent; leave untouched until we decide.
+- Repo sprawl on GitHub — archive old repos later.
 
 ---
 
 ## Major needs / known issues (prioritized)
 
-1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase
-   SQL editor + one Auth toggle. The only real hardening gap. (Anthony Dependency)
-2. **Re-point Vercel at the monorepo** — the live app still deploys from the old
-   repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform`
-   (root `tools/build-workflows`). Do before shipping further changes. (Anthony Dependency)
+1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. The only real hardening gap. (Anthony Dependency)
+2. **Re-point Vercel at the monorepo** — the live app still deploys from the old repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform` (root `tools/build-workflows`). Do before shipping further changes. (Anthony Dependency)
 
 ## Next steps (in order)
 
-1. **Confirm the admin actually works** — Anthony logs in once at the Vercel URL
-   as `contact@digitalallies.net` and sanity-checks the Press Office shows the
-   seeded data. (One hands-on login; everything else is in place.)
-2. **Apply `security-fixes.sql` + leaked-password toggle** — one paste into the
-   Supabase SQL editor + one Auth setting. The only real hardening gap.
-3. **Week 4 — the connected loop for DA:** build out the public block-renderer,
-   the transmission loop (contact → message + email), then connect the real
-   `digitalallies.net` to Supabase and do the domain/DNS cutover + launch QA.
+1. **Apply `security-fixes.sql` + leaked-password toggle** — one paste into the Supabase SQL editor + one Auth setting.
+2. **Re-point Vercel at the monorepo** — update deployment repo in Vercel.
+3. **Domain + DNS Cutover (Day 19) & Launch QA (Day 20)** — point `digitalallies.net` DNS to Vercel, verify magic-link login on the live domain, test contact form email routing, and confirm anon/draft visibility RLS works.
 4. Backfill the Day-04 `ARCHITECTURE.md` at a convenient point.
 
 ## Only-Anthony dependencies (not decisions — just hands-on)

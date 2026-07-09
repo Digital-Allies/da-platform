@@ -55,3 +55,15 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     .order('display_order', { ascending: true })
   return data ?? []
 }
+
+export async function getPageBySlug(slug: string): Promise<any | null> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('pages')
+    .select('*')
+    .eq('client_id', CLIENT_ID)
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .maybeSingle()
+  return data
+}

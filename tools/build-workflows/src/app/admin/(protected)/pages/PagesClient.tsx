@@ -64,6 +64,8 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
       defaultData = { title: 'What Clients Say', description: 'Client review descriptions' };
     } else if (type === 'cta') {
       defaultData = { title: 'Ready to start?', subtitle: 'Get in touch today', buttonText: 'Contact Us', buttonLink: '#contact' };
+    } else if (type === 'contact') {
+      defaultData = { title: 'Get in Touch', subtitle: 'Fill out the form below.' };
     }
 
     const newBlocks = [...blocks, { type, data: defaultData }];
@@ -199,6 +201,28 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
               <a href="${block.data.buttonLink || '#'}" style="display: inline-block; padding: 10px 20px; background: ${brandColor}; color: white; text-decoration: none; font-weight: bold; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 13px;">${block.data.buttonText || 'Contact Us'}</a>
             </section>
           `;
+        case 'contact':
+          return `
+            <section style="padding: 45px 20px; text-align: center; background: #F9F6F0; border-top: 1px solid #2D2D2D; font-family: 'Lexend Deca', sans-serif;">
+              <h2 style="font-size: 24px; margin-bottom: 8px; color: #2D2D2D;">${block.data.title || 'Get in Touch'}</h2>
+              <p style="color: #6b6b6b; font-family: 'JetBrains Mono', monospace; font-size: 13px; margin-bottom: 24px;">${block.data.subtitle || 'Fill out the form below.'}</p>
+              <div style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #2D2D2D; background: white; text-align: left;">
+                <div style="margin-bottom: 12px;">
+                  <label style="display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; color: #2D2D2D;">Name</label>
+                  <div style="height: 36px; border: 1px solid #E0DDD5; background: #fdfdfd;"></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                  <label style="display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; color: #2D2D2D;">Email</label>
+                  <div style="height: 36px; border: 1px solid #E0DDD5; background: #fdfdfd;"></div>
+                </div>
+                <div style="margin-bottom: 12px;">
+                  <label style="display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; color: #2D2D2D;">Message</label>
+                  <div style="height: 80px; border: 1px solid #E0DDD5; background: #fdfdfd;"></div>
+                </div>
+                <div style="display: inline-block; padding: 10px 20px; background: ${brandColor}; color: white; font-weight: bold; font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; border-radius: 4px;">Send Message</div>
+              </div>
+            </section>
+          `;
         default:
           return '';
       }
@@ -293,6 +317,7 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('services')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Services</button>
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('testimonials')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Testimonials</button>
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('cta')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> CTA</button>
+                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('contact')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Contact Form</button>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -365,6 +390,18 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
                               <div className="form-group" style={{ marginBottom: '10px' }}>
                                 <label className="form-label">Button Link</label>
                                 <input type="text" className="form-control" value={block.data.buttonLink || ''} onChange={e => handleBlockDataChange(idx, 'buttonLink', e.target.value)} />
+                              </div>
+                            </>
+                          )}
+                          {block.type === 'contact' && (
+                            <>
+                              <div className="form-group" style={{ marginBottom: '10px' }}>
+                                <label className="form-label">Headline</label>
+                                <input type="text" className="form-control" value={block.data.title || ''} onChange={e => handleBlockDataChange(idx, 'title', e.target.value)} />
+                              </div>
+                              <div className="form-group" style={{ marginBottom: '10px' }}>
+                                <label className="form-label">Subheading</label>
+                                <input type="text" className="form-control" value={block.data.subtitle || ''} onChange={e => handleBlockDataChange(idx, 'subtitle', e.target.value)} />
                               </div>
                             </>
                           )}
