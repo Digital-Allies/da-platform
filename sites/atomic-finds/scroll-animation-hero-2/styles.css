@@ -1,0 +1,616 @@
+/* ==========================================================================
+   Atomic Finds — Jenny Celestial Scroll Hero Stylesheet
+   Scoped under .jenny-hero-widget for Duda compatibility
+   ========================================================================== */
+
+.jenny-hero-widget {
+  /* Design System Tokens */
+  --font-display: 'Lilita One', cursive;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-theme: background-color 0.8s var(--ease-out-expo), color 0.8s var(--ease-out-expo);
+
+  position: relative;
+  font-family: var(--font-body);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.jenny-hero-widget * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Theme Variable Overrides --- */
+.jenny-hero-widget.theme-night {
+  --color-bg: #0c0b0f;
+  --color-text: #f4eee1;
+  --color-accent: #f5c842; /* Celestial Gold */
+  --color-sub: #d4822a;    /* Amber Orange */
+  --color-line: rgba(245, 200, 66, 0.12);
+  --color-scrim: radial-gradient(120% 90% at 50% 40%, transparent 40%, rgba(12, 11, 15, 0.4) 100%),
+                 linear-gradient(180deg, rgba(12, 11, 15, 0.5) 0%, transparent 20%, transparent 70%, #0c0b0f 100%);
+  --image-filter: brightness(0.9) contrast(1.02);
+}
+
+.jenny-hero-widget.theme-gold {
+  --color-bg: #211917; /* Warm Terracotta Black */
+  --color-text: #f7f2e8;
+  --color-accent: #e59052; /* Solar Copper */
+  --color-sub: #cc703d;    /* Clay Red */
+  --color-line: rgba(229, 144, 82, 0.15);
+  --color-scrim: radial-gradient(120% 90% at 50% 40%, transparent 40%, rgba(33, 25, 23, 0.45) 100%),
+                 linear-gradient(180deg, rgba(33, 25, 23, 0.6) 0%, transparent 20%, transparent 70%, #211917 100%);
+  --image-filter: sepia(0.22) saturate(1.15) brightness(0.92) contrast(0.98);
+}
+
+/* --- Pinned Stage & Layout --- */
+.jenny-hero-widget .jh-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+  transition: var(--transition-theme);
+  z-index: 10;
+}
+
+.jenny-hero-widget .jh-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+/* --- Technical Grid Lines (Inspiration: Breedlove) --- */
+.jenny-hero-widget .jh-grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.jenny-hero-widget .jh-line {
+  position: absolute;
+  background-color: var(--color-line);
+  transition: background-color 0.8s var(--ease-out-expo);
+}
+
+/* Vertical grid dividers */
+.jenny-hero-widget .jh-line--v1 {
+  left: 45%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+.jenny-hero-widget .jh-line--v2 {
+  right: 5%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+/* Horizontal grid dividers */
+.jenny-hero-widget .jh-line--h1 {
+  top: 12%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+.jenny-hero-widget .jh-line--h2 {
+  bottom: 12%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+/* --- Header Section --- */
+.jenny-hero-widget .jh-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4%;
+  z-index: 30;
+}
+
+.jenny-hero-widget .jh-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  text-shadow: 0 0 10px rgba(245, 200, 66, 0.2);
+  transition: color 0.8s var(--ease-out-expo);
+}
+
+.jenny-hero-widget .jh-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.jenny-hero-widget .jh-nav-item {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.jenny-hero-widget .jh-nav-item:hover {
+  opacity: 1;
+}
+
+/* --- Day / Night Slider Toggle --- */
+.jenny-hero-widget .jh-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.jenny-hero-widget .jh-toggle-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.jenny-hero-widget.theme-night .jh-toggle-label:first-child,
+.jenny-hero-widget.theme-gold .jh-toggle-label:last-child {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.jenny-hero-widget .jh-toggle-track {
+  width: 38px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  position: relative;
+  transition: border-color 0.8s;
+}
+
+.jenny-hero-widget .jh-toggle-thumb {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.8s;
+  box-shadow: 0 0 8px rgba(245, 200, 66, 0.4);
+}
+
+.jenny-hero-widget.theme-gold .jh-toggle-thumb {
+  transform: translateX(16px);
+}
+
+/* --- Corner Metadata Overlays --- */
+.jenny-hero-widget .jh-metadata {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-sub);
+  opacity: 0;
+  transition: opacity 0.8s, color 0.8s var(--ease-out-expo);
+  z-index: 25;
+  pointer-events: none;
+}
+
+.jenny-hero-widget .jh-metadata--top-left {
+  top: 15%;
+  left: 4%;
+}
+.jenny-hero-widget .jh-metadata--top-right {
+  top: 15%;
+  right: 9%;
+}
+.jenny-hero-widget .jh-metadata--bottom-left {
+  bottom: 15%;
+  left: 4%;
+}
+.jenny-hero-widget .jh-metadata--bottom-right {
+  bottom: 15%;
+  right: 9%;
+}
+
+/* --- Vertical Nominee Badge --- */
+.jenny-hero-widget .jh-badge {
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg) translateY(-20px);
+  transform-origin: center right;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.jenny-hero-widget .jh-badge-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  opacity: 0.35;
+}
+
+.jenny-hero-widget .jh-badge-star {
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.jenny-hero-widget .jh-badge-year {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.35;
+}
+
+/* --- Left Column: Info Panel --- */
+.jenny-hero-widget .jh-panel {
+  width: 45%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 5% 0 4%;
+  position: relative;
+  z-index: 10;
+}
+
+.jenny-hero-widget .jh-beat {
+  position: absolute;
+  width: 82%;
+  opacity: 0;
+  transform: translateY(30px);
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+}
+
+.jenny-hero-widget .jh-beat.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.jenny-hero-widget .jh-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-sub);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.jenny-hero-widget .jh-headline {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4vw, 68px);
+  line-height: 1.05;
+  color: var(--color-accent);
+  text-shadow: 0 0 20px rgba(245, 200, 66, 0.18);
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.jenny-hero-widget .jh-desc {
+  font-size: clamp(14px, 1.2vw, 17px);
+  line-height: 1.6;
+  opacity: 0.75;
+  max-width: 32ch;
+}
+
+.jenny-hero-widget .jh-body {
+  font-size: clamp(18px, 1.5vw, 24px);
+  line-height: 1.55;
+  margin-bottom: 32px;
+  max-width: 25ch;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.jenny-hero-widget .jh-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  background-color: var(--color-accent);
+  color: #0c0b0f;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 0 16px rgba(245, 200, 66, 0.3);
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo), background-color 0.3s;
+}
+
+.jenny-hero-widget .jh-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(245, 200, 66, 0.45);
+}
+
+/* --- Right Column: Image Canvas Container --- */
+.jenny-hero-widget .jh-canvas-container {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.jenny-hero-widget .jh-canvas {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  right: 10%;
+  bottom: 12%;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--color-line);
+  background-color: #000;
+  transition: border-color 0.8s var(--ease-out-expo);
+  z-index: 10;
+}
+
+/* Stacking frames */
+.jenny-hero-widget .jh-frames {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-origin: 50% 36%;
+  will-change: transform;
+}
+
+.jenny-hero-widget .jh-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  opacity: 0;
+  filter: var(--image-filter);
+  transition: opacity 0.25s linear, filter 0.8s var(--ease-out-expo);
+  will-change: opacity;
+}
+
+.jenny-hero-widget .jh-frame.active {
+  opacity: 1;
+}
+
+/* Foreground Cloud Wisps */
+.jenny-hero-widget .jh-wisps {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 15;
+  overflow: hidden;
+}
+
+.jenny-hero-widget .jh-wisp {
+  position: absolute;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.jenny-hero-widget .jh-wisp--1 {
+  bottom: -5%;
+  left: -10%;
+  width: 120%;
+  mix-blend-mode: screen;
+}
+
+.jenny-hero-widget .jh-wisp--2 {
+  top: -5%;
+  right: -10%;
+  width: 90%;
+  transform: scaleX(-1);
+  opacity: 0.4;
+}
+
+.jenny-hero-widget .jh-wisp--3 {
+  bottom: -8%;
+  right: -15%;
+  width: 130%;
+  mix-blend-mode: screen;
+}
+
+/* Scrim overlays for layout text legibility */
+.jenny-hero-widget .jh-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--color-scrim);
+  transition: background 0.8s var(--ease-out-expo);
+  z-index: 12;
+  pointer-events: none;
+}
+
+/* --- Scroll Cue (Bottom Center) --- */
+.jenny-hero-widget .jh-cue {
+  position: absolute;
+  bottom: 4%;
+  left: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 25;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.jenny-hero-widget .jh-cue span {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-sub);
+}
+
+.jenny-hero-widget .jh-cue-line {
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(180deg, var(--color-accent), transparent);
+  animation: jh-cue-anim 2s infinite ease-in-out;
+}
+
+@keyframes jh-cue-anim {
+  0% {
+    transform: scaleY(0.2);
+    transform-origin: top;
+    opacity: 0.8;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 0.3;
+  }
+  50.1% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 0.3;
+  }
+  100% {
+    transform: scaleY(0.2);
+    transform-origin: bottom;
+    opacity: 0.8;
+  }
+}
+
+/* --- Content Section --- */
+.jh-content-section {
+  min-height: 80vh;
+  background-color: #0c0b0f;
+  color: #f4eee1;
+  padding: 140px 10%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.jh-content-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.jh-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.5vw, 56px);
+  color: #f5c842;
+  margin: 12px 0 24px;
+  font-weight: 400;
+}
+
+.jh-section-text {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints & Media Queries
+   ========================================================================== */
+
+/* Mobile Stack Layout (< 768px) */
+@media (max-width: 767px) {
+  .jenny-hero-widget .jh-grid-lines {
+    display: none;
+  }
+
+  .jenny-hero-widget .jh-line--v1 {
+    display: none;
+  }
+
+  .jenny-hero-widget .jh-line--v2 {
+    right: 4%;
+  }
+
+  .jenny-hero-widget .jh-layout {
+    flex-direction: column-reverse;
+  }
+
+  .jenny-hero-widget .jh-panel {
+    width: 100%;
+    height: 48%;
+    padding: 24px 6%;
+    align-items: flex-start;
+  }
+
+  .jenny-hero-widget .jh-beat {
+    width: 88%;
+    position: relative;
+    transform: none;
+  }
+
+  .jenny-hero-widget .jh-headline {
+    font-size: 34px;
+    margin-bottom: 12px;
+  }
+
+  .jenny-hero-widget .jh-body {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .jenny-hero-widget .jh-canvas-container {
+    width: 100%;
+    height: 52%;
+  }
+
+  .jenny-hero-widget .jh-canvas {
+    top: 15%;
+    left: 6%;
+    right: 6%;
+    bottom: 4%;
+  }
+
+  .jenny-hero-widget .jh-badge {
+    display: none;
+  }
+
+  .jenny-hero-widget .jh-metadata--top-left {
+    top: 15%;
+    left: 6%;
+  }
+
+  .jenny-hero-widget .jh-metadata--top-right {
+    top: 15%;
+    right: 6%;
+  }
+
+  .jenny-hero-widget .jh-metadata--bottom-left {
+    display: none;
+  }
+
+  .jenny-hero-widget .jh-metadata--bottom-right {
+    display: none;
+  }
+
+  .jenny-hero-widget .jh-cue {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2%;
+  }
+}
+
+/* Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .jenny-hero-widget .jh-cue,
+  .jenny-hero-widget .jh-wisps,
+  .jenny-hero-widget .jh-cue-line {
+    display: none !important;
+  }
+}

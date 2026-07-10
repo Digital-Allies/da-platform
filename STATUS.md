@@ -40,6 +40,10 @@ independently-animated constellation disc + dozens of AI in-between frames.
 - **Next:** cutouts for frame-1 + frame-5, disc extraction, 3 wisp sprites,
   in-between generation (gated pilot first), then rebuild `celestial-hero.html`
   + `CelestialScrollHero.tsx` with the layer stack, then verify in preview.
+- **Jenny Breedlove Hero (2026-07-10):**
+  - **What:** Completed the Breedlove-inspired scroll animation hero for Jenny using her 7 portrait frames. Added snappy dissolves, zoom push-in, grid lines, vertical Nominee badge, corner metadata text, and a Day/Night theme toggle (Night mode: #0c0b0f background/neon-gold text; Gold mode: #211917 background/sunset-copper text/scrim overlay).
+  - **Deliverables:** Scoped Duda-compatible code blocks (HTML/CSS/JS) and standalone preview workspace in `sites/atomic-finds/scroll-animation-hero-2/index.html`. Written walkthrough details in `walkthrough.md`.
+  - **Status:** Done. Dev server launched on port 8080.
 - **Image tooling:** nano-banana is DEAD (retired Gemini model → 404). Use
   **higgsfield** (Pro trial active — prioritize) or **openart** for generation;
   Adobe `image_remove_background` works for one-off cutouts (manual picker only).
