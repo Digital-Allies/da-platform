@@ -166,6 +166,11 @@ independently-animated constellation disc + dozens of AI in-between frames.
 
 ## Only-Anthony dependencies (not decisions — just hands-on)
 
+**Full step-by-step checklist:** `tools/build-workflows/tasks/anthony/TODO.md`
+— every dashboard-only action (Vercel, Supabase, GitHub) any agent has queued
+up for Anthony lives there, in priority order. Agents: read/update that file
+instead of duplicating this list.
+
 - **Supabase SQL editor:** paste `supabase/security-fixes.sql` and Run; then Auth
   → Providers → Email → enable leaked-password protection. (Or add a Supabase
   access token so the agent can run SQL/DDL directly in future.)
