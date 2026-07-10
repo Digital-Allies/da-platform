@@ -1,0 +1,11 @@
+- [x] Implement Dynamic Block Renderer
+  - [x] Add `getPageBySlug` in `src/lib/data.ts`
+  - [x] Create `BlockRenderer.tsx` in `src/components/site`
+  - [x] Update root page `src/app/page.tsx` with dynamic page query + fallback
+  - [x] Create root dynamic page `src/app/[slug]/page.tsx` for catch-all page routing
+- [x] Add Contact Form Block to Admin & Public
+  - [x] Add `'contact'` block type to `PagesClient.tsx`
+  - [x] Add `'contact'` block preview HTML in `PagesClient.tsx`
+  - [x] Map `'contact'` block in `BlockRenderer.tsx` to `<ContactForm>`
+- [x] Verify Codebase Compiles
+  - [x] Run `npm run build` to verify Next.js builds successfully
