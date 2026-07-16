@@ -5,9 +5,59 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-09 — by Antigravity (Gemini 3.5 Flash)
+**Last updated:** 2026-07-16 — by Claude Code (full audit pass — see "2026-07-16
+audit" section below for what was verified vs. what was stale)
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
+
+## 2026-07-16 audit — what changed since Jul 9
+
+A full stock-take of this file against live reality, prompted by Anthony
+noticing digitalallies.net was serving placeholder Supabase content. Findings:
+
+- **digitalallies.net and the CMS admin engine are two separate Vercel
+  projects — this file previously conflated them.** Confirmed via Vercel's
+  API (team `digital-allies`):
+  - **`digital-allies`** project → `digitalallies.net` / `www.digitalallies.net`.
+    This is the static marketing site (source repo: the separate GitHub repo
+    `Digital-Allies/DigitalAllies`, **not** this monorepo — `sites/digitalallies`
+    here is a one-time historical import from `2a84e5c`, frozen at import
+    time, with no commits since. Don't treat it as source of truth for this
+    site; it's stale.
+  - **`da-webwssite-build-workflows`** project → the Next.js CMS admin engine
+    (`tools/build-workflows`). This is the one still connected to the wrong
+    repo (`cassellac/da-webwssite-build-workflows` instead of
+    `Digital-Allies/da-platform`) — see Major needs #2 below.
+- **`digitalallies.net` IS connected to Supabase** (the line below claiming
+  otherwise is stale — removing it). A Claude-in-Chrome session found the
+  `services`/`testimonials` tables held generic placeholder demo rows
+  (fake departments, fake testimonials, Lucide icon *names* rendering as
+  literal text because `cms-loader.js` only knows emoji) and replaced them
+  with the real bilingual copy from the live site. While verifying, that
+  session also found the live `index.html` had the **entire document
+  duplicated** (two `<html>`/`<head>`/`<body>`), which silently broke the
+  EN/ES toggle site-wide via a `LanguageController` redeclaration
+  `SyntaxError`. Anthony fixed both the Supabase data and the duplicated
+  HTML directly on the live repo since then. **Verified live just now:** no
+  console errors, real content renders, EN/ES toggle correctly re-translates
+  the page (checked index, privacy.html, /learn/).
+- **Auto-sync + health-check automations were silently broken since Jul 7,
+  fixed this session.** A Jul 7 reorg moved the working scripts into
+  `projects/air-setup/` but the already-installed launchd plists on this Mac
+  still pointed at the old flat `projects/sync.sh` / `projects/sync-health.sh`
+  paths, which didn't exist — every 15-min sync and 3-hr health check failed
+  immediately (exit 127) for 53+ hours (last successful auto-commit before
+  the fix: Jul 14 02:18). Fixed by copying the working scripts into the flat
+  path and reloading the launchd jobs; a fresh sync commit landed immediately
+  after. `db-backup-reminder` (Saturdays 9am) was also pointed at a missing
+  script but is calendar-scheduled so hadn't audibly failed yet — fixed the
+  same way.
+- **`cms-suite/` was a misplaced nested repo** (its own git history, pointed
+  at `github.com/cassellac/cms-suite`) sitting untracked inside da-platform's
+  root, picked up once as an accidental gitlink by the broken auto-sync
+  script. Moved to `~/Claude/projects/cms-suite/` (its own project folder,
+  history intact), the accidental gitlink commit reverted, and it's now
+  gitignored here so it can't recur.
 
 ## Atomic Finds — Celestial Scroll Hero (2026-07-08)
 - **What:** the scroll-scrubbed hero of the AF owner (celestial-70s styling) was
@@ -50,12 +100,25 @@ independently-animated constellation disc + dozens of AI in-between frames.
   `sips -Z` (no `-s format`) preserves alpha. Character must follow the guidelines
   in the scroll-animation-hero-component directory.
 
-## Automation + ops (2026-07-06)
+## Automation + ops (2026-07-06, repaired 2026-07-16)
 - **Sync health monitor installed.** `../sync-health.sh` + launchd agent
   `com.digitalallies.sync-health` (every 3 hr) reads the sync logs, walks every
   repo, and **notifies only on problems** (stale sync, push failures, stuck git
   locks, oversized tracked files, missing remotes). Details + known issues:
   `../SYNC-NOTES.md`. Run `./sync-health.sh` anytime (read-only).
+- **2026-07-16: found and fixed a silent 53+ hour outage.** A Jul 7 reorg
+  moved the working sync/health scripts into `projects/air-setup/`, but the
+  launchd plists already installed on this Mac still pointed at the old flat
+  `projects/sync.sh` / `projects/sync-health.sh` paths — neither existed, so
+  every scheduled run failed instantly (exit 127) from shortly after Jul 7
+  until this fix. Confirmed via `launchctl list` (exit 32512) and the git log
+  (`chore: sync MM23` commits stopped dead at Jul 14 02:18). Fixed by copying
+  `air-setup/{sync,sync-health,db-backup-reminder,maintenance-status}.sh` into
+  the flat `projects/` path the plists expect, then `launchctl unload`/`load`
+  on all three agents. Verified: a fresh sync commit landed within seconds of
+  the reload. **Note for whoever bootstraps the MacBook Air later:**
+  `air-setup/bootstrap-air.sh` is still the right tool for that machine —
+  this fix only addressed the already-installed agents on this Mac (Mini/MM23).
 - **Fixed:** cleared 11 stale git `*.lock` files across repos that were silently
   blocking commits (cms-suite + 9 HEAD.lock from a Jun-15 batch op + 1 packed-refs).
 - **Known ops issues** (tracked in `../SYNC-NOTES.md`): headless GitHub auth
@@ -119,6 +182,11 @@ independently-animated constellation disc + dozens of AI in-between frames.
   file. Either agent can drive.
 - Open gap: the workspace-root shared brain no longer has a sync path. Fix later
   if we want workspace-wide conventions to travel between Macs.
+- **2026-07-16:** `../AGENTS.md` didn't actually exist on disk (this file's own
+  reference to it was stale) — recreated it with the one convention that
+  mattered right now (where generated/downloaded files belong, so they stop
+  landing loose in project roots). Still no sync path to the Air; still local
+  to this Mac only.
 
 ---
 
@@ -149,24 +217,32 @@ independently-animated constellation disc + dozens of AI in-between frames.
 - **Genuinely still open:** `security-fixes.sql` NOT applied (anon can still call `get_my_client_id` → HTTP 200; low severity, returns null for anon). Needs the SQL editor. `ARCHITECTURE.md` (Day 04) missing.
 - **Per-client theming (decision #7) — COMPLETED (Step 2, 2026-07-09):**
   `src/lib/theme.ts` holds design tokens mapped by `client_id`. `SiteTheme.tsx` injects them as `--tok-*` CSS variables on the public site scope. Public components (Hero, Nav, cards, Footer) now consume these tokens through `.site-theme-scope` variable overrides in `globals.css`. Client fonts (Montserrat, Lilita One, DM Sans) are imported.
-- **Vercel deploys from the OLD repo, not the monorepo.** The live app (`da-webwssite-build-workflows.vercel.app`) still builds from `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production deploys come from the source of truth. Loose end — do before shipping changes.
+- **The CMS admin engine's Vercel project deploys from the OLD repo, not the monorepo.** The live app (`da-webwssite-build-workflows.vercel.app`) still builds from `cassellac/da-webwssite-build-workflows`. Same code today, but re-point Vercel at `Digital-Allies/da-platform` (root `tools/build-workflows`) so production deploys come from the source of truth. Loose end — do before shipping changes. (This is the CMS *admin* app — NOT digitalallies.net, which is a separate Vercel project/repo; see "2026-07-16 audit" above.)
 - Note: the DA `brand_color` fix lives in Supabase (live data), not in git.
-- `digitalallies.net` is **not yet connected** to Supabase.
+- `digitalallies.net` **is connected to Supabase** and verified working as of 2026-07-16 (real content, EN/ES toggle functional) — see "2026-07-16 audit" above. It deploys from the separate `Digital-Allies/DigitalAllies` repo, not this monorepo.
 - Repo sprawl on GitHub — archive old repos later.
+- **CMS admin has no Services/Testimonials module.** Editing that content today means hand-written SQL in the Supabase table editor. Needed before "fully connecting" digitalallies.net's content the way it should work long-term.
+- **`cms-loader.js` builds cards via unescaped `innerHTML`.** Fine while only Claude/Anthony touch the DB directly; becomes a real injection risk once a Services/Testimonials admin module exists and non-developers can enter content. Fix before that module ships.
+- **Dead `tailwind.config = {...}` block** in digitalallies.net's inline script references a CDN Tailwind global that isn't loaded (site is precompiled/self-hosted) — harmless but throws a `ReferenceError` on every page load. Small cleanup, low priority.
 
 ---
 
 ## Major needs / known issues (prioritized)
 
-1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. The only real hardening gap. (Anthony Dependency)
-2. **Re-point Vercel at the monorepo** — the live app still deploys from the old repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform` (root `tools/build-workflows`). Do before shipping further changes. (Anthony Dependency)
+1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. (Anthony Dependency)
+2. **Rotate the leaked Supabase `service_role` key** — still sitting in git history on GitHub (Antigravity committed it in `tasks/antigravity/list_clients.js`, since removed from the file but not from history). Not urgent while the repo stays private, but do it before this repo is ever public/shared. (Anthony Dependency — full steps in `tools/build-workflows/tasks/anthony/TODO.md` Priority 3)
+3. **Re-point the CMS admin engine's Vercel project at the monorepo** — `da-webwssite-build-workflows.vercel.app` still deploys from the old repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform` (root `tools/build-workflows`). Do before shipping further changes to the admin app. This is **only** the CMS admin app — digitalallies.net is a separate, already-correct Vercel project (see 2026-07-16 audit). (Anthony Dependency)
+4. **Build the missing Services/Testimonials admin module** in the CMS engine so digitalallies.net's content can be edited without hand-written SQL — the actual prerequisite for "fully connecting" that site the way it should work long-term.
+5. **Escape HTML in `cms-loader.js`'s card-building code** before the above module ships (currently raw `innerHTML`, an injection risk once non-developers can enter content).
 
 ## Next steps (in order)
 
-1. **Apply `security-fixes.sql` + leaked-password toggle** — one paste into the Supabase SQL editor + one Auth setting.
-2. **Re-point Vercel at the monorepo** — update deployment repo in Vercel.
-3. **Domain + DNS Cutover (Day 19) & Launch QA (Day 20)** — point `digitalallies.net` DNS to Vercel, verify magic-link login on the live domain, test contact form email routing, and confirm anon/draft visibility RLS works.
-4. Backfill the Day-04 `ARCHITECTURE.md` at a convenient point.
+1. Add basic HTML-escaping to `cms-loader.js`'s card-building code (small, prevents a real injection risk once non-developers can edit content).
+2. Remove the dead `tailwind.config` block from digitalallies.net's inline script.
+3. Build the missing Services/Testimonials admin module in the CMS engine (`tools/build-workflows`) — this is the actual prerequisite for a "solid CMS connection" before fully connecting the site's content.
+4. **Anthony-only:** rotate the leaked `service_role` key; apply `security-fixes.sql` + enable leaked-password protection; re-point the `da-webwssite-build-workflows` Vercel project to `Digital-Allies/da-platform` (root `tools/build-workflows`).
+5. **The original Day 19/20 domain cutover is still the real end-state goal, just not yet — do after 1–4.** `BUILD-SCHEDULE.md` originally called for pointing `digitalallies.net` itself at the Next.js CMS engine (the "Templated" tier from decision #2) and retiring the separate static-site repo. Today's setup — static site + `cms-loader.js` pulling from Supabase — is the "Connected" tier working as designed, and it's live and fine, but it isn't the full cutover the 30-Day Run originally scoped. Revisit whether full cutover is still the goal once the admin module (step 3) exists; if so: add `digitalallies.net`/`www` to the `da-webwssite-build-workflows` Vercel project, update Supabase Auth Site URL + redirect URLs, verify magic-link login and the contact form on the real domain, confirm anon/draft RLS, then switch DNS.
+6. Backfill the Day-04 `ARCHITECTURE.md` at a convenient point.
 
 ## Only-Anthony dependencies (not decisions — just hands-on)
 

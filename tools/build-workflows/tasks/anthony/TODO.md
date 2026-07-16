@@ -4,11 +4,18 @@ Every item here needs a human in a dashboard, or a decision only you can make.
 Nothing in this list is code — it's clicks, pastes, and confirmations. Check
 items off as you go; agents will read this file to know what's still open.
 
-Update history: created 2026-07-09 by Claude Code.
+Update history: created 2026-07-09 by Claude Code. Reviewed 2026-07-16 —
+still accurate; added a scope note below and logged what's newly done.
 
 ---
 
 ## 🔴 Priority 1 — get Digital Allies' own site live for testing
+
+**Scope note (2026-07-16):** this is about the CMS *admin* engine
+(`da-webwssite-build-workflows`), not digitalallies.net. The marketing site
+is a separate Vercel project/GitHub repo, already live, and already
+Supabase-connected — see `STATUS.md`'s 2026-07-16 audit. This item is only
+about getting the admin dashboard itself deploying from the right repo.
 
 This unblocks the "connect my own website first" plan — deploy DA's tenant,
 log in, edit pages, post a blog, confirm everything works before touching
@@ -99,3 +106,11 @@ Reference for whenever we actually get here — not blocking anything now.
       name/color/avatar from each tenant's own settings.
 - ✅ Root-caused both "scary broken admin" incidents (stale dev server,
       stale Vercel deployment) — no code was lost.
+- ✅ (2026-07-16, Anthony) digitalallies.net's `services`/`testimonials`
+      Supabase rows fixed (were placeholder demo data) and the live
+      `index.html`'s duplicated-document bug fixed (was breaking the EN/ES
+      toggle site-wide). Verified live. Still open from that investigation:
+      no Services/Testimonials admin module exists yet (editing needs raw
+      SQL), and `cms-loader.js` builds cards via unescaped `innerHTML` —
+      both tracked in `STATUS.md`'s Next steps, not here (they're code
+      tasks, not dashboard/Anthony tasks).
