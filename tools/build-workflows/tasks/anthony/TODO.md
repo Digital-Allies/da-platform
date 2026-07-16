@@ -63,19 +63,24 @@ Atomic Finds.
 
 ## 🟠 Priority 3 — rotate the leaked service-role key
 
-Antigravity committed your Supabase **service_role key** (full database
+~~Antigravity committed your Supabase **service_role key** (full database
 bypass — not the safe public anon key) in plaintext inside
-`tools/build-workflows/tasks/antigravity/list_clients.js`. I already removed
-it from the file, but it's still sitting in git history on GitHub.
+`tools/build-workflows/tasks/antigravity/list_clients.js`.~~
 
-- [ ] Supabase dashboard → Project Settings → API → **Regenerate** the
-      `service_role` secret.
-- [ ] Update `SUPABASE_SERVICE_ROLE_KEY` everywhere it's used:
-      - `tools/build-workflows/.env.local` (local dev)
-      - Every Vercel project's Environment Variables that has this key set
-- [ ] Not urgent if this repo stays private and you trust everyone with
-      access — but it's a "do it before this repo is ever public or shared"
-      item.
+**✅ Done, 2026-07-16.** This turned out more urgent than this note assumed —
+`Digital-Allies/da-platform` was actually **public** on GitHub (not private,
+despite STATUS.md's decision #1), so the leaked key was exposed live, not
+just a future risk. Anthony:
+- Migrated to Supabase's new key system (Publishable + Secret keys) and
+  disabled the legacy `anon`/`service_role` pair, which kills the old
+  leaked key.
+- Updated the new Secret key in Vercel (auto-synced via the Supabase↔Vercel
+  integration on projects that have it connected) and in
+  `tools/build-workflows/.env.local`.
+- Made `Digital-Allies/da-platform` private.
+- Verified live: digitalallies.net renders correctly (Supabase-fed
+  Departments/testimonials sections, EN/ES toggle) with zero console
+  errors; the CMS admin engine's sign-in page loads clean.
 
 ---
 
