@@ -44,6 +44,26 @@ export interface Testimonial {
   created_at: string
 }
 
+export interface Product {
+  id: string
+  client_id: string
+  title: string
+  description: string | null
+  price: number | null
+  original_price: number | null
+  condition: string | null
+  location: string | null
+  listed_label: string | null
+  attributes: Record<string, string | number>
+  image_url: string | null
+  external_url: string
+  seller_name: string | null
+  seller_rating: string | null
+  display_order: number
+  created_at: string
+  updated_at: string
+}
+
 export interface TeamMember {
   id: string
   client_id: string
