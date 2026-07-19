@@ -54,7 +54,7 @@ export interface Product {
   condition: string | null
   location: string | null
   listed_label: string | null
-  attributes: Record<string, string | number>
+  attributes: Record<string, unknown>
   image_url: string | null
   external_url: string
   seller_name: string | null
