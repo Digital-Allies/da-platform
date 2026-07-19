@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
@@ -12,6 +12,18 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [linkError, setLinkError] = useState('')
+
+  useEffect(() => {
+    // Supabase reports an expired/invalid/already-used recovery link as
+    // #error=...&error_description=... in the URL hash, not a normal page
+    // load — surface that clearly instead of showing a dead-end form.
+    const hash = new URLSearchParams(window.location.hash.slice(1))
+    const description = hash.get('error_description')
+    if (description) {
+      setLinkError(description.replace(/\+/g, ' '))
+    }
+  }, [])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -96,13 +108,37 @@ export default function ResetPasswordPage() {
           </div>
 
           <h1 className="apage__title" style={{ fontSize: 22, marginBottom: 8, fontFamily: 'var(--font-headers)', fontWeight: 700, color: 'var(--charcoal)' }}>
-            Set Password
+            {linkError ? 'Link expired' : 'Set Password'}
           </h1>
           <p className="apage__sub" style={{ marginBottom: 32, fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-muted)', lineHeight: '1.5' }}>
-            {success ? 'Password updated. Redirecting to admin...' : 'Set a new password for your admin account.'}
+            {linkError
+              ? linkError
+              : success
+              ? 'Password updated. Redirecting to admin...'
+              : 'Set a new password for your admin account.'}
           </p>
 
-          {!success && (
+          {linkError && (
+            <Link
+              href="/admin/login"
+              className="abtn abtn--primary login-submit-btn"
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                padding: '12px 18px',
+                fontSize: 13,
+                fontFamily: 'var(--font-details)',
+                letterSpacing: '0.08em',
+                boxShadow: 'var(--shadow-sm)',
+                textDecoration: 'none',
+                display: 'flex',
+              }}
+            >
+              Request a new link
+            </Link>
+          )}
+
+          {!success && !linkError && (
             <form onSubmit={handleSubmit} className="editor-stack">
               <label className="afield">
                 <span className="afield__label" style={{ fontFamily: 'var(--font-details)', fontSize: 11, letterSpacing: '0.08em', fontWeight: 600 }}>

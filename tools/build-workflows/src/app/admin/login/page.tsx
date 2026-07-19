@@ -8,10 +8,12 @@ import { DEFAULT_SETTINGS } from '@/lib/types'
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const [mode, setMode] = useState<'signin' | 'reset'>('signin')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [resetSent, setResetSent] = useState(false)
   const [businessName, setBusinessName] = useState(DEFAULT_SETTINGS.site_title)
 
   useEffect(() => {
@@ -44,6 +46,26 @@ export default function AdminLoginPage() {
 
     router.push('/admin')
     router.refresh()
+  }
+
+  async function handleResetRequest(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    const supabase = createClient()
+    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/admin/reset-password`,
+    })
+
+    setLoading(false)
+
+    if (resetError) {
+      setError(resetError.message)
+      return
+    }
+
+    setResetSent(true)
   }
 
   return (
@@ -94,77 +116,185 @@ export default function AdminLoginPage() {
           </div>
 
           <h1 className="apage__title" style={{ fontSize: 22, marginBottom: 8, fontFamily: 'var(--font-headers)', fontWeight: 700, color: 'var(--charcoal)' }}>
-            Sign in
+            {mode === 'signin' ? 'Sign in' : 'Reset password'}
           </h1>
           <p className="apage__sub" style={{ marginBottom: 32, fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--text-muted)', lineHeight: '1.5' }}>
-            Access the client site admin panel.
+            {mode === 'signin'
+              ? 'Access the client site admin panel.'
+              : resetSent
+              ? `Check ${email} for a reset link.`
+              : "Enter your email and we'll send a reset link."}
           </p>
 
-          <form onSubmit={handleSubmit} className="editor-stack">
-            <label className="afield">
-              <span className="afield__label" style={{ fontFamily: 'var(--font-details)', fontSize: 11, letterSpacing: '0.08em', fontWeight: 600 }}>
-                Email
-              </span>
-              <input
-                type="email"
-                autoComplete="email"
-                required
-                className="ainput"
-                style={{ fontFamily: 'var(--font-body)', fontSize: 14 }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-            <label className="afield">
-              <span className="afield__label" style={{ fontFamily: 'var(--font-details)', fontSize: 11, letterSpacing: '0.08em', fontWeight: 600 }}>
-                Password
-              </span>
-              <input
-                type="password"
-                autoComplete="current-password"
-                required
-                className="ainput"
-                style={{ fontFamily: 'var(--font-body)', fontSize: 14 }}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
+          {mode === 'signin' ? (
+            <form onSubmit={handleSubmit} className="editor-stack">
+              <label className="afield">
+                <span className="afield__label" style={{ fontFamily: 'var(--font-details)', fontSize: 11, letterSpacing: '0.08em', fontWeight: 600 }}>
+                  Email
+                </span>
+                <input
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="ainput"
+                  style={{ fontFamily: 'var(--font-body)', fontSize: 14 }}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
+              <label className="afield">
+                <span className="afield__label" style={{ fontFamily: 'var(--font-details)', fontSize: 11, letterSpacing: '0.08em', fontWeight: 600 }}>
+                  Password
+                </span>
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="ainput"
+                  style={{ fontFamily: 'var(--font-body)', fontSize: 14 }}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
 
-            {error && (
-              <p
+              {error && (
+                <p
+                  style={{
+                    fontFamily: 'var(--font-details)',
+                    fontSize: 12,
+                    color: 'var(--signal)',
+                    border: '1px solid var(--signal)',
+                    backgroundColor: 'rgba(197, 48, 26, 0.04)',
+                    padding: '10px 14px',
+                    margin: '8px 0',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="abtn abtn--primary login-submit-btn"
                 style={{
+                  width: '100%',
+                  justifyContent: 'center',
+                  padding: '12px 18px',
+                  fontSize: 13,
                   fontFamily: 'var(--font-details)',
-                  fontSize: 12,
-                  color: 'var(--signal)',
-                  border: '1px solid var(--signal)',
-                  backgroundColor: 'rgba(197, 48, 26, 0.04)',
-                  padding: '10px 14px',
-                  margin: '8px 0',
-                  lineHeight: '1.5',
+                  letterSpacing: '0.08em',
+                  marginTop: 8,
+                  boxShadow: 'var(--shadow-sm)',
                 }}
               >
-                {error}
-              </p>
-            )}
+                {loading ? 'Signing in…' : 'Sign in'}
+              </button>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="abtn abtn--primary login-submit-btn"
-              style={{
-                width: '100%',
-                justifyContent: 'center',
-                padding: '12px 18px',
-                fontSize: 13,
-                fontFamily: 'var(--font-details)',
-                letterSpacing: '0.08em',
-                marginTop: 8,
-                boxShadow: 'var(--shadow-sm)',
-              }}
-            >
-              {loading ? 'Signing in…' : 'Sign in'}
-            </button>
-          </form>
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('reset')
+                  setError('')
+                  setResetSent(false)
+                }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  marginTop: 12,
+                  fontFamily: 'var(--font-details)',
+                  fontSize: 12,
+                  color: 'var(--text-soft)',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                Forgot password?
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleResetRequest} className="editor-stack">
+              {!resetSent && (
+                <label className="afield">
+                  <span className="afield__label" style={{ fontFamily: 'var(--font-details)', fontSize: 11, letterSpacing: '0.08em', fontWeight: 600 }}>
+                    Email
+                  </span>
+                  <input
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="ainput"
+                    style={{ fontFamily: 'var(--font-body)', fontSize: 14 }}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </label>
+              )}
+
+              {error && (
+                <p
+                  style={{
+                    fontFamily: 'var(--font-details)',
+                    fontSize: 12,
+                    color: 'var(--signal)',
+                    border: '1px solid var(--signal)',
+                    backgroundColor: 'rgba(197, 48, 26, 0.04)',
+                    padding: '10px 14px',
+                    margin: '8px 0',
+                    lineHeight: '1.5',
+                  }}
+                >
+                  {error}
+                </p>
+              )}
+
+              {!resetSent && (
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="abtn abtn--primary login-submit-btn"
+                  style={{
+                    width: '100%',
+                    justifyContent: 'center',
+                    padding: '12px 18px',
+                    fontSize: 13,
+                    fontFamily: 'var(--font-details)',
+                    letterSpacing: '0.08em',
+                    marginTop: 8,
+                    boxShadow: 'var(--shadow-sm)',
+                  }}
+                >
+                  {loading ? 'Sending…' : 'Send reset link'}
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  setMode('signin')
+                  setError('')
+                  setResetSent(false)
+                }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  marginTop: 12,
+                  fontFamily: 'var(--font-details)',
+                  fontSize: 12,
+                  color: 'var(--text-soft)',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                  alignSelf: 'flex-start',
+                }}
+              >
+                Back to sign in
+              </button>
+            </form>
+          )}
         </div>
 
         <p
