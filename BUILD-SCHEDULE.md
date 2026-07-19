@@ -72,16 +72,30 @@ hands-on external click only you can do (Supabase / Vercel / registrar).
 - **Done when —** a submission creates a row, emails you, shows in Command Center.
 
 ### Thu Jul 16 · Day 19 — Domain + DNS cutover (do early in the day)
-- **[Anthony]** Add `digitalallies.net` + `www` to Vercel; set A/CNAME at the
+**⚠ SUPERSEDED, see `STATUS.md`'s 2026-07-16/17 notes.** This assumed
+`digitalallies.net` itself would be cut over to point at the Next.js CMS
+engine. In reality `digitalallies.net` was already live the whole time on
+a separate repo/Vercel project (`Digital-Allies/DigitalAllies`, the
+"Connected" tier per decision #2) and never needed this cutover — what
+actually happened 2026-07-17 was standing up `cms.digitalallies.net` as a
+new subdomain for the *admin engine*, leaving digitalallies.net as-is.
+Whether the original full cutover (retiring the separate static-site repo)
+is still the goal is an open question — see STATUS.md's Next steps.
+- ~~**[Anthony]** Add `digitalallies.net` + `www` to Vercel; set A/CNAME at the
   registrar; update Supabase Auth Site URL + redirect URLs to the real domain.
-  Keep the old site reachable until HTTPS + magic-link verified.
-- **Done when —** https://digitalallies.net serves the new site; login still works.
+  Keep the old site reachable until HTTPS + magic-link verified.~~
+- ~~**Done when —** https://digitalallies.net serves the new site; login still works.~~
 
 ### Fri Jul 17 · Day 20 — Launch QA + cut over
-- **[Agent + Anthony]** Run the launch checklist (every page loads, contact form
+**⚠ Also superseded** — depended on the Day 19 cutover above, which didn't
+happen as originally scoped. The admin engine's Vercel repo connection and
+`security-fixes.sql` are still open regardless (see `STATUS.md` Major
+needs); the "Phase 1 shipped" framing here assumed a cutover that didn't
+occur this way.
+- ~~**[Agent + Anthony]** Run the launch checklist (every page loads, contact form
   end-to-end, login on the real domain, drafts hidden from anon, mobile holds,
-  Lighthouse reasonable). Clean prod deploy from `main`; tag `v1`.
-- **Done when —** the connected loop is live. **Phase 1 shipped.**
+  Lighthouse reasonable). Clean prod deploy from `main`; tag `v1`.~~
+- ~~**Done when —** the connected loop is live. **Phase 1 shipped.**~~
 
 ---
 

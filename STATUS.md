@@ -5,10 +5,66 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-16 — by Claude Code (full audit pass — see "2026-07-16
-audit" section below for what was verified vs. what was stale)
+**Last updated:** 2026-07-17 — by Claude Code (see "2026-07-17" section below;
+2026-07-16 audit section retained below it, still accurate)
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
+
+## 2026-07-17 — Atomic Finds catalog, Vercel/Supabase audit, tooling additions
+
+- **Atomic Finds product catalog started.** PR
+  [#1](https://github.com/Digital-Allies/da-platform/pull/1) adds a
+  `products` table (same client_id + RLS convention as
+  services/testimonials), a `getProducts()` data function, and seeds 4 real
+  listings from Jennyfer's (Atomic Finds owner) Facebook Marketplace
+  catalog — real data, not placeholders. Not merged/applied yet — the
+  migration + seed are files to review and run in the Supabase SQL editor,
+  nothing touches the live DB automatically. Still needed: a 5th product
+  (cut off mid-paste), real product photos (`image_url` is null for all
+  four on purpose), and the frontend catalog components (still being
+  designed). Full checklist: `tools/build-workflows/tasks/anthony/TODO.md`
+  Priority 5.
+- **Reality check on Atomic Finds, since it came up directly:** there is no
+  live Atomic Finds site. What exists in `sites/atomic-finds` is a design
+  system/component showcase, a few standalone prototypes (Galaxy Card,
+  scroll-hero experiments), and planning docs — not a built product site.
+  **Treat the "v3 layered rebuild — APPROVED" note and the Celestial Scroll
+  Hero write-up further down this file with caution** — when asked
+  directly, Anthony did not recognize those as things he'd signed off on.
+  Don't take "APPROVED"/"CONFIRMED" language elsewhere in this file at face
+  value going forward; confirm with Anthony before treating a past
+  session's characterization of a decision as settled.
+- **Read-only Vercel/Supabase audit (Claude in Chrome) found real gaps** —
+  full list + exact fix steps in `TODO.md` Priority 4. Highlights:
+  `da-webwssite-build-workflows` is missing `NEXT_PUBLIC_SITE_URL` entirely;
+  `healthcare-training-center`'s Supabase keys are manually-pasted, not
+  integration-managed; two duplicate Supabase key pairs exist
+  ("default" + "supabase_anon_new"/"supabase_service_role_new"); new
+  per-site Resend keys (generated after the shared one was flagged
+  compromised) exist only in local `.env.local`, not in Vercel yet.
+- **Standing constraint, not a bug:** we're on free-tier Vercel/Supabase.
+  Vercel's Supabase integration caps out at 2 connected projects, already
+  used. Any additional Vercel project (HCTC now, Atomic Finds once it gets
+  one) needs its Supabase keys pasted in by hand, and **every future key
+  rotation has to be manually repeated on those non-integration-managed
+  projects** — they won't self-update. Checklist is in `TODO.md` Priority 4.
+  Resolves itself once there's revenue to justify the paid tier; not worth
+  re-architecting around in the meantime.
+- **`cms.digitalallies.net` domain connection in progress** (Anthony,
+  2026-07-17) — steps in `TODO.md` Priority 4.
+- **Greptile added for code review** (Anthony, 2026-07-17) —
+  `https://app.greptile.com/digital-allies/`. Review findings on this repo
+  now come through Greptile directly to the agent, in addition to whatever
+  review happens in-session.
+- **Clarified: da-platform's `sites/` folders are sometimes used for
+  general storage, not only build source** — e.g. the
+  `healthcare-training-center/review/Caladrius Brand Review - Standalone.html`
+  file flagged as a mystery on 2026-07-16 was intentional (Anthony). Don't
+  treat every unexpected file in a site folder as a bug — the actual
+  stray-file problem this file has tracked (loose numbered downloads
+  dumped at a project's *root*, e.g. the `magical-village-assets (N).png`
+  pattern found in other projects) is a different, narrower thing than
+  Anthony deliberately parking a reference doc in a subfolder.
 
 ## 2026-07-16 audit — what changed since Jul 9
 
@@ -79,7 +135,11 @@ noticing digitalallies.net was serving placeholder Supabase content. Findings:
   design-system package ships Recoleta/Bromello. Component consumes the token vars
   w/ fallbacks so it renders either way, but the brand needs one source of truth.
 
-### v3 layered rebuild — APPROVED, IN PROGRESS (resume here)
+### v3 layered rebuild — status disputed, see 2026-07-17 note above
+**⚠ 2026-07-17: Anthony did not recognize this as something he'd approved
+when asked directly — do not resume this plan as-is without checking with
+him first.** Leaving the original write-up below for reference only.
+
 The user decided v2's flat full-bleed photos lost the "she's moving THROUGH the
 clouds" feeling, and approved a **v3 layered rebuild**: character cutout +
 multi-rate cloud parallax + foreground wisps that partially occlude her +
@@ -136,6 +196,11 @@ independently-animated constellation disc + dozens of AI in-between frames.
    **archive/backup only — do not commit to them.** Originals also sit in
    `../archive/pre-monorepo/`. Rationale: the multi-tenant model needs one shared
    codebase, not one repo per site.  **Confirmed by Anthony 2026-07-06.**
+   (**Caveat, 2026-07-16:** this decision's "private" framing was wrong in
+   practice — the repo was actually public on GitHub until fixed that day.
+   Verify security-sensitive claims like this against the live GitHub
+   settings rather than trusting this file, which is exactly how that drift
+   went unnoticed.)
 2. **The model = one Platform, three faces per client.** Build the engine once;
    each client is configured, not rebuilt. Faces: **Admin** (their login +
    workspace), **Brand** (their tokens), **Website** (their pages). The Website
@@ -229,11 +294,18 @@ independently-animated constellation disc + dozens of AI in-between frames.
 
 ## Major needs / known issues (prioritized)
 
-1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. (Anthony Dependency)
+**Status unknown as of 2026-07-17 — needs confirming, not assumed done:**
+whether `security-fixes.sql` has been applied, whether leaked-password
+protection is on, and whether the CMS admin engine's Vercel Git connection
+has actually been re-pointed to the monorepo. All three were open as of
+2026-07-16 and haven't been explicitly confirmed since.
+
+1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. Also directly confirmed by Supabase's own Security Advisor (2026-07-17 audit: 6 warnings, including the exact RLS/`SECURITY DEFINER` issues this file fixes). (Anthony Dependency)
 2. ~~Rotate the leaked Supabase `service_role` key~~ — **done 2026-07-16.** Turned out more urgent than previously documented: `Digital-Allies/da-platform` was actually **public** on GitHub (STATUS.md's own decision #1 wrongly assumed private), so the leaked key was live-exposed, not a future risk. Anthony migrated to Supabase's new Publishable/Secret key system, disabled legacy keys (killing the old leaked one), updated the new Secret key in Vercel + `.env.local`, and made the repo private. Verified live: digitalallies.net and the CMS admin engine both work cleanly post-rotation.
-3. **Re-point the CMS admin engine's Vercel project at the monorepo** — `da-webwssite-build-workflows.vercel.app` still deploys from the old repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform` (root `tools/build-workflows`). Do before shipping further changes to the admin app. This is **only** the CMS admin app — digitalallies.net is a separate, already-correct Vercel project (see 2026-07-16 audit). (Anthony Dependency)
+3. **Re-point the CMS admin engine's Vercel project at the monorepo** — `da-webwssite-build-workflows.vercel.app` still deploys from the old repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform` (root `tools/build-workflows`), **as of the last confirmation (2026-07-16) — not re-checked since.** This is **only** the CMS admin app — digitalallies.net is a separate, already-correct Vercel project (see 2026-07-16 audit). (Anthony Dependency)
 4. **Build the missing Services/Testimonials admin module** in the CMS engine so digitalallies.net's content can be edited without hand-written SQL — the actual prerequisite for "fully connecting" that site the way it should work long-term.
 5. **Escape HTML in `cms-loader.js`'s card-building code** before the above module ships (currently raw `innerHTML`, an injection risk once non-developers can enter content).
+6. **2026-07-17 Vercel/Supabase audit fixes + Atomic Finds onboarding** — full checklist in `TODO.md` Priorities 4–5, not duplicated here.
 
 ## Next steps (in order)
 
