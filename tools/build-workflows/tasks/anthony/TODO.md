@@ -11,51 +11,51 @@ still accurate; added a scope note below and logged what's newly done.
 
 ## 🔴 Priority 1 — get Digital Allies' own site live for testing
 
-**⚠ 2026-07-19: confirmed this is now actively blocking, not just a loose
-end.** Admin login is broken (`/admin/login` redirects away to a generic
-placeholder homepage instead of rendering) and the site shows "My
-Business"/"Welcome" fallback content instead of DA's real seeded settings.
-Root cause, confirmed by testing: this deployment is still building from
-the old disconnected repo (`cassellac/da-webwssite-build-workflows`), not
-`Digital-Allies/da-platform` — so it's running stale code (missing a
-routing fix that already exists in the monorepo) and very possibly stale
-Supabase key values baked into its last build (env var changes need a
-fresh deploy to take effect, and this project hasn't redeployed since the
-key rotation). **Doing the re-point + redeploy below is expected to fix
-both the login redirect and the placeholder-content issue in one shot —
-try that first before assuming a new code bug.**
+- [x] **Re-point the `da-webwssite-build-workflows` Vercel project to the
+      monorepo.** Confirmed done — the project's Connected Git Repository
+      has shown `Digital-Allies/da-platform` since Jul 10 (Anthony
+      confirmed via screenshot 2026-07-19), and deployment history shows
+      it's been auto-deploying successfully on every push since. **Earlier
+      notes in this file claiming the repo re-point was still open, or
+      that it explained a login redirect bug, were wrong — corrected here
+      2026-07-19.** Root Directory should still be double-checked is set
+      to `tools/build-workflows` in Settings → General, but the Git
+      connection itself is right.
+
+**⚠ The actual admin-login bug, confirmed 2026-07-19 by submitting the
+live form (not just loading the page):** it returned a real Supabase
+error, **"Legacy API keys are disabled."** The client-side
+`NEXT_PUBLIC_SUPABASE_ANON_KEY` (and `SUPABASE_SERVICE_ROLE_KEY`) baked
+into this deployment were still legacy-format keys — the Vercel↔Supabase
+integration's badge being present didn't mean it had actually re-synced
+after legacy keys got disabled. **Fixed by Anthony (2026-07-19):**
+manually updated both to the current Publishable/Secret key values.
+**Still needed: a fresh deployment** — `NEXT_PUBLIC_`-prefixed vars are
+baked in at build time, so the corrected values won't take effect until
+the next deploy. A docs-only commit was pushed right after this fix
+specifically to trigger one; check `/admin/login` again once that
+deployment shows READY.
+
+**Also confirmed while checking this (2026-07-19):** `NEXT_PUBLIC_SUPABASE_URL`,
+`CONTACT_FORM_TO_EMAIL`, `RESEND_API_KEY`, and `NEXT_PUBLIC_CLIENT_ID` on
+this project are **manually-entered, not integration-synced** — no amount
+of pushing to the repo updates them; Vercel env vars have zero connection
+to the repo's `.env.local` (which is gitignored and which Vercel wouldn't
+read from anyway even if it weren't). `RESEND_API_KEY` here is known stale
+(needs the new key, tracked in Priority 4). The other three are probably
+still correct but unverified.
 
 **Scope note (2026-07-16):** this is about the CMS *admin* engine
 (`da-webwssite-build-workflows`), not digitalallies.net. The marketing site
 is a separate Vercel project/GitHub repo, already live, and already
-Supabase-connected — see `STATUS.md`'s 2026-07-16 audit. This item is only
-about getting the admin dashboard itself deploying from the right repo.
+Supabase-connected — see `STATUS.md`'s 2026-07-16 audit.
 
-This unblocks the "connect my own website first" plan — deploy DA's tenant,
-log in, edit pages, post a blog, confirm everything works before touching
-Atomic Finds.
-
-- [ ] **Re-point the `da-webwssite-build-workflows` Vercel project to the monorepo.**
-  1. Go to [vercel.com](https://vercel.com) → team **Digital Allies** → project
-     `da-webwssite-build-workflows`.
-  2. Settings → Git → **Disconnect** the current repo
-     (`cassellac/da-webwssite-build-workflows`).
-  3. **Connect** a new repo → `Digital-Allies/da-platform`.
-  4. Settings → General → **Root Directory** → set to `tools/build-workflows`.
-  5. Leave all existing Environment Variables as-is — they're already correct
-     for this project.
-  6. Trigger a redeploy (Deployments tab → ⋯ on latest → Redeploy, or just
-     push any commit to `main`).
-  7. Once it's built, open the deployment URL → `/admin` → log in → confirm
-     it matches what you see locally.
-
-- [ ] **Test the full admin loop on that live URL:**
-  - [ ] Log in.
+- [ ] **Test the full admin loop once the fresh deployment is live:**
+  - [ ] Log in with a real password.
   - [ ] Edit a page in `/admin/pages`.
   - [ ] Post a blog entry in `/admin/content` ("The Press Office").
-  - [ ] Click "View live site" and confirm it shows the styled, current site
-        (not the old unstyled version — that was the stale deployment, this
-        should be fixed once step above is done).
+  - [ ] Click "View live site" and confirm it shows real DA content, not
+        the generic "My Business"/"Welcome" fallback.
 
 ---
 

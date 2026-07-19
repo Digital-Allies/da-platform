@@ -10,25 +10,42 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
 
-## 2026-07-19 — admin login confirmed broken, root cause found
+## 2026-07-19 — admin login: real bug found, after a wrong first guess
 
-Anthony reported `/admin/login` redirecting away to a generic placeholder
-homepage, and the CMS admin engine's Vercel project still not re-pointed to
-the monorepo. Investigated directly rather than assuming the cause:
+Anthony reported `/admin/login` broken and the Vercel project possibly not
+re-pointed to the monorepo. **First pass got it wrong — corrected here
+rather than left standing:** claimed the Vercel Git connection was still on
+the old disconnected repo and that this explained a "redirect away from
+/admin/login." Neither held up. Anthony's own screenshot plus Vercel's
+deployment history show the project has been correctly connected to
+`Digital-Allies/da-platform` since Jul 10, auto-deploying successfully ever
+since. The "redirect" was a misread of a browser tool's output (it reports
+tab origin, not full path) — the login page was rendering the whole time.
+Lesson: verify by reading the actual page/response, not by trusting a
+tool's summary line.
+
+**The real bug, found by actually submitting the live form:** it returned
+a genuine Supabase error, **"Legacy API keys are disabled."** The anon/
+service-role key values baked into this deployment were still legacy-
+format, despite the Vercel↔Supabase integration badge being present on
+those variables — the integration hadn't actually re-synced after legacy
+keys got disabled. **Fixed by Anthony:** manually updated both to current
+Publishable/Secret values. Still needs a fresh deployment to take effect
+(`NEXT_PUBLIC_` vars bake in at build time) — pushing this correction
+itself triggers one; re-test after.
+
+**Also surfaced:** `NEXT_PUBLIC_SUPABASE_URL`, `CONTACT_FORM_TO_EMAIL`,
+`RESEND_API_KEY`, `NEXT_PUBLIC_CLIENT_ID` on this project are manually-
+entered, not integration-synced — and, worth being explicit about since it
+came up directly: **Vercel env vars have no connection whatsoever to the
+repo's `.env.local`.** Pushing commits never syncs them; `.env.local` is
+gitignored and Vercel wouldn't read it for its own config even if it
+weren't. Full detail in `TODO.md` Priority 1.
+
 - **`cms.digitalallies.net`'s root now redirects to `/admin/login`** instead
   of showing the generic "My Business"/"Welcome" fallback — fixed in code,
   scoped to that hostname only (verified locally against a spoofed `Host`
-  header), pushed to `main`.
-- **The actual `/admin/login` redirect-away bug + the generic fallback
-  content are very likely both explained by the same still-open root
-  cause:** `da-webwssite-build-workflows` is still building from the old
-  disconnected repo, not this monorepo — confirmed by testing that the
-  live site's behavior doesn't match what the current middleware/data code
-  actually does (the exclusion logic for `/admin/login` already exists
-  here and works correctly in local testing). Re-pointing the Vercel Git
-  connection (Major need #3 / `TODO.md` Priority 1, open since 2026-07-16)
-  is expected to fix login and the placeholder content in one shot — see
-  `TODO.md` for why, in detail.
+  header), pushed to `main`. This part of the diagnosis was correct.
 - **Backlog idea captured, not scheduled:** per-site document storage in
   the admin (contracts/invoices/client uploads) — see `TODO.md`'s new
   Backlog section.
@@ -325,7 +342,7 @@ has actually been re-pointed to the monorepo. All three were open as of
 
 1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. Also directly confirmed by Supabase's own Security Advisor (2026-07-17 audit: 6 warnings, including the exact RLS/`SECURITY DEFINER` issues this file fixes). (Anthony Dependency)
 2. ~~Rotate the leaked Supabase `service_role` key~~ — **done 2026-07-16.** Turned out more urgent than previously documented: `Digital-Allies/da-platform` was actually **public** on GitHub (STATUS.md's own decision #1 wrongly assumed private), so the leaked key was live-exposed, not a future risk. Anthony migrated to Supabase's new Publishable/Secret key system, disabled legacy keys (killing the old leaked one), updated the new Secret key in Vercel + `.env.local`, and made the repo private. Verified live: digitalallies.net and the CMS admin engine both work cleanly post-rotation.
-3. **Re-point the CMS admin engine's Vercel project at the monorepo** — `da-webwssite-build-workflows.vercel.app` still deploys from the old repo `cassellac/da-webwssite-build-workflows`, not `Digital-Allies/da-platform` (root `tools/build-workflows`), **as of the last confirmation (2026-07-16) — not re-checked since.** This is **only** the CMS admin app — digitalallies.net is a separate, already-correct Vercel project (see 2026-07-16 audit). (Anthony Dependency)
+3. ~~Re-point the CMS admin engine's Vercel project at the monorepo~~ — **confirmed done, 2026-07-19** (connected to `Digital-Allies/da-platform` since Jul 10, per Anthony's screenshot + Vercel deployment history — earlier claims in this file that it was still on the old repo were wrong, corrected). This is **only** the CMS admin app — digitalallies.net is a separate, already-correct Vercel project (see 2026-07-16 audit).
 4. **Build the missing Services/Testimonials admin module** in the CMS engine so digitalallies.net's content can be edited without hand-written SQL — the actual prerequisite for "fully connecting" that site the way it should work long-term.
 5. **Escape HTML in `cms-loader.js`'s card-building code** before the above module ships (currently raw `innerHTML`, an injection risk once non-developers can enter content).
 6. **2026-07-17 Vercel/Supabase audit fixes + Atomic Finds onboarding** — full checklist in `TODO.md` Priorities 4–5, not duplicated here.
