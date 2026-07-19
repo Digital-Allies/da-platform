@@ -11,6 +11,20 @@ still accurate; added a scope note below and logged what's newly done.
 
 ## 🔴 Priority 1 — get Digital Allies' own site live for testing
 
+**⚠ 2026-07-19: confirmed this is now actively blocking, not just a loose
+end.** Admin login is broken (`/admin/login` redirects away to a generic
+placeholder homepage instead of rendering) and the site shows "My
+Business"/"Welcome" fallback content instead of DA's real seeded settings.
+Root cause, confirmed by testing: this deployment is still building from
+the old disconnected repo (`cassellac/da-webwssite-build-workflows`), not
+`Digital-Allies/da-platform` — so it's running stale code (missing a
+routing fix that already exists in the monorepo) and very possibly stale
+Supabase key values baked into its last build (env var changes need a
+fresh deploy to take effect, and this project hasn't redeployed since the
+key rotation). **Doing the re-point + redeploy below is expected to fix
+both the login redirect and the placeholder-content issue in one shot —
+try that first before assuming a new code bug.**
+
 **Scope note (2026-07-16):** this is about the CMS *admin* engine
 (`da-webwssite-build-workflows`), not digitalallies.net. The marketing site
 is a separate Vercel project/GitHub repo, already live, and already
@@ -148,6 +162,20 @@ Not urgent, just noted: `healthcare-training-center`'s `NEXT_PUBLIC_SITE_URL`
 currently points at its default `.vercel.app` URL, not a custom domain —
 fine for now, revisit whenever HCTC gets a real domain.
 
+- [x] **`cms.digitalallies.net` root redirect** — done in code (2026-07-19):
+      hitting the bare domain now redirects to `/admin/login` instead of
+      showing the generic placeholder homepage, since there's no real
+      content to show there yet. Scoped to that hostname only, verified
+      locally against a spoofed Host header — won't affect any other
+      tenant's own site.
+- **Note on "and cms.digitalallies.net/login":** only `/admin/login` exists
+  in the codebase — there's no separate `/login` route. If a distinct
+  client-facing login (as opposed to `/admin/login`) is actually wanted,
+  that needs to be built; for now the redirect only targets `/admin/login`.
+- [ ] **Domain connection itself** (Vercel Settings → Domains, Cloudflare
+      CNAME, Supabase redirect URLs) is in progress as of 2026-07-19 — same
+      steps as before, not repeated here.
+
 **Also surfaced by the audit, ties into Priority 2 above:** Supabase's own
 Security Advisor currently shows 0 errors, 6 warnings, 1 suggestion —
 overly permissive RLS policies, two `SECURITY DEFINER` functions callable
@@ -195,6 +223,18 @@ and backend groundwork has started — this is no longer blocked/deferred.
       too.
 
 ---
+
+## ⚪ Backlog — future features (not scheduled, just captured)
+
+- **Per-site document storage in the admin.** Anthony wants a dedicated
+  storage area inside each tenant's admin panel — not just for content
+  clients upload themselves, but also for documents *Anthony* adds per
+  client (contracts, invoices, etc.), accessible to both sides. Noted
+  2026-07-19, explicitly deferred: naming conventions and scope are a task
+  for later, not now. When this gets picked up, it'll need its own design
+  pass (storage backend — likely Supabase Storage, bucketed per
+  `client_id` — plus an admin UI section and access rules for who can see
+  what).
 
 ## Done / resolved this session (for reference, not action items)
 
