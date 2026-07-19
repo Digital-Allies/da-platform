@@ -27,6 +27,16 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   const { pathname } = request.nextUrl
 
+  // cms.digitalallies.net's root has no real homepage to show yet — send it
+  // straight to the admin login instead of the generic fallback template.
+  // Scoped to this hostname only so it never affects a client's own site.
+  const host = request.headers.get('host') ?? ''
+  if (pathname === '/' && host.startsWith('cms.digitalallies.net')) {
+    const loginUrl = request.nextUrl.clone()
+    loginUrl.pathname = '/admin/login'
+    return NextResponse.redirect(loginUrl)
+  }
+
   // Only protect /admin pages that are NOT the login page.
   // When redirecting, copy Supabase session cookies so the token state
   // survives the redirect — without this, the redirect response drops the
@@ -47,5 +57,5 @@ export async function middleware(request: NextRequest) {
 export const config = {
   // Exclude /admin/login from middleware entirely so it always renders.
   // The login page handles post-auth redirect itself.
-  matcher: ['/admin', '/admin/((?!login$).+)'],
+  matcher: ['/', '/admin', '/admin/((?!login$).+)'],
 }
