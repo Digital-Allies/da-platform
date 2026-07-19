@@ -92,22 +92,35 @@ gaps. None of these are code — there's no tool that can write Vercel env
 vars or touch Supabase's dashboard directly, so every item here is
 genuinely a dashboard click, not something that can be done from the repo.
 
+**Standing constraint (2026-07-17, confirmed by Anthony — not a bug):**
+we're on free-tier Vercel/Supabase, and Vercel's native Supabase
+integration only supports 2 connected projects on that tier — already
+used up. This is a budget decision, not an oversight, and Anthony's plan
+is to upgrade once there's paying-customer revenue, at which point this
+whole section becomes moot. Until then: **any Vercel project beyond the
+first 2 must have its Supabase keys pasted in by hand, and — this is the
+part that actually matters — every future key rotation has to be repeated
+manually on those same projects, since they don't auto-sync.** Right now
+that's `healthcare-training-center`; the moment Atomic Finds gets its own
+Vercel project (Priority 5), it joins this list too. Don't try to "fix"
+this by connecting the integration there — it can't be, at this tier.
+**Checklist for next time ANY Supabase key gets rotated:** manually update
+`NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` in
+`healthcare-training-center` (and, once it exists, Atomic Finds' project)
+— `da-webwssite-build-workflows` alone will update itself.
+
 - [ ] **Add `NEXT_PUBLIC_SITE_URL` to `da-webwssite-build-workflows`** — it
       doesn't exist in this project at all right now. Settings →
       Environment Variables → Add → Name `NEXT_PUBLIC_SITE_URL`, Value
       `https://da-webwssite-build-workflows.vercel.app` for now (update to
       `https://cms.digitalallies.net` once that domain is connected, below).
-- [ ] **Refresh `healthcare-training-center`'s Supabase keys.** Its
-      `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` were
-      added by hand (no Supabase-integration badge on those two rows,
-      unlike `da-webwssite-build-workflows` where the integration manages
-      them automatically) — so they won't auto-update on future key
-      rotations, and it's worth confirming they hold the *current*
-      Publishable/Secret key values right now. Supabase dashboard →
-      Project Settings → API Keys → copy the current Publishable key value
-      → paste into this project's `NEXT_PUBLIC_SUPABASE_ANON_KEY`; copy the
-      current Secret key value → paste into `SUPABASE_SERVICE_ROLE_KEY`.
-      Redeploy after.
+- [ ] **Confirm `healthcare-training-center`'s Supabase keys are current.**
+      They're manually-pasted by necessity (see constraint above, not a
+      mistake) — just confirm they hold today's actual Publishable/Secret
+      key values. Supabase dashboard → Project Settings → API Keys → copy
+      the current Publishable key value → paste into this project's
+      `NEXT_PUBLIC_SUPABASE_ANON_KEY`; copy the current Secret key value →
+      paste into `SUPABASE_SERVICE_ROLE_KEY`. Redeploy after.
 - [ ] **Clean up duplicate Supabase keys.** There are two Publishable/Secret
       key pairs in the Supabase project — one named "default," one named
       "supabase_anon_new"/"supabase_service_role_new" (the ones actually in
