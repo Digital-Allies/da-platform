@@ -22,19 +22,22 @@ still accurate; added a scope note below and logged what's newly done.
       to `tools/build-workflows` in Settings → General, but the Git
       connection itself is right.
 
-**⚠ The actual admin-login bug, confirmed 2026-07-19 by submitting the
-live form (not just loading the page):** it returned a real Supabase
-error, **"Legacy API keys are disabled."** The client-side
+**✅ Admin login fixed and verified, 2026-07-19.** Root cause: it returned
+a real Supabase error, **"Legacy API keys are disabled"** — the client-side
 `NEXT_PUBLIC_SUPABASE_ANON_KEY` (and `SUPABASE_SERVICE_ROLE_KEY`) baked
-into this deployment were still legacy-format keys — the Vercel↔Supabase
-integration's badge being present didn't mean it had actually re-synced
-after legacy keys got disabled. **Fixed by Anthony (2026-07-19):**
-manually updated both to the current Publishable/Secret key values.
-**Still needed: a fresh deployment** — `NEXT_PUBLIC_`-prefixed vars are
-baked in at build time, so the corrected values won't take effect until
-the next deploy. A docs-only commit was pushed right after this fix
-specifically to trigger one; check `/admin/login` again once that
-deployment shows READY.
+into this deployment were still legacy-format keys, despite the
+Vercel↔Supabase integration badge being present (the badge doesn't mean it
+auto-resyncs on every downstream Supabase change). Anthony manually
+updated both to the current Publishable/Secret values, then a fresh
+deployment was triggered and confirmed READY. **Verified by actually
+submitting the live login form with a deliberately wrong password**: the
+error changed from "Legacy API keys are disabled" to "Invalid login
+credentials" — the correct response from a working auth system, not proof
+of a working password, but proof the key rejection is gone. Also
+confirmed in the same test: the login page now shows "DIGITAL ALLIES" as
+the business name (was showing the generic fallback before), and
+`cms.digitalallies.net` is now a live alias on this deployment — the
+domain connection completed successfully too.
 
 **Also confirmed while checking this (2026-07-19):** `NEXT_PUBLIC_SUPABASE_URL`,
 `CONTACT_FORM_TO_EMAIL`, `RESEND_API_KEY`, and `NEXT_PUBLIC_CLIENT_ID` on

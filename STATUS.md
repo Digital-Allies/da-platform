@@ -30,9 +30,17 @@ service-role key values baked into this deployment were still legacy-
 format, despite the Vercel↔Supabase integration badge being present on
 those variables — the integration hadn't actually re-synced after legacy
 keys got disabled. **Fixed by Anthony:** manually updated both to current
-Publishable/Secret values. Still needs a fresh deployment to take effect
-(`NEXT_PUBLIC_` vars bake in at build time) — pushing this correction
-itself triggers one; re-test after.
+Publishable/Secret values.
+
+**✅ Verified fixed, same session:** the docs-correction commit triggered
+a fresh deployment; once it showed READY, re-submitted the live login form
+with a deliberately wrong password. The error changed from "Legacy API
+keys are disabled" to "Invalid login credentials" — the correct behavior
+of a working auth system, confirming the key fix actually took effect.
+Also confirmed in that same test: the login page now shows "DIGITAL
+ALLIES" instead of the generic fallback business name, and
+`cms.digitalallies.net` is now a live alias on this deployment — the
+domain connection Anthony was setting up completed successfully.
 
 **Also surfaced:** `NEXT_PUBLIC_SUPABASE_URL`, `CONTACT_FORM_TO_EMAIL`,
 `RESEND_API_KEY`, `NEXT_PUBLIC_CLIENT_ID` on this project are manually-
