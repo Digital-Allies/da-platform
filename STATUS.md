@@ -12,26 +12,38 @@ Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fo
 
 ## 2026-07-19 — admin login: real bug found, after a wrong first guess
 
-**Still open: Anthony can't actually log in yet.** His password itself
-doesn't work (separate from the key-rejection bug below), and there was no
-working reset path — no "Forgot password?" trigger existed anywhere in the
-app, so a reset attempted via Supabase's dashboard used its generic Site
-URL and dumped him on the bare homepage with an `otp_expired` error
-instead of the reset form. Built and deployed a proper flow: the login
-page now has a working "Forgot password?" link, and the reset page detects
-an expired/invalid link and offers "Request a new link" instead of a
-dead-end. Not yet end-to-end tested with a real account — Anthony still
-needs to actually use it to regain access.
+**✅ Login confirmed working, no reset needed after all** — Anthony logged
+in fine on both domains shortly after. The password reset flow built above
+is still a real, permanent gap-fill (there genuinely was no way to trigger
+one before), just turned out not to be needed in the moment.
 
-**Also still open, raised in the same message:** Anthony said `/admin`
-looked like "the malformed unformatted placeholder" instead of the
-dashboard he built. Unconfirmed whether that's the actual protected
-`/admin` route regressing, or just him landing on the public homepage via
-the broken reset link — the admin route code
-(Content/Development/Messages/Pages/Posts/Projects/Research/Services/
-Settings/Testimonials) all still exists in this repo, so nothing looks
-deleted, but this needs checking once login actually works, not assumed
-either way.
+**"Malformed placeholder" mystery resolved — not a regression.** Checked
+Vercel Toolbar comments on the admin deployment: 10 comments, all posted by
+Anthony (`cassellac`) **~23 days before this entry** (i.e. well before the
+Jul 10 monorepo switch), 3 marked resolved and 7 still open. These are
+Anthony's own notes that large parts of the admin dashboard were
+placeholder/unfinished from early on — nothing was lost or regressed in
+the repo switch, it's the same known gaps, still open:
+
+- `/admin` (Dashboard): ~~"dashboard is not wired to real data"~~,
+  ~~"fake numbers"~~ — both resolved.
+- `/admin/development` ("The Workshop"): **open** — "doesn't work needs
+  templates"; "cms needs to be connected to actual site - digitalallies.net";
+  "real notifications need to be [built]"; "there is no login/out button."
+- `/admin/projects`: **open** — "doesn't work and need to build actual
+  project templates."
+- `/admin/content` ("The Press Office"): **open** — "needs to include
+  templates for all category tabs as well as connect to the primary site
+  for posting in the same format as the digitalallies.net/learn/ page
+  articles."
+- `/admin/pages`: **open** — "this build isn't meant for production — new
+  pages should offer a code option with live preview and use actual
+  components for elements, sections, cards, etc."
+- `/admin/research`: ~~"doesn't work needs templates"~~ — resolved.
+
+**These are real code tasks, not Anthony-dashboard clicks** — belongs here
+in STATUS.md's backlog, not `TODO.md`. Not started; needs prioritization
+before picking any of these up (see Next steps).
 
 Anthony reported `/admin/login` broken and the Vercel project possibly not
 re-pointed to the monorepo. **First pass got it wrong — corrected here
