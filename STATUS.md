@@ -5,12 +5,33 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-17 — by Claude Code (see "2026-07-17" section below;
-2026-07-16 audit section retained below it, still accurate)
+**Last updated:** 2026-07-19 — by Claude Code (password reset flow added;
+see top of "2026-07-19" section below)
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
 
 ## 2026-07-19 — admin login: real bug found, after a wrong first guess
+
+**Still open: Anthony can't actually log in yet.** His password itself
+doesn't work (separate from the key-rejection bug below), and there was no
+working reset path — no "Forgot password?" trigger existed anywhere in the
+app, so a reset attempted via Supabase's dashboard used its generic Site
+URL and dumped him on the bare homepage with an `otp_expired` error
+instead of the reset form. Built and deployed a proper flow: the login
+page now has a working "Forgot password?" link, and the reset page detects
+an expired/invalid link and offers "Request a new link" instead of a
+dead-end. Not yet end-to-end tested with a real account — Anthony still
+needs to actually use it to regain access.
+
+**Also still open, raised in the same message:** Anthony said `/admin`
+looked like "the malformed unformatted placeholder" instead of the
+dashboard he built. Unconfirmed whether that's the actual protected
+`/admin` route regressing, or just him landing on the public homepage via
+the broken reset link — the admin route code
+(Content/Development/Messages/Pages/Posts/Projects/Research/Services/
+Settings/Testimonials) all still exists in this repo, so nothing looks
+deleted, but this needs checking once login actually works, not assumed
+either way.
 
 Anthony reported `/admin/login` broken and the Vercel project possibly not
 re-pointed to the monorepo. **First pass got it wrong — corrected here

@@ -48,6 +48,33 @@ read from anyway even if it weren't). `RESEND_API_KEY` here is known stale
 (needs the new key, tracked in Priority 4). The other three are probably
 still correct but unverified.
 
+**⚠ Still can't actually log in — Anthony's password itself doesn't work
+(separate issue from the key rejection above), and there was no working
+password-reset path.** Confirmed the app had no "Forgot password?"
+trigger anywhere — the `/admin/reset-password` page existed, but nothing
+called `resetPasswordForEmail()` with a correct `redirectTo`, so any reset
+attempt (e.g. one triggered manually from Supabase's own dashboard) used
+Supabase's generic Site URL and landed on the bare homepage with an
+`otp_expired`/`access_denied` error instead of the reset form — exactly
+what Anthony hit. **Fixed and deployed, 2026-07-19:** login page now has a
+"Forgot password?" link that calls `resetPasswordForEmail` with the right
+redirect; the reset page itself now detects an expired/invalid link and
+shows "Request a new link" instead of a dead-end form.
+
+- [ ] **Use the new "Forgot password?" link** at
+      `da-webwssite-build-workflows.vercel.app/admin/login` (or
+      `cms.digitalallies.net/admin/login`) to actually regain access —
+      confirmed live in code, but the end-to-end email-to-login loop with
+      a real password hasn't been tested with a real account yet.
+- [ ] Once back in, check whether `/admin` shows the dashboard you built
+      (Content/Development/Messages/Pages/Posts/Projects/Research/Services/
+      Settings/Testimonials sections all exist in this repo's code — see
+      `src/app/admin/(protected)/`) or something else. Anthony flagged it
+      looked like "the malformed unformatted placeholder" instead of the
+      real dashboard — unconfirmed whether that meant the actual protected
+      `/admin` route, or just the public homepage he landed on via the
+      broken reset link. Needs checking once login actually works.
+
 **Scope note (2026-07-16):** this is about the CMS *admin* engine
 (`da-webwssite-build-workflows`), not digitalallies.net. The marketing site
 is a separate Vercel project/GitHub repo, already live, and already
