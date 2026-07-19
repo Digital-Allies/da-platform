@@ -84,22 +84,102 @@ just a future risk. Anthony:
 
 ---
 
-## ⚪ Priority 4 — later: onboarding Atomic Finds (don't do yet)
+## 🟢 Priority 4 — fix tonight: 2026-07-17 Vercel/Supabase audit findings
 
-Reference for whenever we actually get here — not blocking anything now.
+A read-only audit (Claude in Chrome, cross-checking a rotation done a day
+earlier) of both Vercel projects + the Supabase project turned up real
+gaps. None of these are code — there's no tool that can write Vercel env
+vars or touch Supabase's dashboard directly, so every item here is
+genuinely a dashboard click, not something that can be done from the repo.
 
-- [ ] Create a new Vercel project: Add New Project → import
-      `Digital-Allies/da-platform` → Root Directory `tools/build-workflows`.
-- [ ] Copy these env vars from `da-webwssite-build-workflows`'s project settings:
-      `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
-      `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `CONTACT_FORM_TO_EMAIL`.
-- [ ] Set these two differently for Atomic Finds:
-      - `NEXT_PUBLIC_CLIENT_ID` = `443936d5-f92e-480b-b206-c65cfb52bdfc`
-      - `NEXT_PUBLIC_SITE_URL` = (fill in after first deploy gives you the URL)
+- [ ] **Add `NEXT_PUBLIC_SITE_URL` to `da-webwssite-build-workflows`** — it
+      doesn't exist in this project at all right now. Settings →
+      Environment Variables → Add → Name `NEXT_PUBLIC_SITE_URL`, Value
+      `https://da-webwssite-build-workflows.vercel.app` for now (update to
+      `https://cms.digitalallies.net` once that domain is connected, below).
+- [ ] **Refresh `healthcare-training-center`'s Supabase keys.** Its
+      `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` were
+      added by hand (no Supabase-integration badge on those two rows,
+      unlike `da-webwssite-build-workflows` where the integration manages
+      them automatically) — so they won't auto-update on future key
+      rotations, and it's worth confirming they hold the *current*
+      Publishable/Secret key values right now. Supabase dashboard →
+      Project Settings → API Keys → copy the current Publishable key value
+      → paste into this project's `NEXT_PUBLIC_SUPABASE_ANON_KEY`; copy the
+      current Secret key value → paste into `SUPABASE_SERVICE_ROLE_KEY`.
+      Redeploy after.
+- [ ] **Clean up duplicate Supabase keys.** There are two Publishable/Secret
+      key pairs in the Supabase project — one named "default," one named
+      "supabase_anon_new"/"supabase_service_role_new" (the ones actually in
+      use). Confirm the "_new" pair is what's referenced in both Vercel
+      projects, then revoke the unused "default" pair so there's no
+      unused-but-valid credential sitting around.
+- [ ] **Connect the `cms.digitalallies.net` domain** to
+      `da-webwssite-build-workflows` — not done yet. Steps: project →
+      Settings → Domains → add it; update the *existing* Cloudflare CNAME
+      record to point at Vercel (set to "DNS only," not proxied — Cloudflare's
+      proxy commonly breaks Vercel's own SSL); add the domain to Supabase →
+      Authentication → URL Configuration (Site URL + Redirect URLs); update
+      `NEXT_PUBLIC_SITE_URL` to match once it's live.
+- [ ] **Add the new per-site Resend API keys to Vercel** — generated
+      2026-07-17 after the old shared key was flagged compromised; they're
+      only in the local `.env.local` right now. Add `RESEND_API_KEY` to
+      `da-webwssite-build-workflows` (Digital Allies' own key) and to
+      `healthcare-training-center` (its own key). Atomic Finds doesn't have
+      a Vercel project yet — nothing to add there until Priority 5 below.
+- [ ] **Revoke the old, compromised Resend key** in Resend's own dashboard,
+      if not done already — replacing where it's *referenced* doesn't kill
+      the old key itself.
+
+Not urgent, just noted: `healthcare-training-center`'s `NEXT_PUBLIC_SITE_URL`
+currently points at its default `.vercel.app` URL, not a custom domain —
+fine for now, revisit whenever HCTC gets a real domain.
+
+**Also surfaced by the audit, ties into Priority 2 above:** Supabase's own
+Security Advisor currently shows 0 errors, 6 warnings, 1 suggestion —
+overly permissive RLS policies, two `SECURITY DEFINER` functions callable
+without proper restriction (this matches `get_my_client_id()`, which
+`security-fixes.sql` addresses), and leaked-password protection still off.
+Applying `security-fixes.sql` (Priority 2) should clear most of these —
+worth re-checking the Advisor after.
+
+---
+
+## 🔵 Priority 5 — onboarding Atomic Finds (in progress, not "later" anymore)
+
+Anthony is actively finishing the design (a Figma Make trial is underway)
+and backend groundwork has started — this is no longer blocked/deferred.
+
+- [x] **Products catalog schema** — PR
+      [#1](https://github.com/Digital-Allies/da-platform/pull/1)
+      (`feat/atomic-finds-products-catalog`) adds a `products` table
+      (matching the services/testimonials client_id+RLS convention),
+      a `getProducts()` data function, and seeds 4 real listings from
+      Jennyfer's catalog. **Needs:** review + merge the PR, then run the
+      migration and seed file yourself in the Supabase SQL editor — neither
+      runs automatically.
+- [ ] Re-send the 5th product (cut off mid-paste in the original message)
+      so it can be added to the seed.
+- [ ] Get real product photos — none in the source data; `image_url` is
+      `null` for all four seeded products on purpose, not faked.
+- [ ] Frontend product grid/card components — still being designed
+      (Figma Make trial), not built yet.
+- [ ] Once design + backend are both ready: Create a new Vercel project →
+      Add New Project → import `Digital-Allies/da-platform` → Root
+      Directory `tools/build-workflows`.
+- [ ] Copy these env vars over: `NEXT_PUBLIC_SUPABASE_URL`,
+      `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
+      `CONTACT_FORM_TO_EMAIL` (`atomicfindsat@gmail.com`), and Atomic
+      Finds' own `RESEND_API_KEY` (generated 2026-07-17, currently only in
+      local `.env.local`).
+- [ ] Set `NEXT_PUBLIC_CLIENT_ID` = `443936d5-f92e-480b-b206-c65cfb52bdfc`
+      and `NEXT_PUBLIC_SITE_URL` (fill in after first deploy gives you the
+      URL).
 - [ ] Also re-point `healthcare-training-center`'s Vercel project the same
       way as Priority 1 (Git → `Digital-Allies/da-platform`, root
       `tools/build-workflows`, confirm `NEXT_PUBLIC_CLIENT_ID` =
-      `7896354c-1d34-4649-85f5-51f2e5a7df6c`), whenever HCTC needs testing too.
+      `7896354c-1d34-4649-85f5-51f2e5a7df6c`), whenever HCTC needs testing
+      too.
 
 ---
 
