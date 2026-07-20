@@ -51,7 +51,7 @@ begin
 end;
 $$ language plpgsql;
 
-create trigger products_set_updated_at
+create or replace trigger products_set_updated_at
   before update on products
   for each row
   execute function set_updated_at();
