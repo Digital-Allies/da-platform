@@ -11,14 +11,27 @@ const headers = {
   "Content-Type": "application/json"
 };
 
-// Helper to parse bilingual text (format: "English text || Spanish text")
+// Escape HTML special chars before interpolating CMS content into innerHTML
+function escapeHtml(text) {
+  if (text == null) return "";
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// Helper to parse bilingual text (format: "English text || Spanish text").
+// Values are HTML-escaped here since every caller interpolates them into innerHTML.
 function parseBilingual(text) {
   if (!text) return { en: "", es: "" };
   if (text.includes("||")) {
     const parts = text.split("||");
-    return { en: parts[0].trim(), es: parts[1].trim() };
+    return { en: escapeHtml(parts[0].trim()), es: escapeHtml(parts[1].trim()) };
   }
-  return { en: text, es: text };
+  const escaped = escapeHtml(text);
+  return { en: escaped, es: escaped };
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -85,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         card.innerHTML = `
           <div class="flex justify-center mb-6">
-            <span style="font-size: 48px;">${svc.icon || "💼"}</span>
+            <span style="font-size: 48px;">${escapeHtml(svc.icon) || "💼"}</span>
           </div>
           <h3 class="font-headers font-bold text-lg mb-1" data-en="${title.en}" data-es="${title.es}">
             ${document.documentElement.lang === "es" ? title.es : title.en}
@@ -188,14 +201,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           const item = document.createElement("div");
           item.className = "p-6 bg-white border border-charcoal hover:shadow-md transition duration-200";
           item.innerHTML = `
-            <span class="text-xs text-signal-red font-bold uppercase tracking-widest">${art.type || "Article"}</span>
+            <span class="text-xs text-signal-red font-bold uppercase tracking-widest">${escapeHtml(art.type) || "Article"}</span>
             <h3 class="font-headers text-xl font-bold mt-2 mb-3" data-en="${title.en}" data-es="${title.es}">
               ${document.documentElement.lang === "es" ? title.es : title.en}
             </h3>
             <p class="text-sm leading-relaxed mb-4" data-en="${excerpt.en}" data-es="${excerpt.es}">
               ${document.documentElement.lang === "es" ? excerpt.es : excerpt.en}
             </p>
-            <a href="/blog/${art.slug}" class="text-sm font-bold text-primary-blue hover:underline" data-en="Read Article &rarr;" data-es="Leer Artículo &rarr;">
+            <a href="/blog/${escapeHtml(art.slug)}" class="text-sm font-bold text-primary-blue hover:underline" data-en="Read Article &rarr;" data-es="Leer Artículo &rarr;">
               ${document.documentElement.lang === "es" ? "Leer Artículo &rarr;" : "Read Article &rarr;"}
             </a>
           `;
