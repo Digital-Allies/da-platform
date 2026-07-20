@@ -5,10 +5,58 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-19 — by Claude Code (password reset flow added;
-see top of "2026-07-19" section below)
+**Last updated:** 2026-07-20 — by Claude Code (daily build session — two
+Mon Jul 20 code fixes shipped; see top of "2026-07-20" section below)
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
+
+## 2026-07-20 — daily build session: two Mon Jul 20 code fixes shipped
+
+Ran the scheduled Mon Jul 20 `BUILD-SCHEDULE.md` item. All four `[Anthony]`
+items for today (security-fixes.sql, leaked-password protection, the
+2026-07-17 audit confirmations, PR #1 review/merge) are dashboard-only —
+none blocked the two `[Agent]` items, so both were done independently:
+
+- **Escaped HTML in `cms-loader.js`'s card-building code**
+  (`sites/digitalallies/assets/js/cms-loader.js`). Centralized the fix in
+  `parseBilingual()` (added an `escapeHtml()` helper it now runs both
+  language variants through, since every caller interpolates the result
+  into `innerHTML`) plus three direct call sites that bypassed it
+  (`svc.icon`, `art.type`, `art.slug`). Verified the escaping itself with a
+  quick node check (`<script>`/`onerror` payloads come back neutralized)
+  and verified the page still renders with no console errors by serving
+  the static files locally and checking in-browser.
+- **Removed the dead `tailwind.config` block** — turned out to be site-wide,
+  not just `index.html` as STATUS.md previously scoped it: **13 of 15**
+  HTML files in `sites/digitalallies` had the block (two single-line
+  variants in `learn/dept-cooperation.html` and
+  `learn/self-governing-bureau.html`, the rest multi-line), and **none** of
+  the 15 load the Tailwind CDN script that would make `tailwind.config`
+  a defined global — every page was throwing a `ReferenceError` on load.
+  Removed all 13, verified in-browser (multi-line and single-line variants
+  both spot-checked) that styling is untouched (site is precompiled/
+  self-hosted Tailwind, `tailwind.min.css` doesn't need the config) and the
+  console is clean.
+
+**⚠ Important caveat, don't skip past this:** `sites/digitalallies` in this
+monorepo is the frozen one-time import noted in the 2026-07-16 audit below
+(`git log` confirms exactly one commit ever touched these files — the
+import itself, `2a84e5c`) — it is **not** the source the live
+digitalallies.net deploys from (that's the separate
+`Digital-Allies/DigitalAllies` repo). So these two fixes are real and
+verified *in this repo's copy*, but **won't take effect on the live site**
+until Anthony manually ports them to `Digital-Allies/DigitalAllies` — same
+pattern as the Supabase-data and duplicated-`<html>` fixes he applied
+directly there on 2026-07-16. Added as a new checklist item in `TODO.md`.
+
+Both fixes got auto-committed and pushed by the 15-min sync script mid-session
+(`chore: sync MM23 2026-07-20 16:48`, `6876c63`) before a descriptive commit
+message could be written — noting the real "why" here since the commit
+message itself doesn't carry it.
+
+**Not started, correctly so:** the next `[Agent]` item in schedule order is
+Tue Jul 21's `ARCHITECTURE.md` backfill — left for tomorrow's scheduled run
+rather than front-run today, per the one-task-per-weekday cadence.
 
 ## 2026-07-19 — admin login: real bug found, after a wrong first guess
 

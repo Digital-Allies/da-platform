@@ -253,6 +253,18 @@ and backend groundwork has started — this is no longer blocked/deferred.
 
 ## ⚪ Backlog — future features (not scheduled, just captured)
 
+- **Port two verified code fixes from da-platform to the live
+  `Digital-Allies/DigitalAllies` repo.** 2026-07-20: the HTML-escaping fix
+  in `cms-loader.js` and the dead `tailwind.config` removal (13 files) were
+  built and verified in `da-platform`'s `sites/digitalallies`, but that
+  copy is a frozen one-time import — it's not what digitalallies.net
+  actually deploys from. Same manual-port pattern as the 2026-07-16
+  Supabase-data/duplicated-`<html>` fixes. Diffs are in `da-platform`
+  commit `6876c63` (`sites/digitalallies/assets/js/cms-loader.js` +
+  the 13 HTML files) — copy the equivalent changes into
+  `Digital-Allies/DigitalAllies` directly. Full detail: `STATUS.md`
+  2026-07-20 entry.
+
 - **Per-site document storage in the admin.** Anthony wants a dedicated
   storage area inside each tenant's admin panel — not just for content
   clients upload themselves, but also for documents *Anthony* adds per

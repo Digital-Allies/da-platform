@@ -118,10 +118,17 @@ continuation of stale dates above.
   Full checklist: `tools/build-workflows/tasks/anthony/TODO.md` Priority 4.
 - **[Anthony]** Review + merge PR #1 (`feat/atomic-finds-products-catalog`),
   then run its migration + seed file in the Supabase SQL editor.
-- **[Agent]** Escape HTML in `cms-loader.js`'s card-building code.
-- **[Agent]** Remove the dead `tailwind.config` block from digitalallies.net.
+- ~~**[Agent]** Escape HTML in `cms-loader.js`'s card-building code.~~ **Done,
+  2026-07-20** — see `STATUS.md`. Still needs manual porting to the live
+  `Digital-Allies/DigitalAllies` repo (this monorepo's copy is a frozen
+  import, not the deploy source).
+- ~~**[Agent]** Remove the dead `tailwind.config` block from
+  digitalallies.net.~~ **Done, 2026-07-20** — turned out to be in 13 of 15
+  HTML files, not just `index.html`; all removed. Same live-repo porting
+  caveat as above applies.
 - **Done when —** security items confirmed, audit checklist clear, PR #1
-  merged and applied, both small code fixes shipped.
+  merged and applied (all `[Anthony]`, still open), both small code fixes
+  shipped (done).
 
 ### Tue Jul 21 · Backfill `ARCHITECTURE.md`
 - **[Agent]** Write it from the CMS Build Plan's Vercel/architecture layout
