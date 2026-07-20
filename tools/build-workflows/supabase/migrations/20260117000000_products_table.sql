@@ -15,7 +15,7 @@ create table if not exists products (
   condition     text,                           -- freeform, e.g. "Used - Good"
   location      text,                           -- freeform, e.g. "Austin, TX"
   listed_label  text,                           -- freeform recency/status text, e.g. "3 days ago" or "In stock"
-  attributes    jsonb default '{}'::jsonb,      -- flexible per-item specs, e.g. {"Number of Seats": 4}
+  attributes    jsonb default '{}'::jsonb not null, -- flexible per-item specs, e.g. {"Number of Seats": 4}
   image_url     text,                           -- product photo; not backfilled by the seed below, see note
   external_url  text not null,                  -- where "buy/inquire" currently points (Facebook Marketplace
                                                  -- listing today; will become a checkout provider link/embed
@@ -26,6 +26,8 @@ create table if not exists products (
   created_at    timestamptz default now(),
   updated_at    timestamptz default now()
 );
+
+create index if not exists idx_products_order on products(client_id, display_order);
 
 alter table products enable row level security;
 
