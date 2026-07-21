@@ -359,6 +359,28 @@ independently-animated constellation disc + dozens of AI in-between frames.
      OPTIONAL future capability (plan-gated, likely agency tier), not required now.
    - Net: per-client theming work is scoped to the **public site renderer only**,
      not the admin. Less work than theming both.
+8. **Atomic Finds ATX = priority build + the platform's e-commerce proving
+   ground; conversion layer stays flexible** (Anthony, 2026-07-21).
+   - The client is **Atomic Finds ATX** (use that name). It is prioritized
+     alongside digitalallies.net as the most real client-like use case — the
+     commerce patterns built for it (product cards, quick-view modals,
+     cart-capable foundation, admin product management) must be **reusable for
+     future clients**, not one-offs.
+   - **E-commerce-READY, not checkout-committed.** Sales complete off-site
+     today (Facebook Marketplace links, direct payment, inquiry coordination)
+     and the conversion path may vary per product. Quick-view modals instead of
+     separate product pages for now.
+   - **No provider-specific (e.g. Stripe-specific) assumptions** in UX, CTA
+     language, or architecture — say "checkout provider" / "payment platform" /
+     "purchase flow." Stripe may win later; not decided.
+   - **No hard-coded "Buy Now."** CTA patterns must support multiple selling
+     states — approved directions: View Listing / Show Interest / Claim Me /
+     Ask About This Item / Get in Touch / Purchase Options / Message to Buy.
+   - A future on-site checkout must slot in with **no schema rethink**
+     (`external_url` already carries the outbound target per product).
+   - **HCTC stays a placeholder**: host live as-is, basic content display only.
+     No deep build, no compliance scope, no training modules / video / progress
+     tracking / certificates yet — long-term ideas only.
 
 ## Shared-agent setup + what actually syncs (READ THIS)
 

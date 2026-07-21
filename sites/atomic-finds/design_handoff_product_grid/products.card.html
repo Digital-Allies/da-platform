@@ -1,0 +1,30 @@
+<!-- @dsCard group="Components" viewport="900x760" name="Product Grid" subtitle="Live Supabase products table, real seeded rows -- image_url null, sale price, price:null, long titles" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="../_ds_bundle.js"></script>
+<style>body{margin:0;padding:40px;background:var(--bg);}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+var NS = window.AtomicFindsDesignSystem_29110a;
+var ProductGrid = NS.ProductGrid;
+var h = React.createElement;
+var products = [
+  { id: '1', title: 'Vintage MCM Dining Set – Table + 4 Swivel Chairs', description: 'Vintage 1970s-style dining set with wood-grain laminate tabletop, chrome pedestal base, and four cream vinyl swivel chairs.', price: 550.00, original_price: null, condition: 'Used - Good', location: 'Austin, TX', listed_label: '3 days ago', attributes: { 'Number of Seats': 4, 'Decor Style': 'Mid-Century Modern' }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/2150548818844605/', seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 1 },
+  { id: '2', title: 'Vintage Wicker Waterfall Dresser | Boho Coastal Rattan Chest', description: 'Vintage wicker waterfall dresser with four drawers, handwoven details, warm honey finish.', price: 285.00, original_price: 365.00, condition: 'Used - Good', location: 'Austin, TX', listed_label: '4 days ago', attributes: { 'Date Range': '1970-1979', 'Dimensions': '38in W x 33in D x 19in H', 'Drawers': 4 }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/3235493369971776/', seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 2 },
+  { id: '3', title: 'Nordic Scandinavian Side Table / Mesa Lateral Escandinava 16x16', description: 'Simple Nordic Scandinavian side table with clean minimalist wood design.', price: null, original_price: null, condition: 'Used - like new', location: 'Austin, TX', listed_label: 'In stock', attributes: { 'Decor Style': 'Scandinavian', 'Dimensions': '16in x 16in, 16.5in tall' }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/1504095271020600/', seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 3 },
+  { id: '4', title: 'Vintage Bamboo & Wicker Bistro Set | Coastal Boho | 2 Chairs + Glass Table', description: 'Vintage bamboo/wicker bistro set with two sculptural fan-back chairs and a wicker pedestal glass-top table.', price: 250.00, original_price: null, condition: 'Used - Good', location: 'Austin, TX', listed_label: '2 weeks ago', attributes: { 'Number of Pieces': 3, 'Type': 'Bistro Set' }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/1365991472086639/', seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 4 }
+];
+ReactDOM.createRoot(document.getElementById('root')).render(
+  h(ProductGrid, { products: products })
+);
+</script>
+</body>
+</html>
