@@ -139,11 +139,11 @@ INSERT INTO settings (client_id, key, value) VALUES
 
 **Step 3 — Domain:** point DNS at Vercel, add the custom domain in project settings.
 
-**Step 4 — Admin access:** Supabase → Authentication → Users → Invite their email. They log in at `https://theirdomain.com/admin`. Link the auth user to their client row (`clients.auth_user_id`).
+**Step 4 — Admin access:** Supabase → Authentication → Users → Invite their email. **Before their first login**, copy the new auth user's UUID into their client row's `clients.auth_user_id` — `get_my_client_id()` depends on that link, so logging in before it exists lands them in an empty admin. Then they log in at `https://theirdomain.com/admin`.
 
 **Step 5 — Content:** add their design tokens to `src/lib/theme.ts` and a `sites/<site>/CLAUDE.md`; populate content via the admin.
 
-Supabase RLS (scoped by `client_id`) ensures every client only ever sees their own data.
+Authenticated admin access is tenant-isolated by Supabase RLS via `clients.auth_user_id` → `get_my_client_id()`. **Public reads are not RLS-isolated** — the public policies allow all rows (`using (true)`) and rely on each deployment's queries filtering by `client_id`; anyone with the publishable key can read other tenants' public rows directly. Fine for content that's public on some site anyway, but don't put anything cross-tenant-sensitive behind a public-read policy.
 
 ---
 
