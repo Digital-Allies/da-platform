@@ -6,7 +6,7 @@
 -- ============================================================
 
 create table if not exists products (
-  id            uuid primary key default uuid_generate_v4(),
+  id            uuid primary key default gen_random_uuid(),
   client_id     uuid references clients(id) on delete cascade not null,
   title         text not null,
   description   text,
