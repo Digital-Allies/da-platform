@@ -5,13 +5,11 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (PR #4 reviewed and merged to
-`main` — the Atomic Finds ATX storefront below was live on Vercel but sitting
-unmerged for two days; `main` now matches what's actually deployed. Reviewed
-for RLS/migration safety and secrets before merging — clean, except one real
-finding: the homepage hardcodes "5.0 ★" review copy instead of computing it,
-and the `reviews` table has no numeric rating field at all, only a
-written/rating-only split — worth a follow-up fix.)
+**Last updated:** 2026-07-21 — by Claude Code (Mobile-responsive design for
+Atomic Finds ATX implemented and verified in browser. Split nav into client
+component `AtomicNav` with hamburger toggle; responsive CSS for all sections
+with clamp() typography; GalaxyCard now scales with viewport. Tested on mobile
+(375×812) and desktop viewports. See feat/atomic-finds-mobile-responsive PR.)
 
 ## 2026-07-21 (cont'd) — Atomic Finds ATX bespoke homepage, Galaxy Card, reviews system
 
