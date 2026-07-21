@@ -1,4 +1,23 @@
 // Reference only — rename ProductCardRef to ProductCard in your target codebase.
+// CTA logic mirrors the production resolver at src/lib/commerce.ts
+// (resolveProductCta) — see that file for the source of truth.
+const CTA_DEFAULT_LABELS = {
+  listing: 'View Listing',
+  inquiry: 'Ask About This Item',
+  direct: 'Message to Buy',
+  checkout: 'Purchase Options',
+};
+
+function resolveCtaRef({ selling_state, cta_label, external_url }) {
+  const state = selling_state || 'inquiry';
+  // 'listing'/'checkout' only count as external once a URL actually exists —
+  // otherwise both degrade to the inquiry flow, label included, so the
+  // button never promises an outbound link (or a live checkout) that isn't there.
+  const external = (state === 'listing' || state === 'checkout') && !!external_url;
+  const label = cta_label || (external ? CTA_DEFAULT_LABELS[state] : CTA_DEFAULT_LABELS.inquiry);
+  return { label, href: external ? external_url : '#contact', external };
+}
+
 /**
  * ProductCard — Single product from the live Supabase `products` table
  * @kind component
@@ -14,10 +33,13 @@ function ProductCardRef({
   attributes,
   image_url,
   external_url,
+  selling_state,
+  cta_label,
   seller_name,
   seller_rating,
   ...props
 }) {
+  const cta = resolveCtaRef({ selling_state, cta_label, external_url });
   const attrEntries = attributes ? Object.entries(attributes).slice(0, 3) : [];
   const onSale = original_price != null && price != null;
 
@@ -89,11 +111,10 @@ function ProductCardRef({
             )}
           </div>
           <a
-            href={external_url}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={cta.href}
+            {...(cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--celestial-yellow)', border: 'var(--border-1)', padding: '8px 14px', borderRadius: 'var(--radius-pill)', textDecoration: 'none', whiteSpace: 'nowrap' }}
-          >View Listing →</a>
+          >{cta.label}{cta.external ? ' →' : ''}</a>
         </div>
 
         {(seller_name || seller_rating) && (

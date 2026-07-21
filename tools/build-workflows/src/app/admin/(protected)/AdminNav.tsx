@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard, FileText, Briefcase, Star, MessageSquare,
-  Settings, LogOut, ExternalLink,
+  Settings, LogOut, ExternalLink, ShoppingBag, Quote,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 
@@ -19,6 +19,8 @@ const NAV_ITEMS = [
   { label: 'Posts',          href: '/admin/posts',        icon: FileText },
   { label: 'Departments',    href: '/admin/services',     icon: Briefcase },
   { label: 'Field Notes',    href: '/admin/testimonials', icon: Star },
+  { label: 'The Showroom',   href: '/admin/products',     icon: ShoppingBag },
+  { label: 'Reviews',        href: '/admin/reviews',      icon: Quote },
   { label: 'Command Center', href: '/admin/messages',     icon: MessageSquare },
   { label: 'Settings',       href: '/admin/settings',     icon: Settings },
 ]

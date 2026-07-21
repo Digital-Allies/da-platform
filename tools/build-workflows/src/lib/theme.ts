@@ -47,14 +47,16 @@ export const HCTC_TOKENS: DesignTokens = {
   radius: '8px', radiusLg: '16px',
 }
 
-// Atomic Finds — celestial-70s dark, rattan + gold (sites/atomic-finds/CLAUDE.md)
+// Atomic Finds ATX — celestial-70s dark, rattan + gold (sites/atomic-finds/CLAUDE.md,
+// synced 2026-07-21 to the Claude Design system: Bagel Fat One replaced Lilita One,
+// Pacifico is the script face — Tilda Script's only copy was a watermarked trial)
 export const ATOMIC_TOKENS: DesignTokens = {
-  name: 'Atomic Finds',
+  name: 'Atomic Finds ATX',
   colors: {
-    bg: '#1E1E1E', surface: '#2A2017', text: '#F0E8D8', textMuted: '#B8AD97',
+    bg: '#1E1E1E', surface: '#2A2017', text: '#F0E8D8', textMuted: '#9A8F7D',
     primary: '#F5C842', secondary: '#D4822A', border: 'rgba(245,200,66,0.15)',
   },
-  fonts: { heading: "'Lilita One', system-ui, sans-serif", body: "'DM Sans', system-ui, sans-serif" },
+  fonts: { heading: "'Bagel Fat One', 'DM Serif Display', Georgia, sans-serif", body: "'DM Sans', system-ui, sans-serif" },
   radius: '12px', radiusLg: '18px',
 }
 
@@ -70,11 +72,17 @@ export const NEUTRAL_TOKENS: DesignTokens = {
   radius: '8px', radiusLg: '12px',
 }
 
+// Named client IDs — reused wherever code needs to branch per-client
+// (e.g. page.tsx picking the Atomic Finds ATX bespoke homepage).
+export const DA_CLIENT_ID = '3d76b896-e1fb-49f0-a8db-f62fdd5bc258'
+export const HCTC_CLIENT_ID = '7896354c-1d34-4649-85f5-51f2e5a7df6c'
+export const ATOMIC_FINDS_CLIENT_ID = '443936d5-f92e-480b-b206-c65cfb52bdfc'
+
 // Map real Supabase client_id → tokens.
 export const TOKENS_BY_CLIENT: Record<string, DesignTokens> = {
-  '3d76b896-e1fb-49f0-a8db-f62fdd5bc258': DA_TOKENS,     // Digital Allies
-  '7896354c-1d34-4649-85f5-51f2e5a7df6c': HCTC_TOKENS,   // Healthcare Training Center
-  '443936d5-f92e-480b-b206-c65cfb52bdfc': ATOMIC_TOKENS, // Atomic Finds
+  [DA_CLIENT_ID]: DA_TOKENS,
+  [HCTC_CLIENT_ID]: HCTC_TOKENS,
+  [ATOMIC_FINDS_CLIENT_ID]: ATOMIC_TOKENS,
 }
 
 export function getDesignTokens(clientId: string | undefined): DesignTokens {

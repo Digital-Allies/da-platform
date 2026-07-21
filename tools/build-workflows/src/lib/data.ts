@@ -1,6 +1,6 @@
 // Server-side data fetching helpers — call from Server Components
 import { createClient } from './supabase-server'
-import { parseSettings, type SiteSettings, type Post, type Service, type Testimonial, type Product } from './types'
+import { parseSettings, type SiteSettings, type Post, type Service, type Testimonial, type Product, type Review } from './types'
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
@@ -63,6 +63,18 @@ export async function getProducts(): Promise<Product[]> {
     .select('*')
     .eq('client_id', CLIENT_ID)
     .order('display_order', { ascending: true })
+  return data ?? []
+}
+
+export async function getFeaturedReviews(limit = 6): Promise<Review[]> {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('reviews')
+    .select('*')
+    .eq('client_id', CLIENT_ID)
+    .eq('featured_on_homepage', true)
+    .order('sort_order', { ascending: true })
+    .limit(limit)
   return data ?? []
 }
 
