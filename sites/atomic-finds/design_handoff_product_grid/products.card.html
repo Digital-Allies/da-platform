@@ -7,22 +7,21 @@
 <link rel="stylesheet" href="../design_handoff_homepage/styles.css">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="../design_handoff_homepage/_ds_bundle.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js" crossorigin="anonymous"></script>
 <style>body{margin:0;padding:40px;background:var(--bg);}</style>
 </head>
 <body>
-<!-- NOTE: NS.ProductGrid below is the compiled bundle from the Claude Design
-     project and was built before the flexible-CTA direction (2026-07-21) —
-     it still renders every card's CTA as an outbound "View Listing" link.
-     The sample data here now carries selling_state/cta_label so a rebuilt
-     bundle picks them up, but this preview's live CTA behavior lags until
-     that bundle is recompiled. ProductCard.reference.jsx / ProductGrid.reference.jsx
-     in this same folder implement the correct selling_state-driven CTA and
-     are the accurate reference. -->
+<!-- Loads ProductGrid.reference.jsx directly (Babel-transpiled in-browser)
+     instead of the compiled Claude Design bundle (_ds_bundle.js), which
+     predates the flexible-CTA direction (2026-07-21) and always renders
+     "View Listing" against external_url regardless of selling_state. The
+     .reference.jsx file is the accurate, selling_state-driven CTA logic —
+     loading it here means this preview actually reflects the resolver
+     instead of just documenting the discrepancy. -->
 <div id="root"></div>
-<script>
-var NS = window.AtomicFindsDesignSystem_29110a;
-var ProductGrid = NS.ProductGrid;
+<script type="text/babel" data-presets="react" src="./ProductGrid.reference.jsx"></script>
+<script type="text/babel" data-presets="react">
+var ProductGrid = ProductGridRef;
 var h = React.createElement;
 var products = [
   { id: '1', title: 'Vintage MCM Dining Set – Table + 4 Swivel Chairs', description: 'Vintage 1970s-style dining set with wood-grain laminate tabletop, chrome pedestal base, and four cream vinyl swivel chairs.', price: 550.00, original_price: null, condition: 'Used - Good', location: 'Austin, TX', listed_label: '3 days ago', attributes: { 'Number of Seats': 4, 'Decor Style': 'Mid-Century Modern' }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/2150548818844605/', selling_state: 'listing', cta_label: null, seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 1 },
