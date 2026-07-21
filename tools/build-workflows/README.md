@@ -2,7 +2,7 @@
 
 The multi-tenant CMS engine for Digital Allies, built with Next.js 15 + Supabase. One codebase powers an admin panel plus client websites — Anthony manages his own site with it and onboards paying clients as hosted website + CMS subscriptions. A direct replacement for Duda.
 
-**This app lives at `tools/build-workflows/` inside the [`Digital-Allies/da-platform`](https://github.com/Digital-Allies/da-platform) monorepo** (private) — the single source of truth since 2026-07-06. The old standalone repo (`cassellac/da-webwssite-build-workflows`) is archive-only; do not commit to it.
+**This app lives at [`Digital-Allies/da-platform` → `tools/build-workflows/`](https://github.com/Digital-Allies/da-platform/tree/main/tools/build-workflows)** (private monorepo) — the single source of truth since 2026-07-06. The old standalone repo (`cassellac/da-webwssite-build-workflows`) is archive-only; do not commit to it.
 
 > **Status lives in the repo root `STATUS.md`** — read that first for what's true right now. This README covers what this app is, how it's wired, and how to operate it.
 
@@ -27,7 +27,7 @@ The multi-tenant CMS engine for Digital Allies, built with Next.js 15 + Supabase
 
 | What | Source | Live URL |
 |---|---|---|
-| **CMS admin engine** (this app) | `Digital-Allies/da-platform` → `tools/build-workflows` (Vercel project `da-webwssite-build-workflows`, re-pointed to the monorepo 2026-07-10) | **[cms.digitalallies.net](https://cms.digitalallies.net)** — root redirects to `/admin/login` (`da-webwssite-build-workflows.vercel.app` is the underlying Vercel URL; use the cms. domain) |
+| **CMS admin engine** (this app) | [`Digital-Allies/da-platform` → `tools/build-workflows`](https://github.com/Digital-Allies/da-platform/tree/main/tools/build-workflows) (Vercel project `da-webwssite-build-workflows`, re-pointed to the monorepo 2026-07-10) | **[cms.digitalallies.net](https://cms.digitalallies.net)** — root redirects to `/admin/login` (`da-webwssite-build-workflows.vercel.app` is the underlying Vercel URL; use the cms. domain) |
 | **DA public site** — Connected tier, DO NOT REPLACE | Separate repo [`Digital-Allies/DigitalAllies`](https://github.com/Digital-Allies/DigitalAllies) (static HTML) | `digitalallies.net` |
 | **Design system** | `packages/design-system` in the monorepo + per-site `sites/<site>/CLAUDE.md` | [digital-allies.github.io/design-system](https://digital-allies.github.io/design-system/) |
 
