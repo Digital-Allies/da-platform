@@ -194,7 +194,7 @@
 .af-footer-credit { margin-top: 16px; font-size: 12px; font-weight: 600; color: #ffffff; }
 .af-footer-credit a { color: var(--celestial-yellow); text-decoration: none; transition: all 300ms ease-out; }
 .af-footer-credit a:hover { color: #ffe07a; text-shadow: var(--glow-sm); }
-.af-da-heart { display: inline-block; color: #F5A4C7; animation: af-pulse 2s ease-in-out infinite; margin: 0 4px; }
+.af-da-heart { display: inline-block; color: #FADEEB; animation: af-pulse 2s ease-in-out infinite; margin: 0 4px; }
 @keyframes af-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.15); } }
 
 @media (max-width: 900px) {
