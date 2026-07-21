@@ -10,9 +10,12 @@ The multi-tenant CMS engine for Digital Allies, built with Next.js 15 + Supabase
 
 ## The Vision
 
-**Phase 1 (live):** `digitalallies.net` is connected to the CMS — blog posts, services, and testimonials feed from Supabase into the existing static site. The admin panel is live at `cms.digitalallies.net`.
+**Priority builds — digitalallies.net and Atomic Finds, side by side:**
 
-**Phase 2 (in progress):** Onboard paying clients. Each client gets a Vercel-hosted website and their own admin login. HCTC and Atomic Finds are the first two tenants; the Atomic Finds product catalog is the current build focus.
+- **`digitalallies.net` (live):** connected to the CMS — blog posts, services, and testimonials feed from Supabase into the existing static site. The admin panel is live at `cms.digitalallies.net`.
+- **Atomic Finds (active build):** the first full Templated-tier client site — and the platform's first **e-commerce site**. Products backend is review-complete (PR #1); homepage design handoff is landing from Claude Design; the catalog frontend, `'products'` block, and admin Products editor are the immediate build queue. Products are real and actively selling, so non-technical product management is a launch requirement, not a nice-to-have. Phase 1 links each product out to its Facebook Marketplace listing (`external_url`); the target is on-site checkout — the schema was built so a checkout provider swaps in with no schema change.
+
+**Then:** onboard further paying clients on the same engine — each gets a Vercel-hosted website and their own admin login. HCTC is next in line as a tenant.
 
 **This is not Duda. It's better.** Anthony owns the infrastructure, the code, and the client relationships. No platform lock-in.
 
@@ -24,7 +27,7 @@ The multi-tenant CMS engine for Digital Allies, built with Next.js 15 + Supabase
 
 | What | Source | Live URL |
 |---|---|---|
-| **CMS admin engine** (this app) | `Digital-Allies/da-platform` → `tools/build-workflows` (Vercel project `da-webwssite-build-workflows`, re-pointed to the monorepo 2026-07-10) | [cms.digitalallies.net](https://cms.digitalallies.net) (root redirects to `/admin/login`) + [da-webwssite-build-workflows.vercel.app](https://da-webwssite-build-workflows.vercel.app/) |
+| **CMS admin engine** (this app) | `Digital-Allies/da-platform` → `tools/build-workflows` (Vercel project `da-webwssite-build-workflows`, re-pointed to the monorepo 2026-07-10) | **[cms.digitalallies.net](https://cms.digitalallies.net)** — root redirects to `/admin/login` (`da-webwssite-build-workflows.vercel.app` is the underlying Vercel URL; use the cms. domain) |
 | **DA public site** — Connected tier, DO NOT REPLACE | Separate repo [`Digital-Allies/DigitalAllies`](https://github.com/Digital-Allies/DigitalAllies) (static HTML) | `digitalallies.net` |
 | **Design system** | `packages/design-system` in the monorepo + per-site `sites/<site>/CLAUDE.md` | [digital-allies.github.io/design-system](https://digital-allies.github.io/design-system/) |
 
@@ -69,13 +72,13 @@ For **Templated-tier** clients, this app also renders their public site: block-b
 |---|---|---|---|
 | Digital Allies | `3d76b896-e1fb-49f0-a8db-f62fdd5bc258` | Connected | Seeded: settings, services, testimonials. Admin user: `contact@digitalallies.net` |
 | Healthcare Training Center | `7896354c-…` | Templated (building) | Navy/teal + Montserrat tokens |
-| Atomic Finds | `443936d5-f92e-480b-b206-c65cfb52bdfc` | Templated (building) | Product catalog in progress — see below |
+| Atomic Finds | `443936d5-f92e-480b-b206-c65cfb52bdfc` | Templated e-commerce (building) | Priority build — product catalog in progress, on-site checkout the end goal; see below |
 
 **Per-client theming is done:** `src/lib/theme.ts` maps design tokens by `client_id`; `SiteTheme.tsx` injects them as `--tok-*` CSS variables scoped to `.site-theme-scope`. Public sites each use their OWN design system (per-site `sites/<site>/CLAUDE.md`) — a client site must never look like Digital Allies. The admin stays DA-branded for all clients.
 
 ---
 
-## Atomic Finds Product Catalog (current focus)
+## Atomic Finds E-commerce (priority build)
 
 **PR [#1](https://github.com/Digital-Allies/da-platform/pull/1) — schema + data layer, review-complete and ready to merge.** It adds:
 
@@ -89,6 +92,7 @@ For **Templated-tier** clients, this app also renders their public site: block-b
 1. Frontend catalog components (design handoff from Claude Design incoming) + a `'products'` case in `BlockRenderer.tsx`.
 2. **Admin Products editor** — required so non-technical users (Jennyfer) can add/remove products as items sell. Follow the Services module pattern (`admin/(protected)/services/page.tsx` — full CRUD with ordering).
 3. Product photos (`image_url` is intentionally NULL on all seeded rows) and the 5th product (cut off mid-paste in the source data).
+4. **On-site checkout** (provider TBD — Stripe is the house default for DA billing work). Until then, each product's CTA links out to its Facebook Marketplace listing via `external_url`; the same field carries the checkout link/embed later, no schema change.
 
 ---
 
@@ -174,7 +178,7 @@ Set in Vercel project settings and `.env.local` for local dev (never committed).
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | New **Publishable** key value — public, safe to expose |
 | `SUPABASE_SERVICE_ROLE_KEY` | New **Secret** key value — **sensitive**, server-only |
 | `NEXT_PUBLIC_CLIENT_ID` | Tenant UUID (see Tenants table) |
-| `NEXT_PUBLIC_SITE_URL` | The deployment's public URL |
+| `NEXT_PUBLIC_SITE_URL` | The deployment's public URL (DA admin: `https://cms.digitalallies.net`) |
 | `CONTACT_FORM_TO_EMAIL` | Where contact-form submissions go |
 | `RESEND_API_KEY` | **Sensitive** |
 
