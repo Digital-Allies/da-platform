@@ -62,6 +62,8 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
       defaultData = { title: 'Our Services', description: 'Brief description' };
     } else if (type === 'testimonials') {
       defaultData = { title: 'What Clients Say', description: 'Client review descriptions' };
+    } else if (type === 'products') {
+      defaultData = { title: 'Featured Finds' };
     } else if (type === 'cta') {
       defaultData = { title: 'Ready to start?', subtitle: 'Get in touch today', buttonText: 'Contact Us', buttonLink: '#contact' };
     } else if (type === 'contact') {
@@ -193,6 +195,25 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
               </div>
             </section>
           `;
+        case 'products':
+          return `
+            <section style="padding: 45px 20px; text-align: center; background: #1E1E1E; font-family: 'Lexend Deca', sans-serif;">
+              <h2 style="font-size: 24px; margin-bottom: 24px; color: #F5C842;">${block.data.title || 'Featured Finds'}</h2>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; max-width: 800px; margin: 0 auto;">
+                <div style="background: #23201B; border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 14px; text-align: left;">
+                  <div style="height: 90px; background: #14120E; border-radius: 8px; margin-bottom: 10px;"></div>
+                  <h3 style="margin: 0 0 6px; font-size: 14px; color: #F5C842;">Product title</h3>
+                  <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9A8F7D; margin: 0;">$000 · CTA per selling state</p>
+                </div>
+                <div style="background: #23201B; border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 14px; text-align: left;">
+                  <div style="height: 90px; background: #14120E; border-radius: 8px; margin-bottom: 10px;"></div>
+                  <h3 style="margin: 0 0 6px; font-size: 14px; color: #F5C842;">Product title</h3>
+                  <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9A8F7D; margin: 0;">$000 · CTA per selling state</p>
+                </div>
+              </div>
+              <p style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #6A6052; margin-top: 14px;">Live products render from the Products table on the real site.</p>
+            </section>
+          `;
         case 'cta':
           return `
             <section style="padding: 45px 20px; text-align: center; background: #2D2D2D; color: white; font-family: 'Lexend Deca', sans-serif;">
@@ -316,6 +337,7 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('richtext')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Richtext</button>
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('services')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Services</button>
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('testimonials')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Testimonials</button>
+                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('products')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Products</button>
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('cta')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> CTA</button>
                   <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('contact')} style={{ padding: '6px 10px', minWidth: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}><Plus size={12}/> Contact Form</button>
                 </div>
@@ -371,6 +393,13 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
                             <div className="form-group" style={{ marginBottom: '10px' }}>
                               <label className="form-label">Section Title</label>
                               <input type="text" className="form-control" value={block.data.title || ''} onChange={e => handleBlockDataChange(idx, 'title', e.target.value)} />
+                            </div>
+                          )}
+                          {block.type === 'products' && (
+                            <div className="form-group" style={{ marginBottom: '10px' }}>
+                              <label className="form-label">Section Title</label>
+                              <input type="text" className="form-control" value={block.data.title || ''} onChange={e => handleBlockDataChange(idx, 'title', e.target.value)} />
+                              <p style={{ fontSize: '11px', color: 'var(--text-muted, #888)', marginTop: '6px' }}>Products themselves are managed in the Products section — this block renders them automatically.</p>
                             </div>
                           )}
                           {block.type === 'cta' && (

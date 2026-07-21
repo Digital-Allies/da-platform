@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" viewport="900x760" name="Product Grid" subtitle="Live Supabase products table -- image_url null, sale price, price:null, long titles, listing/inquiry/direct selling states" -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../design_handoff_homepage/styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js" crossorigin="anonymous"></script>
+<style>body{margin:0;padding:40px;background:var(--bg);}</style>
+</head>
+<body>
+<!-- Loads ProductGrid.reference.jsx directly (Babel-transpiled in-browser)
+     instead of the compiled Claude Design bundle (_ds_bundle.js), which
+     predates the flexible-CTA direction (2026-07-21) and always renders
+     "View Listing" against external_url regardless of selling_state. The
+     .reference.jsx file is the accurate, selling_state-driven CTA logic —
+     loading it here means this preview actually reflects the resolver
+     instead of just documenting the discrepancy. -->
+<div id="root"></div>
+<script type="text/babel" data-presets="react" src="./ProductGrid.reference.jsx"></script>
+<script type="text/babel" data-presets="react">
+var ProductGrid = ProductGridRef;
+var h = React.createElement;
+var products = [
+  { id: '1', title: 'Vintage MCM Dining Set – Table + 4 Swivel Chairs', description: 'Vintage 1970s-style dining set with wood-grain laminate tabletop, chrome pedestal base, and four cream vinyl swivel chairs.', price: 550.00, original_price: null, condition: 'Used - Good', location: 'Austin, TX', listed_label: '3 days ago', attributes: { 'Number of Seats': 4, 'Decor Style': 'Mid-Century Modern' }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/2150548818844605/', selling_state: 'listing', cta_label: null, seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 1 },
+  { id: '2', title: 'Vintage Wicker Waterfall Dresser | Boho Coastal Rattan Chest', description: 'Vintage wicker waterfall dresser with four drawers, handwoven details, warm honey finish.', price: 285.00, original_price: 365.00, condition: 'Used - Good', location: 'Austin, TX', listed_label: '4 days ago', attributes: { 'Date Range': '1970-1979', 'Dimensions': '38in W x 33in D x 19in H', 'Drawers': 4 }, image_url: null, external_url: 'https://www.facebook.com/marketplace/item/3235493369971776/', selling_state: 'listing', cta_label: null, seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 2 },
+  { id: '3', title: 'Nordic Scandinavian Side Table / Mesa Lateral Escandinava 16x16', description: 'Simple Nordic Scandinavian side table with clean minimalist wood design.', price: null, original_price: null, condition: 'Used - like new', location: 'Austin, TX', listed_label: 'In stock', attributes: { 'Decor Style': 'Scandinavian', 'Dimensions': '16in x 16in, 16.5in tall' }, image_url: null, external_url: null, selling_state: 'inquiry', cta_label: null, seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 3 },
+  { id: '4', title: 'Vintage Bamboo & Wicker Bistro Set | Coastal Boho | 2 Chairs + Glass Table', description: 'Vintage bamboo/wicker bistro set with two sculptural fan-back chairs and a wicker pedestal glass-top table.', price: 250.00, original_price: null, condition: 'Used - Good', location: 'Austin, TX', listed_label: '2 weeks ago', attributes: { 'Number of Pieces': 3, 'Type': 'Bistro Set' }, image_url: null, external_url: null, selling_state: 'direct', cta_label: 'Claim Me', seller_name: 'Jennyfer Gomez', seller_rating: '81 ratings - Highly rated', display_order: 4 }
+];
+ReactDOM.createRoot(document.getElementById('root')).render(
+  h(ProductGrid, { products: products })
+);
+</script>
+</body>
+</html>
