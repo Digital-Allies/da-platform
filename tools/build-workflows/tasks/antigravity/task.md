@@ -9,3 +9,9 @@
   - [x] Map `'contact'` block in `BlockRenderer.tsx` to `<ContactForm>`
 - [x] Verify Codebase Compiles
   - [x] Run `npm run build` to verify Next.js builds successfully
+- [x] Fix Mobile Responsiveness and Layout for Atomic Finds
+  - [x] Add local mock data fallback in `src/lib/data.ts` to allow local previewing when database DNS is sandboxed
+  - [x] Fix horizontal layout overflow by adding `overflow-x: hidden` to `.af-homepage` in `atomic-finds.css`
+  - [x] Stack curators vertically in a single column below `560px` breakpoint to prevent bio text clipping
+  - [x] Verify layout and responsiveness using Chrome DevTools viewport viewport audits
+

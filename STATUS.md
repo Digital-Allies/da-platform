@@ -5,8 +5,16 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 (evening) — by Anthony (Supabase keys rotated)
-then by Claude Code (Contrast fixes + DA footer credit + i18n bilingual system scoped)
+**Last updated:** 2026-07-21 (evening) — by Antigravity (Atomic Finds Mobile Responsive + Overflow Fixes)
+
+## 2026-07-21 (evening) — Atomic Finds Mobile Responsiveness, Overflow & Fallback Mock Data
+
+**Layout & Responsiveness Fixes:**
+- **Stacked mobile curators layout**: Changed the curators grid (`.af-curators-grid`) to stack in a single column (`grid-template-columns: 1fr`) on screens under `560px` with a `32px` gap. This prevents curator bio text from clipping or overflowing on phone screens, keeping the design premium.
+- **Fixed horizontal layout overflow**: Added `overflow-x: hidden` to `.af-homepage` in `atomic-finds.css` to prevent absolute-positioned elements (such as the `GalaxyCard` orbital rings) from causing horizontal scrolling and layout shifts.
+- **Local mock data fallback**: Implemented a query fallback inside `src/lib/data.ts` to return mock data for products and reviews when remote database fetches fail (e.g. inside network-sandboxed local environments). This allows previewing pages locally.
+
+---
 
 ## 2026-07-21 (evening) — Production outage resolved: Supabase keys rotated & Vercel env vars updated
 
