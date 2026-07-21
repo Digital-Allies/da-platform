@@ -47,14 +47,16 @@ export const HCTC_TOKENS: DesignTokens = {
   radius: '8px', radiusLg: '16px',
 }
 
-// Atomic Finds — celestial-70s dark, rattan + gold (sites/atomic-finds/CLAUDE.md)
+// Atomic Finds ATX — celestial-70s dark, rattan + gold (sites/atomic-finds/CLAUDE.md,
+// synced 2026-07-21 to the Claude Design system: Bagel Fat One replaced Lilita One,
+// Pacifico is the script face — Tilda Script's only copy was a watermarked trial)
 export const ATOMIC_TOKENS: DesignTokens = {
-  name: 'Atomic Finds',
+  name: 'Atomic Finds ATX',
   colors: {
-    bg: '#1E1E1E', surface: '#2A2017', text: '#F0E8D8', textMuted: '#B8AD97',
+    bg: '#1E1E1E', surface: '#2A2017', text: '#F0E8D8', textMuted: '#9A8F7D',
     primary: '#F5C842', secondary: '#D4822A', border: 'rgba(245,200,66,0.15)',
   },
-  fonts: { heading: "'Lilita One', system-ui, sans-serif", body: "'DM Sans', system-ui, sans-serif" },
+  fonts: { heading: "'Bagel Fat One', 'DM Serif Display', Georgia, sans-serif", body: "'DM Sans', system-ui, sans-serif" },
   radius: '12px', radiusLg: '18px',
 }
 

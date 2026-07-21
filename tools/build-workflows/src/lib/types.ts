@@ -44,6 +44,8 @@ export interface Testimonial {
   created_at: string
 }
 
+export type ProductSellingState = 'listing' | 'inquiry' | 'direct' | 'checkout'
+
 export interface Product {
   id: string
   client_id: string
@@ -56,9 +58,19 @@ export interface Product {
   listed_label: string | null
   attributes: Record<string, unknown>
   image_url: string | null
-  external_url: string
+  external_url: string | null
   seller_name: string | null
   seller_rating: string | null
+  sku: string | null
+  category: string | null
+  tagline: string | null
+  badge: 'featured' | 'instock' | null
+  in_stock: boolean
+  origin: string | null
+  era: string | null
+  dimensions: string | null
+  selling_state: ProductSellingState
+  cta_label: string | null
   display_order: number
   created_at: string
   updated_at: string

@@ -5,8 +5,51 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-20 — by Claude Code (daily build session — two
-Mon Jul 20 code fixes shipped; see top of "2026-07-20" section below)
+**Last updated:** 2026-07-21 — by Claude Code (Atomic Finds ATX storefront
+build — see the "2026-07-21" section below)
+
+## 2026-07-21 — Atomic Finds ATX storefront: components, admin Showroom, commerce schema
+
+The e-commerce build (decision #8 below) shipped on branch
+`claude/products-table-review-fixes-doa26m` (PR #4's branch), on top of the
+merged products table (PR #1, applied to live Supabase by Anthony — both
+SQL runs verified):
+
+- **Migration `20260121000000_products_commerce_fields.sql`** — adds the
+  design-catalog fields (`sku`, `category`, `tagline`, `badge`, `in_stock`,
+  `origin`, `era`, `dimensions`) plus the flexible conversion layer:
+  `selling_state` ('listing' | 'inquiry' | 'direct' | 'checkout') +
+  `cta_label`; makes `external_url` nullable. Additive + safe to re-run.
+  **Not yet run in Supabase** (Anthony: SQL editor, then the catalog seed).
+- **`src/lib/commerce.ts`** — `resolveProductCta()`: the ONE place CTAs
+  resolve (label + destination per selling state, provider-agnostic). A
+  future checkout provider slots in by extending this function only.
+- **`ProductGrid.tsx`** (site component, client leaf) — cards + category
+  tabs + quick-view modal per `design_handoff_product_grid` spec: null-image
+  "Photo coming soon" state, Sale/Featured badges, "Inquire" price state,
+  2-line title clamp, seller trust line. Styled entirely from `--tok-*`
+  theme vars, so it's reusable by any commerce client. Wired into
+  `BlockRenderer` (`case 'products'`, fetched in parallel) and into the
+  Pages builder (add-button, preview, title field).
+- **Admin "The Showroom"** (`/admin/products` + nav) — full CRUD for
+  non-technical product management, Services-module pattern: ordering,
+  sale pricing, photo URL, category, in-stock/featured, and a "How it
+  sells" section choosing the selling method per product.
+- **`seed-atomic-finds-catalog.sql`** — the 10 photographed design-catalog
+  pieces (SKUs AF-002…AF-014, prices from the design's catalog JSON) as
+  `inquiry` products; photos shipped at
+  `tools/build-workflows/public/atomic-finds/products/` (14 files). The 4
+  Marketplace rows stay `listing` — 14 items total, both CTA states live.
+  Idempotent (delete-by-client+SKU first).
+- **Theme sync:** ATOMIC_TOKENS heading font → Bagel Fat One (+ Pacifico
+  import) matching the synced `sites/atomic-finds/CLAUDE.md`.
+- **Verified:** `tsc --noEmit` clean; full `next build` succeeds with
+  `/admin/products` in the route table.
+- **Still open:** 4 photos without data rows (lamp-01, bookshelf-03,
+  peacock-05, bamboo-armchair-09 — need titles/prices, add via Showroom);
+  contact form as the inquiry destination is `#contact` — fine on pages
+  with a contact block, revisit deep-linking later; cart/checkout remains
+  deliberately unbuilt (foundation only, per decision #8).
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
 
