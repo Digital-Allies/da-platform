@@ -20,6 +20,7 @@ import ProductGrid from '@/components/site/ProductGrid'
 import GalaxyCard from '@/components/site/GalaxyCard'
 import Starfield from './Starfield'
 import AtomicContactForm from './AtomicContactForm'
+import AtomicNav from './AtomicNav'
 
 const ASSET = '/atomic-finds'
 
@@ -76,25 +77,7 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
       <div className="af-weave-fixed" />
       <div className="af-page">
 
-        {/* NAV */}
-        <nav className="af-nav">
-          <a className="af-nav-logo" href="#home">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="af-nav-logo-mark" src={`${ASSET}/logos/logo-mark-new.png`} alt="Atomic Finds ATX" style={{ width: 99, height: 101 }} />
-          </a>
-          <div className="af-nav-links">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <a className="af-nav-link" href="#shop"><img src={`${ASSET}/icons/Shop.png`} alt="" />Shop</a>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <a className="af-nav-link" href="#process"><img src={`${ASSET}/icons/restoration.png`} alt="" />How It Works</a>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <a className="af-nav-link" href="#reviews"><img src={`${ASSET}/icons/star.png`} alt="" />Reviews</a>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <a className="af-nav-link" href="#contact"><img src={`${ASSET}/icons/Contact.png`} alt="" />Contact</a>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <a className="af-nav-cta" href="#shop"><img src={`${ASSET}/icons/Cart.png`} alt="" />Shop Now</a>
-          </div>
-        </nav>
+        <AtomicNav />
 
         {/* HERO */}
         <section className="af-hero" id="home">
