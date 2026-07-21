@@ -53,9 +53,15 @@ export default function AdminLoginPage() {
     setLoading(true)
     setError('')
 
+    // Use the client's stable production domain, not window.location.origin —
+    // if this is requested from a Vercel preview/branch URL, that domain is
+    // walled behind Vercel's own login (Deployment Protection), so the
+    // recovery email's link would dead-end there before ever reaching this
+    // app's /admin/reset-password page.
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin
     const supabase = createClient()
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/admin/reset-password`,
+      redirectTo: `${siteUrl}/admin/reset-password`,
     })
 
     setLoading(false)
