@@ -1,16 +1,16 @@
 # Handoff: Product Grid (Featured Finds)
 
-> **⚠ CTA contract superseded (2026-07-21).** This package predates the
-> flexible-conversion-layer direction (root `STATUS.md` decision #8 /
-> `sites/atomic-finds/CLAUDE.md` "Commerce rules"). The single fixed
-> `View Listing → external_url` CTA described below is now only the
-> **default/Phase-1 state**, not the contract: the production
-> implementation must drive each card's CTA from a **per-product selling
-> state** (outbound link / inquiry / direct-payment coordination / future
-> checkout), with label + action varying per product and no hard-coded
-> "Buy Now". A follow-up `products` migration adds the selling-state/CTA
-> field; everything else in this spec (layout, tokens, image fallback,
-> price states, title clamp) still stands.
+> **Updated 2026-07-21 for the flexible conversion layer.** The CTA is
+> driven per product by a `selling_state` field (`listing` / `inquiry` /
+> `direct` / `checkout`) resolved through `resolveProductCta()` in
+> `src/lib/commerce.ts` (the production source of truth) — not a single
+> fixed "View Listing" link. `ProductCard.reference.jsx` /
+> `ProductGrid.reference.jsx` / `ProductCard.prompt.md` in this package
+> implement and document that resolver so they stay consistent with the
+> shipped `ProductGrid.tsx` component. See root `STATUS.md` decision #8
+> and `sites/atomic-finds/CLAUDE.md` "Commerce rules" for the full policy.
+> Everything else in this spec (layout, tokens, image fallback, price
+> states, title clamp) is unchanged.
 
 ## Overview
 Homepage "Featured Products" section wired to the live Supabase `products` table (see `da-platform` repo, PR #1). This package hands off a hi-fi React reference implementation of `ProductCard` / `ProductGrid` styled to the Atomic Finds ATX design system, ready to drop into the Next.js CMS engine's `BlockRenderer.tsx` as the `case 'products':` block.
@@ -26,7 +26,7 @@ Components expect props shaped exactly like a `products` row — no transform ne
 ```ts
 { id, title, description, price, original_price, condition, location,
   listed_label, attributes, image_url, external_url, seller_name,
-  seller_rating, display_order }
+  seller_rating, selling_state, cta_label, display_order }
 ```
 Sort by `display_order` ascending before passing in (canonical sort, already the DB order from `getProducts()`).
 
@@ -49,7 +49,7 @@ Sort by `display_order` ascending before passing in (canonical sort, already the
 - **Meta line**: `location` + `listed_label` joined with " · ", 12px, `--fg-muted` (#9A8F7D). Display `listed_label` verbatim — never parse/reformat ("3 days ago", "In stock" are both valid as-is).
 - **Attribute chips**: up to 3 entries from the free-form `attributes` object, rendered `Key: value` — 11px pill, `#D9CFBF` text, `#14120E` bg, 1px border, 6px radius.
 - **Price row**: `price == null` → "Inquire" (only state, no dollar sign). Else current price in Bagel Fat One 20px `--celestial-yellow`; if on sale, `original_price` shown first with strikethrough at 14px `--fg-soft` (#6A6052).
-- **CTA**: right-aligned pill button/link → `external_url`, `target="_blank" rel="noopener noreferrer"`, label **"View Listing →"** (never "Buy Now" — `external_url` is a Marketplace listing today, will become a checkout link later without a schema change). 11px/700/uppercase, `--celestial-yellow` text, 1px border, pill radius.
+- **CTA**: right-aligned pill button/link, resolved from `selling_state` (never hard-coded "Buy Now"): `listing`/`checkout` with `external_url` set → opens that link in a new tab (`target="_blank" rel="noopener noreferrer"`), default label "View Listing"/"Purchase Options"; otherwise → links to `#contact` in the current tab, default label "Ask About This Item"/"Message to Buy". `cta_label` overrides the default label for any state. 11px/700/uppercase, `--celestial-yellow` text, 1px border, pill radius.
 - **Trust line** (only if `seller_name` or `seller_rating` present): top-bordered footer row, `seller_name` + `seller_rating` joined " · ", 11px `--fg-soft`.
 
 ## Design Tokens

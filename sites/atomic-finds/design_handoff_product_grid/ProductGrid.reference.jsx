@@ -1,4 +1,20 @@
 // Reference only — rename ProductGridRef to ProductGrid in your target codebase.
+// CTA logic mirrors the production resolver at src/lib/commerce.ts
+// (resolveProductCta) — see that file for the source of truth.
+const CTA_DEFAULT_LABELS = {
+  listing: 'View Listing',
+  inquiry: 'Ask About This Item',
+  direct: 'Message to Buy',
+  checkout: 'Purchase Options',
+};
+
+function resolveCtaRef({ selling_state, cta_label, external_url }) {
+  const state = selling_state || 'inquiry';
+  const label = cta_label || CTA_DEFAULT_LABELS[state] || CTA_DEFAULT_LABELS.inquiry;
+  const external = (state === 'listing' || state === 'checkout') && !!external_url;
+  return { label, href: external ? external_url : '#contact', external };
+}
+
 /**
  * ProductGrid — Renders a `products` array (Supabase output) as a responsive card grid
  * @kind component
@@ -13,11 +29,14 @@ function ProductGridCardRef({
   attributes,
   image_url,
   external_url,
+  selling_state,
+  cta_label,
   seller_name,
   seller_rating,
 }) {
   const attrEntries = attributes ? Object.entries(attributes).slice(0, 3) : [];
   const onSale = original_price != null && price != null;
+  const cta = resolveCtaRef({ selling_state, cta_label, external_url });
 
   return (
     <div
@@ -85,11 +104,10 @@ function ProductGridCardRef({
             )}
           </div>
           <a
-            href={external_url}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={cta.href}
+            {...(cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
             style={{ fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--celestial-yellow)', border: 'var(--border-1)', padding: '8px 14px', borderRadius: 'var(--radius-pill)', textDecoration: 'none', whiteSpace: 'nowrap' }}
-          >View Listing →</a>
+          >{cta.label}{cta.external ? ' →' : ''}</a>
         </div>
 
         {(seller_name || seller_rating) && (

@@ -19,7 +19,7 @@ import { ProductGrid } from './ProductGrid.jsx';
 - Meta line → `location` + `listed_label`, joined, displayed as-is (never parsed).
 - Attribute chips → up to 3 entries from `attributes` (free-form key/value).
 - Price → `price` + `original_price` strikethrough when on sale; `price: null` renders "Inquire".
-- CTA → links to `external_url` (Marketplace today, checkout later — same field), opens in a new tab, labeled "View Listing".
+- CTA → driven by `selling_state`, resolved the same way as `src/lib/commerce.ts`'s `resolveProductCta()`: `listing`/`checkout` with an `external_url` set open that link in a new tab (default label "View Listing" / "Purchase Options"); `inquiry`/`direct`, or a `listing`/`checkout` product with no URL, link to `#contact` in the current tab (default label "Ask About This Item" / "Message to Buy"). `cta_label` overrides the default label for any state. Never hard-code "Buy Now" or assume every product links out.
 - Trust line (bottom) → `seller_name` + `seller_rating`, shown only if present.
 
 `description` is accepted but not rendered on the card — surface it in a detail view/modal if needed.
@@ -29,7 +29,7 @@ import { ProductGrid } from './ProductGrid.jsx';
 ```ts
 { id, title, description, price, original_price, condition, location,
   listed_label, attributes, image_url, external_url, seller_name,
-  seller_rating, display_order }
+  seller_rating, selling_state, cta_label, display_order }
 ```
 
 Sort by `display_order` ascending before passing in — the component renders in array order.
