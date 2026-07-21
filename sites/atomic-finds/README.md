@@ -1,128 +1,83 @@
-# Atomic Finds Design System — Complete Deliverables
+# Atomic Finds ATX — Design Assets & Handoffs
 
-## What's Included
+Atomic Finds ATX is a vintage rattan & bamboo furniture business restored and
+curated in Austin by **Jennyfer Gomez**. This directory holds the design
+system, brand assets, and Claude Design handoffs that feed the **live site**,
+which is built and served from `tools/build-workflows` (the shared DA CMS
+platform) — this folder is not itself a runnable app.
 
-### 1. Brand Foundation
-- **Atomic Fines Brand System.dc.html** — Dark-mode visual identity guide: color palette, typography, spacing, and component patterns
-- **Atomic Fines Color Palette.dc.html** — Interactive swatch reference with usage examples and contrast notes
-- **Brand Voice & Usage Guide.md** — Copywriting and tone guidelines for all touchpoints
-- **Atomic Fines Dark Mode Style Guide.md** — Full visual + brand reference
+> For current colors, type, spacing, and commerce rules, **`CLAUDE.md` in this
+> directory is the source of truth**, synced 2026-07-21 from the Claude Design
+> project. This README is an index of what's in the folder, not a duplicate
+> spec — if the two ever disagree, `CLAUDE.md` wins.
 
-### 2. Website & Frontend
-- **Atomic Fines Final Website.dc.html** — The canonical homepage:
-  - Sticky navigation bar
-  - Hero with glowing headline + alien character
-  - Feature grid (4 cards)
-  - Featured collection gallery (6 pieces)
-  - CTA section
-  - Multi-column footer
-- **Component Library.dc.html** — Reusable component system:
-  - Button styles (primary outline, solid, amber accent)
-  - Badges and status indicators
-  - Product cards + the signature galaxy card with neon ring frame
-  - Testimonial pattern
-  - Form elements
-  - Color reference
+## Where the live implementation actually lives
 
-### 3. CMS & Admin
-- **CMS Admin Interface.dc.html** — Admin dashboard with sidebar nav, dashboard metrics, product table, and create/edit forms
-- **Digital Allies CMS Integration.md** — Backend integration guide (the CMS platform is Digital Allies; the Atomic Finds brand styling is entirely its own)
-- **cms-schema.json** — Content structure and data models
+| Piece | Path (in `tools/build-workflows`) |
+|---|---|
+| Bespoke homepage | `src/components/site/atomic-finds/AtomicFindsHomepage.tsx` |
+| Homepage styles | `src/styles/atomic-finds.css` |
+| Product grid + quick-view modal | `src/components/site/ProductGrid.tsx` |
+| Galaxy Card (signature featured-product component) | `src/components/site/GalaxyCard.tsx` |
+| CTA / selling-state resolver | `src/lib/commerce.ts` (`resolveProductCta`) |
+| Products admin ("The Showroom") | `src/app/admin/(protected)/products/page.tsx` |
+| Reviews admin | `src/app/admin/(protected)/reviews/page.tsx` |
+| Commerce schema migration | `supabase/migrations/20260121000000_products_commerce_fields.sql` |
+| Reviews schema migration | `supabase/migrations/20260122000000_reviews_table.sql` |
+| Catalog + reviews seed data | `supabase/seed-atomic-finds-catalog.sql`, `supabase/seed-atomic-finds-reviews.sql` |
 
-### 4. Visual Assets
-- **assets/alien-daisy.png**, **alien-malibu.png**, **alien-milo.png**, **alien-ruso.png**, **alien-totiana.png** — Transparent alien characters (rattan-themed)
+The homepage route (`src/app/page.tsx`) special-cases Atomic Finds by
+`NEXT_PUBLIC_CLIENT_ID` to render `AtomicFindsHomepage` instead of the
+generic block-based renderer other clients use, so the layout can match the
+approved design pixel-for-pixel.
 
----
+## Commerce architecture (why this matters for future clients)
 
-## Design System Overview
+Atomic Finds is the platform's first real e-commerce-oriented build, and its
+patterns are meant to be reused, not one-offs:
 
-### Color Palette — Dark Mode (Golden Glow)
-| Color | Hex | Role |
-|-------|-----|------|
-| Celestial Yellow | #ffd966 | Primary accent — headlines, CTAs, glow |
-| Amber Orange | #d4822a | Secondary glow — cursive subheads, hover |
-| Rattan Tan | #d4aa82 | Borders, dividers, nav rules, texture |
-| Bone White | #f0e6d6 | Primary body text |
-| Woven Moss | #b8b8a8 | Muted text, captions |
-| Rattan Black | #2a2017 | Card surfaces, section variation |
-| Deep Charcoal | #0a0a0a | Primary background |
-| Hero Gradient | #1a1510 → #0a0a0a | Hero + CTA depth backgrounds |
+- **Flexible conversion layer, not a checkout commitment.** Sales today
+  happen off-platform (Facebook Marketplace, direct payment, inquiry) — there
+  is no native checkout yet. Each product has a `selling_state`
+  (`listing | inquiry | direct | checkout`) and an optional `cta_label`
+  override; `resolveProductCta()` is the single place any component computes
+  a CTA label and destination, so a future checkout provider can slot in
+  without touching component code. CTAs are never hard-coded to "Buy Now."
+- **Quick-view modal, not per-product pages** — `ProductGrid` and
+  `GalaxyCard` both open a shared detail modal instead of routing to a
+  dedicated product URL.
+- **Reviews are a reusable, source-agnostic feature.** The `reviews` table
+  has a free-text `source` field (Facebook, Google, Yelp, etc.), editable per
+  review in the admin UI — it is not hard-coded to Facebook even though every
+  current review was sourced from Jennyfer's Facebook Marketplace profile.
+- **Admin-first.** Both products ("The Showroom") and reviews are fully
+  CRUD-able by a non-technical owner from `/admin`, following the same
+  pattern as the platform's existing Services module.
 
-### Typography
-- **Display/Headers:** Playfair Display — 56–72px, 800, glowing
-- **Subheadings/Accents:** Great Vibes (cursive) — 28–32px, amber
-- **Body & Details:** JetBrains Mono — 14–15px body, 12px labels
-- **Line height:** 1.7–1.8 for breathing room
-- **Labels:** UPPERCASE tracked +2px
+## What's in this directory
 
-### Spacing
-- Scale: 4 · 8 · 12 · 16 · 20 · 24 · 32 · 48 · 60 · 80 · 120px
-- **Section padding:** 80–120px top/bottom
-- **Max width:** 1280px containers, 800px prose
+### Design system & brand
+- `CLAUDE.md` — **current** design tokens, type, spacing, motion, voice, and commerce rules (read this first)
+- `Atomic Fines Brand System.dc.html`, `Atomic Fines Color Palette.dc.html`, `Atomic Fines Dark Mode Style Guide.md` — visual identity references
+- `Brand Voice & Usage Guide.md` — copywriting/tone guidelines
+- `Digital Allies CMS Integration.md`, `cms-schema.json` — backend integration notes
 
-### Component Patterns
-- **Buttons:** Outlined primary (golden glow on hover), solid yellow, amber accent
-- **Cards:** 2px rattan-tan border, hover lift (6px) + neon glow
-- **Galaxy card:** Continuous rounded frame, galaxy-lit background, neon ring around the image, info flows straight down (no tag break)
-- **Badges:** Status indicators in golden/amber
-- **Forms:** Dark inputs with golden focus ring
+### Claude Design handoffs (source of the live build)
+- `design_handoff_homepage/` — full homepage HTML/CSS/tokens/fonts pulled from the approved Claude Design project (`29110ac3-0a76-4fa1-a322-a78bc212a50d`), plus `products-catalog.json` / `reviews-catalog.json` reference data
+- `design_handoff_product_grid/` — ProductCard/ProductGrid reference components and prompt, updated to match the shipped `resolveProductCta()` contract
+- `Galaxy Card.dc.html`, `Galaxy Product Card Component/` — the signature orbital "Galaxy Card" featured-product component, source for `GalaxyCard.tsx`
+- `atomic-finds-design-system/` — exported design-system bundle (colors, type, component templates)
+- `scroll-animation-hero-2/`, `scroll-animation-hero-component/` — hero scroll-animation exploration (not yet in the shipped homepage)
 
----
+### Assets
+- `assets/` — fonts, product photos, curator character art (Daisy, Milo, Tatiana, Malibu), patterns, logo variations
+- `uploads/` — misc generated/reference imagery from design exploration
+- `screenshots/` — component and layout verification screenshots
 
-## How to Use This System
+## Status
 
-### For Designers
-1. Open **Atomic Fines Brand System.dc.html** for visual reference
-2. Refer to **Brand Voice & Usage Guide.md** for copywriting rules
-3. Use **Component Library.dc.html** as your pattern reference
-
-### For Content Managers
-1. Use **CMS Admin Interface.dc.html** as your reference for workflows
-2. Refer to **Brand Voice & Usage Guide.md** when writing copy
-
----
-
-## Brand Voice Summary
-
-**The Voice:** Warm, authentic, handmade. Fran & Mabel know their stuff and genuinely love what they do.
-
-**Core Values:**
-- Handcrafted heritage (celebrate every piece's story)
-- Sustainable by nature (giving vintage a second life)
-- Fran & Mabel's personality (real people, real taste)
-
-**Key Phrases:**
-- "Handpicked vintage rattan, restored with love"
-- "Each piece tells a story of mid-century craftsmanship"
-- "Curated by Fran & Mabel"
-- "Giving vintage a second life"
-
----
-
-## Project File Structure
-
-```
-atomic-finds-design-system/
-├── Atomic Fines Brand System.dc.html     (Brand guidelines — dark mode)
-├── Atomic Fines Color Palette.dc.html    (Swatch reference)
-├── Atomic Fines Final Website.dc.html    (Homepage)
-├── Component Library.dc.html             (Reusable components)
-├── CMS Admin Interface.dc.html           (Admin dashboard)
-├── Brand Voice & Usage Guide.md          (Copywriting rules)
-├── Atomic Fines Dark Mode Style Guide.md (Visual reference)
-├── Digital Allies CMS Integration.md     (Backend integration)
-├── cms-schema.json                       (Data structure)
-└── assets/
-    ├── alien-daisy.png
-    ├── alien-malibu.png
-    ├── alien-milo.png
-    ├── alien-ruso.png
-    └── alien-totiana.png
-```
-
----
-
-**Created:** June 2026
-**Brand:** Atomic Finds — Fran & Mabel's Rattan Revival Retreat
-**Aesthetic:** Dark-mode celestial 70s — deep charcoal, golden-glow neon, vintage rattan
-**Status:** Production-Ready
+- ✅ Homepage (hero, about, shop grid, curators, featured Galaxy Cards, process, reviews, contact, footer) built and visually verified against the approved design
+- ✅ Product catalog (10 real photographed pieces) + admin "Showroom" CRUD
+- ✅ Reviews (19 real reviews) + admin CRUD with editable `source` field
+- ⏳ Native on-site checkout — intentionally not built yet; architecture supports adding it later without a rework
+- ⏳ Reviews migration/seed still need to be run against Supabase (commerce-fields migration and catalog seed have already been run)

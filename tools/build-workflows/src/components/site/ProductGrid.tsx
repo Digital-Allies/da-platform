@@ -195,7 +195,9 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+      // z-[200] (not the default z-50) so this sits above any sticky nav a host
+      // page defines — Atomic Finds ATX's nav is z-index:100.
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8"
       style={{ background: 'rgba(0,0,0,0.7)' }}
       onClick={onClose}
       role="dialog"
@@ -250,7 +252,7 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
             </dl>
           )}
 
-          <div className="mt-auto flex items-center justify-between gap-4 pt-4" style={{ borderTop: '1px solid var(--tok-border)' }}>
+          <div className="mt-auto flex flex-col gap-3 pt-4" style={{ borderTop: '1px solid var(--tok-border)' }}>
             <div className="flex items-baseline gap-2" style={{ fontFamily: 'var(--tok-font-heading)', color: 'var(--tok-primary)', fontSize: 24 }}>
               {product.price == null ? (
                 <span>Inquire</span>
@@ -265,7 +267,12 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
                 </>
               )}
             </div>
-            <ProductCta product={product} onInquire={onClose} />
+            {/* Full-width in the modal's narrower detail column — the card's
+                inline price+CTA row is too tight for longer CTA labels like
+                "Ask About This Item". */}
+            <div className="flex justify-center">
+              <ProductCta product={product} onInquire={onClose} />
+            </div>
           </div>
         </div>
       </div>

@@ -5,8 +5,63 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (Atomic Finds ATX storefront
-build — see the "2026-07-21" section below)
+**Last updated:** 2026-07-21 — by Claude Code (Atomic Finds ATX bespoke
+homepage + reviews shipped — see "2026-07-21 (cont'd)" section below)
+
+## 2026-07-21 (cont'd) — Atomic Finds ATX bespoke homepage, Galaxy Card, reviews system
+
+Continuation of the same-day commerce build below, on the same branch/PR #4
+(still a draft — Anthony asked to hold merge until he's reviewed the design
+match). Scope corrected mid-session: Anthony clarified the "flexible
+conversion layer" scope was about how the product grid/checkout *functions*,
+not the whole homepage — the actual ask is a homepage that mirrors the
+approved Claude Design homepage (Claude Design project `29110ac3-0a76-4fa1-
+a322-a78bc212a50d`) closely enough to show the client for the first time.
+
+- **`AtomicFindsHomepage.tsx`** (new, ~300 lines) — full bespoke homepage
+  (hero, about, shop grid via `ProductGrid`, curators, 3 featured Galaxy
+  Cards, process, reviews, contact, text band, footer) with real copy from
+  the design handoff. Special-cased in `src/app/page.tsx` by
+  `ATOMIC_FINDS_CLIENT_ID` so it bypasses the generic `BlockRenderer` — see
+  that file's comment for why. Wrapped in `<SiteTheme>` (see bug below).
+- **`GalaxyCard.tsx`** (new) — production port of the signature orbital-ring
+  featured-product component; quick-view dialog CTA now goes through
+  `resolveProductCta()` instead of the reference's hardcoded "Add to Cart".
+- **Reviews system (reusable, not Facebook-only):**
+  `20260122000000_reviews_table.sql` (new `reviews` table — `source` is a
+  free-text field, default `'other'`, editable per row, NOT hard-coded to
+  Facebook) + `seed-atomic-finds-reviews.sql` (19 real reviews from
+  Jennyfer's Facebook Marketplace profile, `source='facebook'`, 6 featured)
+  + `getFeaturedReviews()` in `data.ts` + full admin CRUD at
+  `/admin/reviews` with a `<datalist>` of source suggestions.
+  **Not yet run in Supabase** — Anthony already ran the commerce-fields
+  migration + catalog seed, but these two reviews files came after that and
+  are still pending.
+- **`src/styles/atomic-finds.css`** (new) — full token + section CSS scoped
+  under `.af-homepage`, ported from the design handoff.
+- **Bonus fix, pre-existing, site-wide:** `tools/build-workflows` had no
+  `postcss.config.js`, so Tailwind's `@tailwind` directives were never
+  processed by Next's build pipeline — every `@tailwind`-derived utility
+  class was silently a no-op across the *entire* app, not just this build.
+  Root-caused via `getComputedStyle` (classes present, styles absent) and
+  fixed by adding `postcss.config.js` (`tailwindcss` + `autoprefixer`).
+- **Other real bugs found + fixed via Playwright visual verification:** a
+  CSS specificity bug (`.af-homepage a` outranking single-class button
+  rules, making hero CTA text invisible — fixed with `:where(a)`); quick-view
+  modal `z-50` rendering below the sticky nav's `z-index: 100` — fixed to
+  `z-[200]`; modal CTA text clipping in the narrow detail column — fixed by
+  stacking price/CTA vertically instead of one crowded row.
+- **Verified:** visually confirmed every homepage section against the
+  approved design via a temporary local route + Playwright screenshots
+  (route deleted before commit — not part of the shipped diff); `tsc
+  --noEmit` clean; `next build` succeeds end-to-end with the full route
+  table (`/admin/products`, `/admin/reviews`, homepage, etc.), zero errors.
+- **`sites/atomic-finds/README.md`** rewritten to reflect the actual live
+  build location and commerce architecture instead of only listing design
+  deliverables.
+- **Still open:** run the two reviews SQL files in Supabase (see above);
+  native on-site checkout intentionally still unbuilt (decision #8);
+  cart/deep-linking beyond `#contact` not yet built.
 
 ## 2026-07-21 — Atomic Finds ATX storefront: components, admin Showroom, commerce schema
 

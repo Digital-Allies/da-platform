@@ -44,6 +44,22 @@ export interface Testimonial {
   created_at: string
 }
 
+export interface Review {
+  id: string
+  client_id: string
+  reviewer_name: string
+  review_date: string | null
+  rating_type: 'written' | 'rating_only'
+  text: string | null
+  seller_response: string | null
+  source: string
+  notable_tags: string[]
+  featured_on_homepage: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
+}
+
 export type ProductSellingState = 'listing' | 'inquiry' | 'direct' | 'checkout'
 
 export interface Product {

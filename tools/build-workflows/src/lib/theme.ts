@@ -72,11 +72,17 @@ export const NEUTRAL_TOKENS: DesignTokens = {
   radius: '8px', radiusLg: '12px',
 }
 
+// Named client IDs — reused wherever code needs to branch per-client
+// (e.g. page.tsx picking the Atomic Finds ATX bespoke homepage).
+export const DA_CLIENT_ID = '3d76b896-e1fb-49f0-a8db-f62fdd5bc258'
+export const HCTC_CLIENT_ID = '7896354c-1d34-4649-85f5-51f2e5a7df6c'
+export const ATOMIC_FINDS_CLIENT_ID = '443936d5-f92e-480b-b206-c65cfb52bdfc'
+
 // Map real Supabase client_id → tokens.
 export const TOKENS_BY_CLIENT: Record<string, DesignTokens> = {
-  '3d76b896-e1fb-49f0-a8db-f62fdd5bc258': DA_TOKENS,     // Digital Allies
-  '7896354c-1d34-4649-85f5-51f2e5a7df6c': HCTC_TOKENS,   // Healthcare Training Center
-  '443936d5-f92e-480b-b206-c65cfb52bdfc': ATOMIC_TOKENS, // Atomic Finds
+  [DA_CLIENT_ID]: DA_TOKENS,
+  [HCTC_CLIENT_ID]: HCTC_TOKENS,
+  [ATOMIC_FINDS_CLIENT_ID]: ATOMIC_TOKENS,
 }
 
 export function getDesignTokens(clientId: string | undefined): DesignTokens {
