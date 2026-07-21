@@ -6,7 +6,29 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 — stale status is worse than none.
 
 **Last updated:** 2026-07-21 (evening) — by Claude Code
-(PR #7 Greptile review fixes applied; PR #4 merged; pending review on PR #5/6/7)
+(Contrast fixes + DA footer credit + i18n bilingual system scoped; PR #7 Greptile fixes applied)
+
+## 2026-07-21 (evening) — Contrast fixes, DA footer credit, i18n architecture scoped
+
+**Contrast improvements (WCAG AA compliance):**
+- Changed all non-accent body text to white (#ffffff) from low-contrast CSS vars:
+  - Section descriptions (collection, process): `var(--fg-body)` → white
+  - Footer copyright text: `var(--fg-soft)` → white
+  - Curator roles, review dates/tags, contact subtitles, social links: `var(--fg-muted)` → white
+  - Delivery stat labels: `var(--fg-muted)` → white
+
+**Digital Allies footer credit:**
+- Added "Website made with love by Digital Allies 🩷" below copyright
+- "Digital Allies" text links to https://digitalallies.com (gold color on hover)
+- Heart emoji (#F5A4C7, DA light pink) pulses with 2-second animation (scale 1→1.15)
+- New CSS classes: `.af-footer-credit`, `.af-da-heart` with `@keyframes af-pulse`
+
+**Bilingual system scoped (i18n):**
+- Created `I18N_SYSTEM_PLAN.md`: comprehensive architecture for EN/ES bilingual sites
+- Covers: next-intl integration, translations table schema, admin dashboard, language switcher UX, SEO (hreflang, sitemap, robots.txt), WCAG accessibility, Phase 1 (MVP on Atomic Finds) and Phase 2 (rollout) timelines
+- Ready for implementation when prioritized; enables all three sites (DA, HCTC, AF) to offer Spanish versions
+
+All changes verified TypeScript-clean, committed to `feat/atomic-finds-mobile-responsive`.
 
 ## 2026-07-21 (evening) — Mobile responsive Greptile review fixes
 
