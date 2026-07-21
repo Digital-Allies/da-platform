@@ -5,8 +5,13 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (Atomic Finds ATX bespoke
-homepage + reviews shipped — see "2026-07-21 (cont'd)" section below)
+**Last updated:** 2026-07-21 — by Claude Code (PR #4 reviewed and merged to
+`main` — the Atomic Finds ATX storefront below was live on Vercel but sitting
+unmerged for two days; `main` now matches what's actually deployed. Reviewed
+for RLS/migration safety and secrets before merging — clean, except one real
+finding: the homepage hardcodes "5.0 ★" review copy instead of computing it,
+and the `reviews` table has no numeric rating field at all, only a
+written/rating-only split — worth a follow-up fix.)
 
 ## 2026-07-21 (cont'd) — Atomic Finds ATX bespoke homepage, Galaxy Card, reviews system
 
@@ -105,8 +110,41 @@ SQL runs verified):
   contact form as the inquiry destination is `#contact` — fine on pages
   with a contact block, revisit deep-linking later; cart/checkout remains
   deliberately unbuilt (foundation only, per decision #8).
+
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
+
+## 2026-07-21 — daily build session: `ARCHITECTURE.md` backfilled
+
+Ran the scheduled Tue Jul 21 `BUILD-SCHEDULE.md` item (the Day-04 doc that's
+been outstanding since 2026-07-09). No `[Anthony]` blockers applied — this
+was a standalone docs task.
+
+- **`tools/build-workflows/ARCHITECTURE.md` written** from the CMS Build
+  Plan's original Vercel/architecture layout, reconciled line-by-line against
+  the actual `src/` tree rather than transcribed from the plan doc as-is (per
+  CLAUDE.md's "trust the code over old notes" rule — and it paid off, see
+  next item). Covers stack, multi-tenancy model, full route structure, the
+  data layer (and where it diverges from the original `lib/store.ts` design),
+  the content model/schema, the block-registry renderer, and the auth
+  middleware. `npx tsc --noEmit` clean (docs-only change, no code touched).
+
+- **Real finding, not just a writing exercise: the Services/Testimonials
+  admin module already exists.** Both `STATUS.md` (Major need #4) and
+  `BUILD-SCHEDULE.md` (Week of Jul 20, Wed–Thu Jul 22–23 slot) describe this
+  as unbuilt — "CMS admin has no Services/Testimonials module... editing
+  needs raw SQL." That's stale. `src/app/admin/(protected)/services/page.tsx`
+  ("The Departments") and `.../testimonials/page.tsx` ("Field Notes") are
+  full CRUD UIs — add/edit/delete/reorder, wired to the real `services`/
+  `testimonials` tables (`client_id` + RLS), linked in `AdminNav.tsx`. `git
+  log` shows this predates even this monorepo's Jul 6 import — it's not new
+  work landing unnoticed, it's been there the whole time and the docs never
+  caught up. **Action taken:** the Jul 22–23 schedule slot below is marked
+  superseded; don't pick it up as originally scoped. Full detail + the one
+  narrower gap that's still real (the *static* `sites/digitalallies`
+  `cms-loader.js` HTML-escaping port, a different codebase entirely) is in
+  `ARCHITECTURE.md`'s "Correction to STATUS.md" section — read that before
+  touching this area again.
 
 ## 2026-07-20 — daily build session: two Mon Jul 20 code fixes shipped
 
@@ -552,18 +590,29 @@ has actually been re-pointed to the monorepo. All three were open as of
 1. **Apply `security-fixes.sql` + enable leaked-password protection** — Supabase SQL editor + one Auth toggle. Also directly confirmed by Supabase's own Security Advisor (2026-07-17 audit: 6 warnings, including the exact RLS/`SECURITY DEFINER` issues this file fixes). (Anthony Dependency)
 2. ~~Rotate the leaked Supabase `service_role` key~~ — **done 2026-07-16.** Turned out more urgent than previously documented: `Digital-Allies/da-platform` was actually **public** on GitHub (STATUS.md's own decision #1 wrongly assumed private), so the leaked key was live-exposed, not a future risk. Anthony migrated to Supabase's new Publishable/Secret key system, disabled legacy keys (killing the old leaked one), updated the new Secret key in Vercel + `.env.local`, and made the repo private. Verified live: digitalallies.net and the CMS admin engine both work cleanly post-rotation.
 3. ~~Re-point the CMS admin engine's Vercel project at the monorepo~~ — **confirmed done, 2026-07-19** (connected to `Digital-Allies/da-platform` since Jul 10, per Anthony's screenshot + Vercel deployment history — earlier claims in this file that it was still on the old repo were wrong, corrected). This is **only** the CMS admin app — digitalallies.net is a separate, already-correct Vercel project (see 2026-07-16 audit).
-4. **Build the missing Services/Testimonials admin module** in the CMS engine so digitalallies.net's content can be edited without hand-written SQL — the actual prerequisite for "fully connecting" that site the way it should work long-term.
-5. **Escape HTML in `cms-loader.js`'s card-building code** before the above module ships (currently raw `innerHTML`, an injection risk once non-developers can enter content).
+4. ~~Build the missing Services/Testimonials admin module~~ — **already
+   exists, confirmed 2026-07-21** (`ARCHITECTURE.md`'s correction section has
+   full detail). This need is resolved; what's left is unrelated: porting
+   the `cms-loader.js` HTML-escaping fix (below) to the live static site.
+5. **Escape HTML in `cms-loader.js`'s card-building code** — done in this
+   monorepo's copy 2026-07-20, still needs manual porting to the live
+   `Digital-Allies/DigitalAllies` repo (separate codebase from the admin
+   module above — see `TODO.md` Backlog).
 6. **2026-07-17 Vercel/Supabase audit fixes + Atomic Finds onboarding** — full checklist in `TODO.md` Priorities 4–5, not duplicated here.
 
 ## Next steps (in order)
 
-1. Add basic HTML-escaping to `cms-loader.js`'s card-building code (small, prevents a real injection risk once non-developers can edit content).
-2. Remove the dead `tailwind.config` block from digitalallies.net's inline script.
-3. Build the missing Services/Testimonials admin module in the CMS engine (`tools/build-workflows`) — this is the actual prerequisite for a "solid CMS connection" before fully connecting the site's content.
+1. ~~Add basic HTML-escaping to `cms-loader.js`'s card-building code~~ — done 2026-07-20 (this repo's copy); still needs manual porting to the live `Digital-Allies/DigitalAllies` repo.
+2. ~~Remove the dead `tailwind.config` block from digitalallies.net's inline script~~ — done 2026-07-20; same live-repo porting gap as above.
+3. ~~Build the missing Services/Testimonials admin module~~ — turned out to already exist, confirmed 2026-07-21 (see ARCHITECTURE.md).
 4. **Anthony-only:** rotate the leaked `service_role` key; apply `security-fixes.sql` + enable leaked-password protection; re-point the `da-webwssite-build-workflows` Vercel project to `Digital-Allies/da-platform` (root `tools/build-workflows`).
-5. **The original Day 19/20 domain cutover is still the real end-state goal, just not yet — do after 1–4.** `BUILD-SCHEDULE.md` originally called for pointing `digitalallies.net` itself at the Next.js CMS engine (the "Templated" tier from decision #2) and retiring the separate static-site repo. Today's setup — static site + `cms-loader.js` pulling from Supabase — is the "Connected" tier working as designed, and it's live and fine, but it isn't the full cutover the 30-Day Run originally scoped. Revisit whether full cutover is still the goal once the admin module (step 3) exists; if so: add `digitalallies.net`/`www` to the `da-webwssite-build-workflows` Vercel project, update Supabase Auth Site URL + redirect URLs, verify magic-link login and the contact form on the real domain, confirm anon/draft RLS, then switch DNS.
-6. Backfill the Day-04 `ARCHITECTURE.md` at a convenient point.
+5. **The original Day 19/20 domain cutover is still the real end-state goal, just not yet — do after 4.** `BUILD-SCHEDULE.md` originally called for pointing `digitalallies.net` itself at the Next.js CMS engine (the "Templated" tier from decision #2) and retiring the separate static-site repo. Today's setup — static site + `cms-loader.js` pulling from Supabase — is the "Connected" tier working as designed, and it's live and fine, but it isn't the full cutover the 30-Day Run originally scoped. Revisit whether full cutover is still the goal now that the admin module (step 3) is confirmed to exist; if so: add `digitalallies.net`/`www` to the `da-webwssite-build-workflows` Vercel project, update Supabase Auth Site URL + redirect URLs, verify magic-link login and the contact form on the real domain, confirm anon/draft RLS, then switch DNS.
+6. ~~Backfill the Day-04 `ARCHITECTURE.md`~~ — done 2026-07-21.
+7. Pick the next real `BUILD-SCHEDULE.md` item now that Jul 22–23's original
+   slot (Services/Testimonials) is moot — see that file's Week of Jul 20
+   section for the note, and decide what fills the freed time (dashboard
+   backlog items from Week of Jul 27 are the next real code work, but check
+   for anything higher-priority first).
 
 ## Only-Anthony dependencies (not decisions — just hands-on)
 

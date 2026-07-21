@@ -131,18 +131,30 @@ continuation of stale dates above.
   shipped (done).
 
 ### Tue Jul 21 · Backfill `ARCHITECTURE.md`
-- **[Agent]** Write it from the CMS Build Plan's Vercel/architecture layout
-  (outstanding since Day 04 — STATUS.md next-step, never done).
+- ~~**[Agent]** Write it from the CMS Build Plan's Vercel/architecture layout
+  (outstanding since Day 04 — STATUS.md next-step, never done).~~ **Done,
+  2026-07-21** — see `tools/build-workflows/ARCHITECTURE.md`.
 - **Done when —** `ARCHITECTURE.md` exists and matches what's actually built.
 
-### Wed–Thu Jul 22–23 · Services/Testimonials admin module
-- **[Agent]** Build the missing admin module so digitalallies.net's
+### Wed–Thu Jul 22–23 · SUPERSEDED — Services/Testimonials admin module already exists
+**⚠ 2026-07-21: while writing `ARCHITECTURE.md`, found this module was
+already fully built** (`admin/(protected)/services/` "The Departments" +
+`admin/(protected)/testimonials/` "Field Notes" — full CRUD, real
+`client_id`+RLS tables, linked in nav — predates this monorepo's Jul 6
+import). The premise below ("CMS admin has no Services/Testimonials
+module") is stale; do not build this. Full detail in `ARCHITECTURE.md`'s
+"Correction to STATUS.md" section and `STATUS.md`'s 2026-07-21 entry.
+This slot is free — next agent should pick up the next real item (dashboard
+backlog, Week of Jul 27, is next in schedule order) rather than leaving two
+days idle, but confirm with Anthony's TODO.md first in case something
+higher-priority surfaced.
+- ~~**[Agent]** Build the missing admin module so digitalallies.net's
   services/testimonials can be edited without hand-written SQL — the
   actual prerequisite for "fully connecting" that site (STATUS.md Major
   need #4). Include the HTML-escaping fix from Monday if not already
-  covering this surface.
-- **Done when —** services + testimonials are editable from `/admin`, and
-  `cms-loader.js`'s rendering is confirmed still correct against it.
+  covering this surface.~~
+- ~~**Done when —** services + testimonials are editable from `/admin`, and
+  `cms-loader.js`'s rendering is confirmed still correct against it.~~
 
 ### Fri Jul 24 · Review / buffer
 - Skim the week's commits, confirm deploys are green, no new build prompts.
