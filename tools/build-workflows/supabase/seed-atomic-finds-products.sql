@@ -14,7 +14,7 @@
 
 -- Safe to re-run: clear out these exact listings (by external_url) before
 -- re-inserting, so this doesn't create duplicates on a second run.
-delete from products where external_url in (
+delete from products where client_id = '443936d5-f92e-480b-b206-c65cfb52bdfc' and external_url in (
   'https://www.facebook.com/marketplace/item/2150548818844605/',
   'https://www.facebook.com/marketplace/item/3235493369971776/',
   'https://www.facebook.com/marketplace/item/1504095271020600/',
