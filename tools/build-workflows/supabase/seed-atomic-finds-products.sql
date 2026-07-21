@@ -12,6 +12,15 @@
 -- rest of the catalog when ready and this file can be extended.
 -- ============================================================
 
+-- Safe to re-run: clear out these exact listings (by external_url) before
+-- re-inserting, so this doesn't create duplicates on a second run.
+delete from products where external_url in (
+  'https://www.facebook.com/marketplace/item/2150548818844605/',
+  'https://www.facebook.com/marketplace/item/3235493369971776/',
+  'https://www.facebook.com/marketplace/item/1504095271020600/',
+  'https://www.facebook.com/marketplace/item/1365991472086639/'
+);
+
 insert into products (
   client_id, title, description, price, original_price, condition,
   location, listed_label, attributes, external_url, seller_name,

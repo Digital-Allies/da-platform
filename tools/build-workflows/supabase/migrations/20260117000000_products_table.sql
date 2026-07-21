@@ -43,3 +43,18 @@ create policy "Products: client full access"
 create policy "Products: public read"
   on products for select
   using (true);
+
+-- No shared `updated_at` trigger function exists yet in schema.sql (services/
+-- testimonials don't have an updated_at column), so it's defined here.
+create or replace function set_updated_at()
+returns trigger as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$ language plpgsql;
+
+create or replace trigger products_set_updated_at
+  before update on products
+  for each row
+  execute function set_updated_at();
