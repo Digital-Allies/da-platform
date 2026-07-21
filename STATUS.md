@@ -5,8 +5,27 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 (evening) — by Claude Code
-(Contrast fixes + DA footer credit + i18n bilingual system scoped; PR #7 Greptile fixes applied)
+**Last updated:** 2026-07-21 (evening) — by Anthony (Supabase keys rotated)
+then by Claude Code (Contrast fixes + DA footer credit + i18n bilingual system scoped)
+
+## 2026-07-21 (evening) — Production outage resolved: Supabase keys rotated & Vercel env vars updated
+
+**Outage summary:** CMS was returning 500 errors ("Your project's URL and Key are required to create a Supabase client!") since 2026-07-19.
+
+**Root cause:** Missing Supabase authentication keys in Vercel environment variables. The `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` were not present in the `da-webwssite-build-workflows` production environment.
+
+**Fix applied (by Anthony):**
+- Rotated Supabase API keys (new `supabase_anon_new` and `supabase_service_role_new` keys generated)
+- Added `NEXT_PUBLIC_SUPABASE_ANON_KEY` to Vercel Production + Preview scope
+- Added `SUPABASE_SERVICE_ROLE_KEY` to Vercel Production scope (server-side secret, not in Preview)
+- Verified `NEXT_PUBLIC_SUPABASE_URL` is correctly set
+- Updated SETUP.md with detailed key naming guidance and scoping requirements
+
+**Status:** ✅ Ready to redeploy. Next deployment will activate the new environment variables and resolve all 500 errors.
+
+**Documentation updated:** `SETUP.md` section 3b now includes detailed notes on Supabase key naming conventions and environment variable scoping to prevent this in future deployments.
+
+---
 
 ## 2026-07-21 (evening) — Contrast fixes, DA footer credit, i18n architecture scoped
 
