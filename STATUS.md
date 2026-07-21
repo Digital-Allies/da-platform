@@ -6,7 +6,7 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 — stale status is worse than none.
 
 **Last updated:** 2026-07-21 (evening) — by Anthony (Supabase keys rotated)
-then by Claude Code (Contrast fixes + DA footer credit + i18n bilingual system scoped)
+then by Claude Code (contrast fixes + DA footer credit + i18n scope + Atomic Finds cleanup/theme-engine scope)
 
 ## 2026-07-21 (evening) — Production outage resolved: Supabase keys rotated & Vercel env vars updated
 
@@ -160,6 +160,12 @@ SQL runs verified):
 
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
+
+## 2026-07-21 — `sites/atomic-finds` cleanup, theme-engine scope, and a real finding on PR #4
+
+- **`sites/atomic-finds` cleanup** ([PR #5](https://github.com/Digital-Allies/da-platform/pull/5)): removed 381 tracked files — three superseded generations of the design system, two abandoned scroll-hero prototypes, a standalone Galaxy Card prototype with unused scaffold Supabase functions, dev screenshots, and image-gen scratch output. Verified via grep before removal that nothing in `tools/build-workflows` or the canonical `design_handoff_homepage/` referenced any of it. Kept: `CLAUDE.md`, `design_handoff_homepage/` (canonical), `assets/` (still holds the raw Marketplace product photos needed for `products.image_url`, though some subfolders in it look prunable in a follow-up pass), and the Master Setup Doc (has real owner contact info/review themes not fully verified elsewhere — held for a human read rather than auto-removed).
+- **Theme engine scoped, not built**: `tools/build-workflows/THEME_ENGINE_PLAN.md` — plan to make per-client site theming admin-editable by extending the existing `settings` table (which already has a disconnected, unused `brand_color` field) rather than adding a new table, with `theme.ts`'s hardcoded `TOKENS_BY_CLIENT` becoming the seed/fallback instead of the source of truth.
+- **⚠ Open question — Atomic Finds frontend diverged from `main`:** storefront implementation appears only in draft [PR #4](https://github.com/Digital-Allies/da-platform/pull/4) (branch `claude/products-table-review-fixes-doa26m`). The `atomic-finds-atx` Vercel production alias appears to be deploying that branch rather than `main` — confirm Production Branch in Vercel Settings → Git before doing responsive/mobile work.
 
 ## 2026-07-21 — daily build session: `ARCHITECTURE.md` backfilled
 
