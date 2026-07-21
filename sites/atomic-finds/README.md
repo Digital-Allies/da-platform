@@ -56,23 +56,22 @@ patterns are meant to be reused, not one-offs:
 
 ## What's in this directory
 
+As of 2026-07-21 this folder was cleaned up — three superseded generations
+of design-system exports, two abandoned scroll-hero prototypes, a
+standalone Galaxy Card prototype, dev screenshots, and image-gen scratch
+output were removed (nothing in `tools/build-workflows` or the handoffs
+below referenced any of it). What's left is current:
+
 ### Design system & brand
 - `CLAUDE.md` — **current** design tokens, type, spacing, motion, voice, and commerce rules (read this first)
-- `Atomic Fines Brand System.dc.html`, `Atomic Fines Color Palette.dc.html`, `Atomic Fines Dark Mode Style Guide.md` — visual identity references
-- `Brand Voice & Usage Guide.md` — copywriting/tone guidelines
-- `Digital Allies CMS Integration.md`, `cms-schema.json` — backend integration notes
+- `Master Setup Guide_ Atomic Finds Digital Destination (1).txt` — early strategy doc; has real owner contact info and review themes, technical instructions are stale (describes a different, never-used platform) — worth a human skim to extract anything still useful, otherwise safe to remove
 
 ### Claude Design handoffs (source of the live build)
-- `design_handoff_homepage/` — full homepage HTML/CSS/tokens/fonts pulled from the approved Claude Design project (`29110ac3-0a76-4fa1-a322-a78bc212a50d`), plus `products-catalog.json` / `reviews-catalog.json` reference data
+- `design_handoff_homepage/` — full homepage HTML/CSS/tokens/fonts pulled from the approved Claude Design project (`29110ac3-0a76-4fa1-a322-a78bc212a50d`), plus `products-catalog.json` / `reviews-catalog.json` reference data. Includes the `GalaxyCard` reference component — this is the current source for `GalaxyCard.tsx`, not the old standalone prototype (removed).
 - `design_handoff_product_grid/` — ProductCard/ProductGrid reference components and prompt, updated to match the shipped `resolveProductCta()` contract
-- `Galaxy Card.dc.html`, `Galaxy Product Card Component/` — the signature orbital "Galaxy Card" featured-product component, source for `GalaxyCard.tsx`
-- `atomic-finds-design-system/` — exported design-system bundle (colors, type, component templates)
-- `scroll-animation-hero-2/`, `scroll-animation-hero-component/` — hero scroll-animation exploration (not yet in the shipped homepage)
 
 ### Assets
-- `assets/` — fonts, product photos, curator character art (Daisy, Milo, Tatiana, Malibu), patterns, logo variations
-- `uploads/` — misc generated/reference imagery from design exploration
-- `screenshots/` — component and layout verification screenshots
+- `assets/` — fonts, raw Marketplace product photos (still needed for `products.image_url`, currently null on several rows), curator character art, patterns, logo variations. Some subfolders here (pattern/icon/logo variants, design-guide reference screenshots) look like exploratory leftovers rather than shipped assets — flagged for a closer pass, not yet touched.
 
 ## Status
 
