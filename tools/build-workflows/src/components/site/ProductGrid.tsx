@@ -196,8 +196,10 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
   return (
     <div
       // z-[200] (not the default z-50) so this sits above any sticky nav a host
-      // page defines — Atomic Finds ATX's nav is z-index:100.
-      className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8"
+      // page defines — Atomic Finds ATX's nav is z-index:100. No md: escalation
+      // on padding here — this project's Tailwind spacing scale is redefined
+      // to design-system section sizes (p-8 = 120px), not the Tailwind default.
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4"
       style={{ background: 'rgba(0,0,0,0.7)' }}
       onClick={onClose}
       role="dialog"
@@ -227,7 +229,11 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
           )}
         </div>
 
-        <div className="p-6 md:p-8 flex flex-col">
+        {/* p-4, not p-6/p-8 — this project's Tailwind spacing scale is
+            redefined to design-system section sizes (p-6=64px, p-8=120px),
+            which left almost none of this ~270-330px column for text and
+            forced every line to wrap one word at a time. */}
+        <div className="p-4 flex flex-col">
           {product.tagline && (
             <div className="mb-1" style={{ fontFamily: "'Pacifico', cursive", color: 'var(--tok-secondary)', fontSize: 18 }}>
               {product.tagline}
