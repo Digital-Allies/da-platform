@@ -10,12 +10,14 @@ The multi-tenant CMS engine for Digital Allies, built with Next.js 15 + Supabase
 
 ## The Vision
 
-**Priority builds — digitalallies.net and Atomic Finds, side by side:**
+**Priority builds — digitalallies.net and Atomic Finds ATX, side by side:**
 
 - **`digitalallies.net` (live):** connected to the CMS — blog posts, services, and testimonials feed from Supabase into the existing static site. The admin panel is live at `cms.digitalallies.net`.
-- **Atomic Finds (active build):** the first full Templated-tier client site — and the platform's first **e-commerce site**. Products backend is review-complete (PR #1); homepage design handoff is landing from Claude Design; the catalog frontend, `'products'` block, and admin Products editor are the immediate build queue. Products are real and actively selling, so non-technical product management is a launch requirement, not a nice-to-have. Phase 1 links each product out to its Facebook Marketplace listing (`external_url`); the target is on-site checkout — the schema was built so a checkout provider swaps in with no schema change.
+- **Atomic Finds ATX (active build):** the first full Templated-tier client site, and the platform's proving ground for **reusable e-commerce foundations** — the most real client-like use case in the build, deliberately used to drive the commerce patterns future clients will get. It should feel like a legitimate e-commerce-ready storefront while the **conversion layer stays flexible**: sales currently complete through Facebook Marketplace, direct payment, or inquiry — not platform-native checkout. Build product cards, quick-view modals, and a cart-capable foundation, but do NOT assume every product gets a full native checkout flow on day one, and do NOT bake in provider-specific (e.g. Stripe-specific) assumptions in UX, CTA language, or architecture — say "checkout provider" / "payment platform" / "purchase flow." A future on-site checkout must slot in cleanly with no schema rethink.
 
-**Then:** onboard further paying clients on the same engine — each gets a Vercel-hosted website and their own admin login. HCTC is next in line as a tenant.
+**Healthcare Training Center stays a placeholder for now** — host it live as-is with the basic content-display foundation, but do not build deep (no compliance work, no training modules / video / progress tracking / certificates yet — those are long-term ideas, not current scope).
+
+**Then:** onboard further paying clients on the same engine — each gets a Vercel-hosted website and their own admin login.
 
 **This is not Duda. It's better.** Anthony owns the infrastructure, the code, and the client relationships. No platform lock-in.
 
@@ -71,28 +73,32 @@ For **Templated-tier** clients, this app also renders their public site: block-b
 | Client | `NEXT_PUBLIC_CLIENT_ID` | Tier | Notes |
 |---|---|---|---|
 | Digital Allies | `3d76b896-e1fb-49f0-a8db-f62fdd5bc258` | Connected | Seeded: settings, services, testimonials. Admin user: `contact@digitalallies.net` |
-| Healthcare Training Center | `7896354c-…` | Templated (building) | Navy/teal + Montserrat tokens |
-| Atomic Finds | `443936d5-f92e-480b-b206-c65cfb52bdfc` | Templated e-commerce (building) | Priority build — product catalog in progress, on-site checkout the end goal; see below |
+| Healthcare Training Center | `7896354c-…` | Templated (placeholder) | Host live as-is; basic content display only — no deep build or compliance scope yet. Navy/teal + Montserrat tokens |
+| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | Templated e-commerce-ready (building) | Priority build — storefront + catalog in progress, conversion layer intentionally flexible; see below |
 
 **Per-client theming is done:** `src/lib/theme.ts` maps design tokens by `client_id`; `SiteTheme.tsx` injects them as `--tok-*` CSS variables scoped to `.site-theme-scope`. Public sites each use their OWN design system (per-site `sites/<site>/CLAUDE.md`) — a client site must never look like Digital Allies. The admin stays DA-branded for all clients.
 
 ---
 
-## Atomic Finds E-commerce (priority build)
+## Atomic Finds ATX — E-commerce-Ready Storefront (priority build)
 
-**PR [#1](https://github.com/Digital-Allies/da-platform/pull/1) — schema + data layer, review-complete and ready to merge.** It adds:
+**Design intent (Anthony, 2026-07-21):** e-commerce-ready storefront with a flexible conversion layer. Sales complete off-site today (Facebook Marketplace, direct payment, or inquiry coordination); the conversion path may vary **per product**. CTAs must support multiple selling states without hard-coding "Buy Now" — approved directions: *View Listing, Show Interest, Claim Me, Ask About This Item, Get in Touch, Purchase Options, Message to Buy*. Quick-view modals instead of separate product pages for now. Cart-capable foundation, provider-agnostic language and architecture throughout. Everything built here should be reusable for future commerce clients on this platform.
+
+**PR [#1](https://github.com/Digital-Allies/da-platform/pull/1) — schema + data layer, MERGED 2026-07-21.** It added:
 
 - `supabase/migrations/20260117000000_products_table.sql` — `products` table (same `client_id` + RLS convention as services/testimonials), `(client_id, display_order)` index, `updated_at` auto-refresh trigger, `gen_random_uuid()` ids.
 - `supabase/seed-atomic-finds-products.sql` — 4 real listings from Jennyfer's Facebook Marketplace catalog. Idempotent (client-scoped delete-then-insert) — safe to re-run, but don't re-run after live product management starts.
 - `Product` type in `types.ts` + `getProducts()` in `data.ts`.
 
-**To apply after merge** (nothing touches the live DB automatically): Supabase Dashboard → Atomic Finds project → SQL Editor → paste + Run the migration file, then the seed file. Verify 4 rows in Table Editor → `products`.
+**To apply after merge** (nothing touches the live DB automatically): Supabase Dashboard → Atomic Finds ATX project → SQL Editor → paste + Run the migration file, then the seed file. Verify 4 rows in Table Editor → `products`.
 
-**Still to build:**
-1. Frontend catalog components (design handoff from Claude Design incoming) + a `'products'` case in `BlockRenderer.tsx`.
-2. **Admin Products editor** — required so non-technical users (Jennyfer) can add/remove products as items sell. Follow the Services module pattern (`admin/(protected)/services/page.tsx` — full CRUD with ordering).
-3. Product photos (`image_url` is intentionally NULL on all seeded rows) and the 5th product (cut off mid-paste in the source data).
-4. **On-site checkout** (provider TBD — Stripe is the house default for DA billing work). Until then, each product's CTA links out to its Facebook Marketplace listing via `external_url`; the same field carries the checkout link/embed later, no schema change.
+**Design handoff is in the repo:** `sites/atomic-finds/design_handoff_homepage/` — full brand system (tokens, component references incl. `ProductCard`/`ProductGrid`, guidelines), the production homepage as self-contained HTML, real product photography, and `products-catalog.json` with the real catalog (SKUs, categories, priced items). Note: the handoff's catalog JSON carries fields the live table doesn't have yet (`sku`, `category`, `badge`, `in_stock`, `origin/era/dimensions`) — a follow-up migration reconciles this before the storefront wiring lands.
+
+**Still to build (reusable-first):**
+1. Storefront components from the handoff — product cards, **quick-view modal** (no separate product pages yet), catalog grid with category tabs — plus a `'products'` case in `BlockRenderer.tsx`.
+2. **Flexible CTA layer** — per-product selling state driving the CTA (outbound link / inquiry / future checkout), no hard-coded "Buy Now."
+3. **Admin Products editor** — required so non-technical users (Jennyfer) can add/remove products as items sell. Follow the Services module pattern (`admin/(protected)/services/page.tsx` — full CRUD with ordering).
+4. **Cart-capable foundation** — architecture that lets a cart + on-site purchase flow slot in later; provider undecided, keep it agnostic. Until then, product CTAs resolve per product (Marketplace link via `external_url`, inquiry, or direct-payment coordination) with no schema rethink required later.
 
 ---
 
@@ -113,7 +119,7 @@ Live at `cms.digitalallies.net/admin`. Auth: Supabase (`@supabase/ssr`), with pa
 | Content ("Press Office") | Placeholder — needs templates + connection to digitalallies.net/learn/ format |
 | Projects | Placeholder — needs project templates |
 | Development ("Workshop") | Placeholder — needs templates, notifications, login/out button |
-| **Products** | **Missing — next up** (see Atomic Finds section) |
+| **Products** | **Missing — next up** (see Atomic Finds ATX section) |
 
 The admin UI follows the **Connected CMS prototype** (`cms-suite` repo, at `~/Claude/projects/cms-suite` — moved out of this monorepo 2026-07-16). That prototype is the admin design spec; the admin is not a generic CRUD skin.
 
@@ -251,7 +257,7 @@ Tracked properly in root `STATUS.md` + `tasks/anthony/TODO.md`; headline items a
 
 1. **Anthony:** apply `security-fixes.sql` + enable leaked-password protection (Supabase dashboard).
 2. **Anthony:** merge PR #1, then run the products migration + seed (steps above).
-3. **Build:** Atomic Finds catalog frontend + `'products'` block + **admin Products editor**.
+3. **Build:** Atomic Finds ATX storefront (components, quick-view modal, flexible CTAs) + `'products'` block + **admin Products editor**.
 4. **Build:** the placeholder admin sections (Development, Projects, Content) per Anthony's Vercel Toolbar notes.
 5. **Port** the 2026-07-20 `cms-loader.js` escaping + dead-`tailwind.config` fixes from `sites/digitalallies` to the live `Digital-Allies/DigitalAllies` repo.
 

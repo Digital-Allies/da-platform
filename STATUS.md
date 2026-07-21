@@ -5,9 +5,112 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (daily build session —
-`ARCHITECTURE.md` backfilled; found the Services/Testimonials admin module
-already exists, contradicting the Jul 22–23 schedule slot — see below)
+**Last updated:** 2026-07-21 — by Claude Code (PR #4 reviewed and merged to
+`main` — the Atomic Finds ATX storefront below was live on Vercel but sitting
+unmerged for two days; `main` now matches what's actually deployed. Reviewed
+for RLS/migration safety and secrets before merging — clean, except one real
+finding: the homepage hardcodes "5.0 ★" review copy instead of computing it,
+and the `reviews` table has no numeric rating field at all, only a
+written/rating-only split — worth a follow-up fix.)
+
+## 2026-07-21 (cont'd) — Atomic Finds ATX bespoke homepage, Galaxy Card, reviews system
+
+Continuation of the same-day commerce build below, on the same branch/PR #4
+(still a draft — Anthony asked to hold merge until he's reviewed the design
+match). Scope corrected mid-session: Anthony clarified the "flexible
+conversion layer" scope was about how the product grid/checkout *functions*,
+not the whole homepage — the actual ask is a homepage that mirrors the
+approved Claude Design homepage (Claude Design project `29110ac3-0a76-4fa1-
+a322-a78bc212a50d`) closely enough to show the client for the first time.
+
+- **`AtomicFindsHomepage.tsx`** (new, ~300 lines) — full bespoke homepage
+  (hero, about, shop grid via `ProductGrid`, curators, 3 featured Galaxy
+  Cards, process, reviews, contact, text band, footer) with real copy from
+  the design handoff. Special-cased in `src/app/page.tsx` by
+  `ATOMIC_FINDS_CLIENT_ID` so it bypasses the generic `BlockRenderer` — see
+  that file's comment for why. Wrapped in `<SiteTheme>` (see bug below).
+- **`GalaxyCard.tsx`** (new) — production port of the signature orbital-ring
+  featured-product component; quick-view dialog CTA now goes through
+  `resolveProductCta()` instead of the reference's hardcoded "Add to Cart".
+- **Reviews system (reusable, not Facebook-only):**
+  `20260122000000_reviews_table.sql` (new `reviews` table — `source` is a
+  free-text field, default `'other'`, editable per row, NOT hard-coded to
+  Facebook) + `seed-atomic-finds-reviews.sql` (19 real reviews from
+  Jennyfer's Facebook Marketplace profile, `source='facebook'`, 6 featured)
+  + `getFeaturedReviews()` in `data.ts` + full admin CRUD at
+  `/admin/reviews` with a `<datalist>` of source suggestions.
+  **Not yet run in Supabase** — Anthony already ran the commerce-fields
+  migration + catalog seed, but these two reviews files came after that and
+  are still pending.
+- **`src/styles/atomic-finds.css`** (new) — full token + section CSS scoped
+  under `.af-homepage`, ported from the design handoff.
+- **Bonus fix, pre-existing, site-wide:** `tools/build-workflows` had no
+  `postcss.config.js`, so Tailwind's `@tailwind` directives were never
+  processed by Next's build pipeline — every `@tailwind`-derived utility
+  class was silently a no-op across the *entire* app, not just this build.
+  Root-caused via `getComputedStyle` (classes present, styles absent) and
+  fixed by adding `postcss.config.js` (`tailwindcss` + `autoprefixer`).
+- **Other real bugs found + fixed via Playwright visual verification:** a
+  CSS specificity bug (`.af-homepage a` outranking single-class button
+  rules, making hero CTA text invisible — fixed with `:where(a)`); quick-view
+  modal `z-50` rendering below the sticky nav's `z-index: 100` — fixed to
+  `z-[200]`; modal CTA text clipping in the narrow detail column — fixed by
+  stacking price/CTA vertically instead of one crowded row.
+- **Verified:** visually confirmed every homepage section against the
+  approved design via a temporary local route + Playwright screenshots
+  (route deleted before commit — not part of the shipped diff); `tsc
+  --noEmit` clean; `next build` succeeds end-to-end with the full route
+  table (`/admin/products`, `/admin/reviews`, homepage, etc.), zero errors.
+- **`sites/atomic-finds/README.md`** rewritten to reflect the actual live
+  build location and commerce architecture instead of only listing design
+  deliverables.
+- **Still open:** run the two reviews SQL files in Supabase (see above);
+  native on-site checkout intentionally still unbuilt (decision #8);
+  cart/deep-linking beyond `#contact` not yet built.
+
+## 2026-07-21 — Atomic Finds ATX storefront: components, admin Showroom, commerce schema
+
+The e-commerce build (decision #8 below) shipped on branch
+`claude/products-table-review-fixes-doa26m` (PR #4's branch), on top of the
+merged products table (PR #1, applied to live Supabase by Anthony — both
+SQL runs verified):
+
+- **Migration `20260121000000_products_commerce_fields.sql`** — adds the
+  design-catalog fields (`sku`, `category`, `tagline`, `badge`, `in_stock`,
+  `origin`, `era`, `dimensions`) plus the flexible conversion layer:
+  `selling_state` ('listing' | 'inquiry' | 'direct' | 'checkout') +
+  `cta_label`; makes `external_url` nullable. Additive + safe to re-run.
+  **Not yet run in Supabase** (Anthony: SQL editor, then the catalog seed).
+- **`src/lib/commerce.ts`** — `resolveProductCta()`: the ONE place CTAs
+  resolve (label + destination per selling state, provider-agnostic). A
+  future checkout provider slots in by extending this function only.
+- **`ProductGrid.tsx`** (site component, client leaf) — cards + category
+  tabs + quick-view modal per `design_handoff_product_grid` spec: null-image
+  "Photo coming soon" state, Sale/Featured badges, "Inquire" price state,
+  2-line title clamp, seller trust line. Styled entirely from `--tok-*`
+  theme vars, so it's reusable by any commerce client. Wired into
+  `BlockRenderer` (`case 'products'`, fetched in parallel) and into the
+  Pages builder (add-button, preview, title field).
+- **Admin "The Showroom"** (`/admin/products` + nav) — full CRUD for
+  non-technical product management, Services-module pattern: ordering,
+  sale pricing, photo URL, category, in-stock/featured, and a "How it
+  sells" section choosing the selling method per product.
+- **`seed-atomic-finds-catalog.sql`** — the 10 photographed design-catalog
+  pieces (SKUs AF-002…AF-014, prices from the design's catalog JSON) as
+  `inquiry` products; photos shipped at
+  `tools/build-workflows/public/atomic-finds/products/` (14 files). The 4
+  Marketplace rows stay `listing` — 14 items total, both CTA states live.
+  Idempotent (delete-by-client+SKU first).
+- **Theme sync:** ATOMIC_TOKENS heading font → Bagel Fat One (+ Pacifico
+  import) matching the synced `sites/atomic-finds/CLAUDE.md`.
+- **Verified:** `tsc --noEmit` clean; full `next build` succeeds with
+  `/admin/products` in the route table.
+- **Still open:** 4 photos without data rows (lamp-01, bookshelf-03,
+  peacock-05, bamboo-armchair-09 — need titles/prices, add via Showroom);
+  contact form as the inquiry destination is `#contact` — fine on pages
+  with a contact block, revisit deep-linking later; cart/checkout remains
+  deliberately unbuilt (foundation only, per decision #8).
+
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
 
@@ -392,6 +495,28 @@ independently-animated constellation disc + dozens of AI in-between frames.
      OPTIONAL future capability (plan-gated, likely agency tier), not required now.
    - Net: per-client theming work is scoped to the **public site renderer only**,
      not the admin. Less work than theming both.
+8. **Atomic Finds ATX = priority build + the platform's e-commerce proving
+   ground; conversion layer stays flexible** (Anthony, 2026-07-21).
+   - The client is **Atomic Finds ATX** (use that name). It is prioritized
+     alongside digitalallies.net as the most real client-like use case — the
+     commerce patterns built for it (product cards, quick-view modals,
+     cart-capable foundation, admin product management) must be **reusable for
+     future clients**, not one-offs.
+   - **E-commerce-READY, not checkout-committed.** Sales complete off-site
+     today (Facebook Marketplace links, direct payment, inquiry coordination)
+     and the conversion path may vary per product. Quick-view modals instead of
+     separate product pages for now.
+   - **No provider-specific (e.g. Stripe-specific) assumptions** in UX, CTA
+     language, or architecture — say "checkout provider" / "payment platform" /
+     "purchase flow." Stripe may win later; not decided.
+   - **No hard-coded "Buy Now."** CTA patterns must support multiple selling
+     states — approved directions: View Listing / Show Interest / Claim Me /
+     Ask About This Item / Get in Touch / Purchase Options / Message to Buy.
+   - A future on-site checkout must slot in with **no schema rethink**
+     (`external_url` already carries the outbound target per product).
+   - **HCTC stays a placeholder**: host live as-is, basic content display only.
+     No deep build, no compliance scope, no training modules / video / progress
+     tracking / certificates yet — long-term ideas only.
 
 ## Shared-agent setup + what actually syncs (READ THIS)
 
