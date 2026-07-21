@@ -5,11 +5,19 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (Mobile-responsive design for
-Atomic Finds ATX implemented and verified in browser. Split nav into client
-component `AtomicNav` with hamburger toggle; responsive CSS for all sections
-with clamp() typography; GalaxyCard now scales with viewport. Tested on mobile
-(375×812) and desktop viewports. See feat/atomic-finds-mobile-responsive PR.)
+**Last updated:** 2026-07-21 (evening) — by Claude Code
+(PR #7 Greptile review fixes applied; PR #4 merged; pending review on PR #5/6/7)
+
+## 2026-07-21 (evening) — Mobile responsive Greptile review fixes
+
+Fixed all 4 Greptile review issues on PR #7 (feat/atomic-finds-mobile-responsive):
+
+- **Issue 1 — Closed menu keeps invisible focus targets:** Added `aria-hidden={!open}` and `inert={!open}` to nav panel to remove closed menu from accessibility tree and tab order.
+- **Issue 2 — Panel starts inside sticky navigation:** Adjusted `.af-nav-links` `top` position from 60px to 80px to account for mobile nav height (~48px logo + 12px padding top/bottom = 72px).
+- **Issue 3 — Responsive shell clips fixed content:** Increased GalaxyCard height clamp from `clamp(400px, 120vw, 520px)` to `clamp(520px, 140vw, 620px)` to prevent text clipping; made all text sizes responsive with clamp(); reduced padding at mobile; reduced description line clamp from 3 to 2 lines.
+- **Issue 4 — Row gap smaller than ring overhang:** Increased `.af-featured-root` row gap from 60px to 120px at mobile breakpoint (≤640px) to prevent orbital rings from overlapping.
+
+All changes TypeScript-verified clean. Commit pushed to `feat/atomic-finds-mobile-responsive`.
 
 ## 2026-07-21 (cont'd) — Atomic Finds ATX bespoke homepage, Galaxy Card, reviews system
 
