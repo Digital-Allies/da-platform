@@ -1,5 +1,17 @@
 # Handoff: Product Grid (Featured Finds)
 
+> **⚠ CTA contract superseded (2026-07-21).** This package predates the
+> flexible-conversion-layer direction (root `STATUS.md` decision #8 /
+> `sites/atomic-finds/CLAUDE.md` "Commerce rules"). The single fixed
+> `View Listing → external_url` CTA described below is now only the
+> **default/Phase-1 state**, not the contract: the production
+> implementation must drive each card's CTA from a **per-product selling
+> state** (outbound link / inquiry / direct-payment coordination / future
+> checkout), with label + action varying per product and no hard-coded
+> "Buy Now". A follow-up `products` migration adds the selling-state/CTA
+> field; everything else in this spec (layout, tokens, image fallback,
+> price states, title clamp) still stands.
+
 ## Overview
 Homepage "Featured Products" section wired to the live Supabase `products` table (see `da-platform` repo, PR #1). This package hands off a hi-fi React reference implementation of `ProductCard` / `ProductGrid` styled to the Atomic Finds ATX design system, ready to drop into the Next.js CMS engine's `BlockRenderer.tsx` as the `case 'products':` block.
 
@@ -72,5 +84,5 @@ case 'products':
 - `ProductCard.reference.jsx` — reference component (exported as `ProductCardRef`; rename to `ProductCard` in your codebase)
 - `ProductGrid.reference.jsx` — grid wrapper (exported as `ProductGridRef`; rename to `ProductGrid`; self-contained, no cross-file import)
 - `ProductCard.prompt.md` — wiring notes (visual element → `products` column)
-- `products.card.html` — the live reference (relative paths point back into the design-system project, so view it there rather than standalone); styled with the 4 real seeded rows from the brief
+- `products.card.html` — the live reference, viewable in-repo (its stylesheet/bundle paths point at the sibling `../design_handoff_homepage/` copies); styled with the 4 real seeded rows from the brief
 - `tokens/` — colors, typography, spacing source-of-truth CSS
