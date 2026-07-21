@@ -18,10 +18,10 @@ editing" needs:
    editing this file and redeploying — there is no admin path to it at
    all.
 2. **`/admin/settings`** already has a `brand_color` field
-   (`SettingsPage.tsx`), saved to the generic `settings` table
-   (`client_id, key, value`, RLS-scoped, upsert-on-save). But nothing in
-   the renderer reads `brand_color` — it's a dead field today, disconnected
-   from what actually themes the site.
+   (`src/app/admin/(protected)/settings/page.tsx`), saved to the generic `settings` table
+   (`client_id, key, value`, RLS-scoped, upsert-on-save). `brand_color` is injected as `--brand`
+   in `src/app/layout.tsx`, but `SiteTheme.tsx` currently overrides `--brand` from hardcoded tokens,
+   so the admin field does not affect the public theme today.
 
 Separately, **`packages/design-system`** is Digital Allies' own brand
 documentation (static HTML, no `package.json`, not imported anywhere) —
