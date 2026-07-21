@@ -84,7 +84,7 @@ For **Templated-tier** clients, this app also renders their public site: block-b
 
 **Design intent (Anthony, 2026-07-21):** e-commerce-ready storefront with a flexible conversion layer. Sales complete off-site today (Facebook Marketplace, direct payment, or inquiry coordination); the conversion path may vary **per product**. CTAs must support multiple selling states without hard-coding "Buy Now" — approved directions: *View Listing, Show Interest, Claim Me, Ask About This Item, Get in Touch, Purchase Options, Message to Buy*. Quick-view modals instead of separate product pages for now. Cart-capable foundation, provider-agnostic language and architecture throughout. Everything built here should be reusable for future commerce clients on this platform.
 
-**PR [#1](https://github.com/Digital-Allies/da-platform/pull/1) — schema + data layer, review-complete and ready to merge.** It adds:
+**PR [#1](https://github.com/Digital-Allies/da-platform/pull/1) — schema + data layer, MERGED 2026-07-21.** It added:
 
 - `supabase/migrations/20260117000000_products_table.sql` — `products` table (same `client_id` + RLS convention as services/testimonials), `(client_id, display_order)` index, `updated_at` auto-refresh trigger, `gen_random_uuid()` ids.
 - `supabase/seed-atomic-finds-products.sql` — 4 real listings from Jennyfer's Facebook Marketplace catalog. Idempotent (client-scoped delete-then-insert) — safe to re-run, but don't re-run after live product management starts.
