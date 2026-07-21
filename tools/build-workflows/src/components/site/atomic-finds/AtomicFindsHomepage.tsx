@@ -116,7 +116,7 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
             <div className="af-section-head">
               <p className="af-section-eyebrow">Shop the Collection</p>
               <h2 className="af-section-title">The Collection</h2>
-              <p style={{ fontSize: 18, color: 'var(--fg-body)', maxWidth: 560, margin: '16px auto 0' }}>Curated rattan &amp; bamboo for modern living. Every piece is hand-picked, restored, and ready to adopt.</p>
+              <p style={{ fontSize: 18, color: '#ffffff', maxWidth: 560, margin: '16px auto 0' }}>Curated rattan &amp; bamboo for modern living. Every piece is hand-picked, restored, and ready to adopt.</p>
             </div>
             <ProductGrid title="" products={products} />
           </div>
@@ -166,7 +166,7 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
             <div className="af-section-head">
               <p className="af-section-eyebrow">The Process</p>
               <h2 className="af-section-title">How We Deliver</h2>
-              <p style={{ fontSize: 18, color: 'var(--fg-body)', maxWidth: 560, margin: '16px auto 0' }}>From estate sale to your living room — handled with the same care Jennyfer gives her own home.</p>
+              <p style={{ fontSize: 18, color: '#ffffff', maxWidth: 560, margin: '16px auto 0' }}>From estate sale to your living room — handled with the same care Jennyfer gives her own home.</p>
             </div>
             <div className="af-process-grid">
               <div>
@@ -195,7 +195,7 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
                     <div style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--amber-orange)' }}>3–5 days · White-glove · Free over $100</div>
                   </div>
                 </div>
-                <p style={{ fontSize: 15, color: 'var(--fg-body)', lineHeight: 1.7 }}>Jennyfer doesn&apos;t drop it at the curb — she brings it inside, positions it where you want it, and hauls away all the packaging. If you&apos;re not thrilled, she&apos;ll make it right.</p>
+                <p style={{ fontSize: 15, color: '#ffffff', lineHeight: 1.7 }}>Jennyfer doesn&apos;t drop it at the curb — she brings it inside, positions it where you want it, and hauls away all the packaging. If you&apos;re not thrilled, she&apos;ll make it right.</p>
                 <div className="af-delivery-stats">
                   <div className="af-delivery-stat"><b>3–5</b><span>Day delivery</span></div>
                   <div className="af-delivery-stat"><b>100%</b><span>Satisfaction</span></div>
@@ -293,7 +293,12 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
               <a className="af-footer-link" href="#contact">Contact Us</a>
             </div>
           </div>
-          <div className="af-footer-bottom">© 2026 Atomic Finds ATX · Curated and restored by Jennyfer · Made with love in Austin, TX</div>
+          <div className="af-footer-bottom">
+            <div>© 2026 Atomic Finds ATX · Curated and restored by Jennyfer · Made with love in Austin, TX</div>
+            <div className="af-footer-credit">
+              Website made with love by <a href="https://digitalallies.com">Digital Allies</a> <span className="af-da-heart">🩷</span>
+            </div>
+          </div>
         </footer>
       </div>
     </div>
