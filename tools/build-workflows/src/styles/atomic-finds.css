@@ -50,6 +50,7 @@
   color: var(--fg);
   font-family: var(--font-body);
   position: relative;
+  overflow-x: hidden;
 }
 
 /* :where() keeps this at .af-homepage's specificity (0,1,0) so every
@@ -224,3 +225,9 @@
   .af-footer-col h4 { font-size: 14px; margin-bottom: 12px; }
   .af-footer-link { font-size: 14px; margin-bottom: 6px; }
 }
+
+@media (max-width: 480px) {
+  .af-curators-grid { grid-template-columns: 1fr; gap: 32px; }
+  .af-curator-item { max-width: 280px; margin: 0 auto; }
+}
+
