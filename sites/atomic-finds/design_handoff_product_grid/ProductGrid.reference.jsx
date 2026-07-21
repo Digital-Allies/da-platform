@@ -10,8 +10,11 @@ const CTA_DEFAULT_LABELS = {
 
 function resolveCtaRef({ selling_state, cta_label, external_url }) {
   const state = selling_state || 'inquiry';
-  const label = cta_label || CTA_DEFAULT_LABELS[state] || CTA_DEFAULT_LABELS.inquiry;
+  // 'listing'/'checkout' only count as external once a URL actually exists —
+  // otherwise both degrade to the inquiry flow, label included, so the
+  // button never promises an outbound link (or a live checkout) that isn't there.
   const external = (state === 'listing' || state === 'checkout') && !!external_url;
+  const label = cta_label || (external ? CTA_DEFAULT_LABELS[state] : CTA_DEFAULT_LABELS.inquiry);
   return { label, href: external ? external_url : '#contact', external };
 }
 

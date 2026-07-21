@@ -20,21 +20,16 @@ const DEFAULT_LABELS: Record<Product['selling_state'], string> = {
 }
 
 export function resolveProductCta(product: Product): ProductCta {
-  const label = product.cta_label || DEFAULT_LABELS[product.selling_state] || DEFAULT_LABELS.inquiry
+  const state = product.selling_state
+  // 'listing'/'checkout' only count as external once a URL actually exists —
+  // otherwise both degrade to the inquiry flow, label included, so the button
+  // never promises an outbound link (or a live checkout) that isn't there.
+  const external = (state === 'listing' || state === 'checkout') && !!product.external_url
+  const label = product.cta_label || (external ? DEFAULT_LABELS[state] : DEFAULT_LABELS.inquiry)
 
-  switch (product.selling_state) {
-    case 'listing':
-      if (product.external_url) return { label, href: product.external_url, external: true }
-      // A listing product without a URL degrades to the inquiry flow
-      return { label: product.cta_label || DEFAULT_LABELS.inquiry, href: '#contact', external: false }
-    case 'checkout':
-      // Future purchase flow: external_url carries the checkout link/embed
-      // (provider TBD) — same field, no schema change (decision #8).
-      if (product.external_url) return { label, href: product.external_url, external: true }
-      return { label, href: '#contact', external: false }
-    case 'direct':
-    case 'inquiry':
-    default:
-      return { label, href: '#contact', external: false }
+  return {
+    label,
+    href: external ? (product.external_url as string) : '#contact',
+    external,
   }
 }
