@@ -27,6 +27,9 @@ create table if not exists products (
   updated_at    timestamptz default now()
 );
 
+-- Indexes (performance)
+create index if not exists idx_products_order on products(client_id, display_order);
+
 alter table products enable row level security;
 
 -- Logged-in client: full CRUD on their own products (same pattern as posts/services)
