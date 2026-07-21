@@ -41,7 +41,7 @@ export default function AtomicNav() {
         <span className="af-nav-toggle-bar" />
       </button>
 
-      <div id="af-nav-panel" className={`af-nav-links${open ? ' af-nav-links--open' : ''}`}>
+      <div id="af-nav-panel" className={`af-nav-links${open ? ' af-nav-links--open' : ''}`} aria-hidden={!open} inert={!open}>
         {LINKS.map((l) => (
           // eslint-disable-next-line @next/next/no-img-element
           <a key={l.href} className="af-nav-link" href={l.href} onClick={() => setOpen(false)}>

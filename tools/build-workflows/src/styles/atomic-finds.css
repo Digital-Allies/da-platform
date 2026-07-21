@@ -79,7 +79,7 @@
 @media (max-width: 768px) {
   .af-nav { padding: 12px 20px; }
   .af-nav-toggle { display: flex; }
-  .af-nav-links { position: fixed; top: 60px; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(52,40,24,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(245,200,66,0.22); max-height: 0; overflow: hidden; transition: max-height 300ms ease-out; padding: 0; align-items: stretch; }
+  .af-nav-links { position: fixed; top: 80px; left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(52,40,24,0.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(245,200,66,0.22); max-height: 0; overflow: hidden; transition: max-height 300ms ease-out; padding: 0; align-items: stretch; }
   .af-nav-links--open { max-height: 400px; padding: 16px 0; }
   .af-nav-link { justify-content: center; font-size: 11px; padding: 12px 0; border-bottom: 1px solid rgba(245,200,66,0.08); flex-grow: 1; }
   .af-nav-cta { width: 90%; margin: 12px auto 0; text-align: center; padding: 12px; font-size: 11px; justify-content: center; }
@@ -212,7 +212,7 @@
   .af-section-script { font-size: clamp(20px, 2.5vw, 32px); }
   .af-curators-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .af-curator-item img { height: 100px; }
-  .af-featured-root { gap: 40px 60px; }
+  .af-featured-root { gap: 120px 60px; }
   .af-delivery-stats { gap: 16px; }
   .af-delivery-stat b { font-size: 20px; }
   .af-footer-grid { gap: 24px; }
