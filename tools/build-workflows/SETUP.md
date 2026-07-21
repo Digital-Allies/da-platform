@@ -82,15 +82,24 @@ Select `client-site-template`.
 
 In the Vercel project settings → **Environment Variables**, add:
 
+**Critical (Supabase auth — required for production):**
+
+| Variable | Value | Scope |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | From Supabase → Project Settings → API | Production + Preview |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | From Supabase → Project Settings → API → `supabase_anon_new` (or `anon`) | Production + Preview |
+| `SUPABASE_SERVICE_ROLE_KEY` | From Supabase → Project Settings → API → `supabase_service_role_new` (or `service_role`) | **Production only** (server-side secret) |
+
+**Site Configuration:**
+
 | Variable | Value |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | From Supabase → Project Settings → API |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | From Supabase → Project Settings → API |
-| `SUPABASE_SERVICE_ROLE_KEY` | From Supabase → Project Settings → API (keep secret) |
 | `NEXT_PUBLIC_CLIENT_ID` | The UUID from step 2b |
 | `RESEND_API_KEY` | From resend.com → API Keys |
 | `CONTACT_FORM_TO_EMAIL` | Client's email that receives contact form submissions |
 | `NEXT_PUBLIC_SITE_URL` | `https://clientdomain.com` |
+
+**⚠️ Note on Supabase keys:** Supabase recently updated key naming conventions. Use the keys labeled `supabase_anon_new` and `supabase_service_role_new` in the API settings. If those don't exist, use `anon` and `service_role` respectively. **Both `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` must be present for the app to function.** Missing keys cause middleware initialization failures and 500 errors.
 
 ### 3c. Deploy
 

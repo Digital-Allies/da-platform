@@ -93,10 +93,10 @@ export default function GalaxyCard({ product, bg }: GalaxyCardProps) {
         aria-haspopup="dialog"
         onClick={() => setOpen(true)}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(true) } }}
-        style={{ position: 'relative', cursor: 'pointer', width: 360, height: 520, flexShrink: 0, isolation: 'isolate', perspective: 1200 }}
+        style={{ position: 'relative', cursor: 'pointer', width: 'clamp(280px, 90vw, 360px)', height: 'clamp(520px, 140vw, 620px)', flexShrink: 0, isolation: 'isolate', perspective: 1200 }}
       >
         <div id={`${id}-scene`} style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d' }}>
-          <div style={{ position: 'absolute', top: '50%', left: '50%', width: 700, height: 700, transform: 'translate(-50%, -50%)', transformStyle: 'preserve-3d', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+          <div style={{ position: 'absolute', top: '50%', left: '50%', width: 'clamp(500px, 150vw, 700px)', height: 'clamp(500px, 150vw, 700px)', transform: 'translate(-50%, -50%)', transformStyle: 'preserve-3d', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'rotateZ(-35deg) rotateX(75deg)', transformStyle: 'preserve-3d' }}>
               <div id={`${id}-ring`} style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', border: `4px solid ${gold}`, boxShadow: '0 0 30px rgba(245,200,66,0.6), inset 0 0 20px rgba(245,200,66,0.4)', transformStyle: 'preserve-3d' }}>
                 <div style={{ position: 'absolute', inset: 10, borderRadius: '50%', border: '1px solid rgba(245,200,66,0.3)' }} />
@@ -117,19 +117,19 @@ export default function GalaxyCard({ product, bg }: GalaxyCardProps) {
               <ProductImage image={product.image_url} title={product.title} />
             </div>
 
-            <div style={{ flex: 1, padding: '16px 24px 20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', color: 'var(--bone-white)', background: 'linear-gradient(180deg, rgba(14,12,9,0) 0%, rgba(14,12,9,0.42) 55%, rgba(14,12,9,0.72) 100%)' }}>
+            <div style={{ flex: 1, padding: '12px 16px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', color: 'var(--bone-white)', background: 'linear-gradient(180deg, rgba(14,12,9,0) 0%, rgba(14,12,9,0.42) 55%, rgba(14,12,9,0.72) 100%)' }}>
               <div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 42, letterSpacing: '0.01em', color: 'var(--celestial-yellow)', lineHeight: 1, margin: 0, textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>{product.title}</h3>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 5vw, 42px)', letterSpacing: '0.01em', color: 'var(--celestial-yellow)', lineHeight: 1, margin: 0, textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>{product.title}</h3>
                 {product.tagline && (
-                  <p style={{ fontFamily: 'var(--font-script)', fontSize: 30, color: 'var(--amber-orange)', margin: '0 0 12px 0', lineHeight: 1.1 }}>{product.tagline}</p>
+                  <p style={{ fontFamily: 'var(--font-script)', fontSize: 'clamp(18px, 3vw, 30px)', color: 'var(--amber-orange)', margin: '0 0 8px 0', lineHeight: 1.1 }}>{product.tagline}</p>
                 )}
                 {product.description && (
-                  <p style={{ fontFamily: 'var(--font-body)', fontSize: 13, color: 'var(--fg-muted)', lineHeight: 1.55, margin: 0, opacity: 0.95, textShadow: '0 1px 6px rgba(0,0,0,0.9)', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{product.description}</p>
+                  <p style={{ fontFamily: 'var(--font-body)', fontSize: 'clamp(11px, 2vw, 13px)', color: 'var(--fg-muted)', lineHeight: 1.4, margin: 0, opacity: 0.95, textShadow: '0 1px 6px rgba(0,0,0,0.9)', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{product.description}</p>
                 )}
               </div>
 
-              <div style={{ marginTop: 16 }}>
-                <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'var(--celestial-yellow)', color: '#1E1E1E', padding: '2px 16px', borderRadius: 999, fontFamily: 'var(--font-display)', fontSize: 20, boxShadow: '0 0 15px rgba(245,200,66,0.3)' }}>
+              <div style={{ marginTop: 12 }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, background: 'var(--celestial-yellow)', color: '#1E1E1E', padding: '4px 12px', borderRadius: 999, fontFamily: 'var(--font-display)', fontSize: 'clamp(14px, 3vw, 20px)', boxShadow: '0 0 15px rgba(245,200,66,0.3)' }}>
                   {product.price != null ? `$${priceStr}` : 'Inquire'}
                   <OrbitIcon size={16} />
                 </div>

@@ -5,13 +5,60 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (PR #4 reviewed and merged to
-`main` — the Atomic Finds ATX storefront below was live on Vercel but sitting
-unmerged for two days; `main` now matches what's actually deployed. Reviewed
-for RLS/migration safety and secrets before merging — clean, except one real
-finding: the homepage hardcodes "5.0 ★" review copy instead of computing it,
-and the `reviews` table has no numeric rating field at all, only a
-written/rating-only split — worth a follow-up fix.)
+**Last updated:** 2026-07-21 (evening) — by Anthony (Supabase keys rotated)
+then by Claude Code (Contrast fixes + DA footer credit + i18n bilingual system scoped)
+
+## 2026-07-21 (evening) — Production outage resolved: Supabase keys rotated & Vercel env vars updated
+
+**Outage summary:** CMS was returning 500 errors ("Your project's URL and Key are required to create a Supabase client!") since 2026-07-19.
+
+**Root cause:** Missing Supabase authentication keys in Vercel environment variables. The `NEXT_PUBLIC_SUPABASE_ANON_KEY` and `SUPABASE_SERVICE_ROLE_KEY` were not present in the `da-webwssite-build-workflows` production environment.
+
+**Fix applied (by Anthony):**
+- Rotated Supabase API keys (new `supabase_anon_new` and `supabase_service_role_new` keys generated)
+- Added `NEXT_PUBLIC_SUPABASE_ANON_KEY` to Vercel Production + Preview scope
+- Added `SUPABASE_SERVICE_ROLE_KEY` to Vercel Production scope (server-side secret, not in Preview)
+- Verified `NEXT_PUBLIC_SUPABASE_URL` is correctly set
+- Updated SETUP.md with detailed key naming guidance and scoping requirements
+
+**Status:** ✅ Ready to redeploy. Next deployment will activate the new environment variables and resolve all 500 errors.
+
+**Documentation updated:** `SETUP.md` section 3b now includes detailed notes on Supabase key naming conventions and environment variable scoping to prevent this in future deployments.
+
+---
+
+## 2026-07-21 (evening) — Contrast fixes, DA footer credit, i18n architecture scoped
+
+**Contrast improvements (WCAG AA compliance):**
+- Changed all non-accent body text to white (#ffffff) from low-contrast CSS vars:
+  - Section descriptions (collection, process): `var(--fg-body)` → white
+  - Footer copyright text: `var(--fg-soft)` → white
+  - Curator roles, review dates/tags, contact subtitles, social links: `var(--fg-muted)` → white
+  - Delivery stat labels: `var(--fg-muted)` → white
+
+**Digital Allies footer credit:**
+- Added "Website made with love by Digital Allies 🩷" below copyright
+- "Digital Allies" text links to https://digitalallies.com (gold color on hover)
+- Heart emoji (#F5A4C7, DA light pink) pulses with 2-second animation (scale 1→1.15)
+- New CSS classes: `.af-footer-credit`, `.af-da-heart` with `@keyframes af-pulse`
+
+**Bilingual system scoped (i18n):**
+- Created `I18N_SYSTEM_PLAN.md`: comprehensive architecture for EN/ES bilingual sites
+- Covers: next-intl integration, translations table schema, admin dashboard, language switcher UX, SEO (hreflang, sitemap, robots.txt), WCAG accessibility, Phase 1 (MVP on Atomic Finds) and Phase 2 (rollout) timelines
+- Ready for implementation when prioritized; enables all three sites (DA, HCTC, AF) to offer Spanish versions
+
+All changes verified TypeScript-clean, committed to `feat/atomic-finds-mobile-responsive`.
+
+## 2026-07-21 (evening) — Mobile responsive Greptile review fixes
+
+Fixed all 4 Greptile review issues on PR #7 (feat/atomic-finds-mobile-responsive):
+
+- **Issue 1 — Closed menu keeps invisible focus targets:** Added `aria-hidden={!open}` and `inert={!open}` to nav panel to remove closed menu from accessibility tree and tab order.
+- **Issue 2 — Panel starts inside sticky navigation:** Adjusted `.af-nav-links` `top` position from 60px to 80px to account for mobile nav height (~48px logo + 12px padding top/bottom = 72px).
+- **Issue 3 — Responsive shell clips fixed content:** Increased GalaxyCard height clamp from `clamp(400px, 120vw, 520px)` to `clamp(520px, 140vw, 620px)` to prevent text clipping; made all text sizes responsive with clamp(); reduced padding at mobile; reduced description line clamp from 3 to 2 lines.
+- **Issue 4 — Row gap smaller than ring overhang:** Increased `.af-featured-root` row gap from 60px to 120px at mobile breakpoint (≤640px) to prevent orbital rings from overlapping.
+
+All changes TypeScript-verified clean. Commit pushed to `feat/atomic-finds-mobile-responsive`.
 
 ## 2026-07-21 (cont'd) — Atomic Finds ATX bespoke homepage, Galaxy Card, reviews system
 
