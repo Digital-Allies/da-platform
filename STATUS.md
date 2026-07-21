@@ -5,11 +5,7 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 — by Claude Code (`sites/atomic-finds` cleanup +
-theme-engine scope + a real finding: the Atomic Finds storefront build
-(ProductGrid, GalaxyCard, commerce.ts, admin Showroom) exists only on the
-**unmerged, still-DRAFT PR #4** — `main` has none of it. See "⚠ Open
-question" below before doing any Atomic Finds frontend work.)
+**Last updated:** 2026-07-21 — by Claude Code (`sites/atomic-finds` cleanup + theme-engine scope + note: Atomic Finds storefront currently lives on draft PR #4; see “⚠ Open question” below.)
 **Week of July 13 Core Tasks Completed:** Dynamic block renderer (`BlockRenderer.tsx`), root dynamic catch-all pages (`[slug]/page.tsx`), and contact form block integration in the page editor + renderer are fully implemented and verified. Next.js compiles with zero errors.
 Prior: Mobile login layout fixed + Step 2 client theming finished with Google Fonts loaded and CSS scope overrides.
 
