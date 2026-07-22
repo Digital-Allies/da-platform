@@ -1,0 +1,197 @@
+<!-- @dsCard group="Brand" name="Marketing Reference Library" subtitle="~120 finished social/carousel assets, icon sets, patterns & case-study PDFs — reference only, not editable components" viewport="1200x900" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Digital Allies — Marketing Reference Library</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { padding: var(--space-10) var(--space-8) var(--space-24); }
+  .lib-wrap { max-width: var(--wide-max); margin: 0 auto; }
+  .lib-head { border-bottom: var(--border-1); padding-bottom: var(--space-6); margin-bottom: var(--space-10); }
+  .lib-head h1 { margin: var(--space-2) 0 var(--space-3); }
+  .lib-head p { max-width: 640px; color: var(--fg-muted); }
+  .lib-note {
+    border: var(--border-1);
+    background: var(--bg-alt);
+    padding: var(--space-4) var(--space-5);
+    margin-bottom: var(--space-12);
+    font-family: var(--font-details);
+    font-size: var(--fs-small);
+  }
+  .lib-note a { color: var(--accent); }
+  .lib-note a:hover { color: var(--signal); }
+
+  .lib-section { margin-bottom: var(--space-16); }
+  .lib-section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: var(--border-hairline);
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  .lib-section-head h2 { margin: 0; }
+  .lib-count { font-family: var(--font-details); font-size: var(--fs-small); color: var(--fg-muted); }
+
+  .lib-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-3);
+  }
+  .lib-tile {
+    border: var(--border-1);
+    background: var(--bone-white);
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .lib-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .lib-files {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
+  }
+  .lib-file {
+    border: var(--border-1);
+    background: var(--bg-alt);
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-details);
+    font-size: var(--fs-small);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .lib-file a { color: var(--accent); }
+  .lib-file a:hover { color: var(--signal); }
+</style>
+</head>
+<body>
+<div class="lib-wrap">
+
+  <div class="lib-head">
+    <span class="da-eyebrow">BRAND</span>
+    <h1>Marketing Reference Library</h1>
+    <p>Finished carousel and single-post artwork pulled from past production runs, plus icon sets, pattern tiles, tool screenshots, and case-study PDFs. These are reference assets — drop them into a new project to match tone, layout rhythm, and color usage. They are not design-system components.</p>
+  </div>
+
+  <div class="lib-note">
+    Full production spec (voice, palette, grid, carousel structure, prompt guide) lives at
+    <a href="../docs/Digital_Allies_Social_Media_Production_Brief.md">docs/Digital_Allies_Social_Media_Production_Brief.md</a>.
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>AEO vs. SEO — carousel</h2><span class="lib-count">9 slides</span></div>
+    <div class="lib-grid" id="g-aeo"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Automation — single posts</h2><span class="lib-count">8</span></div>
+    <div class="lib-grid" id="g-automation"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Bilingual — single posts</h2><span class="lib-count">7</span></div>
+    <div class="lib-grid" id="g-bilingual"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Design — single posts</h2><span class="lib-count">7</span></div>
+    <div class="lib-grid" id="g-design"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Field Notes — 4-article summary carousel</h2><span class="lib-count">10 slides</span></div>
+    <div class="lib-grid" id="g-fieldnotes"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Integrations — single posts</h2><span class="lib-count">7</span></div>
+    <div class="lib-grid" id="g-integrations"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Kingman Data Story — carousel</h2><span class="lib-count">8 slides</span></div>
+    <div class="lib-grid" id="g-kingman"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Mastering Alt Text — carousel</h2><span class="lib-count">8 slides</span></div>
+    <div class="lib-grid" id="g-alttext"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Tech Jargon — carousel</h2><span class="lib-count">6 slides</span></div>
+    <div class="lib-grid" id="g-jargon"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Loose singles</h2><span class="lib-count">7</span></div>
+    <div class="lib-grid" id="g-loose"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Specialty — tool icon set (diagram style)</h2><span class="lib-count">24</span></div>
+    <div class="lib-grid" id="g-icons"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Specialty — topographic pattern tiles</h2><span class="lib-count">8</span></div>
+    <div class="lib-grid" id="g-topo"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Tools &amp; case studies — screenshots</h2><span class="lib-count">14</span></div>
+    <div class="lib-grid" id="g-tools"></div>
+  </div>
+
+  <div class="lib-section">
+    <div class="lib-section-head"><h2>Case study PDFs</h2><span class="lib-count">3</span></div>
+    <div class="lib-files" id="g-pdfs"></div>
+  </div>
+
+</div>
+
+<script>
+  function fill(id, folder, count, ext) {
+    ext = ext || 'png';
+    const el = document.getElementById(id);
+    let html = '';
+    for (let i = 1; i <= count; i++) {
+      const n = String(i).padStart(2, '0');
+      html += `<div class="lib-tile"><img src="marketing-library/${folder}/${n}.${ext}" loading="lazy" alt=""></div>`;
+    }
+    el.innerHTML = html;
+  }
+  fill('g-aeo', 'aeo-vs-seo', 9);
+  fill('g-automation', 'automation', 8);
+  fill('g-bilingual', 'bilingual', 7);
+  fill('g-design', 'design', 7);
+  fill('g-fieldnotes', 'field-notes-carousel', 10);
+  fill('g-integrations', 'integrations', 7);
+  fill('g-kingman', 'kingman-data-story', 8);
+  fill('g-alttext', 'mastering-alt-text', 8);
+  fill('g-jargon', 'tech-jargon', 6);
+  fill('g-loose', 'loose', 7);
+  fill('g-icons', 'specialty-icons', 24);
+  fill('g-topo', 'topographic-patterns', 8);
+
+  document.getElementById('g-tools').innerHTML = [
+    'frame-01.png','frame-02.png','frame-03.png','frame-04.png',
+    'tool-01-discovery.png','tool-02-seo-audit.png','tool-03-curators-notebook.png',
+    'tool-04-manuscript.png','tool-05-refresh.png','tool-06-ledger.png',
+    'tool-07-feature-grid.png','tool-08-cms.png','tool-09-editorial-stack.png',
+    'tool-10-index-detail.png'
+  ].map(f => `<div class="lib-tile"><img src="marketing-library/tools-case-studies/${f}" loading="lazy" alt=""></div>`).join('');
+
+  document.getElementById('g-pdfs').innerHTML = [
+    ['case-study-bilingual-website.pdf', 'Why Your Business Needs a Bilingual Website'],
+    ['case-study-app-integrations.pdf', 'App Integrations for Small Business'],
+    ['case-study-design-brand.pdf', 'Design & Brand for Small Business'],
+  ].map(([f, label]) => `<div class="lib-file"><span>${label}</span><a href="marketing-library/frame/${f}">open →</a></div>`).join('')
+   + `<div class="lib-file"><span>Business Automation case study</span><a href="marketing-library/frame/case-study-business-automation.pdf">open →</a></div>`;
+</script>
+</body>
+</html>

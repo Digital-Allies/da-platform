@@ -1,0 +1,502 @@
+[
+  {
+    "id": "cap_mq6n0ejq_skwcos",
+    "selector": "svg",
+    "label": "svg",
+    "tag": "svg",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:49:57.926Z",
+    "innerText": "",
+    "outerHTML": "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 195 195\" width=\"195\" height=\"195\" preserveAspectRatio=\"xMidYMid meet\" style=\"width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;\"><defs><clipPath id=\"__lottie_element_3\"><rect width=\"195\" height=\"195\" x=\"0\" y=\"0\"></rect></clipPath></defs><g clip-path=\"url(#__lottie_element_3)\"><g transform=\"matrix(1,0,0,1,240,26)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,29.9999942779541,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,173.30657958984375,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(247,224,95)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,100,26)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(247,224,95)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,100.513671875,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,30,26)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,-40,96)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,170,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,9.794986724853516,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,100,96)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,90.62609100341797,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,170,96)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,240,166)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(252,200,170)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,29.999996185302734,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(252,200,170)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,173.9855194091797,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,100,166)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,101.34452056884766,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,30,166)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g></g></svg>",
+    "rect": {
+      "x": 451,
+      "y": 286,
+      "width": 220,
+      "height": 220
+    },
+    "computedStyles": {
+      "display": "block",
+      "width": "220px",
+      "height": "220px",
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "overflow": "hidden",
+      "transform": "matrix(1, 0, 0, 1, 0, 0)",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n166a_31cyxg",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:33.730Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 606,
+      "y": 298,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1aa2_wfu9y6",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:39.050Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 448,
+      "y": 298,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1ar9_c5ow38",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:39.669Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 455,
+      "y": 298,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1bgo_0vx0mb",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:40.584Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 533,
+      "y": 298,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1cc0_vqi2e3",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:41.712Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 612,
+      "y": 298,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1dsv_8n526g",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:43.615Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 481,
+      "y": 298,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1ek1_3k9xup",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:44.593Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 431,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1fif_rs2tlm",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:45.831Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 454,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1g1p_hbabdv",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:46.525Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 459,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1g5s_nsfwhd",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:46.672Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 455,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1h9z_i5it4t",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:48.119Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 454,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1i8f_xqegi8",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:49.359Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 454,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1j6o_vaquhf",
+    "selector": "path",
+    "label": "path",
+    "tag": "path",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:50:50.592Z",
+    "innerText": "",
+    "outerHTML": "<path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path>",
+    "rect": {
+      "x": 454,
+      "y": 377,
+      "width": 55,
+      "height": 55
+    },
+    "computedStyles": {
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-align": "left",
+      "text-decoration": "none",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1qrg_fs17et",
+    "selector": "div.section-standard",
+    "label": "Digital Growth Agency Get unlimited desi…",
+    "tag": "div",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:51:00.412Z",
+    "innerText": "Digital Growth\nAgency\n\nGet unlimited design orders and scale your business with monthly subscriptions.\n\n\nGet Started\nTake a Tour\n\n\n\n",
+    "outerHTML": "<div data-w-id=\"7a3324a3-d0e3-8cdd-0334-71e6b5303a46\" style=\"background-color: rgb(253, 236, 232);\" class=\"section-standard hero lp-template light-blue sticky\"><div class=\"container-10 w-container\"><div class=\"div-home\"><div class=\"lottie-animation-11\" data-w-id=\"ebff96e8-f9a7-aed1-5ff2-b4821527beae\" data-animation-type=\"lottie\" data-src=\"https://cdn.prod.website-files.com/5eeaa8254ac140092cf3c3d6/5fa464848815ec17f271b6d4_squares_nostroke.json\" data-loop=\"1\" data-direction=\"1\" data-autoplay=\"1\" data-is-ix2-target=\"0\" data-renderer=\"svg\" data-default-duration=\"3.7916666666666665\" data-duration=\"0\" data-loading=\"eager\"><svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" viewBox=\"0 0 195 195\" width=\"195\" height=\"195\" preserveAspectRatio=\"xMidYMid meet\" style=\"width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;\"><defs><clipPath id=\"__lottie_element_3\"><rect width=\"195\" height=\"195\" x=\"0\" y=\"0\"></rect></clipPath></defs><g clip-path=\"url(#__lottie_element_3)\"><g transform=\"matrix(1,0,0,1,240,26)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,168.71087646484375,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(97,190,172)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,240,26)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(247,224,95)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,97.8021011352539,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(247,224,95)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,239.3581085205078,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,26.599407196044922,26)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,-40,96)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,31.0039005279541,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,-40,96)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,101.70343017578125,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(45,41,43)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,-39.8200798034668,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,172.6220245361328,96)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,240,166)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(252,200,170)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,168.9519805908203,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(252,200,170)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,240,166)\" opacity=\"1\" style=\"display: none;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,98.19457244873047,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(255,255,255)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,239.81698608398438,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g><g transform=\"matrix(1,0,0,1,27.173370361328125,166)\" opacity=\"1\" style=\"display: block;\"><g opacity=\"1\" transform=\"matrix(1,0,0,1,-2.5,1.5)\"><path fill=\"rgb(253,236,232)\" fill-opacity=\"1\" d=\" M24.5,-24.5 C24.5,-24.5 24.5,24.5 24.5,24.5 C24.5,24.5 -24.5,24.5 -24.5,24.5 C-24.5,24.5 -24.5,-24.5 -24.5,-24.5 C-24.5,-24.5 24.5,-24.5 24.5,-24.5z\"></path></g></g></g></svg></div></div><div class=\"div-home\"><div class=\"div-block-61\"><h1 class=\"heading-1 centre\">Digital Growth<br>Agency</h1></div><p class=\"subheadline _500w centre\">Get unlimited design orders and scale your business with monthly subscriptions.<strong><br></strong></p><div class=\"div-450-width left-aligned flex centre\"><a href=\"/pricing\" class=\"button w-button\">Get Started </a><a href=\"/product-tour\" class=\"button ghost w-button\">Take a Tour</a></div><p class=\"icon-fa\" style=\"transform: translate3d(0px, 8.6667px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;\"><a href=\"#steps\" class=\"icon-link\"></a><strong><br></strong></p></div></div></div>",
+    "rect": {
+      "x": 0,
+      "y": -52,
+      "width": 1684,
+      "height": 885
+    },
+    "computedStyles": {
+      "display": "flex",
+      "width": "1684px",
+      "height": "885px",
+      "padding": "0px 140px",
+      "border": "0px none rgb(51, 51, 51)",
+      "box-sizing": "border-box",
+      "background": "rgb(253, 236, 232) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(51, 51, 51)",
+      "font-family": "Inter, sans-serif",
+      "font-size": "14px",
+      "line-height": "20px",
+      "text-decoration": "none",
+      "justify-content": "center",
+      "align-items": "flex-start",
+      "z-index": "-100",
+      "transition": "all"
+    },
+    "cssRules": []
+  },
+  {
+    "id": "cap_mq6n1ve7_udjqv9",
+    "selector": "a.button-3",
+    "label": "Book a Call",
+    "tag": "a",
+    "url": "https://thesonder.webflow.io/",
+    "title": "Your Digital Agency",
+    "timestamp": "2026-06-09T12:51:06.415Z",
+    "innerText": "Book a Call",
+    "outerHTML": "<a data-w-id=\"7aca7ddf-809e-c73a-1220-632a3f044596\" href=\"/book-a-call\" class=\"button-3 w-button\" style=\"transform: translate3d(0.61324vw, -0.45844vh, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(-322.016deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;\">Book a Call</a>",
+    "rect": {
+      "x": 967,
+      "y": 262,
+      "width": 211,
+      "height": 211
+    },
+    "computedStyles": {
+      "display": "flex",
+      "width": "150px",
+      "height": "150px",
+      "border": "2px solid rgb(24, 24, 24)",
+      "border-radius": "110px",
+      "box-sizing": "border-box",
+      "background": "rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box",
+      "color": "rgb(24, 24, 24)",
+      "font-family": "\"Roboto Mono\", sans-serif",
+      "font-size": "20px",
+      "font-weight": "600",
+      "line-height": "40px",
+      "text-align": "center",
+      "text-decoration": "none",
+      "justify-content": "center",
+      "align-items": "center",
+      "transform": "matrix(0.788187, 0.615436, -0.615436, 0.788187, 10.327, -4.05719)",
+      "transition": "all",
+      "cursor": "pointer"
+    },
+    "cssRules": []
+  }
+]

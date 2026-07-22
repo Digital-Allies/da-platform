@@ -1,0 +1,222 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "client-docs/**",
+              "cms/**",
+              "cms/_archive/connected/**",
+              "cms/_archive/connected/workspace/**",
+              "social/**",
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Lexend Deca|JetBrains Mono))/i]",
+        "message": "Font not provided by the design system. Available: Lexend Deca, JetBrains Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ContentCalendarEntry'] > JSXAttribute > JSXIdentifier[name!=/^(?:day|week|category|topic|hook|caption|promptRef|prompt|status|key|ref|className|style|children)$/]",
+        "message": "<ContentCalendarEntry> doesn't accept that prop. Declared props: day, week, category, topic, hook, caption, promptRef, prompt, status."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "ContentCalendarEntry": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent",
+      "--accent-soft",
+      "--bg",
+      "--bg-alt",
+      "--bone-white",
+      "--border",
+      "--border-1",
+      "--border-dashed",
+      "--border-hairline",
+      "--border-soft",
+      "--charcoal",
+      "--content-max",
+      "--dur-base",
+      "--dur-pulse",
+      "--dur-quick",
+      "--dur-slow",
+      "--ease-out",
+      "--ease-snap",
+      "--fg",
+      "--fg-muted",
+      "--fg-on-dark",
+      "--fg-soft",
+      "--field-border",
+      "--font-body",
+      "--font-details",
+      "--font-headers",
+      "--fs-body",
+      "--fs-display",
+      "--fs-h1",
+      "--fs-h2",
+      "--fs-h3",
+      "--fs-h4",
+      "--fs-micro",
+      "--fs-nano",
+      "--fs-small",
+      "--grid-line",
+      "--grid-line-strong",
+      "--hairline",
+      "--lace-step",
+      "--lh-normal",
+      "--lh-relaxed",
+      "--lh-snug",
+      "--lh-tight",
+      "--light-pink",
+      "--pinned-note",
+      "--pulse-blue",
+      "--radius-0",
+      "--radius-1",
+      "--radius-pill",
+      "--shadow-lg",
+      "--shadow-md",
+      "--shadow-pin",
+      "--shadow-sm",
+      "--signal",
+      "--signal-red",
+      "--space-1",
+      "--space-10",
+      "--space-12",
+      "--space-16",
+      "--space-2",
+      "--space-20",
+      "--space-24",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-8",
+      "--text-muted",
+      "--text-soft",
+      "--tracking-wide",
+      "--tracking-wider",
+      "--tracking-widest",
+      "--wide-max"
+    ],
+    "tokenKinds": {
+      "--bone-white": "color",
+      "--charcoal": "color",
+      "--pulse-blue": "color",
+      "--light-pink": "color",
+      "--signal-red": "color",
+      "--pinned-note": "color",
+      "--grid-line": "color",
+      "--grid-line-strong": "color",
+      "--hairline": "color",
+      "--text-muted": "font",
+      "--text-soft": "font",
+      "--field-border": "color",
+      "--bg": "color",
+      "--bg-alt": "color",
+      "--fg": "color",
+      "--fg-muted": "color",
+      "--fg-soft": "color",
+      "--fg-on-dark": "color",
+      "--border": "color",
+      "--border-soft": "color",
+      "--accent": "color",
+      "--accent-soft": "color",
+      "--signal": "color",
+      "--font-headers": "font",
+      "--font-details": "font",
+      "--font-body": "font",
+      "--fs-display": "font",
+      "--fs-h1": "font",
+      "--fs-h2": "font",
+      "--fs-h3": "spacing",
+      "--fs-h4": "spacing",
+      "--fs-body": "spacing",
+      "--fs-small": "spacing",
+      "--fs-micro": "spacing",
+      "--fs-nano": "spacing",
+      "--lh-tight": "font",
+      "--lh-snug": "font",
+      "--lh-normal": "font",
+      "--lh-relaxed": "font",
+      "--tracking-wide": "font",
+      "--tracking-wider": "font",
+      "--tracking-widest": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-8": "spacing",
+      "--space-10": "spacing",
+      "--space-12": "spacing",
+      "--space-16": "spacing",
+      "--space-20": "spacing",
+      "--space-24": "spacing",
+      "--border-1": "color",
+      "--border-hairline": "color",
+      "--border-dashed": "color",
+      "--radius-0": "radius",
+      "--radius-1": "radius",
+      "--radius-pill": "radius",
+      "--shadow-sm": "shadow",
+      "--shadow-md": "shadow",
+      "--shadow-lg": "shadow",
+      "--shadow-pin": "shadow",
+      "--ease-out": "other",
+      "--ease-snap": "other",
+      "--dur-quick": "other",
+      "--dur-base": "other",
+      "--dur-slow": "other",
+      "--dur-pulse": "other",
+      "--lace-step": "spacing",
+      "--content-max": "spacing",
+      "--wide-max": "spacing"
+    },
+    "fontFamilies": [
+      "JetBrains Mono",
+      "Lexend Deca"
+    ]
+  }
+}

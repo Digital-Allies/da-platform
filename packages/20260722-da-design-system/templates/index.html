@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Templates Gallery" subtitle="All reusable slide, service, and tool templates" viewport="1100x900" -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies — Templates</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="../colors_and_type.css">
+  <style>
+    body { padding: 0; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+
+    .hero { padding: 72px 40px 40px; }
+    .brand { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+    .brand-name { font-family: var(--font-headers); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; }
+    .eb { font-family: var(--font-details); font-size: 11px; color: var(--signal); letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+    h1 { font-size: clamp(38px, 4.4vw, 54px); margin: 14px 0 20px; max-width: 880px; line-height: 1.05; letter-spacing: -0.012em; }
+    .lede { font-family: var(--font-body); font-size: 16px; line-height: 1.7; max-width: 640px; color: var(--fg); }
+    
+    .back-link { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px; font-size: 13px; color: var(--fg-muted); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--fg); }
+
+    .section { padding: 40px 40px 8px; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--charcoal); padding-bottom: 10px; margin-bottom: 24px; }
+    .section-head h2 { font-family: var(--font-headers); font-weight: 700; font-size: 22px; margin: 0; }
+    .section-head .cap { font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); letter-spacing: 0.05em; }
+
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .tile { border: 1px solid var(--charcoal); background: var(--bg); padding: 22px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; min-height: 116px; transition: all 0.2s var(--ease-snap); }
+    .tile:hover { background: var(--bg-alt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .tile .t-tag { font-family: var(--font-details); font-size: 10px; color: var(--signal); text-transform: uppercase; letter-spacing: 0.18em; font-weight: 700; }
+    .tile .t-name { font-family: var(--font-headers); font-weight: 700; font-size: 17px; }
+    .tile .t-desc { font-family: var(--font-body); font-size: 12px; line-height: 1.55; color: var(--fg-muted); margin-top: 4px; }
+
+    footer { padding: 56px 40px; text-align: center; font-family: var(--font-details); font-size: 11px; color: var(--fg-muted); border-top: 1px solid var(--hairline); margin-top: 56px; }
+
+    @media (max-width: 820px) {
+      .grid3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 540px) {
+      .grid3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero wrap">
+    <a class="back-link" href="../index.html">← Back to Design System</a>
+    <div class="brand">
+      <span class="da-pulse-stack"><span class="da-pulse"></span></span>
+      <span class="brand-name">Digital Allies</span>
+    </div>
+    <div class="eb">Reusable Templates</div>
+    <h1>All Templates.</h1>
+    <p class="lede">Ready-made templates for slides, service pages, tools, and marketing campaigns. All designed on-brand with Digital Allies voice, color, and type system.</p>
+  </div>
+
+  <!-- SLIDE TEMPLATES -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>Slide Templates</h2>
+      <span class="cap">Seven 16:9 layouts — open and edit</span>
+    </div>
+    <div class="grid3">
+      <a class="tile" href="../slides/index.html">
+        <span class="t-tag">Deck</span>
+        <span class="t-name">Slide Template Set</span>
+        <span class="t-desc">All seven on-brand 16:9 layouts: title, section header, content, comparison, quote, stat, and end card.</span>
+      </a>
+      <a class="tile" href="../slides/01-title.html">
+        <span class="t-tag">Slide</span>
+        <span class="t-name">Title Slide</span>
+        <span class="t-desc">Dark Technical-Lace opener with pulse-dot header and signal-red slide number.</span>
+      </a>
+      <a class="tile" href="../slides/06-stat.html">
+        <span class="t-tag">Slide</span>
+        <span class="t-name">By the Numbers</span>
+        <span class="t-desc">Big-stat layout for highlighting a single metric or proof point.</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PAGE TEMPLATES -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>Page Templates</h2>
+      <span class="cap">CMS-driven Design Components</span>
+    </div>
+    <div class="grid3">
+      <a class="tile" href="services-index/ServicesIndex.dc.html">
+        <span class="t-tag">Template</span>
+        <span class="t-name">Services Index</span>
+        <span class="t-desc">Hero + featured tools grid + all-tools link. CMS-driven, ready to drop into the site.</span>
+      </a>
+      <a class="tile" href="tool-detail/ToolDetail.dc.html">
+        <span class="t-tag">Template</span>
+        <span class="t-name">Tool Detail Page</span>
+        <span class="t-desc">Full single-tool page: overview, features, how-it-works, and related tools.</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- MARKETING TEMPLATES -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>Marketing Templates</h2>
+      <span class="cap">Social &amp; content campaign assets</span>
+    </div>
+    <div class="grid3">
+      <a class="tile" href="../social/index.html">
+        <span class="t-tag">Social</span>
+        <span class="t-name">Social Carousels</span>
+        <span class="t-desc">Square 1080×1080 carousel sets — Kingman, AEO, and Strategy story decks on the brand canvas.</span>
+      </a>
+      <a class="tile" href="../ui_kits/website/content-calendar.html">
+        <span class="t-tag">Tool</span>
+        <span class="t-name">Content Calendar</span>
+        <span class="t-desc">The live, sortable 30-day calendar component — daily topics, hooks, CTAs, and asset references.</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="section wrap">
+    <div class="section-head">
+      <h2>Resources</h2>
+      <span class="cap">Documentation and guides</span>
+    </div>
+    <div class="grid3">
+      <a class="tile" href="README.md">
+        <span class="t-tag">Guide</span>
+        <span class="t-name">Templates Guide</span>
+        <span class="t-desc">How to use, customize, and extend these templates.</span>
+      </a>
+      <a class="tile" href="BRAND_VOICE_CMS_INTEGRATION.md">
+        <span class="t-tag">Guide</span>
+        <span class="t-name">Brand Voice CMS</span>
+        <span class="t-desc">Integration guide for brand voice, content calendar, and CMS workflows.</span>
+      </a>
+      <a class="tile" href="../GLOBAL_CONTEXT_FOR_CLAUDE.md">
+        <span class="t-tag">Context</span>
+        <span class="t-name">Design System Context</span>
+        <span class="t-desc">Complete context for designers and developers building on this system.</span>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Digital Allies Design System — Templates Gallery</p>
+    <p><span>©</span> <span class="sep">·</span> <a href="../index.html" style="color: inherit; text-decoration: none;">Back to Design System</a></p>
+  </footer>
+
+  <script src="../_ds_bundle.js"></script>
+</body>
+</html>

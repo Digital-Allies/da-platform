@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Allies CMS — Specification &amp; Build Plan</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F9F6F0;
+      color: #2D2D2D;
+      line-height: 1.6;
+    }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
+    
+    h1 { font-family: 'Lexend Deca', serif; font-size: 42px; font-weight: 700; margin: 0 0 8px 0; }
+    h2 { font-family: 'Lexend Deca', serif; font-size: 28px; font-weight: 700; margin: 48px 0 20px 0; padding-bottom: 12px; border-bottom: 1px solid #2D2D2D; }
+    h3 { font-family: 'Lexend Deca', serif; font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
+    
+    .eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: #3A7BD5; font-weight: 700; margin-bottom: 16px; }
+    .subtitle { font-size: 14px; color: #666; margin: 0 0 32px 0; }
+    
+    .phase {
+      border: 1px solid #2D2D2D;
+      padding: 28px;
+      margin: 24px 0;
+      background: white;
+    }
+    
+    .phase-title { color: #3A7BD5; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .phase h3 { margin-top: 0; }
+    
+    .code-block {
+      background: #2D2D2D;
+      color: #F9F6F0;
+      padding: 16px;
+      border: 1px solid #3A7BD5;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      overflow-x: auto;
+      margin: 16px 0;
+      line-height: 1.5;
+    }
+    
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+    
+    .checklist li {
+      padding: 8px 0 8px 24px;
+      position: relative;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    
+    .checklist li:before {
+      content: '☐';
+      position: absolute;
+      left: 0;
+      color: #3A7BD5;
+      font-weight: 700;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 12px;
+    }
+    
+    th {
+      background: #F0F0F0;
+      padding: 12px;
+      text-align: left;
+      font-weight: 700;
+      border: 1px solid #DDD;
+    }
+    
+    td {
+      padding: 12px;
+      border: 1px solid #DDD;
+    }
+    
+    .tech-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    
+    .tech-item {
+      border: 1px solid #2D2D2D;
+      padding: 16px;
+      text-align: center;
+    }
+    
+    .tech-item strong { display: block; margin-bottom: 4px; }
+    .tech-item span { font-size: 11px; color: #666; }
+
+    .callout { border-left: 4px solid #3A7BD5; background: #fff; padding: 18px 22px; margin: 28px 0; font-size: 13px; }
+    .callout strong { color: #3A7BD5; }
+    .callout a { color: #2D2D2D; font-weight: 700; }
+    .pillar { border: 1px solid #2D2D2D; background: #fff; padding: 24px 26px; margin: 18px 0; }
+    .pillar h3 { margin-top: 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .pillar .lead { font-size: 13px; color: #444; margin: 2px 0 14px; }
+    .status-pill { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 8px; border: 1px solid; white-space: nowrap; }
+    .status-built { color: #1F8A5B; border-color: #1F8A5B; }
+    .status-spec { color: #C5301A; border-color: #C5301A; }
+    .status-partial { color: #B26B00; border-color: #B26B00; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="eyebrow">Digital Allies · CMS Specification</div>
+    <h1>The Digital Allies CMS</h1>
+    <p class="subtitle">What the CMS must do, and the plan to build it.</p>
+
+    <div class="callout">
+      <strong>One CMS, one interface.</strong> The canonical CMS is the side-navigation dashboard at
+      <a href="cms/dashboard.html">cms/dashboard.html</a> (served by <code>cms/app.js</code> + <code>cms/style.css</code>).
+      Point every developer, collaborator, and doc here. Earlier prototypes live in <code>cms/_archive/</code> for reference only —
+      don't build against them.
+    </div>
+
+    <h2>What the CMS Must Include</h2>
+    <p>Beyond managing records, the CMS has to <strong>run the website</strong>. It does three core jobs, plus a set of
+      supporting modules. The dashboard shell and basic create/edit/delete already exist as a front-end prototype; the
+      items marked <span class="status-pill status-spec">To build</span> are the functional scope to implement against a real backend.</p>
+
+    <div class="pillar">
+      <h3>1 · Website page editing <span class="status-pill status-partial">Partially built</span></h3>
+      <p class="lead">Full visual website editing — not a single text box. Editors build and change pages by stacking
+        <strong>sections</strong> they pick from a library, the same way a real website builder works.</p>
+      <ul class="checklist">
+        <li>Page list — title, slug, status, last-updated <span class="status-pill status-built">Built</span></li>
+        <li>Open a page into a <strong>block/section editor</strong> — the page is an ordered stack of sections, each with its own fields <span class="status-pill status-spec">To build</span></li>
+        <li>A <strong>section / component library</strong> to insert from, drawn from the design system: Hero, Departments grid, Field Notes, Rich Text, Call-to-Action, Image / media, Stat strip, Pinned Quote, FAQ / Accordion, Contact footer <span class="status-pill status-spec">To build</span></li>
+        <li>Add a section → choose its type → edit its content inline <span class="status-pill status-spec">To build</span></li>
+        <li>Reorder (drag or up/down), duplicate, and remove sections <span class="status-pill status-spec">To build</span></li>
+        <li>Per-section options (light / dark background, spacing) <span class="status-pill status-spec">To build</span></li>
+        <li>Draft vs. Published; SEO title, meta description, slug <span class="status-pill status-built">Built (fields)</span></li>
+        <li>Live preview rendering the real brand styles before publish <span class="status-pill status-spec">To build</span></li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <h3>2 · Global design-system editing <span class="status-pill status-partial">Partially built</span></h3>
+      <p class="lead">Edit the brand <strong>tokens</strong> the entire website reads from one place, so a change updates
+        every page and template at once — no code edits.</p>
+      <ul class="checklist">
+        <li>Colors — Pulse Blue, Signal Red, Accent, charcoal, bone, and semantic colors <span class="status-pill status-built">Built (3 colors)</span></li>
+        <li>Type — header / body / detail font families and the type scale <span class="status-pill status-spec">To build</span></li>
+        <li>Spacing scale, border, shadow, and motion values <span class="status-pill status-spec">To build</span></li>
+        <li>Logo / wordmark upload, favicon, site name, tagline, contact, social links <span class="status-pill status-built">Built (most)</span></li>
+        <li>Tokens write to a store the site reads at render (CSS variables, mirroring <code>colors_and_type.css</code>) <span class="status-pill status-spec">To build</span></li>
+        <li>Preview a sample page with the new tokens; revert to defaults <span class="status-pill status-spec">To build</span></li>
+      </ul>
+    </div>
+
+    <div class="pillar">
+      <h3>3 · Blog &amp; article publishing <span class="status-pill status-partial">Partially built</span></h3>
+      <p class="lead">The Press Office / The Journal — write, schedule, and publish long-form content that appears on the site.</p>
+      <ul class="checklist">
+        <li>Article list by type (Blog Post / Press Release / Case Study), status, and date <span class="status-pill status-built">Built</span></li>
+        <li>Editor — title, slug, excerpt, body, tags, hero image, author <span class="status-pill status-built">Built (fields)</span></li>
+        <li>Rich-text / block body (reuse the section library where it helps) <span class="status-pill status-spec">To build</span></li>
+        <li>Draft / Review / Scheduled / Published, with a schedule date <span class="status-pill status-built">Built (states)</span></li>
+        <li>Publishing surfaces the article on the public site and feeds the content calendar <span class="status-pill status-spec">To build</span></li>
+      </ul>
+    </div>
+
+    <h3>Supporting modules (already in the dashboard shell)</h3>
+    <ul>
+      <li><strong>Content Calendar</strong> — the 30-day marketing run (matches the reusable <code>ContentCalendar</code> component shape)</li>
+      <li><strong>Projects</strong> — Kanban board · <strong>Research</strong> — notebooks &amp; notes · <strong>The Workshop</strong> — dev / bug tracker</li>
+      <li><strong>Settings</strong> — site info + the global design-token editor (Pillar 2)</li>
+      <li>Global search, notifications, and the multi-client switcher (Agency plan)</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Build status, honestly.</strong> <code>cms/dashboard.html</code> + <code>cms/app.js</code> are a working
+      front-end prototype with in-memory sample data — the shell, navigation, and basic CRUD are real and clickable.
+      The page builder, the section library, the full design-token editor, and live publishing are <em>specified above</em>
+      and get built against the backend in the phases that follow.
+    </div>
+
+    <h2>The three public surfaces it feeds</h2>
+    <ul>
+      <li><strong>Pages</strong> built in the page builder (home, about, services, contact, and any new page)</li>
+      <li><strong>Services Index + Tool Detail</strong> templates (<code>ServicesIndex.dc.html</code>, <code>ToolDetail.dc.html</code>) reading Tools &amp; Services</li>
+      <li><strong>The Journal</strong> — published articles + the content calendar</li>
+    </ul>
+
+    <h2>Technology Stack</h2>
+    <div class="tech-stack">
+      <div class="tech-item">
+        <strong>Backend</strong>
+        <span>Node.js + Express / Firebase / Supabase</span>
+      </div>
+      <div class="tech-item">
+        <strong>Database</strong>
+        <span>PostgreSQL / MongoDB / Firebase</span>
+      </div>
+      <div class="tech-item">
+        <strong>Frontend (Dashboard)</strong>
+        <span>React + Tailwind CSS</span>
+      </div>
+      <div class="tech-item">
+        <strong>API</strong>
+        <span>REST / GraphQL</span>
+      </div>
+      <div class="tech-item">
+        <strong>Authentication</strong>
+        <span>JWT / OAuth 2.0</span>
+      </div>
+      <div class="tech-item">
+        <strong>Hosting</strong>
+        <span>Vercel / Netlify / AWS / Heroku</span>
+      </div>
+    </div>
+
+    <h2>Implementation Phases</h2>
+
+    <div class="phase">
+      <div class="phase-title">Phase 1: Database Setup (Week 1)</div>
+      <h3>Collections to Create</h3>
+      <table>
+        <tr>
+          <th>Collection</th>
+          <th>Purpose</th>
+          <th>Key Fields</th>
+        </tr>
+        <tr>
+          <td><strong>Tools</strong></td>
+          <td>Individual service offerings</td>
+          <td>name, slug, description, icon, features, pricing, problemStatement, solutionStatement, faqs, cta</td>
+        </tr>
+        <tr>
+          <td><strong>Services</strong></td>
+          <td>Department/service categories</td>
+          <td>name, slug, description, icon, featuredTools[], order</td>
+        </tr>
+        <tr>
+          <td><strong>ContentCalendar</strong></td>
+          <td>30-day social + email schedule</td>
+          <td>day, week, category, topic, hook, caption, cta, promptRef, status, scheduledDate</td>
+        </tr>
+        <tr>
+          <td><strong>Users</strong></td>
+          <td>CMS editors & admins</td>
+          <td>email, password (hashed), role, permissions, createdAt</td>
+        </tr>
+        <tr>
+          <td><strong>Settings</strong></td>
+          <td>Global configuration</td>
+          <td>siteName, tagline, contactEmail, socialLinks, brandColors</td>
+        </tr>
+      </table>
+
+      <h3>Setup Instructions</h3>
+      <ul class="checklist">
+        <li>Choose your database provider (PostgreSQL recommended for relational data)</li>
+        <li>Create the 5 collections above with the specified fields</li>
+        <li>Add indexes on: Tools.slug, Services.slug, ContentCalendar.day, Users.email</li>
+        <li>Set up automated backups (daily)</li>
+        <li>Create seed data: import the 30-day content calendar CSV</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Phase 2: Backend API (Week 2)</div>
+      <h3>Core Endpoints to Build</h3>
+
+      <h4>Tools</h4>
+      <div class="code-block">
+GET    /api/tools                    # List all tools
+GET    /api/tools/:slug              # Get single tool
+POST   /api/tools                    # Create (admin)
+PUT    /api/tools/:slug              # Update (admin)
+DELETE /api/tools/:slug              # Delete (admin)
+      </div>
+
+      <h4>Services</h4>
+      <div class="code-block">
+GET    /api/services                 # List all services
+GET    /api/services/:slug           # Get single service + tools
+POST   /api/services                 # Create (admin)
+PUT    /api/services/:slug           # Update (admin)
+DELETE /api/services/:slug           # Delete (admin)
+      </div>
+
+      <h4>Content Calendar</h4>
+      <div class="code-block">
+GET    /api/calendar                 # List all entries (30 days)
+GET    /api/calendar?status=scheduled # Filter by status
+GET    /api/calendar?category=...    # Filter by category
+POST   /api/calendar                 # Create entry (editor)
+PUT    /api/calendar/:day            # Update entry (editor)
+DELETE /api/calendar/:day            # Delete entry (admin)
+      </div>
+
+      <h4>Authentication</h4>
+      <div class="code-block">
+POST   /api/auth/login               # Login (returns JWT)
+POST   /api/auth/logout              # Logout (invalidate token)
+POST   /api/auth/refresh             # Refresh token
+GET    /api/auth/me                  # Get current user
+      </div>
+
+      <h3>Response Format Example</h3>
+      <div class="code-block">
+{
+  "success": true,
+  "data": {
+    "id": "tool-001",
+    "name": "Brand Discovery",
+    "slug": "brand-discovery",
+    "description": "From brief to brand board in one session",
+    "icon": "🎨",
+    "features": ["Logo variations", "Color palette", ...],
+    "pricing": "From $475",
+    "status": "published",
+    "createdAt": "2026-06-18T14:30:00Z",
+    "updatedAt": "2026-06-18T14:30:00Z"
+  },
+  "timestamp": "2026-06-18T14:35:00Z"
+}
+      </div>
+
+      <h3>Setup Instructions</h3>
+      <ul class="checklist">
+        <li>Create Express.js (or equivalent) server</li>
+        <li>Set up database connections</li>
+        <li>Implement all 15 endpoints above</li>
+        <li>Add authentication middleware (JWT validation)</li>
+        <li>Add error handling & validation</li>
+        <li>Test all endpoints with Postman or Insomnia</li>
+        <li>Add CORS headers for front-end access</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Phase 3: Dashboard Frontend (Week 3)</div>
+      <h3>Main Dashboard Views</h3>
+      <ul>
+        <li><strong>Overview:</strong> Recent edits, publishing status, quick links</li>
+        <li><strong>Tools Manager:</strong> Create/edit/delete service tools</li>
+        <li><strong>Services Manager:</strong> Manage service categories</li>
+        <li><strong>Content Calendar:</strong> 30-day schedule with edit inline</li>
+        <li><strong>Users:</strong> Manage editor permissions (admin only)</li>
+        <li><strong>Settings:</strong> Global configuration (admin only)</li>
+      </ul>
+
+      <h3>Key Features</h3>
+      <ul class="checklist">
+        <li>Login/logout (JWT auth)</li>
+        <li>Role-based access control (Admin / Editor / Viewer)</li>
+        <li>Live preview of changes (connected to design system templates)</li>
+        <li>Bulk import (CSV for content calendar)</li>
+        <li>Publish/unpublish content</li>
+        <li>Version history (track changes)</li>
+        <li>Search across all content</li>
+        <li>Mobile-responsive dashboard</li>
+      </ul>
+
+      <h3>Setup Instructions</h3>
+      <ul class="checklist">
+        <li>Create React app (Vite or Create React App)</li>
+        <li>Set up routing (React Router)</li>
+        <li>Create login page with JWT handling</li>
+        <li>Build 6 main dashboard views (above)</li>
+        <li>Wire up API calls to backend endpoints</li>
+        <li>Add form validation & error handling</li>
+        <li>Test authentication flow</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Phase 4: Design System Integration (Week 4)</div>
+      <h3>How Templates Connect</h3>
+      <p>The design system's CMS-ready templates (ServicesIndex.dc.html, ToolDetail.dc.html) consume data from Barcelona via API:</p>
+
+      <div class="code-block">
+// In your Design Component (DC):
+&lt;sc-for list="{{ tools }}" as="tool"&gt;
+  &lt;!-- renders each tool from /api/tools --&gt;
+&lt;/sc-for&gt;
+
+// Props passed from API:
+{{ toolName }}        # from /api/tools/:slug
+{{ features }}        # from /api/tools/:slug
+{{ pricingDisplay }}  # from /api/tools/:slug
+{{ faqs }}            # from /api/tools/:slug
+      </div>
+
+      <h3>Integration Checklist</h3>
+      <ul class="checklist">
+        <li>Create an environment variable file (.env) with API base URL</li>
+        <li>In design system templates, fetch from /api/tools and /api/services</li>
+        <li>Set up auto-refresh (poll API every 30 seconds for live updates)</li>
+        <li>Add error handling for missing/invalid data</li>
+        <li>Test end-to-end: edit in CMS → see change in design system</li>
+      </ul>
+
+      <h3>Example Integration Code</h3>
+      <div class="code-block">
+// In ToolDetail.dc.html logic class:
+async componentDidMount() {
+  const slug = window.location.pathname.split('/').pop();
+  const res = await fetch(`/api/tools/${slug}`);
+  const { data } = await res.json();
+  this.setState({ tool: data });
+}
+
+renderVals() {
+  const { tool } = this.state;
+  return {
+    toolName: tool?.name || '',
+    features: tool?.features || [],
+    pricingDisplay: tool?.pricing || '',
+    faqs: tool?.faqs || []
+  };
+}
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">Phase 5: Deployment & Launch (Week 5)</div>
+      <h3>Deployment Checklist</h3>
+      <ul class="checklist">
+        <li>Set up environment variables (API keys, database URLs, JWT secret)</li>
+        <li>Configure CORS to allow design system origin</li>
+        <li>Set up HTTPS (required for JWT auth)</li>
+        <li>Deploy backend (Vercel, Heroku, AWS)</li>
+        <li>Deploy frontend dashboard (Vercel, Netlify)</li>
+        <li>Deploy design system with API URL pointing to live backend</li>
+        <li>Test end-to-end in production</li>
+        <li>Set up monitoring & error tracking</li>
+        <li>Create admin account for yourself</li>
+        <li>Invite editors and set permissions</li>
+      </ul>
+
+      <h3>Post-Launch</h3>
+      <ul class="checklist">
+        <li>Monitor API performance (response times)</li>
+        <li>Set up automated daily backups</li>
+        <li>Create user documentation (how to use dashboard)</li>
+        <li>Establish content review workflow</li>
+        <li>Plan content calendar (weekly meetings)</li>
+      </ul>
+    </div>
+
+    <h2>User Roles & Permissions</h2>
+    <table>
+      <tr>
+        <th>Role</th>
+        <th>Permissions</th>
+      </tr>
+      <tr>
+        <td><strong>Admin</strong></td>
+        <td>Create/edit/delete tools, services, users. View all. Change settings.</td>
+      </tr>
+      <tr>
+        <td><strong>Editor</strong></td>
+        <td>Create/edit content (tools, calendar). Can't delete. Can't manage users.</td>
+      </tr>
+      <tr>
+        <td><strong>Viewer</strong></td>
+        <td>Read-only access. See all content but can't make changes.</td>
+      </tr>
+    </table>
+
+    <h2>Data Flow Diagram</h2>
+    <div class="code-block">
+┌─────────────────┐
+│  CMS Dashboard  │  (React frontend)
+│   (Barcelona)   │
+└────────┬────────┘
+         │ POST/PUT/GET
+         │
+┌────────▼────────┐
+│   Backend API   │  (Express.js)
+│  /api/tools     │
+│  /api/services  │
+│  /api/calendar  │
+└────────┬────────┘
+         │ Read/Write
+         │
+┌────────▼────────┐
+│    Database     │  (PostgreSQL)
+│  - Tools        │
+│  - Services     │
+│  - Calendar     │
+│  - Users        │
+└────────────────┘
+         ▲
+         │ GET /api/tools/:slug
+         │
+┌────────┴────────┐
+│  Design System  │
+│  Templates      │  (Shows live data)
+│  (Services,     │
+│   Tools, etc)   │
+└─────────────────┘
+    </div>
+
+    <h2>Timeline Summary</h2>
+    <table>
+      <tr>
+        <th>Week</th>
+        <th>Phase</th>
+        <th>Deliverables</th>
+      </tr>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Database Setup</td>
+        <td>5 collections, indexes, seed data</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Backend API</td>
+        <td>15 endpoints, authentication, testing</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Dashboard Frontend</td>
+        <td>6 main views, forms, validation</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>Design System Integration</td>
+        <td>Live API connections, end-to-end testing</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Deployment & Launch</td>
+        <td>Live platform, user accounts, monitoring</td>
+      </tr>
+    </table>
+
+    <h2>Next Steps</h2>
+    <ol>
+      <li>Decide on tech stack (database, backend framework, hosting)</li>
+      <li>Start Phase 1: Database Setup (this week)</li>
+      <li>Once API is ready, I can build the dashboard UI mockup (jump to Phase 3)</li>
+      <li>Wire up design system templates to API (Phase 4)</li>
+      <li>Deploy to production (Phase 5)</li>
+    </ol>
+
+    <h2>Questions?</h2>
+    <p><strong>Ready to proceed?</strong> Next, I can create:</p>
+    <ul>
+      <li>Complete CMS Dashboard UI mockup (interactive HTML/React)</li>
+      <li>Database schema (SQL file for your database setup)</li>
+      <li>API starter code (Node.js/Express boilerplate)</li>
+      <li>Integration code for design system templates</li>
+    </ul>
+  </div>
+</body>
+</html>

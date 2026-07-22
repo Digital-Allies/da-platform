@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Page Editor (prototype)" subtitle="Block/section builder with live multi-tenant preview, component library, and tier-gated code editor" viewport="1400x900" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Allies CMS — Page Editor</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+*{box-sizing:border-box}
+body{padding:0;background:var(--fg);overflow:hidden;height:100vh}
+.app{display:flex;flex-direction:column;height:100vh}
+.topbar{display:flex;align-items:center;gap:16px;padding:10px 18px;background:var(--fg);color:var(--fg-on-dark);border-bottom:1px solid rgba(255,255,255,0.12);flex:0 0 auto}
+.tb-brand{font-family:var(--font-headers);font-weight:700;font-size:13px;display:flex;align-items:center;gap:8px}
+.tb-crumb{font-family:var(--font-details);font-size:11px;color:rgba(255,255,255,0.55)}
+.tb-crumb b{color:#fff;font-weight:700}
+.tb-sep{flex:1}
+.tb-select{font-family:var(--font-details);font-size:11px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:6px 8px}
+.pill{font-family:var(--font-details);font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:5px 10px;border:1px solid;cursor:pointer;white-space:nowrap}
+.pill.draft{color:#B26B00;border-color:#B26B00}
+.pill.pub{color:#1F8A5B;border-color:#1F8A5B}
+.tb-publish{font-family:var(--font-details);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--signal);color:#fff;border:none;padding:8px 16px;cursor:pointer}
+.tb-publish:hover{opacity:.85}
+.body-row{display:flex;flex:1;min-height:0}
+.rail{background:var(--bg);border-right:1px solid var(--charcoal);overflow-y:auto;flex:0 0 auto}
+.rail.left{width:280px}
+.rail.right{width:320px;border-right:none;border-left:1px solid var(--charcoal)}
+.rail-head{padding:16px 18px 10px;border-bottom:1px solid var(--hairline);font-family:var(--font-details);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-muted);font-weight:700}
+.outline{list-style:none;margin:0;padding:8px}
+.oi{display:flex;align-items:center;gap:8px;padding:10px 10px;border:1px solid transparent;cursor:pointer;margin-bottom:4px;background:var(--bg)}
+.oi:hover{background:var(--bg-alt)}
+.oi.sel{border-color:var(--charcoal);background:var(--bg-alt)}
+.oi .handle{color:var(--fg-soft);font-size:12px;cursor:grab}
+.oi .oi-name{flex:1;font-family:var(--font-body);font-size:12.5px;font-weight:600}
+.oi .oi-type{display:block;font-family:var(--font-details);font-size:9.5px;color:var(--fg-muted);text-transform:uppercase;letter-spacing:.06em}
+.oi-actions{display:flex;gap:4px;opacity:0;transition:opacity .15s}
+.oi:hover .oi-actions{opacity:1}
+.oi-actions button{border:none;background:none;color:var(--fg-muted);cursor:pointer;font-size:12px;padding:2px 4px}
+.oi-actions button:hover{color:var(--signal)}
+.add-btn{margin:6px 8px 14px;width:calc(100% - 16px);font-family:var(--font-details);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:11px;border:1.5px dashed var(--charcoal);background:none;cursor:pointer;color:var(--fg)}
+.add-btn:hover{background:var(--bg-alt);border-style:solid}
+.stage{flex:1;background:#e9e6de;overflow:auto;padding:36px;display:flex;justify-content:center}
+.canvas{width:100%;max-width:960px;background:var(--tok-bg,#fff);color:var(--tok-fg,#111);font-family:var(--tok-body,sans-serif);box-shadow:0 20px 50px rgba(0,0,0,.25);min-height:600px}
+.blk{padding:56px 48px;border-bottom:1px dashed rgba(0,0,0,0.08);position:relative;cursor:pointer}
+.blk:last-child{border-bottom:none}
+.blk.selected{outline:2px solid var(--tok-accent,#3A7BD5);outline-offset:-2px}
+.blk .blabel{position:absolute;top:8px;right:10px;font-family:var(--font-details);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(0,0,0,0.3)}
+.blk h2{font-family:var(--tok-head,sans-serif);margin:0 0 14px;font-size:clamp(24px,3vw,36px);color:var(--tok-fg,#111)}
+.blk p{font-family:var(--tok-body,sans-serif);font-size:15px;line-height:1.7;color:var(--tok-fg,#111);opacity:.75;max-width:640px}
+.stripe-ph{height:120px;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.06),rgba(0,0,0,0.06) 10px,rgba(0,0,0,0.02) 10px,rgba(0,0,0,0.02) 20px);display:flex;align-items:center;justify-content:center;font-family:var(--font-details);font-size:11px;color:rgba(0,0,0,0.4);margin-top:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.mini-card{background:rgba(0,0,0,0.03);padding:20px;border:1px solid rgba(0,0,0,0.08)}
+.mini-card b{display:block;font-size:22px;margin-bottom:4px}
+.mini-card span{font-size:11px;opacity:.6}
+.tabs{display:flex;border-bottom:1px solid var(--charcoal)}
+.tab{flex:1;text-align:center;padding:12px;font-family:var(--font-details);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-muted);cursor:pointer;border-bottom:2px solid transparent}
+.tab.active{color:var(--fg);border-color:var(--signal)}
+.insp-body{padding:18px}
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--font-details);font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--fg-muted);margin-bottom:6px;font-weight:700}
+.field input,.field textarea,.field select{width:100%;font-family:var(--font-body);font-size:13px;padding:8px 10px;border:1px solid var(--charcoal);background:var(--bg);color:var(--fg)}
+.field textarea{resize:vertical;min-height:70px}
+.toggle-row{display:flex;gap:8px}
+.toggle-row button{flex:1;font-family:var(--font-details);font-size:10.5px;padding:8px;border:1px solid var(--charcoal);background:var(--bg);color:var(--fg);cursor:pointer}
+.toggle-row button.on{background:var(--fg);color:var(--fg-on-dark)}
+.code-wrap{position:relative}
+.code-wrap textarea{width:100%;height:220px;font-family:var(--font-details);font-size:11.5px;background:#1e1e1e;color:#d4d4d4;border:1px solid var(--charcoal);padding:12px;line-height:1.6}
+.lock-overlay{position:absolute;inset:0;background:rgba(249,246,240,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:20px}
+.lock-overlay .lock-icon{width:28px;height:28px;border:2px solid var(--charcoal);border-radius:4px;position:relative}
+.lock-overlay .lock-icon::after{content:'';position:absolute;top:-14px;left:6px;width:14px;height:14px;border:2px solid var(--charcoal);border-bottom:none;border-radius:8px 8px 0 0}
+.lock-overlay p{font-family:var(--font-body);font-size:12px;max-width:220px;margin:0}
+.lock-overlay .tag{font-family:var(--font-details);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);border:1px solid var(--signal);padding:3px 8px}
+.empty-insp{padding:40px 20px;text-align:center;font-family:var(--font-body);font-size:13px;color:var(--fg-muted)}
+/* library modal */
+.modal-veil{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:100}
+.modal-veil.open{display:flex}
+.modal{background:var(--bg);width:900px;max-width:92vw;max-height:82vh;overflow-y:auto;border:1px solid var(--charcoal)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;border-bottom:1px solid var(--charcoal)}
+.modal-head h3{font-family:var(--font-headers);font-size:19px;margin:0}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--fg-muted)}
+.modal-body{padding:22px 26px}
+.lib-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lib-card{border:1px solid var(--charcoal);background:var(--bg);cursor:pointer;transition:all .15s var(--ease-snap)}
+.lib-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.lib-thumb{height:80px;background:repeating-linear-gradient(45deg,var(--hairline),var(--hairline) 8px,transparent 8px,transparent 16px)}
+.lib-info{padding:12px 14px}
+.lib-info .lib-name{font-family:var(--font-headers);font-weight:700;font-size:13px}
+.lib-info .lib-src{display:inline-block;margin-top:6px;font-family:var(--font-details);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-muted);border:1px solid var(--hairline);padding:2px 6px}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#2D2D2D">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg"><rect width="1200" height="800" fill="#2D2D2D"/><circle cx="600" cy="330" r="34" fill="#3A7BD5"/><text x="600" y="470" text-anchor="middle" fill="#F9F6F0" font-family="monospace" font-size="46" font-weight="700" letter-spacing="4">EDITOR</text><text x="600" y="540" text-anchor="middle" fill="#9a9a9a" font-family="monospace" font-size="22" letter-spacing="8">DIGITAL ALLIES</text></svg>
+</template>
+
+<div class="app">
+  <div class="topbar">
+    <div class="tb-brand"><span class="da-pulse-stack"><span class="da-pulse"></span></span>Digital Allies CMS</div>
+    <div class="tb-crumb">Pages / <b id="tbPageName">Home</b></div>
+    <select class="tb-select" id="tenantSel">
+      <option value="da">Client: Digital Allies</option>
+      <option value="af">Client: Atomic Finds ATX</option>
+      <option value="hctc">Client: Healthcare Training Center</option>
+    </select>
+    <select class="tb-select" id="tierSel">
+      <option value="starter">Plan: Starter</option>
+      <option value="pro">Plan: Pro</option>
+      <option value="agency" selected>Plan: Agency</option>
+    </select>
+    <div class="tb-sep"></div>
+    <span class="pill draft" id="statusPill">● Draft</span>
+    <button class="tb-publish">Publish</button>
+  </div>
+  <div class="body-row">
+    <div class="rail left">
+      <div class="rail-head" style="display:flex;align-items:center;justify-content:space-between">Pages<button id="newPageBtn" style="font-family:var(--font-details);font-size:10px;font-weight:700;color:var(--fg);background:none;border:1px solid var(--charcoal);padding:3px 7px;cursor:pointer">+ New</button></div>
+      <div class="rail-head">Section stack</div>
+      <ul class="outline" id="outline"></ul>
+      <button class="add-btn" id="addBtn">+ Add section</button>
+    </div>
+    <div class="stage"><div class="canvas" id="canvas"></div></div>
+    <div class="rail right">
+      <div class="tabs"><div class="tab active" data-tab="content">Content</div><div class="tab" data-tab="code">Code</div></div>
+      <div class="insp-body" id="inspector"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-veil" id="libVeil">
+  <div class="modal">
+    <div class="modal-head"><h3>Add a section</h3><button class="modal-close" id="libClose">×</button></div>
+    <div class="modal-body"><div class="lib-grid" id="libGrid"></div></div>
+  </div>
+</div>
+<div class="modal-veil" id="tplVeil">
+  <div class="modal">
+    <div class="modal-head"><h3>New page — choose a template</h3><button class="modal-close" id="tplClose">×</button></div>
+    <div class="modal-body"><div class="lib-grid" id="tplGrid"></div></div>
+  </div>
+</div>
+
+<script>
+const TENANTS = {
+  da:  {name:'Digital Allies', bg:'#F9F6F0', fg:'#2D2D2D', accent:'#C5301A', head:'Lexend Deca, sans-serif', body:'JetBrains Mono, monospace'},
+  af:  {name:'Atomic Finds ATX', bg:'#17151c', fg:'#f3ead8', accent:'#e8b23c', head:'"Bagel Fat One", cursive', body:'"DM Sans", sans-serif'},
+  hctc:{name:'Healthcare Training Center', bg:'#ffffff', fg:'#0b2540', accent:'#0e8f8f', head:'Montserrat, sans-serif', body:'Inter, sans-serif'}
+};
+const LIBRARY = [
+  {id:'hero', name:'Hero', src:'DS component', tag:'Top-of-page banner'},
+  {id:'departments', name:'Services Grid', src:'DS component', tag:'Services list'},
+  {id:'fieldnotes', name:'Testimonials', src:'DS component', tag:'Customer quotes'},
+  {id:'richtext', name:'Rich Text', src:'DS component', tag:'Freeform copy'},
+  {id:'cta', name:'Call to Action', src:'DS component', tag:'Conversion band'},
+  {id:'media', name:'Image / Media', src:'shadcnblocks base', tag:'Media block'},
+  {id:'stats', name:'Stat Strip', src:'shadcnblocks base', tag:'Metrics row'},
+  {id:'quote', name:'Pull Quote', src:'DS component', tag:'Highlighted quote'},
+  {id:'faq', name:'FAQ / Accordion', src:'Mantine base', tag:'Q&A'},
+  {id:'products', name:'Product Grid', src:'shadcnblocks base', tag:'Commerce'},
+  {id:'contact', name:'Contact Form', src:'DS component', tag:'Lead capture'}
+];
+const PAGE_TEMPLATES = [
+  {id:'blank', name:'Blank Page', daOnly:false, desc:'Start with an empty section stack.'},
+  {id:'home', name:'Home', daOnly:false, desc:'Hero + Services + Testimonials + CTA.'},
+  {id:'service-detail', name:'Service / Tool Detail', daOnly:true, desc:'Reuses this design system\'s ToolDetail.dc.html structure.'},
+  {id:'services-index', name:'Services Index', daOnly:true, desc:'Reuses this design system\'s ServicesIndex.dc.html structure.'},
+  {id:'blog-post', name:'Blog Post', daOnly:false, desc:'Article layout: hero image, rich text body, author, tags.'},
+  {id:'case-study', name:'Case Study', daOnly:false, desc:'Client story: problem, approach, results, quote.'}
+];
+let sections = [
+  {id:'s1', type:'hero', title:'Technological Solutions for People with Better Things to Do.', body:'The sharp, straight-talking tech guy you actually want to call.', bg:'light'},
+  {id:'s2', type:'departments', title:'Our Services', body:'', bg:'light'},
+  {id:'s3', type:'fieldnotes', title:'What clients say', body:'Real feedback, unedited.', bg:'dark'},
+  {id:'s4', type:'cta', title:'Let\'s fix what\'s broken.', body:'Strategy is free. Execution is paid.', bg:'dark'}
+];
+let selectedId = sections[0].id, activeTab = 'content', idSeq = 5;
+
+function tenant(){ return TENANTS[document.getElementById('tenantSel').value]; }
+function tier(){ return document.getElementById('tierSel').value; }
+
+function renderOutline(){
+  const ol = document.getElementById('outline'); ol.innerHTML='';
+  sections.forEach((s,i)=>{
+    const li=document.createElement('li');
+    li.className='oi'+(s.id===selectedId?' sel':'');
+    li.innerHTML='<span class="handle">⠿</span><span class="oi-name">'+s.title.slice(0,26)+(s.title.length>26?'…':'')+'<span class="oi-type">'+labelFor(s.type)+'</span></span><span class="oi-actions"><button data-a="up" title="Move up">↑</button><button data-a="down" title="Move down">↓</button><button data-a="dup" title="Duplicate">⎘</button><button data-a="del" title="Remove">✕</button></span>';
+    li.addEventListener('click',(e)=>{ if(e.target.dataset.a) return; selectedId=s.id; renderAll(); });
+    li.querySelectorAll('[data-a]').forEach(btn=>btn.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      const a=btn.dataset.a;
+      if(a==='up'&&i>0){ [sections[i-1],sections[i]]=[sections[i],sections[i-1]]; }
+      if(a==='down'&&i<sections.length-1){ [sections[i+1],sections[i]]=[sections[i],sections[i+1]]; }
+      if(a==='dup'){ const copy={...s,id:'s'+(idSeq++)}; sections.splice(i+1,0,copy); selectedId=copy.id; }
+      if(a==='del'){ sections.splice(i,1); if(selectedId===s.id) selectedId=sections[0]?sections[0].id:null; }
+      renderAll();
+    }));
+    ol.appendChild(li);
+  });
+}
+function labelFor(t){ const l=LIBRARY.find(x=>x.id===t); return l?l.name:t; }
+
+function blockInner(s,t){
+  if(s.type==='departments') return '<div class="grid3">'+[1,2,3].map(n=>'<div class="mini-card"><b>0'+n+'</b><span>Department name</span></div>').join('')+'</div>';
+  if(s.type==='stats') return '<div class="grid3">'+[1,2,3].map(()=>'<div class="mini-card"><b>—</b><span>metric label</span></div>').join('')+'</div>';
+  if(s.type==='media'||s.type==='products'||s.type==='faq') return '<div class="stripe-ph">'+labelFor(s.type)+' — placeholder</div>';
+  return '';
+}
+function renderCanvas(){
+  const t=tenant();
+  const canvas=document.getElementById('canvas');
+  canvas.style.setProperty('--tok-bg',t.bg); canvas.style.setProperty('--tok-fg',t.fg);
+  canvas.style.setProperty('--tok-accent',t.accent); canvas.style.setProperty('--tok-head',t.head); canvas.style.setProperty('--tok-body',t.body);
+  canvas.innerHTML='';
+  sections.forEach(s=>{
+    const div=document.createElement('div');
+    div.className='blk'+(s.id===selectedId?' selected':'');
+    div.style.background = s.bg==='dark' ? (t.fg+'10') : 'transparent';
+    div.innerHTML='<span class="blabel">'+labelFor(s.type)+'</span><h2>'+s.title+'</h2>'+(s.body?'<p>'+s.body+'</p>':'')+blockInner(s,t);
+    div.addEventListener('click',()=>{ selectedId=s.id; renderAll(); });
+    canvas.appendChild(div);
+  });
+}
+function renderInspector(){
+  const insp=document.getElementById('inspector');
+  document.querySelectorAll('.tab').forEach(tb=>tb.classList.toggle('active',tb.dataset.tab===activeTab));
+  const s=sections.find(x=>x.id===selectedId);
+  if(!s){ insp.innerHTML='<div class="empty-insp">Select a section to edit its content.</div>'; return; }
+  if(activeTab==='content'){
+    insp.innerHTML='<div class="insp-body"><div class="field"><label>Title</label><input id="fTitle" value="'+s.title.replace(/"/g,'&quot;')+'"></div>'+
+      '<div class="field"><label>Body</label><textarea id="fBody">'+s.body+'</textarea></div>'+
+      '<div class="field"><label>Background</label><div class="toggle-row"><button data-bg="light" class="'+(s.bg==='light'?'on':'')+'">Light</button><button data-bg="dark" class="'+(s.bg==='dark'?'on':'')+'">Dark</button></div></div>'+
+      '<div class="field"><label>Section type</label><input value="'+labelFor(s.type)+'" disabled style="opacity:.6"></div></div>';
+    document.getElementById('fTitle').addEventListener('input',e=>{s.title=e.target.value;renderOutline();renderCanvas();});
+    document.getElementById('fBody').addEventListener('input',e=>{s.body=e.target.value;renderCanvas();});
+    insp.querySelectorAll('[data-bg]').forEach(b=>b.addEventListener('click',()=>{s.bg=b.dataset.bg;renderAll();}));
+  } else {
+    const canEdit = tier()==='agency';
+    const canSnippet = tier()==='pro' || tier()==='agency';
+    if(!canSnippet){
+      insp.innerHTML='<div class="code-wrap" style="height:260px"><div class="lock-overlay"><span class="tag">Pro plan</span><div class="lock-icon"></div><p>Upgrade to Pro to add custom embeds, or Agency for full section code editing.</p></div></div>';
+    } else if(!canEdit){
+      insp.innerHTML='<div class="insp-body"><div class="field"><label>Custom embed (Pro)</label><textarea placeholder="&lt;!-- paste an embed snippet --&gt;" style="min-height:120px;font-family:var(--font-details)"></textarea></div><div class="code-wrap" style="height:140px;margin-top:10px"><div class="lock-overlay"><span class="tag">Agency plan</span><div class="lock-icon"></div><p>Full raw HTML/CSS editing per section is an Agency-plan capability.</p></div></div></div>';
+    } else {
+      insp.innerHTML='<div class="insp-body"><div class="field"><label>Section HTML/CSS — Agency plan</label><div class="code-wrap"><textarea spellcheck="false">&lt;section class="'+s.type+'"&gt;\n  &lt;h2&gt;'+s.title+'&lt;/h2&gt;\n  &lt;p&gt;'+s.body+'&lt;/p&gt;\n&lt;/section&gt;</textarea></div></div><small style="font-family:var(--font-details);color:var(--fg-muted);font-size:10.5px">Changes here render live in the preview at right and are sandboxed per-section — they cannot break the rest of the page.</small></div>';
+    }
+  }
+}
+function renderAll(){ renderOutline(); renderCanvas(); renderInspector(); }
+
+document.querySelectorAll('.tab').forEach(tb=>tb.addEventListener('click',()=>{activeTab=tb.dataset.tab;renderInspector();}));
+document.getElementById('tenantSel').addEventListener('change',renderCanvas);
+document.getElementById('tierSel').addEventListener('change',renderInspector);
+
+const libVeil=document.getElementById('libVeil'), libGrid=document.getElementById('libGrid');
+document.getElementById('addBtn').addEventListener('click',()=>{
+  libGrid.innerHTML='';
+  LIBRARY.forEach(l=>{
+    const c=document.createElement('div'); c.className='lib-card';
+    c.innerHTML='<div class="lib-thumb"></div><div class="lib-info"><div class="lib-name">'+l.name+'</div><span class="lib-src">'+l.src+'</span></div>';
+    c.addEventListener('click',()=>{
+      const ns={id:'s'+(idSeq++), type:l.id, title:l.name, body:'', bg:'light'};
+      sections.push(ns); selectedId=ns.id; libVeil.classList.remove('open'); renderAll();
+    });
+    libGrid.appendChild(c);
+  });
+  libVeil.classList.add('open');
+});
+document.getElementById('libClose').addEventListener('click',()=>libVeil.classList.remove('open'));
+libVeil.addEventListener('click',(e)=>{ if(e.target===libVeil) libVeil.classList.remove('open'); });
+
+const tplVeil=document.getElementById('tplVeil'), tplGrid=document.getElementById('tplGrid');
+document.getElementById('newPageBtn').addEventListener('click',()=>{
+  const isDA = document.getElementById('tenantSel').value==='da';
+  tplGrid.innerHTML='';
+  PAGE_TEMPLATES.forEach(t=>{
+    const locked = t.daOnly && !isDA;
+    const c=document.createElement('div'); c.className='lib-card'+(locked?'':'');
+    c.style.opacity = locked ? 0.45 : 1;
+    c.style.cursor = locked ? 'not-allowed' : 'pointer';
+    c.innerHTML='<div class="lib-thumb"></div><div class="lib-info"><div class="lib-name">'+t.name+(t.daOnly?' <span style="font-size:9px;color:var(--signal)">· DA only</span>':'')+'</div><span class="lib-src" style="display:block;margin-top:4px">'+t.desc+'</span></div>';
+    if(!locked) c.addEventListener('click',()=>{ tplVeil.classList.remove('open'); document.getElementById('tbPageName').textContent = t.name; });
+    tplGrid.appendChild(c);
+  });
+  tplVeil.classList.add('open');
+});
+document.getElementById('tplClose').addEventListener('click',()=>tplVeil.classList.remove('open'));
+tplVeil.addEventListener('click',(e)=>{ if(e.target===tplVeil) tplVeil.classList.remove('open'); });
+document.getElementById('statusPill').addEventListener('click',function(){
+  const isDraft=this.classList.contains('draft');
+  this.classList.toggle('draft',!isDraft); this.classList.toggle('pub',isDraft);
+  this.textContent = isDraft? '● Published':'● Draft';
+});
+
+renderAll();
+</script>
+</body>
+</html>

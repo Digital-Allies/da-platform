@@ -1,0 +1,229 @@
+<!-- @dsCard group="Brand" name="Voice Experiment — Secondary Lead" subtitle="Lighter, less stringent direction: secondary voice only, no Jargon Jar, plain 'Services' — styled in the Paula Scher punk poster system" viewport="1200x1400" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Experiment — Digital Allies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #2D2D2D;
+      --gold-ink: #FADEEB;
+      --cream-ink: #F9F6F0;
+      --burgundy: #3A7BD5;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0; background-color: var(--bg-dark); color: var(--cream-ink); font-family: var(--font-mono);
+      background-image:
+        linear-gradient(rgba(249, 246, 240, 0.07) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, rgba(249, 246, 240, 0.07) 0.5px, transparent 0.5px);
+      background-size: 20px 20px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 60px 40px 0; }
+
+    a.back { font-family: var(--font-mono); font-size: 11px; color: var(--gold-ink); text-decoration: none; letter-spacing: 0.04em; display: inline-block; margin-bottom: 24px; }
+
+    .masthead { border-bottom: 6px solid var(--gold-ink); padding-bottom: 28px; margin-bottom: 8px; }
+    .eyebrow { font-family: var(--font-display); font-weight: 900; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-ink); margin-bottom: 6px; }
+    h1 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(3.2rem, 8vw, 6.5rem); line-height: 0.82; letter-spacing: -0.03em; margin: 0 0 12px 0; color: var(--cream-ink); }
+    .deck { font-family: var(--font-mono); font-size: 14px; line-height: 1.7; color: var(--cream-ink); max-width: 720px; margin: 0 0 8px 0; }
+
+    h2 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 0.88; letter-spacing: -0.02em; color: var(--gold-ink); margin: 56px 0 18px 0; }
+    h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.4rem; letter-spacing: 0.01em; color: var(--cream-ink); margin: 24px 0 10px 0; border-bottom: 3px solid var(--gold-ink); padding-bottom: 6px; display: inline-block; }
+
+    .section { margin-bottom: 8px; padding-bottom: 40px; }
+    .section-intro { font-family: var(--font-mono); font-size: 14px; line-height: 1.8; color: var(--cream-ink); margin-bottom: 20px; max-width: 800px; }
+
+    .note-flag { background: var(--cream-ink); color: var(--bg-dark); border: none; padding: 20px 26px; margin: 32px 0 48px; font-family: var(--font-mono); font-size: 13px; line-height: 1.7; }
+    .note-flag strong { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .voice-card { border: 3px solid var(--gold-ink); padding: 30px; background: var(--bg-dark); margin-bottom: 24px; }
+    .voice-label { font-family: var(--font-display); font-weight: 900; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-ink); margin-bottom: 10px; }
+    .voice-quote { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.15; margin: 0; color: var(--cream-ink); text-transform: uppercase; }
+
+    .tone-spectrum { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 20px 0; font-family: var(--font-mono); font-size: 12px; }
+    .tone-item { display: flex; align-items: center; gap: 16px; }
+    .tone-label { width: 150px; text-align: right; color: var(--cream-ink); flex-shrink: 0; opacity: 0.7; }
+    .tone-bar { flex: 1; height: 22px; background: var(--burgundy); border: 1px solid var(--gold-ink); position: relative; display: flex; align-items: center; }
+    .tone-fill { height: 100%; background: var(--gold-ink); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: var(--bg-dark); font-weight: 700; font-size: 10px; }
+
+    .example-box { background: var(--burgundy); border-left: 6px solid var(--gold-ink); padding: 18px 22px; margin: 16px 0; font-family: var(--font-mono); font-size: 13px; line-height: 1.9; color: var(--cream-ink); }
+    .dont { border-left-color: var(--cream-ink); background: #1a1a1a; opacity: 0.85; }
+
+    .loose-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 20px 0; }
+    .loose-grid ul { font-family: var(--font-mono); font-size: 13px; line-height: 1.9; margin: 12px 0; padding-left: 20px; }
+    .loose-grid h4 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.1rem; }
+
+    .services-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin: 20px 0; background: var(--gold-ink); }
+    .service-item { border: none; padding: 18px 20px; font-family: var(--font-mono); font-size: 13px; background: var(--bg-dark); color: var(--cream-ink); }
+    .service-item strong { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 1.15rem; color: var(--gold-ink); display: block; margin-bottom: 4px; }
+
+    .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 20px 0; background: var(--gold-ink); }
+    .audience-card { background: var(--bg-dark); padding: 20px; }
+    .audience-card h4 { font-family: var(--font-display); font-weight: 900; text-transform: uppercase; font-size: 1.2rem; margin: 0 0 10px 0; color: var(--gold-ink); }
+    .audience-card p { font-family: var(--font-mono); font-size: 12px; line-height: 1.7; margin: 0 0 6px 0; color: var(--cream-ink); }
+
+    .swatch-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 20px 0; background: var(--gold-ink); }
+    .swatch-color { height: 60px; }
+    .swatch-label { font-family: var(--font-mono); font-size: 10px; padding: 8px; background: var(--bg-dark); color: var(--cream-ink); }
+
+    footer { padding: 0; }
+    .footer-strip { background: var(--cream-ink); color: var(--bg-dark); margin-top: 40px; padding: 18px 40px; font-family: var(--font-display); font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .footer-strip small { font-family: var(--font-mono); font-weight: 400; text-transform: none; letter-spacing: normal; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="../index.html">← DESIGN SYSTEM</a>
+
+    <div class="masthead">
+      <div class="eyebrow">Experimental Direction</div>
+      <h1>Voice,<br>Reconsidered</h1>
+      <p class="deck">A lighter reference for a voice that's still Digital Allies — just less rigid about it. This drops the split between two registers in favor of one warmer, more conversational voice, and swaps the invented department names for plain-language services.</p>
+    </div>
+
+    <div class="note-flag">
+      <strong>What changed:</strong> The old system ran a stricter "primary" voice everywhere and saved this warmer register for marketing only. This version leads with the warmer register across the board, drops the Jargon Jar translation table, and drops the proprietary department names (The Departments, The Design Bureau, etc.) in favor of just calling things what they are — Services.
+    </div>
+
+    <!-- ====== THE VOICE ====== -->
+    <section class="section">
+      <h2>The Voice</h2>
+      <p class="section-intro">Real talk about real problems, from someone who actually answers the phone. Warmer and more conversational than a typical services site, still direct, still honest — just not so buttoned-up about it.</p>
+
+      <div class="voice-card">
+        <div class="voice-label">In One Sentence</div>
+        <p class="voice-quote">"Real talk about real problems from someone who actually answers the phone."</p>
+      </div>
+
+      <h3>Tone, Roughly</h3>
+      <div class="tone-spectrum">
+        <div class="tone-item">
+          <div class="tone-label">Formal ↔ Casual</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 75%;">75% casual</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Dry ↔ Warm</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 60%;">60% warm</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Technical ↔ Plain</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 80%;">80% plain</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Eager ↔ Confident</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 70%;">70% confident</div></div>
+        </div>
+        <div class="tone-item">
+          <div class="tone-label">Performing ↔ Authentic</div>
+          <div class="tone-bar"><div class="tone-fill" style="width: 100%;">100% authentic</div></div>
+        </div>
+      </div>
+      <p style="font-family: var(--font-mono); font-size: 11px; color: var(--cream-ink); opacity: 0.6; font-style: italic;">These are a compass, not a spec. Close enough is fine.</p>
+
+      <h3>Sounds Like</h3>
+      <div class="example-box">
+        "Your site is turning away Spanish-speaking customers. Want to know why?"<br>
+        "Machine translation is fine for a first draft. Public-facing? Not so much."<br>
+        "Bilingual content isn't a bonus feature — it's respect."<br>
+        "Your customers speak two languages. Your site should too."<br>
+        "I build systems that don't require a master's degree to operate."<br>
+        "We answer the phone. In person. Every time."
+      </div>
+
+      <h3>Still Avoid</h3>
+      <div class="example-box dont">
+        "We facilitate seamless API-level ecosystem integration."<br>
+        "We're passionate about nurturing your digital journey."<br>
+        "Leverage scalable, user-centric digital solutions."<br>
+        Anything that sends someone to a dictionary.
+      </div>
+    </section>
+
+    <!-- ====== LOOSE GUIDELINES ====== -->
+    <section class="section">
+      <h2>Loose Guidelines</h2>
+      <p class="section-intro">Guardrails, not rules. Use judgment over checklists.</p>
+      <div class="loose-grid">
+        <div>
+          <h4 style="color: var(--gold-ink);">Keep</h4>
+          <ul>
+            <li>First person, direct address — "I" and "you"</li>
+            <li>Plain words over impressive ones</li>
+            <li>Owner: Anthony · Kingman, Arizona</li>
+            <li>Prices as "From $X"</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="color: var(--cream-ink); opacity: 0.7;">Loosen</h4>
+          <ul>
+            <li>Casing and punctuation rules — sentence case is a default, not a law</li>
+            <li>Bracketed CTAs — use where they feel natural, skip where they don't</li>
+            <li>No more invented department names — see Services below</li>
+            <li>No more Jargon Jar translation table — just write plainly the first time</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SERVICES ====== -->
+    <section class="section">
+      <h2>Services</h2>
+      <p class="section-intro">Plain names, no invented vocabulary. What used to be "The Departments" is just Services.</p>
+      <div class="services-list">
+        <div class="service-item"><strong>Design & Brand</strong>Logos, sites, identity work.</div>
+        <div class="service-item"><strong>Integrations</strong>Getting your tools to talk to each other.</div>
+        <div class="service-item"><strong>Automation</strong>Taking repetitive tasks off your plate.</div>
+        <div class="service-item"><strong>Support & Monitoring</strong>Someone watching, so you don't have to.</div>
+        <div class="service-item"><strong>Pricing</strong>What things cost, up front.</div>
+        <div class="service-item"><strong>Contact</strong>A form. Or just call.</div>
+      </div>
+    </section>
+
+    <!-- ====== TARGET AUDIENCE ====== -->
+    <section class="section">
+      <h2>Who We're Talking To</h2>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h4>Small Local Business Owner</h4>
+          <p><strong>Pain:</strong> "My site is broken, and I don't know who to call."</p>
+          <p><strong>Age:</strong> 35–55 · Mohave County & surrounding</p>
+        </div>
+        <div class="audience-card">
+          <h4>Marketing Manager</h4>
+          <p><strong>Pain:</strong> "We need Spanish-speaking markets and don't know how to do it right."</p>
+          <p><strong>Age:</strong> 28–42 · Budget-conscious</p>
+        </div>
+        <div class="audience-card">
+          <h4>Bilingual Community Leader</h4>
+          <p><strong>Pain:</strong> "Local businesses ignore Spanish speakers, then wonder why they can't sell."</p>
+          <p>High trust, recommends vendors.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== VISUAL QUICK REFERENCE ====== -->
+    <section class="section">
+      <h2>Visual Quick Reference</h2>
+      <p class="section-intro">This page is styled per the Paula Scher punk poster system, using Digital Allies' own existing palette: Charcoal Grey and Bone White swapped for a dark canvas, with Light Pink and Pulse Blue as the two accents. The underlying Digital Allies brand colors and type remain unchanged elsewhere in the system.</p>
+      <div class="swatch-row">
+        <div><div class="swatch-color" style="background:#2D2D2D;"></div><div class="swatch-label">Charcoal Grey</div></div>
+        <div><div class="swatch-color" style="background:#F9F6F0;"></div><div class="swatch-label" style="color:#2D2D2D;">Bone White</div></div>
+        <div><div class="swatch-color" style="background:#FADEEB;"></div><div class="swatch-label" style="color:#2D2D2D;">Light Pink</div></div>
+        <div><div class="swatch-color" style="background:#3A7BD5;"></div><div class="swatch-label">Pulse Blue</div></div>
+      </div>
+      <p style="font-family: var(--font-mono); font-size: 13px; line-height: 1.7;">Headlines: Barlow Condensed 900, uppercase, tight leading. Body: JetBrains Mono. Strict 3-tone limit per surface.</p>
+    </section>
+  </div>
+
+  <div class="footer-strip">
+    <span>Digital Allies · Voice Experiment</span>
+    <small>Styled per Paula Scher Punk & Rock Poster System · Draft for review</small>
+  </div>
+</body>
+</html>
