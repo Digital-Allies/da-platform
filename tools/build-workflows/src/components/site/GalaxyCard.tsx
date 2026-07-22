@@ -80,6 +80,9 @@ export default function GalaxyCard({ product, bg }: GalaxyCardProps) {
         @keyframes ${id}-rev  { from { transform: rotateZ(360deg); } to { transform: rotateZ(0deg); } }
         #${id}-scene { transition: transform 500ms cubic-bezier(0.16,1,0.3,1); }
         #${id}-group:hover #${id}-scene { transform: scale(1.03); }
+        @media (max-width: 640px) {
+          #${id}-ring { display: none; }
+        }
         @media (prefers-reduced-motion: no-preference) {
           #${id}-ring   { animation: ${id}-spin 25s linear infinite; }
           #${id}-planet { animation: ${id}-rev  25s linear infinite; }
