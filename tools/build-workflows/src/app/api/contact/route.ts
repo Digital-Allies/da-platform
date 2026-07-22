@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     if (resendKey && toEmail) {
       const resend = new Resend(resendKey)
       await resend.emails.send({
-        from: 'Website Contact Form <noreply@digitalallies.co>',
+        from: 'Website Contact Form <noreply@digitalallies.net>',
         to: toEmail,
         replyTo: email,
         subject: subject ? `Contact: ${subject}` : `New message from ${name}`,

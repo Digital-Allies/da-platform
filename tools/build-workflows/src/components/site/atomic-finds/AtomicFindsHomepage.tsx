@@ -301,7 +301,7 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl }: Atom
           <div className="af-footer-bottom">
             <div>© 2026 Atomic Finds ATX · Curated and restored by Jennyfer · Made with love in Austin, TX</div>
             <div className="af-footer-credit">
-              Website made with love by <a href="https://digitalallies.com">Digital Allies</a> <span className="af-da-dot" aria-hidden="true" />
+              Website made with love by <a href="https://digitalallies.net">Digital Allies</a> <span className="af-da-dot" aria-hidden="true" />
             </div>
           </div>
         </footer>

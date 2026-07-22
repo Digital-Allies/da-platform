@@ -92,7 +92,7 @@ export default function Footer({ settings }: FooterProps) {
           <p>&copy; {year} {settings.site_title}. All rights reserved.</p>
           <p>
             Site by{' '}
-            <a href="https://digitalallies.co" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300 transition-colors">
+            <a href="https://digitalallies.net" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300 transition-colors">
               Digital Allies
             </a>
           </p>

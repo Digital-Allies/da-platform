@@ -10,8 +10,8 @@
 ## Overview
 
 The DA platform should support bilingual (English/Spanish) websites across all three client sites:
-- **Digital Allies** (digitalallies.com)
-- **Atomic Finds ATX** (atomicfindsatx.com)
+- **Digital Allies** (digitalallies.net)
+- **Atomic Finds ATX** (atomicfindsatx.store)
 - **Healthcare Training Center** (client site)
 
 This document scopes a reusable i18n system that works with the Next.js CMS architecture (tools/build-workflows), is admin-manageable, and follows best practices for SEO, accessibility, and user experience.
@@ -78,9 +78,9 @@ export const localePaths = {
 **Pattern:** `/[locale]/[path]`
 
 Examples:
-- `https://atomicfindsatx.com/en/shop` → English shop
-- `https://atomicfindsatx.com/es/tienda` → Spanish shop
-- `https://atomicfindsatx.com/` → Redirect to `/en/` (default locale)
+- `https://atomicfindsatx.store/en/shop` → English shop
+- `https://atomicfindsatx.store/es/tienda` → Spanish shop
+- `https://atomicfindsatx.store/` → Redirect to `/en/` (default locale)
 
 **SEO hreflang tags:** Auto-generated per page to link alternate language versions
 
