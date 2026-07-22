@@ -1,11 +1,11 @@
 // Server-side data fetching helpers — call from Server Components
-import { createClient } from './supabase-server'
+import { createPublicClient } from './supabase-server'
 import { parseSettings, type SiteSettings, type Post, type Service, type Testimonial, type Product, type Review } from './types'
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
   const { data } = await supabase
     .from('settings')
     .select('*')
@@ -14,7 +14,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 }
 
 export async function getPublishedPosts(): Promise<Post[]> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
   const { data } = await supabase
     .from('posts')
     .select('*')
@@ -25,7 +25,7 @@ export async function getPublishedPosts(): Promise<Post[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
   const { data } = await supabase
     .from('posts')
     .select('*')
@@ -37,7 +37,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 }
 
 export async function getServices(): Promise<Service[]> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
   const { data } = await supabase
     .from('services')
     .select('*')
@@ -47,7 +47,7 @@ export async function getServices(): Promise<Service[]> {
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
   const { data } = await supabase
     .from('testimonials')
     .select('*')
@@ -225,7 +225,7 @@ const MOCK_REVIEWS: Review[] = [
 
 export async function getProducts(): Promise<Product[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createPublicClient()
     const { data, error } = await supabase
       .from('products')
       .select('*')
@@ -242,7 +242,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getFeaturedReviews(limit = 6): Promise<Review[]> {
   try {
-    const supabase = await createClient()
+    const supabase = createPublicClient()
     const { data, error } = await supabase
       .from('reviews')
       .select('*')
@@ -260,7 +260,7 @@ export async function getFeaturedReviews(limit = 6): Promise<Review[]> {
 }
 
 export async function getPageBySlug(slug: string): Promise<any | null> {
-  const supabase = await createClient()
+  const supabase = createPublicClient()
   const { data } = await supabase
     .from('pages')
     .select('*')
