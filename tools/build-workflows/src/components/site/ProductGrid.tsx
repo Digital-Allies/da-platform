@@ -77,6 +77,8 @@ function ProductCard({ product, onOpen }: { product: Product; onOpen: () => void
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen() } }}
       className="flex flex-col overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1.5 focus-visible:-translate-y-1.5 outline-none"
       style={{
+        width: 'clamp(280px, 90vw, 360px)',
+        margin: '0 auto',
         borderRadius: 'var(--tok-radius-lg)',
         background: 'linear-gradient(180deg, var(--tok-surface) 0%, color-mix(in srgb, var(--tok-surface) 80%, black) 100%)',
         border: '1px solid var(--tok-border)',
@@ -286,9 +288,13 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
   )
 }
 
-export default function ProductGrid({ title = 'Featured Finds', products }: ProductGridProps) {
+export default function ProductGrid({ title = 'Featured Finds', products: allProducts }: ProductGridProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
   const [quickView, setQuickView] = useState<Product | null>(null)
+
+  // Temporary: hide products with no photo until real photography is in —
+  // "Photo coming soon" placeholders read as broken/unfinished in the grid.
+  const products = useMemo(() => allProducts.filter((p) => p.image_url), [allProducts])
 
   const categories = useMemo(() => {
     const set = new Set<string>()

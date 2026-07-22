@@ -65,10 +65,15 @@ function formatReviewDate(iso: string | null) {
 interface AtomicFindsHomepageProps {
   products: Product[]
   reviews: Review[]
+  /** From settings.logo_url — falls back to the static brand mark when unset */
+  logoUrl?: string
 }
 
-export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHomepageProps) {
-  const featured = products.filter((p) => p.badge === 'featured').slice(0, 3)
+export default function AtomicFindsHomepage({ products, reviews, logoUrl }: AtomicFindsHomepageProps) {
+  // Temporary: photo-less featured products fall back to a "coming soon" state
+  // that doesn't work for the Galaxy Card's hero-image treatment — skip them
+  // until real photography is in, same rule as ProductGrid's standard cards.
+  const featured = products.filter((p) => p.badge === 'featured' && p.image_url).slice(0, 3)
   const heroCta = products[0] ? resolveProductCta(products[0]) : null
 
   return (
@@ -77,7 +82,7 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
       <div className="af-weave-fixed" />
       <div className="af-page">
 
-        <AtomicNav />
+        <AtomicNav logoUrl={logoUrl} />
 
         {/* HERO */}
         <section className="af-hero" id="home">
@@ -296,7 +301,7 @@ export default function AtomicFindsHomepage({ products, reviews }: AtomicFindsHo
           <div className="af-footer-bottom">
             <div>© 2026 Atomic Finds ATX · Curated and restored by Jennyfer · Made with love in Austin, TX</div>
             <div className="af-footer-credit">
-              Website made with love by <a href="https://digitalallies.com">Digital Allies</a> <span className="af-da-heart">🩷</span>
+              Website made with love by <a href="https://digitalallies.com">Digital Allies</a> <span className="af-da-dot" aria-hidden="true" />
             </div>
           </div>
         </footer>

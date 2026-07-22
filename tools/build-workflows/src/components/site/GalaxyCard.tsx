@@ -80,9 +80,6 @@ export default function GalaxyCard({ product, bg }: GalaxyCardProps) {
         @keyframes ${id}-rev  { from { transform: rotateZ(360deg); } to { transform: rotateZ(0deg); } }
         #${id}-scene { transition: transform 500ms cubic-bezier(0.16,1,0.3,1); }
         #${id}-group:hover #${id}-scene { transform: scale(1.03); }
-        @media (max-width: 640px) {
-          #${id}-ring { display: none; }
-        }
         @media (prefers-reduced-motion: no-preference) {
           #${id}-ring   { animation: ${id}-spin 25s linear infinite; }
           #${id}-planet { animation: ${id}-rev  25s linear infinite; }
@@ -96,9 +93,9 @@ export default function GalaxyCard({ product, bg }: GalaxyCardProps) {
         aria-haspopup="dialog"
         onClick={() => setOpen(true)}
         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpen(true) } }}
-        style={{ position: 'relative', cursor: 'pointer', width: 'clamp(280px, 90vw, 360px)', height: 'clamp(520px, 140vw, 620px)', flexShrink: 0, isolation: 'isolate', perspective: 1200, overflow: 'hidden' }}
+        style={{ position: 'relative', cursor: 'pointer', width: 'clamp(280px, 90vw, 360px)', height: 'clamp(520px, 140vw, 620px)', flexShrink: 0, isolation: 'isolate', perspective: 1200 }}
       >
-        <div id={`${id}-scene`} style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d', overflow: 'hidden' }}>
+        <div id={`${id}-scene`} style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d' }}>
           <div style={{ position: 'absolute', top: '50%', left: '50%', width: 'clamp(300px, 115vw, 500px)', height: 'clamp(300px, 115vw, 500px)', transform: 'translate(-50%, -50%)', transformStyle: 'preserve-3d', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', transform: 'rotateZ(-35deg) rotateX(75deg)', transformStyle: 'preserve-3d' }}>
               <div id={`${id}-ring`} style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', border: `4px solid ${gold}`, boxShadow: '0 0 30px rgba(245,200,66,0.6), inset 0 0 20px rgba(245,200,66,0.4)', transformStyle: 'preserve-3d' }}>

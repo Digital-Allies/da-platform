@@ -18,14 +18,19 @@ const LINKS = [
   { href: '#contact', icon: 'Contact.png', label: 'Contact' },
 ]
 
-export default function AtomicNav() {
+interface AtomicNavProps {
+  /** From settings.logo_url — falls back to the static brand mark when unset */
+  logoUrl?: string
+}
+
+export default function AtomicNav({ logoUrl }: AtomicNavProps) {
   const [open, setOpen] = useState(false)
 
   return (
     <nav className="af-nav">
       <a className="af-nav-logo" href="#home">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="af-nav-logo-mark" src={`${ASSET}/logos/logo-mark-new.png`} alt="Atomic Finds ATX" width={99} height={101} />
+        <img className="af-nav-logo-mark" src={logoUrl || `${ASSET}/logos/logo-mark-new.png`} alt="Atomic Finds ATX" width={99} height={101} />
       </a>
 
       <button
