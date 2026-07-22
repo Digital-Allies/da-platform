@@ -5,7 +5,38 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-22 — by Claude Code (root-caused Atomic Finds "not loading" bug)
+**Last updated:** 2026-07-22 — by Claude Code (fixed real code bug: ISR/cookies conflict was permanently masking real product/review data)
+
+## 2026-07-22 — Fixed: public data fetches were permanently stuck on mock data (code bug, not config)
+
+**A second, independent root cause**, found from a live Vercel runtime log after
+the branch fix below was applied: `src/app/page.tsx` sets
+`export const revalidate = 60` (ISR), but `getProducts()`/`getFeaturedReviews()`
+in `data.ts` used the cookie-based Supabase client (`supabase-server.ts`).
+Calling `cookies()` during a static-generation attempt makes Next.js throw its
+internal `DYNAMIC_SERVER_USAGE` bailout signal — and the `try/catch` added for
+the mock-data fallback was swallowing that signal before Next's own pipeline
+could react to it. Net effect: **the homepage would permanently serve mock
+product/review data on every build and every ISR revalidation, forever,
+regardless of branch or env vars** — this would have kept failing even after
+the Vercel branch fix above.
+
+**Fix:** confirmed via the `products`/`reviews` RLS policies (`using (true)` —
+pure public reads, no session dependency) that a cookie-free client is correct
+here. Added `createPublicClient()` to `supabase-server.ts` (plain
+`@supabase/supabase-js`, no `cookies()` call) and switched all of `data.ts`'s
+public read functions to it. Admin pages keep using the cookie-based client
+unchanged — confirmed via grep that `data.ts` was the only non-admin consumer
+of it.
+
+**Verified:** `tsc --noEmit` clean; `npm run build` — homepage now builds as
+`○ (Static)` with working ISR, zero `DYNAMIC_SERVER_USAGE` errors; live local
+run confirms real product data renders ("14 pieces available", real listings)
+instead of the 4-item mock set. Reviews still fall back to mock, but that's
+the **separate, already-tracked** issue below — the `reviews` table migration
+has never been run in Supabase.
+
+Committed directly to `main` (`52ff5ff`).
 
 ## 2026-07-22 — Root cause found: Atomic Finds production deploys from a stale branch, not env vars
 
