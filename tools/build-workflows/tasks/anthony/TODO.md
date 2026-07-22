@@ -6,6 +6,60 @@ items off as you go; agents will read this file to know what's still open.
 
 Update history: created 2026-07-09 by Claude Code. Reviewed 2026-07-16 —
 still accurate; added a scope note below and logged what's newly done.
+Reviewed again 2026-07-22 — added Priority 0 below (root cause found for
+"Atomic Finds isn't loading card content/reviews").
+
+---
+
+## 🔴 Priority 0 — fix Atomic Finds production: wrong deploy branch (found 2026-07-22)
+
+**This is the actual root cause of "Atomic Finds isn't loading card content,
+reviews, or a few other sections" — it is NOT a Supabase key problem.**
+Anthony pulled a full env-var audit CSV from Vercel across all 4 projects
+(`atomic-finds-atx`, `da-webwssite-build-workflows`, `digital-allies`,
+`healthcare-training-center`) and confirmed via the Vercel Toolbar that the
+`atomic-finds-atx` project is deploying from branch
+`claude/products-table-review-fixes-doa26m` (PR #4's branch) — not `main`.
+
+That branch's own commits **are** in `main` (merged at `b1ac668`), but the
+branch itself was never advanced afterward, so Vercel is deploying a frozen
+snapshot from before 22 commits of later work, including:
+- PR #5 (`chore/atomic-finds-cleanup`) — the products/design-system directory cleanup
+- PR #7 + Greptile fixes — full mobile-responsive design, nav accessibility
+- Contrast fixes + Digital Allies footer credit (pulsing heart)
+- The local mock-data fallback for products/reviews in `src/lib/data.ts`
+
+None of this is visible on production because Vercel never deploys `main`
+for this project.
+
+- [ ] **Vercel → `atomic-finds-atx` project → Settings → Git → Production
+      Branch → change from `claude/products-table-review-fixes-doa26m` to
+      `main`.** Trigger a redeploy after.
+- [ ] After redeploy, verify cards/reviews/footer credit/mobile nav all
+      render correctly on the live URL.
+- [ ] Once confirmed stable, `claude/products-table-review-fixes-doa26m` can
+      be deleted (PR #4 is fully merged, nothing else depends on it).
+
+**Also confirmed in the same audit (env vars were NOT the problem, but two
+small things need a decision):**
+- `atomic-finds-atx`'s `CONTACT_FORM_TO_EMAIL` is `atomicfindsatx@gmail.com`
+  — **confirmed correct by Anthony 2026-07-22.** The `atomicfindsat@gmail.com`
+  (missing "x") reference earlier in this file (Priority 5, below) was the
+  stale/wrong one — corrected there.
+- `digital-allies` Vercel project has **zero environment variables set**.
+  Anthony confirmed 2026-07-22: this is the live marketing site, and it's
+  "partially connected to the Supabase CMS tables via reviews and services."
+  Needs follow-up to confirm how it's reading Supabase data with no env vars
+  configured in this Vercel project (maybe hardcoded, maybe a different
+  project holds the real config, maybe it's client-side calling a public
+  endpoint) — not yet root-caused, just flagging the gap.
+- `healthcare-training-center`'s `NEXT_PUBLIC_SUPABASE_ANON_KEY` and
+  `VITE_SUPABASE_ANON_KEY` are still the **old legacy JWT-format key**
+  (`eyJhbGc...`), not the new `sb_publishable_...` key. Per Priority 3 below,
+  legacy keys were supposed to be disabled after the rotation — if so, this
+  project is likely hitting the same "Legacy API keys are disabled" error
+  the CMS had before its fix. Not yet verified live, just flagged from the
+  audit — worth an actual test load of the HCTC site.
 
 ---
 
@@ -237,7 +291,7 @@ and backend groundwork has started — this is no longer blocked/deferred.
       Directory `tools/build-workflows`.
 - [ ] Copy these env vars over: `NEXT_PUBLIC_SUPABASE_URL`,
       `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`,
-      `CONTACT_FORM_TO_EMAIL` (`atomicfindsat@gmail.com`), and Atomic
+      `CONTACT_FORM_TO_EMAIL` (`atomicfindsatx@gmail.com`), and Atomic
       Finds' own `RESEND_API_KEY` (generated 2026-07-17, currently only in
       local `.env.local`).
 - [ ] Set `NEXT_PUBLIC_CLIENT_ID` = `443936d5-f92e-480b-b206-c65cfb52bdfc`

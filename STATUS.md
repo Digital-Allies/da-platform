@@ -5,7 +5,29 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-21 (evening) — by Antigravity (Atomic Finds Mobile Responsive + Overflow Fixes)
+**Last updated:** 2026-07-22 — by Claude Code (root-caused Atomic Finds "not loading" bug)
+
+## 2026-07-22 — Root cause found: Atomic Finds production deploys from a stale branch, not env vars
+
+**Not a Supabase key problem.** Anthony pulled a full Vercel env-var audit
+across all 4 projects and confirmed via the Vercel Toolbar that
+`atomic-finds-atx` deploys from `claude/products-table-review-fixes-doa26m`
+(PR #4's branch) — never repointed to `main` after the PR merged at `b1ac668`.
+`git log claude/products-table-review-fixes-doa26m..main` shows **22 commits**
+of later work invisible to production: PR #5 cleanup, PR #7 mobile-responsive
++ Greptile a11y fixes, contrast/footer-credit fixes, and the mock-data
+fallback in `data.ts`. That fully explains the missing cards/reviews/sections
+Anthony was seeing — production was just running old code.
+
+**Fix (dashboard-only, tracked in `tasks/anthony/TODO.md` Priority 0):**
+repoint `atomic-finds-atx`'s Vercel Production Branch to `main`, redeploy.
+
+**Also confirmed in the same audit:** `atomicfindsatx@gmail.com` (with the
+"x") is the correct contact email — an earlier TODO.md reference without the
+"x" was stale, now corrected. `healthcare-training-center`'s Supabase anon
+key is still the old legacy JWT format, not yet verified broken but flagged.
+`digital-allies`'s Vercel project has zero env vars despite reportedly
+reading some Supabase tables — not yet root-caused.
 
 ## 2026-07-21 (evening) — Atomic Finds Mobile Responsiveness, Overflow & Fallback Mock Data
 
