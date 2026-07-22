@@ -25,7 +25,7 @@ export default function AtomicNav() {
     <nav className="af-nav">
       <a className="af-nav-logo" href="#home">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className="af-nav-logo-mark" src={`${ASSET}/logos/logo-mark-new.png`} alt="Atomic Finds ATX" style={{ width: 99, height: 101 }} />
+        <img className="af-nav-logo-mark" src={`${ASSET}/logos/logo-mark-new.png`} alt="Atomic Finds ATX" width={99} height={101} />
       </a>
 
       <button
