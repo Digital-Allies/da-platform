@@ -164,16 +164,34 @@ higher-priority surfaced.
 STATUS.md's 2026-07-19 entry for the full list.*
 
 ### Mon–Tue Jul 27–28 · `/admin/development` ("The Workshop")
-- **[Agent]** Build real templates (currently "doesn't work needs
+**⚠ SUPERSEDED, done early 2026-07-22 — this premise was stale, same
+pattern as the Jul 22–23 Services/Testimonials slot above.** The Anthony
+Vercel Toolbar comments this slot was based on predate the Jul 6 monorepo
+import (confirmed via `git log`). Checked each complaint against the real
+code: real login/out button exists (a dead duplicate `AdminNav.tsx` was
+found and deleted); real Supabase-Realtime-backed notifications exist, not
+a stub; the live-site link is code-complete and only missing one Vercel env
+var (`NEXT_PUBLIC_SITE_URL`, already tracked in `TODO.md` Priority 4); "needs
+templates" doesn't clearly apply to a task tracker. Full detail:
+`STATUS.md`'s 2026-07-22 (daily build session) entry.
+- ~~**[Agent]** Build real templates (currently "doesn't work needs
   templates"); wire the CMS-to-live-site connection groundwork toward
   digitalallies.net; add a working login/out button; scope what "real
-  notifications" should actually mean here and implement a first version.
-- **Done when —** the Workshop's core actions work against real data, not
-  placeholders.
+  notifications" should actually mean here and implement a first version.~~
+- ~~**Done when —** the Workshop's core actions work against real data, not
+  placeholders.~~
 
 ### Wed–Thu Jul 29–30 · `/admin/projects`
+**Not yet deeply reviewed** — a quick spot-check (2026-07-22) found the
+same import-commit pattern as the other three backlog items (real
+`projects`/`project_tasks` tables + CRUD already exist), but nobody has
+checked `ProjectsClient.tsx` against Anthony's specific "need to build
+actual project templates" complaint yet. **Do that check first** before
+assuming this slot needs a build from scratch — it may turn out mostly
+superseded too, or the "templates" gap may be real. See `STATUS.md`.
 - **[Agent]** Build real project templates (currently "doesn't work and
-  need to build actual project templates").
+  need to build actual project templates") — **only if the check above
+  confirms this is still a real gap.**
 - **Done when —** creating/viewing a project uses a real template, not a
   stub.
 
@@ -182,13 +200,30 @@ STATUS.md's 2026-07-19 entry for the full list.*
 ## Week of Aug 3 — Dashboard backlog, part 2 (Press Office + Pages)
 
 ### Mon–Tue Aug 3–4 · `/admin/content` ("The Press Office")
-- **[Agent]** Build templates for all category tabs; connect posting to
+**Partially superseded (checked 2026-07-22, see `STATUS.md`).** A
+Templates tab with 3 real templates (Blog Post/Press Release/Case Study)
+already exists (`ContentClient.tsx`), and published articles already flow
+live to `digitalallies.net/learn/` via the shared `articles` table
+(confirmed in `sites/digitalallies/assets/js/cms-loader.js`) — **in this
+repo's frozen copy only; not confirmed against the separate live
+`Digital-Allies/DigitalAllies` repo.** Verify that before assuming this
+slot needs nothing.
+- ~~**[Agent]** Build templates for all category tabs; connect posting to
   the primary site so entries match the format of
-  `digitalallies.net/learn/` articles.
-- **Done when —** a post made here shows up on the live `/learn/` page in
-  the right format.
+  `digitalallies.net/learn/` articles.~~ Templates + the data-layer
+  connection already exist in this repo — **remaining real work, if any,
+  is confirming/porting parity with the live `DigitalAllies` repo**, not
+  building this from scratch.
+- **Done when —** confirmed (not assumed) that a post made here shows up on
+  the live `/learn/` page in the right format.
 
 ### Wed–Thu Aug 5–6 · `/admin/pages`
+**Confirmed still fully real (checked 2026-07-22, see `STATUS.md`) — not
+stale.** `PagesClient.tsx`'s live preview is hand-rolled hardcoded HTML per
+block type (fake placeholder content for services/testimonials blocks, not
+real data or real components), and there's no code-view/raw-HTML editing
+option anywhere in the file. Anthony's complaint holds as originally
+scoped.
 - **[Agent]** This build "isn't meant for production" per Anthony's own
   note — add a code-view option with live preview, and use real components
   for elements/sections/cards instead of whatever's there now.

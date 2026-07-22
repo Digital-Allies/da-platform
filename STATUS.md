@@ -5,7 +5,88 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-22 — by Claude Code (fixed real code bug: ISR/cookies conflict was permanently masking real product/review data)
+**Last updated:** 2026-07-22 (daily build session) — by Claude Code (found the Week of Jul 27 dashboard-backlog premise is stale, same pattern as the Jul 21 Services/Testimonials finding — see below)
+
+## 2026-07-22 (daily build session) — dashboard-backlog audit: `/admin/development` ("The Workshop") already fully built
+
+Today's scheduled slot (Wed–Thu Jul 22–23) is the superseded Services/
+Testimonials slot from the 2026-07-21 finding — nothing to do there. Per
+this file's own "Next steps" #7, picked up the next real `BUILD-SCHEDULE.md`
+item early: Week of Jul 27's `/admin/development` ("The Workshop"). **Same
+pattern as the Services/Testimonials finding: the Anthony Vercel Toolbar
+comments this schedule slot is based on are ~23+ days old and predate this
+monorepo's Jul 6 import** (confirmed via `git log` — every file involved
+traces to the single `c277733` import commit) — they describe an earlier,
+unfinished state that's since been built out.
+
+Checked each of the four specific complaints against the actual code:
+- **"there is no login/out button"** — false now. `AdminShell.tsx` (the
+  layout actually wired in `layout.tsx`) has a working `Sign Out` button
+  calling `supabase.auth.signOut()`. Found a *second*, unused copy of the
+  same logic in a dead `AdminNav.tsx` component (superseded by `AdminShell`,
+  confirmed via grep — zero imports anywhere) — deleted it as a low-risk
+  cleanup, `tsc --noEmit` clean.
+- **"real notifications need to be built"** — false now. `AdminShell.tsx`
+  has a real `notifications` table-backed bell with a live Supabase
+  Realtime subscription (`postgres_changes` on INSERT) and a working
+  mark-read action. Not a stub.
+- **"cms needs to be connected to actual site - digitalallies.net"** —
+  code-complete, one env var short. The Workshop's "View live site" link
+  reads `NEXT_PUBLIC_SITE_URL` and falls back to `/` if unset
+  (`AdminShell.tsx:121`) — and that var is genuinely still missing from the
+  `da-webwssite-build-workflows` Vercel project, but that's **already
+  tracked** as an open item in `TODO.md` Priority 4, not new work.
+- **"doesn't work needs templates"** — unclear what this refers to for a
+  dev-task tracker specifically (full CRUD works fine without a "template"
+  concept); possibly a mis-transcription from a different tab. Not treating
+  this as a real gap without more specific evidence.
+
+**Spot-checked the other 3 dashboard-backlog items for the same staleness,
+without doing full implementation passes** (that's out of this week's
+scope) — worth knowing before anyone picks them up on schedule:
+- **`/admin/projects`** — also traces to the `c277733` import commit; real
+  `projects`/`project_tasks` tables + CRUD exist. Not deeply reviewed beyond
+  that; still treat Wed–Thu Jul 29–30 as real until someone actually checks
+  `ProjectsClient.tsx` against Anthony's specific complaint.
+- **`/admin/content`** ("The Press Office") — also predates the import.
+  **Two of its complaints are already resolved:** a "Templates" tab exists
+  with 3 ready-to-use templates (Blog Post / Press Release / Case Study,
+  `ContentClient.tsx:452-476`) covering all 3 content-type tabs; and
+  articles saved here with `status: 'published'` **do** flow live to
+  `digitalallies.net/learn/` — confirmed by reading
+  `sites/digitalallies/assets/js/cms-loader.js:190-213`, which fetches
+  `articles?client_id=eq.…&status=eq.published` directly and renders
+  title/excerpt/type through the same `escapeHtml`/`parseBilingual` helpers
+  fixed 2026-07-20. **Caveat, same one that already applies everywhere in
+  this file:** `sites/digitalallies` here is the frozen one-time import —
+  this confirms the *code* exists and is wired correctly in this copy, not
+  that it's live on the actual `Digital-Allies/DigitalAllies` repo digitalallies.net
+  deploys from. Don't mark this fully resolved without checking that repo.
+- **`/admin/pages`** — **this one is a genuine, still-real gap, confirmed
+  at the code level, not stale.** `PagesClient.tsx`'s live preview
+  (`generatePreviewHtml()`, ~line 154) is a hand-rolled string of hardcoded
+  inline-styled HTML per block type — the `services`/`testimonials` blocks
+  render fake placeholder content ("Strategy Consulting", "Jane Doe, CEO")
+  regardless of real data, not the actual `BlockRenderer.tsx`/design-system
+  components the public site renders with. There's also no code-view/raw-
+  HTML editing option anywhere in the file. Anthony's original complaint
+  ("isn't meant for production... use actual components") is accurate as-is
+  — treat the Aug 5–6 schedule slot as real, unlike the other three.
+
+**Net effect on `BUILD-SCHEDULE.md`:** marked Mon–Tue Jul 27–28
+(`/admin/development`) done below. Left Jul 29–30 and Aug 3–4 schedule
+dates as-is (not confirmed complete, just flagged for a cheaper first-check
+before building) — only Aug 5–6 (`/admin/pages`) is confirmed still fully
+real work.
+
+**Verified:** `npx tsc --noEmit` clean after the `AdminNav.tsx` deletion.
+Did not start the dev server — the pages are all auth-gated behind
+`/admin/login` and no credentials are available in this non-interactive
+session; verification here is code-level (git history + grep + direct
+reads), same standard the 2026-07-21 Services/Testimonials finding used.
+
+Committed directly to `main` (small, low-risk: one dead-code deletion +
+docs).
 
 ## 2026-07-22 — Fixed: public data fetches were permanently stuck on mock data (code bug, not config)
 
