@@ -5,7 +5,52 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-22 (daily build session) — by Claude Code (found the Week of Jul 27 dashboard-backlog premise is stale, same pattern as the Jul 21 Services/Testimonials finding — see below)
+**Last updated:** 2026-07-22 (daily build session) — by Claude Code (fixed galaxy-card rings, logo wiring, mobile card sizing on Atomic Finds)
+
+## 2026-07-22 — Atomic Finds: galaxy card rings restored, logo wired to settings, mobile card sizing fixed
+
+Anthony reported a batch of visual regressions on the live (post branch-fix)
+Atomic Finds deployment. Root-caused and fixed all five, committed to `main`
+(`c75f1a4`):
+
+- **Galaxy Card rings gone on mobile AND desktop** — root cause: successive
+  "fix mobile ring overflow" commits earlier in the day added `overflow:
+  hidden` to the card's own outer containers. The ring was only ever visible
+  via its bleed *beyond* the card's box (the matching central area is
+  correctly hidden behind the opaque card face) — clipping at the card level
+  removed that bleed entirely, on every screen size, not just mobile. Fix:
+  removed the per-card `overflow:hidden` (redundant — `.af-homepage`'s
+  page-level `overflow-x:hidden` already prevents horizontal scroll) and the
+  mobile `display:none` override. Verified live: ring now bleeds a real 76px
+  beyond the card, clipped only by the intentional page-level container.
+- **Header logo not data-driven** — `AtomicNav.tsx` hardcoded the logo image
+  path with zero connection to `settings.logo_url`, unlike every other
+  site's `Navigation` component. Wired `getSiteSettings()` into the Atomic
+  Finds branch of `page.tsx` and threaded `logoUrl` through to `AtomicNav`,
+  falling back to the static brand mark when unset. **Note:** queried the
+  live `settings` table for Atomic Finds' `client_id` — it currently has
+  **zero rows**, so nothing will visually change until Anthony populates
+  settings via `/admin/settings` (or a settings row gets seeded).
+- **Mobile product cards thin/off-center** — `ProductGrid`'s grid used
+  `auto-fit, minmax(280px, 1fr)`, so cards stretched to fill their column
+  instead of having a fixed width. Gave standard cards the same
+  `clamp(280px, 90vw, 360px)` width as `GalaxyCard`, centered.
+- **Photo-less products removed from view** — filtered products with no
+  `image_url` out of both the standard grid and the featured Galaxy Card
+  selection (temporary, until real photography is in — per Anthony).
+- **Footer heart → DA brand signal dot** — replaced the pink heart emoji
+  with DA's actual `--signal-red` (#C5301A) brand dot from
+  `packages/design-system`, animated with the same pulse pattern as the DA
+  logo's FAB dot (that dot is normally static per the design system's own
+  "never animated" rule — this footer credit is the deliberate exception).
+
+**Not changed / needs follow-up:** the "layout/ratios changing over time"
+observation is likely the cumulative effect of the same-day iterative
+ring/card sizing tweaks (700px→500px ring, etc.) rather than a single bug —
+worth being more deliberate about touching these clamp() values going
+forward rather than re-tuning repeatedly. Reviews still fall back to mock
+(the `reviews` table migration still hasn't been run in Supabase — tracked
+separately, unchanged by this session).
 
 ## 2026-07-22 (daily build session) — dashboard-backlog audit: `/admin/development` ("The Workshop") already fully built
 
