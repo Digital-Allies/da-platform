@@ -212,6 +212,8 @@
   .af-hero h1 { font-size: clamp(36px, 7vw, 56px); }
   .af-hero-script { font-size: clamp(24px, 3vw, 36px); }
   .af-hero-body { font-size: 16px; max-width: 100%; }
+  .af-hero-ctas { gap: 12px; }
+  .af-btn-solid, .af-btn-outline { padding: 12px 24px; font-size: 12px; gap: 6px; }
   .af-section { padding: 60px 16px; }
   .af-section-head { margin-bottom: 32px; }
   .af-section-title { font-size: clamp(28px, 4vw, 48px); }
