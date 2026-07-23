@@ -115,6 +115,18 @@ what Anthony hit. **Fixed and deployed, 2026-07-19:** login page now has a
 redirect; the reset page itself now detects an expired/invalid link and
 shows "Request a new link" instead of a dead-end form.
 
+**✅ Second half of the same bug found and fixed, 2026-07-22:** the link
+generation and the reset page itself were both correct, but `middleware.ts`
+was still gating `/admin/reset-password` behind a session check. Supabase's
+recovery link carries the token in the URL *hash* (`#access_token=...`),
+which browsers never send to the server — so `getUser()` in middleware saw
+no session on that first hit and redirected straight to `/admin/login`
+before the page's client-side code ever got a chance to read the hash.
+Excluded `/admin/reset-password` from the middleware auth gate (same as
+`/admin/login`); verified an unauthenticated visit now renders the form
+instead of bouncing to login, and confirmed `/admin` is still correctly
+protected. Committed `4324b32`.
+
 - [x] ~~Use the new "Forgot password?" link to regain access~~ — moot,
       Anthony logged in fine on both domains without needing it. The flow
       itself is still a real permanent fix, just wasn't needed this time.
