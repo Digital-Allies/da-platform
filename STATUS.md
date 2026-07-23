@@ -5,7 +5,113 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-22 (daily build session) — by Claude Code (fixed galaxy-card rings, logo wiring, mobile card sizing on Atomic Finds)
+**Last updated:** 2026-07-23 (daily build session) — by Claude Code (dashboard-backlog audit: `/admin/projects` confirmed superseded; `/admin/content` live-parity check found a real, currently-live bug on digitalallies.net, in the separate `Digital-Allies/DigitalAllies` repo)
+
+## 2026-07-23 — daily build session: `/admin/projects` superseded (same pattern); `/admin/content` live-parity check finds a real, currently-live production bug — NOT in this repo
+
+**Schedule order followed:** Wed–Thu Jul 29–30's `/admin/projects` slot was
+next. Checked `ProjectsClient.tsx` against Anthony's original complaint
+("doesn't work and need to build actual project templates") — **same stale
+pattern as the other three dashboard-backlog items.** `git log` on the whole
+`admin/(protected)/projects/` directory shows exactly one commit ever
+touched it (`c277733`, the Jul 6 import) — it predates the monorepo and has
+never been revisited. The code already has: full CRUD for projects + tasks,
+a working drag-and-drop Kanban board (`todo`/`in_progress`/`review`/`done`),
+and — the specific thing the complaint says is missing — a "Initialize
+Template" picker on project creation with 3 real templates (Software
+Launch / Marketing Campaign / SEO Audit) that insert real starter tasks
+into `project_tasks` on creation, not stub content. Nothing to build here.
+Marked superseded in `BUILD-SCHEDULE.md` below.
+
+**Moved to the next item, Mon–Tue Aug 3–4's `/admin/content` slot.** This
+one had a real open question STATUS.md flagged twice before but nobody had
+tools to check: does a post made in the CMS admin's Press Office actually
+show up on the live `digitalallies.net/learn/` page? Previous sessions
+could only check `sites/digitalallies` **in this monorepo** (a frozen,
+one-time import, confirmed via git log to have exactly one commit ever) —
+not the separate live `Digital-Allies/DigitalAllies` repo that
+digitalallies.net actually deploys from. This session had working `gh`
+access to that repo for the first time, so did the check for real.
+
+**Finding #1 — the homepage no longer loads `cms-loader.js` at all, so
+editing Services/Testimonials in the CMS admin has zero live effect on
+digitalallies.net's homepage today.** Confirmed by reading the live repo's
+`index.html` script tags (none reference `cms-loader.js`) and by loading
+the live page in-browser and querying `document.querySelectorAll('script')`
+— same result. The `#departments` and `#field-notes` sections that used to
+be populated dynamically are now fully static, hand-written HTML baked
+into `index.html` (4 dept-cards, 3 pinned-note testimonials, hardcoded).
+Traced the cause: `Merge pull request #52 from Digital-Allies/site-overhaul-2026`
+(`4838b4aa`, 2026-07-14) rewrote the homepage and dropped the Supabase
+wiring that the 2026-06-26 `feat: connect static website to Supabase CMS`
+commit had originally added. **This directly updates/supersedes the
+2026-07-16 audit entry below** ("digitalallies.net IS connected to
+Supabase") — that was accurate when written, but a same-repo merge two
+days later silently reverted it and nobody re-checked live since. Not
+flagging this as something to fix right now (Anthony may have intentionally
+gone static in the overhaul) — just correcting the record so nobody trusts
+the stale "connected" claim.
+
+**Finding #2 — `learn/index.html` still loads `cms-loader.js`, but the live
+copy of that script has been silently broken since 2026-07-16, so it's been
+stuck on "Loading articles..." for every visitor for over a week.** Live
+repo commit `f77d1596` ("Update Supabase anon key to new publishable key",
+2026-07-16T17:04:21Z — a manual edit to the static site's key, unrelated to
+the admin CMS) renamed the `SUPABASE_ANON_KEY` constant to
+`supabase_anon_new` but left both references inside the `headers` object
+(`apikey` / `Authorization`) pointing at the old, now-undefined name. That's
+a top-level `ReferenceError` the instant the script parses — it throws
+before the `DOMContentLoaded` listener (and its `try/catch`) ever
+registers, so **the entire script never runs**: no settings/brand-color
+apply, no services/testimonials fetch (moot now per Finding #1), no
+contact-form wiring, and no articles fetch. Verified live via the actual
+served response (`https://digitalallies.net/assets/js/cms-loader.js`,
+byte-identical to the repo's `main` branch) and via
+`document.getElementById('learn-articles-grid').innerHTML` on the live
+page, which is still the unreplaced static placeholder: `"Loading
+articles..."` / `"Cargando artículos..."`. **This directly answers the Aug
+3–4 schedule item's "done when" — confirmed, not assumed: no, a post made
+in the Press Office does NOT currently reach the live `/learn/` page,** for
+a reason that has nothing to do with the CMS admin's own code (which is
+fine) — it's a one-character-class typo in a completely different,
+separately-deployed static-site repo.
+
+**Also reconfirmed while in that file:** the escapeHtml/XSS fix built in
+this monorepo's frozen copy 2026-07-20 (`sites/digitalallies/assets/js/cms-loader.js`)
+was never ported to the live repo — the live `cms-loader.js` still builds
+`innerHTML` from `title.en`/`desc.en`/`art.type`/etc. with zero escaping.
+Same manual-port gap already tracked in `TODO.md`'s Backlog, now more
+directly relevant since fixing the `ReferenceError` above would re-enable
+that unescaped path for real published content.
+
+**The fix itself is trivial** (rename the two `headers` references from
+`SUPABASE_ANON_KEY` to `supabase_anon_new`, or rename the `const` the other
+way — either restores the intended key) **but deliberately not applied by
+this session.** `Digital-Allies/DigitalAllies` is a separate, live,
+customer-facing production repo outside this scheduled task's scope
+(`da-platform` only, per the task's own instructions) — pushing a fix
+there, even a safe one-line one, isn't something to do autonomously in a
+non-interactive session with nobody able to say yes. Flagging clearly here
+instead. **Whoever picks this up next (Anthony directly, or an agent
+session explicitly scoped to that repo) should fix both issues in the same
+edit:** the `SUPABASE_ANON_KEY`/`supabase_anon_new` mismatch, and the
+missing `escapeHtml()` wrapping (diff already sitting in `da-platform`
+commit `6876c63` as the pattern to port, per `TODO.md`'s Backlog entry).
+
+**Net effect on `BUILD-SCHEDULE.md`:** marked Wed–Thu Jul 29–30
+(`/admin/projects`) superseded below, same as the other three. Mon–Tue Aug
+3–4 (`/admin/content`) is now **investigated and answered** (the "done
+when" question has a confirmed answer), but not "done" in the sense of
+nothing left to do — the live bug above is real, outstanding work, just
+not in this repo. Did not start Aug 5–6 (`/admin/pages`) — that's a
+genuine, substantial feature build (code-view + real components), one task
+per weekday per the schedule's own cadence, and today's slot was already
+spent on the two items above.
+
+**Verified:** no code in this repo changed this session (docs-only), so no
+`tsc` run needed; `git status` clean before and after. All live-site
+findings verified directly (live page console/network/DOM state via
+browser tools, live repo source via `gh api`), not inferred from docs.
 
 ## 2026-07-22 — Atomic Finds: galaxy card rings restored, logo wired to settings, mobile card sizing fixed
 

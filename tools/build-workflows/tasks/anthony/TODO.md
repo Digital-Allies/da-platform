@@ -319,6 +319,25 @@ and backend groundwork has started — this is no longer blocked/deferred.
 
 ## ⚪ Backlog — future features (not scheduled, just captured)
 
+- **🔴 Upgrade from Backlog — this one is currently live-broken, found
+  2026-07-23.** `Digital-Allies/DigitalAllies`'s `assets/js/cms-loader.js`
+  (the SEPARATE live repo, not this monorepo) has had a top-level
+  `ReferenceError` since commit `f77d1596` (2026-07-16T17:04:21Z, a manual
+  Supabase-key edit): it renamed the `SUPABASE_ANON_KEY` const to
+  `supabase_anon_new` but left both references inside the `headers` object
+  pointing at the old name. The script throws before it ever runs, so on
+  every page that still loads it (`learn/index.html`), NOTHING works.
+  Verified live: `#learn-articles-grid` on `digitalallies.net/learn/` has
+  shown a static "Loading articles..." to every visitor for over a week.
+  **The fix is one line** — in `assets/js/cms-loader.js`, change the two
+  `SUPABASE_ANON_KEY` references inside the `headers` object (lines ~9-10)
+  to `supabase_anon_new` (matching the const actually declared on line 5).
+  Do the escapeHtml fix below in the same edit while the file's open — full
+  detail on both: `STATUS.md`'s 2026-07-23 entry. **Also worth knowing:**
+  the live homepage (`index.html`) no longer loads `cms-loader.js` at all
+  as of the 2026-07-14 site-overhaul merge — Services/Testimonials edits in
+  the CMS admin currently have zero effect there, only `/learn/` is
+  affected by the bug above.
 - **Port two verified code fixes from da-platform to the live
   `Digital-Allies/DigitalAllies` repo.** 2026-07-20: the HTML-escaping fix
   in `cms-loader.js` and the dead `tailwind.config` removal (13 files) were

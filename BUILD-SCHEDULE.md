@@ -182,40 +182,54 @@ templates" doesn't clearly apply to a task tracker. Full detail:
   placeholders.~~
 
 ### Wed–Thu Jul 29–30 · `/admin/projects`
-**Not yet deeply reviewed** — a quick spot-check (2026-07-22) found the
-same import-commit pattern as the other three backlog items (real
-`projects`/`project_tasks` tables + CRUD already exist), but nobody has
-checked `ProjectsClient.tsx` against Anthony's specific "need to build
-actual project templates" complaint yet. **Do that check first** before
-assuming this slot needs a build from scratch — it may turn out mostly
-superseded too, or the "templates" gap may be real. See `STATUS.md`.
-- **[Agent]** Build real project templates (currently "doesn't work and
-  need to build actual project templates") — **only if the check above
-  confirms this is still a real gap.**
-- **Done when —** creating/viewing a project uses a real template, not a
-  stub.
+**⚠ SUPERSEDED, confirmed 2026-07-23 — same pattern as the other three
+backlog items.** `git log` on the whole directory shows one commit ever
+(the Jul 6 import). `ProjectsClient.tsx` already has full CRUD, a working
+drag-and-drop Kanban board, and — the specific thing Anthony's complaint
+says is missing — a "Initialize Template" picker with 3 real templates
+(Software Launch / Marketing Campaign / SEO Audit) that insert real
+starter tasks on project creation. Full detail: `STATUS.md`'s 2026-07-23
+entry.
+- ~~**[Agent]** Build real project templates (currently "doesn't work and
+  need to build actual project templates").~~
+- ~~**Done when —** creating/viewing a project uses a real template, not a
+  stub.~~
 
 ### Fri Jul 31 · Review / buffer
 
 ## Week of Aug 3 — Dashboard backlog, part 2 (Press Office + Pages)
 
 ### Mon–Tue Aug 3–4 · `/admin/content` ("The Press Office")
-**Partially superseded (checked 2026-07-22, see `STATUS.md`).** A
-Templates tab with 3 real templates (Blog Post/Press Release/Case Study)
-already exists (`ContentClient.tsx`), and published articles already flow
-live to `digitalallies.net/learn/` via the shared `articles` table
-(confirmed in `sites/digitalallies/assets/js/cms-loader.js`) — **in this
-repo's frozen copy only; not confirmed against the separate live
-`Digital-Allies/DigitalAllies` repo.** Verify that before assuming this
-slot needs nothing.
+**Investigated and answered, 2026-07-23 (see `STATUS.md`) — the "done
+when" question below has a confirmed answer, but it's not good news, and
+the real fix isn't in this repo.** A Templates tab with 3 real templates
+(Blog Post/Press Release/Case Study) exists in the CMS admin
+(`ContentClient.tsx`) and is fine. But checked against the **actual live
+`Digital-Allies/DigitalAllies` repo** (via `gh`, for the first time) rather
+than this monorepo's frozen copy: (1) the live homepage no longer loads
+`cms-loader.js` at all since a 2026-07-14 overhaul merge — Services/
+Testimonials edits have zero live effect there now; (2) `learn/index.html`
+still loads it, but the live script has had a `ReferenceError` (undefined
+`SUPABASE_ANON_KEY`) since a 2026-07-16 key-rotation edit, so it never
+executes — `#learn-articles-grid` has been stuck on "Loading articles..."
+for every visitor for over a week. **So: no, a published post does not
+currently reach the live page** — not a templates or data-layer gap, a
+one-line JS bug in the separate static-site repo. Fix is trivial (rename
+the two stale `SUPABASE_ANON_KEY` references in that repo's
+`assets/js/cms-loader.js` to match the renamed `supabase_anon_new` const,
+same edit should add the escapeHtml wrapping from `da-platform` commit
+`6876c63`) but deliberately not applied by the agent session that found it
+— out of this scheduled task's repo scope, needs Anthony or an
+explicitly-scoped session on that repo.
 - ~~**[Agent]** Build templates for all category tabs; connect posting to
   the primary site so entries match the format of
   `digitalallies.net/learn/` articles.~~ Templates + the data-layer
-  connection already exist in this repo — **remaining real work, if any,
-  is confirming/porting parity with the live `DigitalAllies` repo**, not
-  building this from scratch.
-- **Done when —** confirmed (not assumed) that a post made here shows up on
-  the live `/learn/` page in the right format.
+  connection are fine in this repo. **Real remaining work is a one-line fix
+  in the separate `Digital-Allies/DigitalAllies` repo**, not a build here —
+  see `STATUS.md`'s 2026-07-23 entry for the exact fix.
+- ~~**Done when —** confirmed (not assumed) that a post made here shows up on
+  the live `/learn/` page in the right format.~~ **Confirmed: it does not,
+  currently** — see above.
 
 ### Wed–Thu Aug 5–6 · `/admin/pages`
 **Confirmed still fully real (checked 2026-07-22, see `STATUS.md`) — not
