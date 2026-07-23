@@ -39,7 +39,7 @@ the Theme Engine, and the module set in real, daily use.
 | Hover wash | Light Pink `#FADEEB` |
 | Header font | Lexend Deca |
 | Body font | JetBrains Mono |
-| Logo | `packages/design-system/assets/logo-*` |
+| Logo | `packages/20260722-da-design-system/assets/logo-*` (current snapshot folder) |
 | Voice | Primary voice per `GLOBAL_CONTEXT_FOR_CLAUDE.md` — DA's OWN jargon (Departments, Field Notes, Command Center, etc.) stays fully intact here — this is the one tenant where that vocabulary is correct everywhere, admin and public site both. |
 
 ## 4. Pages & blocks

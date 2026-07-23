@@ -2,7 +2,7 @@
 
 Paste into `da-platform/STATUS.md` above the most recent entry.
 
-**Placement, confirmed by Anthony:** `cms/` → `da-platform/packages/design-system/cms/` (its existing mirror location). `client-docs/` → new folder at `da-platform/packages/design-system/client-docs/` (same mirroring pattern; moves under `tools/build-workflows` once wired to real client records). This status-update file itself is a paste-in draft, not meant to be kept as a permanent doc.
+**Placement (current actual location):** these files live in the dated design-system snapshot folder `da-platform/packages/20260722-da-design-system/` — `cms/` at `.../20260722-da-design-system/cms/`, `client-docs/` at `.../20260722-da-design-system/client-docs/`. That folder is a design-system mirror/snapshot, **not live code or a deployed site** — the real engine is `tools/build-workflows`, where `client-docs/` moves once it's wired to real client records. (Folder naming in `packages/` is known-inconsistent — the dated `20260722-da-design-system` name vs. the canonical `packages/design-system` the architecture docs refer to; a repo-wide naming-convention pass is a deliberately-deferred future project, per Anthony.) This status-update file itself is a paste-in draft, not meant to be kept as a permanent doc.
 
 - **Design-system project cleanup:** removed a stale bundled export
   (`Digital Allies CMS.html`) that duplicated `cms/dashboard.html`.
