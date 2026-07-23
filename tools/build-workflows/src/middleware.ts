@@ -37,11 +37,19 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // Only protect /admin pages that are NOT the login page.
+  // Only protect /admin pages that are NOT the login or reset-password page.
+  // reset-password must stay unauthenticated at the server level: Supabase's
+  // recovery link lands here with the session token in the URL *hash*
+  // fragment (#access_token=...&type=recovery), which browsers never send
+  // to the server — so getUser() above sees no session on that first
+  // request. Gating this route would redirect straight to /admin/login
+  // before the page's client-side code ever gets to read the hash and
+  // exchange it for a session.
   // When redirecting, copy Supabase session cookies so the token state
   // survives the redirect — without this, the redirect response drops the
   // refreshed tokens and causes an infinite redirect loop.
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login' && !user) {
+  const isPublicAdminRoute = pathname === '/admin/login' || pathname === '/admin/reset-password'
+  if (pathname.startsWith('/admin') && !isPublicAdminRoute && !user) {
     const loginUrl = request.nextUrl.clone()
     loginUrl.pathname = '/admin/login'
     const redirectResponse = NextResponse.redirect(loginUrl)
