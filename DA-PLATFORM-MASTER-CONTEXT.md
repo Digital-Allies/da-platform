@@ -1,6 +1,12 @@
 # DA Platform — Master Context & Operations Plan
 **Generated:** 2026-07-23 by Cowork session (full history synthesis)  
+**Updated:** 2026-07-24 — DA site rebuild spec added; 3 AF seeds written; NEW-SITE-SETUP-PROCESS.md created  
 **Read this before every session. Update after every major change.**
+
+**See also:**
+- `NEW-SITE-SETUP-PROCESS.md` — process guide for every new client site (phases, non-negotiables, skills registry, component status)
+- `tools/build-workflows/web-design-platform-skill.md` — full design system reference
+- `tools/build-workflows/templates/CLIENT-ONBOARDING.template.md` — launch checklist
 
 ---
 
@@ -148,6 +154,41 @@ The live marketing site Vercel project has no env vars configured. How it reads 
 
 ---
 
+### PROJECT — Digital Allies Site Full Rebuild (opened 2026-07-24)
+
+**Source:** Claude Design conversation — Anthony confirmed intent to rebuild digitalallies.net to platform standards.  
+**Full spec:** `NEW-SITE-SETUP-PROCESS.md` §DA Site Rebuild section  
+**Target repo:** `Digital-Allies/DigitalAllies` (the live static site) — NOT da-platform, which holds only a frozen import
+
+**What's driving this:**
+- Site is missing required platform pages (learn subpages, legal, accessibility, AI disclosure, sitemap)
+- Existing pages don't meet non-negotiable accessibility and i18n standards
+- Homepage is not CMS-connected (P2 — hardcoded after PR #52)
+- Design system itself needs visual updates before the code rebuild
+
+**Build order:**
+1. Visual design review + system updates in Claude Design (review homepage comments section first)
+2. Fix P1: one-line `cms-loader.js` fix in `Digital-Allies/DigitalAllies` → restores `/learn`
+3. Build `LanguageSwitcher` component → `packages/design-system/` → add to nav + footer
+4. Scaffold and seed all missing pages (terms, privacy, cookies, accessibility, use-of-ai, sitemap, learn index)
+5. Audit existing pages for WCAG 2.1 AA violations → fix all Critical/Serious
+6. Full contrast ratio pass — STRICT (4.5:1 normal text, 3:1 large text/UI)
+7. Add JSON-LD structured data to homepage and articles
+8. Ensure all pages use production-only dependencies, zero dev leakage
+9. QA per `NEW-SITE-SETUP-PROCESS.md` Phase 5 checklist
+10. Deploy
+
+**Non-negotiables that must be true at launch** (see `NEW-SITE-SETUP-PROCESS.md` §3):
+- WCAG 2.1 AA — zero axe Critical/Serious violations
+- STRICT contrast ratios (4.5:1 / 3:1)
+- Descriptive alt text on all images, aria-labels on all icon-only elements
+- Language switcher present (functional or stubbed)
+- `/terms`, `/privacy`, `/cookies`, `/accessibility`, `/use-of-ai`, `/sitemap` all live
+- Production-only dependencies
+- `sitemap.xml`, `robots.txt`, JSON-LD LocalBusiness
+
+---
+
 ## 4. WHAT'S BEEN BUILT (verified as real, not stale)
 
 These all exist in `tools/build-workflows` and are working:
@@ -164,7 +205,7 @@ These all exist in `tools/build-workflows` and are working:
 - ✅ Per-client theming via `SiteTheme.tsx`
 - ✅ `cms.digitalallies.net` domain connected
 - ✅ ISR/cookies bug fixed (public data fetchers no longer stuck on mock data)
-- ✅ Language switcher system (hardened `LanguageController` pattern)
+- ❌ Language switcher — NOT YET BUILT. The "LanguageController pattern" entry was stale. No `LanguageSwitcher` component exists in the codebase as of 2026-07-24. Confirmed by code search. Scheduled as part of the DA site rebuild (see PROJECT entry in §3). See `NEW-SITE-SETUP-PROCESS.md` for spec.
 
 ---
 
@@ -175,11 +216,11 @@ These all exist in `tools/build-workflows` and are working:
 - ❌ Atomic Finds Vercel project creation (blocked on P0 fix first, then design finalization)
 - ❌ Atomic Finds real product photos + 5th product from Jenny
 - ❌ Checkout provider integration (blocked on Jenny conversation about provider)
-- ❌ i18n system (plan exists: `I18N_SYSTEM_PLAN.md`; not started)
+- ❌ i18n system / LanguageSwitcher component (plan: `I18N_SYSTEM_PLAN.md`; component not started; spec in `NEW-SITE-SETUP-PROCESS.md` §3.2)
 - ❌ Theme engine — admin-editable per-client theming (plan: `THEME_ENGINE_PLAN.md`; not started)
 - ❌ Per-site document storage (contracts/invoices) — backlog, not scoped
 - ❌ HCTC site — still placeholder; no build plan finalized
-- ❌ DA site rebuilt inside monorepo — `sites/digitalallies` is a frozen import; actual live site is separate
+- ❌ DA site rebuilt inside monorepo — `sites/digitalallies` is a frozen import; actual live site is separate. Full rebuild project opened 2026-07-24 (see §3 PROJECT entry). Rebuild targets `Digital-Allies/DigitalAllies` repo.
 
 ---
 
@@ -351,7 +392,7 @@ Design concept → Asset gen (Canva / Luma Labs) → Canva → Claude Design →
 - Load https://digitalallies.net — does homepage render correctly?
 - Load https://digitalallies.net/learn/ — is `#learn-articles-grid` showing articles or "Loading..."? (Currently BROKEN — see P1)
 - Load https://cms.digitalallies.net/admin/login — does login work?
-- Load the Atomic Finds live URL — do Galaxy Cards, reviews, and mobile nav render? (Currently BROKEN — see P0)
+- Load the Atomic Finds live URL — do Galaxy Cards, reviews, and mobile nav render? (P0 resolved 2026-07-24 — should be working now; tab title will still read "My Business" until the P4 seeds are run)
 - Load HCTC Vercel URL — does it load or throw a Supabase key error? (Suspected BROKEN — see P5)
 
 ### Step 2 — Vercel deployment check (10 min)
@@ -414,11 +455,12 @@ Update this file (DA-PLATFORM-MASTER-CONTEXT.md §3 and §4) if any bugs resolve
 
 ---
 
-## 13. BUILD SCHEDULE — WHAT'S NEXT (current as of 2026-07-23)
+## 13. BUILD SCHEDULE — WHAT'S NEXT (current as of 2026-07-24)
 
 | Date | Task | Status | Owner |
 |------|------|--------|-------|
-| Before anything | Fix P0 — Atomic Finds deploy branch | **BLOCKED on Anthony** | Anthony in Vercel |
+| ~~Before anything~~ | ~~Fix P0 — Atomic Finds deploy branch~~ | **✅ RESOLVED 2026-07-24** — see §3 | — |
+| Before anything | Run 3 AF seed files in Supabase SQL Editor (P4 — fixes "My Business" title) | **BLOCKED on Anthony** | Anthony, SQL Editor |
 | Before anything | Fix P1 — cms-loader.js ReferenceError in DigitalAllies repo | **BLOCKED on Anthony or scoped session** | 1-line fix |
 | Aug 5–6 | `/admin/pages` — real components + code-view + live preview | Genuine build needed | Claude Code |
 | Parallel | Atomic Finds Vercel project creation | Blocked on P0 fix + design finalization | Anthony + Claude |
@@ -478,7 +520,7 @@ Anthony's current workflow works. These additions tighten the loop:
 |----------|-----------|
 | `sites/digitalallies` (monorepo) vs `Digital-Allies/DigitalAllies` (live repo) | These are two separate things. Monorepo copy is FROZEN. All live fixes go to `DigitalAllies` repo. Never confuse them. |
 | `CMS_IMPLEMENTATION_PLAN.html` and older docs in `_archive/` | Superseded. Canonical plan is `BUILD-SCHEDULE.md` + `STATUS.md`. Do not read archived files for current state. |
-| PR #4 branch still deployed on Atomic Finds | P0 bug. Fix = Vercel branch setting change. |
+| PR #4 branch still deployed on Atomic Finds | ✅ Resolved 2026-07-24 — Vercel Production Branch changed to `main`, verified live (§3 P0). |
 | `MAINTENANCE-CHECKLIST.md` links scope — some listed out-of-scope `cassellac/*` repos | Per 2026-07-22 Anthony directive: scope is CMS engine + its client sites only. Remove cassellac links from checklist. |
 | Stale `AdminNav.tsx` reference in docs | File was deleted. The correct five-file list is in `ARCHITECTURE.md`. |
 | Multiple Supabase key pairs ("default" + "_new") | The `_new` pair is what's in use. "Default" should be revoked. |
@@ -498,7 +540,8 @@ Anthony's current workflow works. These additions tighten the loop:
 - **Jul 21:** Atomic Finds full storefront built — Galaxy Card, ProductGrid, commerce schema, admin Showroom. ARCHITECTURE.md written. Mobile-responsive design shipped. Stale backlog items confirmed superseded.
 - **Jul 22:** Auth bug fixed (reset-password middleware). Visual regressions on Atomic Finds fixed (rings, logo, card sizing). Found P0 (wrong deploy branch).
 - **Jul 23:** `/admin/projects` confirmed superseded. `/admin/content` live-parity check found the cms-loader.js ReferenceError on live digitalallies.net/learn/. This master context document created.
+- **Jul 24:** P0 (Atomic Finds wrong deploy branch) resolved and verified live — 14 products, 19+ reviews, category filters, quick-view modal all confirmed working via Claude in Chrome. Root cause of the lingering symptom was actually a temporarily-wrong `NEXT_PUBLIC_CLIENT_ID`, not the branch itself; fixed in commit `ef74922`. Opened P4 (empty `settings` table → "My Business" tab title) and wrote all 3 pending seed files (`settings`, `design_tokens`, `pages`), awaiting Anthony to run them. Opened the DA site full-rebuild project. `NEW-SITE-SETUP-PROCESS.md` created. This file's §3/§13/§16/§11 reconciled — they still described P0 as open even after §3 itself was updated to resolved.
 
 ---
 
-*Last updated: 2026-07-23 | Next update: after next build session | Owner: Anthony + whichever agent ran the session*
+*Last updated: 2026-07-24 (Claude Code — reconciled §3/§13/§16/§11, which still described P0 as open after it was resolved elsewhere in this same file) | Next update: after next build session | Owner: Anthony + whichever agent ran the session*

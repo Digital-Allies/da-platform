@@ -5,7 +5,7 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-24 — by Cowork session (3 Atomic Finds seed files written: settings, design_tokens, pages — all pending Anthony run in Supabase SQL Editor)
+**Last updated:** 2026-07-24 — by Cowork session (3 AF seeds written; NEW-SITE-SETUP-PROCESS.md created; DA site rebuild spec opened; LanguageSwitcher confirmed NOT built)
 
 ## 2026-07-24 — P0 resolved; 3 AF seed files written; master context doc created and updated
 
