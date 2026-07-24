@@ -235,16 +235,16 @@ background-size: 20px 20px;
 **Variants:**
 - Image overlay (image + dark overlay + text on top)
 - Dark background (solid color + text)
-- Light background (bone white + accent color accent stripe)
+- Light background (canvas color + accent stripe in brand color)
 - Video background (optional, for premium sites)
 
 **Props:**
-- `title`: Main headline (Lexend Deca, bold, 48–64px)
-- `subtitle`: Subheading (body font, 18–24px)
+- `title`: Main headline (client's heading font, bold, 48–64px)
+- `subtitle`: Subheading (client's body font, 18–24px)
 - `cta_text`: Button label
 - `cta_link`: Button target (internal or external)
-- `background_color`: Primary brand color (or image)
-- `text_color`: White or charcoal (auto-contrast based on background)
+- `background_color`: Client's primary brand color (or image)
+- `text_color`: Auto-contrast based on background (light or dark, never hardcoded)
 
 **Structure:**
 ```
@@ -622,12 +622,12 @@ background-size: 20px 20px;
 2. **Short sentences.** Busy people scan. Make every word count.
 3. **Confidence, not hype.** "We do X really well" beats "Industry-leading X solutions."
 4. **Action words.** "Learn," "Try," "Book," "Call" — not "Explore," "Leverage," "Optimize."
-5. **Local, not corporate.** If the client is in Kingman, AZ, celebrate that. Don't hide it.
+5. **Local, not corporate.** If the client is proud of where they are, put that in the copy. Don't bury it in generic brand-speak.
 
 **CTA Copy (examples):**
 - ✅ "See our work"
 - ✅ "Book an appointment"
-- ✅ "Call us at (928) 555-1234"
+- ✅ "Call us"
 - ✅ "Get started"
 - ❌ "Leverage our solutions"
 - ❌ "Explore our ecosystem"
@@ -835,33 +835,18 @@ CTA: [Optional, if answer leads to action]
 
 ---
 
-## GETTING STARTED
+## STARTING A NEW CLIENT SITE
 
-### Phase 1: Build core infrastructure
-1. Set up Next.js repo (monorepo structure)
-2. Set up Supabase project (schema + RLS)
-3. Create client-site template (all components)
-4. Create admin-panel template (dashboard + CRUD)
-5. Deploy template to Vercel
+The platform is already built. When a new client signs, follow this order:
 
-### Phase 2: Build first client site (internal test)
-1. Follow build workflow above
-2. Test admin panel (create post, edit service, etc.)
-3. Test form submission (email + Supabase)
-4. Test mobile responsiveness
-5. Verify Lighthouse score
+1. **Phase 0** — Visual foundation in Claude Design. Every client gets their own design project from scratch.
+2. **Phase 1** — Supabase tenant setup. See `NEW-SITE-SETUP-PROCESS.md` for the full seed file pattern.
+3. **Phase 2** — Vercel deployment. New project, correct env vars, branch `main`.
+4. **Phase 3** — Apply all non-negotiables (a11y, i18n placeholder, required pages, SEO, AI disclosure).
+5. **Phase 5** — QA. Run full checklist before handing off.
+6. **Phase 6** — Handoff. Credentials + 5-min walkthrough.
 
-### Phase 3: Document and package
-1. Create video walkthroughs (login, edit, add content)
-2. Write client onboarding email
-3. Create admin panel FAQ
-4. Package skill for reuse
-
-### Phase 4: First real client
-1. Use workflow to build site (3–4 hours)
-2. Hand off to client
-3. Collect feedback
-4. Iterate on process
+Full detail in `NEW-SITE-SETUP-PROCESS.md`.
 
 ---
 
