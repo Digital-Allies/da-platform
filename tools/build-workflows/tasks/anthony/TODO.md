@@ -11,7 +11,25 @@ Reviewed again 2026-07-22 — added Priority 0 below (root cause found for
 
 ---
 
-## 🔴 Priority 0 — fix Atomic Finds production: wrong deploy branch (found 2026-07-22)
+## ✅ Priority 0 — RESOLVED 2026-07-24 — Atomic Finds Supabase sync confirmed working
+
+**Resolved:** Branch was fixed (now `main`). Client ID was temporarily wrong — restored to `443936d5-f92e-480b-b206-c65cfb52bdfc` in commit `ef74922`. Verified live 2026-07-24 via Claude in Chrome: 14 products, 19+ reviews, category filters, product detail modal — all loading correctly from Supabase. Supabase logs show HTTP 200s, zero errors.
+
+**What remains (now P0-a):** Browser tab title shows "My Business" — `public.settings` has zero rows for Atomic Finds. See Priority 0-a below.
+
+---
+
+## 🔴 Priority 0-a — Create and run Atomic Finds settings seed (found 2026-07-24)
+
+`public.settings` has 21 rows — all Digital Allies. Zero for Atomic Finds `443936d5-f92e-480b-b206-c65cfb52bdfc`. Until seeded, the site title shows "My Business" and the logo uses a static fallback.
+
+- [ ] Claude Code: Create `tools/build-workflows/supabase/seed-atomic-finds-settings.sql` (SQL is in DA-PLATFORM-MASTER-CONTEXT.md §3 P4)
+- [ ] Anthony: Run that file in Supabase SQL Editor → paste → Run
+- [ ] Verify: reload https://atomicfindsatx.store — tab title should read "Atomic Finds ATX" (no redeploy needed)
+
+---
+
+## 🔴 ARCHIVED — Priority 0 original entry (branch fix): wrong deploy branch (found 2026-07-22)
 
 **This is the actual root cause of "Atomic Finds isn't loading card content,
 reviews, or a few other sections" — it is NOT a Supabase key problem.**

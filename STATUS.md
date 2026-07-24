@@ -5,7 +5,26 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-23 (daily build session) — by Claude Code (dashboard-backlog audit: `/admin/projects` confirmed superseded; `/admin/content` live-parity check found a real, currently-live bug on digitalallies.net, in the separate `Digital-Allies/DigitalAllies` repo)
+**Last updated:** 2026-07-24 — by Cowork session (Atomic Finds P0 resolved; settings seed identified as missing; DA-PLATFORM-MASTER-CONTEXT.md created as new cross-agent context document)
+
+## 2026-07-24 — P0 resolved; settings seed task opened; master context doc created
+
+**P0 CLOSED — Atomic Finds Supabase sync is working.** Investigated and verified live via Claude in Chrome session. 14 products load for `client_id = 443936d5-f92e-480b-b206-c65cfb52bdfc`, 19+ reviews display, category filters work, Galaxy Card quick-view modal shows full Supabase data. Supabase Unified Logs confirm HTTP 200s, zero auth/RLS errors. Root cause of initial symptom: `NEXT_PUBLIC_CLIENT_ID` was temporarily set to wrong value (auth user UUID instead of client UUID); restored in commit `ef74922`.
+
+**Remaining cosmetic issue (P4 in master context):** Browser tab title shows "My Business". `public.settings` has 21 rows, all Digital Allies — zero for Atomic Finds. Fallback is defined in `src/lib/types.ts:165`. Fix: create and run `seed-atomic-finds-settings.sql` (tracked in `tasks/anthony/TODO.md` Priority 0-a). No redeploy needed after seed — it's a runtime read.
+
+**Other confirmed facts from this session:**
+- `public.reviews` table confirmed populated (19+ Atomic Finds reviews)
+- Admin CAN edit products and reviews without settings seed — RLS works
+- Admin settings page will show defaults until seed row exists
+- Meta title template: `src/lib/types.ts:165`, `DEFAULT_SETTINGS.site_title = 'My Business'`
+
+**New document created:** `DA-PLATFORM-MASTER-CONTEXT.md` in repo root — cross-agent master context covering all bugs (P0–P6), build schedule, routines (daily build, weekly infra maintenance, twice-daily context briefing), skills/tool inventory, client onboarding workflow, and full project history. All agents should read this before starting any session.
+
+**What's next:**
+1. Claude Code: write `seed-atomic-finds-settings.sql`, then Anthony runs it in Supabase SQL Editor
+2. Fix P1: one-line `cms-loader.js` fix in `Digital-Allies/DigitalAllies` repo (separate from da-platform)
+3. Build schedule slot: Aug 5–6 — `/admin/pages` (real components + live preview)
 
 ## 2026-07-23 — daily build session: `/admin/projects` superseded (same pattern); `/admin/content` live-parity check finds a real, currently-live production bug — NOT in this repo
 

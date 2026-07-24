@@ -37,7 +37,7 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 | Vercel project (CMS) | https://vercel.com/digital-allies/da-webwssite-build-workflows | Root dir: `tools/build-workflows` |
 | GitHub (monorepo) | https://github.com/Digital-Allies/da-platform | Private |
 | Live marketing site | https://digitalallies.net | Separate static repo |
-| Atomic Finds live | https://atomicfindsatx.store | Deploying from `main` ✅; **Supabase not connecting (see §3 P0)** |
+| Atomic Finds live | https://atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; **"My Business" title — settings seed missing (see §3 P0)** |
 | Supabase | (login via Supabase dashboard) | Anon key: `sb_publishable_...` format |
 | Claude Design — DA | https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758?via=share | Design system + CMS mocks |
 | Claude Design — Atomic Finds | https://claude.ai/design/p/29110ac3-0a76-4fa1-a322-a78bc212a50d?via=share | Storefront design |
@@ -49,7 +49,7 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 |--------|-------------|--------|--------|
 | Digital Allies | (in Supabase clients table) | digitalallies.net | Live static; CMS wiring broken (see §3) |
 | Healthcare Training Center | `7896354c-1d34-4649-85f5-51f2e5a7df6c` | HCTC Vercel URL | Placeholder; no deep build |
-| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | atomicfindsatx.store | Deploying from `main` ✅; **Supabase not connecting — P0** |
+| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; settings seed missing |
 
 ### Env vars (what matters)
 
@@ -66,21 +66,20 @@ Every Vercel project needs these set manually — they do NOT sync from `.env.lo
 
 ## 3. OPEN BUGS & BLOCKERS (priority order)
 
-### P0 — Atomic Finds not connecting to Supabase (live site at atomicfindsatx.store)
-**Confirmed:** Branch fixed — `atomic-finds-atx` Vercel project now deploys from `main`. ✅  
-**Current issue:** The live site at https://atomicfindsatx.store is not reading from Supabase — products, settings, or both are not loading from the database.
+### P0 — ✅ RESOLVED 2026-07-24 — Atomic Finds Supabase sync confirmed working
 
-**What to check (in order):**
-1. **Vercel env vars** — go to Vercel → `atomic-finds-atx` → Settings → Environment Variables. Confirm ALL of these are set and correct:
-   - `NEXT_PUBLIC_SUPABASE_URL` — must be your project URL (not a placeholder)
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — must be `sb_publishable_...` format (NOT the old JWT that starts with `eyJ`)
-   - `NEXT_PUBLIC_CLIENT_ID` — must be `443936d5-f92e-480b-b206-c65cfb52bdfc`
-   - `NEXT_PUBLIC_SITE_URL` — must be `https://atomicfindsatx.store`
-2. **Supabase RLS** — in Supabase → Table Editor → `products` → check if any rows exist for `client_id = 443936d5-f92e-480b-b206-c65cfb52bdfc`. If zero rows, the grid will be empty regardless.
-3. **Settings table** — `settings` table likely has zero rows for Atomic Finds `client_id`. Seed a row via `/admin/settings` on `cms.digitalallies.net` or directly in Supabase.
-4. **Browser console** — load https://atomicfindsatx.store, open DevTools → Console. Look for: CORS errors, 401/403 from Supabase (wrong key), or "No rows found" (RLS blocking).
+**What was wrong:** `NEXT_PUBLIC_CLIENT_ID` in Vercel was temporarily set to the wrong value (an auth user ID was confused with the client UUID). Restored to `443936d5-f92e-480b-b206-c65cfb52bdfc` in commit `ef74922`.
 
-**Note for Claude Code:** The branch is correct and `main` is live. The Supabase connection is an env var or RLS issue, NOT a code problem. Do not revert branch settings. Do not "fix" the Vercel git config — it is already correct.
+**What was verified live (Claude in Chrome session, 2026-07-24):**
+- 14 products loading for Atomic Finds `client_id` ✅
+- Galaxy Card quick-view modal shows full Supabase data (title, description, dimensions, origin, era, condition, price) ✅
+- Reviews section: 19+ real reviews displaying ✅
+- Category filtering (CHAIRS, LAMPS, SHELVING) ✅
+- Supabase Unified Logs: HTTP 200s on `/rest/v1/settings`, `/rest/v1/pages`, and product endpoints; zero 401/403/404 errors ✅
+
+**Remaining cosmetic issue (now P4 — see below):** Browser tab title shows "My Business" because `public.settings` has zero rows for Atomic Finds. This is NOT a sync failure — it's a missing seed file.
+
+**Note for Claude Code:** Supabase sync is working. Branch is `main`. Vercel config is correct. Do not touch env vars or git config.
 
 ---
 
@@ -106,8 +105,34 @@ Every Vercel project needs these set manually — they do NOT sync from `.env.lo
 
 ---
 
-### P4 — Atomic Finds settings table is empty
-`settings` has zero rows for the Atomic Finds `client_id`. Logo in `AtomicNav` will fall back to static brand mark until Anthony seeds a settings row via `/admin/settings`.
+### P4 — Atomic Finds settings table has zero rows (site title shows "My Business")
+
+**Confirmed 2026-07-24 (Claude in Chrome, Supabase Table Editor):**  
+`public.settings` has 21 rows total — all for Digital Allies client. Zero rows for Atomic Finds `client_id = 443936d5-f92e-480b-b206-c65cfb52bdfc`.
+
+**Effect:**
+- Browser tab title + page `<title>`: shows "My Business" (fallback from `tools/build-workflows/src/lib/types.ts:165`)
+- Logo: falls back to static Atomic Finds brand mark (not settings-driven)
+- Admin CAN still edit products and reviews — RLS is scoped to `client_id`, works fine
+- Admin CANNOT meaningfully use `/admin/settings` until a seed row exists
+
+**What's seeded:**
+- `seed-atomic-finds-catalog.sql` ✅ executed
+- `seed-atomic-finds-products.sql` ✅ executed  
+- `seed-atomic-finds-reviews.sql` ✅ executed
+- `seed-atomic-finds-settings.sql` ❌ **does not exist — needs to be created**
+
+**Fix — create `tools/build-workflows/supabase/seed-atomic-finds-settings.sql`:**
+```sql
+INSERT INTO public.settings (client_id, key, value) VALUES
+  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'site_title', 'Atomic Finds ATX'),
+  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'site_description', 'Vintage rattan & bamboo, sourced in Austin. Timeless design, built to last.'),
+  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'tagline', 'Vintage, Written in the Stars'),
+  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'contact_email', 'atomicfindsatx@gmail.com');
+```
+After running the SQL in Supabase, reload atomicfindsatx.store — browser tab should update to "Atomic Finds ATX" without any redeploy needed (it's a runtime read).
+
+**Meta title template location:** `tools/build-workflows/src/lib/types.ts` line 165, `DEFAULT_SETTINGS.site_title = 'My Business'`
 
 ---
 
