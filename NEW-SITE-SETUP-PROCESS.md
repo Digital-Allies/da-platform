@@ -18,8 +18,8 @@ Starting point: **Claude Design** → design approval → code. Never code befor
 
 ### 0.1 Design Foundation Session
 1. Open Claude Design at https://claude.ai/design
-2. Reference the DA Design System (https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758)
-3. Create the client's own design project — NOT a fork of the DA design system. Each client has their own visual identity per Decision #7 in `STATUS.md`.
+2. Start from scratch for this client — every client gets their own visual identity. Do NOT copy tokens, colors, layout, or type choices from another client's design or from the DA admin UI.
+3. Create a new Claude Design project for this client specifically.
 4. Produce mockups for at minimum:
    - Homepage (hero, primary sections, footer)
    - One interior page (services or about)
@@ -164,7 +164,7 @@ Every DA Platform site ships ready to switch language. English-only at launch is
 - Image filenames — descriptive (`peacock-chair-1970s-rattan.jpg` not `IMG_4821.jpg`)
 
 ### 3.4 AI Readiness
-- **`/use-of-ai` page** — required on every site. Explains how Digital Allies uses AI in the build process, what content was AI-assisted, and what was human-reviewed. Template: see §Required Pages below.
+- **`/use-of-ai` page** — required on every site. Explains how AI was used in the build and design process, what content was AI-assisted, and what was human-reviewed. Template: see §Required Pages below.
 - **`llms.txt`** — a plain-text file at the root describing the site for AI crawlers. Format: brief description, key pages, contact, permissions for AI training (client's choice).
 - **Structured data** (see §3.3) helps AI systems understand the business accurately.
 - Content generated with AI must be reviewed and approved by a human before publishing.
@@ -289,19 +289,15 @@ Referenced by name throughout this process. Load these before working on related
 ### Cowork Skills (available in this session)
 | Skill | When to use |
 |-------|-------------|
-| `digital-allies-brand` | Any branded content — HTML pages, docs, social, proposals |
-| `da-dark-mode-design-spec` | Dark-variant DA surfaces (zo.space, CMS dark theme) |
 | `frontend-design` | Web components, landing pages, dashboards |
-| `da-social-campaign` | Social media campaigns and scheduling |
-| `da-sound-brief` | Branded audio content, music for video/reels |
-| `local-leads` | Lead generation for Mohave County B2B outreach |
 | `nextjs-supabase-auth` | Supabase Auth integration with Next.js App Router |
 | `web-animation-framer-motion` | Animation patterns (Motion/Framer Motion) |
 | `docx` / `pptx` / `pdf` | Document generation |
 | `stripe-projects` | Stripe product/subscription/invoice management |
-| `da-social-campaign` | Social calendar, Meta posts, GBP posts |
-| `vpai:vibe-prospecting` | Contact/company research for outreach |
+| `vpai:vibe-prospecting` | Contact/company research for client outreach |
 | `legal:compliance-check` | Compliance review for new features/pages |
+| `design:accessibility-review` | WCAG audit before launch |
+| `design:design-critique` | Design feedback before coding begins |
 
 ### Platform Skills / Reference Docs
 | Document | Location | Purpose |
@@ -360,60 +356,5 @@ This maps what Digital Allies sells/offers to what the platform must provide.
 
 ---
 
-## DIGITAL ALLIES SITE REBUILD — Project Spec
-
-**Source:** Claude Design conversation 2026-07-24  
-**Target:** digitalallies.net (deployed from `Digital-Allies/DigitalAllies` repo, NOT da-platform)  
-**See also:** `DA-PLATFORM-MASTER-CONTEXT.md` §3 P1, P2
-
-### Rebuild Goals
-1. Bring the DA site in line with all §3 non-negotiables above
-2. Rebuild all pages as CMS-editable templates (via block system)
-3. Production-grade codebase — no dev leakage, no placeholder content
-
-### Visual Design First
-Before any code:
-- Review homepage comments in the existing Claude Design project
-- Apply visual system updates to the DA design system (the design system itself needs visual updates, not just content)
-- Establish what is changing visually before touching code
-
-### Missing Pages (add to the site rebuild)
-| Page | Notes |
-|------|-------|
-| `/learn` | Article index — fixes P1 (cms-loader.js broken) once the loader is fixed |
-| `/learn/[slug]` | Individual article/blog post pages |
-| `/sitemap` | Human-readable sitemap |
-| `/terms` | Terms of Service |
-| `/privacy` | Privacy Policy |
-| `/cookies` | Cookie Policy |
-| `/accessibility` | Accessibility Statement |
-| `/use-of-ai` | AI Disclosure page |
-
-### What Each Page Needs
-- All new pages: CMS template format (block-based or richtext) so Anthony can edit without code
-- Full accessibility (WCAG 2.1 AA, strict contrast, aria, alt text)
-- Language switcher stub (or full i18n if LanguageSwitcher is built by then)
-- SEO meta (title, description, OG, canonical, JSON-LD where applicable)
-- Production-only dependencies (no dev leakage)
-
-### Legal Page Copy (DA-specific)
-- Terms: governs use of the DA Platform, admin access, payment for services
-- Privacy: covers Supabase data storage, Resend email, Vercel analytics, contact form submissions
-- AI Disclosure: DA uses Claude (Anthropic) for content generation and design assistance; all AI output is reviewed and approved by Anthony before publishing
-- Accessibility: targeting WCAG 2.1 AA; contact Anthony for issues
-
-### Build Order for the Rebuild
-1. Visual design review + system updates in Claude Design
-2. Fix P1 (cms-loader.js) in `Digital-Allies/DigitalAllies` → restores `/learn` articles
-3. Scaffold missing pages as CMS templates (seed into `pages` table for DA client)
-4. Build `LanguageSwitcher` component → add to nav + footer
-5. Audit existing pages for a11y violations → fix all Critical/Serious
-6. Strict contrast ratio pass on all color combinations
-7. Add JSON-LD to homepage and articles
-8. Generate `sitemap.xml` dynamic route
-9. QA per Phase 5 checklist above
-10. Deploy
-
----
-
-*End of process document. Keep this current — when a step is completed or the platform evolves, update the relevant section.*
+*End of process document. Keep this current — when a step is completed or the platform evolves, update the relevant section.*  
+*For active project-specific work (e.g. the DA site rebuild), see `DA-PLATFORM-MASTER-CONTEXT.md` §3.*

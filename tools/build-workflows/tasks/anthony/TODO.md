@@ -392,6 +392,27 @@ and backend groundwork has started — this is no longer blocked/deferred.
 
 ## Done / resolved this session (for reference, not action items)
 
+- ✅ (2026-07-24) **NEW-SITE-SETUP-PROCESS.md created** — comprehensive 6-phase
+      platform setup process doc at repo root. Covers: Phase 0 (Claude Design /
+      visual foundation), Phase 1 (Supabase tenant setup + all 4 seed files),
+      Phase 2 (Vercel deployment + env vars), Phase 3 (non-negotiables: a11y,
+      i18n, SEO, AI readiness, legal pages), Phase 4 (CMS template setup),
+      Phase 5 (launch QA), Phase 6 (client handoff). Includes skills/tools
+      registry, DA services → platform feature mapping table, and DA site
+      rebuild spec (10 build steps, 8 missing pages).
+- ✅ (2026-07-24) **DA-PLATFORM-MASTER-CONTEXT.md updated** with AF data
+      context (seed file table, 3 written/pending run), DA Site Rebuild PROJECT
+      section opened, LanguageSwitcher corrected from "✅ built" to
+      "❌ NOT YET BUILT" (code search confirmed zero matches in src/).
+- ✅ (2026-07-24) **Three AF seed files written** (see Priority 0-a for
+      Anthony's run steps — not yet run as of end of session):
+      `seed-atomic-finds-settings.sql`, `seed-atomic-finds-design-tokens.sql`,
+      `seed-atomic-finds-pages.sql`.
+- ✅ (2026-07-24) **DA Site Rebuild project opened** — build order, missing
+      pages, non-negotiables all documented in NEW-SITE-SETUP-PROCESS.md and
+      MASTER-CONTEXT.md. Step 1 requires Anthony to share Claude Design link
+      or homepage comments before code work starts.
+
 - ✅ Atomic Finds now has a Supabase `clients` row
       (`443936d5-f92e-480b-b206-c65cfb52bdfc`).
 - ✅ Admin dashboard de-hardcoded from "Digital Allies" — now pulls business

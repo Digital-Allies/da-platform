@@ -98,48 +98,49 @@ settings (
 
 ### Philosophy
 
-Based on Digital Allies principles:
-- **95/5 Rule:** 95% of the canvas stays neutral (background + text). The remaining 5% carries all color weight.
-- **No Jargon:** Every visual decision is explained in plain language.
-- **Confidence Through Simplicity:** Generous whitespace. No decorative fluff. No gradients.
-- **One Accent Color:** Each client has ONE primary brand color. All else is neutral.
-- **Technical Grid:** Use a subtle grid overlay (20px) to signal structure and organization.
+Platform design principles — applied to every client site, regardless of their brand:
+- **95/5 Rule:** 95% of the canvas stays neutral (background + text). The remaining 5% carries all color weight. Every client gets ONE primary brand color; the rest is neutral.
+- **Confidence Through Simplicity:** Generous whitespace. No decorative fluff.
 - **One Animated Element:** Never more than one piece of motion on a page (usually the button hover or scroll reveal).
+- **Earned design decisions:** Every visual choice is grounded in the client's brief — not carried over from another client or from the platform's own brand.
 
-### Color Palette (Per Client)
+### Color Palette (Per Client — Established in Claude Design)
 
-| Role | Usage | Default (Override per client) |
+Each client's color system is established in Phase 0 before coding begins. There are no platform defaults — the client's brand drives every choice.
+
+| Role | Usage | Source |
 |---|---|---|
-| **Canvas** | Background | `#F9F6F0` (bone white) |
-| **Text/Borders** | Type, structure | `#2D2D2D` (charcoal) |
-| **Primary Brand** | Buttons, links, accents | Client's chosen color |
-| **Neutral Light** | Subtle overlays, hover states | `#E0DDD5` (grid lines) |
-| **Alert/CTA** | Critical cues (form validation) | `#C5301A` (red) — use sparingly |
+| **Canvas** | Page background | From client brief / Claude Design |
+| **Text** | Body copy, UI labels | From client brief |
+| **Primary Brand** | Buttons, links, accents | Client's primary brand color |
+| **Surface** | Card backgrounds, panels | Derived from canvas |
+| **Border** | Structural lines, dividers | Derived from text color |
+| **Alert** | Form validation errors | Client's error state (or standard red if unspecified) |
 
 **5% Rule Implementation:**
 - Use primary brand color only for: buttons, links, hover states, icons, one accent line per section
-- Everything else: bone white background, charcoal text, structural borders
+- Everything else: background, text, structural borders — all neutral
 - If you're using more than 5% color, remove something
 
-### Typography
+These values are extracted into the `design_tokens` seed file (Phase 1) and injected via `SiteTheme.tsx` as CSS variables (`--tok-primary`, `--tok-bg`, etc.) — never hardcoded in component files.
 
-**Headlines, CTAs, card headers:**
-- Font: **Lexend Deca** (or similar high-x-height sans-serif)
-- Weights: 400, 500, 600, 700
-- Purpose: Scannable, authoritative, readable on mobile
+### Typography (Per Client — Established in Claude Design)
 
-**Body text, technical specs, system UI:**
-- Font: **Inter**, **System Fonts**, or **JetBrains Mono** (if technical feel is needed)
-- Weights: 400, 500, 600
-- Purpose: Clean, readable, professional
+Typography is chosen per client in Phase 0 based on their brand personality. There are no platform font defaults.
 
-**Rules:**
-- Never use more than 2 typefaces per site
-- Headlines: Bold (700), 24px–80px depending on context
-- Subheadings: Semibold (600), 18px–32px
-- Body: Regular (400), 14px–16px
+**Selection criteria:**
+- Heading font: chosen for the client's tone (editorial, playful, technical, warm, etc.)
+- Body font: legible, web-safe or Google Font, optimized for readability
+- Never more than 2 typefaces per site
+- Confirm both fonts are available via Google Fonts or system stack (no licensing issues)
+
+**Rules (universal — apply to every site):**
+- Headlines: Bold weight, 24px–80px depending on context
+- Subheadings: Semibold, 18px–32px
+- Body: Regular weight, 14px–16px
 - Line height (body): 1.6 (generous spacing for readability)
 - Line height (headlines): 1.2 (tight, authoritative)
+- Minimum body font size: 14px (smaller fails WCAG at small sizes)
 
 ### Spacing & Layout
 
@@ -164,25 +165,26 @@ Based on Digital Allies principles:
 - ONLY in the primary brand color or red
 - Creates visual interest without clutter
 
-### Grid Overlay (Technical Lace)
+### Grid Overlay (Optional Pattern)
 
-**CSS:**
+A subtle 20px grid overlay can signal structure and technical rigor. It is an optional design choice — confirm with the client's visual direction in Phase 0.
+
+**Implementation (use client's background + text colors, not hardcoded values):**
 ```css
-background-color: #F9F6F0;
+/* Replace hex values with client's design tokens */
+background-color: var(--tok-bg);
 background-image:
-  linear-gradient(rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px),
-  linear-gradient(90deg, rgba(45, 45, 45, 0.07) 0.5px, transparent 0.5px);
+  linear-gradient(rgba(var(--tok-text-rgb), 0.07) 0.5px, transparent 0.5px),
+  linear-gradient(90deg, rgba(var(--tok-text-rgb), 0.07) 0.5px, transparent 0.5px);
 background-size: 20px 20px;
 ```
 
-**Why:** Signals organization and technical rigor. Reinforces that the design is as structured as the underlying code.
-
 ### Borders & Structure
 
-- All borders: `1px solid #2D2D2D` (charcoal)
 - Use borders to separate regions, not decorate
-- Cards, sections, inputs: all have structural borders
-- No shadows (use borders instead for definition)
+- Cards, sections, inputs: structural borders using the client's border token (`--tok-border`)
+- Border weight: 1px standard
+- Decide per client whether to use borders vs. shadows — match the client's visual direction from Phase 0
 
 ### Animations (Minimal)
 
@@ -302,7 +304,7 @@ background-size: 20px 20px;
 [Optional Link]
 ```
 
-**Spacing:** Cards have 1px charcoal border, 24px padding, 0–3px hover lift (translateY).
+**Spacing:** Cards have 1px border (client's border token), 24px padding, 0–3px hover lift (translateY).
 
 ---
 
@@ -335,7 +337,7 @@ background-size: 20px 20px;
 
 **Mobile behavior:** Hamburger menu at 768px breakpoint. Drawer slides in from left.
 
-**Styling:** Bone white background, charcoal text, 1px bottom border, 16–32px padding.
+**Styling:** Background + text from client's design tokens. 1px bottom border. 16–32px padding.
 
 ---
 
@@ -660,15 +662,64 @@ background-size: 20px 20px;
 
 ---
 
-## PART 9: ACCESSIBILITY (WCAG 2.1 AA)
+## PART 9: PLATFORM NON-NEGOTIABLES (Every Site, No Exceptions)
 
-- **Color contrast:** 4.5:1 for normal text, 3:1 for large text
-- **Focus states:** Visible 2px border, usually in brand color
-- **Touch targets:** Minimum 44x44px for buttons/links
-- **Alt text:** Descriptive (avoid "image1.jpg", use "Antique wooden dresser from 1960s")
+These rules apply regardless of client type, budget, or aesthetic. They are not optional and are not design choices — they are platform standards.
+
+**For full implementation detail, see `NEW-SITE-SETUP-PROCESS.md` §3.**
+
+### 9.1 Accessibility — WCAG 2.1 AA STRICT
+- 4.5:1 contrast minimum for body text; 3:1 for large text (18px+ regular or 14px+ bold) and UI components
+- Descriptive alt text on all content images
+- `aria-label` on all icon-only interactive elements
+- One `<h1>` per page; logical heading order; landmark regions
+- Keyboard navigation — every element reachable and operable via Tab/Enter/Space
+- Visible focus states — never `outline: none` without an equivalent replacement
+- 44×44px minimum touch targets on mobile
+- `<label for>` linked to every `<input>`
+- `prefers-reduced-motion` honored for all animations
+
+### 9.2 Language Switcher (Required — Not Yet Built)
+Every site must ship with the infrastructure to switch language. English-only at launch is acceptable; the switcher must exist.
+
+- Add `<!-- LANGUAGE_SWITCHER_PLACEHOLDER -->` in Navigation and Footer until the component is built
+- All user-facing strings must be externalized to an i18n dictionary — no hardcoded copy in JSX
+- Component location (once built): `packages/design-system/src/components/LanguageSwitcher.tsx`
+
+### 9.3 Required Pages (Every Site)
+Every site must have these pages seeded before launch:
+
+| Slug | Title |
+|------|-------|
+| `home` | Home |
+| `about` | About |
+| `contact` | Contact |
+| `terms` | Terms of Service |
+| `privacy` | Privacy Policy |
+| `cookies` | Cookie Policy |
+| `accessibility` | Accessibility Statement |
+| `use-of-ai` | Our Use of AI |
+| `sitemap` | Sitemap |
+
+### 9.4 Production Code Standards
+- No `console.log` in production code
+- No devDependencies in the production bundle
+- All images via `next/image` — no raw `<img>` tags
+- `tsc --noEmit` + ESLint clean before every deploy
+
+---
+
+## PART 9B: ACCESSIBILITY — QUICK REFERENCE
+
+- **Color contrast:** 4.5:1 for normal text, 3:1 for large text — verified per client's actual color tokens
+- **Focus states:** Visible 2px outline in client's primary brand color
+- **Touch targets:** Minimum 44×44px for buttons/links
+- **Alt text:** Descriptive and content-specific (not filenames, not "image")
 - **Semantic HTML:** `<button>`, `<a>`, `<form>`, proper heading order
 - **Keyboard navigation:** All interactive elements reachable via Tab
-- **Form labels:** Associated with inputs (`<label for="email">`)
+- **Form labels:** `<label for="...">` linked to every `<input>`
+
+**Tool:** Run axe DevTools on every page before launch. Target zero Critical and Serious violations.
 
 ---
 
@@ -759,16 +810,16 @@ CTA: [Optional, if answer leads to action]
 6. **Done** → Client manages content, you monitor uptime
 
 ### Color system reminder:
-- 95% neutral (bone white + charcoal)
+- 95% neutral (client's canvas + text tokens)
 - 5% brand color (buttons, accents, links)
-- No gradients, no shadows (use borders instead)
-- Red only for alerts/validation
+- Colors come from Claude Design Phase 0 — never invented in code
+- Use CSS variables (`--tok-*`) — never hardcode hex values in components
 
 ### Typography reminder:
-- Lexend Deca for headlines (or similar scannab)
-- Body font (Inter or system fonts)
+- Heading + body fonts chosen in Phase 0 for this client specifically
 - Max 2 typefaces per site
 - Line height 1.6 (body), 1.2 (headlines)
+- Min 14px body size
 
 ### Animation reminder:
 - One moving element per page MAX

@@ -7,12 +7,18 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 
 **Last updated:** 2026-07-24 — by Cowork session (3 AF seeds written; NEW-SITE-SETUP-PROCESS.md created; DA site rebuild spec opened; LanguageSwitcher confirmed NOT built)
 
-## 2026-07-24 — P0 resolved; 3 AF seed files written; master context doc created and updated
+## 2026-07-24 — P0 resolved; 3 AF seed files written; new platform process doc; DA rebuild opened
 
 **3 seed files written for Atomic Finds** — all in `tools/build-workflows/supabase/`, all pending Anthony to run in Supabase SQL Editor in order:
 1. `seed-atomic-finds-settings.sql` — 20 keys (site_title, hero, about, contact, social). Fixes "My Business" tab title.
 2. `seed-atomic-finds-design-tokens.sql` — 1 row in `design_tokens` table with AF brand colors, fonts (Bagel Fat One / DM Sans), type scale, spacing.
 3. `seed-atomic-finds-pages.sql` — 2 draft pages in `pages` table: `home` (hero + products + richtext + contact blocks) and `about`. Homepage draft is standby for Aug 5–6 build slot; live site still uses `AtomicFindsHomepage.tsx`.
+
+**NEW-SITE-SETUP-PROCESS.md created** at repo root — 6-phase platform setup guide for all future agents. Covers: visual foundation in Claude Design, Supabase tenant + seed files, Vercel env vars, non-negotiables (WCAG 2.1 AA, i18n/LanguageSwitcher, SEO, AI readiness, 9 required legal pages), CMS template setup, launch QA, and client handoff. Also includes skills/tools registry and DA services → platform feature mapping. All future new-site work starts here.
+
+**DA-PLATFORM-MASTER-CONTEXT.md corrected:** LanguageSwitcher entry was stale "✅ built" — code search confirmed zero matches in `src/` for `LanguageSwitcher` or `LanguageController`. Corrected to "❌ NOT YET BUILT." Also replaced P4 inline SQL stub with proper seed file table (6 rows: 3 executed, 3 pending) and added DA Site Rebuild PROJECT section.
+
+**DA Site Rebuild project opened** — 10-step build order documented. Step 1 is visual design review in Claude Design (needs Anthony to share CD link or homepage comments). Code tasks (LanguageSwitcher build, page scaffolding, WCAG audit) begin after design direction is confirmed. All context in NEW-SITE-SETUP-PROCESS.md §7 and MASTER-CONTEXT.md.
 
 ---
 
