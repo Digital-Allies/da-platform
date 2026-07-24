@@ -37,7 +37,7 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 | Vercel project (CMS) | https://vercel.com/digital-allies/da-webwssite-build-workflows | Root dir: `tools/build-workflows` |
 | GitHub (monorepo) | https://github.com/Digital-Allies/da-platform | Private |
 | Live marketing site | https://digitalallies.net | Separate static repo |
-| Atomic Finds live | https://atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; **"My Business" title — settings seed missing (see §3 P0)** |
+| Atomic Finds live | https://atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; **"My Business" title — 3 seeds written, not yet run (see §3 P4)** |
 | Supabase | (login via Supabase dashboard) | Anon key: `sb_publishable_...` format |
 | Claude Design — DA | https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758?via=share | Design system + CMS mocks |
 | Claude Design — Atomic Finds | https://claude.ai/design/p/29110ac3-0a76-4fa1-a322-a78bc212a50d?via=share | Storefront design |
@@ -49,7 +49,7 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 |--------|-------------|--------|--------|
 | Digital Allies | (in Supabase clients table) | digitalallies.net | Live static; CMS wiring broken (see §3) |
 | Healthcare Training Center | `7896354c-1d34-4649-85f5-51f2e5a7df6c` | HCTC Vercel URL | Placeholder; no deep build |
-| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; settings seed missing |
+| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; 3 seeds written — run to fix "My Business" title (see §3 P4) |
 
 ### Env vars (what matters)
 
@@ -116,21 +116,23 @@ Every Vercel project needs these set manually — they do NOT sync from `.env.lo
 - Admin CAN still edit products and reviews — RLS is scoped to `client_id`, works fine
 - Admin CANNOT meaningfully use `/admin/settings` until a seed row exists
 
-**What's seeded:**
-- `seed-atomic-finds-catalog.sql` ✅ executed
-- `seed-atomic-finds-products.sql` ✅ executed  
-- `seed-atomic-finds-reviews.sql` ✅ executed
-- `seed-atomic-finds-settings.sql` ❌ **does not exist — needs to be created**
+**Seed files — all written, awaiting Anthony to run in Supabase SQL Editor:**
 
-**Fix — create `tools/build-workflows/supabase/seed-atomic-finds-settings.sql`:**
-```sql
-INSERT INTO public.settings (client_id, key, value) VALUES
-  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'site_title', 'Atomic Finds ATX'),
-  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'site_description', 'Vintage rattan & bamboo, sourced in Austin. Timeless design, built to last.'),
-  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'tagline', 'Vintage, Written in the Stars'),
-  ('443936d5-f92e-480b-b206-c65cfb52bdfc', 'contact_email', 'atomicfindsatx@gmail.com');
-```
-After running the SQL in Supabase, reload atomicfindsatx.store — browser tab should update to "Atomic Finds ATX" without any redeploy needed (it's a runtime read).
+| File | Table | Status | Run order |
+|------|-------|--------|-----------|
+| `seed-atomic-finds-catalog.sql` | `products` | ✅ executed | — |
+| `seed-atomic-finds-products.sql` | `products` | ✅ executed | — |
+| `seed-atomic-finds-reviews.sql` | `reviews` | ✅ executed | — |
+| `seed-atomic-finds-settings.sql` | `settings` | ✅ **written** — ❌ **not yet run** | Run first |
+| `seed-atomic-finds-design-tokens.sql` | `design_tokens` | ✅ **written** — ❌ **not yet run** | Run second |
+| `seed-atomic-finds-pages.sql` | `pages` | ✅ **written** — ❌ **not yet run** | Run third |
+
+All three pending seeds are in `tools/build-workflows/supabase/` and are idempotent (safe to re-run).
+
+**What each seed does:**
+- **settings** — 20 keys (Identity, Hero, About, Contact, Social). Fixes "My Business" tab title immediately on run. No redeploy needed.
+- **design_tokens** — 1 row with official AF brand colors, fonts (Bagel Fat One / DM Sans), type scale, spacing. Feeds the admin Design/Theme editor when it's built.
+- **pages** — 2 draft pages: `home` (hero + products + richtext + contact blocks) and `about`. The homepage draft is standby for the Aug 5–6 `/admin/pages` build slot; the live homepage still uses `AtomicFindsHomepage.tsx` until that block renderer is promoted.
 
 **Meta title template location:** `tools/build-workflows/src/lib/types.ts` line 165, `DEFAULT_SETTINGS.site_title = 'My Business'`
 

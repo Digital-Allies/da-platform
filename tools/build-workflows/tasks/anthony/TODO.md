@@ -23,9 +23,21 @@ Reviewed again 2026-07-22 — added Priority 0 below (root cause found for
 
 `public.settings` has 21 rows — all Digital Allies. Zero for Atomic Finds `443936d5-f92e-480b-b206-c65cfb52bdfc`. Until seeded, the site title shows "My Business" and the logo uses a static fallback.
 
-- [ ] Claude Code: Create `tools/build-workflows/supabase/seed-atomic-finds-settings.sql` (SQL is in DA-PLATFORM-MASTER-CONTEXT.md §3 P4)
-- [ ] Anthony: Run that file in Supabase SQL Editor → paste → Run
-- [ ] Verify: reload https://atomicfindsatx.store — tab title should read "Atomic Finds ATX" (no redeploy needed)
+All three seed files are now written. Run them in order in Supabase SQL Editor:
+
+**Step 1 — Site settings (fixes "My Business" title immediately):**
+- [x] Claude Code: `seed-atomic-finds-settings.sql` ✅ written (20 keys: Identity, Hero, About, Contact, Social)
+- [ ] Anthony: Open Supabase SQL Editor → New Query → paste contents of `tools/build-workflows/supabase/seed-atomic-finds-settings.sql` → Run
+- [ ] Verify: reload https://atomicfindsatx.store — tab title should read "Atomic Finds ATX"
+
+**Step 2 — Design tokens (feeds the admin Theme editor):**
+- [x] Claude Code: `seed-atomic-finds-design-tokens.sql` ✅ written (colors, fonts, type scale, spacing)
+- [ ] Anthony: Run `seed-atomic-finds-design-tokens.sql` in Supabase SQL Editor
+
+**Step 3 — Pages (draft homepage + About for the page builder):**
+- [x] Claude Code: `seed-atomic-finds-pages.sql` ✅ written (2 draft pages: home, about)
+- [ ] Anthony: Run `seed-atomic-finds-pages.sql` in Supabase SQL Editor
+- [ ] Note: Homepage draft is standby for Aug 5–6 build slot — live site still uses bespoke AtomicFindsHomepage.tsx
 
 ---
 

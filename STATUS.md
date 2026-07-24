@@ -5,7 +5,16 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-24 — by Cowork session (Atomic Finds P0 resolved; settings seed identified as missing; DA-PLATFORM-MASTER-CONTEXT.md created as new cross-agent context document)
+**Last updated:** 2026-07-24 — by Cowork session (3 Atomic Finds seed files written: settings, design_tokens, pages — all pending Anthony run in Supabase SQL Editor)
+
+## 2026-07-24 — P0 resolved; 3 AF seed files written; master context doc created and updated
+
+**3 seed files written for Atomic Finds** — all in `tools/build-workflows/supabase/`, all pending Anthony to run in Supabase SQL Editor in order:
+1. `seed-atomic-finds-settings.sql` — 20 keys (site_title, hero, about, contact, social). Fixes "My Business" tab title.
+2. `seed-atomic-finds-design-tokens.sql` — 1 row in `design_tokens` table with AF brand colors, fonts (Bagel Fat One / DM Sans), type scale, spacing.
+3. `seed-atomic-finds-pages.sql` — 2 draft pages in `pages` table: `home` (hero + products + richtext + contact blocks) and `about`. Homepage draft is standby for Aug 5–6 build slot; live site still uses `AtomicFindsHomepage.tsx`.
+
+---
 
 ## 2026-07-24 — P0 resolved; settings seed task opened; master context doc created
 
