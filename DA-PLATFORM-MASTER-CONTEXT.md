@@ -37,7 +37,7 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 | Vercel project (CMS) | https://vercel.com/digital-allies/da-webwssite-build-workflows | Root dir: `tools/build-workflows` |
 | GitHub (monorepo) | https://github.com/Digital-Allies/da-platform | Private |
 | Live marketing site | https://digitalallies.net | Separate static repo |
-| Atomic Finds live | atomic-finds-atx.vercel.app (or custom domain) | **Broken — wrong deploy branch (see §3 P0)** |
+| Atomic Finds live | https://atomicfindsatx.store | Deploying from `main` ✅; **Supabase not connecting (see §3 P0)** |
 | Supabase | (login via Supabase dashboard) | Anon key: `sb_publishable_...` format |
 | Claude Design — DA | https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758?via=share | Design system + CMS mocks |
 | Claude Design — Atomic Finds | https://claude.ai/design/p/29110ac3-0a76-4fa1-a322-a78bc212a50d?via=share | Storefront design |
@@ -49,7 +49,7 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 |--------|-------------|--------|--------|
 | Digital Allies | (in Supabase clients table) | digitalallies.net | Live static; CMS wiring broken (see §3) |
 | Healthcare Training Center | `7896354c-1d34-4649-85f5-51f2e5a7df6c` | HCTC Vercel URL | Placeholder; no deep build |
-| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | atomic-finds-atx | **Wrong deploy branch — P0** |
+| Atomic Finds ATX | `443936d5-f92e-480b-b206-c65cfb52bdfc` | atomicfindsatx.store | Deploying from `main` ✅; **Supabase not connecting — P0** |
 
 ### Env vars (what matters)
 
@@ -66,10 +66,21 @@ Every Vercel project needs these set manually — they do NOT sync from `.env.lo
 
 ## 3. OPEN BUGS & BLOCKERS (priority order)
 
-### P0 — Atomic Finds deploying wrong branch
-**Root cause:** Vercel `atomic-finds-atx` project is set to branch `claude/products-table-review-fixes-doa26m` (PR #4's stale branch), not `main`. 22 commits of work are invisible on production.
+### P0 — Atomic Finds not connecting to Supabase (live site at atomicfindsatx.store)
+**Confirmed:** Branch fixed — `atomic-finds-atx` Vercel project now deploys from `main`. ✅  
+**Current issue:** The live site at https://atomicfindsatx.store is not reading from Supabase — products, settings, or both are not loading from the database.
 
-**Anthony click (required):** Vercel → `atomic-finds-atx` → Settings → Git → Production Branch → change to `main` → trigger redeploy.
+**What to check (in order):**
+1. **Vercel env vars** — go to Vercel → `atomic-finds-atx` → Settings → Environment Variables. Confirm ALL of these are set and correct:
+   - `NEXT_PUBLIC_SUPABASE_URL` — must be your project URL (not a placeholder)
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` — must be `sb_publishable_...` format (NOT the old JWT that starts with `eyJ`)
+   - `NEXT_PUBLIC_CLIENT_ID` — must be `443936d5-f92e-480b-b206-c65cfb52bdfc`
+   - `NEXT_PUBLIC_SITE_URL` — must be `https://atomicfindsatx.store`
+2. **Supabase RLS** — in Supabase → Table Editor → `products` → check if any rows exist for `client_id = 443936d5-f92e-480b-b206-c65cfb52bdfc`. If zero rows, the grid will be empty regardless.
+3. **Settings table** — `settings` table likely has zero rows for Atomic Finds `client_id`. Seed a row via `/admin/settings` on `cms.digitalallies.net` or directly in Supabase.
+4. **Browser console** — load https://atomicfindsatx.store, open DevTools → Console. Look for: CORS errors, 401/403 from Supabase (wrong key), or "No rows found" (RLS blocking).
+
+**Note for Claude Code:** The branch is correct and `main` is live. The Supabase connection is an env var or RLS issue, NOT a code problem. Do not revert branch settings. Do not "fix" the Vercel git config — it is already correct.
 
 ---
 
