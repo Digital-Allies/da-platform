@@ -1,12 +1,12 @@
-Here's a full site audit across every page and section:
+260706-site-audit
 
 \---
 
-\#\# 🔍 Digital Allies CMS — Full Site Audit
+## Digital Allies CMS — Full Site Audit
 
 \---
 
-\#\#\# 🏠 \`/admin\` — Dashboard
+### 🏠 `admin` — Dashboard
 
 \*\*Issues found:\*\*  
 \- \*\*Greeting is hardcoded\*\* — says "Good Morning, Admin" regardless of time of day or actual user name. Should dynamically reflect the correct time of day and the logged-in user's name.  
