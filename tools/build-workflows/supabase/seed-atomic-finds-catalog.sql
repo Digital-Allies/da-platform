@@ -21,7 +21,7 @@
 
 -- Safe to re-run: clear these exact rows (by client + SKU) first.
 delete from products
-where client_id = '443936d5-f92e-480b-b206-c65cfb52bdfc'
+where client_id = '2afb056f-408d-419d-be2b-d414ffffdd5c'
   and sku in ('AF-002','AF-004','AF-006','AF-007','AF-008','AF-010','AF-011','AF-012','AF-013','AF-014');
 
 insert into products (
@@ -31,7 +31,7 @@ insert into products (
   seller_name, seller_rating, display_order
 ) values
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-002',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-002',
   'Peacock Chair', 'Chairs', 'icon of the 70s',
   '1970s rattan peacock chair, restored cane back. A dramatic seating option for sunrooms, studios, or anywhere bold.',
   1450.00, '/atomic-finds/products/product-peacock-chair-02.png',
@@ -40,7 +40,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 5
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-004',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-004',
   'Rattan Lounge Chair', 'Chairs', 'vintage find',
   'Newly restored upholstery in neutral linen. A statement piece that catches light beautifully.',
   145.00, '/atomic-finds/products/product-rattan-chair-04.png',
@@ -49,7 +49,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 6
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-010',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-010',
   'Blue MCM Armchair', 'Chairs', 'plush meets rattan',
   'Deep blue upholstery on a rattan-accented mid-century base. Unexpected and striking.',
   595.00, '/atomic-finds/products/product-blue-mcm-armchair-10.png',
@@ -58,7 +58,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 7
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-008',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-008',
   'Rattan Armchair', 'Chairs', 'everyday elegance',
   'A sturdy woven rattan armchair, ready to be your favorite reading spot.',
   195.00, '/atomic-finds/products/product-rattan-armchair-08.png',
@@ -67,7 +67,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 8
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-013',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-013',
   'Striped Wicker Chair', 'Chairs', 'work in style',
   'A round-backed wicker chair with striped detailing. Lightweight and surprisingly comfortable.',
   165.00, '/atomic-finds/products/product-striped-wicker-chair-13.png',
@@ -76,7 +76,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 9
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-014',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-014',
   'Teal MCM Chair', 'Chairs', 'clean lines, warm soul',
   'A sleek teal side chair in the mid-century modern tradition — understated confidence.',
   445.00, '/atomic-finds/products/product-teal-mcm-chair-14.png',
@@ -85,7 +85,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 10
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-006',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-006',
   'Woven Floor Lamp', 'Lamps', 'warm light, big mood',
   'A naturalistic wicker floor lamp with a tightly woven pole form. Rewired with modern fittings.',
   175.00, '/atomic-finds/products/product-floor-lamp-06.png',
@@ -94,7 +94,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 11
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-007',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-007',
   'Arched Étagère', 'Shelving', 'vertical drama',
   'Tall woven shelving unit with a graceful arched top and multiple display shelves.',
   385.00, '/atomic-finds/products/product-arched-etagere-07.png',
@@ -103,7 +103,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 12
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-011',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-011',
   'Rattan Bookshelf', 'Shelving', 'rattan meets modern',
   'Open rattan bookshelf — a rare combination of organic material and clean modernism.',
   520.00, '/atomic-finds/products/product-rattan-bookshelf-11.png',
@@ -112,7 +112,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 13
 ),
 (
-  '443936d5-f92e-480b-b206-c65cfb52bdfc', 'AF-012',
+  '2afb056f-408d-419d-be2b-d414ffffdd5c', 'AF-012',
   'Wicker Cabinet', 'Shelving', 'storage with soul',
   'Closed wicker cabinet with woven doors — hides the clutter, keeps the character.',
   410.00, '/atomic-finds/products/product-wicker-cabinet-12.png',
