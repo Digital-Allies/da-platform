@@ -14,7 +14,7 @@
 
 -- Safe to re-run: clear out these exact listings (by external_url) before
 -- re-inserting, so this doesn't create duplicates on a second run.
-delete from products where client_id = '2afb056f-408d-419d-be2b-d414ffffdd5c' and external_url in (
+delete from products where client_id = '443936d5-f92e-480b-b206-c65cfb52bdfc' and external_url in (
   'https://www.facebook.com/marketplace/item/2150548818844605/',
   'https://www.facebook.com/marketplace/item/3235493369971776/',
   'https://www.facebook.com/marketplace/item/1504095271020600/',
@@ -27,7 +27,7 @@ insert into products (
   seller_rating, display_order
 ) values
 (
-  '2afb056f-408d-419d-be2b-d414ffffdd5c',
+  '443936d5-f92e-480b-b206-c65cfb52bdfc',
   'Vintage MCM Dining Set – Table + 4 Swivel Chairs',
   'Vintage 1970s-style dining set with wood-grain laminate tabletop, chrome pedestal base, and four cream vinyl swivel chairs on rolling chrome caster bases. Light surface wear and one repaired edge chip on table. Pickup South Austin. Final sale.',
   550.00, null, 'Used - Good', 'Austin, TX', '3 days ago',
@@ -36,7 +36,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 1
 ),
 (
-  '2afb056f-408d-419d-be2b-d414ffffdd5c',
+  '443936d5-f92e-480b-b206-c65cfb52bdfc',
   'Vintage Wicker Waterfall Dresser | Boho Coastal Rattan Chest',
   'Vintage wicker waterfall dresser with four drawers, handwoven details, warm honey finish. Beautiful vintage condition with age-appropriate wear. Pickup South Austin. Final sale.',
   285.00, 365.00, 'Used - Good', 'Austin, TX', '4 days ago',
@@ -45,7 +45,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 2
 ),
 (
-  '2afb056f-408d-419d-be2b-d414ffffdd5c',
+  '443936d5-f92e-480b-b206-c65cfb52bdfc',
   'Nordic Scandinavian Side Table / Mesa Lateral Escandinava 16x16',
   'Simple Nordic Scandinavian side table with clean minimalist wood design. Perfect condition. South Austin pickup. Final sale.',
   55.00, null, 'Used - like new', 'Austin, TX', 'In stock',
@@ -54,7 +54,7 @@ insert into products (
   'Jennyfer Gomez', '81 ratings - Highly rated', 3
 ),
 (
-  '2afb056f-408d-419d-be2b-d414ffffdd5c',
+  '443936d5-f92e-480b-b206-c65cfb52bdfc',
   'Vintage Bamboo & Wicker Bistro Set | Coastal Boho | 2 Chairs + Glass Table',
   'Vintage bamboo/wicker bistro set with two sculptural fan-back chairs and a wicker pedestal glass-top table. Excellent vintage condition, no structural issues. Pickup South Austin. Final sale.',
   250.00, null, 'Used - Good', 'Austin, TX', '2 weeks ago',
