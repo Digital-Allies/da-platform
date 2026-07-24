@@ -157,6 +157,15 @@ higher-priority surfaced.
   `cms-loader.js`'s rendering is confirmed still correct against it.~~
 
 ### Fri Jul 24 · Review / buffer
+**Done, 2026-07-24 (daily build session).** Skimmed the week's commits
+(Jul 20–24, ~90 commits including Anthony's own MM23 syncs and the
+Cowork session's 3 AF seed files + NEW-SITE-SETUP-PROCESS.md). Confirmed
+green: both Vercel projects (`da-webwssite-build-workflows`,
+`atomic-finds-atx`) show `state: success` on the latest commit
+(`a6b4271`) via `gh api .../commits/main/status`; Supabase Preview check
+also green; `npx tsc --noEmit` in `tools/build-workflows` is clean; no
+open PRs. No new build prompts surfaced. See `STATUS.md`'s 2026-07-24
+(daily build session) entry.
 - Skim the week's commits, confirm deploys are green, no new build prompts.
 
 ## Week of Jul 27 — Dashboard backlog, part 1 (Workshop + Projects)
