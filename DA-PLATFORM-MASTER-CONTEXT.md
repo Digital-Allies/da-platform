@@ -8,7 +8,7 @@
 
 **Anthony Cassella** — Digital Allies / Code Unicorn LLC, Kingman AZ.  
 One-person shop. Zero paying clients as of July 2026 — everything bootstrapped.  
-Strongest asset: project coordination and execution, not design or development.  
+Strongest asset: project coordination and execution, some design, actively learning development.  
 Pitch: "I coordinate and execute. I get things done and I don't disappear."
 
 ---
