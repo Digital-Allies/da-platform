@@ -1,0 +1,3222 @@
+commit 76373e5fe17cc901054d51de5a399669ca078ce4
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 23 09:08:28 2026 -0700
+
+    docs: confirm /admin/projects superseded; find live cms-loader.js bug on digitalallies.net
+    
+    Wed-Thu Jul 29-30 (/admin/projects): same stale-complaint pattern as the
+    other three dashboard-backlog items — git log shows one commit ever
+    (the Jul 6 import), and the code already has full CRUD, a working Kanban
+    board, and real project templates (Software/Marketing/SEO) that insert
+    real starter tasks. Nothing to build.
+    
+    Mon-Tue Aug 3-4 (/admin/content): used gh access to check the actual live
+    Digital-Allies/DigitalAllies repo for the first time, instead of this
+    monorepo's frozen copy. Found two things: the live homepage dropped
+    cms-loader.js entirely in a 2026-07-14 overhaul (Services/Testimonials
+    edits have no live effect there now), and learn/index.html's copy of
+    cms-loader.js has had a top-level ReferenceError since a 2026-07-16
+    manual key-rotation edit (SUPABASE_ANON_KEY renamed to supabase_anon_new,
+    but two references to the old name left behind) — confirmed live via
+    #learn-articles-grid still showing the static "Loading articles..."
+    placeholder. Answers the schedule item's "done when" for real: published
+    posts do not currently reach the live page. Fix is a one-line rename but
+    lives in a separate production repo outside this task's scope, so it's
+    documented (STATUS.md, TODO.md) rather than pushed.
+
+commit e784ebffd64a13842df1d9ccf9f07bbbd05cbdc9
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 18:50:01 2026 -0700
+
+    docs: document the reset-password middleware fix in TODO.md
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 4324b320dbfc48bf90ef12f4a3c09cd321b054c6
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 18:49:29 2026 -0700
+
+    fix(auth): exclude /admin/reset-password from middleware's auth gate
+    
+    Supabase's password-recovery link lands on /admin/reset-password with
+    the session token in the URL hash fragment (#access_token=...&type=
+    recovery), which browsers never send to the server. Middleware's
+    getUser() check saw no session on that first request and redirected
+    straight to /admin/login before the page's client-side code ever got
+    to read the hash and exchange it for a session — silently breaking the
+    password-reset flow end to end, even though the "Forgot password?"
+    link and email itself were already fixed correctly.
+    
+    Verified: unauthenticated /admin/reset-password now renders the form
+    instead of redirecting; /admin still correctly gates to login.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit b8af145f687413072d8f8cc0f4517b9f9e5b9c09
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 17:05:22 2026 -0700
+
+    chore: sync MM23 2026-07-22 17:05
+
+commit 1856b063263974e6967761ebaa92e012581da4aa
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 12:58:01 2026 -0700
+
+    chore: sync MM23 2026-07-22 12:58
+
+commit 62def69023d53f477e244efc869bc9785f0c7ef3
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 11:52:09 2026 -0700
+
+    chore: sync MM23 2026-07-22 11:52
+
+commit 78c39eef1b8ce5d8b11627e7ab3196d34a1a6e7b
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 11:36:34 2026 -0700
+
+    chore: sync MM23 2026-07-22 11:36
+
+commit 1c47820caf6204458250bf4abe7b10d6768a5343
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 11:36:15 2026 -0700
+
+    docs: document Atomic Finds visual regression fixes in STATUS.md
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit c75f1a498b66daa7ff314c3e0b511cce19c05888
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 11:35:01 2026 -0700
+
+    fix(atomic-finds): restore galaxy card rings, wire logo to settings, fix mobile card sizing
+    
+    - GalaxyCard: remove overflow:hidden on the outer group/scene containers and
+      the mobile display:none override — these were added across several
+      "fix mobile overflow" commits and progressively clipped away the ring's
+      only visible portion (its bleed beyond the card's own box), on both
+      mobile and desktop. Page-level .af-homepage overflow-x:hidden already
+      guards against horizontal scroll, making the per-card clipping redundant.
+    - Wire settings.logo_url into AtomicNav (via AtomicFindsHomepage), falling
+      back to the static brand mark when unset — previously hardcoded with no
+      settings dependency at all, unlike every other site's Navigation.
+    - ProductGrid: give standard cards the same clamp(280px, 90vw, 360px) width
+      as GalaxyCard, centered, instead of stretching to fill their auto-fit
+      grid column — fixes thin/off-center cards on mobile.
+    - Filter out products with no image_url from both the standard grid and
+      the featured Galaxy Card selection — "Photo coming soon" placeholders
+      until real photography is in.
+    - Footer: replace the pink heart emoji with DA's actual brand signal-red
+      dot (#C5301A, the --signal-red token from packages/design-system),
+      animated with the same pulse pattern as the DA logo's FAB dot.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 8bb4b214526f9a62050c39f9b65be24c02f7dd62
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 09:07:06 2026 -0700
+
+    docs: correct stale Week-of-Jul27 dashboard-backlog premise, remove dead AdminNav
+    
+    The BUILD-SCHEDULE.md slot for /admin/development ("The Workshop") was
+    based on Anthony's Vercel Toolbar comments from ~23 days before this
+    monorepo's Jul 6 import - same root cause as the Jul 21 Services/
+    Testimonials finding. Checked each complaint against the actual code:
+    real login/out button, real Supabase-Realtime notifications, and a
+    code-complete (env-var-only) live-site link all already exist. Deleted
+    AdminNav.tsx, a dead duplicate of AdminShell's nav/logout logic with zero
+    importers anywhere in the app.
+    
+    Spot-checked the other 3 backlog items too so the next agent doesn't
+    re-discover the same staleness cold: /admin/content already has real
+    templates and a live data connection to digitalallies.net/learn/ (in this
+    repo's copy - still needs confirming against the separate live
+    DigitalAllies repo); /admin/pages is a confirmed real gap, not stale (its
+    preview is hardcoded fake HTML, no real components, no code-view option);
+    /admin/projects not yet deeply checked.
+    
+    Full detail in STATUS.md's 2026-07-22 entry.
+
+commit 9f637e8db0a68046fb6c31e2d6a8dedce8e227cd
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 05:13:45 2026 -0700
+
+    docs: document ISR/cookies bug fix in STATUS.md
+    
+    Adds the root-cause writeup for the second, independent bug found and
+    fixed today: public data fetchers were permanently stuck on mock data
+    due to a cookies()/DYNAMIC_SERVER_USAGE conflict, separate from the
+    stale Vercel deploy-branch issue documented above it.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 52ff5ff35244495092935bd0e0e66b1efec4c7be
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 04:53:54 2026 -0700
+
+    chore: sync MM23 2026-07-22 04:53
+
+commit f949aa852786f0019397f257176a85c6384d0b3d
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 03:36:27 2026 -0700
+
+    chore: sync MM23 2026-07-22 03:36
+
+commit f5b9fc743894fe9d980bb2fbd46f05d507e45cc4
+Merge: 8cfee91 c05c875
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 00:38:28 2026 -0700
+
+    Merge pull request #8 from Digital-Allies/feat/atomic-finds-mobile-responsive
+    
+    fix(atomic-finds): mobile responsiveness - clip orbital rings and optimize button sizing
+
+commit c05c875a3c83b282b2a3ba25348db412725076eb
+Merge: 717e0fa 8cfee91
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 00:35:11 2026 -0700
+
+    Merge branch 'main' into feat/atomic-finds-mobile-responsive
+    
+    # Conflicts:
+    #       STATUS.md
+
+commit 717e0fa207065d89495a962f9a8d2eb064194a42
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 22 00:30:53 2026 -0700
+
+    chore: sync MM23 2026-07-22 00:30
+
+commit 37b112bdca3090c2d27711f6b07df4b067cb41bc
+Author: Claude <noreply@anthropic.com>
+Date:   Wed Jul 22 01:54:29 2026 +0000
+
+    fix(atomic-finds): tighten orbital ring sizing for desktop
+    
+    - Reduce orbital ring max from 700px to 500px for tighter visual effect
+    - Increase min from 280px to 300px for better proportions
+    - Desktop rings now extend ~70-140px beyond card instead of ~340px
+    - Rings still orbit visibly but at more refined scale
+    - Mobile rings remain hidden via media query
+    
+    Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 32d77abbb65681f7cc87f75d6e2481cab83c2ee0
+Author: Claude <noreply@anthropic.com>
+Date:   Wed Jul 22 01:53:39 2026 +0000
+
+    fix(atomic-finds): hide orbital rings on mobile, keep galaxy card design
+    
+    - Add media query to hide orbital rings at 640px breakpoint
+    - Mobile users see full featured card with galaxy nebula background
+    - Eliminates horizontal scroll completely on mobile
+    - Desktop experience unchanged - rings still animate on larger screens
+    - Cleaner, simpler solution focused on mobile UX
+    
+    Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 7d22dec6312205d5313ee268846306715de5a9bd
+Author: Claude <noreply@anthropic.com>
+Date:   Wed Jul 22 01:52:50 2026 +0000
+
+    fix(atomic-finds): further reduce orbital ring size and add scene-level overflow clipping
+    
+    - Reduce orbital ring from 130vw to 115vw (still visible but much smaller at mobile)
+    - Reduce orbital ring min from 420px to 280px for tighter mobile constraint
+    - Add overflow:hidden to scene div for better 3D transform clipping
+    - At 393px iPhone 16 viewport: rings now ~50px wider than card on each side
+    - Prevents excessive horizontal scroll while maintaining visual effect
+    
+    Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 51229f86ad3c1ef2eda759938e1279b61eedb8a4
+Author: Claude <noreply@anthropic.com>
+Date:   Wed Jul 22 01:48:39 2026 +0000
+
+    fix(atomic-finds): clip orbital rings and reduce button size on mobile
+    
+    - Add overflow:hidden to GalaxyCard container to prevent orbital rings from extending beyond card bounds
+    - Reduce orbital ring size from 150vw to 130vw for proportionally smaller effect on mobile
+    - Add mobile button styling: reduce padding (16px→12px), font-size (14px→12px), and gap (16px→12px)
+    - Prevents horizontal scroll on Galaxy Cards and hero buttons at 375px viewport
+    
+    Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 92f801b0bb64eb2bb486bf1de43f544b4b735f14
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 13:58:12 2026 -0700
+
+    chore: sync MM23 2026-07-21 13:58
+
+commit 096d0dea00b69c7347b0108558bf3134fed1e2fe
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 13:48:29 2026 -0700
+
+    fix(atomic-finds): resolve curators grid mobile clipping, horizontal layout overflow, and add local dev query fallback
+
+commit 519e4e618bd721ef292e8f593be2a342c3fd6c4a
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 13:42:40 2026 -0700
+
+    chore: sync MM23 2026-07-21 13:42
+
+commit 985d5bfa4a70246d3e609d814d649b7da11aa805
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 13:27:06 2026 -0700
+
+    chore: sync MM23 2026-07-21 13:27
+
+commit 8cfee91f2cddde87192af17c9091bde79867c74d
+Merge: 51ff34b 796c3c5
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:59:15 2026 -0700
+
+    Merge pull request #6 from Digital-Allies/docs/theme-engine-scope
+    
+    docs: scope the theme-engine plan; flag PR #4/Atomic Finds branch divergence
+
+commit 796c3c538c89d90753a19bec7dca3186adfce0e9
+Merge: 7ee55ed 51ff34b
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Tue Jul 21 19:32:11 2026 +0000
+
+    Merge origin/main into docs/theme-engine-scope
+
+commit 51ff34b5004bd99a1b52753b452a4ad6f044502d
+Merge: f9885a2 3f15eef
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:30:33 2026 -0700
+
+    Merge pull request #7 from Digital-Allies/feat/atomic-finds-mobile-responsive
+    
+    feat: responsive mobile design for Atomic Finds ATX
+
+commit 3f15eef34787bf99964934355b43e91b037d553f
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:29:57 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit 7ee55ed69dd9024c763928b43ced95b1305a71c7
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:27:26 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit b7783534aa60693d09f40158d20e45fa8aa0850c
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:27:18 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit 1bc2dbbf0cb527f6482b5706f00f7ad82bc557ef
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:27:09 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit f9885a23ca1d0ab8ab1baf3fd8d3b7913793e67c
+Merge: b1ac668 4f736ce
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:25:44 2026 -0700
+
+    Merge pull request #5 from Digital-Allies/chore/atomic-finds-cleanup
+    
+    chore(atomic-finds): remove superseded design-system generations and dev scratch dirs
+
+commit 6e927bb7f2ea4d485cf3f2a1d5fa57bfd6630857
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:25:00 2026 -0700
+
+    chore: sync MM23 2026-07-21 12:25
+
+commit b427dce3124ee81c02df9f30d8bf2916d7f04d9e
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:18:08 2026 -0700
+
+    docs: update for Supabase key rotation & production outage resolution
+    
+    SETUP.md:
+    - Updated env var table with explicit Supabase key naming (supabase_anon_new, supabase_service_role_new)
+    - Added scope columns (Production + Preview vs Production only)
+    - Added warning note about missing keys causing 500 errors
+    - Clarified that NEXT_PUBLIC_SUPABASE_ANON_KEY and SUPABASE_SERVICE_ROLE_KEY are CRITICAL
+    
+    STATUS.md:
+    - Added section documenting production outage resolution
+    - Root cause: Missing NEXT_PUBLIC_SUPABASE_ANON_KEY and SUPABASE_SERVICE_ROLE_KEY in Vercel
+    - Fix: Keys rotated by Anthony, added to Vercel with correct scoping
+    - Status: Ready to redeploy to activate new environment variables
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 2842e210893541dff93381279810e4fe2b7e2bc6
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:17:16 2026 -0700
+
+    docs: update STATUS.md with contrast fixes, DA footer credit, i18n scope
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 41f8804b8dc3e81937a65da81051929924b5648d
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:16:49 2026 -0700
+
+    docs(i18n): scope bilingual system architecture for all sites
+    
+    Adds comprehensive i18n system plan for EN/ES bilingual support across DA,
+    HCTC, and Atomic Finds sites. Includes:
+    
+    - Database schema (translations table with client/namespace/key/language)
+    - next-intl library integration with App Router
+    - URL structure (/[locale]/[path])
+    - Admin dashboard for translation management
+    - Language switcher UX (nav + footer)
+    - SEO best practices (hreflang, sitemap, robots.txt, Open Graph)
+    - WCAG 2.1 AA accessibility checklist
+    - Translation content checklist
+    - Testing checklist
+    - Phase 1 (MVP on Atomic Finds) and Phase 2 (rollout) scopes
+    
+    Ready for implementation when prioritized.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 797b7755a0e233f04cfb89d02c2505a878452dbe
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 12:15:58 2026 -0700
+
+    feat(atomic-finds): improve contrast & add Digital Allies footer credit
+    
+    Fixes contrast issues by making all non-accent body text white:
+    - Section description text (collection, process) changed from fg-body to white
+    - Footer copyright text changed from fg-soft to white
+    - Curator roles changed from fg-muted to white
+    - Review dates/tags changed from fg-soft/fg-muted to white
+    - Contact card subtitles and social links changed to white
+    - Delivery stat labels changed to white
+    
+    Adds footer credit with DA brand pulsing heart animation:
+    - "Website made with love by Digital Allies 🩷"
+    - Heart emoji uses DA brand pink (#F5A4C7) with 2s pulse animation
+    - "Digital Allies" text links to digitalallies.com in gold
+    
+    WCAG AA contrast compliance across all body text.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit cd941abf79da155cb63cc78e0a6aa70f25e1a46f
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 19:02:10 2026 +0000
+
+    docs: update STATUS.md — PR #7 Greptile review fixes complete
+
+commit 71705c11fb0013eb050001242fd4805f21fd37a6
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 19:01:45 2026 +0000
+
+    fix: mobile responsive review issues — fix nav menu accessibility, adjust panel positioning, increase featured cards gap, make text responsive
+    
+    - Add aria-hidden and inert attributes to nav panel when closed to remove from accessibility tree
+    - Fix panel top position from 60px to 80px to account for actual mobile nav height (~72px)
+    - Increase featured cards row gap from 60px to 120px on mobile to prevent orbital ring overlap
+    - Increase GalaxyCard height clamp from 520px max to 620px to accommodate responsive text and images
+    - Make card text sizes responsive using clamp(): title, tagline, price, description
+    - Reduce padding at mobile to preserve content space while keeping layout breathable
+    - Reduce description line clamp from 3 to 2 lines for mobile fit
+    
+    Addresses Greptile review issues on PR #7:
+    - Issue 1: Closed menu visibility in tab order
+    - Issue 2: Panel starting inside sticky nav
+    - Issue 3: Card height clipping text
+    - Issue 4: Ring overhang causing visual overlap
+    
+    Co-Authored-By: Claude Haiku 4.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 68b4e7c3848f3b1f999bebd04da0ae0a39f8d81c
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 11:21:05 2026 -0700
+
+    docs: update STATUS.md — mobile-responsive design for Atomic Finds complete
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 2e0dc6cbaa31c06ce28bfbd3463fe50048f8cd7b
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 11:19:09 2026 -0700
+
+    feat(atomic-finds): add responsive mobile design for homepage
+    
+    Adds mobile-first responsive layout with:
+    - Hamburger nav toggle (hidden ≤768px) with collapsible link panel
+    - Responsive typography using clamp() for fluid scaling
+    - Mobile-optimized spacing and layouts for all sections
+    - Responsive GalaxyCard with flexible 360→280px width scaling
+    - Adjusted breakpoints: 768px (tablet toggle), 640px (mobile optimized)
+    - Hamburger menu closes when link is clicked
+    - All interactive elements scale to thumb-friendly sizes on small screens
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 4f736ce0dde11b018a9d2367a29a3593e190d2fc
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 11:15:06 2026 -0700
+
+    fix(atomic-finds): correct README inventory after PR #4 merge + cleanup
+    
+    The prior commit resolved the README.md merge conflict by keeping PR #4's
+    version verbatim, but that version's file inventory still listed several
+    items this cleanup already removed (the old .dc.html brand-system bundle,
+    the standalone Galaxy Card prototype, atomic-finds-design-system/, the
+    two scroll-hero prototype dirs, uploads/, screenshots/). Updates the
+    "What's in this directory" section to match what's actually here post-
+    cleanup, and clarifies GalaxyCard.tsx's real source is the reference
+    component inside design_handoff_homepage/, not the removed prototype.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 6db92d0c64dbc29873f743bc64bd9a5dd79eeba3
+Merge: e4368a4 b1ac668
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 11:13:54 2026 -0700
+
+    Merge branch 'main' into chore/atomic-finds-cleanup
+    
+    # Conflicts:
+    #       sites/atomic-finds/README.md
+
+commit b1ac6689e448a7ef80faffc769c1bc30401cbb07
+Merge: 363c3b1 069cb85
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 11:12:05 2026 -0700
+
+    Merge pull request #4 from Digital-Allies/claude/products-table-review-fixes-doa26m
+    
+    docs: encode Atomic Finds ATX e-commerce direction; import product-grid handoff
+
+commit 069cb8558df315c9105fd54deaff475d995caa58
+Merge: 97a60f5 363c3b1
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 11:12:00 2026 -0700
+
+    Merge remote-tracking branch 'origin/main' into claude/products-table-review-fixes-doa26m
+    
+    # Conflicts:
+    #       STATUS.md
+
+commit 543b7aefbe7cc4d110702bfa82b5f53c7a437edc
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 10:58:56 2026 -0700
+
+    docs: scope the theme-engine plan; flag PR #4/Atomic Finds branch divergence
+    
+    Adds tools/build-workflows/THEME_ENGINE_PLAN.md — a plan (not an
+    implementation) for making per-client site theming admin-editable, per
+    Anthony's direction that the design system should eventually act as a
+    live plugin for the admin dashboard. Proposes extending the existing
+    settings table (which already has a disconnected, unused brand_color
+    field) rather than adding a new table, with theme.ts's hardcoded
+    TOKENS_BY_CLIENT map becoming the seed/fallback instead of the source
+    of truth.
+    
+    Also logs a real finding surfaced while scoping a mobile-responsive
+    pass for Atomic Finds: main has none of the storefront implementation
+    (ProductGrid, GalaxyCard, commerce.ts, admin Showroom) — it all lives
+    on the still-DRAFT, unmerged PR #4. The live atomic-finds-atx Vercel
+    production alias appears to be serving a build from that branch, not
+    main, based on deployment target metadata. Flagged in STATUS.md rather
+    than silently working around it.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit e4368a40323b88607d2686cae2dda7c849df99fe
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 10:54:49 2026 -0700
+
+    chore(atomic-finds): remove superseded design-system generations and dev scratch dirs
+    
+    sites/atomic-finds had accumulated three generations of design-system
+    exports plus several abandoned prototypes; design_handoff_homepage/ is
+    the current canonical handoff (per its own README: "going live as the
+    production Atomic Finds ATX site") and nothing else in the folder is
+    referenced by tools/build-workflows or by design_handoff_homepage itself.
+    
+    Removed:
+    - Top-level .dc.html/.md/.json files + README.md — the oldest generation
+      (Playfair Display/Great Vibes/#ffd966 palette), self-documented by its
+      own leftover README (now archived inside
+      design_handoff_homepage/guidelines/) as belonging to a prior
+      "atomic-finds-design-system/" bundle that predates the current tokens.
+    - atomic-finds-design-system/ — a second, mid-generation export (Jul 17),
+      superseded by design_handoff_homepage (Jul 21).
+    - _ds/digital-allies-design-system-.../ — Digital Allies' own design
+      system, misfiled inside the Atomic Finds folder by an export tool.
+    - Galaxy Product Card Component/ — standalone Vite+React prototype of the
+      Galaxy Card, including unused scaffold Supabase edge functions; the
+      card has since been folded into
+      design_handoff_homepage/components/GalaxyCard.reference.jsx and shipped
+      to production.
+    - scroll-animation-hero-2/ — abandoned early pass at the scroll hero.
+    - scroll-animation-hero-component/ — the working folder for the scroll
+      hero that shipped; all 7 needed frames are already copied into
+      tools/build-workflows/public/celestial-hero/, which is what actually
+      renders in production.
+    - screenshots/, uploads/ — dev QA screenshots and image-gen scratch
+      output, unreferenced.
+    - support.js — a generated runtime helper for the now-removed .dc.html
+      files; orphaned once they're gone.
+    
+    Kept: CLAUDE.md, design_handoff_homepage/ (canonical), assets/ (holds
+    the raw Marketplace product photos still needed for products.image_url —
+    flagged separately for a closer pass since it also has some clearly
+    exploratory subfolders), and the Master Setup Doc (holds real owner
+    contact info/review themes not fully verified elsewhere — held back from
+    this pass for a human read rather than auto-removed).
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 363c3b18c1065d1583f1b9187a2a913c7f091aa7
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 09:05:47 2026 -0700
+
+    docs: backfill ARCHITECTURE.md; correct stale Services/Testimonials claim
+    
+    Wrote the Day-04 ARCHITECTURE.md (tools/build-workflows) from the CMS Build
+    Plan's Vercel/architecture layout, reconciled against the actual src/ tree
+    rather than transcribed as-is. Doing that reconciliation surfaced a real
+    drift: STATUS.md and BUILD-SCHEDULE.md both claimed the Services/Testimonials
+    admin module didn't exist yet (scheduled for Jul 22-23) — it already does,
+    predating even this monorepo's import. Corrected both docs and marked that
+    schedule slot superseded rather than leave the next agent to build something
+    that's already there.
+
+commit 97a60f57f59342065e6476b93696d61df63372d1
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 13:02:01 2026 +0000
+
+    fix: sync the homepage handoff's ProductCard/ProductGrid to the flexible CTA resolver
+    
+    Greptile caught that CLAUDE.md's "synced" framing covered both handoff
+    directories, but only design_handoff_product_grid/'s reference components
+    had actually been updated to the selling_state-driven CTA — the copies in
+    design_handoff_homepage/components/ still hardcoded href={external_url}
+    and "View Listing ->" regardless of selling_state, so inquiry/direct
+    sample products would render a dead link with the wrong label.
+    
+    Applied the same resolveCtaRef() fix already used in
+    design_handoff_product_grid/ to this second copy, so both handoff
+    directories now genuinely match the production resolver
+    (src/lib/commerce.ts).
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit f4ad47d648a7fe70db6661ccce77edf1fd924750
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 12:57:29 2026 +0000
+
+    fix: recovered product-grid preview loads the corrected reference component
+    
+    Greptile flagged that products.card.html still loaded _ds_bundle.js — the
+    compiled Claude Design bundle, which predates the flexible-CTA direction
+    and always renders "View Listing" against external_url regardless of
+    selling_state. The inquiry/direct sample rows have no external_url, so
+    the preview showed broken listing actions even though
+    ProductGrid.reference.jsx (in the same folder) already implements the
+    correct resolver.
+    
+    Swapped the compiled bundle for an in-browser Babel transpile of
+    ProductGrid.reference.jsx directly, so the preview now actually reflects
+    the same selling_state-driven CTA logic as production (src/lib/commerce.ts)
+    instead of just documenting the discrepancy in a comment.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 36873497d6bc40c2401d681ac1a479aa15a6df59
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 12:48:01 2026 +0000
+
+    fix: build password-reset redirect from NEXT_PUBLIC_SITE_URL, not window.location.origin
+    
+    Reproduced and confirmed the root cause of the Atomic Finds admin login
+    issue via curl: Vercel Deployment Protection walls every preview/branch/
+    raw-deployment URL behind vercel.com/sso-api, but the reset-password
+    redirect was being built from window.location.origin — whatever domain
+    happened to be in the address bar when "forgot password" was clicked.
+    Before this project had a stable production alias, that was necessarily
+    a protected preview URL, so every recovery email dead-ended at Vercel's
+    own login wall instead of reaching /admin/reset-password.
+    
+    This is a shared-codebase bug, not client-specific: every site built on
+    tools/build-workflows uses this same login page. Fixed by preferring
+    NEXT_PUBLIC_SITE_URL (already an established env var in this codebase,
+    used by AdminShell's live-site link) with window.location.origin only
+    as a fallback, so the redirect always targets each client's stable
+    production domain regardless of which URL an admin happens to be
+    browsing from.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 7c500dbcd9e4336ea0cb224f4d7bceeedd505b99
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 10:44:55 2026 +0000
+
+    fix: quick-view modal title/description wrapping to one word per line
+    
+    This project's Tailwind spacing scale is redefined (theme.extend.spacing)
+    to design-system section sizes — p-6 is 64px and p-8 is 120px, not
+    Tailwind's defaults. The modal's detail column used p-6 md:p-8, which
+    ate up to 240px of padding out of a ~270-330px wide column, leaving so
+    little room that every line of the title and description wrapped one
+    word at a time. Switched to a flat p-4 (32px) on both the column and the
+    overlay backdrop.
+    
+    Root-caused by bisecting the exact class/style combination that
+    triggered it down to a minimal repro, then confirming against the
+    compiled Tailwind output.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit eb778ef86ba9010631fa1b134dab19a81f702f22
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 09:55:00 2026 +0000
+
+    feat: Atomic Finds ATX bespoke homepage, Galaxy Card, and reviews system
+    
+    Builds the full storefront homepage (hero, about, shop grid, curators,
+    featured Galaxy Cards, process, reviews, contact) matching the approved
+    Claude Design homepage, plus a reusable reviews feature with an editable
+    source field (not hard-coded to Facebook) and its admin CRUD.
+    
+    Also fixes a pre-existing site-wide bug: tools/build-workflows had no
+    postcss.config.js, so Tailwind's @tailwind directives were never processed
+    by Next's build pipeline.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 867fa691b0ac6970c55fa6ec6afb1be11e08b9d7
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 08:46:25 2026 +0000
+
+    fix: checkout state also degrades its CTA label when no URL exists
+    
+    Greptile's fallback-label finding on the reference file exposed the same
+    bug in production: resolveProductCta() correctly swapped 'listing' to
+    the inquiry-style label when external_url was missing, but 'checkout'
+    kept its "Purchase Options" label while still linking to #contact —
+    promising a live checkout that isn't there yet.
+    
+    Rewrote resolveProductCta() so both 'listing' and 'checkout' degrade
+    symmetrically: only count as external once a URL exists, and take the
+    inquiry default label whenever they don't. Synced both reference .jsx
+    files' resolveCtaRef() to the identical corrected logic, and updated the
+    prompt/README CTA description to match.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 28c06317cd5fe041a0c93c6263d74ce97d03454d
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 08:42:45 2026 +0000
+
+    fix: bring product-grid handoff reference files in line with the shipped CTA resolver
+    
+    Greptile correctly flagged that the earlier supersession note didn't go
+    far enough — ProductCard.prompt.md and both reference .jsx files still
+    specified/implemented a single fixed "View Listing -> external_url" CTA,
+    which would render a broken outbound link for inquiry-state products
+    with no external_url. Since the production implementation
+    (src/lib/commerce.ts + ProductGrid.tsx) now exists, update the handoff
+    package to match it instead of just flagging the mismatch:
+    
+    - ProductCard.reference.jsx / ProductGrid.reference.jsx: add a
+      resolveCtaRef() mirroring resolveProductCta() and use it for the CTA
+      link/label instead of always linking external_url.
+    - ProductCard.prompt.md + README.md: document the selling_state-driven
+      CTA contract (listing/inquiry/direct/checkout) consistently with the
+      resolver, including the fields in the data-shape blocks.
+    - products.card.html: sample data now covers all three states in active
+      use (listing/inquiry/direct with a custom cta_label), with a note that
+      the compiled _ds_bundle.js preview still lags until recompiled upstream
+      — the .reference.jsx files are the accurate source now.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 79281c477ae979cc5c5e3a0ac12849a41879927d
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 08:37:36 2026 +0000
+
+    feat: Atomic Finds ATX storefront — commerce schema, ProductGrid, admin Showroom
+    
+    Implements the e-commerce-ready storefront per STATUS.md decision #8:
+    
+    - Migration 20260121000000_products_commerce_fields.sql: design-catalog
+      fields (sku/category/tagline/badge/in_stock/origin/era/dimensions) +
+      flexible conversion layer (selling_state + cta_label); external_url
+      now nullable. Additive, safe to re-run.
+    - lib/commerce.ts: resolveProductCta() — single provider-agnostic CTA
+      resolver (listing/inquiry/direct/checkout); no hard-coded "Buy Now".
+    - ProductGrid.tsx: cards + category tabs + quick-view modal per the
+      design_handoff_product_grid spec (null-image fallback, sale badge,
+      Inquire state, title clamp, trust line), themed from --tok-* vars for
+      reuse across commerce clients. Wired into BlockRenderer ('products'
+      case) and the Pages builder (button/preview/field).
+    - Admin "The Showroom" (/admin/products + nav): non-technical CRUD with
+      ordering and a per-product "How it sells" selector.
+    - seed-atomic-finds-catalog.sql: 10 photographed catalog pieces as
+      inquiry products (idempotent, keyed by client+SKU); photos shipped in
+      public/atomic-finds/products/. ATOMIC_TOKENS fonts synced to Bagel
+      Fat One/Pacifico.
+    
+    Verified: tsc --noEmit clean; next build succeeds with /admin/products
+    in the route table.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 2aef76f4586b127bb83b240e84689ff5154b5efd
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 08:23:46 2026 +0000
+
+    fix: address PR #4 review — supersede fixed CTA contract, fix preview paths
+    
+    - README: mark the fixed "View Listing -> external_url" CTA as the
+      default/Phase-1 state only, superseded by the per-product selling-state
+      direction (STATUS.md decision #8); a follow-up migration adds the field.
+    - products.card.html: point stylesheet/bundle at the sibling
+      design_handoff_homepage/ copies so the recovered preview actually
+      renders in-repo (the homepage bundle exports ProductGrid).
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit e83a09aa632c28aade1a2d831c43ed4842500f1c
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 08:19:43 2026 +0000
+
+    docs: sync Atomic Finds ATX CLAUDE.md to the new design system; note PR #1 merged
+    
+    - CLAUDE.md now reflects the handoff system: Bagel Fat One / Pacifico /
+      Agbalumo / DM Sans (Tilda Script dead — watermarked trial only),
+      expanded semantic palette, starfield utility, Jennyfer Gomez as owner,
+      curators roster, and the 2026-07-21 commerce rules (flexible CTAs,
+      quick-view modals, provider-agnostic checkout).
+    - README: PR #1 marked merged.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit ddca042930788445d6e5740b1f0bb542ae985be2
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 08:18:49 2026 +0000
+
+    docs: encode Atomic Finds ATX e-commerce direction; import product-grid handoff
+    
+    Direction from Anthony (2026-07-21), recorded in README + STATUS.md
+    decision #8:
+    - Atomic Finds ATX (use that name) is the priority build alongside
+      digitalallies.net and the platform's e-commerce proving ground —
+      commerce patterns must be reusable for future clients.
+    - E-commerce-READY, not checkout-committed: flexible conversion layer
+      (Marketplace links / direct payment / inquiry, varies per product),
+      quick-view modals over product pages, cart-capable foundation,
+      provider-agnostic language everywhere (no Stripe assumptions),
+      no hard-coded "Buy Now" — approved CTA directions listed.
+    - HCTC stays a hosted placeholder; no deep build or compliance scope.
+    
+    Also imports sites/atomic-finds/design_handoff_product_grid/ from the
+    Claude Design project (29110ac3) — the companion package referenced by
+    the homepage handoff README that never made it into the repo push. It
+    contains the ProductCard/ProductGrid reference implementation built
+    against the live products schema, wiring notes, and token CSS.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit f451d12c50a4c850b4591bdfcb84769577fff7d4
+Merge: b4cf6b3 1c9b200
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 01:17:01 2026 -0700
+
+    Merge pull request #1 from Digital-Allies/feat/atomic-finds-products-catalog
+    
+    Add products table + seed for Atomic Finds catalog
+
+commit b4cf6b3573e1b8a996fdec7b1b25b07c8f381269
+Merge: 4e74963 29a25e1
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 00:54:26 2026 -0700
+
+    Merge pull request #3 from Digital-Allies/claude/products-table-review-fixes-doa26m
+    
+    docs: bring build-workflows README current with platform reality
+
+commit 29a25e12b3468772d89d503e476d4cbd954874f4
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 07:49:49 2026 +0000
+
+    docs: link "this repo" references directly to tools/build-workflows on GitHub
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 33ea8983497ecf3f98e717816ae84a57bdc93d4e
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 07:48:51 2026 +0000
+
+    docs: frame Atomic Finds as priority e-commerce build; canonicalize cms URL
+    
+    - Vision now lists digitalallies.net and Atomic Finds as side-by-side
+      priority builds, with Atomic Finds framed as the platform's first
+      e-commerce site (Marketplace links now, on-site checkout the target).
+    - cms.digitalallies.net is the canonical admin URL everywhere; the
+      vercel.app address demoted to an internal note.
+    - Catalog section retitled and given a checkout roadmap item.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 5774dbb185a4a216040e9ed591e5abc0cf56f3fd
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 07:46:28 2026 +0000
+
+    docs: correct onboarding order and RLS isolation claims in README
+    
+    - Step 4: link clients.auth_user_id BEFORE the client's first login —
+      get_my_client_id() depends on it, so the old order produced an empty
+      admin on first login.
+    - Replace the "RLS ensures clients only see their own data" claim with
+      the accurate split: admin access is RLS-isolated, public reads use
+      using(true) policies and rely on app-level client_id filtering.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit a3478563787b30454c41040457710bc95d207f74
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 07:43:13 2026 +0000
+
+    docs: bring build-workflows README current with platform reality
+    
+    The README predated the monorepo move and still described the app as the
+    standalone cassellac repo, with a pre-launch "CMS looks empty" status.
+    Updated to reflect what's true as of 2026-07-21:
+    
+    - Monorepo location + deployment table (Vercel re-pointed 2026-07-10,
+      cms.digitalallies.net live, sites/digitalallies is a frozen import)
+    - Three live tenants with client IDs and tiers; per-client theming done
+    - Atomic Finds product catalog section: PR #1 contents, how to apply the
+      migration + seed, and what's still to build (components, products
+      block, admin Products editor)
+    - Admin section status table incl. Anthony's placeholder-section notes
+    - Supabase key-system migration (legacy keys disabled) in the env table
+    - Fixed onboarding SQL that referenced nonexistent clients columns
+      (name/slug/domain -> business_name)
+    - Key files updated to the migrations-dir layout and current app tree
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit 4e74963576551c6ae34492e7ba3d80b1ab56d9bd
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 21 00:16:09 2026 -0700
+
+    chore: sync MM23 2026-07-21 00:16
+
+commit 1c9b20063fd530d8a459ece44a8ef32b6f0257a4
+Author: Claude <noreply@anthropic.com>
+Date:   Tue Jul 21 01:15:56 2026 +0000
+
+    fix: scope seed's cleanup delete to the Atomic Finds client_id
+    
+    An unscoped DELETE by external_url runs with RLS bypassed in the SQL
+    editor, so it could silently remove another client's product if they
+    ever recorded a matching URL. Scope it to this client's client_id too.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+
+commit daa1c4f15a80320661229f5a9a936bbf0b1c6585
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 18:12:21 2026 -0700
+
+    fix: address products table review — trigger, JSONB type, uuid default, seed idempotency
+    
+    * fix: address products table review — trigger, JSONB type, uuid default
+    
+    - Add products_set_updated_at trigger (and the set_updated_at() function,
+      which didn't exist yet in schema.sql) so updated_at refreshes on UPDATE.
+    - Widen Product.attributes to Record<string, unknown> to match the
+      unconstrained JSONB column.
+    - Switch id default from uuid_generate_v4() to gen_random_uuid(), dropping
+      the uuid-ossp extension dependency.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+    
+    * fix: make products_set_updated_at trigger idempotent
+    
+    CREATE TRIGGER fails with "already exists" on re-run; CREATE OR REPLACE
+    TRIGGER (PG14+) matches the idempotent function definition above it.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+    
+    * fix: address remaining PR #1 review comments — NOT NULL attributes, order index
+    
+    - attributes is required by the Product type and always set by the seed;
+      make the column NOT NULL so PostgREST can't hand back null there.
+    - Add idx_products_order on (client_id, display_order), matching the
+      index every other ordered-per-client table (services/testimonials/
+      team/gallery) already has.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+    
+    * fix: make Atomic Finds product seed idempotent
+    
+    Re-running the seed inserted duplicate rows. Delete the 4 seeded
+    listings by external_url before inserting, matching the delete-then-
+    insert pattern update-content.sql already uses for services/testimonials.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_019HyHgDKwRAR8U6XeReR3V2
+    
+    ---------
+    
+    Co-authored-by: Claude <noreply@anthropic.com>
+
+commit 6fb08cb43d52740bf070bd8d6f7e3eb4b0bf8bd9
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 18:04:50 2026 -0700
+
+    Update tools/build-workflows/src/lib/types.ts
+    
+    Co-authored-by: greptile-apps[bot] <165735046+greptile-apps[bot]@users.noreply.github.com>
+
+commit e928459c4e446c9682c7aa4f463f6839d6ea919c
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 18:04:37 2026 -0700
+
+    Update tools/build-workflows/supabase/migrations/20260117000000_products_table.sql
+    
+    Co-authored-by: greptile-apps[bot] <165735046+greptile-apps[bot]@users.noreply.github.com>
+
+commit 4928127f6b847a78efbc3f1e2b780ee81402aa6f
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 18:00:49 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit 1c85588f90146df30b6b44bc1ff0f89ed86b277e
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 18:00:37 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit 4e71ce844e181ac6718af3dc317ad02df4b8b502
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 16:50:13 2026 -0700
+
+    docs: log Mon Jul 20 fixes and the live-repo porting gap they create
+    
+    cms-loader.js HTML-escaping and the dead tailwind.config removal both
+    landed this session, but sites/digitalallies here is a frozen one-time
+    import (git log shows a single commit ever touching it) — not what
+    digitalallies.net actually deploys from. Recording that explicitly so
+    the fixes don't get assumed live just because they're in this repo;
+    TODO.md now tracks the manual port to Digital-Allies/DigitalAllies.
+    
+    Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+
+commit 6876c63944c12fe332ccae7b1ee66f687f431c5a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 16:48:23 2026 -0700
+
+    chore: sync MM23 2026-07-20 16:48
+
+commit db2f82c29def87351ad8b52186bf9e4c44389cf2
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 20 14:15:24 2026 -0700
+
+    docs: recalibrate BUILD-SCHEDULE.md to current reality
+    
+    The Jul 13 week's plan is stale — this session picked up key rotation,
+    admin login bugs, the Atomic Finds catalog, a Vercel/Supabase audit, and
+    a dashboard backlog that weren't in it. Adds a fresh 3-week schedule
+    (Jul 20 - Aug 7) covering everything actually open right now: security
+    confirmation, the audit checklist, the products PR, ARCHITECTURE.md,
+    the Services/Testimonials module, and the 7-item dashboard backlog from
+    Anthony's Vercel Toolbar comments — split by [Agent]/[Anthony] as before,
+    plus a parallel section for items blocked on external input (Atomic
+    Finds design, checkout provider decision).
+
+commit 22a825edcf200bb6df781dec2034bec427a7eef5
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 13:53:51 2026 -0700
+
+    docs: resolve the "malformed dashboard" mystery — pre-existing, not a regression
+    
+    Login sorted itself out without needing the new reset flow. The dashboard
+    question is resolved: Vercel Toolbar comments show Anthony flagged
+    Development, Projects, Content, and Pages as unfinished placeholders ~23
+    days ago, well before the Jul 10 monorepo switch. Nothing regressed —
+    logged the 7 still-open items as real backlog in STATUS.md, needing
+    prioritization before any get built.
+
+commit 06898442ca5331142792cd70c225422a5af3cf5d
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 13:33:55 2026 -0700
+
+    docs: log the missing password-reset flow and open dashboard question
+    
+    Anthony's password doesn't work and there was no reset path in the app —
+    built and deployed a "Forgot password?" flow (previous commit); logging
+    that here as still-open until he's actually confirmed back in. Also
+    logged his separate report that /admin looked like a placeholder instead
+    of his built dashboard — unconfirmed whether that's a real regression or
+    just landing on the public homepage via the broken reset link, since the
+    admin route code all still exists in this repo.
+
+commit 1786fed3b1bbe454eee4da4751d71d665a423123
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 13:30:51 2026 -0700
+
+    feat: add missing password reset flow to admin login
+    
+    There was no way to trigger a password reset from the app itself — the
+    /admin/reset-password page existed, but nothing called
+    resetPasswordForEmail() with the right redirectTo, so any reset attempt
+    (e.g. triggered manually from Supabase's dashboard) used Supabase's
+    generic Site URL and landed on the bare homepage instead of the reset
+    form. This is very likely why Anthony's reset link dumped him on / with
+    an otp_expired error instead of a working reset page.
+    
+    Adds a "Forgot password?" toggle on the login page that calls
+    resetPasswordForEmail(email, { redirectTo: origin + '/admin/reset-password' }),
+    and updates the reset-password page to detect Supabase's
+    #error=...&error_description=... hash (expired/invalid/already-used link)
+    and show a clear "Request a new link" action instead of a dead-end
+    password form.
+
+commit d1069e7775900302c636fd8140a7791a6e9eb572
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 13:19:13 2026 -0700
+
+    docs: confirm admin login fix verified live
+    
+    Re-tested /admin/login on the fresh deployment: the error changed from
+    "Legacy API keys are disabled" to "Invalid login credentials" (tested
+    with a deliberately wrong password), confirming the key fix took effect.
+    Also confirmed the business name now resolves correctly (was showing the
+    generic fallback) and cms.digitalallies.net is live as an alias on this
+    deployment.
+
+commit 2ab58d642fcf44874aeb4f6f524aac3b567a8ace
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 13:14:14 2026 -0700
+
+    docs: correct wrong "stale repo" claim, log real admin-login root cause
+    
+    The Vercel Git re-point was actually done Jul 10 (confirmed via Anthony's
+    screenshot + deployment history) — my earlier claim that it was still on
+    the old repo, and that this explained a login redirect, was wrong on both
+    counts. The redirect was a misread of a browser tool reporting tab origin
+    instead of full path; the login page was rendering fine.
+    
+    The real bug, found by actually submitting the live form: Supabase
+    rejected it with "Legacy API keys are disabled" — the anon/service-role
+    keys baked into this deployment were still legacy-format despite the
+    Vercel-Supabase integration badge being present. Anthony fixed both
+    manually. This commit also serves as the trigger for a fresh deployment
+    so the corrected values actually take effect (NEXT_PUBLIC_ vars bake in
+    at build time).
+    
+    Also clarified for the record: Vercel env vars have no relationship to
+    the repo's .env.local — pushing commits never syncs them.
+
+commit 8b0c4368e4f40b2972fd2cece9ff1c6a08411e29
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 12:07:41 2026 -0700
+
+    docs: log admin-login root cause, redirect fix, and storage backlog idea
+    
+    Confirmed via direct testing (not just Anthony's report) that the
+    /admin/login redirect-away behavior and the generic placeholder homepage
+    content are most likely both explained by the CMS admin engine's Vercel
+    project still building from the old disconnected repo rather than the
+    monorepo. Elevated Priority 1 in TODO.md accordingly. Also logged the
+    cms.digitalallies.net root-redirect fix and captured the per-site document
+    storage feature idea as an unscheduled backlog item.
+
+commit 067eccbacebb4385f7a49efaf6871f9ea2da0327
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 12:06:31 2026 -0700
+
+    fix: redirect cms.digitalallies.net root to /admin/login
+    
+    The root path had no real homepage to show yet, so it fell through to
+    the generic DEFAULT_SETTINGS fallback ("My Business"/"Welcome") — useless
+    for what's meant to be an admin entry point. Scoped to this hostname via
+    the Host header (not client_id or nextUrl.hostname, which doesn't reflect
+    custom Host headers reliably in this Next.js setup — verified locally with
+    curl + a spoofed Host header) so it can never affect another tenant's own
+    site once they have real homepage content.
+    
+    Also had to add '/' to the middleware matcher — the function checked for
+    it but the route-level matcher excluded '/' entirely, so the check never
+    ran until this was added too.
+
+commit cc390cf7c117923d9a84eaff65577b6e56a846ce
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 11:47:19 2026 -0700
+
+    docs: full 2026-07-17 sync — Atomic Finds status, audit findings, tooling, corrections
+    
+    - STATUS.md: log the products-catalog PR, the Vercel/Supabase audit and
+      free-tier constraint, cms.digitalallies.net in progress, Greptile added
+      for review, and the clarification that sites/ folders are sometimes
+      used for general storage (not every unexpected file is a dump).
+    - Flag the "v3 layered rebuild — APPROVED" and decision #1's "private"
+      framing as unreliable — both turned out not to match reality when
+      checked directly against Anthony or GitHub. Treat historical
+      "approved"/"confirmed" language in this file as needing reconfirmation,
+      not as settled fact.
+    - Mark several items explicitly unconfirmed since 2026-07-16 rather than
+      assumed done (security-fixes.sql, leaked-password protection, the CMS
+      engine's Vercel repo re-point).
+    - BUILD-SCHEDULE.md: mark the original Day 19/20 digitalallies.net cutover
+      plan as superseded — that site was already live separately the whole
+      time; what actually happened was a new cms.digitalallies.net subdomain
+      for the admin engine instead.
+
+commit 6ec10881cb71903abeb87b36d78a60bf5b44ad6e
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jul 19 00:19:07 2026 -0700
+
+    docs: correct framing on HCTC's manual Supabase keys — free-tier limit, not a bug
+    
+    Anthony confirmed we're on free-tier Vercel/Supabase, capped at 2
+    Supabase-integration connections, already used. HCTC's manually-pasted
+    keys aren't a gap to close by connecting the integration — they can't be,
+    at this tier. Reframed as a standing constraint with a rotation checklist
+    instead of an action item to "fix," and noted Atomic Finds' future
+    project will hit the same limit. Revisit once there's paying-customer
+    revenue to justify upgrading.
+
+commit ce669dfcade4d1367d6445d87ec98c2ee9de83d0
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jul 18 23:27:43 2026 -0700
+
+    docs: log audit findings + expand Atomic Finds onboarding status
+    
+    Adds a new priority section covering tonight's Vercel/Supabase audit
+    (missing NEXT_PUBLIC_SITE_URL, HCTC's manually-added Supabase keys,
+    duplicate Supabase key pairs, cms.digitalallies.net domain not yet
+    connected, new Resend keys not yet in Vercel) and updates Atomic Finds
+    from "don't do yet" to "in progress" now that the products catalog PR is
+    open and design work is underway.
+
+commit b3a83597bc01450c4016a8232bf4e372539373c6
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jul 18 13:32:24 2026 -0700
+
+    chore: sync MM23 2026-07-18 13:32
+
+commit 9f373c6c34b2aa0a179b4e795c9f8bd9fe0af099
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jul 18 13:29:49 2026 -0700
+
+    feat: add products table + seed for Atomic Finds catalog
+    
+    Adds a `products` table following the existing client_id + RLS
+    convention used by services/testimonials, plus a Product type and
+    getProducts() data-fetcher matching the existing pattern. Seeds it with
+    4 real listings from Jennyfer's Facebook Marketplace catalog (a 5th was
+    cut off mid-paste — needs re-sending).
+    
+    Not included in this PR: frontend product-grid/card components (still
+    being designed) and wiring into BlockRenderer's block-type switch — this
+    is schema + data-layer only, so the table exists and is ready the moment
+    onboarding continues. image_url is left null for all four; the source
+    data had no photos.
+    
+    external_url currently points at each item's Facebook Marketplace listing
+    — per Anthony, that's the intended "buy/inquire" target until a checkout
+    provider is chosen, so the field is named generically to avoid a schema
+    change later.
+
+commit ce5af03396bb3be524b882fb3342efa75afe4b6b
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jul 17 06:12:56 2026 -0700
+
+    chore: sync MM23 2026-07-17 06:12
+
+commit 617bd507507a4ed6894a33255b990b55d628a68a
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jul 17 05:56:32 2026 -0700
+
+    chore: sync MM23 2026-07-17 05:56
+
+commit c801606a4f8489577734c623e47f262188a29d1e
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 16 12:56:01 2026 -0700
+
+    chore: sync MM23 2026-07-16 12:56
+
+commit 3c7ffd14aa9d0b1f9ae833f0c18a8bf682f4808f
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 16 10:08:00 2026 -0700
+
+    docs: log service_role key rotation + repo privacy fix
+    
+    Anthony discovered the leaked service_role key was actually live-exposed
+    (da-platform was public on GitHub, contrary to STATUS.md's own assumption)
+    rather than a deferred risk. Rotated via Supabase's new Publishable/Secret
+    key system, disabled legacy keys, updated Vercel + local env, and made the
+    repo private. Verified digitalallies.net and the CMS admin engine both
+    still work cleanly post-rotation.
+
+commit fa8cb8b54cc7f69945947daa8be3f80a43b102b4
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 16 08:00:59 2026 -0700
+
+    chore: sync MM23 2026-07-16 08:00
+
+commit 459386a387181f381421e8774933a27491eb04e6
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 16 07:46:03 2026 -0700
+
+    chore: remove accidental cms-suite gitlink
+    
+    cms-suite was a nested standalone repo that had been sitting inside
+    da-platform's working tree; the auto-sync script picked it up as an
+    embedded-repo gitlink in the last sync commit. Moved the actual project
+    to ~/Claude/projects/cms-suite (its own repo, own home) and removing the
+    stray gitlink reference here.
+
+commit 3cfe89a1659a2bb6ae7a6a0f07b0b225603bb1f6
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 16 07:45:24 2026 -0700
+
+    chore: sync MM23 2026-07-16 07:45
+
+commit ed18599d010c9ec031484cc8ed4f2ebc251105b9
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 14 02:18:52 2026 -0700
+
+    chore: sync MM23 2026-07-14 02:18
+
+commit 35b98f15f803dfd35d25130a79100cd46c94fa30
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 14 00:30:56 2026 -0700
+
+    chore: sync MM23 2026-07-14 00:30
+
+commit 368fc38faa13ecef4b922c4040c3135b096509d5
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jul 14 00:15:29 2026 -0700
+
+    chore: sync MM23 2026-07-14 00:15
+
+commit 36e4f4eeb983076acb670bfd56648fb337ef5190
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 13 23:44:36 2026 -0700
+
+    chore: sync MM23 2026-07-13 23:44
+
+commit 5c2a8ffdd251a74fef06fd433105cfaa15e2039a
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jul 10 10:09:58 2026 -0700
+
+    chore: sync MM23 2026-07-10 10:09
+
+commit badb9d02d7608186ec06f8d53a5fff989d55900e
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jul 10 01:39:27 2026 -0700
+
+    chore: sync MM23 2026-07-10 01:39
+
+commit e4cc56f36ab58ebff8b9ee911af540d74c0760c1
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jul 10 01:22:20 2026 -0700
+
+    chore: sync MM23 2026-07-10 01:22
+
+commit 39efbedb7cd799c17d3e35f344debb52744d17e1
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 19:25:48 2026 -0700
+
+    chore: sync MM23 2026-07-09 19:25
+
+commit 0945ab864deb0244c2f62c6d3744c919fd0c51db
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 19:12:44 2026 -0700
+
+    docs(tasks): copy antigravity implementation plan, tasks, walkthrough, and client script into repo for agent handoff
+
+commit e1bfd8389b8f208501d198e27e1683357664f677
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 15:02:33 2026 -0700
+
+    chore: sync MM23 2026-07-09 15:02
+
+commit 8139b2d5b81c273a85767db02ca68fa88ea0c468
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 14:46:58 2026 -0700
+
+    chore: sync MM23 2026-07-09 14:46
+
+commit 7d69cda065a6e8e7b9bb033eecef447b5706900c
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 14:30:33 2026 -0700
+
+    chore: sync MM23 2026-07-09 14:30
+
+commit 278f1212a4ca8800e3f436cf3ceb93959853e928
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 14:14:59 2026 -0700
+
+    chore: sync MM23 2026-07-09 14:14
+
+commit 323c49873267d12654ac1d436d3da9d493464f78
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 02:13:57 2026 -0700
+
+    feat(cms): add dynamic BlockRenderer, [slug] page routing, and contact form block support
+
+commit dd9cc992fa381857ae22826aa7addc5e86f0b6ac
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 02:07:27 2026 -0700
+
+    chore: sync MM23 2026-07-09 02:07
+
+commit 64ed129520d4e246d6dbf55becbe75fac230da11
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 01:51:55 2026 -0700
+
+    chore: sync MM23 2026-07-09 01:51
+
+commit 0a6db8f34b1a2fba3e3c2e7ab10d94c38c3adaeb
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 01:36:22 2026 -0700
+
+    chore: sync MM23 2026-07-09 01:36
+
+commit 47be22b926ba9654caeec0e081feb8601207eab2
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jul 9 01:20:34 2026 -0700
+
+    chore: sync MM23 2026-07-09 01:20
+
+commit 5c13e66456665ac4be0085db3de8b3cfa380c48d
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 8 22:14:49 2026 -0700
+
+    chore: sync MM23 2026-07-08 22:14
+
+commit e6acb9b9baf8999e1cdd474dfbcb2be048f14a17
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 8 21:12:47 2026 -0700
+
+    chore: sync MM23 2026-07-08 21:12
+
+commit 1895921cf4146e56df171ad7b7efef6eaa8cb9fa
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 8 19:08:36 2026 -0700
+
+    chore: sync MM23 2026-07-08 19:08
+
+commit c0b1c58e454faca245883d9908f8497364a01883
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 8 18:52:59 2026 -0700
+
+    chore: sync MM23 2026-07-08 18:52
+
+commit 73a4e32b36f1c1298addae6a640bf25a10b82bf3
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 8 18:37:26 2026 -0700
+
+    chore: sync MM23 2026-07-08 18:37
+
+commit 01862fe4f640a46946165d22c03b80f12625e6a8
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jul 8 07:59:32 2026 -0700
+
+    chore: sync MM23 2026-07-08 07:59
+
+commit aa9ed16dc6e548a60d83bd4e9b578f2b1e675ebd
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 23:28:18 2026 -0700
+
+    chore: sync MM23 2026-07-06 23:28
+
+commit 236abd3a98821c30b6d0dba65db5119ba56f9f8f
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 16:18:37 2026 -0700
+
+    docs(status): clarify what syncs (da-platform) vs what doesn't (workspace-root files)
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 4e3fc1bd0573805e00fba0de5cde4e9ec8abb078
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 16:17:31 2026 -0700
+
+    docs(status): add prioritized Major needs section; refresh timestamp
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 4b6f7968226faeb69780d6e766667a8c906f78ca
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 16:14:46 2026 -0700
+
+    docs(status): add major need — admin login page broken on mobile, needs responsive rebuild
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 29cd4c40d00be2ff4bb5034bf4bd456ee843d8f2
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 15:12:15 2026 -0700
+
+    feat(site): SiteTheme applies per-client fonts + surfaces; update STATUS
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit df9edf082e85ca8593c5874c84828326b7f4df7a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 15:10:29 2026 -0700
+
+    feat(site): per-client design-token theming for the public renderer (Step 2)
+    
+    Adds lib/theme.ts (DA / HCTC / Atomic Finds tokens from each sites/<site>/CLAUDE.md,
+    mapped by client_id, neutral non-DA fallback) and a SiteTheme wrapper that injects
+    the full token set as CSS vars on the public site only. Admin stays DA-branded.
+    Non-breaking: DA's look is unchanged, now token-driven. Implements STATUS decision #7.
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 0c35bb5e6ce0dd51b62fc184cd7065a921a007c6
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 15:02:03 2026 -0700
+
+    docs(status): note Vercel-deploys-from-old-repo loose end; brand fix is live DB data
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 5112d0f3c543172b8b491479541af1bdfc7884c0
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:57:51 2026 -0700
+
+    docs(status): refine decision #7 — per-client websites, DA-branded admin (white-label optional/later)
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 6cb91b13942fe293c900c3d3c21ab2de9ba7f31a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:55:29 2026 -0700
+
+    docs(status): lock per-client theming rule (site+admin); note tokens gap
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 9356f1db7cd7d7f6084b25f621b53890e8b2495c
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:51:56 2026 -0700
+
+    docs(status): correct against live Supabase — seed+admin already done, fix brand_color drift
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 54905d5cfbead8d5f16b1b71f54577c667861656
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:47:24 2026 -0700
+
+    docs(status): lock monorepo decision, pin 30-Day Run position, set operating mode
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 2dc462bc2ac6883a50ec56feb022033fddc308e7
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:42:22 2026 -0700
+
+    docs: add shared STATUS.md running log; link from AGENTS.md
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 5aa305c066264981ec6211e57cab6b5d911a9c3c
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:42:05 2026 -0700
+
+    chore: sync MM23 2026-07-06 14:42
+
+commit bb2c7bd1d95aab6ebeae446911e6da1de09c1367
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 14:19:29 2026 -0700
+
+    docs: add per-site design system references (Brand face)
+    
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit de3fe2e0c194c6f410ba22ecb60147663ceac65c
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 13:55:34 2026 -0700
+
+    chore: sync MM23 2026-07-06 13:55
+
+commit f2afcc2c6eda36092a34a6344d266e23eb77107b
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:52:39 2026 -0700
+
+    chore: sync MM23 2026-07-06 07:52
+
+commit 1a9f8c748f361786d25dc877af31da293e8c9f23
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:46:08 2026 -0700
+
+    chore: sync MM23 2026-07-06 07:46
+
+commit c277733179198864aecf77ab083c72d77949467d
+Merge: 36cb2c5 4241030
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:09:57 2026 -0700
+
+    chore: import da-webwssite-build-workflows into tools/build-workflows (history preserved)
+    
+    git-subtree-dir: tools/build-workflows
+    git-subtree-mainline: 36cb2c5d09579393a265d5ee01d57c37aed5be7d
+    git-subtree-split: 4241030b6a96da34cf92ddf9f8f7822162d65668
+
+commit 36cb2c5d09579393a265d5ee01d57c37aed5be7d
+Merge: 4cdee70 8f82134
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:09:53 2026 -0700
+
+    chore: import atomic-finds  into sites/atomic-finds (history preserved)
+    
+    git-subtree-dir: sites/atomic-finds
+    git-subtree-mainline: 4cdee70584e93f5431c10391105241c0cb9585d1
+    git-subtree-split: 8f82134d3ec67ccb72d2fc639aa4d1a5a8c4b340
+
+commit 4cdee70584e93f5431c10391105241c0cb9585d1
+Merge: 92be9c6 442e1de
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:09:42 2026 -0700
+
+    chore: import healthcare-training-center into sites/healthcare-training-center (history preserved)
+    
+    git-subtree-dir: sites/healthcare-training-center
+    git-subtree-mainline: 92be9c6755912284312fcf9a75f477e5667cd3cd
+    git-subtree-split: 442e1de1166f3192f936f3a5644db7e85b984520
+
+commit 92be9c6755912284312fcf9a75f477e5667cd3cd
+Merge: 2a84e5c dd653e7
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:09:32 2026 -0700
+
+    chore: import design-system-main into packages/design-system (history preserved)
+    
+    git-subtree-dir: packages/design-system
+    git-subtree-mainline: 2a84e5c42b5b72e7d5c225c9e75db2295c81d10a
+    git-subtree-split: dd653e7da66d44b038dbd3d3ec89df5aa6e3bdd6
+
+commit 2a84e5c42b5b72e7d5c225c9e75db2295c81d10a
+Merge: 319db48 967529a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:09:24 2026 -0700
+
+    chore: import DigitalAllies into sites/digitalallies (history preserved)
+    
+    git-subtree-dir: sites/digitalallies
+    git-subtree-mainline: 319db48a0f70962115c0eb2523fa7f57170aa52f
+    git-subtree-split: 967529a2ecac0f9efed7d34373dc59d7fb455227
+
+commit 319db48a0f70962115c0eb2523fa7f57170aa52f
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 07:09:06 2026 -0700
+
+    chore: initialize da-platform monorepo
+
+commit 8f82134d3ec67ccb72d2fc639aa4d1a5a8c4b340
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jul 6 05:30:46 2026 -0700
+
+    chore: sync MM23 2026-07-06 05:30
+
+commit 4241030b6a96da34cf92ddf9f8f7822162d65668
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Mon Jul 6 05:30:49 2026 -0700
+
+    chore: sync MM23 2026-07-06 05:30
+
+commit 6af45ba9f7ac3a96f544b61999a2f955c8dea899
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 27 00:59:57 2026 -0700
+
+    file structure renamed
+
+commit 967529a2ecac0f9efed7d34373dc59d7fb455227
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 26 12:49:59 2026 -0700
+
+    feat: connect static website to Supabase CMS
+
+commit c71f9b6e87a7ef3a29584e70602975807308d21a
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Fri Jun 26 12:46:57 2026 -0700
+
+    site audit resolutions: implement modular admin dashboard sections, kanban board, notebooks, dev tracker, settings uploads, and pages split-pane editor
+
+commit 442e1de1166f3192f936f3a5644db7e85b984520
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 26 09:23:05 2026 -0700
+
+    fix: resolve Vite/Rollup React dependency errors and relocate design system assets to public folder
+
+commit 8ec5bc73079b095746d66d5e62cd617236fce664
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 26 09:19:42 2026 -0700
+
+    Please provide the list of changes or the files modified so I can generate the commit message for you. Index_wired.html, index.html
+
+commit 769fe9fccd866b1f8bc6ee473024dc03548aeb24
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 26 09:18:34 2026 -0700
+
+    refactor: fix relative paths to design system assets in index files
+
+commit da34d4720594e489687f9bda46a52838101b26c5
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 26 08:00:16 2026 -0700
+
+    chore: update vercel.json configuration for Vite
+
+commit 96b6c6d8c705809a44fa218ec52b8e1f93bc5e0d
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 26 07:41:16 2026 -0700
+
+    chore: integrate app and news-template subprojects and update project files
+
+commit d8369bf10d8ea7fbcff508d32f781217e8c30819
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 24 19:06:16 2026 -0700
+
+    initial commit: add atomic finds components and brand assets
+
+commit bf537b7b4f1b3fd705c04a069c92d53d965799d3
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 24 18:39:08 2026 -0700
+
+    feat: integrate new CMS admin dashboard layout and views
+
+commit 10d11aada71ac5488dc0dae30776018aa9301147
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 24 13:34:25 2026 -0700
+
+    chore: sync local to remote
+
+commit dd653e7da66d44b038dbd3d3ec89df5aa6e3bdd6
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 24 05:31:29 2026 -0700
+
+    Delete CNAME
+
+commit 634d9383b82654b3034176683fa5853859dc2db9
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 24 05:24:21 2026 -0700
+
+    Update design system files
+
+commit 2606528b4e553296e07f3667119d3e8c3c3bfd69
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 24 04:07:07 2026 -0700
+
+    Initial commit of design system
+
+commit 09c439c2680023a60c8ab1741e2be298ef9207f3
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jun 21 03:03:00 2026 -0700
+
+    Delete skills directory
+
+commit a2922d251d5762dc6524707f52374fdd05092445
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jun 21 09:57:42 2026 +0000
+
+    Prepare for Vercel deployment: clean root redirect, add Vercel setup guide, organize legacy materials
+
+commit 4681da86677d38b110482afd537ea5401b9f4baa
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Jun 21 01:57:47 2026 -0700
+
+    Delete Screen Recording 2026-06-03 at 12.22.45 PM.mov
+
+commit a41ddc7b3f7d7cf9baa550903801e0c4c3d21716
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 19 12:19:09 2026 -0700
+
+    Delete digital-allies-design-system directory
+
+commit e335f42a40cf59f97fb3a62c04bf67f0c6a514b2
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Fri Jun 19 10:54:10 2026 -0700
+
+    fix: add navigation delay and safety timeout to auth recovery redirects to ensure session processing
+
+commit 28cab10aeee6d3d5cd86f0716de816ddabee4631
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Fri Jun 19 01:02:25 2026 -0700
+
+    docs: update GitHub repository link for the primary live site in README
+
+commit 7c483ac697f0d469029b2dfb1f257a5d23259131
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Thu Jun 18 01:52:53 2026 -0700
+
+    chore: sync 2026-06-18 01:52
+
+commit f89bce6fea8c9a3c770a0b6dc3d7e8f8ba3ba07d
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Thu Jun 18 01:38:36 2026 -0700
+
+    refactor: migrate connected CMS source files and design system assets to new directory structure
+
+commit cdf906d6292f2156ca436ba994d1fb0af34da494
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 22:20:21 2026 -0700
+
+    chore: upgrade @supabase/ssr and @supabase/supabase-js dependencies
+
+commit 09c1587914b026427f6fdd774649241c0e8d69fb
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 21:46:57 2026 -0700
+
+    fix: move @next/swc-darwin-arm64 to optionalDependencies for Vercel Linux builds
+
+commit 17ae54226d096727cb5488e14292292bdbd60fd1
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 21:28:58 2026 -0700
+
+    chore: force vercel rebuild of main
+
+commit b27de0d95e6030ff098eeeb71e6583eaad8ea3f7
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 20:51:40 2026 -0700
+
+    feat: implement password reset flow, SWC resolution, and route group auth fix
+
+commit 099731e503982710c46ff513b2188392e7d98799
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 17 14:27:59 2026 -0700
+
+    chore: sync 2026-06-17 14:27
+
+commit 5b27d592de83b1f4d5ba3a62355cfe7888064ffa
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 08:42:11 2026 -0700
+
+    fix: handle PKCE flow in auth callback for Supabase invite/recovery emails
+    
+    Supabase now defaults to PKCE flow — invite and recovery links arrive as
+    ?code=xxx query params, not #access_token= hash fragments. The old callback
+    only handled the hash/implicit flow so invited users landed on a blank page
+    with no password-creation option.
+    
+    Now checks ?code= first, calls exchangeCodeForSession(), then shows the
+    set-password form for invite/recovery types. Hash-based flow kept as fallback
+    for any legacy links.
+    
+    Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+commit 15698c99da237192ee4a9dec7e6f1be363af5532
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 08:14:33 2026 -0700
+
+    chore: add Supabase CLI config and migration structure
+    
+    - Fix permission denied error for schema public (newer Supabase projects
+      revoke CREATE from postgres by default; grant it explicitly at top of schema)
+    - Initialize supabase CLI project (config.toml)
+    - Promote schema.sql and security-fixes.sql to versioned migrations
+    - Add seed.sql for supabase db seed workflow
+    
+    Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+commit b7e67f0a01e624852365db293d0b04bfa3bcc409
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 17 08:14:30 2026 -0700
+
+    feat: complete bilingual (EN/ES) coverage for alttext and seo-aeo pages
+    
+    All static content sections now carry data-en/data-es attributes.
+    JS-rendered checklists (accItems, dirItems, aeoItems) carry label_es/note_es
+    translations and re-render on language toggle via LC.applyLanguage hook.
+    ATC analyzer and schema generator copy button also language-aware.
+    
+    Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+commit 84d53c1449d29e9dcc88d01f0aaff72d52ea26b4
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 07:02:30 2026 -0700
+
+    chore: sync 2026-06-17 07:02
+
+commit 5ba4941936465e4577bab394a8cfd27a44febd57
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Wed Jun 17 06:26:15 2026 -0700
+
+    chore: sync 2026-06-17 06:26
+
+commit 034ad4baf07bbe54f7745a7129398f851ff66f98
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Tue Jun 16 03:41:34 2026 -0700
+
+    fix: stop redirect loop — exclude login from matcher, copy cookies on redirect
+
+commit 568df6f9edc800afa93095f672cf40517c6abe61
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Tue Jun 16 03:00:39 2026 -0700
+
+    feat: redesign remaining admin pages with Connected CMS design system
+
+commit 159e11bb4768abb6e291cf0085658c992a03f889
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Tue Jun 16 02:22:44 2026 -0700
+
+    feat: redesign admin UI with Connected CMS design system
+
+commit f92b29fd696240fcd626f579e39afd6f32215041
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Tue Jun 16 02:02:26 2026 -0700
+
+    fix: add vercel.json for nextjs framework detection, fix lint error
+
+commit 8c6cf9954bd6dc88d5e05fd2ad005ec24e7deb56
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Tue Jun 16 01:45:16 2026 -0700
+
+    chore: remove client-site-template subdirectory, app now lives at root
+
+commit e746aa3a1fe0b00adb9565ee850699706c1a8301
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Tue Jun 16 01:21:14 2026 -0700
+
+    fix: update next to v15, align eslint-config-next
+
+commit e56926251115ce9519ec6c37dd53d94a3dd6b492
+Author: Anthony Cassella <acinktown@gmail.com>
+Date:   Mon Jun 15 12:54:48 2026 -0700
+
+    feat: add auth callback and restructure to root
+
+commit 598a6cab9d00faf6b3432ccd9bac4748e87dab9e
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jun 15 11:00:46 2026 -0700
+
+    Add .nojekyll to bypass Jekyll build step on Pages
+    
+    The site is plain static HTML, so no Jekyll build is needed. This removes
+    the Pages dependency on GitHub Actions and lets the site publish on push.
+
+commit 96d58aedc60732f543a4eca5d356a002371a392a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jun 15 12:25:29 2026 +0000
+
+    chore: initial commit
+
+commit e41d58f4512132da58a7767afdea33bf09bb126a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jun 15 12:24:58 2026 +0000
+
+    chore: initial commit
+
+commit 1a628608591551d622812115364d9acafabad14b
+Merge: 581f372 e7d8b3f
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 12:36:20 2026 -0700
+
+    Merge pull request #51 from Digital-Allies/main
+    
+    Merge pull request #50 from Digital-Allies/site-overhaul-2026
+
+commit e7d8b3f2e46b56982563f151369ee7b6257be233
+Merge: 69d7d31 581f372
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 12:28:24 2026 -0700
+
+    Merge pull request #50 from Digital-Allies/site-overhaul-2026
+    
+    Site overhaul 2026
+
+commit 581f372ef2d5c4efa6455cc44357f33ae8e5e1bc
+Author: Digital Allies Bot <bot@digitalallies.net>
+Date:   Sat Jun 13 11:54:34 2026 +0000
+
+    fix: image paths, docs move, sitemap cleanup
+    
+    - Update department icons to assets/the departments/*_optimized.webp
+    - Update diagram srcset/src to assets/diagrams/*_optimized.webp
+    - Update suspension bridge to assets/suspension-bridge/
+    - Remove broken SVG source line (file already deleted)
+    - Move docs/CODE-STANDARDS.md -> assets/docs/CODE-STANDARDS.md
+    - Move CODE_OF_CONDUCT.md -> assets/docs/CODE_OF_CONDUCT.md
+    - sitemap.xml: remove video-training, update homepage lastmod
+    - sitemap.html: remove video-training entry, fix count 13->12, update date
+
+commit 03ec6d9e4088df0a7d7c6f39f3c62349a1ca0dc4
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:36:34 2026 -0700
+
+    Delete suspension bridge.svg
+
+commit ca1ddcecf498021b37c9a1083b6b691d3f8da25f
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:36:21 2026 -0700
+
+    Delete suspension bridge.webp
+
+commit 2e5d1632e466e0a52b5265db45603849607c8c9b
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:36:05 2026 -0700
+
+    Delete suspension bridge.png
+
+commit b4b6219d213064a38a7adbdba06dbb77cb4b89a6
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:32:31 2026 -0700
+
+    Delete diagrams directory
+
+commit 36e13cdc01b63fd048e7a4972a7652e8201bb511
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:27:15 2026 -0700
+
+    Delete assets/support-icon.png
+
+commit 6d34a8845d01936dd6de24cf59f28e2b21b59494
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:27:03 2026 -0700
+
+    Delete assets/integrations-icon.png
+
+commit 36482c503d36619906f45df42ebae7e9df50b9f7
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:26:44 2026 -0700
+
+    Delete assets/digital-allies-doc-kit.html
+
+commit d852cb8ec503af76d8c2192f98602065877178a0
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:26:21 2026 -0700
+
+    Delete assets/design-icon.png
+
+commit adf41d4a734288597d89ed524678d77649d16af8
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:26:11 2026 -0700
+
+    Delete assets/automation-icon.png
+
+commit 780beaa2ca765b02bc3a25b6d121fc6406e9a7ab
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:20:17 2026 -0700
+
+    Delete Integrations.svg
+
+commit ad48f404498a3d91fe229e29633d25b0a6855879
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:17:26 2026 -0700
+
+    Delete assets/Brand System directory
+
+commit 93b0aeca1f97bb59416668a04ac7c744d5f85cf1
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:17:14 2026 -0700
+
+    Delete assets/Design System  directory
+
+commit b06ae20b80ea12d4a8392518f90189d133e8c789
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jun 13 04:15:30 2026 -0700
+
+    Delete assets/diagrams/Old PNG FIles directory
+
+commit 3184ff90813156b50ba3ff0a80d85834a65bfe28
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:49:00 2026 +0000
+
+    Project 2: SEO — strengthen structured data for AI search
+    
+    index.html:
+    - Add knowsAbout (12 expertise areas) to ProfessionalService schema
+    - Add knowsLanguage: ['en', 'es']
+    - Add priceRange: 'Free–$$$'
+    - Replace flat areaServed with GeoCircle (100km radius, Kingman AZ)
+    - Update FAQPage dateModified
+    
+    learn/seo-aeo.html, learn/alttext.html:
+    - Update dateModified on Service, Article, FAQPage schemas
+    
+    Next step (manual): Submit these 3 URLs for reindex in Google Search Console:
+      https://digitalallies.net/
+      https://digitalallies.net/learn/seo-aeo
+      https://digitalallies.net/learn/alttext
+
+commit ec25fce013f76e94b3721cc5b1069721328b070e
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:47:05 2026 +0000
+
+    v1.6: standards — update README.md, create docs/CODE-STANDARDS.md
+    
+    - Update README.md: reflect self-hosted assets, remove video-training from
+      site structure, update stack table
+    - Create docs/CODE-STANDARDS.md: folder map, HTML/CSS/JS conventions,
+      JSON-LD schema matrix, accessibility checklist, commit format,
+      digital-allies-brand skill reference
+
+commit 614c631274b044407e1b91d16616024e8cdab8e4
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:45:08 2026 +0000
+
+    v1.5: schema — add Article JSON-LD to 5 learn/ pages
+    
+    - learn/ada-compliance.html: add Article schema
+    - learn/bilingual-web.html: add Article schema
+    - learn/dept-cooperation.html: add Article schema
+    - learn/design-bureau.html: add Article schema
+    - learn/self-governing-bureau.html: add Article schema
+    - All existing JSON-LD blocks valid; FAQPage already present on index.html + seo-aeo.html
+
+commit ba55780fc2bf260422fb20bb1e444d27aa03da33
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:42:31 2026 +0000
+
+    v1.4: content fixes
+    
+    - Remove 'Anthony reviews every Spanish line' from bilingual-web.html
+    - Remove VIDEO TRAINING section from learn/index.html
+    - Remove .video-thumb-card CSS and facade script from learn/index.html
+    - Delete learn/video-training.html
+    - Create _redirects: /learn/video-training → /learn/ 301
+
+commit c29bac3be7575bbd3ea7c3d1ff74f6a2b3f33186
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:39:33 2026 +0000
+
+    v1.3: video facades — lazy-load Vimeo embeds
+    
+    - Replace 3 Vimeo iframes in learn/index.html with click-to-load facades
+      (thumbnail preview + play button; iframe loads on click with ?dnt=1)
+    - Add ?dnt=1 to player URL in learn/video-training.html
+
+commit d9a8fc0de8e3309cd9cc4a0785f32d2ac64e7b40
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:34:51 2026 +0000
+
+    v1.2: accessibility - WCAG 2.1 AA compliance
+    
+    - Add <main id='main-content'> to 9 pages (screen reader navigation)
+    - Fix color contrast: text-primary-blue #3A7BD5→#1D5FAD (5.4:1 ratio)
+    - Fix label for= attributes on 12 schema generator inputs (learn/seo-aeo.html)
+    - Add aria-label to time inputs (opening/closing hours)
+    - Add aria-hidden to decorative range sliders (brand.html)
+    - Fix heading order: h2→h4 changed to h2→h3 in jargon+diagrams sections
+    - Fix floating contact button: remove duplicate aria-label, add sr-only text
+    - Add aria-hidden to decorative pulse animation elements
+
+commit 96d0aa4ad6034c108890f2cbd03044f6291d9c2b
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:28:54 2026 +0000
+
+    v1.1: performance - self-host Tailwind, Lucide, Google Fonts
+    
+    - Build Tailwind CSS from source (eliminates cdn.tailwindcss.com)
+    - Self-host Lucide v1.17.0 custom 4-icon build (3KB vs 402KB)
+    - Self-host JetBrains Mono + Lexend Deca from fontsource
+      (latin + latin-ext subsets, eliminates fonts.googleapis.com)
+    - Add _headers for Cloudflare 1-year asset cache
+    - Deduplicate lucide.createIcons() calls
+
+commit 1abaf53e25249de54a004ba3af920bcf5b06a389
+Author: Claude (Digital Allies) <claude@digitalallies.net>
+Date:   Fri Jun 12 22:23:40 2026 +0000
+
+    v1.0: asset migration - update all HTML path references
+    
+    - diagrams/*.png -> assets/diagrams/*.webp
+    - assets/*-icon.png -> assets/departments/*-icon.webp
+    - suspension bridge.png -> assets/suspension-bridge/suspension-bridge-desktop.webp
+    - suspension bridge-mobile.webp -> assets/suspension-bridge/suspension-bridge-mobile.webp
+    - Removed /projects/ folder
+    - Moved .py scripts to /scripts/ with README
+
+commit 97344695d0a7b5ced34f19786edaa3b9ccb1d58e
+Author: Anthony Cassella <cuus@MBA17.local>
+Date:   Fri Jun 12 04:09:43 2026 -0700
+
+    chore: seed site-overhaul-2026 branch with updated assets and config
+    
+    Adds optimised WebP diagram images, suspension bridge hero assets, department
+    icons, and local Claude settings in preparation for the SEO overhaul,
+    Lighthouse audit fixes, and translator migration work.
+    
+    Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+
+commit 69d7d3152df12626dba014c343e484c66e90fffd
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jun 12 03:09:55 2026 -0700
+
+    Update README with project overview and features
+    
+    Added comprehensive details about the Digital Allies services, site structure, and features.
+
+commit 1039bbe692ed307724ca2ceab305d1420c453b26
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 11 16:11:13 2026 -0700
+
+    Delete .vscode/projects directory
+
+commit 873512d98bde260dd1f5b71176ef77db6dcad110
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jun 9 13:57:08 2026 -0700
+
+    Add files via upload
+
+commit 4416e9094976944aa021f612c5c668e79572caa6
+Merge: 1da3930 2ab46d3
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 08:48:27 2026 -0700
+
+    Merge pull request #10 from Digital-Allies/copilot/fix-json-ld-escaping
+    
+    Escape injected schema/sitemap values and correct URL/count/replacement logic
+
+commit 1da39306efc860d6114adf3c06be0975a780309f
+Author: Digital Allies Admin <contact@digitalallies.net>
+Date:   Thu Jun 4 03:29:58 2026 -0700
+
+    chore: fix code quality issues in sitemap, learn, and cookies
+
+commit 66d256fed0f566e22f8fe6f384edb57dbd0c0b3d
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:55:45 2026 -0700
+
+    Update footer content in sitemap.html
+    
+    Removed footer credits and adjusted copyright text.
+
+commit 2ab46d32abb87004ebe83659835c7d6b61293f26
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Thu Jun 4 09:51:08 2026 +0000
+
+    fix: escape schema and sitemap values safely
+
+commit c7c05f71612e70bf45b36d460b68e28633b1a38d
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Thu Jun 4 09:50:28 2026 +0000
+
+    chore: outline plan for schema and sitemap fixes
+
+commit d8b5aa3cca92ed439dae3bad611d7027a295f068
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Thu Jun 4 09:49:01 2026 +0000
+
+    Initial plan
+
+commit c7efa52a85f3c8987e028e0e58f516f9c1daacd6
+Merge: 29edc56 57349bd
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:34:56 2026 -0700
+
+    Merge pull request #9 from Digital-Allies/finding-autofix-7
+    
+    Fix for Unused import
+
+commit 57349bd0bb31a9daed376aed058f27c21f8f2898
+Merge: 8ec2303 29edc56
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Thu Jun 4 09:33:00 2026 +0000
+
+    Merge origin/main into finding-autofix-7
+
+commit 29edc560e7a2ad24723b93350d8900f8a430d285
+Merge: 1cdab99 7f2454d
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:30:40 2026 -0700
+
+    Merge pull request #7 from Digital-Allies/finding-autofix-4
+    
+    Fix for Unused import
+
+commit 8ec2303c700e8270d4def36973a1f0c5ac22b2b0
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:29:46 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit 1cdab997b65a4f139c7c1c8921a2856f243df4f6
+Merge: 0d10cbb 1890620
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:28:58 2026 -0700
+
+    Merge pull request #8 from Digital-Allies/finding-autofix-6
+    
+    Fix for Unused import
+
+commit 7f2454df650c5d01de75b64671c51efa3163a03a
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:27:33 2026 -0700
+
+    Potential fix for pull request finding
+    
+    Co-authored-by: Copilot Autofix powered by AI <175728472+Copilot@users.noreply.github.com>
+
+commit 0d10cbb731490d248669be887c7a9e22eb482c94
+Merge: 77b6db1 3d761d1
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:26:12 2026 -0700
+
+    Merge pull request #6 from Digital-Allies/finding-autofix-3
+    
+    Fix for Unused import
+
+commit 3dd52efba516796012f4519adc1c9b5d693589f9
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:22:09 2026 -0700
+
+    Fix for Unused import
+    
+    Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>
+
+commit 18906200a9a1b5ae92b3067c8ed31c6522a8db8c
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:21:52 2026 -0700
+
+    Fix for Unused import
+    
+    Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>
+
+commit 06ce6bb97778d0f11469c3d5f6dc9e9f2e68e07a
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:21:37 2026 -0700
+
+    Fix for Unused import
+    
+    Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>
+
+commit 3d761d17683361670b8ffe70c5f15657f749578d
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:20:32 2026 -0700
+
+    Fix for Unused import
+    
+    Co-authored-by: Copilot Autofix powered by AI <62310815+github-advanced-security[bot]@users.noreply.github.com>
+
+commit 77b6db14aed3b077dfe4a53d252d0a2060a502d4
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:00:52 2026 -0700
+
+    Integrate Google Tag Manager into video-training.html
+    
+    Added Google Tag Manager script and noscript tag to video training page.
+
+commit 874cd47f9034ec631426b9dee22feb9d01f4c057
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 02:00:08 2026 -0700
+
+    Update index.html
+
+commit eb0a143871674d154184eade24b7edbbd5b78ac5
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 01:59:02 2026 -0700
+
+    Update terms.html
+
+commit ece31f732aa499890f2665bff14b180c5c94580b
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 01:58:06 2026 -0700
+
+    Update sitemap.html
+
+commit 29a93a4614aac4fddab382be05244abdc6d4d89b
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 01:57:01 2026 -0700
+
+    Update privacy.html
+
+commit dfe130ea09305ef1c039c5625f410056121471e5
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 01:56:20 2026 -0700
+
+    Integrate Google Tag Manager into index.html
+    
+    Added Google Tag Manager script and noscript tag for tracking.
+
+commit 46d7079d98de166a4cb82529e8b4cee1fd9e9fd5
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 01:55:38 2026 -0700
+
+    Integrate Google Tag Manager into cookies.html
+    
+    Added Google Tag Manager scripts for tracking.
+
+commit 60f0042b6ee1091cbfccc3ea5433be81dcf5fbe1
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Jun 4 01:54:05 2026 -0700
+
+    Integrate Google Tag Manager into brand.html
+    
+    Added Google Tag Manager scripts for tracking.
+
+commit 917de58518809ad34df5d8b647f34f7fc22f2239
+Author: Digital Allies <contact@digitalallies.net>
+Date:   Wed Jun 3 07:15:05 2026 -0700
+
+    fix: resolve JSON-LD trailing comma syntax errors in structured data
+
+commit 4007469888bc1d122e0e4295458e3562a6324422
+Author: Digital Allies <contact@digitalallies.net>
+Date:   Wed Jun 3 06:58:09 2026 -0700
+
+    feat: implement sitewide SEO updates including structured JSON-LD data, FAQ injection, and automated site maintenance tools.
+
+commit 36470e46c22cde9ce09721a0b5d6cc2ee97d3236
+Author: Digital Allies <contact@digitalallies.net>
+Date:   Wed Jun 3 06:41:57 2026 -0700
+
+    Initial commit
+
+commit 029859a219fef945f7279935b8d1d4357f1ab0f4
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 3 06:35:20 2026 -0700
+
+    Delete learn/video-training.html
+
+commit fccfbc4f71ca647b2fb639b9ce06a968ac25144c
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 3 06:35:06 2026 -0700
+
+    Delete learn/seo-aeo.html
+
+commit be6c72def7263d5454ddde5de0cb93bd88753d17
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 3 06:34:53 2026 -0700
+
+    Delete learn/index.html
+
+commit 0fab83449e1842d8d7a3baab3a418aa2ae1dafa2
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 3 06:34:29 2026 -0700
+
+    Delete learn/alttext.html
+
+commit e0ccab9aea355aa7ccee8fc9fe39bd5d690237c7
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Jun 3 05:44:50 2026 -0700
+
+    Update README.md
+
+commit df80422ca56cb7c6abcc70fb3769152b5b219fb7
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun May 31 03:43:35 2026 -0700
+
+    Rename README.html to README.md
+
+commit 00e2ce631c1cb1d991d23815e00d39ba6ed7b743
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun May 31 03:42:58 2026 -0700
+
+    Rename README.md to README.html
+
+commit 3970d1628defd70555be8b19ca37b0b5ada4010e
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat May 30 19:19:54 2026 -0700
+
+    Update west-of-3rd-demo.html
+
+commit 6dd40cb5527954ff4d7f6a8f8e71fb0f72892ad4
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat May 30 19:09:42 2026 -0700
+
+    Create west-of-3rd-proposal.html
+
+commit f5c91ff8021c8eddfa8fdeeebf985927e5894336
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat May 30 19:05:40 2026 -0700
+
+    Delete west-of-3rd-proposal.html
+
+commit 958a4af7e7ba248f3f25c42be75b30926b694125
+Author: AI Bot <bot@example.com>
+Date:   Sat May 30 15:16:09 2026 -0700
+
+    Add and update project proposals
+
+commit b081f3b4b0b98e0830076587081032d0cbfd8238
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat May 30 08:53:09 2026 -0700
+
+    Delete saffron-books-brief.html
+
+commit 8299dd547411d361f3e0d27f5922a9230de420f0
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat May 30 02:29:49 2026 -0700
+
+    Add Contributor Covenant Code of Conduct
+    
+    This document outlines the community's Code of Conduct, including standards for behavior, enforcement responsibilities, and guidelines for addressing violations.
+
+commit 7426e69d4da4be0cd1d993d1f4c67f8af8ddae44
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat May 30 02:24:57 2026 -0700
+
+    Delete assets/inventory_app directory
+
+commit 6523d2581ac1e4b69e717b9fba82e06dee797429
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed May 27 18:42:13 2026 -0700
+
+    Update saffron-books-brief.html
+
+commit d109ab6f71cf680ea573aa81451b2ee5a4672b0f
+Author: cuus <cuus@users.noreply.github.com>
+Date:   Sun May 24 06:38:08 2026 -0700
+
+    style: refactor link element formatting for guide cards in index.html
+
+commit 133e667e7441794e42ba4fc8a24dacb1e066cd5a
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun May 24 06:23:41 2026 -0700
+
+    Rename seo-aeo to seo-aeo.html
+
+commit 9479051eb9e214f034edf5f66b85f3480fc972c1
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun May 24 06:20:04 2026 -0700
+
+    Rename seo-aeo.html to seo-aeo
+
+commit aa8b78c54104d7c7afeb75f0a3f6a0cfbec016ba
+Author: cuus <cuus@users.noreply.github.com>
+Date:   Sun May 24 06:12:49 2026 -0700
+
+    feat(learn): add root-relative favicon links to all learning subpages
+
+commit 0390e9b144c8ff73603250e701f8427508ecfbd0
+Author: cuus <cuus@users.noreply.github.com>
+Date:   Sun May 24 06:07:29 2026 -0700
+
+    feat(learn): standardize learn index branding from DIY Desk to The Learning Hub
+
+commit 5fd79e4f424987f48b85daa66c1b98ec97a50862
+Author: cuus <cuus@users.noreply.github.com>
+Date:   Sun May 24 06:05:37 2026 -0700
+
+    style(sitemap): make navigation header responsive on mobile viewports
+
+commit ff6417fd035670f32fb8f3b5dba549f59c16592f
+Author: cuus <cuus@users.noreply.github.com>
+Date:   Sun May 24 05:03:57 2026 -0700
+
+    feat(learn): implement clean urls without .html extension and refine video tutorials page
+
+commit 4bcface8dcaa7b83f03d76f7c7f0b790c8b97331
+Author: cuus <cuus@users.noreply.github.com>
+Date:   Sun May 24 03:10:25 2026 -0700
+
+    feat(learn): clean learning hub integration, header/footer synchronization, and checklist bugfixes
+
+commit adbc7bda336a751019a6dc512b7fa240ff0dee7e
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun May 24 01:46:26 2026 -0700
+
+    Refactor video-training.html for consistency and UX
+    
+    Updated title and navigation links for consistency. Enhanced video card hover effects and improved language toggle functionality.
+
+commit 9f06c0d2874830c82714a78e419f331eaf213635
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 13:30:23 2026 -0700
+
+    Rename saffron-books-brief-email.html to saffron-books-brief.html
+
+commit 142e0b16a3d0b3014145ccb9546fb2975f382c9f
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 13:29:19 2026 -0700
+
+    Add files via upload
+
+commit c94ff5c4d32e4f57d36bef3c218a541f7452caba
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 02:03:19 2026 -0700
+
+    Delete Support.svg
+
+commit d2d61b5b451af82f42fbc42cab6fec747a7fc878
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 02:03:05 2026 -0700
+
+    Delete Automation.svg
+
+commit b5cd7340ce1408deadb243ab9c5bddad594ab551
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 02:02:53 2026 -0700
+
+    Delete digital-support-form.html
+
+commit 2fbb73ff4990e47144a1d95add9740bf24410165
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 02:02:40 2026 -0700
+
+    Delete digital-support-proposal.pdf
+
+commit d4fa5ed8a9857c192e679f33f9d262f6589e1377
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 01:59:39 2026 -0700
+
+    Change logo URL to new asset location
+    
+    Updated logo URL to point to the new image location.
+
+commit b7a32a5ccea32efd83545e04ff70b8d4267e17f8
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 01:56:16 2026 -0700
+
+    Rename 016_DA_lrg_banner_vermilion_glow_RCSHFtz.png to DA_banner_vermilion.png
+
+commit 9c03d9b938f6e413b97a95f46851026709869856
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri May 22 01:52:44 2026 -0700
+
+    Delete saffron-books.html
+
+commit 0675f2c914618ba02076909b7968e6c942680d80
+Author: Anthony Cassella <cuus@MBA17.local>
+Date:   Thu May 21 13:32:43 2026 -0700
+
+    feat: align brand voice, add premium interactive animations, bilingual guide, and resize icons
+
+commit fc3fa37b95df7b1837c26bbea4bad89a69e2dcbe
+Author: Anthony Cassella <cuus@MBA17.local>
+Date:   Tue May 19 08:40:39 2026 -0700
+
+    Update sitemaps with all public pages, enhance JSON-LD schema with services, business info, and department details
+
+commit 37c1931ac63399234731790e448badafa7bef52e
+Author: Anthony Cassella <cuus@MBA17.local>
+Date:   Tue May 19 08:35:09 2026 -0700
+
+    Add BST digital support form and proposal — private client docs, not linked in site navigation
+
+commit 3277f9eddce3cb2c9bde3d99fdd7b4c23c5ca6fc
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue May 19 02:32:05 2026 -0700
+
+    Update index.html
+
+commit 3425346bb734f42d8547f29b9290650b8dd383d0
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Apr 17 16:27:51 2026 -0700
+
+    Update pricing information in index.html
+
+commit 0198e831c63d73c390363e447c50560d32b9bd83
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Apr 17 13:53:57 2026 -0700
+
+    Rename saffron-books to saffron-books.html
+
+commit 212d0219635aa63bdbf59fbc6ca3deafb47ce44b
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Apr 17 13:48:01 2026 -0700
+
+    Add initial HTML structure for Saffron Books
+
+commit 44b72dbce1d95884eb0b71dfd1cddcc173b389af
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 03:11:20 2026 -0700
+
+    Refactor video training HTML structure and scripts
+
+commit 9d4a420c0a3f3a123523aee5a1787a23c3f8859d
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 03:03:54 2026 -0700
+
+    Update index.html
+
+commit 9b5ae03dda2df55cb393e5d9c29004b40ead6bd1
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:58:58 2026 -0700
+
+    Refactor navigation structure and styling
+
+commit 94d46abf4101693c56a48fa1da8320f63e2239c8
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:56:05 2026 -0700
+
+    Update navigation and category button styles
+
+commit 37e1b452b7fb777f52ab4ff9287e6ae770cad7e6
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:49:57 2026 -0700
+
+    Update cookies.html
+
+commit 3391971168410f95d0a3e9fe05ef6cb6262ec786
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:49:33 2026 -0700
+
+    Update index.html
+
+commit 3b4b9eedf400835df1c0ae8707d61688854a509f
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:48:42 2026 -0700
+
+    Update navigation with language switcher and links
+
+commit ad49edadb659b238a8e12c0c6cc5f9ed00c88305
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:47:58 2026 -0700
+
+    Update navigation with new links and language switcher
+
+commit 79c8e00240c662fedd6b64808d0f0cb6f1206297
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:47:30 2026 -0700
+
+    Update navigation links to point to index.html
+
+commit d8f7130e9280f4fc656ebb5a98704e33f053a5ef
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Apr 8 02:43:38 2026 -0700
+
+    Add video training HTML structure and content
+    
+    This file contains the HTML structure and content for the Digital Allies video training platform, including navigation, hero section, category filter, video grid, and footer.
+
+commit c602b1fa588008d2e3061a7dc0c78e4f172b07fa
+Author: Digital Allies <contact@digitalallies.tech>
+Date:   Mon Feb 23 11:10:16 2026 -0700
+
+    feat: Replace old SVG assets with new PNG/WebP diagrams, add a favicon, and remove deprecated inventory application files.
+
+commit f45ad5f83969801c31e7a1b79abe508ba0a9fbdb
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Feb 23 08:24:22 2026 -0700
+
+    Create CNAME
+
+commit 2d44cb850eb3af1c33cc04ee00c7e63b2ad5d3d3
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Feb 23 08:24:06 2026 -0700
+
+    Delete CNAME
+
+commit f822eaf1ed15f1c6af02e403574f3429c8225acc
+Author: Digital Allies <contact@digitalallies.tech>
+Date:   Mon Feb 23 08:01:04 2026 -0700
+
+    Update diagrams: branded Digital Allies infographics with collapsible accordions
+    
+    - Replace all SVG diagrams with high-quality branded PNG infographics
+    - Add responsive mobile (square) versions for all 5 diagrams
+    - All diagrams now tagged 'DIGITAL ALLIES | 2026' instead of generic branding
+    - Wrap diagram sections in collapsible <details> accordions to reduce page height
+    - Add new custom suspension bridge illustration (SVG/PNG/WebP formats)
+    - Update bridge section with responsive <picture> element
+
+commit 0f9351a03b07903d1f7a27381b092c6d036d9882
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 19:03:13 2026 -0700
+
+    Create CNAME
+
+commit 2f80d2bfb19d6ef813449e09a6d658466d4d4bfb
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 19:01:49 2026 -0700
+
+    Delete CNAME
+
+commit f677f203d59f387471887fd36856b9e8c52130d0
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 18:53:26 2026 -0700
+
+    Add files via upload
+
+commit 67932bd41c0fbbadf6083848787c894cc50bb5fb
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 18:52:33 2026 -0700
+
+    Update README.md
+
+commit 5704738b8fcc6f77d8e8355634f4daecd9e0e935
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 18:51:48 2026 -0700
+
+    Delete assets/favicon directory
+
+commit 1338b9a8d576f7a23ecc7cf985463b02be043ea4
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 18:51:27 2026 -0700
+
+    Delete assets/logo directory
+
+commit 773b2aa3d64227de9ff57ee9409183968643e605
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 18:50:54 2026 -0700
+
+    Delete index.html
+
+commit 0df31d3ff4d8c47c8e3b7a9ee57b406aa4b0696a
+Author: Anthony <acinktown@gmail.com>
+Date:   Sun Feb 22 18:05:10 2026 -0700
+
+    Delete knowledgehub directory
+
+commit 7cad694b39ce67cf7e4be7eb544578f8c472c74c
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Feb 11 21:41:27 2026 -0700
+
+    Rename Digital Allies - The Landing 264fc742b9f781409c98eb72f2af7963.html to index.html
+
+commit 7ebf03c418e7b2da3e6888e8704bb8ff0296a5a9
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Feb 11 21:40:49 2026 -0700
+
+    Add proposal-site.html to knowledgehub directory
+
+commit fa2bff3efe19d3660dbf27a9585415eb452246a9
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Feb 11 21:35:36 2026 -0700
+
+    Update knowledgebase link to knowledgehub
+
+commit c2e1abc1b3edccbd7767f7dd4d33ed06b2e6745e
+Author: Anthony <acinktown@gmail.com>
+Date:   Thu Feb 12 04:32:35 2026 +0000
+
+    Refactor code structure for improved readability and maintainability
+
+commit 698579a15a9109ae30c0fea49e34552f1bb442c0
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Feb 11 21:23:17 2026 -0700
+
+    Add link to knowledge base in footer
+
+commit c967032f7c1e9f2f40da7d5d046d5ddd402cf829
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jan 17 14:05:52 2026 -0700
+
+    Update digital-allies-logo-blue-gradient.svg
+
+commit 4834a9f1183782796453bb281b2051a7b159027c
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jan 16 04:46:57 2026 -0700
+
+    Modify Firebase config and appId defaults
+    
+    Updated Firebase configuration to include default values when __firebase_config is undefined. Changed default appId from 'reseller-cmd-center' to 'reseller-app-v1'.
+
+commit 6eabe7b8e946bacd5219f1ecf0396fab120b61b4
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 14:00:14 2026 -0700
+
+    Update gradient colors in animated-logo.svg
+
+commit 67f8f8a5ac3b893705419bda819b4b27edaed593
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:55:38 2026 -0700
+
+    Replace logo with animated version in navbar
+
+commit 02953cd84f311ec8ee253a83f366bd029e931751
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:53:25 2026 -0700
+
+    Add animated logo SVG file
+
+commit 5c2479dab9eeb3ff4a9850588ccbd4d0e9ea3ce0
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:51:25 2026 -0700
+
+    Fix typo in gradient color and remove unused gradients
+
+commit 04223ffdf0bbced909cf1d54946bd779c21c51d8
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:49:50 2026 -0700
+
+    Remove unused gradients from animated logo SVG
+
+commit b02fb449c9ff33bb1833cea2d5b57649539e7ae8
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:48:19 2026 -0700
+
+    Remove unused gradients from animated logo SVG
+
+commit 1ef32765ef6665a84b34b250fd5e04031a59ed1f
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:47:22 2026 -0700
+
+    Update animated logo SVG with pulsing dot animation
+
+commit bda56578a565aea4a50b025a4eb716ac157f0a3a
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 13:34:58 2026 -0700
+
+    Add files via upload
+
+commit 8149864a551456ff66988b31f82139f1b725ec69
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 12 05:36:58 2026 -0700
+
+    Update heading gradient colors in index.html
+
+commit ea674f0fc5248ad4202c0c30859314ff62cef82d
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 5 20:18:38 2026 -0700
+
+    Update inventory.html
+
+commit b63910d577aa54828085f0e293a80aeba38330e5
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jan 6 03:17:25 2026 +0000
+
+    feat: add initial inventory.html file for inventory management app
+
+commit 169e936c335a3f07f88f98f6ccbcdc94b35bbac4
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jan 6 03:01:45 2026 +0000
+
+    feat: initialize package.json for reseller inventory management app
+
+commit fb87037a04e4f077714fd02f800587db49c085ca
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Jan 6 02:52:05 2026 +0000
+
+    feat: add reseller inventory management app with Firebase integration
+
+commit c71f4c96e851245ed2fda447f298e821f8e7ad85
+Author: Anthony <acinktown@gmail.com>
+Date:   Mon Jan 5 19:45:08 2026 -0700
+
+    Delete .nojekyll
+
+commit 155183e358918380e65d67f3f215e8a7b2a4946e
+Author: Anthony <acinktown@gmail.com>
+Date:   Sat Jan 3 12:14:23 2026 -0700
+
+    Fix grammatical error in footer text
+
+commit 9fa9fb9fea0687e054fed876f605d319ee4ca581
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jan 2 13:01:39 2026 -0700
+
+    Update video container and add contact info
+    
+    Updated aspect ratio for video container and adjusted max-width for better fit. Added contact information section with phone and email links.
+
+commit 1e93925cb6029d646d9d1f54970e8628ed41f25b
+Author: Anthony <acinktown@gmail.com>
+Date:   Fri Jan 2 12:37:45 2026 -0700
+
+    Switch form submission to FormSubmit.co
+    
+    Updated form submission logic to use FormSubmit.co for direct email functionality. Added _captcha: false for improved user experience and modified error handling.
+
+commit 10442f0bec6688207b47293fa026b9bc2ebc9049
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 21:47:08 2025 -0700
+
+    Refactor form submission to use Formspree
+    
+    Updated success message and form submission logic to use Formspree for email handling.
+
+commit db07b019ea53d09ef943877fea3a71ee46f74bd4
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 06:13:31 2025 -0700
+
+    Adjust padding and text alignment in hero section
+
+commit 0cf6acfcab679513aad9e7997f8058b1258691d3
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 06:07:44 2025 -0700
+
+    Adjust padding for vision section
+    
+    Increased padding for the vision section.
+
+commit 65704359649ccbbd5f2aadef18f64be99658eb61
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 06:01:34 2025 -0700
+
+    Change text alignment from left to center
+
+commit 06c818d9e161be6d26e173e06bbcc54c07c06263
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 05:55:58 2025 -0700
+
+    Change heading from 'Our Expertise' to 'Our Services'
+
+commit 18f8e909e3e4db9945ffbc902d9f3a2c332508ef
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 05:53:17 2025 -0700
+
+    Change heading text color to white
+    
+    Updated heading text color and formatting for better visibility.
+
+commit 3f3b605b0dc004eb592895875e92d1577a22b0ee
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 05:47:33 2025 -0700
+
+    Fix HTML formatting for heading and span elements
+
+commit d92dcd6985a7d9898ae7f7fd3866f826ee2fb039
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 05:41:48 2025 -0700
+
+    Update index.html
+
+commit 12e5bc50d8865383e0947963962e1a1ccd48b142
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 05:23:17 2025 -0700
+
+    Refactor favicon links and add success message UI
+    
+    Updated favicon links and added success message UI.
+
+commit 5bdd2f4042ecc5943248f653bbb1e5716483dcf5
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 05:06:03 2025 -0700
+
+    Revise HTML meta tags and content for clarity
+    
+    Updated meta tags for description and keywords to better reflect services. Enhanced content in various sections for clarity and engagement.
+
+commit 6a178de1351290c62942ec2716125c09965b4663
+Author: Anthony <acinktown@gmail.com>
+Date:   Wed Dec 31 04:02:24 2025 +0000
+
+    Add pulsing dot icons and update logo assets with gradients
+    
+    - Created four pulsing dot SVG icons in black, blue, green, and red.
+    - Updated digital allies logo SVGs to include gradient fills and pulsing dot animations.
+    - Added new logo variations: blue gradient, green gradient, footer logo, and square solid logo.
+    - Introduced stacked logo variations with gradient fills.
+    - Added a new glyph logo with a gradient fill.
+
+commit e9cd97707604fe5360546723de0bb81d92460b76
+Merge: 71d1eb9 76285cd
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 17:30:35 2025 -0700
+
+    Merge pull request #2 from Digital-Allies/copilot/fix-react-page-loading-issue
+    
+    Add .nojekyll to fix MIME type errors on GitHub Pages custom domain
+
+commit 76285cdd4db0a46efd701b9fc992157fa90c057d
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Wed Dec 31 00:27:27 2025 +0000
+
+    Add .nojekyll and CNAME to public directory to fix GitHub Pages deployment
+    
+    Co-authored-by: cassellac <202744782+cassellac@users.noreply.github.com>
+
+commit 3c9c330d64c12893f5dc8dc2cbb576a21e79cac0
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Wed Dec 31 00:23:18 2025 +0000
+
+    Initial plan
+
+commit 71d1eb9fe24d4b9ce9aa436546b15c7ec1f13319
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 17:00:48 2025 -0700
+
+    Create CNAME
+
+commit e365f19ab313971afff29cd55767994cf1fea656
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:57:32 2025 -0700
+
+    Change base path to '/' for GitHub Pages
+    
+    Updated base path for asset loading in GitHub Pages.
+
+commit 52368f69cf912f3b81609dd688c22d98ced4a06e
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:55:15 2025 -0700
+
+    Delete public/CNAME
+
+commit 424208c42c8ff6d73eb76793990301732f3b76aa
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:54:44 2025 -0700
+
+    Delete CNAME
+
+commit b2bc099152d8230de40adf233789af802e12aa5f
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:47:22 2025 -0700
+
+    Create CNAME
+
+commit da2eebef1457a5c861b67d43509d58eb1e423867
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:34:13 2025 -0700
+
+    Delete CNAME
+
+commit 64f9e02d4d8127259d2177ef92fc607298cb85c7
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:18:32 2025 -0700
+
+    Create CNAME
+
+commit a4a211fcedc8dac281452b2652f944f0792cff09
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 16:07:06 2025 -0700
+
+    Delete CNAME
+
+commit 70ba47addbcc7e3e0672990acb6aeb0c83fc2919
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 15:56:47 2025 -0700
+
+    Fix base path for GitHub Pages deployment
+    
+    Set base path to './' for GitHub Pages compatibility.
+
+commit 77a4add69157461c2fbdc31e1a7d8881022de5cf
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 12:04:06 2025 -0700
+
+    Create CNAME
+
+commit d3344b1f960906fed66753f787980ed86d44d8a9
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 18:59:43 2025 +0000
+
+    Remove CNAME file for deprecated domain
+
+commit 6702666d55fb76acc0975ab6c6602f6107738b31
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 18:58:08 2025 +0000
+
+    Remove obsolete JavaScript files and HTML mockup; update CNAME for domain configuration
+
+commit 736dcb6f3903d8c0b1ec8016999623ff822eb0b8
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 11:46:30 2025 -0700
+
+    Create CNAME
+
+commit 6071e977ae3328d5074573d42336f5d0feac6b99
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 11:44:23 2025 -0700
+
+    Add CNAME file for custom domain
+
+commit 1607cb0a827b3c9a52316d1f442233720787a6d8
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 11:43:16 2025 -0700
+
+    Delete CNAME
+
+commit 5e05d83befd0bd1eec7eea5b7f4349e368be2902
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 18:33:08 2025 +0000
+
+    Remove obsolete brand guidelines and style tokens files
+
+commit 0f01efb5ccd3e5a1306455fcb4b11e2d8e29bf67
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 18:21:34 2025 +0000
+
+    Add GitHub Actions workflows for CNAME and deployment to GitHub Pages
+
+commit b56389d1b8686b03d0ead0813efc16d86bff61a8
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 18:13:07 2025 +0000
+
+    Add new SVG logos and brand guidelines for Digital Allies
+    
+    - Created multiple SVG logo variations including blue gradient, green gradient, default, footer, and square solid logos.
+    - Added stacked logos in both black and default styles.
+    - Introduced a logo glyph for simplified branding.
+    - Developed a comprehensive brand guidelines HTML document.
+    - Established a style dictionary in JSON format for colors, gradients, typography, spacing, and shadows.
+    - Included tokens in both JSON and CSV formats for easy integration into design systems.
+
+commit 0f19988991bac553aab11808e07dcadb97bfce13
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 18:12:18 2025 +0000
+
+    initial commit
+
+commit 4dfe59337147c9f0e854371925c0c06f916bc79c
+Merge: ae2c9b6 1c359ae
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 11:04:03 2025 -0700
+
+    Merge pull request #1 from Digital-Allies/copilot/setup-react-vite-project
+    
+    Initialize React + Vite project with Tailwind CSS, Framer Motion, and Lucide React
+
+commit 1c359ae7b3c31096aef90e084997993e05c38b97
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Tue Dec 30 17:59:53 2025 +0000
+
+    Remove non-existent favicon reference from index.html
+    
+    Co-authored-by: cassellac <202744782+cassellac@users.noreply.github.com>
+
+commit a365de9e300f5af78842986530e04210dcde95f1
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Tue Dec 30 17:58:53 2025 +0000
+
+    Add package-lock.json after successful dependency installation
+    
+    Co-authored-by: cassellac <202744782+cassellac@users.noreply.github.com>
+
+commit 07ec88add0376b7f07db48ca0c50ad399cb6d2c2
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Tue Dec 30 17:56:42 2025 +0000
+
+    Create React + Vite + Tailwind CSS project configuration and boilerplate files
+    
+    Co-authored-by: cassellac <202744782+cassellac@users.noreply.github.com>
+
+commit 228879f9eaf56801a1360147b9e4508495df514c
+Author: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>
+Date:   Tue Dec 30 17:53:46 2025 +0000
+
+    Initial plan
+
+commit ae2c9b6965ad373a17a2d6c55022591eb957f567
+Author: Anthony <acinktown@gmail.com>
+Date:   Tue Dec 30 10:53:40 2025 -0700
+
+    Initial commit
