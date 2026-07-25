@@ -1,11 +1,12 @@
 import { createClient } from '@/lib/supabase-server'
+import { getCurrentClientId } from '@/lib/get-current-client'
 import PagesClient from './PagesClient'
 
 export const dynamic = 'force-dynamic'
 
 export default async function PagesPage() {
   const supabase = await createClient()
-  const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
+  const CLIENT_ID = (await getCurrentClientId()) ?? ''
 
   const { data: pages } = await supabase
     .from('pages')

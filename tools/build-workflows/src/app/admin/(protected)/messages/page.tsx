@@ -1,11 +1,11 @@
 import { createClient } from '@/lib/supabase-server'
+import { getCurrentClientId } from '@/lib/get-current-client'
 import { type ContactSubmission } from '@/lib/types'
 import CommandCenter from './CommandCenter'
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
-
 async function getMessages(): Promise<ContactSubmission[]> {
   const supabase = await createClient()
+  const CLIENT_ID = (await getCurrentClientId()) ?? ''
   const { data } = await supabase
     .from('contact_submissions')
     .select('*')

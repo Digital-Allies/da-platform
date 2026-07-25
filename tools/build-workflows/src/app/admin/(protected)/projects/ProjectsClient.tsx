@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { createClient } from '@/lib/supabase';
+import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash, Edit, Calendar } from 'lucide-react';
 
@@ -29,6 +30,7 @@ export default function ProjectsClient({ initialProjects, initialTasks }: { init
   
   const supabase = createClient();
   const router = useRouter();
+  const clientId = useClientId();
 
   // Modals state
   const [projectModalOpen, setProjectModalOpen] = useState(false);
@@ -76,7 +78,6 @@ export default function ProjectsClient({ initialProjects, initialTasks }: { init
 
   const handleCreateProject = async (e: React.FormEvent) => {
     e.preventDefault();
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
     // 1. Insert Project
     const { data: project, error: projError } = await supabase
@@ -149,7 +150,6 @@ export default function ProjectsClient({ initialProjects, initialTasks }: { init
 
   const handleTaskSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
     const payload = {
       client_id: clientId,

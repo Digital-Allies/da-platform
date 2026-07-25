@@ -1,12 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase-server'
+import { getCurrentClientId } from '@/lib/get-current-client'
 
 export const dynamic = 'force-dynamic'
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient()
-  const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
+  const CLIENT_ID = (await getCurrentClientId()) ?? ''
 
   // 1. Fetch Client info
   const { data: client } = await supabase

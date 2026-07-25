@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react'
 import { Plus, ChevronDown, ChevronUp, Pencil, Trash2, Save } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useClientId } from '@/lib/client-context'
 import { type Service } from '@/lib/types'
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 type Editing = null | 'new' | Service
 
 const EMPTY_SVC = { title: '', description: '', price: '', icon: '🎯', display_order: 0 }
 
 export default function ServicesPage() {
+  const CLIENT_ID = useClientId()
   const [items, setItems] = useState<Service[]>([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState<Editing>(null)
@@ -29,7 +29,7 @@ export default function ServicesPage() {
     setLoading(false)
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => { load() }, [CLIENT_ID])
 
   async function move(id: string, dir: -1 | 1) {
     const idx = items.findIndex((s) => s.id === id)

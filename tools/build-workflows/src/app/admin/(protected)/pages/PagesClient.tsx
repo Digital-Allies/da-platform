@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase';
+import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { ArrowUp, ArrowDown, Trash, Plus } from 'lucide-react';
 
@@ -17,6 +18,7 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
   const [statusFilter, setStatusFilter] = useState('');
   const supabase = createClient();
   const router = useRouter();
+  const clientId = useClientId();
 
   const [formData, setFormData] = useState({
     id: '',
@@ -110,7 +112,6 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 
     const payload = {
       client_id: clientId,

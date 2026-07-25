@@ -8,9 +8,8 @@
 import { useEffect, useState } from 'react'
 import { Plus, ChevronDown, ChevronUp, Pencil, Trash2, Save } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useClientId } from '@/lib/client-context'
 import { type Review } from '@/lib/types'
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 type Editing = null | 'new' | Review
 
@@ -59,6 +58,7 @@ function formToRow(form: ReviewForm) {
 }
 
 export default function ReviewsAdminPage() {
+  const CLIENT_ID = useClientId()
   const [items, setItems] = useState<Review[]>([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState<Editing>(null)
@@ -76,7 +76,7 @@ export default function ReviewsAdminPage() {
     setLoading(false)
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => { load() }, [CLIENT_ID])
 
   async function move(id: string, dir: -1 | 1) {
     const idx = items.findIndex((r) => r.id === id)
