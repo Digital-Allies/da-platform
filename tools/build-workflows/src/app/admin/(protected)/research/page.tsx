@@ -7,7 +7,8 @@ export const dynamic = 'force-dynamic';
 
 export default async function ResearchPage() {
   const supabase = await createClient();
-  const CLIENT_ID = (await getCurrentClientId()) ?? '';
+  const CLIENT_ID = await getCurrentClientId();
+  if (!CLIENT_ID) throw new Error('Client ID is required for research');
 
   // Fetch research notes
   const { data: notes } = await supabase

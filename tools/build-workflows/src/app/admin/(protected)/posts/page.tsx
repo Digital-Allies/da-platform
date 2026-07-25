@@ -6,7 +6,8 @@ import { type Post } from '@/lib/types'
 
 async function getPosts(): Promise<Post[]> {
   const supabase = await createClient()
-  const CLIENT_ID = (await getCurrentClientId()) ?? ''
+  const CLIENT_ID = await getCurrentClientId()
+  if (!CLIENT_ID) throw new Error('Client ID is required for posts')
   const { data } = await supabase
     .from('posts')
     .select('*')

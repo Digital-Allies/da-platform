@@ -73,7 +73,9 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'notifications' },
         (payload) => {
-          setNotifications(prev => [payload.new, ...prev]);
+          if (payload.new.client_id === clientId) {
+            setNotifications(prev => [payload.new, ...prev]);
+          }
         }
       )
       .subscribe();

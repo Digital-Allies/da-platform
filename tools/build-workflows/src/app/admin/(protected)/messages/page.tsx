@@ -5,7 +5,8 @@ import CommandCenter from './CommandCenter'
 
 async function getMessages(): Promise<ContactSubmission[]> {
   const supabase = await createClient()
-  const CLIENT_ID = (await getCurrentClientId()) ?? ''
+  const CLIENT_ID = await getCurrentClientId()
+  if (!CLIENT_ID) throw new Error('Client ID is required for messages')
   const { data } = await supabase
     .from('contact_submissions')
     .select('*')

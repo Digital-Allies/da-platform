@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient()
-  const CLIENT_ID = (await getCurrentClientId()) ?? ''
+  const CLIENT_ID = await getCurrentClientId()
 
   // 1. Fetch Client info
   const { data: client } = await supabase

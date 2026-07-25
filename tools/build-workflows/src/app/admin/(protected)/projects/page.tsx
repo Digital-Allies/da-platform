@@ -7,7 +7,8 @@ export const dynamic = 'force-dynamic';
 
 export default async function ProjectsPage() {
   const supabase = await createClient();
-  const CLIENT_ID = (await getCurrentClientId()) ?? '';
+  const CLIENT_ID = await getCurrentClientId();
+  if (!CLIENT_ID) throw new Error('Client ID is required for projects');
 
   // 1. Fetch all projects
   const { data: projects } = await supabase
