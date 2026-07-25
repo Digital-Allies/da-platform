@@ -1,9 +1,11 @@
 {
   "mcpServers": {
     "supabase": {
-      "command": "curl",
-      "args": ["-s", "https://mcp.supabase.com/mcp"],
-      "url": "https://mcp.supabase.com/mcp"
+      "url": "https://mcp.supabase.com/mcp",
+      "auth": {
+        "type": "bearer",
+        "token": "${SUPABASE_ACCESS_TOKEN}"
+      }
     }
   }
 }
