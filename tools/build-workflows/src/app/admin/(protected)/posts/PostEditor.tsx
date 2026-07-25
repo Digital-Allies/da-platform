@@ -9,9 +9,8 @@ import {
   Undo, Redo, Save, Trash2,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useClientId } from '@/lib/client-context'
 import { type Post } from '@/lib/types'
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 interface PostEditorProps {
   post?: Post
@@ -27,6 +26,7 @@ function slugify(text: string) {
 
 export default function PostEditor({ post }: PostEditorProps) {
   const router = useRouter()
+  const CLIENT_ID = useClientId()
   const isNew = !post
 
   const [title, setTitle] = useState(post?.title ?? '')

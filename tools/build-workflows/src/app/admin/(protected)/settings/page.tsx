@@ -3,9 +3,8 @@
 import { useEffect, useState } from 'react'
 import { Save, Upload } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useClientId } from '@/lib/client-context'
 import { DEFAULT_SETTINGS, type SiteSettings } from '@/lib/types'
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 const SWATCHES = ['#3A7BD5', '#C5301A', '#1F8A5B', '#7A5AE0', '#B7791F', '#0F766E']
 
@@ -68,6 +67,7 @@ const SETTING_GROUPS: Array<{
 ]
 
 export default function SettingsPage() {
+  const CLIENT_ID = useClientId()
   const [values, setValues] = useState<SiteSettings>(DEFAULT_SETTINGS)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -96,7 +96,7 @@ export default function SettingsPage() {
       setLoading(false)
     }
     load()
-  }, [])
+  }, [CLIENT_ID])
 
   function update(key: keyof SiteSettings, value: string) {
     setValues((prev) => ({ ...prev, [key]: value }))

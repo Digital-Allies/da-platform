@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { createClient } from '@/lib/supabase';
+import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Calendar, Layers, FileText, Image as ImageIcon, Search } from 'lucide-react';
 
@@ -40,6 +41,7 @@ export default function ContentClient({ initialArticles, initialCalendar }: { in
   
   const supabase = createClient();
   const router = useRouter();
+  const clientId = useClientId();
 
   // Content form state
   const [contentForm, setContentForm] = useState({
@@ -100,7 +102,6 @@ export default function ContentClient({ initialArticles, initialCalendar }: { in
 
   const handleContentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
     const payload = {
       client_id: clientId,
       title: contentForm.title,
@@ -234,7 +235,6 @@ export default function ContentClient({ initialArticles, initialCalendar }: { in
     e.preventDefault();
     if (!editingCalendarItem) return;
 
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
     const payload = {
       client_id: clientId,
       day: editingCalendarItem.day,

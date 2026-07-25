@@ -4,12 +4,12 @@ import { parseSettings, type SiteSettings, type Post, type Service, type Testimo
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
-export async function getSiteSettings(): Promise<SiteSettings> {
+export async function getSiteSettings(clientId: string = CLIENT_ID): Promise<SiteSettings> {
   const supabase = createPublicClient()
   const { data } = await supabase
     .from('settings')
     .select('*')
-    .eq('client_id', CLIENT_ID)
+    .eq('client_id', clientId)
   return parseSettings(data ?? [])
 }
 

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { createClient } from '@/lib/supabase';
+import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Search, FolderPlus, Download, Trash, Edit, Plus, X } from 'lucide-react';
 
@@ -33,6 +34,7 @@ export default function ResearchClient({ initialNotes }: { initialNotes: Researc
 
   const supabase = createClient();
   const router = useRouter();
+  const clientId = useClientId();
 
   // Form states for note editor
   const [noteForm, setNoteForm] = useState({
@@ -66,7 +68,6 @@ export default function ResearchClient({ initialNotes }: { initialNotes: Researc
 
   const handleSaveNote = async (e: React.FormEvent) => {
     e.preventDefault();
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
     const payload = {
       client_id: clientId,
       title: noteForm.title,

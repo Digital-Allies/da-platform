@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import { Plus, ArrowRight } from 'lucide-react'
 import { createClient } from '@/lib/supabase-server'
+import { getCurrentClientId } from '@/lib/get-current-client'
 import { type Post } from '@/lib/types'
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 async function getPosts(): Promise<Post[]> {
   const supabase = await createClient()
+  const CLIENT_ID = await getCurrentClientId()
+  if (!CLIENT_ID) throw new Error('Client ID is required for posts')
   const { data } = await supabase
     .from('posts')
     .select('*')

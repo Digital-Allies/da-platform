@@ -1,12 +1,14 @@
 import React from 'react';
 import { createClient } from '@/lib/supabase-server';
+import { getCurrentClientId } from '@/lib/get-current-client';
 import ResearchClient from './ResearchClient';
 
 export const dynamic = 'force-dynamic';
 
 export default async function ResearchPage() {
   const supabase = await createClient();
-  const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!;
+  const CLIENT_ID = await getCurrentClientId();
+  if (!CLIENT_ID) throw new Error('Client ID is required for research');
 
   // Fetch research notes
   const { data: notes } = await supabase

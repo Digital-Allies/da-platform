@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
+import { ClientIdProvider } from '@/lib/client-context';
 import '@/styles/admin-dashboard.css';
 import { Search, Bell, LogOut, Check } from 'lucide-react';
 
@@ -12,6 +13,7 @@ interface AdminShellProps {
   userEmail: string;
   businessName: string;
   accentColor: string;
+  clientId: string;
 }
 
 function initialsFor(name: string): string {
@@ -21,7 +23,7 @@ function initialsFor(name: string): string {
   return (words[0][0] + words[1][0]).toUpperCase();
 }
 
-export default function AdminShell({ children, userEmail, businessName, accentColor }: AdminShellProps) {
+export default function AdminShell({ children, userEmail, businessName, accentColor, clientId }: AdminShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -51,9 +53,6 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
   // Fetch unread notifications
   useEffect(() => {
     async function loadNotifications() {
-      const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-      if (!clientId) return;
-
       const { data } = await supabase
         .from('notifications')
         .select('*')
@@ -74,7 +73,9 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'notifications' },
         (payload) => {
-          setNotifications(prev => [payload.new, ...prev]);
+          if (payload.new.client_id === clientId) {
+            setNotifications(prev => [payload.new, ...prev]);
+          }
         }
       )
       .subscribe();
@@ -82,7 +83,7 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [clientId]);
 
   const handleMarkRead = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -121,6 +122,7 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
   const liveSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || '/';
 
   return (
+    <ClientIdProvider clientId={clientId}>
     <div className="custom-widget ws" style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Top bar */}
       <div className="ws-top">
@@ -249,5 +251,6 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
         </div>
       </div>
     </div>
+    </ClientIdProvider>
   );
 }

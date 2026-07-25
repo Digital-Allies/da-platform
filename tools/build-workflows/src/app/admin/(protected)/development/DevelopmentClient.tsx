@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { createClient } from '@/lib/supabase';
+import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash, Edit, Calendar, CheckSquare } from 'lucide-react';
 
@@ -37,6 +38,7 @@ export default function DevelopmentClient({ initialTasks }: { initialTasks: DevT
 
   const supabase = createClient();
   const router = useRouter();
+  const clientId = useClientId();
 
   const handleOpenCreateModal = () => {
     setTaskForm({
@@ -66,7 +68,6 @@ export default function DevelopmentClient({ initialTasks }: { initialTasks: DevT
 
   const handleSaveTask = async (e: React.FormEvent) => {
     e.preventDefault();
-    const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
     const payload = {
       client_id: clientId,
       title: taskForm.title,

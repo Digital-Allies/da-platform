@@ -3,13 +3,13 @@
 import { useEffect, useState } from 'react'
 import { Plus, Save, Pencil } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
+import { useClientId } from '@/lib/client-context'
 import { type Testimonial } from '@/lib/types'
-
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
 type Editing = null | 'new' | Testimonial
 
 export default function TestimonialsPage() {
+  const CLIENT_ID = useClientId()
   const [items, setItems] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
   const [editing, setEditing] = useState<Editing>(null)
@@ -27,7 +27,7 @@ export default function TestimonialsPage() {
     setLoading(false)
   }
 
-  useEffect(() => { load() }, [])
+  useEffect(() => { load() }, [CLIENT_ID])
 
   async function save(form: {
     content: string
