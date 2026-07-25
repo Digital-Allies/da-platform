@@ -5,7 +5,24 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-24 — by daily build session (Fri Jul 24 review/buffer slot: deploys confirmed green, tsc clean, no new build prompts)
+**Last updated:** 2026-07-25 — by Claude Code (Atomic Finds dashboard routing & CMS connection verified live)
+
+## 2026-07-25 — Atomic Finds dashboard routing fixed; CMS connection live and verified
+
+**PR #9 merged-ready:** Multi-tenant routing fix pushed to `claude/atomic-fines-dashboard-routing-joofve`. Tenant (`clients.id`) now resolves from signed-in user (`clients.auth_user_id`) instead of build-time env var. Greptile bug fixed: database errors now throw (not silently return null). All 25 files type-check clean, Vercel CMS previews READY (da-webwssite-build-workflows ✅), atomic-finds-atx preview now shows real AF site data ✅.
+
+**Atomic Finds auth linked:** `atomicfindsatx@gmail.com` (auth_user_id `2afb056f-408d-419d-be2b-d414ffffdd5c`) successfully linked to AF client row (`443936d5-f92e-480b-b206-c65cfb52bdfc`) in Supabase.
+
+**Vercel env vars corrected:** `atomic-finds-atx` project now has `NEXT_PUBLIC_SUPABASE_URL` in **all three scopes** (Production, Preview, Development). Preview redeploy confirmed READY.
+
+**CMS connection verified live:** Atomic Finds site (`atomicfindsatx.vercel.app`) deployed successfully and is displaying real CMS data — products, settings, pages all pulling from Supabase. Site is "Connected" tier (client-facing site fed by the platform's CMS, not Templated tier).
+
+**What's next:** 
+1. PR #9 ready to merge once Copilot review completes (Greptile already passed ✅).
+2. After merge: `atomicfindsatx@gmail.com` logs into dashboard → sees only AF data (routing fix active) → can edit products/settings/pages live.
+3. Build schedule: Aug 5–6 slot `/admin/pages` (real page builder with live preview) still open.
+
+---
 
 ## 2026-07-24 (daily build session) — Fri Jul 24 review/buffer slot: all green, nothing to build
 

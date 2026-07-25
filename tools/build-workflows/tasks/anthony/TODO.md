@@ -19,25 +19,41 @@ Reviewed again 2026-07-22 — added Priority 0 below (root cause found for
 
 ---
 
-## 🔴 Priority 0-a — Create and run Atomic Finds settings seed (found 2026-07-24)
+## ✅ Priority 0-a — COMPLETED 2026-07-25 — Atomic Finds seeded and CMS connection verified live
 
-`public.settings` has 21 rows — all Digital Allies. Zero for Atomic Finds `443936d5-f92e-480b-b206-c65cfb52bdfc`. Until seeded, the site title shows "My Business" and the logo uses a static fallback.
+All three seed files confirmed seeded and working. Site is live, CMS-connected, and displaying real data.
 
-All three seed files are now written. Run them in order in Supabase SQL Editor:
+**Step 1 — Site settings ✅ (20 keys verified in SQL):**
+- [x] Claude Code: `seed-atomic-finds-settings.sql` written
+- [x] Anthony: Ran in Supabase SQL Editor
+- [x] Verified: Site displays "Atomic Finds ATX" in browser tab, all 20 settings rows populated
 
-**Step 1 — Site settings (fixes "My Business" title immediately):**
-- [x] Claude Code: `seed-atomic-finds-settings.sql` ✅ written (20 keys: Identity, Hero, About, Contact, Social)
-- [ ] Anthony: Open Supabase SQL Editor → New Query → paste contents of `tools/build-workflows/supabase/seed-atomic-finds-settings.sql` → Run
-- [ ] Verify: reload https://atomicfindsatx.store — tab title should read "Atomic Finds ATX"
+**Step 2 — Design tokens ✅ (brand colors & fonts confirmed):**
+- [x] Claude Code: `seed-atomic-finds-design-tokens.sql` written
+- [x] Anthony: Ran in Supabase SQL Editor
+- [x] Verified: Colors (`#C89B3C` warm gold), fonts, spacing all in Supabase
 
-**Step 2 — Design tokens (feeds the admin Theme editor):**
-- [x] Claude Code: `seed-atomic-finds-design-tokens.sql` ✅ written (colors, fonts, type scale, spacing)
-- [ ] Anthony: Run `seed-atomic-finds-design-tokens.sql` in Supabase SQL Editor
+**Step 3 — Pages ✅ (draft pages seeded, live site connected):**
+- [x] Claude Code: `seed-atomic-finds-pages.sql` written
+- [x] Anthony: Ran in Supabase SQL Editor
+- [x] Verified: Homepage draft in pages table; live site at atomicfindsatx.vercel.app pulling real products/settings/reviews from CMS
 
-**Step 3 — Pages (draft homepage + About for the page builder):**
-- [x] Claude Code: `seed-atomic-finds-pages.sql` ✅ written (2 draft pages: home, about)
-- [ ] Anthony: Run `seed-atomic-finds-pages.sql` in Supabase SQL Editor
-- [ ] Note: Homepage draft is standby for Aug 5–6 build slot — live site still uses bespoke AtomicFindsHomepage.tsx
+**CMS connection:** atomicfindsatx@gmail.com successfully linked to AF client (`2afb056f-408d-419d-be2b-d414ffffdd5c`). Ready for dashboard access post-PR-#9-merge.
+
+---
+
+## 🟡 Priority 0-b — Merge PR #9 (dashboard routing fix, code-ready 2026-07-25)
+
+Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in user (`clients.auth_user_id`) instead of build-time `NEXT_PUBLIC_CLIENT_ID`. This allows `atomicfindsatx@gmail.com` to log in and see only AF data (not DA data on a shared `cms.digitalallies.net` deployment).
+
+**Status:** Code complete and reviewed. Greptile review passed (error handling bug fixed). Vercel CI all green. Copilot review in progress. PR #9 on `claude/atomic-fines-dashboard-routing-joofve`.
+
+**What's left:** 
+- [ ] Wait for Copilot review to complete
+- [ ] Click **Merge pull request** on GitHub
+- [ ] Verify AF admin dashboard routes correctly post-merge (manual test: log in as `atomicfindsatx@gmail.com`, confirm dashboard shows AF identity/data)
+
+**Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side already ready (auth_user_id linked, settings/products/reviews seeded).
 
 ---
 
