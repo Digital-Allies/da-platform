@@ -5,9 +5,21 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-26 — by Antigravity (Settings Expansion, Collections Integration, LanguageSwitcher, WCAG AA Compliance, and SEO/AEO Engine shipped)
+**Last updated:** 2026-07-26 — by Antigravity (Duda-Style Connected Data Binding, CSV Spreadsheet Importer, Media Storage Uploader, and Plain-Language Theme Engine shipped)
 
-## 2026-07-26 — Antigravity Build Session: Settings Expansion, Collections Integration, LanguageSwitcher, WCAG AA Compliance & SEO/AEO Engine Shipped
+## 2026-07-26 — Antigravity Build Session: Duda-Style Connected Data Binding, CSV Spreadsheet Importer & Plain-Language Theme Engine Shipped
+
+**Deliverables Completed:**
+- ✅ **Duda-Style `⚡ Connect to Data` Block Field Binding** (`PagesClient.tsx` & `BlockRenderer.tsx`):
+  - Added a **⚡ Connect to Data** dropdown next to block fields, allowing clients to bind text/buttons/images directly to `site_settings` variables (`Business Name`, `Phone`, `Email`, `Shipping Policy`, `Announcement Banner`) or Supabase collections.
+- ✅ **CSV Spreadsheet Collection Importer** (`CSVCollectionImporter.tsx`):
+  - Drag-and-drop `.csv` spreadsheet uploader for bulk-creating products and auto-assigning items directly to collections.
+- ✅ **Dashboard Storage Asset Uploader** (`MediaUploader.tsx`):
+  - Direct drag-and-drop uploader to Supabase `client-assets` bucket returning public CDN URLs for logos, favicons, and photos.
+- ✅ **Plain-Language Site Theme Engine** (`ThemeClient.tsx`):
+  - Non-technical labels (*Main Brand Color*, *Signal Badge Color*, *Page Background*, *Headline Font*, *Button Shapes & Shadows*, *Card Elevation*) with live visual previews.
+- ✅ **Lucide System Icons & Client Live Site Mapping**:
+  - Updated settings gear icon and nav icons to Lucide, hid "The Workshop" for Atomic Finds, and mapped live site URL to `https://atomicfindsatx.store`.
 
 **Deliverables Completed:**
 - ✅ **Settings & Store Policy Expansion** (`/admin/settings`):
