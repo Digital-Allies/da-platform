@@ -322,7 +322,7 @@ export default function CollectionsClient({
                           <strong style={{ fontSize: '13px', display: 'block' }}>{prod.title}</strong>
                           <span style={{ fontSize: '11px', color: 'var(--text-soft)' }}>
                             {prod.category ? prod.category.toUpperCase() : 'GENERAL'}{' '}
-                            {prod.price_usd ? `· $${prod.price_usd}` : ''}
+                            {prod.price ? `· $${prod.price}` : ''}
                           </span>
                         </div>
                         {isSelected && <CheckCircle size={16} color="var(--tok-primary, #B7791F)" />}
