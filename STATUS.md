@@ -5,11 +5,27 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-26 — by Antigravity (Design System token consolidation & Next.js Pages, Collections, and Brand Theme Admin modules implemented)
+**Last updated:** 2026-07-26 — by Antigravity (Settings Expansion, Collections Integration, LanguageSwitcher, WCAG AA Compliance, and SEO/AEO Engine shipped)
 
-## 2026-07-26 — Antigravity Build Session: Design System Tokens, Pages Editor, Collections Manager, and Brand Theme Customizer Shipped
+## 2026-07-26 — Antigravity Build Session: Settings Expansion, Collections Integration, LanguageSwitcher, WCAG AA Compliance & SEO/AEO Engine Shipped
 
 **Deliverables Completed:**
+- ✅ **Settings & Store Policy Expansion** (`/admin/settings`):
+  - Added policy fields for `announcement_banner`, `shipping_policy`, `return_policy`, `google_analytics_id`, and `custom_footer_text`.
+
+- ✅ **Storefront Collections Integration** (`ProductGrid.tsx` & `data.ts`):
+  - Connected `getCollections()` query and collection filter tabs to storefront grids for curated product collections.
+
+- ✅ **LanguageSwitcher Component** (`packages/design-system/src/components/LanguageSwitcher.tsx`):
+  - Reusable, accessible EN / ES language selector toggle with WCAG AA focus styling and cookie/localStorage state.
+
+- ✅ **WCAG 2.1 AA & Platform Legal Pages**:
+  - Created required compliance pages: `/accessibility`, `/terms`, `/privacy`, `/cookies`, `/use-of-ai`, and `/sitemap`.
+
+- ✅ **SEO & AEO (Answer Engine Optimization) Engine** (`lib/seo.ts`, `sitemap.ts`, `robots.ts`):
+  - Structured JSON-LD schema generators for Google, Bing, Perplexity, Claude, ChatGPT, and SearchGPT.
+  - Dynamic App Router `/sitemap.xml` and `/robots.txt` configuration.
+
 - ✅ **Design System Token Consolidation** (`packages/design-system/src/tokens/index.ts`):
   - Formalized single source of truth for design tokens (`--tok-*`) across Digital Allies, Atomic Finds ATX, and Healthcare Training Center.
   - CSS custom property generator for multi-tenant rendering.
