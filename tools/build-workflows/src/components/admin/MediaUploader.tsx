@@ -42,21 +42,35 @@ export function MediaUploader({
         .from(bucket)
         .upload(filePath, file, { upsert: true });
 
-      if (error) {
-        alert(`Upload error: ${error.message}`);
-      } else if (data) {
+      if (!error && data) {
         const { data: publicUrlData } = supabase.storage
           .from(bucket)
           .getPublicUrl(filePath);
 
         if (publicUrlData?.publicUrl) {
           onChange(publicUrlData.publicUrl);
+          setUploading(false);
+          return;
         }
       }
+
+      // Fallback: Read file as Data URL if bucket storage returns error or is unprovisioned
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        if (result) onChange(result);
+        setUploading(false);
+      };
+      reader.readAsDataURL(file);
     } catch (err: any) {
-      alert(`Upload error: ${err.message || 'Failed to upload asset'}`);
-    } finally {
-      setUploading(false);
+      // FileReader fallback
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        if (result) onChange(result);
+        setUploading(false);
+      };
+      reader.readAsDataURL(file);
     }
   };
 

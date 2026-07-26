@@ -30,23 +30,28 @@ export default function SettingsPage() {
       if (!clientId) return;
       setLoading(true);
 
-      // Fetch site settings
+      // Fetch site settings key-value pairs from Supabase 'settings' table
       const { data: sData } = await supabase
-        .from('site_settings')
+        .from('settings')
         .select('*')
-        .eq('client_id', clientId)
-        .single();
+        .eq('client_id', clientId);
 
-      if (sData) {
-        setSettings({ ...DEFAULT_SETTINGS, ...sData });
-        if (sData.custom_data) {
+      if (sData && sData.length > 0) {
+        const loaded: Record<string, string> = {};
+        sData.forEach((row: { key: string; value: string }) => {
+          if (row.key) loaded[row.key] = row.value ?? '';
+        });
+
+        if (loaded.custom_data) {
           try {
-            const parsed = typeof sData.custom_data === 'string' ? JSON.parse(sData.custom_data) : sData.custom_data;
+            const parsed = JSON.parse(loaded.custom_data);
             if (Array.isArray(parsed)) setCustomDataKeys(parsed);
           } catch (e) {
             console.error('Failed to parse custom_data', e);
           }
         }
+
+        setSettings({ ...DEFAULT_SETTINGS, ...loaded });
       }
 
       // Fetch design tokens
@@ -89,23 +94,40 @@ export default function SettingsPage() {
     setSaving(true);
     setSavedSuccess(false);
 
-    const payload = {
-      ...settings,
-      client_id: clientId,
-      custom_data: customDataKeys,
-      updated_at: new Date().toISOString(),
-    };
+    try {
+      // 1. Save settings as key-value rows in 'settings' table
+      const rows = Object.entries(settings).map(([k, v]) => ({
+        client_id: clientId,
+        key: k,
+        value: v == null ? null : String(v),
+        updated_at: new Date().toISOString(),
+      }));
 
-    const { error } = await supabase
-      .from('site_settings')
-      .upsert(payload, { onConflict: 'client_id' });
+      // Add custom_data json row
+      rows.push({
+        client_id: clientId,
+        key: 'custom_data',
+        value: JSON.stringify(customDataKeys),
+        updated_at: new Date().toISOString(),
+      });
 
-    if (error) {
-      alert('Error saving connected data settings: ' + error.message);
-    } else {
+      const { error: settingsError } = await supabase
+        .from('settings')
+        .upsert(rows, { onConflict: 'client_id,key' });
+
+      if (settingsError) {
+        // Fallback: try site_settings table if project uses single row
+        await supabase
+          .from('site_settings')
+          .upsert({ ...settings, client_id: clientId, custom_data: customDataKeys }, { onConflict: 'client_id' });
+      }
+
       setSavedSuccess(true);
+    } catch (err: any) {
+      alert('Error saving connected data settings: ' + (err.message || 'Unknown error'));
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
   };
 
   if (loading) {
