@@ -19,7 +19,7 @@ export default async function CollectionsPage() {
   // Fetch available products for collection assignment
   const { data: products } = await supabase
     .from('products')
-    .select('id, title, category, price_usd, image_url')
+    .select('id, title, category, price, image_url')
     .eq('client_id', CLIENT_ID)
     .order('title', { ascending: true })
 
