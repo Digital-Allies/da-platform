@@ -288,12 +288,18 @@ function QuickViewModal({ product, onClose }: { product: Product; onClose: () =>
   )
 }
 
-export default function ProductGrid({ title = 'Featured Finds', products: allProducts }: ProductGridProps) {
+interface ProductGridProps {
+  title?: string
+  products: Product[]
+  collections?: any[]
+}
+
+export default function ProductGrid({ title = 'Featured Finds', products: allProducts, collections }: ProductGridProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null)
+  const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null)
   const [quickView, setQuickView] = useState<Product | null>(null)
 
-  // Temporary: hide products with no photo until real photography is in —
-  // "Photo coming soon" placeholders read as broken/unfinished in the grid.
+  // Temporary: hide products with no photo until real photography is in
   const products = useMemo(() => allProducts.filter((p) => p.image_url), [allProducts])
 
   const categories = useMemo(() => {
@@ -302,7 +308,18 @@ export default function ProductGrid({ title = 'Featured Finds', products: allPro
     return Array.from(set)
   }, [products])
 
-  const visible = activeCategory ? products.filter((p) => p.category === activeCategory) : products
+  const visible = useMemo(() => {
+    if (activeCollectionId && collections) {
+      const targetCol = collections.find(c => c.id === activeCollectionId)
+      if (targetCol && targetCol.item_ids && targetCol.item_ids.length > 0) {
+        return products.filter(p => targetCol.item_ids.includes(p.id))
+      }
+    }
+    if (activeCategory) {
+      return products.filter((p) => p.category === activeCategory)
+    }
+    return products
+  }, [products, activeCategory, activeCollectionId, collections])
 
   if (!products.length) return null
 
@@ -318,10 +335,48 @@ export default function ProductGrid({ title = 'Featured Finds', products: allPro
           </h2>
         )}
         <p className="text-center text-sm mb-8" style={{ color: 'var(--tok-text-muted)' }}>
-          {products.length} piece{products.length === 1 ? '' : 's'} available
+          {visible.length} piece{visible.length === 1 ? '' : 's'} available
         </p>
 
-        {categories.length > 1 && (
+        {/* Render Collections if provided, otherwise render categories */}
+        {collections && collections.length > 0 ? (
+          <div className="flex flex-wrap justify-center gap-2 mb-10" role="tablist" aria-label="Collections filter">
+            <button
+              role="tab"
+              aria-selected={activeCollectionId === null}
+              onClick={() => setActiveCollectionId(null)}
+              className="px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors"
+              style={{
+                borderRadius: 999,
+                border: `1px solid ${activeCollectionId === null ? 'var(--tok-primary)' : 'var(--tok-border)'}`,
+                background: activeCollectionId === null ? 'var(--tok-primary)' : 'transparent',
+                color: activeCollectionId === null ? 'var(--tok-bg)' : 'var(--tok-text)',
+              }}
+            >
+              All Finds
+            </button>
+            {collections.map((col) => {
+              const active = activeCollectionId === col.id
+              return (
+                <button
+                  key={col.id}
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setActiveCollectionId(col.id)}
+                  className="px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors"
+                  style={{
+                    borderRadius: 999,
+                    border: `1px solid ${active ? 'var(--tok-primary)' : 'var(--tok-border)'}`,
+                    background: active ? 'var(--tok-primary)' : 'transparent',
+                    color: active ? 'var(--tok-bg)' : 'var(--tok-text)',
+                  }}
+                >
+                  {col.title}
+                </button>
+              )
+            })}
+          </div>
+        ) : categories.length > 1 ? (
           <div className="flex flex-wrap justify-center gap-2 mb-10" role="tablist" aria-label="Product categories">
             {[null, ...categories].map((cat) => {
               const active = activeCategory === cat
@@ -344,7 +399,7 @@ export default function ProductGrid({ title = 'Featured Finds', products: allPro
               )
             })}
           </div>
-        )}
+        ) : null}
 
         <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
           {visible.map((p) => (

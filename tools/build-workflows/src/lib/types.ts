@@ -159,6 +159,11 @@ export interface SiteSettings {
   about_body: string
   about_image_url: string
   business_hours: string
+  announcement_banner: string
+  shipping_policy: string
+  return_policy: string
+  google_analytics_id: string
+  custom_footer_text: string
 }
 
 export const DEFAULT_SETTINGS: SiteSettings = {
@@ -183,6 +188,11 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   about_body: '',
   about_image_url: '',
   business_hours: '',
+  announcement_banner: '',
+  shipping_policy: '',
+  return_policy: '',
+  google_analytics_id: '',
+  custom_footer_text: '',
 }
 
 // Convert flat settings array → object

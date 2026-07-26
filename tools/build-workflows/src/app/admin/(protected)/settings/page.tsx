@@ -64,6 +64,21 @@ const SETTING_GROUPS: Array<{
       { key: 'twitter_url', label: 'Twitter/X URL', type: 'url' },
     ],
   },
+  {
+    title: 'Store Policies & Announcements',
+    fields: [
+      { key: 'announcement_banner', label: 'Announcement banner bar text', hint: 'Displays at top of website when populated' },
+      { key: 'shipping_policy', label: 'Shipping rates & delivery terms', type: 'textarea', rows: 4 },
+      { key: 'return_policy', label: 'Return & exchange policy', type: 'textarea', rows: 4 },
+    ],
+  },
+  {
+    title: 'Analytics & Platform Integration',
+    fields: [
+      { key: 'google_analytics_id', label: 'Google Analytics 4 ID', hint: 'e.g. G-XXXXXXXXXX' },
+      { key: 'custom_footer_text', label: 'Custom footer disclaimer', type: 'textarea', hint: 'Displays in site footer' },
+    ],
+  },
 ]
 
 export default function SettingsPage() {

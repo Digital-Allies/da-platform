@@ -270,3 +270,19 @@ export async function getPageBySlug(slug: string): Promise<any | null> {
     .maybeSingle()
   return data
 }
+
+export async function getCollections(): Promise<any[]> {
+  try {
+    const supabase = createPublicClient()
+    const { data } = await supabase
+      .from('collections')
+      .select('*')
+      .eq('client_id', CLIENT_ID)
+      .eq('status', 'published')
+      .order('created_at', { ascending: false })
+    return data ?? []
+  } catch (error) {
+    return []
+  }
+}
+
