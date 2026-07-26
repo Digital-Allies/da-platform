@@ -5,7 +5,55 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-25 — by Claude Code (Atomic Finds dashboard routing & CMS connection verified live)
+**Last updated:** 2026-07-26 — by Claude Code (Pages & Collections templates built for CMS admin dashboard)
+
+## 2026-07-26 — CMS Admin Templates Built: Pages Editor & Collections Manager
+
+**Deliverables Completed:**
+- ✅ **Pages Editor Template** (`cms-pages/CmsPages.dc.html`) — Hi-fidelity prototype for admin page creation/editing with block-based layout
+  - Left panel: page settings (title, slug, meta), block list with drag-to-reorder, add/duplicate/delete actions
+  - Right panel: live desktop/mobile preview, block preview rendering
+  - Block types included: Hero, Products Grid, Testimonials, Contact Form, Richtext
+  - Status indicator (Draft/Published)
+
+- ✅ **Collections Manager Template** (`cms-collections/CmsCollections.dc.html`) — Hi-fidelity prototype for product/content collection management
+  - Left panel: collections list with item counts, create new collection button
+  - Right panel: collection metadata editor, items grid view, add/remove items, visibility/feature toggles
+  - Real-time save status indicator
+  - Responsive grid for collection items
+
+- ✅ **Documentation** (`CMS_ADMIN_TEMPLATES.md`) — Complete integration guide with:
+  - Data model schema (TypeScript interfaces)
+  - Supabase table structures
+  - Next.js implementation notes
+  - Route mapping (`/admin/pages`, `/admin/collections`)
+  - RLS policy requirements
+  - Token usage and per-client theming
+  - Open decisions for Anthony (subscription gating, template picker, drag-drop library)
+
+- ✅ **Updated Templates README** — Added new sections linking both templates to the design system
+
+**Design Language Applied:**
+- DA color tokens: primary (#B7791F), accent (#C5301A), neutral grays
+- Typography: Lexend Deca (headings), JetBrains Mono (body/forms)
+- Components: form inputs, buttons, badges, grid layouts, preview viewport
+- Responsive: desktop-first, tablet-ready (mobile admin out of scope per decision #7)
+
+**What's Next:**
+1. **Real Implementation** — Consume these templates as reference for building actual Next.js components in `tools/build-workflows/src/app/admin/(protected)/`
+2. **Sequencing** — Pages build first (higher priority per audit), then Collections
+3. **Database Schema** — Apply migrations for `pages`/`blocks` JSONB structure and `collections`/`collection_items` junction table
+4. **COLLECTIONS_SPEC.md** — Write implementation guide for Collections (mirror PAGE_EDITOR_SPEC.md pattern)
+5. **Antigravity Handoff** — Full prompt provided below to continue both builds
+
+**Context for Next Agent:**
+- Design system lives in `packages/20260722-da-design-system/` (snapshot) and Claude Design project
+- These templates are `.dc.html` (Design Components) — reference/prototype, not live code
+- Real build happens in `tools/build-workflows/` (Next.js/Supabase) per ARCHITECTURE.md
+- Atomic Finds is current priority client; Pages/Collections work unlocks full page editor for all clients
+- Credit budget concern flagged — handoff to Antigravity to continue substantial implementation work
+
+---
 
 ## 2026-07-25 — Atomic Finds dashboard routing fixed; CMS connection live and verified
 
