@@ -9,7 +9,7 @@ export const metadata = {
 export default function SitemapPage() {
   const pages = [
     { title: 'Home', path: '/' },
-    { title: 'Press Office & Articles', path: '/admin/content' },
+    { title: 'Press Office & Articles', path: '/blog' },
     { title: 'Terms of Service', path: '/terms' },
     { title: 'Privacy Policy', path: '/privacy' },
     { title: 'Cookie Policy', path: '/cookies' },
