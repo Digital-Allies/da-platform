@@ -311,8 +311,9 @@ export default function ProductGrid({ title = 'Featured Finds', products: allPro
   const visible = useMemo(() => {
     if (activeCollectionId && collections) {
       const targetCol = collections.find(c => c.id === activeCollectionId)
-      if (targetCol && targetCol.item_ids && targetCol.item_ids.length > 0) {
-        return products.filter(p => targetCol.item_ids.includes(p.id))
+      if (targetCol) {
+        const itemIds = targetCol.item_ids || []
+        return products.filter(p => itemIds.includes(p.id))
       }
     }
     if (activeCategory) {
