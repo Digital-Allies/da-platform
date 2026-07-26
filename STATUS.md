@@ -5,7 +5,34 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-26 — by Claude Code (Pages & Collections templates built for CMS admin dashboard)
+**Last updated:** 2026-07-26 — by Antigravity (Design System token consolidation & Next.js Pages, Collections, and Brand Theme Admin modules implemented)
+
+## 2026-07-26 — Antigravity Build Session: Design System Tokens, Pages Editor, Collections Manager, and Brand Theme Customizer Shipped
+
+**Deliverables Completed:**
+- ✅ **Design System Token Consolidation** (`packages/design-system/src/tokens/index.ts`):
+  - Formalized single source of truth for design tokens (`--tok-*`) across Digital Allies, Atomic Finds ATX, and Healthcare Training Center.
+  - CSS custom property generator for multi-tenant rendering.
+
+- ✅ **Pages Editor Viewport Switcher & Status Integration** (`tools/build-workflows/src/app/admin/(protected)/pages/PagesClient.tsx`):
+  - Integrated Desktop vs. Mobile (375px) responsive iframe preview toggle in the right-hand panel.
+  - Live draft/published status badges and block layout controls.
+
+- ✅ **Collections Manager Route & UI** (`tools/build-workflows/src/app/admin/(protected)/collections/`):
+  - Server route (`page.tsx`) and interactive client dashboard (`CollectionsClient.tsx`).
+  - Allows clients to curate product groups, toggle homepage featuring, and set published/draft status.
+
+- ✅ **Brand Theme Customizer** (`tools/build-workflows/src/app/admin/(protected)/theme/`):
+  - Client brand theme manager (`ThemeClient.tsx` and `page.tsx`) connected to Supabase `design_tokens`.
+  - Live color palette swatches, font preset configuration, and WCAG contrast preview card.
+
+- ✅ **Admin Shell Navigation Updated** (`AdminShell.tsx`):
+  - Added direct navigation links for **Collections** (`/admin/collections`), **Showroom** (`/admin/products`), and **Brand Theme** (`/admin/theme`).
+
+- ✅ **Verification**:
+  - `npx tsc --noEmit` verified clean across `tools/build-workflows` with zero errors.
+
+---
 
 ## 2026-07-26 — CMS Admin Templates Built: Pages Editor & Collections Manager
 

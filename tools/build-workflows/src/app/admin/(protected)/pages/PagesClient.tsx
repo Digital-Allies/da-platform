@@ -16,6 +16,7 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
   const [isEditing, setIsEditing] = useState(false);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [previewViewport, setPreviewViewport] = useState<'desktop' | 'mobile'>('desktop');
   const supabase = createClient();
   const router = useRouter();
   const clientId = useClientId();
@@ -456,17 +457,47 @@ export default function PagesClient({ initialPages }: { initialPages: any[] }) {
             </form>
           </div>
 
-          {/* Right panel: visual preview */}
+          {/* Right panel: visual preview with responsive viewport toggle */}
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', border: 'var(--border-1)', background: '#fff' }}>
             <div style={{ background: 'var(--bg-alt)', borderBottom: 'var(--border-1)', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: '12px', fontWeight: 'bold' }}>Live Layout Preview</span>
-              <span className="status status--review" style={{ fontSize: '9px' }}>Previewing</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '12px', fontWeight: 'bold' }}>Live Layout Preview</span>
+                <span className={`status status--${formData.status}`}>{formData.status}</span>
+              </div>
+              <div style={{ display: 'flex', gap: '4px' }}>
+                <button
+                  type="button"
+                  className={`btn btn--secondary ${previewViewport === 'desktop' ? 'active' : ''}`}
+                  onClick={() => setPreviewViewport('desktop')}
+                  style={{ padding: '4px 10px', fontSize: '11px', minWidth: 'auto', background: previewViewport === 'desktop' ? 'var(--charcoal)' : 'transparent', color: previewViewport === 'desktop' ? '#fff' : 'inherit' }}
+                >
+                  Desktop
+                </button>
+                <button
+                  type="button"
+                  className={`btn btn--secondary ${previewViewport === 'mobile' ? 'active' : ''}`}
+                  onClick={() => setPreviewViewport('mobile')}
+                  style={{ padding: '4px 10px', fontSize: '11px', minWidth: 'auto', background: previewViewport === 'mobile' ? 'var(--charcoal)' : 'transparent', color: previewViewport === 'mobile' ? '#fff' : 'inherit' }}
+                >
+                  Mobile (375px)
+                </button>
+              </div>
             </div>
-            <iframe
-              srcDoc={generatePreviewHtml()}
-              style={{ width: '100%', flex: '1', border: 'none', background: '#F9F6F0' }}
-              title="Live Preview"
-            />
+            <div style={{ flex: '1', display: 'flex', justifyContent: 'center', background: '#EAE7E0', padding: previewViewport === 'mobile' ? '20px 0' : '0', overflowY: 'auto' }}>
+              <iframe
+                srcDoc={generatePreviewHtml()}
+                style={{
+                  width: previewViewport === 'mobile' ? '375px' : '100%',
+                  height: previewViewport === 'mobile' ? '667px' : '100%',
+                  border: previewViewport === 'mobile' ? '2px solid var(--charcoal)' : 'none',
+                  borderRadius: previewViewport === 'mobile' ? '12px' : '0',
+                  background: '#F9F6F0',
+                  boxShadow: previewViewport === 'mobile' ? '0 10px 25px rgba(0,0,0,0.15)' : 'none',
+                  transition: 'width 0.2s ease, height 0.2s ease'
+                }}
+                title="Live Preview"
+              />
+            </div>
           </div>
         </div>
       )}
