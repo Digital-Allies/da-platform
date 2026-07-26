@@ -66,7 +66,17 @@ export default function ThemeClient({
 
     const payload = {
       client_id: clientId,
-      tokens: tokens,
+      colors: {
+        bg: tokens.bg_color,
+        surface: tokens.surface_color,
+        text: tokens.fg_body_color,
+        primary: tokens.primary_color,
+        secondary: tokens.accent_color,
+      },
+      fonts: {
+        heading: tokens.font_header,
+        body: tokens.font_body,
+      },
       updated_at: new Date().toISOString(),
     };
 
