@@ -50,17 +50,17 @@ export function generateProductSchema(product: Product, domain: string) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
-    description: product.description,
+    description: product.description || undefined,
     image: product.image_url ? [`https://${domain}${product.image_url}`] : undefined,
     sku: product.sku || product.id,
-    category: product.category,
-    offers: {
+    category: product.category || undefined,
+    offers: product.price != null ? {
       '@type': 'Offer',
       priceCurrency: 'USD',
-      price: product.price || 0,
+      price: product.price,
       availability: product.in_stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
       url: `https://${domain}/#products`,
-    },
+    } : undefined,
   }
 }
 
