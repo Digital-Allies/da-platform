@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="../../styles.css">
+<script src="../../_ds_bundle.js"></script>
+<style>
+body{margin:0;padding:0;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-body);overflow:hidden;height:100vh}body.dark{--color-bg:#1a1a1a;--color-bg-alt:#242424;--color-fg:#f0e8d8;--color-fg-on-dark:#f0e8d8;--color-fg-muted:#9e9e9e;--color-fg-soft:#6b6b6b;--color-grid-line:rgba(255,255,255,0.05);--border-1:1px solid rgba(255,255,255,0.1)}
+.cms-container{position:absolute;inset:0;display:flex;flex-direction:column}
+.cms-top{flex:0 0 52px;display:flex;align-items:center;gap:var(--space-4);padding:0 var(--space-4);background:var(--color-fg);color:var(--color-fg-on-dark);border-bottom:var(--border-1);z-index:100}
+.cms-top__brand{display:flex;align-items:center;gap:9px;font-family:var(--font-headers);font-weight:700;font-size:14px}
+.cms-top__spacer{flex:1}
+.cms-body{flex:1;display:flex;min-height:0}
+.cms-nav{flex:0 0 232px;background:var(--color-bg-alt);border-right:var(--border-1);overflow-y:auto;padding:var(--space-3) 0}
+.cms-navitem{display:flex;align-items:center;gap:12px;padding:10px var(--space-5);color:var(--color-fg);background:none;border:none;border-left:2px solid transparent;cursor:pointer;width:100%;font-size:13px;transition:all var(--dur-quick);font-family:var(--font-body)}
+.cms-navitem:hover{background:var(--color-accent-soft)}
+.cms-navitem.active{background:var(--color-bg);border-left-color:var(--color-signal);font-weight:600}
+.cms-main{flex:1;min-width:0;overflow-y:auto;background:var(--color-bg);background-image:linear-gradient(var(--color-grid-line) .5px,transparent .5px),linear-gradient(90deg,var(--color-grid-line) .5px,transparent .5px);background-size:20px 20px}
+.cms-page{max-width:1080px;margin:0 auto;padding:var(--space-8) var(--space-10)}
+.cms-head{margin-bottom:var(--space-8);padding-bottom:var(--space-4);border-bottom:var(--border-1)}
+.cms-head h1{font-size:30px;margin:0;color:var(--color-fg)}
+.cms-head__sub{color:var(--color-fg-muted);font-size:13px;margin-top:4px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:var(--space-8)}
+.stat-card{background:var(--color-bg);border:var(--border-1);padding:var(--space-6);border-radius:var(--radius-1)}
+.stat-card__label{font-size:var(--fs-sm);font-weight:600;color:var(--color-fg-muted);margin-bottom:var(--space-2)}
+.stat-card__number{font-family:var(--font-headers);font-weight:700;font-size:34px;color:var(--color-fg);margin:0}
+.widget-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:var(--space-8)}
+.widget{background:var(--color-bg);border:var(--border-1);padding:24px;border-radius:var(--radius-1)}
+.widget h3{font-size:16px;margin-top:0}
+.activity-item{display:flex;gap:12px;padding-bottom:16px;border-bottom:var(--border-hairline);font-size:13px}
+.activity-item:last-child{border:none;padding-bottom:0}
+.activity-item__time{color:var(--color-fg-soft);min-width:60px}
+</style>
+<style>@keyframes pulse-glow{0%,100%{opacity:1;box-shadow:0 0 8px rgba(70,144,213,0.6)}50%{opacity:0.7;box-shadow:0 0 16px rgba(70,144,213,0.9)}}</style>
+</head>
+<body>
+<!-- @startingPoint section="Screens" subtitle="CMS admin dashboard" viewport="1280x720" -->
+<div class="cms-container">
+<div class="cms-top">
+<div class="cms-top__brand"><img src="../../assets/logos/ally-cms-dot.png" alt="ally cms" style="width:20px;height:20px;margin-right:6px"><span>ally cms</span></div>
+<div class="cms-top__spacer"></div>
+<div style="font-size:12px;display:flex;align-items:center;gap:var(--space-4)"><span id="user-email">acac@digitalallies.net</span><button id="theme-toggle" style="background:none;border:none;cursor:pointer;color:var(--color-fg);font-size:14px;padding:4px 8px">◐</button></div>
+</div>
+
+<div class="cms-body">
+<nav class="cms-nav">
+<div style="font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-fg-soft);padding:var(--space-3) var(--space-5) var(--space-2)">Content</div>
+<button class="cms-navitem active">Dashboard</button>
+<button class="cms-navitem">Pages</button>
+<button class="cms-navitem">Press Office</button>
+<button class="cms-navitem">Projects</button>
+
+<div style="font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--color-fg-soft);padding:var(--space-3) var(--space-5) var(--space-2);margin-top:var(--space-6)">Admin</div>
+<button class="cms-navitem">Design Tokens</button>
+<button class="cms-navitem">Settings</button>
+</nav>
+
+<main class="cms-main">
+<div class="cms-page">
+<div class="cms-head">
+<h1>Dashboard</h1>
+<p class="cms-head__sub">Welcome back! Here's an overview of your content.</p>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-card__label">Published Pages</div>
+<h2 class="stat-card__number">12</h2>
+</div>
+<div class="stat-card">
+<div class="stat-card__label">Draft Pages</div>
+<h2 class="stat-card__number">3</h2>
+</div>
+<div class="stat-card">
+<div class="stat-card__label">Published Posts</div>
+<h2 class="stat-card__number">27</h2>
+</div>
+<div class="stat-card">
+<div class="stat-card__label">Scheduled</div>
+<h2 class="stat-card__number">2</h2>
+</div>
+</div>
+
+<div class="widget-grid">
+<div class="widget">
+<h3>Recent Activity</h3>
+<div class="activity-item">
+<span class="activity-item__time">2h ago</span>
+<span>Page "Services" was published</span>
+</div>
+<div class="activity-item">
+<span class="activity-item__time">1d ago</span>
+<span>Post "Q3 Update" was drafted</span>
+</div>
+<div class="activity-item">
+<span class="activity-item__time">2d ago</span>
+<span>Design tokens updated</span>
+</div>
+</div>
+
+<div class="widget">
+<h3>Quick Actions</h3>
+<div style="display:flex;gap:var(--space-3);flex-direction:column">
+<button style="padding:8px 16px;background:var(--color-accent);color:#fff;border:var(--border-1);border-radius:var(--radius-1);font-family:var(--font-body);font-weight:600;cursor:pointer">+ Create Page</button>
+<button style="padding:8px 16px;background:var(--color-bg-alt);border:var(--border-1);border-radius:var(--radius-1);font-family:var(--font-body);font-weight:600;cursor:pointer">+ Write Post</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>document.getElementById('theme-toggle').addEventListener('click',()=>{document.body.classList.toggle('dark');localStorage.setItem('cms-theme',document.body.classList.contains('dark')?'dark':'light')});if(localStorage.getItem('cms-theme')==='dark')document.body.classList.add('dark')</script>
+</body>
+</html>

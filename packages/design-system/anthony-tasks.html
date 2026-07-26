@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Brand" name="Anthony Task Tracker" subtitle="Live check-off list of open platform tasks, synced from da-platform STATUS.md" viewport="1100x900" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Allies — Anthony Tasks</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+body{padding:0}
+.wrap{max-width:1000px;margin:0 auto}
+.hero{padding:64px 40px 28px}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.brand-name{font-family:var(--font-headers);font-weight:700;font-size:18px}
+.eb{font-family:var(--font-details);font-size:11px;color:var(--signal);letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.back{font-family:var(--font-details);font-size:11px;color:var(--fg-muted);text-decoration:none;letter-spacing:.04em}
+.back:hover{color:var(--signal)}
+h1{font-size:clamp(34px,4vw,48px);margin:12px 0 18px;max-width:820px;line-height:1.06;letter-spacing:-.012em}
+.lede{font-family:var(--font-body);font-size:15px;line-height:1.7;max-width:640px;color:var(--fg)}
+.progress-row{display:flex;align-items:center;gap:16px;margin-top:26px;max-width:640px}
+.progress-track{flex:1;height:10px;border:1px solid var(--charcoal);background:var(--bg-alt);position:relative}
+.progress-fill{height:100%;background:var(--signal);width:0%;transition:width .3s var(--ease-snap)}
+.progress-label{font-family:var(--font-details);font-size:11px;color:var(--fg-muted);white-space:nowrap}
+.section{padding:30px 40px 8px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--charcoal);padding-bottom:10px;margin-bottom:8px}
+.section-head h2{font-family:var(--font-headers);font-weight:700;font-size:19px;margin:0;display:flex;align-items:center;gap:10px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.dot.red{background:var(--signal)}
+.dot.amber{background:#B26B00}
+.dot.green{background:#1F8A5B}
+.section-head .cap{font-family:var(--font-details);font-size:11px;color:var(--fg-muted);letter-spacing:.05em;white-space:nowrap}
+.list{list-style:none;margin:6px 0 0;padding:0}
+.item{display:flex;align-items:flex-start;gap:14px;padding:14px 4px;border-bottom:1px solid var(--hairline)}
+.item:last-child{border-bottom:none}
+.cb{flex:0 0 auto;width:20px;height:20px;border:1.5px solid var(--charcoal);background:var(--bg);cursor:pointer;margin-top:2px;position:relative;appearance:none;-webkit-appearance:none}
+.cb:checked{background:var(--charcoal)}
+.cb:checked::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--fg-on-dark);font-size:13px;font-weight:700}
+.item-body{flex:1}
+.item-title{font-family:var(--font-body);font-size:14px;line-height:1.5;color:var(--fg)}
+.item.done .item-title{color:var(--fg-muted);text-decoration:line-through}
+.item-meta{font-family:var(--font-details);font-size:10.5px;color:var(--fg-muted);letter-spacing:.04em;margin-top:4px;text-transform:uppercase}
+.tag{display:inline-block;font-family:var(--font-details);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:2px 6px;border:1px solid currentColor;margin-right:6px}
+.tag.who-anthony{color:var(--signal)}
+.tag.who-agent{color:var(--accent-blue,#3A7BD5)}
+footer{padding:52px 40px;text-align:center;font-family:var(--font-details);font-size:11px;color:var(--fg-muted);border-top:1px solid var(--hairline);margin-top:40px}
+footer .sep{color:var(--signal);margin:0 12px}
+.reset{font-family:var(--font-details);font-size:11px;color:var(--fg-muted);background:none;border:1px solid var(--charcoal);padding:6px 12px;cursor:pointer;letter-spacing:.04em}
+.reset:hover{color:var(--signal);border-color:var(--signal)}
+@media (max-width:820px){.hero,.section{padding-left:20px;padding-right:20px}}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#2D2D2D">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" fill="#2D2D2D"/>
+<circle cx="600" cy="330" r="34" fill="#3A7BD5"/>
+<text x="600" y="470" text-anchor="middle" fill="#F9F6F0" font-family="monospace" font-size="56" font-weight="700" letter-spacing="4">TASKS</text>
+<text x="600" y="540" text-anchor="middle" fill="#9a9a9a" font-family="monospace" font-size="22" letter-spacing="8">DIGITAL ALLIES</text>
+</svg>
+</template>
+<div class="hero wrap">
+<div class="brand"><span class="da-pulse-stack"><span class="da-pulse"></span></span><span class="brand-name">Digital Allies</span></div>
+<a class="back" href="index.html">← CMS Hub</a>
+<div class="eb" style="margin-top:16px;">Digital Allies · Platform Ops</div>
+<h1>Anthony's tasks.</h1>
+<p class="lede">Everything only you can do — Supabase, Vercel, registrar clicks, and calls that need your judgment. Pulled from <code>da-platform/STATUS.md</code> + <code>BUILD-SCHEDULE.md</code>. Check items off as you clear them; it's saved on this device. Tell me what changed and I'll update the source list.</p>
+<div class="progress-row">
+<div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+<span class="progress-label" id="plabel">0 / 0 done</span>
+<button class="reset" id="resetBtn">Reset</button>
+</div>
+</div>
+
+<div class="section wrap">
+<div class="section-head"><h2><span class="dot red"></span>Do first — blocking</h2><span class="cap">Priority 0–1</span></div>
+<ul class="list" id="grp-blocking"></ul>
+</div>
+
+<div class="section wrap">
+<div class="section-head"><h2><span class="dot amber"></span>Needs your review or decision</h2><span class="cap">Priority 2–3</span></div>
+<ul class="list" id="grp-decision"></ul>
+</div>
+
+<div class="section wrap">
+<div class="section-head"><h2><span class="dot green"></span>Ongoing / recurring</h2><span class="cap">Weekly cadence</span></div>
+<ul class="list" id="grp-ongoing"></ul>
+</div>
+
+<footer><span>Digital Allies · Anthony Task Tracker</span><span class="sep">·</span><span>contact@digitalallies.net</span></footer>
+
+<script>
+const TASKS = [
+{id:'t1',grp:'blocking',title:'Apply supabase/security-fixes.sql + enable leaked-password protection',meta:'Supabase SQL editor + Auth toggle · unconfirmed since Jul 16'},
+{id:'t2',grp:'blocking',title:'Repoint atomic-finds-atx Vercel Production Branch to main, redeploy',meta:"Production has been serving 22 commits behind main — this is why cards/reviews looked missing"},
+{id:'t3',grp:'blocking',title:'Run the Atomic Finds commerce-fields migration + catalog seed in Supabase SQL editor',meta:'20260121000000_products_commerce_fields.sql + seed-atomic-finds-catalog.sql'},
+{id:'t4',grp:'blocking',title:'Run the Atomic Finds reviews table migration + seed (19 real reviews)',meta:'20260122000000_reviews_table.sql + seed-atomic-finds-reviews.sql'},
+{id:'t5',grp:'blocking',title:'Review + merge PR #1 (products catalog), confirm applied',meta:'GitHub — Digital-Allies/da-platform'},
+{id:'t6',grp:'decision',title:'Confirm 2026-07-17 Vercel/Supabase audit checklist',meta:'NEXT_PUBLIC_SITE_URL, HCTC legacy anon key, duplicate key pair cleanup, new Resend keys added + old one revoked'},
+{id:'t7',grp:'decision',title:'Decide checkout provider with Jenny (Atomic Finds)',meta:'Blocks native on-site checkout — architecture already provider-agnostic and ready either way'},
+{id:'t8',grp:'decision',title:'Send 5th Atomic Finds product + real product photos',meta:'Blocks completing the 14-item catalog'},
+{id:'t9',grp:'decision',title:'Root-cause digitalallies.net Vercel project having zero env vars',meta:'Site reportedly reads some Supabase tables despite this — flagged, not yet explained'},
+{id:'t10',grp:'decision',title:'Figma Make design trial for Atomic Finds frontend components',meta:'Blocks further AF component build-out'},
+{id:'t11',grp:'ongoing',title:'Weekly: skim commits, confirm Vercel deploys are green',meta:'Every Fri/weekend review slot per BUILD-SCHEDULE.md'},
+{id:'t12',grp:'ongoing',title:'Weekly: back up the Supabase DB',meta:'Dashboard → Database → Backups, or pg_dump — Saturdays'},
+];
+const KEY='da_anthony_tasks_v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return{}}}
+function save(state){localStorage.setItem(KEY,JSON.stringify(state))}
+let state=load();
+function render(){
+  ['blocking','decision','ongoing'].forEach(g=>{
+    const el=document.getElementById('grp-'+g);
+    el.innerHTML='';
+    TASKS.filter(t=>t.grp===g).forEach(t=>{
+      const done=!!state[t.id];
+      const li=document.createElement('li');
+      li.className='item'+(done?' done':'');
+      li.innerHTML='<input type="checkbox" class="cb" data-id="'+t.id+'" '+(done?'checked':'')+'><div class="item-body"><div class="item-title">'+t.title+'</div><div class="item-meta"><span class="tag who-anthony">Anthony</span>'+t.meta+'</div></div>';
+      el.appendChild(li);
+    });
+  });
+  const total=TASKS.length, done=TASKS.filter(t=>state[t.id]).length;
+  document.getElementById('pfill').style.width=(total?done/total*100:0)+'%';
+  document.getElementById('plabel').textContent=done+' / '+total+' done';
+}
+document.addEventListener('change',e=>{
+  if(e.target.classList.contains('cb')){
+    const id=e.target.dataset.id;
+    state[id]=e.target.checked;
+    save(state);
+    render();
+  }
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{state={};save(state);render();});
+render();
+</script>
+</body>
+</html>

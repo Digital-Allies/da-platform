@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ally cms — Mobile</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+:root {
+  --color-bg: #f5f3f0;
+  --color-bg-alt: #ebe8e3;
+  --color-fg: #2a2520;
+  --color-fg-muted: #7a7570;
+  --color-fg-soft: #a9a39d;
+  --color-grid-line: rgba(0,0,0,0.08);
+  --border-1: 1px solid var(--color-grid-line);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--color-bg); color: var(--color-fg); font-family: var(--font-body); overflow: hidden; height: 100vh; }
+
+/* LIGHT MODE */
+body { --color-bg: #f5f3f0; --color-bg-alt: #ebe8e3; --color-fg: #2a2520; --color-fg-muted: #7a7570; --color-fg-soft: #a9a39d; --color-grid-line: rgba(0,0,0,0.08); --border-1: 1px solid rgba(0,0,0,0.08); }
+body.dark { --color-bg: #1a1a1a; --color-bg-alt: #242424; --color-fg: #f0e8d8; --color-fg-muted: #9e9e9e; --color-fg-soft: #6b6b6b; --color-grid-line: rgba(255,255,255,0.05); --border-1: 1px solid rgba(255,255,255,0.1); }
+
+.mobile-frame { width: 375px; height: 812px; border: 1px solid #ddd; border-radius: 40px; background: var(--color-bg); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.15); margin: 0 auto; }
+.mobile-status { height: 44px; background: var(--color-bg-alt); border-bottom: var(--border-1); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-6); font-size: 13px; font-weight: 600; }
+.mobile-notch { width: 100%; height: 44px; background: var(--color-bg-alt); border-bottom: var(--border-1); }
+
+.mobile-screen { flex: 1; display: flex; flex-direction: column; overflow-y: auto; position: relative; }
+.screen { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
+.screen.active { display: flex; }
+
+/* NAV HEADER */
+.mobile-nav { height: 60px; background: var(--color-bg-alt); border-bottom: var(--border-1); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-4); flex-shrink: 0; }
+.nav-logo { display: flex; align-items: center; gap: var(--space-2); font-size: 13px; font-weight: 600; }
+.nav-logo img { width: 16px; height: 16px; }
+.nav-actions { display: flex; gap: var(--space-3); align-items: center; }
+.nav-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--color-fg); padding: var(--space-2); }
+
+/* DASHBOARD SCREEN */
+.dashboard-content { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); }
+.welcome-card { background: var(--color-bg-alt); border: var(--border-1); border-radius: var(--radius-lg); padding: var(--space-5); }
+.welcome-card h2 { font-size: 18px; font-weight: 600; margin-bottom: var(--space-2); }
+.welcome-card p { font-size: 13px; color: var(--color-fg-muted); line-height: 1.6; }
+
+.dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+.stat-card { background: var(--color-bg-alt); border: var(--border-1); border-radius: var(--radius-md); padding: var(--space-4); text-align: center; }
+.stat-num { font-size: 24px; font-weight: 700; color: #4690d5; }
+.stat-label { font-size: 11px; color: var(--color-fg-muted); margin-top: var(--space-1); text-transform: uppercase; letter-spacing: 0.03em; }
+
+.quick-actions { display: flex; flex-direction: column; gap: var(--space-3); }
+.action-btn { background: #4690d5; color: #fff; border: none; border-radius: var(--radius-md); padding: var(--space-4); font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; display: flex; align-items: center; gap: var(--space-3); }
+.action-btn::before { content: '+'; font-size: 16px; min-width: 20px; }
+
+/* PAGES LIST SCREEN */
+.pages-header { padding: var(--space-5) var(--space-5) var(--space-3); display: flex; justify-content: space-between; align-items: center; }
+.pages-header h3 { font-size: 16px; font-weight: 600; }
+.add-btn { background: #4690d5; color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; }
+
+.pages-list { flex: 1; overflow-y: auto; }
+.page-item { padding: var(--space-4) var(--space-5); border-bottom: var(--border-1); display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); cursor: pointer; }
+.page-item:active { background: var(--color-bg-alt); }
+.page-info { flex: 1; }
+.page-title { font-size: 14px; font-weight: 600; }
+.page-meta { font-size: 11px; color: var(--color-fg-muted); margin-top: var(--space-1); }
+.page-actions { display: flex; gap: var(--space-2); }
+.page-action-btn { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--color-fg-muted); padding: var(--space-2); }
+
+/* EDITOR SCREEN */
+.editor-header { padding: var(--space-4) var(--space-5); border-bottom: var(--border-1); display: flex; gap: var(--space-3); align-items: center; }
+.editor-back { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--color-fg); }
+.editor-title-input { flex: 1; font-size: 14px; font-weight: 600; border: none; background: transparent; color: var(--color-fg); font-family: var(--font-body); }
+
+.editor-tabs { display: flex; gap: 0; border-bottom: var(--border-1); padding: 0 var(--space-4); background: var(--color-bg-alt); }
+.editor-tab { flex: 1; padding: var(--space-4); font-size: 12px; font-weight: 600; border: none; background: none; cursor: pointer; color: var(--color-fg-muted); position: relative; }
+.editor-tab.active { color: var(--color-fg); }
+.editor-tab.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: #4690d5; }
+
+.editor-content { flex: 1; padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+.form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+.form-label { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--color-fg-muted); letter-spacing: 0.03em; }
+.form-input { border: var(--border-1); border-radius: var(--radius-md); padding: var(--space-3); font-size: 13px; font-family: var(--font-body); background: var(--color-bg-alt); color: var(--color-fg); }
+.form-textarea { border: var(--border-1); border-radius: var(--radius-md); padding: var(--space-3); font-size: 13px; font-family: var(--font-body); background: var(--color-bg-alt); color: var(--color-fg); resize: vertical; min-height: 80px; }
+
+.editor-actions { display: flex; gap: var(--space-3); padding: var(--space-5); border-top: var(--border-1); }
+.editor-save { flex: 1; background: #4690d5; color: #fff; border: none; border-radius: var(--radius-md); padding: var(--space-3); font-size: 13px; font-weight: 600; cursor: pointer; }
+.editor-cancel { flex: 1; background: var(--color-bg-alt); color: var(--color-fg); border: var(--border-1); border-radius: var(--radius-md); padding: var(--space-3); font-size: 13px; font-weight: 600; cursor: pointer; }
+
+/* BLOCKS SECTION */
+.blocks-list { display: flex; flex-direction: column; gap: var(--space-3); }
+.block-item { background: var(--color-bg-alt); border: var(--border-1); border-radius: var(--radius-md); padding: var(--space-4); }
+.block-type { font-size: 11px; color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: var(--space-1); }
+.block-content { font-size: 13px; font-weight: 600; color: var(--color-fg); }
+.block-handle { color: var(--color-fg-soft); margin-right: var(--space-2); }
+
+.add-block-btn { background: var(--color-bg-alt); border: 1px dashed var(--color-grid-line); border-radius: var(--radius-md); padding: var(--space-4); font-size: 13px; font-weight: 600; color: var(--color-fg-muted); cursor: pointer; }
+
+@keyframes pulse-glow { 0%,100% { opacity: 1; box-shadow: 0 0 8px rgba(70,144,213,0.6); } 50% { opacity: 0.7; box-shadow: 0 0 16px rgba(70,144,213,0.9); } }
+</style>
+</head>
+<body>
+<div class="mobile-frame">
+  <div class="mobile-notch"></div>
+
+  <!-- DASHBOARD SCREEN -->
+  <div class="screen active" data-screen="dashboard">
+    <div class="mobile-nav">
+      <div class="nav-logo"><img src="../../assets/logos/ally-cms-dot.png" alt="ally cms"><span>ally cms</span></div>
+      <div class="nav-actions">
+        <button class="nav-btn" id="theme-toggle">◐</button>
+      </div>
+    </div>
+    <div class="dashboard-content">
+      <div class="welcome-card">
+        <h2>Welcome back, AC</h2>
+        <p>Manage your site's content, pages, and settings all in one place.</p>
+      </div>
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Pages</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">48</div>
+          <div class="stat-label">Products</div>
+        </div>
+      </div>
+      <div class="quick-actions">
+        <button class="action-btn" onclick="showScreen('pages')">Pages</button>
+        <button class="action-btn">Products</button>
+        <button class="action-btn">Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGES LIST SCREEN -->
+  <div class="screen" data-screen="pages">
+    <div class="mobile-nav">
+      <button class="nav-btn editor-back" onclick="showScreen('dashboard')">←</button>
+      <span style="font-weight: 600; font-size: 14px;">Pages</span>
+      <button class="nav-btn add-btn" onclick="showScreen('editor')">+</button>
+    </div>
+    <div class="pages-list">
+      <div class="page-item" onclick="showScreen('editor')">
+        <div class="page-info">
+          <div class="page-title">Homepage</div>
+          <div class="page-meta">Published · 2 days ago</div>
+        </div>
+        <div class="page-actions">
+          <button class="page-action-btn">⋯</button>
+        </div>
+      </div>
+      <div class="page-item" onclick="showScreen('editor')">
+        <div class="page-info">
+          <div class="page-title">About Us</div>
+          <div class="page-meta">Draft · Today</div>
+        </div>
+        <div class="page-actions">
+          <button class="page-action-btn">⋯</button>
+        </div>
+      </div>
+      <div class="page-item" onclick="showScreen('editor')">
+        <div class="page-info">
+          <div class="page-title">Contact</div>
+          <div class="page-meta">Published · 1 week ago</div>
+        </div>
+        <div class="page-actions">
+          <button class="page-action-btn">⋯</button>
+        </div>
+      </div>
+      <div class="page-item" onclick="showScreen('editor')">
+        <div class="page-info">
+          <div class="page-title">Services</div>
+          <div class="page-meta">Draft · 3 days ago</div>
+        </div>
+        <div class="page-actions">
+          <button class="page-action-btn">⋯</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE EDITOR SCREEN -->
+  <div class="screen" data-screen="editor">
+    <div class="editor-header">
+      <button class="editor-back" onclick="showScreen('pages')">←</button>
+      <input type="text" class="editor-title-input" placeholder="Page title" value="Homepage">
+    </div>
+    <div class="editor-tabs">
+      <button class="editor-tab active">Content</button>
+      <button class="editor-tab">SEO</button>
+      <button class="editor-tab">Settings</button>
+    </div>
+    <div class="editor-content">
+      <div class="form-group">
+        <label class="form-label">Page URL</label>
+        <input type="text" class="form-input" value="/index" readonly>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" placeholder="Add page description">Welcome to our site. Discover our latest offerings and services.</textarea>
+      </div>
+      <div style="margin-top: var(--space-2);">
+        <label class="form-label" style="display: block; margin-bottom: var(--space-3);">Blocks</label>
+        <div class="blocks-list">
+          <div class="block-item">
+            <div class="block-type">Hero Section</div>
+            <div class="block-content">⋮⋮ Welcome Banner</div>
+          </div>
+          <div class="block-item">
+            <div class="block-type">Featured Products</div>
+            <div class="block-content">⋮⋮ 6 items from Shop</div>
+          </div>
+          <div class="block-item">
+            <div class="block-type">Testimonials</div>
+            <div class="block-content">⋮⋮ 3 recent reviews</div>
+          </div>
+        </div>
+        <button class="add-block-btn">+ Add Block</button>
+      </div>
+    </div>
+    <div class="editor-actions">
+      <button class="editor-cancel" onclick="showScreen('pages')">Cancel</button>
+      <button class="editor-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function showScreen(screenName) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelector(`[data-screen="${screenName}"]`).classList.add('active');
+}
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('cms-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+});
+if (localStorage.getItem('cms-theme') === 'dark') document.body.classList.add('dark');
+</script>
+</body>
+</html>

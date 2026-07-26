@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Allies — CMS Dashboard (Dark Mode Mock)</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lexend+Deca:wght@100..900&display=swap');
+:root{--bone:#F9F6F0;--canvas:#2D2D2D;--bg:#1E1D1B;--grid:rgba(249,246,240,.06);--white:#FFFFFF;--muted:#B7B2A8;--accent-blue:#4A79CE;--accent-pink:rgba(250,222,235,.85);--card:rgba(249,246,240,.03);--hover:rgba(249,246,240,.05);--border:rgba(249,246,240,.16)}
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--canvas);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px;color:var(--white);font-family:'JetBrains Mono',ui-monospace,monospace;min-height:100vh}
+a{color:var(--accent-blue)}
+a:hover{color:var(--accent-pink)}
+.topbar{display:flex;align-items:center;gap:16px;padding:14px 24px;border-bottom:1px solid var(--border);background:var(--bg)}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Lexend Deca',sans-serif;font-weight:600;font-size:15px;color:var(--bone)}
+.dot{width:8px;height:8px;background:var(--accent-blue);border-radius:50%}
+.tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-pink);border:1px solid var(--border);padding:3px 8px}
+.spacer{flex:1}
+.back{font-size:11px;color:var(--muted);text-decoration:none}
+.back:hover{color:var(--accent-pink)}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 53px)}
+.nav{border-right:1px solid var(--border);padding:20px 0}
+.navgroup{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:0 20px 10px}
+.navitem{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:var(--white);cursor:pointer;border-left:2px solid transparent}
+.navitem svg{width:16px;height:16px;flex-shrink:0}
+.navitem:hover{background:var(--hover)}
+.navitem.active{background:var(--hover);border-left-color:var(--accent-blue);color:var(--bone)}
+.main{padding:32px}
+.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-blue);margin-bottom:8px}
+h1{font-family:'Lexend Deca',sans-serif;font-weight:600;font-size:28px;color:var(--bone);margin:0 0 28px;line-height:1.1}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:28px}
+.stat{background:var(--canvas);padding:18px}
+.stat .n{font-family:'Lexend Deca',sans-serif;font-weight:600;font-size:26px;color:var(--bone)}
+.stat .l{font-size:11px;color:var(--muted);margin-top:4px}
+.panel-head{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--border);padding:18px;transition:background .18s}
+.card:hover{background:var(--hover)}
+.card .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-pink);margin-bottom:8px}
+.card .t{font-family:'Lexend Deca',sans-serif;font-weight:600;font-size:15px;color:var(--bone);margin-bottom:6px}
+.card .d{font-size:12px;color:var(--muted);line-height:1.5}
+.note{margin-top:32px;padding:14px 16px;border:1px solid var(--border);background:var(--card);font-size:12px;color:var(--muted);line-height:1.6}
+.note b{color:var(--bone)}
+</style>
+</head>
+<body>
+<div class="topbar">
+<div class="brand"><span class="dot"></span>Digital Allies · CMS</div>
+<span class="tag">Dark Mode</span>
+<div class="spacer"></div>
+<a class="back" href="index.html">← CMS Hub</a>
+</div>
+<div class="layout">
+<nav class="nav">
+<div class="navgroup">Modules</div>
+<div class="navitem active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>Dashboard</div>
+<div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Pages</div>
+<div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>The Press Office</div>
+<div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>Projects</div>
+<div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>Research</div>
+<div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg>The Workshop</div>
+<div class="navitem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v6m0 6v6M4.22 4.22l4.24 4.24m5.08 0l4.24-4.24M1 12h6m6 0h6m-1.78 7.78l-4.24-4.24m-5.08 0l-4.24 4.24"></path></svg>Settings</div>
+</nav>
+<div class="main">
+<div class="eyebrow">Overview</div>
+<h1>Dashboard</h1>
+<div class="stats">
+<div class="stat"><div class="n">12</div><div class="l">Published pages</div></div>
+<div class="stat"><div class="n">4</div><div class="l">Draft pages</div></div>
+<div class="stat"><div class="n">3</div><div class="l">Connected tenants</div></div>
+<div class="stat"><div class="n">28</div><div class="l">Posts this quarter</div></div>
+</div>
+<div class="panel-head">Recent activity</div>
+<div class="cards">
+<div class="card"><div class="k">● Live</div><div class="t">Services Grid updated</div><div class="d">Home page — edited section copy and reordered 3 blocks.</div></div>
+<div class="card"><div class="k">Draft</div><div class="t">Bilingual Website case study</div><div class="d">Press Office — awaiting review before publish.</div></div>
+<div class="card"><div class="k">● Live</div><div class="t">Atomic Finds — Product grid</div><div class="d">Tenant: Atomic Finds — commerce fields synced from Supabase.</div></div>
+</div>
+<div class="note"><b>Mock, not wired.</b> Visual reference for the standalone dark UI kit — charcoal canvas + light ruled grid, bone headings / white body, pink + light-blue accents, flat (non-glass) hover. See the dark-mode design spec for full tokens.</div>
+</div>
+</div>
+</body>
+</html>
