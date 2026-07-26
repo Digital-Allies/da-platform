@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash, CheckCircle, Package } from 'lucide-react';
+import CSVCollectionImporter from '@/components/admin/CSVCollectionImporter';
 
 interface ProductItem {
   id: string;
@@ -172,6 +173,8 @@ export default function CollectionsClient({
           <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-alt)', border: 'var(--border-1)', fontSize: '13px', lineHeight: 1.6 }}>
             <strong>Collections</strong> — Group products, articles, or services into curated collections (e.g. "Featured Chairs", "Summer Sale", "Mid-Century Classics").
           </div>
+
+          <CSVCollectionImporter onImportComplete={() => router.refresh()} />
 
           <div className="content-filters">
             <input

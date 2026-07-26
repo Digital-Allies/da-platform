@@ -475,7 +475,14 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
                   {blocks.map((block, idx) => (
                     <div key={idx} style={{ border: selectedBlockIndex === idx ? '2px solid var(--tok-primary, #B7791F)' : '1px solid var(--charcoal)', padding: '12px', background: 'var(--bg-alt)' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                        <strong style={{ textTransform: 'uppercase', fontSize: '11px', letterSpacing: '0.05em' }}>Block {idx + 1}: {block.type}</strong>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <strong style={{ textTransform: 'uppercase', fontSize: '11px', letterSpacing: '0.05em' }}>Block {idx + 1}: {block.type}</strong>
+                          {['products', 'services', 'testimonials'].includes(block.type) ? (
+                            <span style={{ fontSize: '10px', background: 'rgba(183,121,31,0.15)', color: 'var(--tok-primary, #B7791F)', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold' }}>⚡ Dynamic DB Block</span>
+                          ) : (
+                            <span style={{ fontSize: '10px', background: '#eee', color: '#666', padding: '2px 6px', borderRadius: '4px' }}>📝 Editable Copy</span>
+                          )}
+                        </div>
                         <div style={{ display: 'flex', gap: '4px' }}>
                           <button type="button" className="btn btn--secondary" onClick={() => handleMoveBlock(idx, 'up')} disabled={idx === 0} style={{ padding: '4px' }}><ArrowUp size={12} /></button>
                           <button type="button" className="btn btn--secondary" onClick={() => handleMoveBlock(idx, 'down')} disabled={idx === blocks.length - 1} style={{ padding: '4px' }}><ArrowDown size={12} /></button>

@@ -7,10 +7,11 @@
 // state; the storefront CTA follows via resolveProductCta().
 
 import { useEffect, useState } from 'react'
-import { Plus, ChevronDown, ChevronUp, Pencil, Trash2, Save } from 'lucide-react'
+import { Plus, ChevronDown, ChevronUp, Pencil, Trash2, Save, FileSpreadsheet } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { useClientId } from '@/lib/client-context'
 import { type Product, type ProductSellingState } from '@/lib/types'
+import CSVCollectionImporter from '@/components/admin/CSVCollectionImporter'
 
 type Editing = null | 'new' | Product
 
@@ -132,14 +133,16 @@ export default function ProductsPage() {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
+  const [collections, setCollections] = useState<any[]>([])
+
   async function load() {
     const supabase = createClient()
-    const { data } = await supabase
-      .from('products')
-      .select('*')
-      .eq('client_id', CLIENT_ID)
-      .order('display_order')
-    setItems(data ?? [])
+    const [prodRes, colRes] = await Promise.all([
+      supabase.from('products').select('*').eq('client_id', CLIENT_ID).order('display_order'),
+      supabase.from('collections').select('*').eq('client_id', CLIENT_ID)
+    ])
+    setItems(prodRes.data ?? [])
+    setCollections(colRes.data ?? [])
     setLoading(false)
   }
 
@@ -217,6 +220,8 @@ export default function ProductsPage() {
           </button>
         </div>
       </div>
+
+      <CSVCollectionImporter onImportComplete={() => load()} />
 
       <div className="svc-list">
         {items.map((p, i) => (
