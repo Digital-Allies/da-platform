@@ -1,276 +1,428 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { Save, Upload } from 'lucide-react'
-import { createClient } from '@/lib/supabase'
-import { useClientId } from '@/lib/client-context'
-import { DEFAULT_SETTINGS, type SiteSettings } from '@/lib/types'
-
-const SWATCHES = ['#3A7BD5', '#C5301A', '#1F8A5B', '#7A5AE0', '#B7791F', '#0F766E']
-
-const SETTING_GROUPS: Array<{
-  title: string
-  fields: Array<{
-    key: keyof SiteSettings
-    label: string
-    type?: 'text' | 'textarea' | 'color' | 'url'
-    hint?: string
-    rows?: number
-  }>
-}> = [
-  {
-    title: 'Identity',
-    fields: [
-      { key: 'site_title', label: 'Business name' },
-      { key: 'tagline', label: 'Tagline', type: 'textarea' },
-      { key: 'site_description', label: 'Site description (SEO)', type: 'textarea', hint: '1–2 sentences for search results' },
-      { key: 'brand_color', label: 'Brand color', type: 'color' },
-      { key: 'logo_url', label: 'Logo URL', type: 'url', hint: 'Upload logo file directly or paste URL' },
-      { key: 'favicon_url', label: 'Favicon URL', type: 'url', hint: 'Upload favicon file directly or paste URL' },
-    ],
-  },
-  {
-    title: 'The Lobby (hero)',
-    fields: [
-      { key: 'hero_title', label: 'Hero headline', type: 'textarea' },
-      { key: 'hero_subtitle', label: 'Hero subheading', type: 'textarea' },
-      { key: 'hero_cta_text', label: 'Hero button text' },
-      { key: 'hero_cta_link', label: 'Hero button link' },
-    ],
-  },
-  {
-    title: 'About',
-    fields: [
-      { key: 'about_title', label: 'About title' },
-      { key: 'about_body', label: 'About text', type: 'textarea', rows: 5 },
-      { key: 'about_image_url', label: 'About image URL', type: 'url', hint: 'Upload photo directly or paste URL' },
-    ],
-  },
-  {
-    title: 'Contact',
-    fields: [
-      { key: 'phone', label: 'Phone' },
-      { key: 'email', label: 'Email' },
-      { key: 'address', label: 'Location line', type: 'textarea' },
-      { key: 'business_hours', label: 'Business hours', type: 'textarea' },
-    ],
-  },
-  {
-    title: 'Social',
-    fields: [
-      { key: 'instagram_url', label: 'Instagram URL', type: 'url' },
-      { key: 'facebook_url', label: 'Facebook URL', type: 'url' },
-      { key: 'linkedin_url', label: 'LinkedIn URL', type: 'url' },
-      { key: 'twitter_url', label: 'Twitter/X URL', type: 'url' },
-    ],
-  },
-  {
-    title: 'Store Policies & Announcements',
-    fields: [
-      { key: 'announcement_banner', label: 'Announcement banner bar text', hint: 'Displays at top of website when populated' },
-      { key: 'shipping_policy', label: 'Shipping rates & delivery terms', type: 'textarea', rows: 4 },
-      { key: 'return_policy', label: 'Return & exchange policy', type: 'textarea', rows: 4 },
-    ],
-  },
-  {
-    title: 'Analytics & Platform Integration',
-    fields: [
-      { key: 'google_analytics_id', label: 'Google Analytics 4 ID', hint: 'e.g. G-XXXXXXXXXX' },
-      { key: 'custom_footer_text', label: 'Custom footer disclaimer', type: 'textarea', hint: 'Displays in site footer' },
-    ],
-  },
-]
+import { useEffect, useState } from 'react';
+import { Save, Upload, Database, Palette, CheckCircle, Plus, Trash2 } from 'lucide-react';
+import { createClient } from '@/lib/supabase';
+import { useClientId } from '@/lib/client-context';
+import { DEFAULT_SETTINGS, type SiteSettings } from '@/lib/types';
+import MediaUploader from '@/components/admin/MediaUploader';
+import ThemeClient from '../theme/ThemeClient';
 
 export default function SettingsPage() {
-  const CLIENT_ID = useClientId()
-  const [values, setValues] = useState<SiteSettings>(DEFAULT_SETTINGS)
-  const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState(false)
-  const [dirty, setDirty] = useState(false)
-  const [saved, setSaved] = useState(false)
-  const [error, setError] = useState('')
+  const [activeTab, setActiveTab] = useState<'connected_data' | 'site_theme'>('connected_data');
+  const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
+  const [customDataKeys, setCustomDataKeys] = useState<Array<{ key: string; value: string }>>([]);
+  const [newKeyName, setNewKeyName] = useState('');
+  const [newKeyValue, setNewKeyValue] = useState('');
+  
+  const [themeTokens, setThemeTokens] = useState<any>(null);
+  const [themeRowId, setThemeRowId] = useState<string | null>(null);
 
-  const supabase = createClient()
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [savedSuccess, setSavedSuccess] = useState(false);
+  
+  const clientId = useClientId();
+  const supabase = createClient();
 
   useEffect(() => {
-    async function load() {
-      const { data } = await supabase
-        .from('settings')
-        .select('key, value')
-        .eq('client_id', CLIENT_ID)
+    async function loadData() {
+      if (!clientId) return;
+      setLoading(true);
 
-      if (data) {
-        const map: Partial<SiteSettings> = {}
-        data.forEach(({ key, value }) => {
-          if (key in DEFAULT_SETTINGS && value !== null) {
-            (map as Record<string, string>)[key] = value
+      // Fetch site settings
+      const { data: sData } = await supabase
+        .from('site_settings')
+        .select('*')
+        .eq('client_id', clientId)
+        .single();
+
+      if (sData) {
+        setSettings({ ...DEFAULT_SETTINGS, ...sData });
+        if (sData.custom_data) {
+          try {
+            const parsed = typeof sData.custom_data === 'string' ? JSON.parse(sData.custom_data) : sData.custom_data;
+            if (Array.isArray(parsed)) setCustomDataKeys(parsed);
+          } catch (e) {
+            console.error('Failed to parse custom_data', e);
           }
-        })
-        setValues({ ...DEFAULT_SETTINGS, ...map })
+        }
       }
-      setLoading(false)
-    }
-    load()
-  }, [CLIENT_ID])
 
-  function update(key: keyof SiteSettings, value: string) {
-    setValues((prev) => ({ ...prev, [key]: value }))
-    setDirty(true)
-  }
+      // Fetch design tokens
+      const { data: tData } = await supabase
+        .from('design_tokens')
+        .select('*')
+        .eq('client_id', clientId)
+        .single();
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, key: keyof SiteSettings) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    try {
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${key}-${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
-      const filePath = `settings/${fileName}`;
-
-      const { data, error: uploadErr } = await supabase.storage
-        .from('client-assets')
-        .upload(filePath, file);
-
-      if (uploadErr) {
-        alert('Upload failed: ' + uploadErr.message);
-      } else if (data) {
-        const { data: { publicUrl } } = supabase.storage
-          .from('client-assets')
-          .getPublicUrl(filePath);
-
-        update(key, publicUrl);
+      if (tData) {
+        setThemeTokens(tData);
+        setThemeRowId(tData.id);
       }
-    } catch (err: any) {
-      alert('Upload exception: ' + err.message);
+
+      setLoading(false);
     }
+
+    loadData();
+  }, [clientId]);
+
+  const handleTextChange = (key: keyof SiteSettings, value: string) => {
+    setSettings(prev => ({ ...prev, [key]: value }));
+    setSavedSuccess(false);
   };
 
-  async function save() {
-    setSaving(true)
-    setError('')
-    setSaved(false)
+  const handleAddCustomDataKey = () => {
+    if (!newKeyName.trim()) return;
+    const cleanKey = newKeyName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+    setCustomDataKeys(prev => [...prev, { key: cleanKey, value: newKeyValue }]);
+    setNewKeyName('');
+    setNewKeyValue('');
+  };
 
-    const upserts = Object.entries(values).map(([key, value]) => ({
-      client_id: CLIENT_ID,
-      key,
-      value: String(value),
+  const handleRemoveCustomDataKey = (index: number) => {
+    setCustomDataKeys(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleSubmitSettings = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSaving(true);
+    setSavedSuccess(false);
+
+    const payload = {
+      ...settings,
+      client_id: clientId,
+      custom_data: customDataKeys,
       updated_at: new Date().toISOString(),
-    }))
+    };
 
-    const { error: e } = await supabase
-      .from('settings')
-      .upsert(upserts, { onConflict: 'client_id,key' })
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert(payload, { onConflict: 'client_id' });
 
-    if (e) {
-      setError(e.message)
+    if (error) {
+      alert('Error saving connected data settings: ' + error.message);
     } else {
-      setSaved(true)
-      setDirty(false)
-      setTimeout(() => setSaved(false), 2500)
+      setSavedSuccess(true);
     }
-    setSaving(false)
+    setSaving(false);
+  };
+
+  if (loading) {
+    return (
+      <div className="ws-page" style={{ padding: '32px' }}>
+        <div style={{ color: 'var(--text-soft)' }}>Loading workspace settings & connected data...</div>
+      </div>
+    );
   }
 
-  if (loading) return <div className="apage"><p className="empty">Loading…</p></div>
-
   return (
-    <div className="apage apage--narrow">
-      <div className="apage__head">
+    <div className="ws-page" style={{ padding: '32px' }}>
+      <div className="ws-head" style={{ marginBottom: '24px' }}>
         <div>
-          <h1 className="apage__title">Site Settings</h1>
-          <p className="apage__sub">The words and identity of the public site.</p>
-        </div>
-        <div className="apage__actions">
-          {dirty && <span className="dirty-dot">● Unsaved</span>}
-          {saved && <span style={{ fontFamily: 'var(--font-details)', fontSize: 11, color: '#1F8A5B' }}>Saved ✓</span>}
-          <button className="abtn abtn--primary" onClick={save} disabled={saving || !dirty}>
-            <Save size={13} /> {saving ? 'Saving…' : 'Save changes'}
-          </button>
+          <div className="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Workspace & Client Data</div>
+          <h2>Settings & Connected Data</h2>
         </div>
       </div>
 
-      {error && (
-        <p style={{ marginBottom: 16, fontSize: 12, color: 'var(--signal)', border: '1px solid var(--signal)', padding: '8px 12px' }}>
-          {error}
-        </p>
+      {/* Sub-Tabs Navigation */}
+      <div style={{ display: 'flex', gap: '8px', borderBottom: '1px solid var(--border-color, #ccc)', marginBottom: '24px' }}>
+        <button
+          type="button"
+          onClick={() => setActiveTab('connected_data')}
+          style={{
+            padding: '12px 20px',
+            background: activeTab === 'connected_data' ? 'var(--bg-alt, #fff)' : 'transparent',
+            border: activeTab === 'connected_data' ? '1px solid var(--border-color, #ccc)' : 'none',
+            borderBottom: activeTab === 'connected_data' ? '2px solid var(--tok-primary, #B7791F)' : 'none',
+            fontWeight: activeTab === 'connected_data' ? 'bold' : 'normal',
+            cursor: 'pointer',
+            fontSize: '14px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <Database size={16} /> Connected Data
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('site_theme')}
+          style={{
+            padding: '12px 20px',
+            background: activeTab === 'site_theme' ? 'var(--bg-alt, #fff)' : 'transparent',
+            border: activeTab === 'site_theme' ? '1px solid var(--border-color, #ccc)' : 'none',
+            borderBottom: activeTab === 'site_theme' ? '2px solid var(--tok-primary, #B7791F)' : 'none',
+            fontWeight: activeTab === 'site_theme' ? 'bold' : 'normal',
+            cursor: 'pointer',
+            fontSize: '14px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          <Palette size={16} /> Site Theme
+        </button>
+      </div>
+
+      {/* Sub-Tab 1: Connected Data */}
+      {activeTab === 'connected_data' && (
+        <form onSubmit={handleSubmitSettings}>
+          <div style={{ marginBottom: '20px', padding: '16px', background: 'var(--bg-alt, #fafafa)', border: '1px solid var(--border-color, #eee)', fontSize: '13px', lineHeight: 1.6 }}>
+            <strong>Connected Data Engine</strong> — All business copy, contact details, media assets, and custom copy variables defined here are synced directly across your page builder blocks and collections.
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            {/* Left Column: Business & Media */}
+            <div style={{ background: 'var(--bg, #fff)', border: '1px solid var(--border-color, #ddd)', padding: '24px', borderRadius: '6px' }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '16px' }}>Business Identity & Brand Media</h3>
+              
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Business Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={settings.site_title || ''}
+                  onChange={e => handleTextChange('site_title', e.target.value)}
+                />
+              </div>
+
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Tagline</label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  value={settings.tagline || ''}
+                  onChange={e => handleTextChange('tagline', e.target.value)}
+                />
+              </div>
+
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">SEO Description</label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  value={settings.site_description || ''}
+                  onChange={e => handleTextChange('site_description', e.target.value)}
+                />
+              </div>
+
+              <MediaUploader
+                label="Brand Logo Asset"
+                hint="Upload brand logo file directly to client storage bucket"
+                value={settings.logo_url || ''}
+                onChange={url => handleTextChange('logo_url', url)}
+              />
+
+              <MediaUploader
+                label="Favicon Asset"
+                hint="Upload 32x32 website icon file directly to storage"
+                value={settings.favicon_url || ''}
+                onChange={url => handleTextChange('favicon_url', url)}
+              />
+
+              <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginTop: '24px', marginBottom: '16px' }}>Hero & About Copy</h3>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Hero Headline</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={settings.hero_title || ''}
+                  onChange={e => handleTextChange('hero_title', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Hero Subtitle</label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  value={settings.hero_subtitle || ''}
+                  onChange={e => handleTextChange('hero_subtitle', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">About Title</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={settings.about_title || ''}
+                  onChange={e => handleTextChange('about_title', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">About Body Copy</label>
+                <textarea
+                  className="form-control"
+                  rows={4}
+                  value={settings.about_body || ''}
+                  onChange={e => handleTextChange('about_body', e.target.value)}
+                />
+              </div>
+              <MediaUploader
+                label="About Featured Photo"
+                hint="Upload brand or store photo for about section"
+                value={settings.about_image_url || ''}
+                onChange={url => handleTextChange('about_image_url', url)}
+              />
+            </div>
+
+            {/* Right Column: Contact, Policies & Custom Variables */}
+            <div style={{ background: 'var(--bg, #fff)', border: '1px solid var(--border-color, #ddd)', padding: '24px', borderRadius: '6px' }}>
+              <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '16px' }}>Contact Info & Location</h3>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Phone Number</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={settings.phone || ''}
+                  onChange={e => handleTextChange('phone', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Support Email</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={settings.email || ''}
+                  onChange={e => handleTextChange('email', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Location / Address</label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  value={settings.address || ''}
+                  onChange={e => handleTextChange('address', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Business Hours</label>
+                <textarea
+                  className="form-control"
+                  rows={2}
+                  value={settings.business_hours || ''}
+                  onChange={e => handleTextChange('business_hours', e.target.value)}
+                />
+              </div>
+
+              <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginTop: '24px', marginBottom: '16px' }}>Store Policies & Analytics</h3>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Announcement Banner Text</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={settings.announcement_banner || ''}
+                  onChange={e => handleTextChange('announcement_banner', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Shipping Policy & Delivery Terms</label>
+                <textarea
+                  className="form-control"
+                  rows={3}
+                  value={settings.shipping_policy || ''}
+                  onChange={e => handleTextChange('shipping_policy', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Return & Exchange Policy</label>
+                <textarea
+                  className="form-control"
+                  rows={3}
+                  value={settings.return_policy || ''}
+                  onChange={e => handleTextChange('return_policy', e.target.value)}
+                />
+              </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Google Analytics ID</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="G-XXXXXXXXXX"
+                  value={settings.google_analytics_id || ''}
+                  onChange={e => handleTextChange('google_analytics_id', e.target.value)}
+                />
+              </div>
+
+              <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginTop: '24px', marginBottom: '16px' }}>Custom Connected Copy Dictionary</h3>
+              <p style={{ fontSize: '12px', color: 'var(--text-soft, #666)', marginBottom: '12px' }}>
+                Add custom copy variables (e.g. <code>free_shipping_threshold</code>) usable across any page builder block or layout.
+              </p>
+
+              {customDataKeys.map((item, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
+                  <span style={{ fontSize: '12px', fontFamily: 'monospace', fontWeight: 'bold', width: '120px' }}>
+                    {item.key}
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={item.value}
+                    onChange={e => {
+                      const updated = [...customDataKeys];
+                      updated[idx].value = e.target.value;
+                      setCustomDataKeys(updated);
+                    }}
+                    style={{ fontSize: '12px', flex: 1 }}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn--secondary"
+                    onClick={() => handleRemoveCustomDataKey(idx)}
+                    style={{ padding: '4px 8px', fontSize: '11px', color: 'var(--signal, #C5301A)' }}
+                  >
+                    <Trash2 size={12} />
+                  </button>
+                </div>
+              ))}
+
+              <div style={{ display: 'flex', gap: '8px', marginTop: '12px' }}>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="variable_name (e.g. promo_code)"
+                  value={newKeyName}
+                  onChange={e => setNewKeyName(e.target.value)}
+                  style={{ fontSize: '12px' }}
+                />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Value string"
+                  value={newKeyValue}
+                  onChange={e => setNewKeyValue(e.target.value)}
+                  style={{ fontSize: '12px' }}
+                />
+                <button
+                  type="button"
+                  className="btn btn--secondary"
+                  onClick={handleAddCustomDataKey}
+                  style={{ fontSize: '12px', whiteSpace: 'nowrap' }}
+                >
+                  <Plus size={12} /> Add Copy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <button type="submit" className="btn btn--primary" disabled={saving}>
+              <Save size={16} /> {saving ? 'Saving Data...' : 'Save Connected Data'}
+            </button>
+            {savedSuccess && (
+              <span style={{ color: '#155724', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <CheckCircle size={16} /> Connected data saved & synced!
+              </span>
+            )}
+          </div>
+        </form>
       )}
 
-      {SETTING_GROUPS.map((group) => (
-        <section className="settings-group" key={group.title}>
-          <h2 className="asubhead">{group.title}</h2>
-          <div className="settings-card">
-            {group.fields.map(({ key, label, type = 'text', hint, rows }) => (
-              <label key={key} className="afield">
-                <span className="afield__label">
-                  {label}
-                  {hint && <em className="afield__hint">{hint}</em>}
-                </span>
-                {type === 'textarea' ? (
-                  <textarea
-                    rows={rows ?? 2}
-                    className="ainput"
-                    value={values[key]}
-                    onChange={(e) => update(key, e.target.value)}
-                  />
-                ) : type === 'color' ? (
-                  <div className="color-row">
-                    <span className="color-chip" style={{ background: values[key] }} />
-                    {SWATCHES.map((c) => (
-                      <button
-                        key={c}
-                        type="button"
-                        className={`swatch${values[key] === c ? ' is-on' : ''}`}
-                        style={{ background: c }}
-                        onClick={() => update(key, c)}
-                      />
-                    ))}
-                    <input
-                      type="text"
-                      className="ainput mono color-hex"
-                      value={values[key]}
-                      onChange={(e) => update(key, e.target.value)}
-                    />
-                  </div>
-                ) : type === 'url' ? (
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    <input
-                      type="text"
-                      className="ainput"
-                      value={values[key]}
-                      onChange={(e) => update(key, e.target.value)}
-                    />
-                    {(key === 'logo_url' || key === 'favicon_url' || key === 'about_image_url') && (
-                      <label className="abtn" style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
-                        <Upload size={12}/> Upload
-                        <input
-                          type="file"
-                          accept="image/*"
-                          style={{ display: 'none' }}
-                          onChange={(e) => handleFileUpload(e, key)}
-                        />
-                      </label>
-                    )}
-                  </div>
-                ) : (
-                  <input
-                    type={type}
-                    className="ainput"
-                    value={values[key]}
-                    onChange={(e) => update(key, e.target.value)}
-                  />
-                )}
-              </label>
-            ))}
-          </div>
-        </section>
-      ))}
-
-      {/* Floating success feedback toast */}
-      {saved && (
-        <div className="toast">
-          <span>✓ Settings saved successfully.</span>
-        </div>
+      {/* Sub-Tab 2: Embedded Site Theme Customizer */}
+      {activeTab === 'site_theme' && (
+        <ThemeClient initialTokens={themeTokens} rowId={themeRowId} />
       )}
     </div>
-  )
+  );
 }

@@ -6,6 +6,11 @@ import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Palette, CheckCircle, RefreshCw } from 'lucide-react';
 
+interface CustomToken {
+  name: string;
+  value: string;
+}
+
 interface ThemeTokens {
   primary_color: string;
   accent_color: string;
@@ -14,6 +19,11 @@ interface ThemeTokens {
   fg_body_color: string;
   font_header: string;
   font_body: string;
+  button_radius: string;
+  button_glow: string;
+  card_glow: string;
+  section_spacing: string;
+  custom_tokens: CustomToken[];
 }
 
 const DEFAULT_THEME: ThemeTokens = {
@@ -24,6 +34,11 @@ const DEFAULT_THEME: ThemeTokens = {
   fg_body_color: '#2D2D2D',
   font_header: 'Lexend Deca',
   font_body: 'JetBrains Mono',
+  button_radius: '6px',
+  button_glow: '0 4px 14px rgba(183,121,31,0.3)',
+  card_glow: '0 10px 30px rgba(0,0,0,0.06)',
+  section_spacing: '80px',
+  custom_tokens: [],
 };
 
 export default function ThemeClient({
@@ -34,14 +49,22 @@ export default function ThemeClient({
   rowId: string | null;
 }) {
   const [tokens, setTokens] = useState<ThemeTokens>({
-    primary_color: initialTokens?.primary_color || DEFAULT_THEME.primary_color,
-    accent_color: initialTokens?.accent_color || DEFAULT_THEME.accent_color,
-    bg_color: initialTokens?.bg_color || DEFAULT_THEME.bg_color,
-    surface_color: initialTokens?.surface_color || DEFAULT_THEME.surface_color,
-    fg_body_color: initialTokens?.fg_body_color || DEFAULT_THEME.fg_body_color,
-    font_header: initialTokens?.font_header || DEFAULT_THEME.font_header,
-    font_body: initialTokens?.font_body || DEFAULT_THEME.font_body,
+    primary_color: initialTokens?.primary_color || initialTokens?.colors?.primary || DEFAULT_THEME.primary_color,
+    accent_color: initialTokens?.accent_color || initialTokens?.colors?.secondary || DEFAULT_THEME.accent_color,
+    bg_color: initialTokens?.bg_color || initialTokens?.colors?.bg || DEFAULT_THEME.bg_color,
+    surface_color: initialTokens?.surface_color || initialTokens?.colors?.surface || DEFAULT_THEME.surface_color,
+    fg_body_color: initialTokens?.fg_body_color || initialTokens?.colors?.text || DEFAULT_THEME.fg_body_color,
+    font_header: initialTokens?.font_header || initialTokens?.fonts?.heading || DEFAULT_THEME.font_header,
+    font_body: initialTokens?.font_body || initialTokens?.fonts?.body || DEFAULT_THEME.font_body,
+    button_radius: initialTokens?.button_radius || DEFAULT_THEME.button_radius,
+    button_glow: initialTokens?.button_glow || DEFAULT_THEME.button_glow,
+    card_glow: initialTokens?.card_glow || DEFAULT_THEME.card_glow,
+    section_spacing: initialTokens?.section_spacing || DEFAULT_THEME.section_spacing,
+    custom_tokens: initialTokens?.custom_tokens || [],
   });
+
+  const [newTokenName, setNewTokenName] = useState('');
+  const [newTokenValue, setNewTokenValue] = useState('#000000');
 
   const [saving, setSaving] = useState(false);
   const [savedSuccess, setSavedSuccess] = useState(false);
@@ -49,9 +72,27 @@ export default function ThemeClient({
   const router = useRouter();
   const clientId = useClientId();
 
-  const handleColorChange = (key: keyof ThemeTokens, value: string) => {
+  const handleFieldChange = (key: keyof ThemeTokens, value: any) => {
     setTokens(prev => ({ ...prev, [key]: value }));
     setSavedSuccess(false);
+  };
+
+  const handleAddCustomToken = () => {
+    if (!newTokenName.trim()) return;
+    const cleanKey = newTokenName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+    setTokens(prev => ({
+      ...prev,
+      custom_tokens: [...prev.custom_tokens, { name: cleanKey, value: newTokenValue }]
+    }));
+    setNewTokenName('');
+    setNewTokenValue('#000000');
+  };
+
+  const handleRemoveCustomToken = (index: number) => {
+    setTokens(prev => ({
+      ...prev,
+      custom_tokens: prev.custom_tokens.filter((_, i) => i !== index)
+    }));
   };
 
   const handleResetDefaults = () => {
@@ -66,6 +107,18 @@ export default function ThemeClient({
 
     const payload = {
       client_id: clientId,
+      primary_color: tokens.primary_color,
+      accent_color: tokens.accent_color,
+      bg_color: tokens.bg_color,
+      surface_color: tokens.surface_color,
+      fg_body_color: tokens.fg_body_color,
+      font_header: tokens.font_header,
+      font_body: tokens.font_body,
+      button_radius: tokens.button_radius,
+      button_glow: tokens.button_glow,
+      card_glow: tokens.card_glow,
+      section_spacing: tokens.section_spacing,
+      custom_tokens: tokens.custom_tokens,
       colors: {
         bg: tokens.bg_color,
         surface: tokens.surface_color,
@@ -86,21 +139,15 @@ export default function ThemeClient({
         .update(payload)
         .eq('id', rowId);
 
-      if (!error) {
-        setSavedSuccess(true);
-      } else {
-        alert('Error updating brand tokens: ' + error.message);
-      }
+      if (!error) setSavedSuccess(true);
+      else alert('Error updating brand tokens: ' + error.message);
     } else {
       const { error } = await supabase
         .from('design_tokens')
         .insert([payload]);
 
-      if (!error) {
-        setSavedSuccess(true);
-      } else {
-        alert('Error creating brand tokens: ' + error.message);
-      }
+      if (!error) setSavedSuccess(true);
+      else alert('Error creating brand tokens: ' + error.message);
     }
     setSaving(false);
     router.refresh();
@@ -124,15 +171,15 @@ export default function ThemeClient({
       </div>
 
       <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-alt)', border: 'var(--border-1)', fontSize: '13px', lineHeight: 1.6 }}>
-        <strong>Brand Theme Engine</strong> — Customize brand color tokens and typography for your site. Changes are saved to your client&apos;s theme token settings.
+        <strong>Site Theme Customizer</strong> — Edit colors, fonts, buttons, glow, and layout spacing tokens. Changes instantly sync across all site blocks and components.
       </div>
 
       <form onSubmit={handleSubmit}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-          {/* Controls */}
+          {/* Controls Column */}
           <div style={{ background: 'var(--bg)', border: 'var(--border-1)', padding: '24px' }}>
             <h3 style={{ fontSize: '15px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Palette size={16} /> Color Tokens
+              <Palette size={16} /> Palette & Color Tokens
             </h3>
 
             <div className="form-group" style={{ marginBottom: '16px' }}>
@@ -141,14 +188,14 @@ export default function ThemeClient({
                 <input
                   type="color"
                   value={tokens.primary_color}
-                  onChange={e => handleColorChange('primary_color', e.target.value)}
+                  onChange={e => handleFieldChange('primary_color', e.target.value)}
                   style={{ width: '40px', height: '40px', border: '1px solid #ccc', cursor: 'pointer', padding: 0 }}
                 />
                 <input
                   type="text"
                   className="form-control"
                   value={tokens.primary_color}
-                  onChange={e => handleColorChange('primary_color', e.target.value)}
+                  onChange={e => handleFieldChange('primary_color', e.target.value)}
                   style={{ fontFamily: 'monospace' }}
                 />
               </div>
@@ -160,14 +207,14 @@ export default function ThemeClient({
                 <input
                   type="color"
                   value={tokens.accent_color}
-                  onChange={e => handleColorChange('accent_color', e.target.value)}
+                  onChange={e => handleFieldChange('accent_color', e.target.value)}
                   style={{ width: '40px', height: '40px', border: '1px solid #ccc', cursor: 'pointer', padding: 0 }}
                 />
                 <input
                   type="text"
                   className="form-control"
                   value={tokens.accent_color}
-                  onChange={e => handleColorChange('accent_color', e.target.value)}
+                  onChange={e => handleFieldChange('accent_color', e.target.value)}
                   style={{ fontFamily: 'monospace' }}
                 />
               </div>
@@ -179,14 +226,14 @@ export default function ThemeClient({
                 <input
                   type="color"
                   value={tokens.bg_color}
-                  onChange={e => handleColorChange('bg_color', e.target.value)}
+                  onChange={e => handleFieldChange('bg_color', e.target.value)}
                   style={{ width: '40px', height: '40px', border: '1px solid #ccc', cursor: 'pointer', padding: 0 }}
                 />
                 <input
                   type="text"
                   className="form-control"
                   value={tokens.bg_color}
-                  onChange={e => handleColorChange('bg_color', e.target.value)}
+                  onChange={e => handleFieldChange('bg_color', e.target.value)}
                   style={{ fontFamily: 'monospace' }}
                 />
               </div>
@@ -198,14 +245,14 @@ export default function ThemeClient({
                 <input
                   type="color"
                   value={tokens.fg_body_color}
-                  onChange={e => handleColorChange('fg_body_color', e.target.value)}
+                  onChange={e => handleFieldChange('fg_body_color', e.target.value)}
                   style={{ width: '40px', height: '40px', border: '1px solid #ccc', cursor: 'pointer', padding: 0 }}
                 />
                 <input
                   type="text"
                   className="form-control"
                   value={tokens.fg_body_color}
-                  onChange={e => handleColorChange('fg_body_color', e.target.value)}
+                  onChange={e => handleFieldChange('fg_body_color', e.target.value)}
                   style={{ fontFamily: 'monospace' }}
                 />
               </div>
@@ -218,54 +265,164 @@ export default function ThemeClient({
                 type="text"
                 className="form-control"
                 value={tokens.font_header}
-                onChange={e => handleColorChange('font_header', e.target.value)}
+                onChange={e => handleFieldChange('font_header', e.target.value)}
               />
             </div>
-            <div className="form-group">
+            <div className="form-group" style={{ marginBottom: '24px' }}>
               <label className="form-label">Body Font Family</label>
               <input
                 type="text"
                 className="form-control"
                 value={tokens.font_body}
-                onChange={e => handleColorChange('font_body', e.target.value)}
+                onChange={e => handleFieldChange('font_body', e.target.value)}
               />
+            </div>
+
+            <h3 style={{ fontSize: '15px', marginTop: '24px', marginBottom: '16px' }}>Buttons, Spacing & Glow</h3>
+            <div className="form-group" style={{ marginBottom: '16px' }}>
+              <label className="form-label">Button Corner Radius</label>
+              <select
+                className="form-control"
+                value={tokens.button_radius}
+                onChange={e => handleFieldChange('button_radius', e.target.value)}
+              >
+                <option value="0px">Sharp Corners (0px)</option>
+                <option value="4px">Slight Rounded (4px)</option>
+                <option value="8px">Medium Rounded (8px)</option>
+                <option value="16px">Extra Rounded (16px)</option>
+                <option value="9999px">Pill / Oval (Full)</option>
+              </select>
+            </div>
+
+            <div className="form-group" style={{ marginBottom: '16px' }}>
+              <label className="form-label">Button Glow / Box Shadow</label>
+              <select
+                className="form-control"
+                value={tokens.button_glow}
+                onChange={e => handleFieldChange('button_glow', e.target.value)}
+              >
+                <option value="none">Flat / No Glow</option>
+                <option value="0 4px 14px rgba(183,121,31,0.3)">Subtle Glow Accent</option>
+                <option value="0 0 20px rgba(183,121,31,0.6)">Neon Intense Glow</option>
+              </select>
+            </div>
+
+            <div className="form-group" style={{ marginBottom: '24px' }}>
+              <label className="form-label">Card Shadow & Elevation</label>
+              <select
+                className="form-control"
+                value={tokens.card_glow}
+                onChange={e => handleFieldChange('card_glow', e.target.value)}
+              >
+                <option value="none">Flat Border Only</option>
+                <option value="0 10px 30px rgba(0,0,0,0.06)">Soft Elevated Drop Shadow</option>
+                <option value="0 20px 40px rgba(0,0,0,0.12)">Deep Elevated Shadow</option>
+              </select>
+            </div>
+
+            <h3 style={{ fontSize: '15px', marginTop: '24px', marginBottom: '16px' }}>Custom Brand Tokens</h3>
+            <div style={{ marginBottom: '16px' }}>
+              {tokens.custom_tokens.map((ct, idx) => (
+                <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '8px' }}>
+                  <span style={{ fontFamily: 'monospace', fontSize: '12px', fontWeight: 'bold', width: '120px' }}>
+                    --{ct.name}
+                  </span>
+                  <input
+                    type="color"
+                    value={ct.value}
+                    onChange={e => {
+                      const updated = [...tokens.custom_tokens];
+                      updated[idx].value = e.target.value;
+                      handleFieldChange('custom_tokens', updated);
+                    }}
+                    style={{ width: '32px', height: '32px', padding: 0, border: '1px solid #ccc', cursor: 'pointer' }}
+                  />
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={ct.value}
+                    onChange={e => {
+                      const updated = [...tokens.custom_tokens];
+                      updated[idx].value = e.target.value;
+                      handleFieldChange('custom_tokens', updated);
+                    }}
+                    style={{ fontSize: '12px', fontFamily: 'monospace', flex: 1 }}
+                  />
+                  <button
+                    type="button"
+                    className="btn btn--secondary"
+                    onClick={() => handleRemoveCustomToken(idx)}
+                    style={{ padding: '4px 8px', fontSize: '11px', color: 'var(--signal, #C5301A)' }}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="token_name (e.g. gold)"
+                value={newTokenName}
+                onChange={e => setNewTokenName(e.target.value)}
+                style={{ fontSize: '12px' }}
+              />
+              <input
+                type="color"
+                value={newTokenValue}
+                onChange={e => setNewTokenValue(e.target.value)}
+                style={{ width: '36px', height: '36px', padding: 0, border: '1px solid #ccc', cursor: 'pointer' }}
+              />
+              <button
+                type="button"
+                className="btn btn--secondary"
+                onClick={handleAddCustomToken}
+                style={{ whiteSpace: 'nowrap', fontSize: '12px' }}
+              >
+                + Add Token
+              </button>
             </div>
           </div>
 
-          {/* Live Preview Card */}
+          {/* Live Preview Column */}
           <div style={{ background: 'var(--bg)', border: 'var(--border-1)', padding: '24px' }}>
-            <h3 style={{ fontSize: '15px', marginBottom: '16px' }}>Live Brand Token Swatches</h3>
+            <h3 style={{ fontSize: '15px', marginBottom: '16px' }}>Live UI Preview</h3>
             <div
               style={{
                 background: tokens.bg_color,
                 color: tokens.fg_body_color,
                 padding: '24px',
-                border: '1px solid rgba(0,0,0,0.15)',
+                border: '1px solid rgba(0,0,0,0.1)',
                 borderRadius: '8px',
+                boxShadow: tokens.card_glow,
                 marginBottom: '20px',
               }}
             >
               <h4 style={{ fontFamily: tokens.font_header, fontSize: '22px', margin: '0 0 10px 0', color: tokens.primary_color }}>
-                Brand Header Sample
+                Sample Hero & Component Preview
               </h4>
               <p style={{ fontFamily: tokens.font_body, fontSize: '13px', lineHeight: '1.6', margin: '0 0 16px 0' }}>
-                This card demonstrates how your selected background color, primary color, body font, and action buttons render together.
+                This live card demonstrates how your background color, primary brand color, heading/body typography, corner radiuses, and button shadows render together.
               </p>
-              <div style={{ display: 'flex', gap: '12px' }}>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <button
                   type="button"
                   style={{
                     background: tokens.primary_color,
                     color: '#FFF',
                     border: 'none',
-                    padding: '8px 16px',
-                    borderRadius: '4px',
+                    padding: '10px 20px',
+                    borderRadius: tokens.button_radius,
+                    boxShadow: tokens.button_glow,
                     fontFamily: tokens.font_body,
                     fontSize: '12px',
                     fontWeight: 'bold',
+                    cursor: 'pointer',
                   }}
                 >
-                  Primary Action
+                  Primary Action Button
                 </button>
                 <button
                   type="button"
@@ -273,11 +430,12 @@ export default function ThemeClient({
                     background: tokens.accent_color,
                     color: '#FFF',
                     border: 'none',
-                    padding: '8px 16px',
-                    borderRadius: '4px',
+                    padding: '10px 20px',
+                    borderRadius: tokens.button_radius,
                     fontFamily: tokens.font_body,
                     fontSize: '12px',
                     fontWeight: 'bold',
+                    cursor: 'pointer',
                   }}
                 >
                   Accent Badge
@@ -287,7 +445,7 @@ export default function ThemeClient({
 
             {savedSuccess && (
               <div style={{ padding: '12px', background: '#D4EDDA', color: '#155724', border: '1px solid #C3E6CB', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
-                <CheckCircle size={16} /> Brand tokens updated successfully!
+                <CheckCircle size={16} /> Brand theme & UI tokens saved successfully!
               </div>
             )}
           </div>
@@ -295,7 +453,7 @@ export default function ThemeClient({
 
         <div className="form-actions" style={{ marginTop: '24px' }}>
           <button type="submit" className="btn btn--primary" disabled={saving}>
-            {saving ? 'Saving...' : 'Save Theme Tokens'}
+            {saving ? 'Saving Theme...' : 'Save Theme Tokens'}
           </button>
         </div>
       </form>
