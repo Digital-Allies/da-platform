@@ -29,7 +29,7 @@ export interface ClientThemeTokens {
 
 export const DEFAULT_TOKENS: Record<string, ClientThemeTokens> = {
   'digital-allies': {
-    clientId: 'digital-allies',
+    clientId: '3d76b896-e1fb-49f0-a8db-f62fdd5bc258',
     clientSlug: 'digitalallies',
     clientName: 'Digital Allies',
     colors: {
