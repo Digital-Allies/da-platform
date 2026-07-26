@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: ['GPTBot', 'ChatGPT-User', 'ClaudeBot', 'PerplexityBot'],
         allow: '/',
         disallow: ['/admin/', '/api/'],
-      }
+      },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
   }

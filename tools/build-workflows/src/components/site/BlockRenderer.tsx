@@ -1,6 +1,6 @@
 import React from 'react'
 import { Hero, ThreeColumnGrid, TestimonialCarousel, ContactForm, ProductGrid } from '@/components/site'
-import { getServices, getTestimonials, getProducts } from '@/lib/data'
+import { getServices, getTestimonials, getProducts, getCollections } from '@/lib/data'
 import CTAButton from './CTAButton'
 
 interface Block {
@@ -16,10 +16,11 @@ export default async function BlockRenderer({ blocks }: BlockRendererProps) {
   if (!blocks || !blocks.length) return null
 
   // Fetch dynamic collections in parallel
-  const [services, testimonials, products] = await Promise.all([
+  const [services, testimonials, products, collections] = await Promise.all([
     getServices(),
     getTestimonials(),
     getProducts(),
+    getCollections(),
   ])
 
   return (
@@ -62,6 +63,7 @@ export default async function BlockRenderer({ blocks }: BlockRendererProps) {
                 <ProductGrid
                   title={block.data.title || 'Featured Finds'}
                   products={products}
+                  collections={collections}
                 />
               </div>
             )

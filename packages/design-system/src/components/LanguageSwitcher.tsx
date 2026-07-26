@@ -47,11 +47,12 @@ export function LanguageSwitcher({
           onClick={() => handleSelect('en')}
           aria-pressed={lang === 'en'}
           aria-label="Switch language to English"
-          className={`px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 ${
+          className={`px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded transition-all focus:outline-none focus:ring-2 focus:ring-current ${
             lang === 'en'
-              ? 'bg-amber-600 text-white shadow-sm'
+              ? 'text-white shadow-sm'
               : 'text-current opacity-70 hover:opacity-100'
           }`}
+          style={lang === 'en' ? { backgroundColor: 'var(--tok-primary)' } : undefined}
         >
           EN
         </button>
@@ -60,11 +61,12 @@ export function LanguageSwitcher({
           onClick={() => handleSelect('es')}
           aria-pressed={lang === 'es'}
           aria-label="Cambiar idioma a Español"
-          className={`px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 ${
+          className={`px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider rounded transition-all focus:outline-none focus:ring-2 focus:ring-current ${
             lang === 'es'
-              ? 'bg-amber-600 text-white shadow-sm'
+              ? 'text-white shadow-sm'
               : 'text-current opacity-70 hover:opacity-100'
           }`}
+          style={lang === 'es' ? { backgroundColor: 'var(--tok-primary)' } : undefined}
         >
           ES
         </button>

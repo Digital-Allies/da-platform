@@ -74,7 +74,7 @@ export function generateArticleSchema(post: Post, domain: string) {
     dateModified: post.updated_at || post.created_at,
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://${domain}/learn/${post.slug}`,
+      '@id': `https://${domain}/blog/${post.slug}`,
     },
     author: {
       '@type': 'Organization',

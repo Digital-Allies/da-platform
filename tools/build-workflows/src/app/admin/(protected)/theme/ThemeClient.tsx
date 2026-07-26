@@ -124,7 +124,7 @@ export default function ThemeClient({
       </div>
 
       <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-alt)', border: 'var(--border-1)', fontSize: '13px', lineHeight: 1.6 }}>
-        <strong>Brand Theme Engine</strong> — Customize brand color tokens and typography for your site. Changes are injected into CSS variables (<code>--tok-*</code>) across all public pages.
+        <strong>Brand Theme Engine</strong> — Customize brand color tokens and typography for your site. Changes are saved to your client&apos;s theme token settings.
       </div>
 
       <form onSubmit={handleSubmit}>

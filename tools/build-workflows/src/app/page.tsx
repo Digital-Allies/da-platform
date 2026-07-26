@@ -11,7 +11,7 @@ import {
 } from '@/components/site'
 import SiteTheme from '@/components/site/SiteTheme'
 import AtomicFindsHomepage from '@/components/site/atomic-finds/AtomicFindsHomepage'
-import { getSiteSettings, getServices, getTestimonials, getPageBySlug, getProducts, getFeaturedReviews } from '@/lib/data'
+import { getSiteSettings, getServices, getTestimonials, getPageBySlug, getProducts, getFeaturedReviews, getCollections } from '@/lib/data'
 import { ATOMIC_FINDS_CLIENT_ID } from '@/lib/theme'
 
 export const revalidate = 60 // ISR — refresh every 60 seconds
@@ -22,13 +22,13 @@ export default async function HomePage() {
   // below so layout can match that design exactly. See
   // AtomicFindsHomepage.tsx for why this client is special-cased.
   if (process.env.NEXT_PUBLIC_CLIENT_ID === ATOMIC_FINDS_CLIENT_ID) {
-    const [products, reviews, settings] = await Promise.all([getProducts(), getFeaturedReviews(), getSiteSettings()])
+    const [products, reviews, settings, collections] = await Promise.all([getProducts(), getFeaturedReviews(), getSiteSettings(), getCollections()])
     // SiteTheme still wraps this: it's what supplies the --tok-* variables
     // ProductGrid (a component shared across clients) depends on. The
     // page's own .af-homepage tokens layer on top for the bespoke sections.
     return (
       <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
-        <AtomicFindsHomepage products={products} reviews={reviews} logoUrl={settings.logo_url || undefined} />
+        <AtomicFindsHomepage products={products} reviews={reviews} logoUrl={settings.logo_url || undefined} collections={collections} />
       </SiteTheme>
     )
   }
@@ -105,4 +105,3 @@ export default async function HomePage() {
     </SiteTheme>
   )
 }
-
