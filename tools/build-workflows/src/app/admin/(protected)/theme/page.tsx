@@ -20,13 +20,9 @@ export default async function ThemePage() {
     <div className="ws-page">
       <ThemeClient
         initialTokens={{
-          primary_color: tokenRow?.colors?.primary,
-          accent_color: tokenRow?.colors?.secondary,
-          bg_color: tokenRow?.colors?.bg,
-          surface_color: tokenRow?.colors?.surface,
-          fg_body_color: tokenRow?.colors?.text,
-          font_header: tokenRow?.fonts?.heading,
-          font_body: tokenRow?.fonts?.body,
+          colors: tokenRow?.colors,
+          fonts: tokenRow?.fonts,
+          ui_extra: tokenRow?.ui_extra,
         }}
         rowId={tokenRow?.id || null}
       />

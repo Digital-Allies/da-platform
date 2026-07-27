@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase-server'
 import { getCurrentClientId } from '@/lib/get-current-client'
+import { parseSettings } from '@/lib/types'
 import PagesClient from './PagesClient'
 
 export const dynamic = 'force-dynamic'
@@ -16,12 +17,15 @@ export default async function PagesPage() {
     .eq('client_id', CLIENT_ID)
     .order('created_at', { ascending: false })
 
-  // Fetch connected site settings
-  const { data: siteSettings } = await supabase
-    .from('site_settings')
+  // Fetch connected site settings — `settings` is the real key-value table
+  // (see settings/page.tsx and lib/data.ts's getSiteSettings). There is no
+  // `site_settings` table; querying it here silently returned {} and broke
+  // every "Connect to Data" binding in the Pages editor.
+  const { data: settingsRows } = await supabase
+    .from('settings')
     .select('*')
     .eq('client_id', CLIENT_ID)
-    .single()
+  const siteSettings = parseSettings(settingsRows ?? [])
 
   // Fetch brand design tokens
   const { data: designTokens } = await supabase

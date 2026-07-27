@@ -1,6 +1,7 @@
 // Server-side data fetching helpers — call from Server Components
 import { createPublicClient } from './supabase-server'
 import { parseSettings, type SiteSettings, type Post, type Service, type Testimonial, type Product, type Review } from './types'
+import { getDesignTokens as getStaticDesignTokens, type DesignTokens } from './theme'
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
@@ -283,6 +284,28 @@ export async function getCollections(): Promise<any[]> {
     return data ?? []
   } catch (error) {
     return []
+  }
+}
+
+// The public site's actual theme: the client's static brand defaults (see
+// lib/theme.ts) with any row saved via the admin Theme Customizer
+// (design_tokens.colors / .fonts) layered on top. Before this, SiteTheme.tsx
+// called the static getDesignTokens() directly, so the Theme Customizer's
+// Save button had zero effect on the live site no matter what was saved.
+export async function getLiveDesignTokens(clientId: string | undefined = CLIENT_ID): Promise<DesignTokens> {
+  const base = getStaticDesignTokens(clientId)
+  if (!clientId) return base
+  const supabase = createPublicClient()
+  const { data } = await supabase
+    .from('design_tokens')
+    .select('colors, fonts')
+    .eq('client_id', clientId)
+    .maybeSingle()
+  if (!data) return base
+  return {
+    ...base,
+    colors: { ...base.colors, ...(data.colors ?? {}) },
+    fonts: { ...base.fonts, ...(data.fonts ?? {}) },
   }
 }
 
