@@ -241,17 +241,27 @@ explicitly-scoped session on that repo.
   currently** — see above.
 
 ### Wed–Thu Aug 5–6 · `/admin/pages`
-**Confirmed still fully real (checked 2026-07-22, see `STATUS.md`) — not
-stale.** `PagesClient.tsx`'s live preview is hand-rolled hardcoded HTML per
-block type (fake placeholder content for services/testimonials blocks, not
-real data or real components), and there's no code-view/raw-HTML editing
-option anywhere in the file. Anthony's complaint holds as originally
-scoped.
-- **[Agent]** This build "isn't meant for production" per Anthony's own
-  note — add a code-view option with live preview, and use real components
-  for elements/sections/cards instead of whatever's there now.
+**⚠ IN PROGRESS, started early — 2026-07-26/27, on `feat/cms-collections-theme-system` (PR #10, open).**
+Antigravity's 2026-07-26 session shipped the "real components, previewed
+live" half of this early: Duda-style `⚡ Connect to Data` block bindings
+(text/buttons/images bind to real `settings`/collections values, not
+hardcoded placeholders), `ProductGrid` is a real shared component (not
+hand-rolled per-block HTML) wired through `BlockRenderer.tsx`, and a
+desktop/mobile responsive preview toggle. This session (2026-07-27,
+Claude Code) found and fixed 3 real bugs in that work that would have
+made it non-functional in practice — see `STATUS.md`'s 2026-07-27 entry:
+the Pages editor's Connected Data preview was reading a nonexistent table
+(always empty), the Theme Customizer's Save button failed every time
+(wrong columns), and the live storefront never read saved theme data at
+all (100% cosmetic). All three fixed and pushed to PR #10.
+**Still missing, not started:** the code-view/raw-HTML editing option —
+Anthony's original complaint's other half. `PagesClient.tsx` still has no
+code-view anywhere in the file (checked 2026-07-27).
+- **[Agent]** Add a code-view option with live preview (the real-components
+  half is done, per above).
 - **Done when —** a new page can be built with real components and
-  previewed live, with a code-view option available.
+  previewed live, with a code-view option available. Real-components: ✅.
+  Code-view: not started.
 
 ### Fri Aug 7 · Review / buffer
 

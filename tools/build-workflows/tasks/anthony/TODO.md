@@ -42,16 +42,28 @@ All three seed files confirmed seeded and working. Site is live, CMS-connected, 
 
 ---
 
-## 🟡 Priority 0-b — Merge PR #9 (dashboard routing fix, code-ready 2026-07-25)
+## ✅ Priority 0-b — RESOLVED — PR #9 merged 2026-07-25
 
-Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in user (`clients.auth_user_id`) instead of build-time `NEXT_PUBLIC_CLIENT_ID`. This allows `atomicfindsatx@gmail.com` to log in and see only AF data (not DA data on a shared `cms.digitalallies.net` deployment).
+Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in user (`clients.auth_user_id`) instead of build-time `NEXT_PUBLIC_CLIENT_ID`. Merged (`38d1fbb`, confirmed via `gh pr list` 2026-07-27). Remaining item is just the manual verification:
+- [ ] Verify AF admin dashboard routes correctly (manual test: log in as `atomicfindsatx@gmail.com`, confirm dashboard shows AF identity/data)
 
-**Status:** Code complete and reviewed. Greptile review passed (error handling bug fixed). Vercel CI all green. Copilot review in progress. PR #9 on `claude/atomic-fines-dashboard-routing-joofve`.
+---
 
-**What's left:** 
-- [ ] Wait for Copilot review to complete
-- [ ] Click **Merge pull request** on GitHub
-- [ ] Verify AF admin dashboard routes correctly post-merge (manual test: log in as `atomicfindsatx@gmail.com`, confirm dashboard shows AF identity/data)
+## 🟡 Priority 0-c — Review + merge PR #10, then run 2 pending migrations (2026-07-27)
+
+`feat/cms-collections-theme-system` — Collections manager, Theme
+Customizer, Duda-style Connected Data bindings, responsive Pages preview,
+SEO/A11y pages. Open since 2026-07-26; this session (2026-07-27) fixed 3
+real bugs in it (Pages editor reading a nonexistent table, Theme
+Customizer's Save always failing, live storefront never reading saved
+theme data — see `STATUS.md`'s 2026-07-27 entry) and pushed to the same
+branch/PR.
+
+- [ ] **Review + merge PR #10** (`Digital-Allies/da-platform#10`).
+- [ ] **Run 2 pending migrations in the Supabase SQL Editor, in order** (both additive/non-destructive):
+  1. `tools/build-workflows/supabase/migrations/20260726000000_collections_table.sql` — creates the `collections` table (Collections manager needs this to work at all).
+  2. `tools/build-workflows/supabase/migrations/20260727000000_design_tokens_ui_extra.sql` — adds a `design_tokens.ui_extra` column for the Theme Customizer's button-radius/glow/card-glow/section-spacing/custom-token controls. Without this they stay local-only (UI works, doesn't persist) — not broken, just incomplete until run.
+- [ ] After both are run: a small follow-up (agent or Anthony) needs to wire `ui_extra` into `ThemeClient.tsx`'s save payload — the read side already expects it, only the save side is pending on purpose (see `STATUS.md`).
 
 **Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side already ready (auth_user_id linked, settings/products/reviews seeded).
 

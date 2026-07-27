@@ -5,7 +5,97 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-26 — by Antigravity (Duda-Style Connected Data Binding, CSV Spreadsheet Importer, Media Storage Uploader, and Plain-Language Theme Engine shipped)
+**Last updated:** 2026-07-27 — by Claude Code (daily build session): fixed 3 confirmed-broken pieces of the 2026-07-26 Connected Data / Theme Customizer PR (#10, still open)
+
+## 2026-07-27 — daily build session: PR #10's Connected Data / Theme Customizer had 3 real bugs, fixed
+
+**Schedule order followed:** Mon–Tue Jul 27–28 (`/admin/development`) and
+Wed–Thu Jul 29–30 (`/admin/projects`) are both already superseded/done (see
+their `BUILD-SCHEDULE.md` entries). Mon–Tue Aug 3–4 (`/admin/content`) was
+investigated 2026-07-23 and the real remaining fix lives in a separate repo,
+out of this scheduled task's scope. That left Wed–Thu Aug 5–6 (`/admin/pages`)
+as the next actionable item — and the previous session (Antigravity,
+2026-07-26) had already opened PR #10 doing exactly that work (real
+components, Connected Data bindings, code-adjacent theme system) on
+`feat/cms-collections-theme-system`, still open. Rather than starting new
+work out of order, this session verified and fixed that in-flight PR instead.
+
+**Checked PR #10 against the actual running app (not just reading the diff)**
+— Greptile's review had already flagged some of this ("theme persistence
+still targets a column absent from the migrated schema... public pages and
+product grids remain disconnected from saved themes"), but its confidence
+score was 2/5 and one of its two specific claims (collections/ProductGrid
+disconnect) turned out to already be fixed in a later commit on the same
+branch (`getCollections()` is wired into both `app/page.tsx` and
+`AtomicFindsHomepage.tsx` → `ProductGrid` already). So rather than trust the
+stale review, re-verified live: ran `tsc`, started the dev server, and
+queried the actual Supabase `design_tokens` row via curl to check what was
+really being read/written.
+
+**Bug 1 — Pages editor's Connected Data preview was always empty.**
+`pages/page.tsx` queried a `site_settings` table that doesn't exist (the
+real table is `settings`, a key-value table — see `lib/data.ts`'s
+`getSiteSettings()` and `settings/page.tsx`). The query silently returned
+null (unchecked error), so `siteSettings` was always `{}` and every
+`{site_title}`/`{phone}`/`{email}`/etc. token in `PagesClient.tsx` resolved
+to an empty string. Fixed to query `settings` and run it through
+`parseSettings()`, matching every other caller.
+
+**Bug 2 — Theme Customizer's Save button failed on every save.**
+`ThemeClient.tsx`'s `handleSubmit` wrote flat columns (`primary_color`,
+`button_radius`, `card_glow`, etc.) that don't exist on `design_tokens` —
+the table only has `colors`/`fonts`/`type_scale`/`spacing`/`logo`/`favicon`
+(all jsonb except the last two). Every save error'd with a Postgres "column
+does not exist" error. Fixed the payload to send only `colors`/`fonts`
+(real columns). **Deliberately did not** stuff the button/glow/spacing
+extras into the existing `spacing` or `type_scale` columns — queried
+Atomic Finds' actual seeded row live and confirmed both already hold real
+per-client data (a numeric spacing scale, a type scale — see
+`seed-atomic-finds-design-tokens.sql`), so reusing either would have
+silently overwritten that data the first time anyone hit Save. Wrote
+migration `20260727000000_design_tokens_ui_extra.sql` (additive, pending
+Anthony running it) for a dedicated column instead; the button-radius/glow
+/card-glow/section-spacing/custom-token controls stay local-only
+(don't round-trip to Supabase) until that lands — a real, deliberate,
+documented gap, not silently dropped.
+
+**Bug 3 — the biggest one: the live storefront never read saved theme
+data at all.** `SiteTheme.tsx` (the public-site wrapper that supplies every
+`--tok-*` CSS variable) called `getDesignTokens()` from `lib/theme.ts` — a
+hardcoded per-client map, with zero Supabase read. So even a
+*successful* Theme Customizer save (once Bug 2 is fixed) would have had
+**no visible effect on the live site** — the entire feature was cosmetic.
+Added `getLiveDesignTokens()` to `lib/data.ts` (the static per-client
+defaults merged with the client's saved `colors`/`fonts` row, client
+falling back cleanly if unconfigured) and made `SiteTheme` an async Server
+Component using it.
+
+**Verified, not assumed:** `npx tsc --noEmit` clean. Started the dev server
+against Atomic Finds (`NEXT_PUBLIC_CLIENT_ID` in `.env.local`), confirmed
+`/` renders 200 with no new errors, and read `--tok-primary` off the
+rendered DOM to confirm it's sourced through the new Supabase-merged path
+(not just silently falling through to the static default — same value in
+this case, but traced the code path to be sure the merge itself executes
+without error rather than assuming from the visual match).
+
+**Pushed to the existing open PR #10** (`feat/cms-collections-theme-system`,
+commit `a276a50`) rather than opening a new one — this is a fix to
+in-flight work on that branch, not a new feature.
+
+**What's next:** PR #10 still needs Anthony's review/merge (it was already
+open before this session). Once merged and the `ui_extra` migration is run,
+a small follow-up should wire `ui_extra` into `ThemeClient.tsx`'s save
+payload so button-radius/glow/card-glow/section-spacing/custom-token edits
+persist too — everything's already in place to read it back, only the save
+side is pending. The `getFeaturedReviews` "Could not find the table
+'public.reviews' in the schema cache" (PGRST205) warning seen repeatedly in
+dev server logs during this session is unrelated to any of the above (not
+touched this session) — likely a PostgREST schema-cache staleness issue
+against the dev Supabase project, not a code bug; flagging in case it
+recurs against production.
+
+---
+
 
 ## 2026-07-26 — Antigravity Build Session: Duda-Style Connected Data Binding, CSV Spreadsheet Importer & Plain-Language Theme Engine Shipped
 
