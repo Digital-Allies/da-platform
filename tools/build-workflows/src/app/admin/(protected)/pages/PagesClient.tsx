@@ -4,12 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
-import { ArrowUp, ArrowDown, Trash, Plus, Zap, Check } from 'lucide-react';
+import { ArrowUp, ArrowDown, Trash, Plus, Zap, Check, Code2 } from 'lucide-react';
 
 interface Block {
   type: string;
   data: any;
   bindings?: Record<string, string>;
+  customCode?: string | null;
 }
 
 interface PagesClientProps {
@@ -53,6 +54,12 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
 
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [selectedBlockIndex, setSelectedBlockIndex] = useState<number | null>(null);
+  const [blockTab, setBlockTab] = useState<'content' | 'code'>('content');
+
+  const selectBlock = (index: number | null) => {
+    setSelectedBlockIndex(index);
+    setBlockTab('content');
+  };
 
   // Extract design tokens for live preview
   const primaryColor = designTokens?.primary_color || designTokens?.colors?.primary || '#B7791F';
@@ -89,7 +96,7 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
       { type: 'hero', data: { title: '{hero_title}', subtitle: '{hero_subtitle}', ctaText: 'Explore Catalog', ctaLink: '#showroom' } },
       { type: 'richtext', data: { content: '<p>Welcome to {site_title}. {tagline}</p>' } }
     ]);
-    setSelectedBlockIndex(0);
+    selectBlock(0);
     setIsEditing(true);
   };
 
@@ -102,7 +109,7 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
       status: page.status,
     });
     setBlocks(page.blocks || []);
-    setSelectedBlockIndex((page.blocks && page.blocks.length > 0) ? 0 : null);
+    selectBlock((page.blocks && page.blocks.length > 0) ? 0 : null);
     setIsEditing(true);
   };
 
@@ -126,14 +133,14 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
 
     const newBlocks = [...blocks, { type, data: defaultData }];
     setBlocks(newBlocks);
-    setSelectedBlockIndex(newBlocks.length - 1);
+    selectBlock(newBlocks.length - 1);
   };
 
   const handleRemoveBlock = (index: number) => {
     const newBlocks = blocks.filter((_, i) => i !== index);
     setBlocks(newBlocks);
     if (selectedBlockIndex === index) {
-      setSelectedBlockIndex(newBlocks.length > 0 ? 0 : null);
+      selectBlock(newBlocks.length > 0 ? 0 : null);
     } else if (selectedBlockIndex !== null && selectedBlockIndex > index) {
       setSelectedBlockIndex(selectedBlockIndex - 1);
     }
@@ -159,6 +166,12 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
       ...newBlocks[index].data,
       [key]: value
     };
+    setBlocks(newBlocks);
+  };
+
+  const handleBlockCodeChange = (index: number, value: string) => {
+    const newBlocks = [...blocks];
+    newBlocks[index] = { ...newBlocks[index], customCode: value };
     setBlocks(newBlocks);
   };
 
@@ -204,6 +217,9 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
   // Generate dynamic preview HTML using client design tokens and resolved connected data
   const generatePreviewHtml = () => {
     const blocksHtml = blocks.map(block => {
+      if (block.customCode) {
+        return `<div>${resolveText(block.customCode)}</div>`;
+      }
       switch (block.type) {
         case 'hero':
           return `
@@ -482,17 +498,91 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
                           ) : (
                             <span style={{ fontSize: '10px', background: '#eee', color: '#666', padding: '2px 6px', borderRadius: '4px' }}>📝 Editable Copy</span>
                           )}
+                          {block.customCode && (
+                            <span style={{ fontSize: '10px', background: 'rgba(30,30,30,0.85)', color: '#d4d4d4', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '3px' }}><Code2 size={10} /> Custom Code Active</span>
+                          )}
                         </div>
                         <div style={{ display: 'flex', gap: '4px' }}>
                           <button type="button" className="btn btn--secondary" onClick={() => handleMoveBlock(idx, 'up')} disabled={idx === 0} style={{ padding: '4px' }}><ArrowUp size={12} /></button>
                           <button type="button" className="btn btn--secondary" onClick={() => handleMoveBlock(idx, 'down')} disabled={idx === blocks.length - 1} style={{ padding: '4px' }}><ArrowDown size={12} /></button>
-                          <button type="button" className="btn btn--secondary" onClick={() => setSelectedBlockIndex(idx)} style={{ padding: '4px 8px', fontSize: '10px' }}>Edit</button>
+                          <button type="button" className="btn btn--secondary" onClick={() => selectBlock(idx)} style={{ padding: '4px 8px', fontSize: '10px' }}>Edit</button>
                           <button type="button" className="btn btn--secondary" onClick={() => handleRemoveBlock(idx)} style={{ padding: '4px', color: 'var(--signal)' }}><Trash size={12} /></button>
                         </div>
                       </div>
 
                       {selectedBlockIndex === idx && (
                         <div style={{ background: 'var(--bg)', padding: '14px', border: 'var(--border-hairline)', marginTop: '8px' }}>
+                          <div style={{ display: 'flex', gap: '2px', marginBottom: '12px', borderBottom: '1px solid var(--charcoal)' }}>
+                            <button
+                              type="button"
+                              onClick={() => setBlockTab('content')}
+                              style={{
+                                padding: '6px 14px',
+                                fontSize: '11px',
+                                fontWeight: 'bold',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.03em',
+                                border: 'none',
+                                cursor: 'pointer',
+                                background: blockTab === 'content' ? 'var(--charcoal)' : 'transparent',
+                                color: blockTab === 'content' ? '#fff' : 'inherit',
+                              }}
+                            >
+                              Content
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setBlockTab('code')}
+                              style={{
+                                padding: '6px 14px',
+                                fontSize: '11px',
+                                fontWeight: 'bold',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.03em',
+                                border: 'none',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '4px',
+                                background: blockTab === 'code' ? 'var(--charcoal)' : 'transparent',
+                                color: blockTab === 'code' ? '#fff' : 'inherit',
+                              }}
+                            >
+                              <Code2 size={12} /> Code
+                            </button>
+                          </div>
+
+                          {blockTab === 'code' ? (
+                            <div>
+                              <p style={{ fontSize: '11px', color: 'var(--text-soft, #6b6b6b)', marginBottom: '8px', lineHeight: 1.5 }}>
+                                Raw HTML/CSS override for this block. When filled in, this replaces the
+                                structured Content fields above on both this preview and the live site.
+                                Supports the same <code>{'{tokens}'}</code> as Connected Data. Leave empty to
+                                use the normal component.
+                              </p>
+                              <div className="code-wrap" style={{ position: 'relative' }}>
+                                <textarea
+                                  spellCheck={false}
+                                  value={block.customCode || ''}
+                                  onChange={e => handleBlockCodeChange(idx, e.target.value)}
+                                  placeholder={`<section>\n  <h2>Custom markup for this block</h2>\n</section>`}
+                                  style={{
+                                    width: '100%',
+                                    height: '220px',
+                                    fontFamily: 'var(--font-details, monospace)',
+                                    fontSize: '11.5px',
+                                    background: '#1e1e1e',
+                                    color: '#d4d4d4',
+                                    border: '1px solid var(--charcoal)',
+                                    padding: '12px',
+                                    lineHeight: 1.6,
+                                    resize: 'vertical',
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                          <>
                           {block.type === 'hero' && (
                             <>
                               <ConnectedInputField label="Headline" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
@@ -526,6 +616,8 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
                               <ConnectedInputField label="Headline" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
                               <ConnectedInputField label="Subheading" value={block.data.subtitle} onChange={v => handleBlockDataChange(idx, 'subtitle', v)} />
                             </>
+                          )}
+                          </>
                           )}
                         </div>
                       )}
