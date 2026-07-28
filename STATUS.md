@@ -5,7 +5,102 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-27 — by Claude Code (daily build session): fixed 3 confirmed-broken pieces of the 2026-07-26 Connected Data / Theme Customizer PR (#10, still open)
+**Last updated:** 2026-07-28 — by Claude Code (daily build session): shipped the code-view option for `/admin/pages` (Aug 5–6 schedule item's last missing piece), pushed to PR #10.
+
+## 2026-07-28 — daily build session: Pages editor code-view shipped, closing out the Aug 5–6 schedule item
+
+**Schedule order followed:** confirmed no `[Anthony]`-only item blocks this
+first (checked `TODO.md` — PR #10's review/merge and the 2 pending
+migrations are still open under Priority 0-c, but nothing about them
+blocks *adding more code to the same open branch*, same reasoning the
+2026-07-27 session used to justify pushing bug fixes there). The next real
+`[Agent]` item in `BUILD-SCHEDULE.md` order was Wed–Thu Aug 5–6's
+`/admin/pages` — already in progress on this branch, with one specific
+piece flagged as "still missing, not started": a code-view/raw-HTML
+editing option, the other half of Anthony's original Pages complaint.
+
+**What shipped:** rather than invent a UI for this from scratch, checked
+`packages/design-system/PAGE_EDITOR_SPEC.md` first — it explicitly names
+its companion prototype (`packages/design-system/page-editor.html`) as
+"the source of truth for interaction design... build against it, not
+against this doc's prose." The prototype's actual pattern is a per-block
+**Content / Code** tab (not a new "code block" type), with a `custom_code`
+field that overrides a block's structured content with raw HTML/CSS when
+filled in. Built exactly that:
+
+- `PagesClient.tsx` — added a `customCode?: string | null` field to the
+  `Block` type; a Content/Code tab bar inside each block's editor panel
+  (resets to Content when switching blocks, via a new `selectBlock()`
+  helper replacing raw `setSelectedBlockIndex` calls); a dark-themed
+  monospace textarea for the Code tab, styled to match the prototype's own
+  `.code-wrap`; a "⚙ Custom Code Active" badge on the block header when
+  set; and `generatePreviewHtml()` now renders `block.customCode` (through
+  the same `resolveText()` Connected Data token resolver) instead of the
+  structured switch-case when present, so the admin preview reflects it
+  immediately.
+- `BlockRenderer.tsx` (the real public-site renderer) — same override,
+  same `resolveText()` pass, so the live site matches the admin preview
+  exactly. This directly satisfies `PAGE_EDITOR_SPEC.md`'s own "Live
+  preview... guarantees what you see is what ships" requirement — a
+  code-view that only worked in the admin preview but not on the real site
+  would have been the same kind of half-finished feature the 2026-07-27
+  session found and fixed in this same PR (the Theme Customizer save that
+  never reached the live storefront).
+- **Trust model, not a new one:** raw HTML via `dangerouslySetInnerHTML` on
+  both sides — same pattern already documented and shipped for the
+  `richtext` block (`ARCHITECTURE.md`: "trusted admin input only, not
+  user-submitted"). Not introducing a new security posture, extending the
+  existing one to one more block field.
+- **Deliberately NOT built:** `PAGE_EDITOR_SPEC.md`'s Starter/Pro/Agency
+  tier-gating for this feature (Starter = no code tab, Pro = one embed
+  slot, Agency = full per-section code). The `clients.plan` column
+  (`20260109000000_client_plan.sql`) exists but is unpopulated with zero
+  gating logic anywhere in the codebase, and `BUILD-SCHEDULE.md`'s own
+  Notes section says Phase 2 (plan gating, Stripe billing) is "intentionally
+  out of scope until Phase 1 ships" — building real gating today would mean
+  unilaterally deciding pricing-tier product structure, not a code call to
+  make alone. Ships ungated to every client for now, same as every other
+  block type. Flagging this explicitly so nobody mistakes "ungated" for
+  "the gating was missed" — it's the correct Phase 1 scope per existing
+  decisions, not an oversight.
+
+**Verified:** `npx tsc --noEmit` clean. `/admin/pages` is auth-gated and no
+credentials are available in this non-interactive session (same constraint
+every prior daily-build session hit) — instead ran a full `next build`,
+which force-compiles every route including `/admin/pages` regardless of
+auth, and it built clean (7.82 kB route bundle, size increase consistent
+with the new tab UI, no other route changed). Also started the dev server
+and loaded the public homepage and `/admin/pages` (redirects to
+`/admin/login` as expected, 200, no console errors) to confirm the
+`BlockRenderer.tsx` change didn't regress the live-rendering path — same
+pre-existing unrelated `getFeaturedReviews`/`reviews` table PGRST205
+warning from the 2026-07-27 session's dev logs, untouched by this change.
+
+**Note on how this got committed:** partway through this session the
+repo's documented background auto-sync (`../SYNC-NOTES.md`'s launchd
+`chore: sync MM23` job, see "Automation + ops" below) fired and
+auto-committed+pushed the in-progress `PagesClient.tsx` changes under its
+own generic message before this session could commit them with a real
+one — expected behavior for this repo (cross-device continuity), not an
+error, but flagging so nobody's confused finding real feature work under a
+`chore: sync MM23` commit message. The remaining `BlockRenderer.tsx` half
+was committed normally right after
+(`ff98c06`, "feat(pages): wire live-site parity for the block code-view
+override") and pushed to the same PR #10 branch
+(`feat/cms-collections-theme-system`) — this is a continuation of
+in-flight work on that already-open PR, not a new one, same reasoning the
+2026-07-27 session used.
+
+**What's next:** the Aug 5–6 schedule item is now fully done (real
+components ✅, code-view ✅). PR #10 (Priority 0-c in `TODO.md`) still
+needs Anthony's review/merge and the 2 pending migrations run — unchanged
+by this session. Once merged, tier-gating for the Code tab is real future
+work but explicitly Phase 2, not urgent. `BUILD-SCHEDULE.md`'s Week of Aug
+3 is now fully closed out; next session should move to whatever's first
+after it (currently nothing further scheduled — worth a fresh look at
+`BUILD-SCHEDULE.md`/`TODO.md` for what fills the next weekday slot).
+
+---
 
 ## 2026-07-27 — daily build session: PR #10's Connected Data / Theme Customizer had 3 real bugs, fixed
 

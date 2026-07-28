@@ -49,7 +49,7 @@ Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in use
 
 ---
 
-## 🟡 Priority 0-c — Review + merge PR #10, then run 2 pending migrations (2026-07-27)
+## 🟡 Priority 0-c — Review + merge PR #10, then run 2 pending migrations (2026-07-27, updated 2026-07-28)
 
 `feat/cms-collections-theme-system` — Collections manager, Theme
 Customizer, Duda-style Connected Data bindings, responsive Pages preview,
@@ -58,6 +58,15 @@ real bugs in it (Pages editor reading a nonexistent table, Theme
 Customizer's Save always failing, live storefront never reading saved
 theme data — see `STATUS.md`'s 2026-07-27 entry) and pushed to the same
 branch/PR.
+
+**2026-07-28 addition, same PR:** added the Pages editor's missing
+code-view option — a per-block Content/Code tab (raw HTML/CSS override per
+block, same trust model as the existing `richtext` block). No new
+migration needed (uses the existing `blocks` jsonb column). Ships ungated
+to every client — the Starter/Pro/Agency tier-gating from
+`PAGE_EDITOR_SPEC.md` is deliberately deferred (Phase 2, needs the
+unpopulated `clients.plan` column and a real pricing-tier decision from
+you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
 
 - [ ] **Review + merge PR #10** (`Digital-Allies/da-platform#10`).
 - [ ] **Run 2 pending migrations in the Supabase SQL Editor, in order** (both additive/non-destructive):
