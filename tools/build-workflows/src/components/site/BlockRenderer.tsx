@@ -6,6 +6,7 @@ import CTAButton from './CTAButton'
 interface Block {
   type: string
   data: any
+  customCode?: string | null
 }
 
 interface BlockRendererProps {
@@ -45,6 +46,16 @@ export default async function BlockRenderer({ blocks }: BlockRendererProps) {
   return (
     <>
       {blocks.map((block, index) => {
+        if (block.customCode) {
+          return (
+            <div
+              key={index}
+              // Custom per-block HTML/CSS override, admin-authored only (never
+              // user-submitted) — same trust model as the `richtext` block below.
+              dangerouslySetInnerHTML={{ __html: resolveText(block.customCode) }}
+            />
+          )
+        }
         switch (block.type) {
           case 'hero':
             return (
