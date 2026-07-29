@@ -56,9 +56,6 @@ export default function ThemeClient({
     fg_body_color: initialTokens?.fg_body_color || initialTokens?.colors?.text || DEFAULT_THEME.fg_body_color,
     font_header: initialTokens?.font_header || initialTokens?.fonts?.heading || DEFAULT_THEME.font_header,
     font_body: initialTokens?.font_body || initialTokens?.fonts?.body || DEFAULT_THEME.font_body,
-    // Not persisted yet — see the handleSubmit comment below. Reads from
-    // ui_extra so this self-heals once that column + the save-side wiring
-    // both land; until then these always fall back to DEFAULT_THEME.
     button_radius: initialTokens?.ui_extra?.button_radius || DEFAULT_THEME.button_radius,
     button_glow: initialTokens?.ui_extra?.button_glow || DEFAULT_THEME.button_glow,
     card_glow: initialTokens?.ui_extra?.card_glow || DEFAULT_THEME.card_glow,
@@ -108,18 +105,16 @@ export default function ThemeClient({
     setSaving(true);
     setSavedSuccess(false);
 
-    // design_tokens only has colors/fonts/type_scale/spacing/logo/favicon
-    // columns (see supabase/migrations/20260101000002_cms_tables.sql) — there
+    // design_tokens only has colors/fonts/type_scale/spacing/logo/favicon/
+    // ui_extra columns (see supabase/migrations/20260101000002_cms_tables.sql
+    // + 20260727000000_design_tokens_ui_extra.sql, run 2026-07-29) — there
     // are no flat primary_color/button_radius/etc columns, so sending those
-    // made every save fail with a "column does not exist" error. `spacing`
-    // and `type_scale` aren't spare capacity either — they already hold real
-    // per-client data (see seed-atomic-finds-design-tokens.sql: a numeric
-    // spacing scale and a type scale), so stuffing button/glow tokens in
-    // there would silently overwrite that on the next save. The
-    // button/glow/card/spacing controls below stay local-only (not
-    // persisted) until a dedicated column exists — see
-    // supabase/migrations/20260727000000_design_tokens_ui_extra.sql
-    // (written, pending Anthony running it) and ui_extra below.
+    // directly made every save fail with a "column does not exist" error.
+    // `spacing` and `type_scale` aren't spare capacity either — they already
+    // hold real per-client data (see seed-atomic-finds-design-tokens.sql: a
+    // numeric spacing scale and a type scale), so stuffing button/glow
+    // tokens in there would silently overwrite that on the next save. The
+    // dedicated `ui_extra` jsonb column holds them instead.
     const payload = {
       client_id: clientId,
       colors: {
@@ -132,6 +127,13 @@ export default function ThemeClient({
       fonts: {
         heading: tokens.font_header,
         body: tokens.font_body,
+      },
+      ui_extra: {
+        button_radius: tokens.button_radius,
+        button_glow: tokens.button_glow,
+        card_glow: tokens.card_glow,
+        section_spacing: tokens.section_spacing,
+        custom_tokens: tokens.custom_tokens,
       },
       updated_at: new Date().toISOString(),
     };
