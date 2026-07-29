@@ -93,8 +93,8 @@ you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
 - [x] **Fixed the source files** (`supabase/security-fixes.sql` and its migrations/ copy) to also `revoke ... from public` — correct for any future fresh run.
 - [ ] **One more small migration to run** for this already-live project (the file edit above doesn't retroactively apply to what's already run): `tools/build-workflows/supabase/migrations/20260729000000_security_fixes_public_grant.sql` — one line, `revoke execute on function public.get_my_client_id() from public;`. Doesn't touch `authenticated`/`service_role` (they hold their own explicit grants, unaffected by a PUBLIC revoke).
 
-**Still open, unrelated to SQL (dashboard toggle only):**
-- [ ] Leaked-password protection — confirmed still off via the Auth config API (`password_hibp_enabled: false`). Dashboard → Authentication → Providers → Email → toggle on. Not something any SQL file touches.
+**Still open, unrelated to SQL — and lower priority than it looks:**
+- [ ] Leaked-password protection — confirmed still off via the Auth config API (`password_hibp_enabled: false`). **Correction, 2026-07-29: this is a Supabase Pro-tier feature, not available on the free plan we're currently on.** Not actionable until there's paying-customer revenue to justify the upgrade (same standing constraint as the free-tier Vercel↔Supabase integration limit in Priority 4). Deliberately deprioritized — don't treat this as a quick toggle anymore.
 
 **Harmless footnote, no action needed:** there's an orphaned `kv_store_ebc15282` table in the live project that no code in this repo references (a leftover from some other tool/prototype run directly against this Supabase project). Not touched, not urgent.
 
@@ -247,11 +247,12 @@ Supabase-connected — see `STATUS.md`'s 2026-07-16 audit.
   its anon-revoke didn't fully work (a real bug in the file, now fixed) —
   one more tiny migration (`20260729000000_security_fixes_public_grant.sql`)
   is still open there.
-- [ ] **Enable leaked-password protection.** Still open — a dashboard
-  toggle, no SQL file touches it. Supabase dashboard → Authentication →
-  Providers → Email → toggle on "Leaked password protection." (Duplicate
-  of the same open item tracked in Priority 0-d — one physical action,
-  listed in both places since it was flagged from two different audits.)
+- [ ] ~~Enable leaked-password protection~~ — **deprioritized 2026-07-29:
+  this is a Supabase Pro-tier feature, not available on our current free
+  plan.** Blocked on paying-customer revenue justifying the upgrade, not
+  actionable as a quick toggle. See Priority 0-d for the same note (one
+  physical action, tracked in both places since it was flagged from two
+  different audits).
 - [x] ~~Apply the new `plan` column migration~~ — run 2026-07-29, confirmed
   live (Priority 0-d).
 
