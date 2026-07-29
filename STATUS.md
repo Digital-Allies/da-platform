@@ -5,7 +5,23 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-28 — by Claude Code (daily build session): shipped the code-view option for `/admin/pages` (Aug 5–6 schedule item's last missing piece), pushed to PR #10.
+**Last updated:** 2026-07-29 — by Claude Code: Anthony ran both pending PR #10 migrations (`collections_table`, `design_tokens_ui_extra`) — confirmed success. `ui_extra` → `ThemeClient.tsx` save-payload wiring is now unblocked but not yet done.
+
+## 2026-07-29 — both PR #10 migrations run, one follow-up now unblocked
+
+Anthony ran `20260726000000_collections_table.sql` and
+`20260727000000_design_tokens_ui_extra.sql` in the Supabase SQL Editor —
+both reported "Success. No rows returned" (expected for additive DDL).
+Per `TODO.md` Priority 0-c, this unblocks the one deliberately-deferred
+follow-up from the 2026-07-27 session: wiring `design_tokens.ui_extra`
+into `ThemeClient.tsx`'s save payload so the button-radius/glow/card-glow/
+section-spacing/custom-token controls actually persist (the read side
+already expects the column; only the save side was waiting on this
+migration). **Not yet done** — no code changed this note, just recording
+that the blocker is cleared. PR #10 itself (review + merge) is still open
+and unaffected by this.
+
+---
 
 ## 2026-07-28 — daily build session: Pages editor code-view shipped, closing out the Aug 5–6 schedule item
 

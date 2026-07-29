@@ -69,10 +69,10 @@ unpopulated `clients.plan` column and a real pricing-tier decision from
 you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
 
 - [ ] **Review + merge PR #10** (`Digital-Allies/da-platform#10`).
-- [ ] **Run 2 pending migrations in the Supabase SQL Editor, in order** (both additive/non-destructive):
+- [x] **Run 2 pending migrations in the Supabase SQL Editor, in order** — both confirmed run by Anthony 2026-07-29 ("Success. No rows returned" on both):
   1. `tools/build-workflows/supabase/migrations/20260726000000_collections_table.sql` — creates the `collections` table (Collections manager needs this to work at all).
-  2. `tools/build-workflows/supabase/migrations/20260727000000_design_tokens_ui_extra.sql` — adds a `design_tokens.ui_extra` column for the Theme Customizer's button-radius/glow/card-glow/section-spacing/custom-token controls. Without this they stay local-only (UI works, doesn't persist) — not broken, just incomplete until run.
-- [ ] After both are run: a small follow-up (agent or Anthony) needs to wire `ui_extra` into `ThemeClient.tsx`'s save payload — the read side already expects it, only the save side is pending on purpose (see `STATUS.md`).
+  2. `tools/build-workflows/supabase/migrations/20260727000000_design_tokens_ui_extra.sql` — adds a `design_tokens.ui_extra` column for the Theme Customizer's button-radius/glow/card-glow/section-spacing/custom-token controls.
+- [ ] **Now unblocked:** wire `ui_extra` into `ThemeClient.tsx`'s save payload — the read side already expects it, only the save side was pending on the migration above (see `STATUS.md`'s 2026-07-29 entry). Not yet done as of this note.
 
 **Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side already ready (auth_user_id linked, settings/products/reviews seeded).
 
