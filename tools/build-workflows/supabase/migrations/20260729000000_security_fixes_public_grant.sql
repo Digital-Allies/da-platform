@@ -1,0 +1,21 @@
+-- ============================================================
+-- Fix: security-fixes.sql's anon revoke doesn't actually work
+--
+-- security-fixes.sql (run 2026-07-29) did:
+--   revoke execute on function public.get_my_client_id() from anon;
+-- which succeeds and removes any DIRECT grant to anon — but Postgres
+-- grants EXECUTE on new functions to the PUBLIC pseudo-role by default,
+-- and anon (like every role) implicitly inherits PUBLIC's privileges.
+-- Revoking from anon specifically does nothing if PUBLIC still holds
+-- the grant. Confirmed live 2026-07-29: after running security-fixes.sql,
+-- has_function_privilege('anon', 'public.get_my_client_id()', 'execute')
+-- still returned true, because pg_proc.proacl still listed the bare
+-- "=X/postgres" entry (PUBLIC execute) alongside authenticated/service_role.
+--
+-- Fix: revoke from PUBLIC directly. authenticated and service_role keep
+-- their own explicit grants (unaffected by a PUBLIC revoke), so this only
+-- removes the implicit anon access path — nothing else changes behavior.
+-- Additive/safe, re-runnable.
+-- ============================================================
+
+revoke execute on function public.get_my_client_id() from public;

@@ -5,7 +5,43 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-29 — by Claude Code: `ui_extra` wired into `ThemeClient.tsx`'s save payload; queried the live Supabase project directly and found 6 tables (`reviews`, `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications`) from already-written migrations were never actually run — see `TODO.md` Priority 0-d, this is a real gap, not a docs error.
+**Last updated:** 2026-07-29 — by Claude Code: Anthony ran all 5 pending migrations/fixes from Priority 0-d; re-verified live and found + fixed a real bug in `security-fixes.sql` itself (its anon-revoke doesn't work due to Postgres's implicit PUBLIC grant) — one more tiny migration pending for that.
+
+## 2026-07-29 (cont'd) — Priority 0-d migrations run; found a bug in security-fixes.sql itself while re-verifying
+
+Anthony ran all 5 items from Priority 0-d
+(`20260101000003_admin_features.sql`, `20260122000000_reviews_table.sql`,
+`seed-atomic-finds-reviews.sql`, the `clients.plan` migration, and
+`security-fixes.sql`). Re-queried the live project directly rather than
+trusting the "Success" messages alone (same Management API approach as the
+original finding): **confirmed all 6 tables now exist (22 total, up from
+16), `reviews` has exactly 19 rows, `clients.plan` exists.**
+
+**`security-fixes.sql` surfaced a real bug while re-verifying it.** Its
+Fix 2 (`revoke execute on function get_my_client_id() from anon`) reports
+success and IS a no-op-safe statement, but doesn't achieve what its own
+comment says — Postgres grants EXECUTE on new functions to the `PUBLIC`
+pseudo-role by default, and `anon` implicitly inherits PUBLIC's privileges
+like every role does. Revoking from `anon` specifically leaves the PUBLIC
+grant untouched. Verified with `has_function_privilege('anon', ...,
+'execute')` both before and after running the file — `true` in both cases.
+The actual fix is revoking from `PUBLIC` directly (doesn't affect
+`authenticated`/`service_role`, which hold their own explicit grants).
+
+**Fixed the source files** (`supabase/security-fixes.sql` and its
+`migrations/20260101000001_security_fixes.sql` copy — confirmed identical,
+updated both) so any future fresh run does the right thing, and wrote
+`migrations/20260729000000_security_fixes_public_grant.sql` as the
+one-line follow-up for this already-live project (can't retroactively fix
+what already ran — needs its own migration). Did not run it myself, same
+reasoning as always — wrote the file, flagged it in `TODO.md` Priority
+0-d for Anthony.
+
+**Still open, unrelated to any SQL file:** leaked-password protection —
+confirmed still off via the Auth config API. Dashboard toggle only, no
+migration touches this.
+
+---
 
 ## 2026-07-29 (cont'd) — queried the live Supabase project directly, found 6 tables from written migrations were never run
 

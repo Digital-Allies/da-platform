@@ -78,23 +78,25 @@ you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
 
 ---
 
-## 🔴 Priority 0-d — 6 tables from already-written migrations were never actually run (found 2026-07-29)
+## ✅ Priority 0-d — RESOLVED 2026-07-29 — 6 missing tables, plan column, and reviews seed all confirmed live
 
-**How this was found:** answering "are there other tables that need to be run or created," queried the live Supabase project directly (Management API, using the `SUPABASE_ACCESS_TOKEN` already in `.env.local`) instead of trusting this file's history — and several "confirmed working" claims from past sessions turned out to be checking the *code*, not the *live database*. The live project (`auwhvicpyiwsubucanpb`) has **16 tables total**. Six tables that migration files already in this repo create do **not exist**:
+**Original finding:** answering "are there other tables that need to be run or created," queried the live Supabase project directly (Management API, using the `SUPABASE_ACCESS_TOKEN` already in `.env.local`) instead of trusting this file's history — and several "confirmed working" claims from past sessions turned out to be checking the *code*, not the *live database*. Six tables that migration files already in this repo create didn't exist: `reviews`, `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications`.
 
-- `reviews` (`supabase/migrations/20260122000000_reviews_table.sql`) — the Atomic Finds reviews the 2026-07-24/25 sessions saw live must have existed at some point (that verification was real, via Claude in Chrome), but the table is gone now. Matches the `getFeaturedReviews` PGRST205 error that's been showing up in dev server logs since at least 2026-07-27/28 and was previously (wrongly) written off as "likely just a schema-cache staleness issue, not a real problem." **It's real — the table doesn't exist**, so the site is silently falling back to 4 mock reviews instead of the 19 real ones.
-- `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications` (all from `supabase/migrations/20260101000003_admin_features.sql`) — none exist. `/admin/projects`, `/admin/research`, `/admin/development`, and the notifications bell in `AdminShell.tsx` all have real, working *code* against these tables (confirmed by earlier sessions) — but every one of them will throw a real Postgres "table not found" error the moment you actually open them, because the tables themselves were never created. Earlier sessions' "already fully built, nothing to do" conclusions about `/admin/development` and `/admin/projects` were checking the code only (explicitly noted at the time as "did not start the dev server, no credentials available") — accurate about the code, wrong about whether it currently works end-to-end.
+**Anthony ran all of it 2026-07-29** — `20260101000003_admin_features.sql`, `20260122000000_reviews_table.sql`, `seed-atomic-finds-reviews.sql`, the `clients.plan` column migration, and `security-fixes.sql`. **Re-verified live, not just trusted the "Success" messages:**
+- ✅ All 6 tables now exist (22 tables total in the live project, up from 16).
+- ✅ `reviews` has exactly 19 rows — the seed landed correctly.
+- ✅ `clients.plan` column exists.
+- ⚠️ **`security-fixes.sql` ran successfully but didn't fully do what it claims** — found and fixed a real bug in the file itself, see below.
 
-**Fix — run these 2 migrations in the Supabase SQL Editor, in order** (both additive, safe):
-1. `tools/build-workflows/supabase/migrations/20260101000003_admin_features.sql` — creates `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications`.
-2. `tools/build-workflows/supabase/migrations/20260122000000_reviews_table.sql` — recreates `reviews`.
-3. **After #2**, re-run `tools/build-workflows/supabase/seed-atomic-finds-reviews.sql` (confirmed exists, written 2026-07-21) to restore the 19 real reviews, since the table itself is gone, not just empty.
+**The security-fixes.sql bug:** its Fix 2 (`revoke execute on function get_my_client_id() from anon`) succeeds but doesn't actually block anonymous access. Postgres grants EXECUTE on new functions to the `PUBLIC` pseudo-role by default, and `anon` (like every role) implicitly inherits PUBLIC's privileges — so revoking from `anon` specifically leaves the PUBLIC grant untouched, and anon can still call the function through it. Verified live both before and after: `has_function_privilege('anon', 'public.get_my_client_id()', 'execute')` returned `true` even after `security-fixes.sql` ran.
 
-**Not run yet, lower urgency, also confirmed live this session:**
-- [ ] `clients.plan` column (`20260109000000_client_plan.sql`) — confirmed still not applied (checked live: `clients` table has only `id`, `auth_user_id`, `business_name`, `created_at`). Reserved for future subscription tiers, no behavior change today, safe anytime.
-- [ ] `security-fixes.sql` — confirmed **partially** applied: Fix 1 (search_path hardening on `get_my_client_id`) is live, but Fix 2 (revoking anon's execute permission on that function) is **not** — anon can still call it. Safe to re-run the whole file again (idempotent); it'll just re-apply Fix 2.
-- [ ] Leaked-password protection — confirmed still off via the Supabase Auth config API (`password_hibp_enabled: false`). Dashboard → Authentication → Providers → Email → toggle on.
-- Harmless footnote, no action needed: there's an orphaned `kv_store_ebc15282` table in the live project that no code in this repo references (a leftover from some other tool/prototype run directly against this Supabase project, not from any migration here). Not touched, not urgent — just flagging so it's not mistaken for something this repo depends on.
+- [x] **Fixed the source files** (`supabase/security-fixes.sql` and its migrations/ copy) to also `revoke ... from public` — correct for any future fresh run.
+- [ ] **One more small migration to run** for this already-live project (the file edit above doesn't retroactively apply to what's already run): `tools/build-workflows/supabase/migrations/20260729000000_security_fixes_public_grant.sql` — one line, `revoke execute on function public.get_my_client_id() from public;`. Doesn't touch `authenticated`/`service_role` (they hold their own explicit grants, unaffected by a PUBLIC revoke).
+
+**Still open, unrelated to SQL (dashboard toggle only):**
+- [ ] Leaked-password protection — confirmed still off via the Auth config API (`password_hibp_enabled: false`). Dashboard → Authentication → Providers → Email → toggle on. Not something any SQL file touches.
+
+**Harmless footnote, no action needed:** there's an orphaned `kv_store_ebc15282` table in the live project that no code in this repo references (a leftover from some other tool/prototype run directly against this Supabase project). Not touched, not urgent.
 
 ---
 

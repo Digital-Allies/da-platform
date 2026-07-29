@@ -17,7 +17,17 @@ $$;
 -- ─── Fix 2: Revoke anon execute on get_my_client_id ─────────
 -- Anonymous users (public site visitors) have no business calling this.
 -- It only returns data for authenticated (admin) users anyway.
+--
+-- NOTE (2026-07-29): `revoke ... from anon` alone does NOT block anon —
+-- Postgres grants EXECUTE on new functions to the PUBLIC pseudo-role by
+-- default, and anon implicitly inherits PUBLIC's privileges. Verified
+-- live: after this file's first run, anon could still call the function
+-- via the PUBLIC grant. Must also revoke from PUBLIC directly (does not
+-- affect `authenticated`/`service_role`, which hold their own explicit
+-- grants). See migrations/20260729000000_security_fixes_public_grant.sql
+-- for the standalone fix if this file was already run before this note.
 revoke execute on function public.get_my_client_id() from anon;
+revoke execute on function public.get_my_client_id() from public;
 
 -- ─── NOT A FIX NEEDED: contact_submissions INSERT policy ─────
 -- The "always true" INSERT policy on contact_submissions is intentional.
