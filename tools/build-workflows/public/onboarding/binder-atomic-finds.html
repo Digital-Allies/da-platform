@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atomic Finds ATX — Platform Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────── */
+    :root {
+      --af-yellow:  #F5C842;
+      --af-amber:   #D4822A;
+      --af-charcoal:#1E1E1E;
+      --af-bone:    #F0E8D8;
+      --af-body:    #D9CFBF;
+      --af-muted:   #9A8F7D;
+      --da-charcoal:#2D2D2D;
+      --da-gold:    #B7791F;
+      --da-red:     #C5301A;
+      --da-bone:    #F9F6F0;
+
+      --page-bg:    #FFFFFF;
+      --text:       #1A1A1A;
+      --text-soft:  #555;
+      --accent:     var(--af-yellow);
+      --accent2:    var(--af-amber);
+      --heading-font: 'Bagel Fat One', cursive;
+      --body-font:  'DM Sans', system-ui, sans-serif;
+    }
+
+    /* ─── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--body-font);
+      color: var(--text);
+      background: var(--page-bg);
+      line-height: 1.6;
+    }
+    a { color: var(--af-amber); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── LAYOUT ─────────────────────────────────── */
+    .binder { max-width: 860px; margin: 0 auto; }
+
+    /* ─── COVER ──────────────────────────────────── */
+    .cover {
+      background: var(--af-charcoal);
+      color: var(--af-bone);
+      padding: 80px 64px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+    }
+    .cover__top {}
+    .cover__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--af-yellow);
+      border: 1px solid rgba(245,200,66,.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 48px;
+    }
+    .cover__badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--af-yellow);
+      flex-shrink: 0;
+    }
+    .cover__title {
+      font-family: var(--heading-font);
+      font-size: clamp(52px, 9vw, 88px);
+      line-height: 1;
+      color: var(--af-yellow);
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    .cover__subtitle {
+      font-family: var(--heading-font);
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--af-body);
+      margin-bottom: 32px;
+    }
+    .cover__tagline {
+      font-size: 15px;
+      color: var(--af-muted);
+      font-style: italic;
+    }
+    .cover__divider {
+      width: 60px; height: 2px;
+      background: var(--af-yellow);
+      margin: 40px 0;
+    }
+    .cover__doc-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--af-bone);
+    }
+    .cover__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(245,200,66,.2);
+      padding-top: 32px;
+      margin-top: 48px;
+    }
+    .cover__by { font-size: 12px; color: var(--af-muted); }
+    .cover__by strong { color: var(--af-yellow); }
+    .cover__date { font-size: 12px; color: var(--af-muted); }
+
+    /* ─── PAGE / SECTION STRUCTURE ───────────────── */
+    .page {
+      padding: 64px;
+      page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--af-amber);
+      margin-bottom: 8px;
+    }
+    .section-num {
+      font-family: var(--heading-font);
+      font-size: 80px;
+      line-height: 1;
+      color: rgba(245,200,66,.1);
+      position: absolute;
+      top: -12px;
+      right: 0;
+      font-weight: 900;
+      pointer-events: none;
+    }
+    .section-header {
+      position: relative;
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--af-yellow);
+      padding-bottom: 20px;
+    }
+    .section-header h2 {
+      font-family: var(--heading-font);
+      font-size: 36px;
+      color: var(--af-charcoal);
+    }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────── */
+    h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--af-charcoal);
+      margin-bottom: 8px;
+      margin-top: 32px;
+    }
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--af-amber);
+      margin-bottom: 8px;
+      margin-top: 24px;
+    }
+    p { margin-bottom: 16px; font-size: 15px; color: #333; }
+    ul, ol { margin-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 6px; font-size: 15px; color: #333; }
+    strong { color: var(--af-charcoal); }
+
+    /* ─── QUICK-REF CARD ─────────────────────────── */
+    .ref-card {
+      background: var(--af-charcoal);
+      color: var(--af-bone);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .ref-card__title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--af-yellow);
+      margin-bottom: 20px;
+    }
+    .ref-card__row {
+      display: flex;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(245,200,66,.15);
+      font-size: 14px;
+    }
+    .ref-card__row:last-child { border-bottom: none; }
+    .ref-card__label { width: 160px; flex-shrink: 0; color: var(--af-muted); }
+    .ref-card__value { color: var(--af-bone); font-weight: 500; }
+    .ref-card__value a { color: var(--af-yellow); }
+
+    /* ─── STEPS ──────────────────────────────────── */
+    .steps { counter-reset: step; margin: 24px 0; }
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .step__num {
+      counter-increment: step;
+      content: counter(step);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--af-charcoal);
+      color: var(--af-yellow);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step__text { padding-top: 5px; font-size: 14px; }
+
+    /* ─── CMS UI MOCKUP ──────────────────────────── */
+    .cms-ui {
+      background: var(--da-charcoal);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 28px 0;
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 12px;
+    }
+    .cms-ui__bar {
+      background: #1A1A1A;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .cms-ui__dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .cms-ui__bar-title {
+      font-size: 11px;
+      color: rgba(255,255,255,.4);
+      letter-spacing: 0.06em;
+      margin-left: 4px;
+    }
+    .cms-ui__body {
+      display: flex;
+      min-height: 220px;
+    }
+    .cms-ui__sidebar {
+      width: 180px;
+      background: #252525;
+      padding: 16px 12px;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255,255,255,.06);
+    }
+    .cms-ui__brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,.4);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .cms-ui__nav-item {
+      font-size: 11px;
+      color: rgba(255,255,255,.5);
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .cms-ui__nav-item.active {
+      background: rgba(245,200,66,.15);
+      color: var(--af-yellow);
+    }
+    .cms-ui__nav-icon {
+      width: 10px; height: 10px;
+      background: currentColor;
+      border-radius: 2px;
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .cms-ui__content {
+      flex: 1;
+      padding: 20px 24px;
+    }
+    .cms-ui__page-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,.9);
+      margin-bottom: 16px;
+    }
+    .cms-ui__field {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+    .cms-ui__field-label {
+      font-size: 10px;
+      color: rgba(255,255,255,.4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .cms-ui__field-value {
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+    }
+    .cms-ui__btn {
+      background: var(--af-yellow);
+      color: var(--af-charcoal);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .cms-ui__btn.outline {
+      background: transparent;
+      border: 1px solid rgba(245,200,66,.4);
+      color: var(--af-yellow);
+      margin-right: 8px;
+    }
+
+    /* ─── TAB SECTION ────────────────────────────── */
+    .tab-section {
+      border-left: 3px solid var(--af-yellow);
+      padding-left: 24px;
+      margin-bottom: 48px;
+      page-break-inside: avoid;
+    }
+    .tab-name {
+      font-family: var(--heading-font);
+      font-size: 24px;
+      color: var(--af-charcoal);
+      margin-bottom: 4px;
+    }
+    .tab-url {
+      font-size: 11px;
+      color: var(--af-muted);
+      font-family: monospace;
+      margin-bottom: 12px;
+    }
+    .tab-desc { font-size: 15px; color: #333; margin-bottom: 12px; }
+
+    /* ─── BRAND SWATCHES ─────────────────────────── */
+    .swatches { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+    .swatch { text-align: center; }
+    .swatch__color {
+      width: 60px; height: 60px;
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,.08);
+      margin-bottom: 6px;
+    }
+    .swatch__name { font-size: 10px; font-weight: 700; color: var(--text-soft); display: block; }
+    .swatch__hex { font-size: 9px; color: var(--af-muted); font-family: monospace; }
+
+    /* ─── CHECKLIST ──────────────────────────────── */
+    .checklist { list-style: none; margin-left: 0; margin-bottom: 24px; }
+    .checklist li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      font-size: 14px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-box {
+      width: 18px; height: 18px;
+      border: 2px solid var(--af-yellow);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ─── TABLE ──────────────────────────────────── */
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+    th {
+      background: var(--af-charcoal);
+      color: var(--af-yellow);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      text-align: left;
+    }
+    td { padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,.08); }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: rgba(245,200,66,.04); }
+
+    /* ─── CALLOUT ────────────────────────────────── */
+    .callout {
+      background: rgba(245,200,66,.08);
+      border-left: 4px solid var(--af-yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .callout strong { color: var(--af-amber); }
+
+    /* ─── GLOSSARY ───────────────────────────────── */
+    .glossary-term {
+      border-bottom: 1px solid rgba(0,0,0,.07);
+      padding: 16px 0;
+    }
+    .glossary-term:last-child { border-bottom: none; }
+    .glossary-term dt {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--af-charcoal);
+      margin-bottom: 4px;
+    }
+    .glossary-term dd { font-size: 14px; color: #555; margin-left: 0; }
+
+    /* ─── PRINT ──────────────────────────────────── */
+    @media print {
+      body { font-size: 12pt; }
+      .cover { min-height: auto; padding: 48pt; page-break-after: always; }
+      .page { padding: 48pt; }
+      .cover__title { font-size: 52pt; }
+      h2 { font-size: 24pt; }
+      h3 { font-size: 14pt; }
+      .section-num { display: none; }
+      .cms-ui { break-inside: avoid; }
+      .tab-section { break-inside: avoid; }
+      .callout { break-inside: avoid; }
+      @page { margin: 0.75in; size: letter; }
+    }
+  </style>
+</head>
+<body>
+<div class="binder">
+
+  <!-- ══════════════════════════════════════════════════
+       COVER
+  ══════════════════════════════════════════════════ -->
+  <div class="cover">
+    <div class="cover__top">
+      <div class="cover__badge">Your Website Platform</div>
+      <div class="cover__title">Atomic<br>Finds ATX</div>
+      <div class="cover__subtitle">where vintage meets digital.</div>
+      <div class="cover__divider"></div>
+      <div class="cover__doc-title">Your Complete Website &amp; CMS Guide</div>
+    </div>
+    <div class="cover__bottom">
+      <div class="cover__by">
+        Built and managed by <strong>Digital Allies</strong><br>
+        <a href="https://digitalallies.net" style="color: var(--af-muted); font-size: 11px;">digitalallies.net</a>
+      </div>
+      <div class="cover__date" style="text-align: right;">
+        Prepared for Jennyfer Gomez<br>
+        <span style="font-size: 11px;">July 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 1 — WELCOME
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 1</div>
+      <h2>Welcome, Jennyfer</h2>
+      <span class="section-num">1</span>
+    </div>
+
+    <p>Your website is live. Your CMS is connected. This guide is your permanent reference — everything you need to manage and grow your online presence at <strong>Atomic Finds ATX</strong>.</p>
+
+    <p>Think of this as your keys. You have full control over your product catalog, your content, your brand settings, and your site copy. Digital Allies is always here for support, but you don't need us for day-to-day updates.</p>
+
+    <p>This document covers:</p>
+    <ul>
+      <li>How to log into your platform (your CMS)</li>
+      <li>What each section does, in plain language</li>
+      <li>Step-by-step guides for the most common tasks</li>
+      <li>Your brand colors, fonts, and voice guidelines</li>
+      <li>All your important URLs and contacts in one place</li>
+      <li>SEO and how the internet finds you</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Need help?</strong> Email Anthony at <a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a>. We aim to respond within 24 hours on business days.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 2 — AT A GLANCE
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 2</div>
+      <h2>Your Website At a Glance</h2>
+      <span class="section-num">2</span>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card__title">Quick Reference</div>
+      <div class="ref-card__row">
+        <span class="ref-card__label">Your live website</span>
+        <span class="ref-card__value"><a href="https://atomicfindsatx.store">atomicfindsatx.store</a></span>
+      </div>
+      <div class="ref-card__row">
+        <span class="ref-card__label">Your CMS login</span>
+        <span class="ref-card__value"><a href="https://cms.digitalallies.net/admin">cms.digitalallies.net/admin</a></span>
+      </div>
+      <div class="ref-card__row">
+        <span class="ref-card__label">Your login email</span>
+        <span class="ref-card__value">atomicfindsatx@gmail.com</span>
+      </div>
+      <div class="ref-card__row">
+        <span class="ref-card__label">Support email</span>
+        <span class="ref-card__value"><a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a></span>
+      </div>
+      <div class="ref-card__row">
+        <span class="ref-card__label">Built &amp; managed by</span>
+        <span class="ref-card__value">Digital Allies — <a href="https://digitalallies.net">digitalallies.net</a></span>
+      </div>
+    </div>
+
+    <h3>What you have</h3>
+    <p>You're running on the <strong>Digital Allies Platform</strong> — a professional website and content management system built for small businesses. Here's what's included:</p>
+    <ul>
+      <li><strong>A live storefront</strong> at atomicfindsatx.store, connected to your product catalog</li>
+      <li><strong>14 products</strong> currently listed, with photos and descriptions</li>
+      <li><strong>Reviews section</strong> showing real customer feedback</li>
+      <li><strong>A CMS dashboard</strong> where you manage everything — no coding required</li>
+      <li><strong>Mobile-ready design</strong> — looks great on phones and tablets</li>
+      <li><strong>SEO built in</strong> — search engines and AI assistants can find and describe your business</li>
+    </ul>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 3 — LOGGING IN
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 3</div>
+      <h2>Logging In</h2>
+      <span class="section-num">3</span>
+    </div>
+
+    <p>Your CMS is at <strong>cms.digitalallies.net/admin</strong>. Here's how to log in:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step__num">1</div>
+        <div class="step__text">Open your browser and go to <strong>cms.digitalallies.net/admin</strong></div>
+      </div>
+      <div class="step">
+        <div class="step__num">2</div>
+        <div class="step__text">Enter your email: <strong>atomicfindsatx@gmail.com</strong></div>
+      </div>
+      <div class="step">
+        <div class="step__num">3</div>
+        <div class="step__text">Enter your password and click <strong>Sign In</strong></div>
+      </div>
+      <div class="step">
+        <div class="step__num">4</div>
+        <div class="step__text">You'll land on your Dashboard — your home base for everything</div>
+      </div>
+    </div>
+
+    <!-- Login screen mock -->
+    <div class="cms-ui">
+      <div class="cms-ui__bar">
+        <div class="cms-ui__dot" style="background:#FF5F57"></div>
+        <div class="cms-ui__dot" style="background:#FEBC2E"></div>
+        <div class="cms-ui__dot" style="background:#28C840"></div>
+        <div class="cms-ui__bar-title">cms.digitalallies.net/admin/login</div>
+      </div>
+      <div style="padding: 40px; display: flex; flex-direction: column; align-items: center; min-height: 220px;">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <div style="font-size: 12px; font-weight: 700; color: rgba(255,255,255,.9); letter-spacing: 0.08em; margin-bottom: 4px;">DIGITAL ALLIES</div>
+          <div style="font-size: 10px; color: rgba(255,255,255,.3);">CMS Platform</div>
+        </div>
+        <div style="width: 280px;">
+          <div style="background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 6px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; color: rgba(255,255,255,.4);">atomicfindsatx@gmail.com</div>
+          <div style="background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 6px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: rgba(255,255,255,.25);">••••••••••</div>
+          <div style="background: #F5C842; color: #1E1E1E; border-radius: 6px; padding: 10px; text-align: center; font-size: 12px; font-weight: 700;">Sign In</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Forgot your password?</strong> Click "Forgot password?" on the login screen. You'll receive an email with a link to reset it. Check your spam folder if you don't see it within a few minutes.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 4 — DASHBOARD OVERVIEW
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 4</div>
+      <h2>Your Dashboard</h2>
+      <span class="section-num">4</span>
+    </div>
+
+    <p>Once you're logged in, you'll see your dashboard. On the left is a sidebar with all your tools. Here's what each one does:</p>
+
+    <!-- Dashboard mock -->
+    <div class="cms-ui">
+      <div class="cms-ui__bar">
+        <div class="cms-ui__dot" style="background:#FF5F57"></div>
+        <div class="cms-ui__dot" style="background:#FEBC2E"></div>
+        <div class="cms-ui__dot" style="background:#28C840"></div>
+        <div class="cms-ui__bar-title">cms.digitalallies.net/admin</div>
+      </div>
+      <div class="cms-ui__body">
+        <div class="cms-ui__sidebar">
+          <div class="cms-ui__brand">Atomic Finds ATX</div>
+          <div class="cms-ui__nav-item active"><div class="cms-ui__nav-icon"></div> Dashboard</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Pages</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Collections</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Showroom</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Press Office</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Projects</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Research</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Brand Theme</div>
+          <div class="cms-ui__nav-item"><div class="cms-ui__nav-icon"></div> Settings</div>
+        </div>
+        <div class="cms-ui__content">
+          <div class="cms-ui__page-title">Welcome back, Jennyfer</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="cms-ui__field">
+              <div class="cms-ui__field-label">Products listed</div>
+              <div class="cms-ui__field-value" style="font-size: 20px; font-weight: 700; color: #F5C842;">14</div>
+            </div>
+            <div class="cms-ui__field">
+              <div class="cms-ui__field-label">Customer reviews</div>
+              <div class="cms-ui__field-value" style="font-size: 20px; font-weight: 700; color: #F5C842;">19</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 5 — TAB GUIDES
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 5</div>
+      <h2>Your Tools, Tab by Tab</h2>
+      <span class="section-num">5</span>
+    </div>
+
+    <!-- SHOWROOM -->
+    <div class="tab-section">
+      <div class="tab-name">The Showroom</div>
+      <div class="tab-url">cms.digitalallies.net/admin/products</div>
+      <div class="tab-desc">Your product catalog. Every piece you sell lives here. Add new items, update prices, mark things as sold, and upload photos — all without touching any code.</div>
+
+      <h4>Most common tasks</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__text">Click <strong>Showroom</strong> in the sidebar</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__text">To add a new piece: click <strong>Add Item</strong>, fill in the name, price, and photo URL, then choose how it sells (Inquiry, View Listing, etc.)</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__text">To mark something as sold: find it in the list, click it, and uncheck <strong>In Stock</strong></div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__text">Click <strong>Save</strong> — the change appears on your site immediately</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>How selling works:</strong> Each product has a "selling method" — <em>View Listing</em> links to your Facebook Marketplace listing, <em>Show Interest</em> opens an inquiry form, <em>Claim Me</em> or <em>Get in Touch</em> route to your contact section.
+      </div>
+    </div>
+
+    <!-- COLLECTIONS -->
+    <div class="tab-section">
+      <div class="tab-name">Collections</div>
+      <div class="tab-url">cms.digitalallies.net/admin/collections</div>
+      <div class="tab-desc">Group your pieces into curated sets — "Living Room Finds," "Under $150," "Newly Listed." Collections show up on your homepage so visitors can browse by category.</div>
+
+      <h4>Most common task</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__text">Click <strong>Collections</strong> in the sidebar</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__text">Click <strong>New Collection</strong>, give it a name and description</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__text">Add products to it from your catalog</div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__text">Toggle <strong>Featured</strong> to show it on the homepage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- More tabs page -->
+  <div class="page">
+
+    <!-- PAGES -->
+    <div class="tab-section">
+      <div class="tab-name">Pages</div>
+      <div class="tab-url">cms.digitalallies.net/admin/pages</div>
+      <div class="tab-desc">Edit the actual pages of your website — your homepage, about page, and any custom pages you want to create. Each page is made of sections (called blocks) that you can edit individually.</div>
+
+      <h4>How the page editor works</h4>
+      <p>Your homepage is made of several sections stacked on top of each other: the hero (top banner), the product grid, the about section, the contact form, and more. You can edit the text inside each one.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__text">Click <strong>Pages</strong> in the sidebar</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__text">Click the page you want to edit (e.g. "Home")</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__text">Click a section in the list on the left to select it</div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__text">Edit the text in the panel that appears</div>
+        </div>
+        <div class="step">
+          <div class="step__num">5</div>
+          <div class="step__text">Watch the live preview on the right update as you type</div>
+        </div>
+        <div class="step">
+          <div class="step__num">6</div>
+          <div class="step__text">When ready, click <strong>Publish</strong> to make it live</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Draft vs Published:</strong> All pages start as Drafts — visible only to you. When you're happy with the changes, click Publish to make them visible to your visitors. You can always go back to Draft mode to make edits without anyone seeing.
+      </div>
+    </div>
+
+    <!-- PRESS OFFICE -->
+    <div class="tab-section">
+      <div class="tab-name">The Press Office</div>
+      <div class="tab-url">cms.digitalallies.net/admin/content</div>
+      <div class="tab-desc">Write and publish content — blog posts, announcements, behind-the-scenes stories, and more. Published articles appear in the Learn / Blog section of your site.</div>
+
+      <h4>Templates available</h4>
+      <ul>
+        <li><strong>Blog Post</strong> — Stories, tips, what's new in the shop</li>
+        <li><strong>Press Release</strong> — Formal announcements (new collection, events)</li>
+        <li><strong>Case Study</strong> — Before/after piece spotlights or customer stories</li>
+      </ul>
+
+      <h4>Publishing a post</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__text">Click <strong>The Press Office</strong> in the sidebar</div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__text">Click <strong>New Article</strong> and choose a template</div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__text">Write your content. Fill in title, excerpt, and body text.</div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__text">Set status to <strong>Published</strong> when ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings, Projects, Research, Brand Theme page -->
+  <div class="page">
+
+    <!-- SETTINGS -->
+    <div class="tab-section">
+      <div class="tab-name">Settings</div>
+      <div class="tab-url">cms.digitalallies.net/admin/settings</div>
+      <div class="tab-desc">Your site's core information — business name, phone, email, social links, and page copy. This is the first place to go when your contact info changes.</div>
+
+      <h4>What you can update</h4>
+      <ul>
+        <li>Business name and tagline</li>
+        <li>Phone number and email address</li>
+        <li>Business address and hours</li>
+        <li>Hero headline and subheadline</li>
+        <li>About section copy</li>
+        <li>Instagram, Facebook, and other social links</li>
+        <li>Announcement banner (shows at the top of your site)</li>
+        <li>Shipping and return policy text</li>
+      </ul>
+    </div>
+
+    <!-- BRAND THEME -->
+    <div class="tab-section">
+      <div class="tab-name">Brand Theme</div>
+      <div class="tab-url">cms.digitalallies.net/admin/theme</div>
+      <div class="tab-desc">Control your brand colors and fonts across the entire site. Your current colors are set to your Atomic Finds ATX brand palette.</div>
+
+      <div class="callout">
+        <strong>Note:</strong> Major brand color changes should be discussed with Digital Allies before applying — your colors affect buttons, backgrounds, headings, and accents throughout the site.
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="tab-section">
+      <div class="tab-name">Projects</div>
+      <div class="tab-url">cms.digitalallies.net/admin/projects</div>
+      <div class="tab-desc">A built-in Kanban board for tracking work between you and Digital Allies. Use it to track a photo shoot, a product launch, or any project that has moving parts. Visitors never see this section.</div>
+    </div>
+
+    <!-- RESEARCH -->
+    <div class="tab-section">
+      <div class="tab-name">Research</div>
+      <div class="tab-url">cms.digitalallies.net/admin/research</div>
+      <div class="tab-desc">A private notepad for market research, competitor notes, ideas, and inspiration. Anything you want to keep organized and on hand. Completely private — visitors never see it.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 6 — SEO & AEO
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 6</div>
+      <h2>Getting Found Online</h2>
+      <span class="section-num">6</span>
+    </div>
+
+    <h3>SEO — Search Engine Optimization</h3>
+    <p>SEO is how search engines like Google and Bing find and rank your website. The higher your ranking, the more people discover your shop.</p>
+
+    <h4>What your platform does automatically</h4>
+    <ul>
+      <li><strong>Sitemap</strong> — A file that tells search engines every page on your site (at atomicfindsatx.store/sitemap.xml)</li>
+      <li><strong>robots.txt</strong> — Tells search engines what to index</li>
+      <li><strong>Meta tags</strong> — Automatic title and description tags on every page</li>
+      <li><strong>Structured data (JSON-LD)</strong> — Machine-readable information about your business (name, address, hours, products)</li>
+      <li><strong>Open Graph tags</strong> — Makes your site look great when shared on social media</li>
+      <li><strong>Mobile optimization</strong> — Google ranks mobile-friendly sites higher; yours is</li>
+    </ul>
+
+    <h4>What you control</h4>
+    <ul>
+      <li>Page titles (set in Settings)</li>
+      <li>Product names and descriptions (set in Showroom)</li>
+      <li>Blog post content (set in The Press Office)</li>
+      <li>Image file names (descriptive names like "rattan-chair-1970s.jpg" help)</li>
+    </ul>
+
+    <h3>AEO — Answer Engine Optimization</h3>
+    <p>A newer and increasingly important category. AEO is about getting your business recognized by AI assistants — Claude, ChatGPT, Perplexity, Google AI Overviews.</p>
+
+    <p>When someone asks "Where can I find restored mid-century furniture in Austin?" your site is structured so that AI tools can read your product descriptions, your location, and your specialty and surface Atomic Finds ATX as a relevant answer.</p>
+
+    <div class="callout">
+      <strong>The best thing you can do for AEO:</strong> Keep your product descriptions detailed and specific. Instead of "Rattan chair," write "1970s rattan peacock chair, fully restored, Austin TX, available for inquiry." That specificity is what AI assistants use to match your business to real questions.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 7 — PUBLISHING CHECKLIST
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 7</div>
+      <h2>Before You Publish</h2>
+      <span class="section-num">7</span>
+    </div>
+
+    <p>Run through this list before making any content go live.</p>
+
+    <h4>For products</h4>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Product name is clear and specific (not just "Chair" — "1970s Rattan Peacock Chair")</li>
+      <li><div class="check-box"></div>Price is correct</li>
+      <li><div class="check-box"></div>Photo URL is working (paste it in a browser to check)</li>
+      <li><div class="check-box"></div>Selling method is set correctly (Inquiry / View Listing / etc.)</li>
+      <li><div class="check-box"></div>In Stock is checked (or unchecked if sold)</li>
+      <li><div class="check-box"></div>Featured is toggled correctly (only highlight your best few pieces)</li>
+    </ul>
+
+    <h4>For blog posts and content</h4>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Title is engaging and describes what the post is about</li>
+      <li><div class="check-box"></div>Content is proofread</li>
+      <li><div class="check-box"></div>Excerpt (short summary) is filled in</li>
+      <li><div class="check-box"></div>Any linked URLs are working</li>
+    </ul>
+
+    <h4>For page edits</h4>
+    <ul class="checklist">
+      <li><div class="check-box"></div>Preview the change in the live preview panel before publishing</li>
+      <li><div class="check-box"></div>Check the mobile view looks correct</li>
+      <li><div class="check-box"></div>Contact info is accurate if you edited the contact section</li>
+    </ul>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 8 — CONTACTS & URLS
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 8</div>
+      <h2>Important Contacts &amp; URLs</h2>
+      <span class="section-num">8</span>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>What</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Your live website</td><td><a href="https://atomicfindsatx.store">atomicfindsatx.store</a></td></tr>
+        <tr><td>Your CMS login</td><td><a href="https://cms.digitalallies.net/admin">cms.digitalallies.net/admin</a></td></tr>
+        <tr><td>Your login email</td><td>atomicfindsatx@gmail.com</td></tr>
+        <tr><td>Privacy policy</td><td>atomicfindsatx.store/privacy</td></tr>
+        <tr><td>Terms of service</td><td>atomicfindsatx.store/terms</td></tr>
+        <tr><td>Sitemap</td><td>atomicfindsatx.store/sitemap.xml</td></tr>
+        <tr><td>Support email</td><td><a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a></td></tr>
+        <tr><td>Digital Allies website</td><td><a href="https://digitalallies.net">digitalallies.net</a></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Your Supabase CMS Connection</h3>
+    <p>Your website reads data from a secure database (Supabase). You don't need to interact with it directly — everything goes through your CMS dashboard. But if you ever need this for troubleshooting:</p>
+    <div class="callout">
+      <strong>Client ID:</strong> 443936d5-f92e-480b-b206-c65cfb52bdfc<br>
+      <span style="font-size: 12px; color: #777;">This identifies your account in the platform. Share it with Digital Allies if you ever need technical support.</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       SECTION 9 — BRAND REFERENCE
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Section 9</div>
+      <h2>Your Brand Reference</h2>
+      <span class="section-num">9</span>
+    </div>
+
+    <p>Use this as a reference when creating social posts, writing captions, or any time you're representing Atomic Finds ATX in writing or visuals.</p>
+
+    <h3>Your Color Palette</h3>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch__color" style="background:#F5C842"></div>
+        <span class="swatch__name">Celestial Yellow</span>
+        <span class="swatch__hex">#F5C842</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch__color" style="background:#D4822A"></div>
+        <span class="swatch__name">Amber Orange</span>
+        <span class="swatch__hex">#D4822A</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch__color" style="background:#1E1E1E"></div>
+        <span class="swatch__name">Deep Charcoal</span>
+        <span class="swatch__hex">#1E1E1E</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch__color" style="background:#F0E8D8"></div>
+        <span class="swatch__name">Bone White</span>
+        <span class="swatch__hex">#F0E8D8</span>
+      </div>
+      <div class="swatch">
+        <div class="swatch__color" style="background:#556B4A"></div>
+        <span class="swatch__name">Woven Moss</span>
+        <span class="swatch__hex">#556B4A</span>
+      </div>
+    </div>
+
+    <h3>Your Fonts</h3>
+    <table>
+      <thead>
+        <tr><th>Font</th><th>Used For</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Bagel Fat One</strong></td><td>Headings, product titles, prices — your main display face</td></tr>
+        <tr><td><strong>Pacifico</strong></td><td>Script accents — use sparingly, never stack two decorative fonts</td></tr>
+        <tr><td><strong>DM Sans</strong></td><td>Body text, buttons, labels — all readable copy</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Voice &amp; Tone</h3>
+    <p>Atomic Finds ATX is warm, authentic, and expert — like a knowledgeable friend who knows everything about mid-century furniture.</p>
+
+    <h4>Say</h4>
+    <ul>
+      <li>"Handpicked" — not "curated" or "sourced"</li>
+      <li>"Restored" — not "refurbished" or "pre-owned"</li>
+      <li>"1970s rattan peacock chair" — be specific about era and material</li>
+      <li>"where vintage meets digital" — the brand tagline, use it</li>
+      <li>Specific piece names and stories</li>
+    </ul>
+
+    <h4>Avoid</h4>
+    <ul>
+      <li>"Retro period," "vintage-inspired," "antique-style" — too vague</li>
+      <li>Corporate or salesy language</li>
+      <li>All-caps sentences (ALL CAPS is fine for short labels only)</li>
+      <li>Emojis in formal product descriptions (fine for social)</li>
+    </ul>
+
+    <h4>Tagline</h4>
+    <p style="font-family: var(--heading-font); font-size: 20px; color: var(--af-amber); margin-top: 8px;">where vintage meets digital.</p>
+
+    <h3>Logo</h3>
+    <p>Your logo is managed through your CMS Settings. Go to <strong>Settings → Logo URL</strong> to update it if you have a new version. Keep your logo on a dark background for best visibility — it's designed for the deep charcoal (#1E1E1E) used throughout your site.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+       APPENDIX — GLOSSARY
+  ══════════════════════════════════════════════════ -->
+  <div class="page">
+    <div class="section-header">
+      <div class="section-label">Appendix</div>
+      <h2>Glossary</h2>
+      <span class="section-num">A</span>
+    </div>
+
+    <p>Terms you'll encounter in your CMS and in conversations with Digital Allies:</p>
+
+    <dl>
+      <div class="glossary-term">
+        <dt>CMS (Content Management System)</dt>
+        <dd>The platform you use to manage your website without coding. Your CMS is at cms.digitalallies.net/admin.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Block / Section</dt>
+        <dd>A reusable chunk of a webpage — like a hero banner, a product grid, a contact form, or a text section. Pages are built by stacking blocks.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Draft</dt>
+        <dd>Content that's saved but not visible to the public yet. Drafts are for work in progress. Set status to "Published" to make content visible.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Published</dt>
+        <dd>Content that's live and visible to all visitors on your site.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>SEO (Search Engine Optimization)</dt>
+        <dd>The practice of making your site easy for Google, Bing, and other search engines to find and rank. Good SEO means more people discover your site naturally.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>AEO (Answer Engine Optimization)</dt>
+        <dd>A newer practice focused on making your business visible in AI-powered search tools — Claude, ChatGPT, Perplexity, Google AI. These tools pull from structured content on your site.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Design Tokens</dt>
+        <dd>The core set of colors, fonts, and spacing values that define your brand on the platform. These live in Brand Theme and apply across every page of your site automatically.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Collection</dt>
+        <dd>A curated group of products. Think of it like a playlist — you pick which items go in it and give it a name. Collections appear as category tabs on your storefront.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>RLS (Row Level Security)</dt>
+        <dd>Behind-the-scenes database protection that ensures your data is only visible to you and your customers — not other businesses on the same platform.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Supabase</dt>
+        <dd>The secure database that stores all your content — products, settings, pages, reviews. You interact with it through your CMS, not directly.</dd>
+      </div>
+      <div class="glossary-term">
+        <dt>Vercel</dt>
+        <dd>The hosting service that runs your live website. It automatically updates your site whenever changes are published. You never need to log into it.</dd>
+      </div>
+    </dl>
+
+    <div style="margin-top: 48px; border-top: 2px solid var(--af-yellow); padding-top: 32px; text-align: center;">
+      <div style="font-family: var(--heading-font); font-size: 22px; color: var(--af-charcoal); margin-bottom: 8px;">Thank you for trusting Digital Allies.</div>
+      <p style="color: var(--text-soft); font-size: 14px;">Questions? Email <a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a> — we're here whenever you need us.</p>
+      <div style="margin-top: 24px; font-size: 11px; color: #aaa;">Atomic Finds ATX · Platform Guide · July 2026 · Prepared by Digital Allies</div>
+    </div>
+  </div>
+
+</div><!-- /.binder -->
+</body>
+</html>
