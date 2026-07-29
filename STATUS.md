@@ -5,7 +5,68 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-29 — by Claude Code: Anthony ran both pending PR #10 migrations (`collections_table`, `design_tokens_ui_extra`) — confirmed success. `ui_extra` → `ThemeClient.tsx` save-payload wiring is now unblocked but not yet done.
+**Last updated:** 2026-07-29 — by Claude Code: `ui_extra` wired into `ThemeClient.tsx`'s save payload; queried the live Supabase project directly and found 6 tables (`reviews`, `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications`) from already-written migrations were never actually run — see `TODO.md` Priority 0-d, this is a real gap, not a docs error.
+
+## 2026-07-29 (cont'd) — queried the live Supabase project directly, found 6 tables from written migrations were never run
+
+Anthony's question ("are there other tables that need to be run or created")
+prompted actually checking, rather than trusting this file's own history.
+Used the `SUPABASE_ACCESS_TOKEN` already in `.env.local` (Management API) to
+query `information_schema` directly against the live project
+(`auwhvicpyiwsubucanpb`) instead of inferring from code or past session
+notes. Result: **16 tables total exist; 6 that migration files already in
+this repo create do not** — `reviews`, and `projects`/`project_tasks`/
+`research_notes`/`dev_tasks`/`notifications` (all from
+`20260101000003_admin_features.sql`). Full detail and the exact fix:
+`TODO.md`'s new Priority 0-d.
+
+**Why this matters and corrects prior entries:** several past sessions
+(2026-07-21/22/23) concluded `/admin/development`, `/admin/projects`, and
+Atomic Finds' reviews were "already fully built, nothing to do" or
+"confirmed working live." Those were accurate about the *code* — it's real,
+not stubbed — but two different things got conflated: "the code exists and
+is correct" vs. "the underlying table exists in the live database right
+now." The 2026-07-21/22/23 sessions explicitly noted they couldn't start
+the dev server or log in (no credentials), so they verified code only. The
+2026-07-24/25 sessions DID verify reviews live via Claude in Chrome and saw
+19 real reviews — that was a genuine, correct observation at the time — but
+the `reviews` table doesn't exist now, meaning it was dropped or the
+project was reset at some point after 2026-07-25. Not root-caused (no
+Supabase audit-log access from here) — flagging as a fact, not a
+theory: verified live, twice, with two different queries, same result.
+
+**Also confirmed live, lower-urgency:** `clients.plan` column still not
+applied; `security-fixes.sql` only half-applied (search_path fix is live,
+the anon-execute revoke is not); leaked-password protection still off
+(`password_hibp_enabled: false` via the Auth config API). All in `TODO.md`
+Priority 0-d.
+
+**What was NOT done:** did not run any of these migrations myself, even
+though they're pre-written, additive, and low-risk — per this repo's own
+rule (`CLAUDE.md`: "If touching Supabase schema... stop and flag to
+Anthony before running"), schema changes need his sign-off first, migration
+file already existing doesn't change that. Wrote up the exact fix in
+`TODO.md` instead.
+
+**Also shipped this session:** wired `design_tokens.ui_extra` into
+`ThemeClient.tsx`'s save payload (`6204758`) — the button-radius/glow/
+card-glow/section-spacing/custom-token controls in the Theme Customizer now
+actually persist (read side already expected this column; save side was
+the deliberately-deferred half, unblocked once Anthony ran
+`20260727000000_design_tokens_ui_extra.sql` earlier today). **Scope note:**
+this makes the values persist and round-trip through the admin's own
+preview — it does not yet make them render on the actual public site.
+`lib/theme.ts`'s shared `DesignTokens` type (used by all 3 clients'
+components via `tokensToCssVars()`) only has a single `radius` field today,
+no button/card/spacing equivalents — wiring those through is a materially
+bigger change (extends the type, `getLiveDesignTokens()`, and every public
+component that would need to consume the new CSS vars) than "make the save
+button persist," and wasn't what was asked for. Verified via `tsc --noEmit`
+(clean) and a full `next build` (all routes compile, `/admin/theme`
+unaffected in size/shape since this only changed the save payload, not the
+UI).
+
+---
 
 ## 2026-07-29 — both PR #10 migrations run, one follow-up now unblocked
 

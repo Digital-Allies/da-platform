@@ -72,9 +72,29 @@ you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
 - [x] **Run 2 pending migrations in the Supabase SQL Editor, in order** — both confirmed run by Anthony 2026-07-29 ("Success. No rows returned" on both):
   1. `tools/build-workflows/supabase/migrations/20260726000000_collections_table.sql` — creates the `collections` table (Collections manager needs this to work at all).
   2. `tools/build-workflows/supabase/migrations/20260727000000_design_tokens_ui_extra.sql` — adds a `design_tokens.ui_extra` column for the Theme Customizer's button-radius/glow/card-glow/section-spacing/custom-token controls.
-- [ ] **Now unblocked:** wire `ui_extra` into `ThemeClient.tsx`'s save payload — the read side already expects it, only the save side was pending on the migration above (see `STATUS.md`'s 2026-07-29 entry). Not yet done as of this note.
+- [x] **Wire `ui_extra` into `ThemeClient.tsx`'s save payload** — done 2026-07-29 (`6204758`). Button-radius/glow/card-glow/section-spacing/custom-token controls now persist. Not yet wired: making those same values actually render on the live public site (separate, larger change — see `STATUS.md`'s 2026-07-29 entry).
 
-**Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side already ready (auth_user_id linked, settings/products/reviews seeded).
+**Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side ready (auth_user_id linked, settings/products seeded — **correction, 2026-07-29: "reviews seeded" here was stale, see Priority 0-d below, the reviews table doesn't currently exist**).
+
+---
+
+## 🔴 Priority 0-d — 6 tables from already-written migrations were never actually run (found 2026-07-29)
+
+**How this was found:** answering "are there other tables that need to be run or created," queried the live Supabase project directly (Management API, using the `SUPABASE_ACCESS_TOKEN` already in `.env.local`) instead of trusting this file's history — and several "confirmed working" claims from past sessions turned out to be checking the *code*, not the *live database*. The live project (`auwhvicpyiwsubucanpb`) has **16 tables total**. Six tables that migration files already in this repo create do **not exist**:
+
+- `reviews` (`supabase/migrations/20260122000000_reviews_table.sql`) — the Atomic Finds reviews the 2026-07-24/25 sessions saw live must have existed at some point (that verification was real, via Claude in Chrome), but the table is gone now. Matches the `getFeaturedReviews` PGRST205 error that's been showing up in dev server logs since at least 2026-07-27/28 and was previously (wrongly) written off as "likely just a schema-cache staleness issue, not a real problem." **It's real — the table doesn't exist**, so the site is silently falling back to 4 mock reviews instead of the 19 real ones.
+- `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications` (all from `supabase/migrations/20260101000003_admin_features.sql`) — none exist. `/admin/projects`, `/admin/research`, `/admin/development`, and the notifications bell in `AdminShell.tsx` all have real, working *code* against these tables (confirmed by earlier sessions) — but every one of them will throw a real Postgres "table not found" error the moment you actually open them, because the tables themselves were never created. Earlier sessions' "already fully built, nothing to do" conclusions about `/admin/development` and `/admin/projects` were checking the code only (explicitly noted at the time as "did not start the dev server, no credentials available") — accurate about the code, wrong about whether it currently works end-to-end.
+
+**Fix — run these 2 migrations in the Supabase SQL Editor, in order** (both additive, safe):
+1. `tools/build-workflows/supabase/migrations/20260101000003_admin_features.sql` — creates `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications`.
+2. `tools/build-workflows/supabase/migrations/20260122000000_reviews_table.sql` — recreates `reviews`.
+3. **After #2**, re-run `tools/build-workflows/supabase/seed-atomic-finds-reviews.sql` (confirmed exists, written 2026-07-21) to restore the 19 real reviews, since the table itself is gone, not just empty.
+
+**Not run yet, lower urgency, also confirmed live this session:**
+- [ ] `clients.plan` column (`20260109000000_client_plan.sql`) — confirmed still not applied (checked live: `clients` table has only `id`, `auth_user_id`, `business_name`, `created_at`). Reserved for future subscription tiers, no behavior change today, safe anytime.
+- [ ] `security-fixes.sql` — confirmed **partially** applied: Fix 1 (search_path hardening on `get_my_client_id`) is live, but Fix 2 (revoking anon's execute permission on that function) is **not** — anon can still call it. Safe to re-run the whole file again (idempotent); it'll just re-apply Fix 2.
+- [ ] Leaked-password protection — confirmed still off via the Supabase Auth config API (`password_hibp_enabled: false`). Dashboard → Authentication → Providers → Email → toggle on.
+- Harmless footnote, no action needed: there's an orphaned `kv_store_ebc15282` table in the live project that no code in this repo references (a leftover from some other tool/prototype run directly against this Supabase project, not from any migration here). Not touched, not urgent — just flagging so it's not mistaken for something this repo depends on.
 
 ---
 
