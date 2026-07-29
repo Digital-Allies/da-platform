@@ -44,11 +44,17 @@ export async function POST(request: NextRequest) {
     // Send email notification via Resend
     const resendKey = process.env.RESEND_API_KEY
     const toEmail = process.env.CONTACT_FORM_TO_EMAIL
+    // Per-tenant sending address — Resend requires the "from" domain to be
+    // verified under whichever Resend key/account is actually sending, so
+    // this can't be hardcoded to digitalallies.net once other clients get
+    // their own Resend keys (see CONTACT_FORM_FROM_EMAIL in .env.local).
+    // Falls back to the original DA default so this deployment is unaffected.
+    const fromAddress = process.env.CONTACT_FORM_FROM_EMAIL || 'Website Contact Form <noreply@digitalallies.net>'
 
     if (resendKey && toEmail) {
       const resend = new Resend(resendKey)
       await resend.emails.send({
-        from: 'Website Contact Form <noreply@digitalallies.net>',
+        from: fromAddress,
         to: toEmail,
         replyTo: email,
         subject: subject ? `Contact: ${subject}` : `New message from ${name}`,
