@@ -243,17 +243,17 @@ Supabase-connected — see `STATUS.md`'s 2026-07-16 audit.
 
 ## 🟡 Priority 2 — Supabase hardening (small, low-risk, keeps getting deferred)
 
-- [ ] **Apply `security-fixes.sql`.**
-  1. Open `tools/build-workflows/supabase/security-fixes.sql` in this repo.
-  2. Supabase dashboard → your project (`auwhvicpyiwsubucanpb`) → SQL Editor →
-     paste the whole file → Run.
-- [ ] **Enable leaked-password protection.**
-  Supabase dashboard → Authentication → Providers → Email → toggle on
-  "Leaked password protection."
-- [ ] **Apply the new `plan` column migration.**
-  1. Open `tools/build-workflows/supabase/migrations/20260109000000_client_plan.sql`.
-  2. SQL Editor → paste → Run. (This just reserves a column for future
-     subscription tiers — no behavior changes yet, safe to run anytime.)
+- [x] ~~Apply `security-fixes.sql`~~ — run 2026-07-29, but see Priority 0-d:
+  its anon-revoke didn't fully work (a real bug in the file, now fixed) —
+  one more tiny migration (`20260729000000_security_fixes_public_grant.sql`)
+  is still open there.
+- [ ] **Enable leaked-password protection.** Still open — a dashboard
+  toggle, no SQL file touches it. Supabase dashboard → Authentication →
+  Providers → Email → toggle on "Leaked password protection." (Duplicate
+  of the same open item tracked in Priority 0-d — one physical action,
+  listed in both places since it was flagged from two different audits.)
+- [x] ~~Apply the new `plan` column migration~~ — run 2026-07-29, confirmed
+  live (Priority 0-d).
 
 ---
 
