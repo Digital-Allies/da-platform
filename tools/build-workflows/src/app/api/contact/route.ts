@@ -41,7 +41,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to save message' }, { status: 500 })
     }
 
-    // Send email notification via Resend
+    // Everything below this point is best-effort notification — the message
+    // is already safely saved above, which is the part that actually
+    // matters. Email/in-admin-notification failures must never turn into a
+    // visitor-facing error for a submission that in fact went through; each
+    // is wrapped separately so one failing doesn't take the other down too.
+
+    // Email notification via Resend (optional per deployment)
     const resendKey = process.env.RESEND_API_KEY
     const toEmail = process.env.CONTACT_FORM_TO_EMAIL
     // Per-tenant sending address — Resend requires the "from" domain to be
@@ -52,20 +58,42 @@ export async function POST(request: NextRequest) {
     const fromAddress = process.env.CONTACT_FORM_FROM_EMAIL || 'Website Contact Form <noreply@digitalallies.net>'
 
     if (resendKey && toEmail) {
-      const resend = new Resend(resendKey)
-      await resend.emails.send({
-        from: fromAddress,
-        to: toEmail,
-        replyTo: email,
-        subject: subject ? `Contact: ${subject}` : `New message from ${name}`,
-        text: `Name: ${name}
+      try {
+        const resend = new Resend(resendKey)
+        await resend.emails.send({
+          from: fromAddress,
+          to: toEmail,
+          replyTo: email,
+          subject: subject ? `Contact: ${subject}` : `New message from ${name}`,
+          text: `Name: ${name}
 Email: ${email}
 Phone: ${phone ?? 'Not provided'}
 Subject: ${subject ?? 'Not provided'}
 
 Message:
 ${message}`,
+        })
+      } catch (emailErr) {
+        // Common cause: RESEND_API_KEY set but CONTACT_FORM_FROM_EMAIL's
+        // domain isn't verified in Resend yet for this tenant. The message
+        // itself is already saved, so this must not fail the request.
+        console.error('Resend notification failed (message was still saved):', emailErr)
+      }
+    }
+
+    // In-admin bell notification (AdminShell.tsx) — real-time via Supabase's
+    // postgres_changes on INSERT into `notifications`, so this fires the
+    // moment the row lands, no polling. Same non-blocking treatment as email.
+    try {
+      await supabase.from('notifications').insert({
+        client_id: CLIENT_ID,
+        title: 'New contact form submission',
+        message: `${name}: ${message.slice(0, 120)}${message.length > 120 ? '…' : ''}`,
+        type: 'activity',
+        read_status: false,
       })
+    } catch (notifErr) {
+      console.error('Admin notification insert failed (message was still saved):', notifErr)
     }
 
     return NextResponse.json({ success: true })
