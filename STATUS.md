@@ -5,7 +5,55 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-29 — by Claude Code: Anthony ran all 5 pending migrations/fixes from Priority 0-d; re-verified live and found + fixed a real bug in `security-fixes.sql` itself (its anon-revoke doesn't work due to Postgres's implicit PUBLIC grant) — one more tiny migration pending for that.
+**Last updated:** 2026-07-29 — by Claude Code: set up GitHub Issues + Releases for this repo. All currently-open actionable items are now tracked as issues (#11–31), not just in this file / `TODO.md`.
+
+## 2026-07-29 (cont'd) — GitHub Issues + Releases set up; this file is no longer the only place open items live
+
+**Requested by Anthony** after the checkbox-in-a-plain-file friction (GitHub
+only makes task lists clickable in Issues/PRs/comments, not repo files).
+Rather than a Project board (needs a `gh auth refresh -s project` scope
+Anthony still needs to grant interactively — flagged, not done), went with
+Issues directly, which needed no new auth scope.
+
+**What exists now:**
+- **Labels:** `P0`–`P3` (priority), `anthony-action` vs `agent-ready` (who
+  does it), `blocked` (external input), and area labels
+  (`supabase`/`vercel`/`atomic-finds`/`hctc`/`digital-allies-live`).
+- **21 issues (#11–31)** — every real open item from `TODO.md`,
+  `BUILD-SCHEDULE.md`'s blocked/backfill sections, and
+  `DA-PLATFORM-MASTER-CONTEXT.md`, deduplicated (raw checkbox count across
+  all docs was 50+; real distinct open items, ~21). Two of them (#20, #21)
+  concern the *separate* `Digital-Allies/DigitalAllies` live repo, not this
+  one — filed here for visibility since that's where they were surfaced,
+  not mirrored into that repo (ask if you also want that).
+- **Releases, CalVer-tagged** (`vYYYY.MM.DD` — semver doesn't fit a
+  continuously-deployed app with no published package). First release:
+  `v2026.07.29`, tagged on `main`'s actual HEAD (`676d20d`) rather than the
+  still-unmerged PR #10 branch, so it reflects what's really live in
+  production today, not in-progress work. Going forward: cut a new release
+  whenever a PR merges to `main`.
+
+**Real correction made along the way:** while creating the leaked-password
+issue, Anthony flagged it's a Supabase **Pro-tier** feature — not available
+on our free plan, so it's not the quick-toggle item every prior session
+(including this one, earlier today) framed it as. Corrected in `TODO.md`
+(both places it was tracked), `DA-PLATFORM-MASTER-CONTEXT.md`,
+`tools/build-workflows/README.md`, and the GitHub issue itself (moved
+P0→P3, added `blocked` label). Deprioritized until there's paying-customer
+revenue to justify the Supabase upgrade — same standing constraint as the
+free-tier Vercel↔Supabase integration limit already tracked in `TODO.md`
+Priority 4.
+
+**What this means going forward for agents:** `TODO.md`/`STATUS.md` remain
+the detailed narrative/investigation record (why something's true, what was
+checked, how it was found) — keep writing there the way this file always
+has. But the **checklist-of-record for "what's open right now"** is now
+GitHub Issues, not the raw checkboxes scattered across these docs. When you
+resolve something, close the issue (`gh issue close <n> --comment "..."`),
+not just a markdown checkbox. When you find something new and actionable,
+open an issue with the right labels instead of only adding a bullet here.
+
+---
 
 ## 2026-07-29 (cont'd) — Priority 0-d migrations run; found a bug in security-fixes.sql itself while re-verifying
 
