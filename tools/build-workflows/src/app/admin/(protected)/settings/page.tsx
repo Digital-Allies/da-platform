@@ -366,6 +366,20 @@ export default function SettingsPage() {
                   onChange={e => handleTextChange('google_analytics_id', e.target.value)}
                 />
               </div>
+              <div className="form-group mb-4">
+                <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Facebook / Meta App ID</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="1234567890123456"
+                  value={settings.facebook_app_id || ''}
+                  onChange={e => handleTextChange('facebook_app_id', e.target.value)}
+                />
+                <p style={{ fontSize: '12px', color: 'var(--text-soft, #666)', marginTop: '4px' }}>
+                  From your app's dashboard at developers.facebook.com. Loads the Meta SDK on the
+                  live site once set — needed for Meta marketing pixels/catalog tools.
+                </p>
+              </div>
 
               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginTop: '24px', marginBottom: '16px' }}>Custom Connected Copy Dictionary</h3>
               <p style={{ fontSize: '12px', color: 'var(--text-soft, #666)', marginBottom: '12px' }}>

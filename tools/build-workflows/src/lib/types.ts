@@ -163,6 +163,7 @@ export interface SiteSettings {
   shipping_policy: string
   return_policy: string
   google_analytics_id: string
+  facebook_app_id: string
   custom_footer_text: string
 }
 
@@ -192,6 +193,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   shipping_policy: '',
   return_policy: '',
   google_analytics_id: '',
+  facebook_app_id: '',
   custom_footer_text: '',
 }
 
