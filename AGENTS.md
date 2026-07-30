@@ -78,3 +78,11 @@ Always stop and confirm with Anthony before:
 - Any action that touches more than one client's data
 
 Everything else — writing files, running shell scripts, installing packages, committing to branches, reading logs — proceed without asking.
+
+---
+
+## Keep PRs scoped to one concern
+
+A bug fix found while doing a task can ship in the same PR if it's small and directly required to make that task's own change work. Once a fix is trending past **~3 commits**, or touches files/systems the original task isn't changing, stop extending the branch — open a new one instead (or log it in `STATUS.md`/a GitHub issue if it's too big to finish now). Anything from the sign-off list above already implies its own PR — don't fold schema/env/prod-merge work into a feature branch.
+
+This applies to every agent working in this repo, scheduled or interactive — PR #10 (2026-07-26 → 2026-07-30) grew across 5 sessions into a mix of unrelated features and got hard to track, which is what this rule is protecting against.
