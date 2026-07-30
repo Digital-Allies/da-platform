@@ -5,7 +5,69 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-29 — by Claude Code: set up GitHub Issues + Releases for this repo. All currently-open actionable items are now tracked as issues (#11–31), not just in this file / `TODO.md`.
+**Last updated:** 2026-07-30 — by Claude Code (daily build session): schedule exhausted, blocked — no in-scope `[Agent]` work remains, see below.
+
+## 2026-07-30 — daily build session: BLOCKED, nothing in-scope and un-superseded left to build
+
+**Schedule order followed:** today (Thu Jul 30) falls in `BUILD-SCHEDULE.md`'s
+Wed–Thu Jul 29–30 slot (`/admin/projects`), which is already marked
+superseded (confirmed done 2026-07-23 — see that date's `STATUS.md` entry).
+Checked every slot from there through the end of the schedule (`Fri Aug 7 ·
+Review / buffer`) to make sure nothing was skipped:
+- Mon–Tue Jul 27–28 (`/admin/development`) — superseded, done 2026-07-22.
+- Wed–Thu Jul 29–30 (`/admin/projects`) — superseded, done 2026-07-23.
+- Fri Jul 31 — review/buffer, not yet reached.
+- Mon–Tue Aug 3–4 (`/admin/content`) — investigated 2026-07-23; the one
+  real remaining fix lives in the separate `Digital-Allies/DigitalAllies`
+  repo (out of this scheduled task's scope), now tracked as issues #20/#21
+  with the `agent-ready` label — but that label refers to *an* agent
+  session explicitly scoped to that other repo, not this one. Did not pick
+  these up, per this task's own instructions not to work outside
+  `da-platform`.
+- Wed–Thu Aug 5–6 (`/admin/pages`) — done 2026-07-28 (code-view shipped on
+  PR #10).
+- Fri Aug 7 — review/buffer. **The schedule has nothing scheduled past this
+  date.**
+
+**Checked GitHub Issues (the checklist-of-record since 2026-07-29) for
+anything actionable beyond the schedule:** of 12 open issues, 10 are
+`anthony-action` or `blocked` (Vercel/Supabase dashboard clicks, or
+waiting on Anthony/Jenny decisions — Figma Make trial, checkout provider,
+product photos). The only two `agent-ready` issues (#20, #21) are both
+explicitly scoped to the separate live `Digital-Allies/DigitalAllies` repo,
+not `da-platform` — this task's instructions are explicit that only
+`BUILD-SCHEDULE.md` items in this repo are in scope, so these were not
+started.
+
+**New since 2026-07-29, worth flagging even though it needs no action here:**
+issue #32 (P0, `anthony-action`) — Vercel is refusing to deploy either
+project (`da-webwssite-build-workflows`, `atomic-finds-atx`) because the
+Hobby plan can't deploy from a private GitHub *organization* repo. This
+affects PR #10 directly (its preview-deploy checks fail, timestamped
+2026-07-29T12:27Z) and looks repo-wide (`main`'s latest commit shows the
+same failure). Needs Anthony to either upgrade the Vercel plan or
+reconfigure the Git connection — flagging because it means **even once PR
+#10 is merged, expect deploys to keep failing until this is resolved
+separately.**
+
+**Re-verified PR #10 itself is still clean and complete, not just old
+news:** re-read the Copilot review's one flagged item
+(`CollectionsClient.tsx:326`, claimed `prod.price_usd` doesn't exist on
+`products`) — checked the current file directly rather than trusting a
+possibly-stale bot comment: it already reads `prod.price` (line 328),
+matching the server query's `select('id, title, category, price,
+image_url')` in `page.tsx`. Already fixed in a later commit on the branch,
+nothing to do. `npx tsc --noEmit` in `tools/build-workflows` — clean, zero
+errors. `git status` clean before and after this session; no code changed.
+
+**What Anthony needs to do to unblock the next session:** review/merge PR
+#10 (issue #13), and separately resolve the Vercel Hobby-plan blocker
+(issue #32) so deploys actually go green again. Until at least one of
+those lands, or `BUILD-SCHEDULE.md` gets new dated entries added past Aug
+7, there is no new `[Agent]` work to start in this repo — the next daily
+session should re-check this same list rather than inventing work.
+
+---
 
 ## 2026-07-29 (cont'd) — GitHub Issues + Releases set up; this file is no longer the only place open items live
 
