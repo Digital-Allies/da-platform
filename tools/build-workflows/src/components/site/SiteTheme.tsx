@@ -2,16 +2,17 @@
 // Public renderer only — the admin panel stays Digital Allies-branded (decision
 // #7). Wrap public page content in this so each client's site looks like itself.
 import type React from 'react'
-import { getDesignTokens, tokensToCssVars } from '@/lib/theme'
+import { tokensToCssVars } from '@/lib/theme'
+import { getLiveDesignTokens } from '@/lib/data'
 
-export default function SiteTheme({
+export default async function SiteTheme({
   clientId,
   children,
 }: {
   clientId: string | undefined
   children: React.ReactNode
 }) {
-  const tokens = getDesignTokens(clientId)
+  const tokens = await getLiveDesignTokens(clientId)
   return (
     <div
       className="site-theme-scope"

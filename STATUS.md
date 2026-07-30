@@ -5,7 +5,470 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-26 — by Claude Code (Pages & Collections templates built for CMS admin dashboard)
+**Last updated:** 2026-07-30 — by Claude Code (daily build session): schedule exhausted, blocked — no in-scope `[Agent]` work remains, see below.
+
+## 2026-07-30 — daily build session: BLOCKED, nothing in-scope and un-superseded left to build
+
+**Schedule order followed:** today (Thu Jul 30) falls in `BUILD-SCHEDULE.md`'s
+Wed–Thu Jul 29–30 slot (`/admin/projects`), which is already marked
+superseded (confirmed done 2026-07-23 — see that date's `STATUS.md` entry).
+Checked every slot from there through the end of the schedule (`Fri Aug 7 ·
+Review / buffer`) to make sure nothing was skipped:
+- Mon–Tue Jul 27–28 (`/admin/development`) — superseded, done 2026-07-22.
+- Wed–Thu Jul 29–30 (`/admin/projects`) — superseded, done 2026-07-23.
+- Fri Jul 31 — review/buffer, not yet reached.
+- Mon–Tue Aug 3–4 (`/admin/content`) — investigated 2026-07-23; the one
+  real remaining fix lives in the separate `Digital-Allies/DigitalAllies`
+  repo (out of this scheduled task's scope), now tracked as issues #20/#21
+  with the `agent-ready` label — but that label refers to *an* agent
+  session explicitly scoped to that other repo, not this one. Did not pick
+  these up, per this task's own instructions not to work outside
+  `da-platform`.
+- Wed–Thu Aug 5–6 (`/admin/pages`) — done 2026-07-28 (code-view shipped on
+  PR #10).
+- Fri Aug 7 — review/buffer. **The schedule has nothing scheduled past this
+  date.**
+
+**Checked GitHub Issues (the checklist-of-record since 2026-07-29) for
+anything actionable beyond the schedule:** of 12 open issues, 10 are
+`anthony-action` or `blocked` (Vercel/Supabase dashboard clicks, or
+waiting on Anthony/Jenny decisions — Figma Make trial, checkout provider,
+product photos). The only two `agent-ready` issues (#20, #21) are both
+explicitly scoped to the separate live `Digital-Allies/DigitalAllies` repo,
+not `da-platform` — this task's instructions are explicit that only
+`BUILD-SCHEDULE.md` items in this repo are in scope, so these were not
+started.
+
+**New since 2026-07-29, worth flagging even though it needs no action here:**
+issue #32 (P0, `anthony-action`) — Vercel is refusing to deploy either
+project (`da-webwssite-build-workflows`, `atomic-finds-atx`) because the
+Hobby plan can't deploy from a private GitHub *organization* repo. This
+affects PR #10 directly (its preview-deploy checks fail, timestamped
+2026-07-29T12:27Z) and looks repo-wide (`main`'s latest commit shows the
+same failure). Needs Anthony to either upgrade the Vercel plan or
+reconfigure the Git connection — flagging because it means **even once PR
+#10 is merged, expect deploys to keep failing until this is resolved
+separately.**
+
+**Re-verified PR #10 itself is still clean and complete, not just old
+news:** re-read the Copilot review's one flagged item
+(`CollectionsClient.tsx:326`, claimed `prod.price_usd` doesn't exist on
+`products`) — checked the current file directly rather than trusting a
+possibly-stale bot comment: it already reads `prod.price` (line 328),
+matching the server query's `select('id, title, category, price,
+image_url')` in `page.tsx`. Already fixed in a later commit on the branch,
+nothing to do. `npx tsc --noEmit` in `tools/build-workflows` — clean, zero
+errors. `git status` clean before and after this session; no code changed.
+
+**What Anthony needs to do to unblock the next session:** review/merge PR
+#10 (issue #13), and separately resolve the Vercel Hobby-plan blocker
+(issue #32) so deploys actually go green again. Until at least one of
+those lands, or `BUILD-SCHEDULE.md` gets new dated entries added past Aug
+7, there is no new `[Agent]` work to start in this repo — the next daily
+session should re-check this same list rather than inventing work.
+
+---
+
+## 2026-07-29 (cont'd) — GitHub Issues + Releases set up; this file is no longer the only place open items live
+
+**Requested by Anthony** after the checkbox-in-a-plain-file friction (GitHub
+only makes task lists clickable in Issues/PRs/comments, not repo files).
+Rather than a Project board (needs a `gh auth refresh -s project` scope
+Anthony still needs to grant interactively — flagged, not done), went with
+Issues directly, which needed no new auth scope.
+
+**What exists now:**
+- **Labels:** `P0`–`P3` (priority), `anthony-action` vs `agent-ready` (who
+  does it), `blocked` (external input), and area labels
+  (`supabase`/`vercel`/`atomic-finds`/`hctc`/`digital-allies-live`).
+- **21 issues (#11–31)** — every real open item from `TODO.md`,
+  `BUILD-SCHEDULE.md`'s blocked/backfill sections, and
+  `DA-PLATFORM-MASTER-CONTEXT.md`, deduplicated (raw checkbox count across
+  all docs was 50+; real distinct open items, ~21). Two of them (#20, #21)
+  concern the *separate* `Digital-Allies/DigitalAllies` live repo, not this
+  one — filed here for visibility since that's where they were surfaced,
+  not mirrored into that repo (ask if you also want that).
+- **Releases, CalVer-tagged** (`vYYYY.MM.DD` — semver doesn't fit a
+  continuously-deployed app with no published package). First release:
+  `v2026.07.29`, tagged on `main`'s actual HEAD (`676d20d`) rather than the
+  still-unmerged PR #10 branch, so it reflects what's really live in
+  production today, not in-progress work. Going forward: cut a new release
+  whenever a PR merges to `main`.
+
+**Real correction made along the way:** while creating the leaked-password
+issue, Anthony flagged it's a Supabase **Pro-tier** feature — not available
+on our free plan, so it's not the quick-toggle item every prior session
+(including this one, earlier today) framed it as. Corrected in `TODO.md`
+(both places it was tracked), `DA-PLATFORM-MASTER-CONTEXT.md`,
+`tools/build-workflows/README.md`, and the GitHub issue itself (moved
+P0→P3, added `blocked` label). Deprioritized until there's paying-customer
+revenue to justify the Supabase upgrade — same standing constraint as the
+free-tier Vercel↔Supabase integration limit already tracked in `TODO.md`
+Priority 4.
+
+**What this means going forward for agents:** `TODO.md`/`STATUS.md` remain
+the detailed narrative/investigation record (why something's true, what was
+checked, how it was found) — keep writing there the way this file always
+has. But the **checklist-of-record for "what's open right now"** is now
+GitHub Issues, not the raw checkboxes scattered across these docs. When you
+resolve something, close the issue (`gh issue close <n> --comment "..."`),
+not just a markdown checkbox. When you find something new and actionable,
+open an issue with the right labels instead of only adding a bullet here.
+
+---
+
+## 2026-07-29 (cont'd) — Priority 0-d migrations run; found a bug in security-fixes.sql itself while re-verifying
+
+Anthony ran all 5 items from Priority 0-d
+(`20260101000003_admin_features.sql`, `20260122000000_reviews_table.sql`,
+`seed-atomic-finds-reviews.sql`, the `clients.plan` migration, and
+`security-fixes.sql`). Re-queried the live project directly rather than
+trusting the "Success" messages alone (same Management API approach as the
+original finding): **confirmed all 6 tables now exist (22 total, up from
+16), `reviews` has exactly 19 rows, `clients.plan` exists.**
+
+**`security-fixes.sql` surfaced a real bug while re-verifying it.** Its
+Fix 2 (`revoke execute on function get_my_client_id() from anon`) reports
+success and IS a no-op-safe statement, but doesn't achieve what its own
+comment says — Postgres grants EXECUTE on new functions to the `PUBLIC`
+pseudo-role by default, and `anon` implicitly inherits PUBLIC's privileges
+like every role does. Revoking from `anon` specifically leaves the PUBLIC
+grant untouched. Verified with `has_function_privilege('anon', ...,
+'execute')` both before and after running the file — `true` in both cases.
+The actual fix is revoking from `PUBLIC` directly (doesn't affect
+`authenticated`/`service_role`, which hold their own explicit grants).
+
+**Fixed the source files** (`supabase/security-fixes.sql` and its
+`migrations/20260101000001_security_fixes.sql` copy — confirmed identical,
+updated both) so any future fresh run does the right thing, and wrote
+`migrations/20260729000000_security_fixes_public_grant.sql` as the
+one-line follow-up for this already-live project (can't retroactively fix
+what already ran — needs its own migration). Did not run it myself, same
+reasoning as always — wrote the file, flagged it in `TODO.md` Priority
+0-d for Anthony.
+
+**Still open, unrelated to any SQL file:** leaked-password protection —
+confirmed still off via the Auth config API. Dashboard toggle only, no
+migration touches this.
+
+---
+
+## 2026-07-29 (cont'd) — queried the live Supabase project directly, found 6 tables from written migrations were never run
+
+Anthony's question ("are there other tables that need to be run or created")
+prompted actually checking, rather than trusting this file's own history.
+Used the `SUPABASE_ACCESS_TOKEN` already in `.env.local` (Management API) to
+query `information_schema` directly against the live project
+(`auwhvicpyiwsubucanpb`) instead of inferring from code or past session
+notes. Result: **16 tables total exist; 6 that migration files already in
+this repo create do not** — `reviews`, and `projects`/`project_tasks`/
+`research_notes`/`dev_tasks`/`notifications` (all from
+`20260101000003_admin_features.sql`). Full detail and the exact fix:
+`TODO.md`'s new Priority 0-d.
+
+**Why this matters and corrects prior entries:** several past sessions
+(2026-07-21/22/23) concluded `/admin/development`, `/admin/projects`, and
+Atomic Finds' reviews were "already fully built, nothing to do" or
+"confirmed working live." Those were accurate about the *code* — it's real,
+not stubbed — but two different things got conflated: "the code exists and
+is correct" vs. "the underlying table exists in the live database right
+now." The 2026-07-21/22/23 sessions explicitly noted they couldn't start
+the dev server or log in (no credentials), so they verified code only. The
+2026-07-24/25 sessions DID verify reviews live via Claude in Chrome and saw
+19 real reviews — that was a genuine, correct observation at the time — but
+the `reviews` table doesn't exist now, meaning it was dropped or the
+project was reset at some point after 2026-07-25. Not root-caused (no
+Supabase audit-log access from here) — flagging as a fact, not a
+theory: verified live, twice, with two different queries, same result.
+
+**Also confirmed live, lower-urgency:** `clients.plan` column still not
+applied; `security-fixes.sql` only half-applied (search_path fix is live,
+the anon-execute revoke is not); leaked-password protection still off
+(`password_hibp_enabled: false` via the Auth config API). All in `TODO.md`
+Priority 0-d.
+
+**What was NOT done:** did not run any of these migrations myself, even
+though they're pre-written, additive, and low-risk — per this repo's own
+rule (`CLAUDE.md`: "If touching Supabase schema... stop and flag to
+Anthony before running"), schema changes need his sign-off first, migration
+file already existing doesn't change that. Wrote up the exact fix in
+`TODO.md` instead.
+
+**Also shipped this session:** wired `design_tokens.ui_extra` into
+`ThemeClient.tsx`'s save payload (`6204758`) — the button-radius/glow/
+card-glow/section-spacing/custom-token controls in the Theme Customizer now
+actually persist (read side already expected this column; save side was
+the deliberately-deferred half, unblocked once Anthony ran
+`20260727000000_design_tokens_ui_extra.sql` earlier today). **Scope note:**
+this makes the values persist and round-trip through the admin's own
+preview — it does not yet make them render on the actual public site.
+`lib/theme.ts`'s shared `DesignTokens` type (used by all 3 clients'
+components via `tokensToCssVars()`) only has a single `radius` field today,
+no button/card/spacing equivalents — wiring those through is a materially
+bigger change (extends the type, `getLiveDesignTokens()`, and every public
+component that would need to consume the new CSS vars) than "make the save
+button persist," and wasn't what was asked for. Verified via `tsc --noEmit`
+(clean) and a full `next build` (all routes compile, `/admin/theme`
+unaffected in size/shape since this only changed the save payload, not the
+UI).
+
+---
+
+## 2026-07-29 — both PR #10 migrations run, one follow-up now unblocked
+
+Anthony ran `20260726000000_collections_table.sql` and
+`20260727000000_design_tokens_ui_extra.sql` in the Supabase SQL Editor —
+both reported "Success. No rows returned" (expected for additive DDL).
+Per `TODO.md` Priority 0-c, this unblocks the one deliberately-deferred
+follow-up from the 2026-07-27 session: wiring `design_tokens.ui_extra`
+into `ThemeClient.tsx`'s save payload so the button-radius/glow/card-glow/
+section-spacing/custom-token controls actually persist (the read side
+already expects the column; only the save side was waiting on this
+migration). **Not yet done** — no code changed this note, just recording
+that the blocker is cleared. PR #10 itself (review + merge) is still open
+and unaffected by this.
+
+---
+
+## 2026-07-28 — daily build session: Pages editor code-view shipped, closing out the Aug 5–6 schedule item
+
+**Schedule order followed:** confirmed no `[Anthony]`-only item blocks this
+first (checked `TODO.md` — PR #10's review/merge and the 2 pending
+migrations are still open under Priority 0-c, but nothing about them
+blocks *adding more code to the same open branch*, same reasoning the
+2026-07-27 session used to justify pushing bug fixes there). The next real
+`[Agent]` item in `BUILD-SCHEDULE.md` order was Wed–Thu Aug 5–6's
+`/admin/pages` — already in progress on this branch, with one specific
+piece flagged as "still missing, not started": a code-view/raw-HTML
+editing option, the other half of Anthony's original Pages complaint.
+
+**What shipped:** rather than invent a UI for this from scratch, checked
+`packages/design-system/PAGE_EDITOR_SPEC.md` first — it explicitly names
+its companion prototype (`packages/design-system/page-editor.html`) as
+"the source of truth for interaction design... build against it, not
+against this doc's prose." The prototype's actual pattern is a per-block
+**Content / Code** tab (not a new "code block" type), with a `custom_code`
+field that overrides a block's structured content with raw HTML/CSS when
+filled in. Built exactly that:
+
+- `PagesClient.tsx` — added a `customCode?: string | null` field to the
+  `Block` type; a Content/Code tab bar inside each block's editor panel
+  (resets to Content when switching blocks, via a new `selectBlock()`
+  helper replacing raw `setSelectedBlockIndex` calls); a dark-themed
+  monospace textarea for the Code tab, styled to match the prototype's own
+  `.code-wrap`; a "⚙ Custom Code Active" badge on the block header when
+  set; and `generatePreviewHtml()` now renders `block.customCode` (through
+  the same `resolveText()` Connected Data token resolver) instead of the
+  structured switch-case when present, so the admin preview reflects it
+  immediately.
+- `BlockRenderer.tsx` (the real public-site renderer) — same override,
+  same `resolveText()` pass, so the live site matches the admin preview
+  exactly. This directly satisfies `PAGE_EDITOR_SPEC.md`'s own "Live
+  preview... guarantees what you see is what ships" requirement — a
+  code-view that only worked in the admin preview but not on the real site
+  would have been the same kind of half-finished feature the 2026-07-27
+  session found and fixed in this same PR (the Theme Customizer save that
+  never reached the live storefront).
+- **Trust model, not a new one:** raw HTML via `dangerouslySetInnerHTML` on
+  both sides — same pattern already documented and shipped for the
+  `richtext` block (`ARCHITECTURE.md`: "trusted admin input only, not
+  user-submitted"). Not introducing a new security posture, extending the
+  existing one to one more block field.
+- **Deliberately NOT built:** `PAGE_EDITOR_SPEC.md`'s Starter/Pro/Agency
+  tier-gating for this feature (Starter = no code tab, Pro = one embed
+  slot, Agency = full per-section code). The `clients.plan` column
+  (`20260109000000_client_plan.sql`) exists but is unpopulated with zero
+  gating logic anywhere in the codebase, and `BUILD-SCHEDULE.md`'s own
+  Notes section says Phase 2 (plan gating, Stripe billing) is "intentionally
+  out of scope until Phase 1 ships" — building real gating today would mean
+  unilaterally deciding pricing-tier product structure, not a code call to
+  make alone. Ships ungated to every client for now, same as every other
+  block type. Flagging this explicitly so nobody mistakes "ungated" for
+  "the gating was missed" — it's the correct Phase 1 scope per existing
+  decisions, not an oversight.
+
+**Verified:** `npx tsc --noEmit` clean. `/admin/pages` is auth-gated and no
+credentials are available in this non-interactive session (same constraint
+every prior daily-build session hit) — instead ran a full `next build`,
+which force-compiles every route including `/admin/pages` regardless of
+auth, and it built clean (7.82 kB route bundle, size increase consistent
+with the new tab UI, no other route changed). Also started the dev server
+and loaded the public homepage and `/admin/pages` (redirects to
+`/admin/login` as expected, 200, no console errors) to confirm the
+`BlockRenderer.tsx` change didn't regress the live-rendering path — same
+pre-existing unrelated `getFeaturedReviews`/`reviews` table PGRST205
+warning from the 2026-07-27 session's dev logs, untouched by this change.
+
+**Note on how this got committed:** partway through this session the
+repo's documented background auto-sync (`../SYNC-NOTES.md`'s launchd
+`chore: sync MM23` job, see "Automation + ops" below) fired and
+auto-committed+pushed the in-progress `PagesClient.tsx` changes under its
+own generic message before this session could commit them with a real
+one — expected behavior for this repo (cross-device continuity), not an
+error, but flagging so nobody's confused finding real feature work under a
+`chore: sync MM23` commit message. The remaining `BlockRenderer.tsx` half
+was committed normally right after
+(`ff98c06`, "feat(pages): wire live-site parity for the block code-view
+override") and pushed to the same PR #10 branch
+(`feat/cms-collections-theme-system`) — this is a continuation of
+in-flight work on that already-open PR, not a new one, same reasoning the
+2026-07-27 session used.
+
+**What's next:** the Aug 5–6 schedule item is now fully done (real
+components ✅, code-view ✅). PR #10 (Priority 0-c in `TODO.md`) still
+needs Anthony's review/merge and the 2 pending migrations run — unchanged
+by this session. Once merged, tier-gating for the Code tab is real future
+work but explicitly Phase 2, not urgent. `BUILD-SCHEDULE.md`'s Week of Aug
+3 is now fully closed out; next session should move to whatever's first
+after it (currently nothing further scheduled — worth a fresh look at
+`BUILD-SCHEDULE.md`/`TODO.md` for what fills the next weekday slot).
+
+---
+
+## 2026-07-27 — daily build session: PR #10's Connected Data / Theme Customizer had 3 real bugs, fixed
+
+**Schedule order followed:** Mon–Tue Jul 27–28 (`/admin/development`) and
+Wed–Thu Jul 29–30 (`/admin/projects`) are both already superseded/done (see
+their `BUILD-SCHEDULE.md` entries). Mon–Tue Aug 3–4 (`/admin/content`) was
+investigated 2026-07-23 and the real remaining fix lives in a separate repo,
+out of this scheduled task's scope. That left Wed–Thu Aug 5–6 (`/admin/pages`)
+as the next actionable item — and the previous session (Antigravity,
+2026-07-26) had already opened PR #10 doing exactly that work (real
+components, Connected Data bindings, code-adjacent theme system) on
+`feat/cms-collections-theme-system`, still open. Rather than starting new
+work out of order, this session verified and fixed that in-flight PR instead.
+
+**Checked PR #10 against the actual running app (not just reading the diff)**
+— Greptile's review had already flagged some of this ("theme persistence
+still targets a column absent from the migrated schema... public pages and
+product grids remain disconnected from saved themes"), but its confidence
+score was 2/5 and one of its two specific claims (collections/ProductGrid
+disconnect) turned out to already be fixed in a later commit on the same
+branch (`getCollections()` is wired into both `app/page.tsx` and
+`AtomicFindsHomepage.tsx` → `ProductGrid` already). So rather than trust the
+stale review, re-verified live: ran `tsc`, started the dev server, and
+queried the actual Supabase `design_tokens` row via curl to check what was
+really being read/written.
+
+**Bug 1 — Pages editor's Connected Data preview was always empty.**
+`pages/page.tsx` queried a `site_settings` table that doesn't exist (the
+real table is `settings`, a key-value table — see `lib/data.ts`'s
+`getSiteSettings()` and `settings/page.tsx`). The query silently returned
+null (unchecked error), so `siteSettings` was always `{}` and every
+`{site_title}`/`{phone}`/`{email}`/etc. token in `PagesClient.tsx` resolved
+to an empty string. Fixed to query `settings` and run it through
+`parseSettings()`, matching every other caller.
+
+**Bug 2 — Theme Customizer's Save button failed on every save.**
+`ThemeClient.tsx`'s `handleSubmit` wrote flat columns (`primary_color`,
+`button_radius`, `card_glow`, etc.) that don't exist on `design_tokens` —
+the table only has `colors`/`fonts`/`type_scale`/`spacing`/`logo`/`favicon`
+(all jsonb except the last two). Every save error'd with a Postgres "column
+does not exist" error. Fixed the payload to send only `colors`/`fonts`
+(real columns). **Deliberately did not** stuff the button/glow/spacing
+extras into the existing `spacing` or `type_scale` columns — queried
+Atomic Finds' actual seeded row live and confirmed both already hold real
+per-client data (a numeric spacing scale, a type scale — see
+`seed-atomic-finds-design-tokens.sql`), so reusing either would have
+silently overwritten that data the first time anyone hit Save. Wrote
+migration `20260727000000_design_tokens_ui_extra.sql` (additive, pending
+Anthony running it) for a dedicated column instead; the button-radius/glow
+/card-glow/section-spacing/custom-token controls stay local-only
+(don't round-trip to Supabase) until that lands — a real, deliberate,
+documented gap, not silently dropped.
+
+**Bug 3 — the biggest one: the live storefront never read saved theme
+data at all.** `SiteTheme.tsx` (the public-site wrapper that supplies every
+`--tok-*` CSS variable) called `getDesignTokens()` from `lib/theme.ts` — a
+hardcoded per-client map, with zero Supabase read. So even a
+*successful* Theme Customizer save (once Bug 2 is fixed) would have had
+**no visible effect on the live site** — the entire feature was cosmetic.
+Added `getLiveDesignTokens()` to `lib/data.ts` (the static per-client
+defaults merged with the client's saved `colors`/`fonts` row, client
+falling back cleanly if unconfigured) and made `SiteTheme` an async Server
+Component using it.
+
+**Verified, not assumed:** `npx tsc --noEmit` clean. Started the dev server
+against Atomic Finds (`NEXT_PUBLIC_CLIENT_ID` in `.env.local`), confirmed
+`/` renders 200 with no new errors, and read `--tok-primary` off the
+rendered DOM to confirm it's sourced through the new Supabase-merged path
+(not just silently falling through to the static default — same value in
+this case, but traced the code path to be sure the merge itself executes
+without error rather than assuming from the visual match).
+
+**Pushed to the existing open PR #10** (`feat/cms-collections-theme-system`,
+commit `a276a50`) rather than opening a new one — this is a fix to
+in-flight work on that branch, not a new feature.
+
+**What's next:** PR #10 still needs Anthony's review/merge (it was already
+open before this session). Once merged and the `ui_extra` migration is run,
+a small follow-up should wire `ui_extra` into `ThemeClient.tsx`'s save
+payload so button-radius/glow/card-glow/section-spacing/custom-token edits
+persist too — everything's already in place to read it back, only the save
+side is pending. The `getFeaturedReviews` "Could not find the table
+'public.reviews' in the schema cache" (PGRST205) warning seen repeatedly in
+dev server logs during this session is unrelated to any of the above (not
+touched this session) — likely a PostgREST schema-cache staleness issue
+against the dev Supabase project, not a code bug; flagging in case it
+recurs against production.
+
+---
+
+
+## 2026-07-26 — Antigravity Build Session: Duda-Style Connected Data Binding, CSV Spreadsheet Importer & Plain-Language Theme Engine Shipped
+
+**Deliverables Completed:**
+- ✅ **Duda-Style `⚡ Connect to Data` Block Field Binding** (`PagesClient.tsx` & `BlockRenderer.tsx`):
+  - Added a **⚡ Connect to Data** dropdown next to block fields, allowing clients to bind text/buttons/images directly to `site_settings` variables (`Business Name`, `Phone`, `Email`, `Shipping Policy`, `Announcement Banner`) or Supabase collections.
+- ✅ **CSV Spreadsheet Collection Importer** (`CSVCollectionImporter.tsx`):
+  - Drag-and-drop `.csv` spreadsheet uploader for bulk-creating products and auto-assigning items directly to collections.
+- ✅ **Dashboard Storage Asset Uploader** (`MediaUploader.tsx`):
+  - Direct drag-and-drop uploader to Supabase `client-assets` bucket returning public CDN URLs for logos, favicons, and photos.
+- ✅ **Plain-Language Site Theme Engine** (`ThemeClient.tsx`):
+  - Non-technical labels (*Main Brand Color*, *Signal Badge Color*, *Page Background*, *Headline Font*, *Button Shapes & Shadows*, *Card Elevation*) with live visual previews.
+- ✅ **Lucide System Icons & Client Live Site Mapping**:
+  - Updated settings gear icon and nav icons to Lucide, hid "The Workshop" for Atomic Finds, and mapped live site URL to `https://atomicfindsatx.store`.
+
+**Deliverables Completed:**
+- ✅ **Settings & Store Policy Expansion** (`/admin/settings`):
+  - Added policy fields for `announcement_banner`, `shipping_policy`, `return_policy`, `google_analytics_id`, and `custom_footer_text`.
+
+- ✅ **Storefront Collections Integration** (`ProductGrid.tsx` & `data.ts`):
+  - Connected `getCollections()` query and collection filter tabs to storefront grids for curated product collections.
+
+- ✅ **LanguageSwitcher Component** (`packages/design-system/src/components/LanguageSwitcher.tsx`):
+  - Reusable, accessible EN / ES language selector toggle with WCAG AA focus styling and cookie/localStorage state.
+
+- ✅ **WCAG 2.1 AA & Platform Legal Pages**:
+  - Created required compliance pages: `/accessibility`, `/terms`, `/privacy`, `/cookies`, `/use-of-ai`, and `/sitemap`.
+
+- ✅ **SEO & AEO (Answer Engine Optimization) Engine** (`lib/seo.ts`, `sitemap.ts`, `robots.ts`):
+  - Structured JSON-LD schema generators for Google, Bing, Perplexity, Claude, ChatGPT, and SearchGPT.
+  - Dynamic App Router `/sitemap.xml` and `/robots.txt` configuration.
+
+- ✅ **Design System Token Consolidation** (`packages/design-system/src/tokens/index.ts`):
+  - Formalized single source of truth for design tokens (`--tok-*`) across Digital Allies, Atomic Finds ATX, and Healthcare Training Center.
+  - CSS custom property generator for multi-tenant rendering.
+
+- ✅ **Pages Editor Viewport Switcher & Status Integration** (`tools/build-workflows/src/app/admin/(protected)/pages/PagesClient.tsx`):
+  - Integrated Desktop vs. Mobile (375px) responsive iframe preview toggle in the right-hand panel.
+  - Live draft/published status badges and block layout controls.
+
+- ✅ **Collections Manager Route & UI** (`tools/build-workflows/src/app/admin/(protected)/collections/`):
+  - Server route (`page.tsx`) and interactive client dashboard (`CollectionsClient.tsx`).
+  - Allows clients to curate product groups, toggle homepage featuring, and set published/draft status.
+
+- ✅ **Brand Theme Customizer** (`tools/build-workflows/src/app/admin/(protected)/theme/`):
+  - Client brand theme manager (`ThemeClient.tsx` and `page.tsx`) connected to Supabase `design_tokens`.
+  - Live color palette swatches, font preset configuration, and WCAG contrast preview card.
+
+- ✅ **Admin Shell Navigation Updated** (`AdminShell.tsx`):
+  - Added direct navigation links for **Collections** (`/admin/collections`), **Showroom** (`/admin/products`), and **Brand Theme** (`/admin/theme`).
+
+- ✅ **Verification**:
+  - `npx tsc --noEmit` verified clean across `tools/build-workflows` with zero errors.
+
+---
 
 ## 2026-07-26 — CMS Admin Templates Built: Pages Editor & Collections Manager
 

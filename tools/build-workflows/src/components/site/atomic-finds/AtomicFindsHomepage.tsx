@@ -65,11 +65,12 @@ function formatReviewDate(iso: string | null) {
 interface AtomicFindsHomepageProps {
   products: Product[]
   reviews: Review[]
+  collections?: any[]
   /** From settings.logo_url — falls back to the static brand mark when unset */
   logoUrl?: string
 }
 
-export default function AtomicFindsHomepage({ products, reviews, logoUrl }: AtomicFindsHomepageProps) {
+export default function AtomicFindsHomepage({ products, reviews, logoUrl, collections }: AtomicFindsHomepageProps) {
   // Temporary: photo-less featured products fall back to a "coming soon" state
   // that doesn't work for the Galaxy Card's hero-image treatment — skip them
   // until real photography is in, same rule as ProductGrid's standard cards.
@@ -123,7 +124,7 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl }: Atom
               <h2 className="af-section-title">The Collection</h2>
               <p style={{ fontSize: 18, color: '#ffffff', maxWidth: 560, margin: '16px auto 0' }}>Curated rattan &amp; bamboo for modern living. Every piece is hand-picked, restored, and ready to adopt.</p>
             </div>
-            <ProductGrid title="" products={products} />
+            <ProductGrid title="" products={products} collections={collections} />
           </div>
         </section>
 

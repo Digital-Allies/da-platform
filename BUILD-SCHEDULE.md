@@ -241,17 +241,40 @@ explicitly-scoped session on that repo.
   currently** — see above.
 
 ### Wed–Thu Aug 5–6 · `/admin/pages`
-**Confirmed still fully real (checked 2026-07-22, see `STATUS.md`) — not
-stale.** `PagesClient.tsx`'s live preview is hand-rolled hardcoded HTML per
-block type (fake placeholder content for services/testimonials blocks, not
-real data or real components), and there's no code-view/raw-HTML editing
-option anywhere in the file. Anthony's complaint holds as originally
-scoped.
-- **[Agent]** This build "isn't meant for production" per Anthony's own
-  note — add a code-view option with live preview, and use real components
-  for elements/sections/cards instead of whatever's there now.
+**⚠ IN PROGRESS, started early — 2026-07-26/27, on `feat/cms-collections-theme-system` (PR #10, open).**
+Antigravity's 2026-07-26 session shipped the "real components, previewed
+live" half of this early: Duda-style `⚡ Connect to Data` block bindings
+(text/buttons/images bind to real `settings`/collections values, not
+hardcoded placeholders), `ProductGrid` is a real shared component (not
+hand-rolled per-block HTML) wired through `BlockRenderer.tsx`, and a
+desktop/mobile responsive preview toggle. This session (2026-07-27,
+Claude Code) found and fixed 3 real bugs in that work that would have
+made it non-functional in practice — see `STATUS.md`'s 2026-07-27 entry:
+the Pages editor's Connected Data preview was reading a nonexistent table
+(always empty), the Theme Customizer's Save button failed every time
+(wrong columns), and the live storefront never read saved theme data at
+all (100% cosmetic). All three fixed and pushed to PR #10.
+**Code-view shipped 2026-07-28.** Added a per-block **Content / Code** tab
+to `PagesClient.tsx`'s block editor, matching the actual interaction design
+in `packages/design-system/page-editor.html` (the prototype `PAGE_EDITOR_SPEC.md`
+names as the source of truth for this, over its own prose) instead of
+inventing a new pattern. A block's `customCode` field, when filled in,
+overrides its structured fields with raw admin-authored HTML/CSS — same
+trust model already documented for the `richtext` block
+(`dangerouslySetInnerHTML`, trusted admin input only). Wired into both the
+admin preview (`generatePreviewHtml()`) and the real public-site renderer
+(`BlockRenderer.tsx`), so preview and live output match — see `STATUS.md`'s
+2026-07-28 entry. **Deliberately not included:** Starter/Pro/Agency
+tier-gating from `PAGE_EDITOR_SPEC.md` — the `clients.plan` column is
+unpopulated with no gating logic anywhere yet, and Phase 2 (plan gating) is
+explicitly out of scope until Phase 1 ships (see this file's own Notes
+section) — ships ungated to every client for now, same as every other
+block type today.
+- ~~**[Agent]** Add a code-view option with live preview (the real-components
+  half is done, per above).~~
 - **Done when —** a new page can be built with real components and
-  previewed live, with a code-view option available.
+  previewed live, with a code-view option available. Real-components: ✅.
+  Code-view: ✅ (2026-07-28, ungated — tier-gating is separate future work).
 
 ### Fri Aug 7 · Review / buffer
 

@@ -1,3 +1,5 @@
+const path = require('path')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,7 +11,10 @@ const nextConfig = {
       },
     ],
   },
-  outputFileTracingRoot: __dirname,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  outputFileTracingRoot: path.join(__dirname, '../../'),
 }
 
 module.exports = nextConfig

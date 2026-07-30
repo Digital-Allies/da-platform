@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import { getSiteSettings } from '@/lib/data'
 import AuthListener from '@/components/AuthListener'
+import FacebookSdk from '@/components/FacebookSdk'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
@@ -33,6 +34,7 @@ export default async function RootLayout({
         style={{ '--brand': settings.brand_color } as React.CSSProperties}
       >
         <AuthListener />
+        <FacebookSdk appId={settings.facebook_app_id} />
         {children}
       </body>
     </html>

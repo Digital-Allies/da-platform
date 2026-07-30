@@ -42,18 +42,61 @@ All three seed files confirmed seeded and working. Site is live, CMS-connected, 
 
 ---
 
-## 🟡 Priority 0-b — Merge PR #9 (dashboard routing fix, code-ready 2026-07-25)
+## ✅ Priority 0-b — RESOLVED — PR #9 merged 2026-07-25
 
-Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in user (`clients.auth_user_id`) instead of build-time `NEXT_PUBLIC_CLIENT_ID`. This allows `atomicfindsatx@gmail.com` to log in and see only AF data (not DA data on a shared `cms.digitalallies.net` deployment).
+Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in user (`clients.auth_user_id`) instead of build-time `NEXT_PUBLIC_CLIENT_ID`. Merged (`38d1fbb`, confirmed via `gh pr list` 2026-07-27). Remaining item is just the manual verification:
+- [ ] Verify AF admin dashboard routes correctly (manual test: log in as `atomicfindsatx@gmail.com`, confirm dashboard shows AF identity/data)
 
-**Status:** Code complete and reviewed. Greptile review passed (error handling bug fixed). Vercel CI all green. Copilot review in progress. PR #9 on `claude/atomic-fines-dashboard-routing-joofve`.
+---
 
-**What's left:** 
-- [ ] Wait for Copilot review to complete
-- [ ] Click **Merge pull request** on GitHub
-- [ ] Verify AF admin dashboard routes correctly post-merge (manual test: log in as `atomicfindsatx@gmail.com`, confirm dashboard shows AF identity/data)
+## 🟡 Priority 0-c — Review + merge PR #10, then run 2 pending migrations (2026-07-27, updated 2026-07-28)
 
-**Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side already ready (auth_user_id linked, settings/products/reviews seeded).
+`feat/cms-collections-theme-system` — Collections manager, Theme
+Customizer, Duda-style Connected Data bindings, responsive Pages preview,
+SEO/A11y pages. Open since 2026-07-26; this session (2026-07-27) fixed 3
+real bugs in it (Pages editor reading a nonexistent table, Theme
+Customizer's Save always failing, live storefront never reading saved
+theme data — see `STATUS.md`'s 2026-07-27 entry) and pushed to the same
+branch/PR.
+
+**2026-07-28 addition, same PR:** added the Pages editor's missing
+code-view option — a per-block Content/Code tab (raw HTML/CSS override per
+block, same trust model as the existing `richtext` block). No new
+migration needed (uses the existing `blocks` jsonb column). Ships ungated
+to every client — the Starter/Pro/Agency tier-gating from
+`PAGE_EDITOR_SPEC.md` is deliberately deferred (Phase 2, needs the
+unpopulated `clients.plan` column and a real pricing-tier decision from
+you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
+
+- [ ] **Review + merge PR #10** (`Digital-Allies/da-platform#10`).
+- [x] **Run 2 pending migrations in the Supabase SQL Editor, in order** — both confirmed run by Anthony 2026-07-29 ("Success. No rows returned" on both):
+  1. `tools/build-workflows/supabase/migrations/20260726000000_collections_table.sql` — creates the `collections` table (Collections manager needs this to work at all).
+  2. `tools/build-workflows/supabase/migrations/20260727000000_design_tokens_ui_extra.sql` — adds a `design_tokens.ui_extra` column for the Theme Customizer's button-radius/glow/card-glow/section-spacing/custom-token controls.
+- [x] **Wire `ui_extra` into `ThemeClient.tsx`'s save payload** — done 2026-07-29 (`6204758`). Button-radius/glow/card-glow/section-spacing/custom-token controls now persist. Not yet wired: making those same values actually render on the live public site (separate, larger change — see `STATUS.md`'s 2026-07-29 entry).
+
+**Deliverables:** 25 files touched (8 server pages, 5 client pages, core resolver, context, layout, unlinked-account UI). Zero type errors, full build succeeds. Database side ready (auth_user_id linked, settings/products seeded — **correction, 2026-07-29: "reviews seeded" here was stale, see Priority 0-d below, the reviews table doesn't currently exist**).
+
+---
+
+## ✅ Priority 0-d — RESOLVED 2026-07-29 — 6 missing tables, plan column, and reviews seed all confirmed live
+
+**Original finding:** answering "are there other tables that need to be run or created," queried the live Supabase project directly (Management API, using the `SUPABASE_ACCESS_TOKEN` already in `.env.local`) instead of trusting this file's history — and several "confirmed working" claims from past sessions turned out to be checking the *code*, not the *live database*. Six tables that migration files already in this repo create didn't exist: `reviews`, `projects`, `project_tasks`, `research_notes`, `dev_tasks`, `notifications`.
+
+**Anthony ran all of it 2026-07-29** — `20260101000003_admin_features.sql`, `20260122000000_reviews_table.sql`, `seed-atomic-finds-reviews.sql`, the `clients.plan` column migration, and `security-fixes.sql`. **Re-verified live, not just trusted the "Success" messages:**
+- ✅ All 6 tables now exist (22 tables total in the live project, up from 16).
+- ✅ `reviews` has exactly 19 rows — the seed landed correctly.
+- ✅ `clients.plan` column exists.
+- ⚠️ **`security-fixes.sql` ran successfully but didn't fully do what it claims** — found and fixed a real bug in the file itself, see below.
+
+**The security-fixes.sql bug:** its Fix 2 (`revoke execute on function get_my_client_id() from anon`) succeeds but doesn't actually block anonymous access. Postgres grants EXECUTE on new functions to the `PUBLIC` pseudo-role by default, and `anon` (like every role) implicitly inherits PUBLIC's privileges — so revoking from `anon` specifically leaves the PUBLIC grant untouched, and anon can still call the function through it. Verified live both before and after: `has_function_privilege('anon', 'public.get_my_client_id()', 'execute')` returned `true` even after `security-fixes.sql` ran.
+
+- [x] **Fixed the source files** (`supabase/security-fixes.sql` and its migrations/ copy) to also `revoke ... from public` — correct for any future fresh run.
+- [ ] **One more small migration to run** for this already-live project (the file edit above doesn't retroactively apply to what's already run): `tools/build-workflows/supabase/migrations/20260729000000_security_fixes_public_grant.sql` — one line, `revoke execute on function public.get_my_client_id() from public;`. Doesn't touch `authenticated`/`service_role` (they hold their own explicit grants, unaffected by a PUBLIC revoke).
+
+**Still open, unrelated to SQL — and lower priority than it looks:**
+- [ ] Leaked-password protection — confirmed still off via the Auth config API (`password_hibp_enabled: false`). **Correction, 2026-07-29: this is a Supabase Pro-tier feature, not available on the free plan we're currently on.** Not actionable until there's paying-customer revenue to justify the upgrade (same standing constraint as the free-tier Vercel↔Supabase integration limit in Priority 4). Deliberately deprioritized — don't treat this as a quick toggle anymore.
+
+**Harmless footnote, no action needed:** there's an orphaned `kv_store_ebc15282` table in the live project that no code in this repo references (a leftover from some other tool/prototype run directly against this Supabase project). Not touched, not urgent.
 
 ---
 
@@ -200,17 +243,18 @@ Supabase-connected — see `STATUS.md`'s 2026-07-16 audit.
 
 ## 🟡 Priority 2 — Supabase hardening (small, low-risk, keeps getting deferred)
 
-- [ ] **Apply `security-fixes.sql`.**
-  1. Open `tools/build-workflows/supabase/security-fixes.sql` in this repo.
-  2. Supabase dashboard → your project (`auwhvicpyiwsubucanpb`) → SQL Editor →
-     paste the whole file → Run.
-- [ ] **Enable leaked-password protection.**
-  Supabase dashboard → Authentication → Providers → Email → toggle on
-  "Leaked password protection."
-- [ ] **Apply the new `plan` column migration.**
-  1. Open `tools/build-workflows/supabase/migrations/20260109000000_client_plan.sql`.
-  2. SQL Editor → paste → Run. (This just reserves a column for future
-     subscription tiers — no behavior changes yet, safe to run anytime.)
+- [x] ~~Apply `security-fixes.sql`~~ — run 2026-07-29, but see Priority 0-d:
+  its anon-revoke didn't fully work (a real bug in the file, now fixed) —
+  one more tiny migration (`20260729000000_security_fixes_public_grant.sql`)
+  is still open there.
+- [ ] ~~Enable leaked-password protection~~ — **deprioritized 2026-07-29:
+  this is a Supabase Pro-tier feature, not available on our current free
+  plan.** Blocked on paying-customer revenue justifying the upgrade, not
+  actionable as a quick toggle. See Priority 0-d for the same note (one
+  physical action, tracked in both places since it was flagged from two
+  different audits).
+- [x] ~~Apply the new `plan` column migration~~ — run 2026-07-29, confirmed
+  live (Priority 0-d).
 
 ---
 

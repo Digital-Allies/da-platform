@@ -105,7 +105,7 @@ Every Vercel project needs these set manually — they do NOT sync from `.env.lo
 
 ### P3 — Supabase security items still unconfirmed
 - `supabase/security-fixes.sql` applied? (Not confirmed since 2026-07-16)
-- Leaked-password protection enabled in Supabase Auth?
+- ~~Leaked-password protection enabled in Supabase Auth?~~ Correction, 2026-07-29: this is a Supabase Pro-tier feature — not available on our free plan, deprioritized until paying-customer revenue justifies the upgrade. See `TODO.md` Priority 0-d.
 - Duplicate key pair cleaned up ("default" vs "supabase_anon_new/_service_role_new")?
 - Old compromised Resend key revoked?
 

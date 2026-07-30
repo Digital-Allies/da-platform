@@ -255,7 +255,7 @@ Other docs here: `PIPELINE.md` (platform model), `SETUP.md`, `tasks/anthony/TODO
 
 Tracked properly in root `STATUS.md` + `tasks/anthony/TODO.md`; headline items as of 2026-07-21:
 
-1. **Anthony:** apply `security-fixes.sql` + enable leaked-password protection (Supabase dashboard).
+1. **Anthony:** apply `security-fixes.sql` (done 2026-07-29 — one follow-up migration pending, see `tasks/anthony/TODO.md`). Leaked-password protection is a Supabase Pro-tier feature, not available on our free plan — deprioritized until paying-customer revenue justifies the upgrade.
 2. **Anthony:** merge PR #1, then run the products migration + seed (steps above).
 3. **Build:** Atomic Finds ATX storefront (components, quick-view modal, flexible CTAs) + `'products'` block + **admin Products editor**.
 4. **Build:** the placeholder admin sections (Development, Projects, Content) per Anthony's Vercel Toolbar notes.
