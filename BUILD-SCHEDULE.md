@@ -205,6 +205,19 @@ entry.
   stub.~~
 
 ### Fri Jul 31 · Review / buffer
+**Done, 2026-07-31 (daily build session).** PR #10 merge status was stale
+in every doc — `gh pr view 10` and the Vercel/Supabase status API showed
+it was actually merged to `main` 2026-07-30T22:40:32Z, ~2 hours after the
+prior daily session's "schedule exhausted" entry was written. Fast-forwarded
+local `main` (41 commits), re-verified the one Greptile-flagged issue
+(`collections/page.tsx` product query) is fixed on `main` (`price`, not
+`price_usd`), confirmed `npx tsc --noEmit` clean and both Vercel deploy
+checks + the Supabase check green on `main`'s HEAD. Ported one doc-only gap
+found while reconciling: `AGENTS.md` was missing the "Keep PRs scoped to
+one concern" section that `CLAUDE.md` already has (it landed only on the
+now-merged feature branch via a background sync commit after the PR's
+merge point, so `main` never got it). See `STATUS.md`'s 2026-07-31 entry
+for full detail.
 
 ## Week of Aug 3 — Dashboard backlog, part 2 (Press Office + Pages)
 
@@ -241,7 +254,7 @@ explicitly-scoped session on that repo.
   currently** — see above.
 
 ### Wed–Thu Aug 5–6 · `/admin/pages`
-**⚠ IN PROGRESS, started early — 2026-07-26/27, on `feat/cms-collections-theme-system` (PR #10, open).**
+**✅ DONE — PR #10 merged to `main` 2026-07-30T22:40:32Z.** Started early — 2026-07-26/27, on `feat/cms-collections-theme-system`.
 Antigravity's 2026-07-26 session shipped the "real components, previewed
 live" half of this early: Duda-style `⚡ Connect to Data` block bindings
 (text/buttons/images bind to real `settings`/collections values, not

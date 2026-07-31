@@ -5,7 +5,70 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-07-30 — by Claude Code (daily build session): schedule exhausted, blocked — no in-scope `[Agent]` work remains, see below.
+**Last updated:** 2026-07-31 — by Claude Code (daily build session): Fri
+review/buffer day — found and corrected a stale "PR #10 still open" belief
+across `STATUS.md`/`TODO.md`/`BUILD-SCHEDULE.md`, see below.
+
+## 2026-07-31 — daily build session: PR #10 was actually merged 2 hours after last session ended; docs corrected, one small doc-sync gap ported
+
+**Schedule order followed:** today is Fri Jul 31, a `BUILD-SCHEDULE.md`
+review/buffer slot (Week of Jul 27's Friday) — not a build day.
+
+**What the review found:** the previous (2026-07-30) session's entry below
+says PR #10 was still open, blocked on Anthony's review/merge (issue #13).
+Checking fresh via `gh pr view 10` and the repo's commit-status API showed
+it had actually been **merged to `main` at 2026-07-30T22:40:32Z** — about 2
+hours after that prior session logged its "schedule exhausted" note, so it
+wasn't wrong when written, just immediately overtaken. Nobody had re-checked
+since. Corrected: `TODO.md` Priority 0-c (was still showing the merge as an
+open checkbox), `BUILD-SCHEDULE.md`'s Aug 5–6 entry (was "IN PROGRESS"),
+and this file's framing. **Did not close GitHub issue #13** — leaving that
+one for Anthony since he's the one who did the merge and may still want the
+issue open for something else; everything else in this file's doc-sync is
+plain correction, not issue-tracker bookkeeping.
+
+**Verified the merge is clean, not just present:**
+- Local `main` fast-forwarded 41 commits (`676d20d..1fb8e2f`) with no
+  conflicts.
+- `npx tsc --noEmit` in `tools/build-workflows` — clean, zero errors, on
+  the new `main` HEAD.
+- Both Vercel deploy checks (`da-webwssite-build-workflows`,
+  `atomic-finds-atx`) and the Supabase check on `main`'s HEAD commit —
+  all `state: success` via `gh api repos/.../commits/main/status`.
+- Re-verified the one Greptile review comment still attached to PR #10
+  (claims `collections/page.tsx` selects a nonexistent `price_usd` column)
+  against the actual file on `main`: it reads `price` (matching the
+  `products` table's real column, `20260117000000_products_table.sql`),
+  confirming this file's 2026-07-30 note that the bot's review was already
+  stale before merge — still true after merge.
+
+**One real doc-sync gap found and fixed while reconciling branches:**
+the local checkout was still sitting on the now-merged
+`feat/cms-collections-theme-system` branch, one commit ahead of what got
+merged — a background `chore: sync MM23` commit (`40f0ef0`, 2026-07-30
+16:07) that added the "Keep PRs scoped to one concern" section to
+`AGENTS.md`. That commit landed on the feature branch *after* the merge
+commit was already cut, so it never made it into `main` — `AGENTS.md` on
+`main` was missing a section `CLAUDE.md` already has verbatim (both are
+meant to mirror each other). Ported the same section into `main`'s
+`AGENTS.md` directly (docs-only, low-risk, matches this file's own
+"small fixes commit straight to main" convention) rather than leaving the
+two agent-instruction files to drift out of sync.
+
+**No feature work started this session** — correctly a review/buffer day
+per the schedule, and even setting that aside, the only concrete finding
+was a documentation-accuracy correction, not a code gap. `git status` clean
+before and after aside from the doc commits below.
+
+**What's next:** Week of Aug 3's Aug 3–4 slot (`/admin/content`) remains
+investigated-and-answered with its real fix living outside this repo (see
+2026-07-23 entry below); Aug 5–6 (`/admin/pages`) is now fully closed out
+(merged, not just code-complete-pending-merge); Aug 7 is the next
+review/buffer slot. Nothing scheduled past that — next session should
+re-check `BUILD-SCHEDULE.md` for new dated entries the way every prior
+"schedule exhausted" session has.
+
+---
 
 ## 2026-07-30 — daily build session: BLOCKED, nothing in-scope and un-superseded left to build
 

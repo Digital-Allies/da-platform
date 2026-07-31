@@ -49,7 +49,7 @@ Multi-tenant routing fix: admin dashboard now resolves tenant from logged-in use
 
 ---
 
-## 🟡 Priority 0-c — Review + merge PR #10, then run 2 pending migrations (2026-07-27, updated 2026-07-28)
+## ✅ Priority 0-c — RESOLVED 2026-07-30 — PR #10 merged, both migrations run
 
 `feat/cms-collections-theme-system` — Collections manager, Theme
 Customizer, Duda-style Connected Data bindings, responsive Pages preview,
@@ -68,7 +68,10 @@ to every client — the Starter/Pro/Agency tier-gating from
 unpopulated `clients.plan` column and a real pricing-tier decision from
 you first). See `STATUS.md`'s 2026-07-28 entry for full detail.
 
-- [ ] **Review + merge PR #10** (`Digital-Allies/da-platform#10`).
+- [x] **Review + merge PR #10** (`Digital-Allies/da-platform#10`) — merged
+  by Anthony 2026-07-30T22:40:32Z. Confirmed on `main`: 41 commits
+  fast-forwarded, `npx tsc --noEmit` clean, both Vercel deploy checks +
+  Supabase check green on `main`'s HEAD.
 - [x] **Run 2 pending migrations in the Supabase SQL Editor, in order** — both confirmed run by Anthony 2026-07-29 ("Success. No rows returned" on both):
   1. `tools/build-workflows/supabase/migrations/20260726000000_collections_table.sql` — creates the `collections` table (Collections manager needs this to work at all).
   2. `tools/build-workflows/supabase/migrations/20260727000000_design_tokens_ui_extra.sql` — adds a `design_tokens.ui_extra` column for the Theme Customizer's button-radius/glow/card-glow/section-spacing/custom-token controls.
