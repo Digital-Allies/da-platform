@@ -28,7 +28,7 @@ export default async function HomePage() {
     // page's own .af-homepage tokens layer on top for the bespoke sections.
     return (
       <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
-        <AtomicFindsHomepage products={products} reviews={reviews} logoUrl={settings.logo_url || undefined} collections={collections} />
+        <AtomicFindsHomepage products={products} reviews={reviews} logoUrl={settings.logo_url || undefined} collections={collections} settings={settings} />
       </SiteTheme>
     )
   }

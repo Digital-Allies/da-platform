@@ -178,7 +178,9 @@
 .af-btn { width: 100%; background: var(--celestial-yellow); color: #1E1E1E; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; padding: 16px; border-radius: 999px; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; cursor: pointer; }
 .af-btn:disabled { opacity: 0.6; cursor: default; }
 .af-social-row { display: flex; gap: 20px; margin-top: 24px; justify-content: center; }
-.af-social-row a { font-size: 13px; font-weight: 600; color: #ffffff; text-decoration: none; }
+.af-social-row a { font-size: 13px; font-weight: 600; color: #ffffff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
+.af-social-row a:hover { opacity: 0.8; }
+.af-social-row svg { color: #ffffff; }
 
 /* ---- FOOTER ---- */
 .af-footer { position: relative; background: #0f0f0f; border-top: 1px solid rgba(245,200,66,0.18); padding: 80px 24px 48px; overflow: hidden; }

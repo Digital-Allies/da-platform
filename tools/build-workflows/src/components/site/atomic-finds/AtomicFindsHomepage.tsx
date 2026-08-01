@@ -14,8 +14,9 @@
 // placeholder text.
 
 import '@/styles/atomic-finds.css'
-import { type Product, type Review } from '@/lib/types'
+import { type Product, type Review, type SiteSettings } from '@/lib/types'
 import { resolveProductCta } from '@/lib/commerce'
+import { Facebook, Instagram } from 'lucide-react'
 import ProductGrid from '@/components/site/ProductGrid'
 import GalaxyCard from '@/components/site/GalaxyCard'
 import Starfield from './Starfield'
@@ -68,9 +69,10 @@ interface AtomicFindsHomepageProps {
   collections?: any[]
   /** From settings.logo_url — falls back to the static brand mark when unset */
   logoUrl?: string
+  settings?: SiteSettings
 }
 
-export default function AtomicFindsHomepage({ products, reviews, logoUrl, collections }: AtomicFindsHomepageProps) {
+export default function AtomicFindsHomepage({ products, reviews, logoUrl, collections, settings }: AtomicFindsHomepageProps) {
   // Temporary: photo-less featured products fall back to a "coming soon" state
   // that doesn't work for the Galaxy Card's hero-image treatment — skip them
   // until real photography is in, same rule as ProductGrid's standard cards.
@@ -256,7 +258,18 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
                 <div className="af-contact-card"><div className="af-c-label">Social</div><div className="af-c-value">Instagram</div><div className="af-c-sub">@atomicfindsatx</div></div>
               </div>
               <AtomicContactForm />
-              <div className="af-social-row"><a href="#">Facebook</a><a href="#">Instagram</a></div>
+              <div className="af-social-row">
+                {settings?.facebook_url && (
+                  <a href={settings.facebook_url} target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">
+                    <Facebook size={24} />
+                  </a>
+                )}
+                {settings?.instagram_url && (
+                  <a href={settings.instagram_url} target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">
+                    <Instagram size={24} />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -293,8 +306,12 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
             </div>
             <div className="af-footer-col">
               <h4>Connect</h4>
-              <a className="af-footer-link" href="#">Facebook</a>
-              <a className="af-footer-link" href="#">Instagram</a>
+              {settings?.facebook_url && (
+                <a className="af-footer-link" href={settings.facebook_url} target="_blank" rel="noopener noreferrer">Facebook</a>
+              )}
+              {settings?.instagram_url && (
+                <a className="af-footer-link" href={settings.instagram_url} target="_blank" rel="noopener noreferrer">Instagram</a>
+              )}
               <a className="af-footer-link" href="#reviews">Reviews</a>
               <a className="af-footer-link" href="#contact">Contact Us</a>
             </div>
