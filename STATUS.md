@@ -5,7 +5,40 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-01 — by Claude Code (post-seed CMS fixes): Asset upload bucket name corrected. Admin page preview route added. Better error messages for upload failures. All fixes committed and ready for Jennyfer testing.
+**Last updated:** 2026-08-01 — by Claude Code (mobile card centering + CMS admin responsiveness): Fixed Atomic Finds featured cards and review cards off-center on mobile (375px). Reduced `.af-featured-root` gap from `90px 130px` → `32px 24px` on mobile. Added mobile media queries for CMS dashboard.
+
+## 2026-08-01 (cont'd) — Mobile card centering fix + CMS admin mobile responsiveness
+
+### **Fix: Atomic Finds Cards Off-Center on Mobile**
+
+**Issue:** Featured product cards and review cards appeared off-center and tilted on 375px mobile viewport.
+
+**Root cause:** `.af-featured-root` had large gap values (`90px 130px`) with no mobile breakpoints, pushing cards beyond safe viewport bounds and causing apparent tilting from horizontal scroll.
+
+**Fix applied to `atomic-finds.css`:**
+- ✅ Added `width: 100%` to `.af-featured-root` for proper centering baseline
+- ✅ Added `@media (max-width: 900px)` → `gap: 60px 80px`
+- ✅ Added `@media (max-width: 640px)` → `gap: 32px 24px; padding: 12px 0 24px`
+
+**Verified live:** Tested Atomic Finds site on mobile viewport (375px). All review cards and featured product cards now perfectly centered and properly aligned. No tilting. Scrolled through full reviews section — all card variants verified.
+
+### **Added: CMS Admin Dashboard Mobile Responsiveness**
+
+**Work done on `admin-dashboard.css`:**
+- ✅ Added responsive media queries for 640px and 900px breakpoints
+- ✅ Converted fixed multi-column layouts to responsive:
+  - `.stats-grid`: 4-column → 1-column on mobile
+  - `.widget-grid`: 2-column → 1-column on mobile
+  - `.kanban-board`: 4-column → 1-column on mobile
+  - `.research-layout`: 2-column → 1-column on mobile
+  - `.notes-grid`: 2-column → 1-column on mobile
+  - `.content-grid`: 3-column → 1-column on mobile
+  - `.contact-cards`: 3-column → 1-column on mobile
+- ✅ Reduced padding, margins, and font sizes for mobile screens to maximize usable space
+
+**Impact:** CMS dashboard is now functional and usable on mobile devices (tablets, phones) while maintaining full functionality on desktop.
+
+---
 
 ## 2026-08-01 (cont'd) — Post-seed CMS fixes: asset uploads + page preview + error handling
 

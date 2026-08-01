@@ -1,6 +1,6 @@
 # DA Platform — Master Context & Operations Plan
 **Generated:** 2026-07-23 by Cowork session (full history synthesis)  
-**Updated:** 2026-07-24 — DA site rebuild spec added; 3 AF seeds written; NEW-SITE-SETUP-PROCESS.md created  
+**Updated:** 2026-08-01 — Mobile responsiveness added: Atomic Finds cards fixed for mobile, CMS admin dashboard now responsive  
 **Read this before every session. Update after every major change.**
 
 **See also:**
@@ -141,6 +141,12 @@ All three pending seeds are in `tools/build-workflows/supabase/` and are idempot
 - **pages** — 2 draft pages: `home` (hero + products + richtext + contact blocks) and `about`. The homepage draft is standby for the Aug 5–6 `/admin/pages` build slot; the live homepage still uses `AtomicFindsHomepage.tsx` until that block renderer is promoted.
 
 **Meta title template location:** `tools/build-workflows/src/lib/types.ts` line 165, `DEFAULT_SETTINGS.site_title = 'My Business'`
+
+**Mobile responsiveness (✅ COMPLETED 2026-08-01):**
+- Featured product cards and review cards fixed for 375px mobile viewport
+- Reduced `.af-featured-root` gap from `90px 130px` → `32px 24px` on mobile
+- Cards now perfectly centered on mobile instead of appearing off-center/tilted
+- See `atomic-finds.css` lines 129–145 for media query changes
 
 ---
 
