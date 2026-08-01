@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Switcher — CMS Reference Implementation</title>
+
+  <!-- SEO: hreflang + og:locale, generated per-client from the CMS's
+       enabled-languages setting. See SKILL.md "Server-rendered SEO tags". -->
+  <link rel="alternate" hreflang="en" href="https://example-client.com/">
+  <link rel="alternate" hreflang="es" href="https://example-client.com/es/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Optional: override defaults before the controller boots. -->
+  <script>
+    window.LANGUAGE_CONTROLLER_CONFIG = {
+      languages: ['en', 'es'],
+      defaultLanguage: 'en',
+      languageNames: { en: 'English', es: 'Spanish' }
+    };
+  </script>
+</head>
+<body>
+
+  <div class="language-switcher">
+    <button class="lang-btn" id="lang-en" onclick="toggleLanguage('en')" aria-pressed="true">EN</button>
+    <button class="lang-btn" id="lang-es" onclick="toggleLanguage('es')" aria-pressed="false">ES</button>
+  </div>
+
+  <header>
+    <h1 data-en="Welcome to Digital Allies" data-es="Bienvenido a Digital Allies">
+      Welcome to Digital Allies
+    </h1>
+    <p data-en="Comprehensive digital solutions" data-es="Soluciones digitales integrales">
+      Comprehensive digital solutions
+    </p>
+    <button data-en="Start Your Project" data-es="Comienza Tu Proyecto">
+      Start Your Project
+    </button>
+  </header>
+
+  <nav>
+    <a href="/" data-en="Home" data-es="Inicio">Home</a>
+    <a href="/services" data-en="Services" data-es="Servicios">Services</a>
+    <a href="/contact" data-en="Contact" data-es="Contacto">Contact</a>
+    <a href="/privacy.html" data-legal="privacy" data-en="Privacy Policy" data-es="Política de Privacidad">Privacy Policy</a>
+  </nav>
+
+  <!-- CMS-managed content goes here. cms-loader.js fetches from Supabase
+       and rebuilds this container's innerHTML on every page load. The
+       MutationObserver in language-controller.js picks up the newly
+       inserted data-en/data-es nodes automatically — no changes needed
+       in cms-loader.js itself. -->
+  <section id="services-grid"></section>
+
+  <form>
+    <input type="text" data-en="Enter your name" data-es="Ingresa tu nombre" placeholder="Enter your name">
+    <textarea data-en="Your message" data-es="Tu mensaje" placeholder="Your message"></textarea>
+  </form>
+
+  <script src="language-controller.js"></script>
+
+  <script>
+    // --- Example: legal link swapping, generalized from a single-site
+    // hard-coded function into a data-attribute driven pattern that
+    // needs zero per-client code once the controller is loaded.
+    function updateLegalLinks(lang) {
+      document.querySelectorAll('[data-legal]').forEach(function (link) {
+        var type = link.getAttribute('data-legal');
+        link.href = lang === 'es' ? '/' + type + '-es.html' : '/' + type + '.html';
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.languageController) {
+        window.languageController.onChange(updateLegalLinks);
+        updateLegalLinks(window.languageController.getLanguage());
+      }
+    });
+
+    // --- Example: simulating a CMS content load (what cms-loader.js
+    // does today against Supabase). This proves dynamically-injected
+    // content is translated without any special-case code.
+    setTimeout(function () {
+      document.getElementById('services-grid').innerHTML =
+        '<div class="service-card">' +
+        '  <h3 data-en="Web Development" data-es="Desarrollo Web">Web Development</h3>' +
+        '  <p data-en="Conversion-focused sites built in 6-8 weeks."' +
+        '     data-es="Sitios enfocados en la conversión construidos en 6-8 semanas.">' +
+        '    Conversion-focused sites built in 6-8 weeks.' +
+        '  </p>' +
+        '</div>';
+    }, 500);
+  </script>
+</body>
+</html>

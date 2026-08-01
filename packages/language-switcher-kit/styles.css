@@ -1,0 +1,70 @@
+/**
+ * Language switcher styles — themeable via CSS custom properties so
+ * every new client site can restyle without touching structure.
+ * Defaults below match the Digital Allies brand (teal primary / white).
+ */
+:root {
+  --lang-switcher-gap: 10px;
+  --lang-switcher-padding: 20px;
+  --lang-btn-padding: 10px 20px;
+  --lang-btn-border-width: 2px;
+  --lang-btn-radius: 25px;
+  --lang-btn-font-size: 14px;
+  --lang-btn-font-weight: bold;
+  --lang-btn-color: #21808D;       /* Digital Allies primary teal */
+  --lang-btn-bg: #FFFFFE;
+  --lang-btn-active-color: #FFFFFE;
+  --lang-btn-active-bg: #21808D;
+  --lang-btn-shadow: 0 4px 12px rgba(33, 128, 141, 0.3);
+  --lang-btn-shadow-active: 0 4px 12px rgba(33, 128, 141, 0.4);
+  --lang-btn-transition: all 0.2s ease;
+}
+
+.language-switcher {
+  display: flex;
+  gap: var(--lang-switcher-gap);
+  padding: var(--lang-switcher-padding);
+  justify-content: flex-end;
+}
+
+.lang-btn {
+  padding: var(--lang-btn-padding);
+  border: var(--lang-btn-border-width) solid var(--lang-btn-color);
+  border-radius: var(--lang-btn-radius);
+  background: var(--lang-btn-bg);
+  color: var(--lang-btn-color);
+  font-weight: var(--lang-btn-font-weight);
+  font-size: var(--lang-btn-font-size);
+  cursor: pointer;
+  transition: var(--lang-btn-transition);
+}
+
+.lang-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--lang-btn-shadow);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--lang-btn-color);
+  outline-offset: 2px;
+}
+
+.lang-btn.active {
+  background: var(--lang-btn-active-bg);
+  color: var(--lang-btn-active-color);
+  box-shadow: var(--lang-btn-shadow-active);
+}
+
+/* Visually hidden but screen-reader accessible — used for the ARIA
+   live-region announcement and any other sr-only helper text. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
