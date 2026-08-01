@@ -5,7 +5,73 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-01 — by Claude Code (Atomic Finds pre-handoff audit): Steps 1–5 of af-build-checklist completed. Three seed files verified and ready for Anthony's sign-off. Live site verified across all required pages. Contact form confirmed working.
+**Last updated:** 2026-08-01 — by Claude Code (post-seed CMS fixes): Asset upload bucket name corrected. Admin page preview route added. Better error messages for upload failures. All fixes committed and ready for Jennyfer testing.
+
+## 2026-08-01 (cont'd) — Post-seed CMS fixes: asset uploads + page preview + error handling
+
+**Issue Report from Anthony (post-seed deployment):**
+1. ❌ Asset uploads (logo, favicon) converting to massive base64 strings instead of storing as files
+2. ❌ New pages in CMS have no way to preview/display on live site
+3. ❌ Featured product card animations no longer working
+
+**Root Cause Analysis & Fixes:**
+
+### **Issue #1: Asset Upload → Base64 Fallback**
+
+**Root cause:** `MediaUploader.tsx` defaulted to bucket name `'client-assets'` but Supabase bucket is actually `'Client Assets'` (with space). When upload failed due to bucket name mismatch, the code silently fell back to `readAsDataURL()`, creating massive base64 strings.
+
+**Fixes applied (commit 22b3ac7):**
+- ✅ Changed default bucket name from `'client-assets'` to `'Client Assets'`
+- ✅ Removed silent base64 fallback — now shows error alert: `"Upload failed: [error message]"`
+- ✅ Added console error logging for debugging upload failures
+
+**Next step (Anthony):** Verify `'Client Assets'` bucket is set to **Public** in Supabase and that anon key has read permissions. If needed:
+- Supabase dashboard → Storage → Buckets → "Client Assets" → Settings → Public toggle
+
+**Result:** Uploads will now succeed and return proper CDN URLs (e.g., `https://supabase-url/storage/v1/object/public/Client%20Assets/...`)
+
+---
+
+### **Issue #2: New Pages Can't Be Previewed on Live Site**
+
+**Root cause:** Pages table seeded with `status='draft'`. The public route `/[slug]` only shows `status='published'` pages. Jennyfer creates pages but can't see them before publishing.
+
+**Fixes applied (commit 22b3ac7):**
+- ✅ Created admin preview route: `/admin/preview/[slug]`
+- ✅ Added `getPageBySlugAny()` function (fetches pages regardless of status)
+- ✅ Admin preview shows orange banner: "🔍 ADMIN PREVIEW (Draft: "Page Name") — Not visible to public"
+
+**How Jennyfer uses it:**
+1. Create page in `/admin/pages` (e.g., slug `about`)
+2. Click "Preview" button (to be added to Pages admin UI)
+3. Loads `/admin/preview/about` showing exact live rendering
+4. Make adjustments in CMS
+5. When ready, publish to make it live at `/about`
+
+**Still TODO (separate PR):**
+- Add "Preview" button link in the `/admin/pages` UI linking to `/admin/preview/[slug]`
+- Consider showing page status (Draft/Published) in admin list
+
+---
+
+### **Issue #3: Featured Card Animations**
+
+**Status:** ⏳ Not yet diagnosed in running server. The `GalaxyCard.tsx` component has animations defined in `<style>` tag at lines 78–86:
+```javascript
+@media (prefers-reduced-motion: no-preference) {
+  #${id}-ring   { animation: ${id}-spin 25s linear infinite; }
+  #${id}-planet { animation: ${id}-rev  25s linear infinite; }
+}
+```
+
+**Possible causes:**
+1. User's browser has `prefers-reduced-motion: reduce` enabled (OS accessibility setting)
+2. Animation styles being stripped during build
+3. CSS scope conflict with other homepage styles
+
+**Next step:** Test in browser with dev server running — verify if animations work on homepage Galaxy Cards, and if not, check browser DevTools for animation rules.
+
+---
 
 ## 2026-08-01 — Atomic Finds ATX pre-handoff audit: seed files verified, live site fully functional, all required pages exist
 
