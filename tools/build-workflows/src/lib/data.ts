@@ -284,6 +284,17 @@ export async function getPageBySlugAny(slug: string): Promise<any | null> {
   return data
 }
 
+export async function getPublishedPages(): Promise<any[]> {
+  const supabase = createPublicClient()
+  const { data } = await supabase
+    .from('pages')
+    .select('id, title, slug')
+    .eq('client_id', CLIENT_ID)
+    .eq('status', 'published')
+    .order('created_at', { ascending: true })
+  return data || []
+}
+
 export async function getCollections(): Promise<any[]> {
   try {
     const supabase = createPublicClient()

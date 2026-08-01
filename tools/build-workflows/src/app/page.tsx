@@ -11,7 +11,7 @@ import {
 } from '@/components/site'
 import SiteTheme from '@/components/site/SiteTheme'
 import AtomicFindsHomepage from '@/components/site/atomic-finds/AtomicFindsHomepage'
-import { getSiteSettings, getServices, getTestimonials, getPageBySlug, getProducts, getFeaturedReviews, getCollections } from '@/lib/data'
+import { getSiteSettings, getServices, getTestimonials, getPageBySlug, getProducts, getFeaturedReviews, getCollections, getPublishedPages } from '@/lib/data'
 import { ATOMIC_FINDS_CLIENT_ID } from '@/lib/theme'
 
 export const revalidate = 60 // ISR — refresh every 60 seconds
@@ -33,12 +33,19 @@ export default async function HomePage() {
     )
   }
 
-  const [settings, services, testimonials, dynamicPage] = await Promise.all([
+  const [settings, services, testimonials, dynamicPage, publishedPages] = await Promise.all([
     getSiteSettings(),
     getServices(),
     getTestimonials(),
     getPageBySlug('home').then(res => res || getPageBySlug('index')),
+    getPublishedPages(),
   ])
+
+  // Build dynamic nav items from published pages
+  const pageNavItems = publishedPages.map((page: any) => ({
+    label: page.title,
+    href: `/${page.slug}`,
+  }))
 
   return (
     <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
@@ -47,6 +54,7 @@ export default async function HomePage() {
         siteTitle={settings.site_title}
         ctaText={settings.hero_cta_text || 'Get in Touch'}
         ctaHref={settings.hero_cta_link || '#contact'}
+        navItems={pageNavItems.length > 0 ? pageNavItems : undefined}
       />
 
       {dynamicPage ? (
