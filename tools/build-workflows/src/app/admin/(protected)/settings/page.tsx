@@ -194,7 +194,7 @@ export default function SettingsPage() {
             <strong>Connected Data Engine</strong> — All business copy, contact details, media assets, and custom copy variables defined here are synced directly across your page builder blocks and collections.
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left Column: Business & Media */}
             <div style={{ background: 'var(--bg, #fff)', border: '1px solid var(--border-color, #ddd)', padding: '24px', borderRadius: '6px' }}>
               <h3 style={{ fontSize: '15px', fontWeight: 'bold', marginBottom: '16px' }}>Business Identity & Brand Media</h3>
