@@ -332,3 +332,49 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
 .calendar-item__status { display: inline-block; font-size: 10px; padding: 2px 6px; background: var(--accent-soft); border: var(--border-1); border-radius: 2px; margin-top: 8px; }
 
 .notification-badge { position: absolute; top: -5px; right: -5px; background: var(--signal); color: white; border-radius: var(--radius-pill); font-size: 10px; padding: 2px 6px; font-weight: 700; }
+
+/* ---- MOBILE RESPONSIVENESS ---- */
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .widget-grid { grid-template-columns: 1fr; }
+  .kanban-board { grid-template-columns: repeat(2, 1fr); }
+  .research-layout { grid-template-columns: 1fr; gap: 24px; }
+  .content-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-cards { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 640px) {
+  .ws-page { padding: var(--space-4) var(--space-5) var(--space-10); }
+  .ws-head { flex-direction: column; gap: var(--space-3); }
+  .ws-head h1, .ws-head h2 { font-size: 22px; }
+  .stats-grid { grid-template-columns: 1fr; gap: 12px; }
+  .stat-card { padding: 16px; }
+  .stat-card__number { font-size: 24px; }
+  .ws-stat__label { font-size: 11px; }
+  .widget-grid { grid-template-columns: 1fr; gap: 16px; }
+  .widget { padding: 16px; }
+  .kanban-board { grid-template-columns: 1fr; gap: 16px; }
+  .kanban-column { min-height: 300px; padding: 12px; }
+  .kanban-column__title { font-size: 12px; }
+  .research-layout { grid-template-columns: 1fr; gap: 16px; }
+  .notebooks-sidebar { padding: 12px; margin-bottom: 16px; }
+  .notebook-item { font-size: 12px; padding: 6px 8px; }
+  .notes-grid { grid-template-columns: 1fr; gap: 16px; }
+  .note-item { padding: 16px; }
+  .note-item__title { font-size: 14px; }
+  .note-item__preview { font-size: 12px; }
+  .content-grid { grid-template-columns: 1fr; gap: 16px; }
+  .content-item { padding: 16px; }
+  .content-item__title { font-size: 14px; }
+  .content-form { padding: 20px; }
+  .form-actions { flex-direction: column; }
+  .btn { min-width: auto; width: 100%; }
+  .contact-cards { grid-template-columns: 1fr; gap: 12px; }
+  .contact-form { padding: 20px; }
+  .contact-form h3 { font-size: 18px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 16px; }
+  .footer-col h4 { font-size: 14px; margin-bottom: 12px; }
+  .footer-link { font-size: 13px; margin-bottom: 6px; }
+  .footer-bottom { font-size: 10px; }
+}
