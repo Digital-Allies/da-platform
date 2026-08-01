@@ -126,7 +126,13 @@
 .af-curator-bio { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.6; margin-top: 10px; }
 
 /* ---- FEATURED GALAXY ---- */
-.af-featured-root { display: flex; flex-wrap: wrap; justify-content: center; gap: 90px 130px; padding: 20px 0 40px; }
+.af-featured-root { display: flex; flex-wrap: wrap; justify-content: center; gap: 90px 130px; padding: 20px 0 40px; width: 100%; }
+@media (max-width: 900px) {
+  .af-featured-root { gap: 60px 80px; }
+}
+@media (max-width: 640px) {
+  .af-featured-root { gap: 32px 24px; padding: 12px 0 24px; }
+}
 
 /* ---- PROCESS ---- */
 .af-process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
