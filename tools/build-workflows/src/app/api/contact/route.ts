@@ -11,10 +11,15 @@ const schema = z.object({
   message: z.string().min(10),
 })
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID
 
 export async function POST(request: NextRequest) {
   try {
+    if (!CLIENT_ID) {
+      console.error('NEXT_PUBLIC_CLIENT_ID environment variable not set')
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
+    }
+
     const body = await request.json()
     const parsed = schema.safeParse(body)
 

@@ -16,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: settings.site_title,
       type: 'website',
     },
+    ...(settings.favicon_url && { icons: { icon: settings.favicon_url } }),
   }
 }
 
@@ -30,7 +31,6 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className="min-h-screen"
-        // Inject the client's brand color as a CSS variable
         style={{ '--brand': settings.brand_color } as React.CSSProperties}
       >
         <AuthListener />
