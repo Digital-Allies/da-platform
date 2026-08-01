@@ -19,7 +19,7 @@ export function MediaUploader({
   onChange,
   label,
   hint,
-  bucket = 'client-assets',
+  bucket = 'Client Assets',
   accept = 'image/*',
 }: MediaUploaderProps) {
   const [uploading, setUploading] = useState(false);
@@ -42,7 +42,14 @@ export function MediaUploader({
         .from(bucket)
         .upload(filePath, file, { upsert: true });
 
-      if (!error && data) {
+      if (error) {
+        console.error('Upload error:', error);
+        setUploading(false);
+        alert(`Upload failed: ${error.message}. Please check that the storage bucket is public and accessible.`);
+        return;
+      }
+
+      if (data) {
         const { data: publicUrlData } = supabase.storage
           .from(bucket)
           .getPublicUrl(filePath);
@@ -54,23 +61,13 @@ export function MediaUploader({
         }
       }
 
-      // Fallback: Read file as Data URL if bucket storage returns error or is unprovisioned
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        if (result) onChange(result);
-        setUploading(false);
-      };
-      reader.readAsDataURL(file);
+      // If we get here, upload succeeded but URL retrieval failed
+      setUploading(false);
+      alert('Upload succeeded but URL could not be generated. Please check bucket permissions.');
     } catch (err: any) {
-      // FileReader fallback
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        if (result) onChange(result);
-        setUploading(false);
-      };
-      reader.readAsDataURL(file);
+      console.error('Upload exception:', err);
+      setUploading(false);
+      alert(`Upload failed: ${err.message}`);
     }
   };
 

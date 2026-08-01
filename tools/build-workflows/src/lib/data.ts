@@ -272,6 +272,18 @@ export async function getPageBySlug(slug: string): Promise<any | null> {
   return data
 }
 
+export async function getPageBySlugAny(slug: string): Promise<any | null> {
+  // Admin preview: fetch pages regardless of status (for draft preview)
+  const supabase = createPublicClient()
+  const { data } = await supabase
+    .from('pages')
+    .select('*')
+    .eq('client_id', CLIENT_ID)
+    .eq('slug', slug)
+    .maybeSingle()
+  return data
+}
+
 export async function getCollections(): Promise<any[]> {
   try {
     const supabase = createPublicClient()
