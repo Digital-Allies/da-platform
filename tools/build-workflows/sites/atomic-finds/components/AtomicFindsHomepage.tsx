@@ -13,7 +13,7 @@
 // About/Meet Jennyfer bio) is real copy from the design handoff, not
 // placeholder text.
 
-import '@/styles/atomic-finds.css'
+import '../styles/atomic-finds.css'
 import { type Product, type Review, type SiteSettings } from '@/lib/types'
 import { resolveProductCta } from '@/lib/commerce'
 import { Facebook, Instagram } from 'lucide-react'
