@@ -378,3 +378,225 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   .footer-link { font-size: 13px; margin-bottom: 6px; }
   .footer-bottom { font-size: 10px; }
 }
+
+/* DARK MODE */
+:root.dark {
+  --bone-white:    #1a1a1a;
+  --charcoal:      #f0e8d8;
+  --pulse-blue:    #5ba3e8;
+  --light-pink:    #2d2416;
+  --signal-red:    #d64a2d;
+  --pinned-note:   #242420;
+  
+  --grid-line:     rgba(255, 255, 255, 0.05);
+  --hairline:      rgba(255, 255, 255, 0.1);
+  --text-muted:    #b0a9a0;
+  --text-soft:     #8a8580;
+  
+  --bg:            var(--bone-white);
+  --bg-alt:        #242420;
+  --fg:            var(--charcoal);
+  --fg-muted:      var(--text-muted);
+  --fg-soft:       var(--text-soft);
+  --fg-on-dark:    var(--bone-white);
+}
+
+/* HAMBURGER MENU (hidden on desktop) */
+.ws-hamburger { display: none !important; }
+
+/* MOBILE HAMBURGER & SIDEBAR (640px and below) */
+@media (max-width: 640px) {
+  .ws-hamburger { display: block !important; }
+  
+  .ws-nav--sidebar {
+    position: fixed;
+    top: 52px;
+    left: -100%;
+    width: 80%;
+    max-width: 280px;
+    height: calc(100vh - 52px);
+    background: var(--bg-alt);
+    border-right: var(--border-1);
+    transition: left 200ms ease-out;
+    z-index: 100;
+    overflow-y: auto;
+    padding: 0;
+  }
+  
+  .ws-nav--sidebar.is-open {
+    left: 0;
+  }
+  
+  .ws-sidebar-overlay { display: block !important; }
+  
+  .ws-body {
+    flex-direction: column;
+  }
+  
+  .ws-main {
+    flex: 1;
+    width: 100%;
+  }
+  
+  /* Reduce top nav spacing on mobile */
+  .ws-top {
+    padding: 0 var(--space-3);
+    gap: var(--space-2);
+    height: 52px;
+  }
+  
+  .ws-top__name,
+  .ws-top__tag {
+    display: none;
+  }
+  
+  .ws-top__spacer {
+    flex: 1;
+  }
+  
+  .search-container {
+    display: none !important;
+  }
+  
+  .ws-client__meta {
+    display: none;
+  }
+  
+  .ws-client__btn {
+    min-width: auto;
+    padding: 6px 8px !important;
+  }
+  
+  /* Reduce icon button sizes */
+  .ws-cmd {
+    padding: 6px 8px !important;
+  }
+  
+  .ws-sync {
+    display: none;
+  }
+}
+
+/* TABLET (640px - 900px) */
+@media (max-width: 900px) and (min-width: 641px) {
+  .ws-top {
+    padding: 0 var(--space-4);
+  }
+  
+  .search-container {
+    width: 200px !important;
+  }
+  
+  .ws-client__meta {
+    display: none;
+  }
+  
+  .ws-client__btn {
+    min-width: auto;
+    padding: 6px 10px !important;
+  }
+}
+
+/* General responsive improvements */
+@media (max-width: 900px) {
+  .ws-page {
+    padding: var(--space-4);
+  }
+  
+  .ws-page__head {
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  
+  .ws-page h1,
+  .ws-page h2 {
+    font-size: 20px;
+  }
+  
+  /* Form responsiveness */
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-col {
+    width: 100% !important;
+  }
+  
+  /* Button groups responsive */
+  .button-group {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .button-group .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Aggressive mobile spacing */
+  .ws-page {
+    padding: var(--space-3);
+  }
+  
+  .ws-page h1,
+  .ws-page h2 {
+    font-size: 18px;
+  }
+  
+  .ws-page h3 {
+    font-size: 16px;
+  }
+  
+  /* Cards full width on mobile */
+  .card {
+    width: 100%;
+    padding: var(--space-4);
+  }
+  
+  /* Modals & dialogs full screen on mobile */
+  .modal {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Tables scroll on mobile */
+  table {
+    font-size: 12px;
+  }
+  
+  /* List items more tappable */
+  .list-item {
+    min-height: 48px;
+    padding: var(--space-4);
+  }
+  
+  /* Inputs full width */
+  input,
+  textarea,
+  select {
+    width: 100%;
+  }
+  
+  /* Actions stack vertically */
+  .actions {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  
+  .actions .btn {
+    width: 100%;
+  }
+  
+  /* Flex grids become single column */
+  .flex-grid {
+    flex-direction: column;
+  }
+  
+  .flex-grid > * {
+    width: 100%;
+  }
+}
+

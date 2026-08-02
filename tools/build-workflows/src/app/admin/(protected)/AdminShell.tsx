@@ -7,7 +7,7 @@ import { createClient } from '@/lib/supabase';
 import { ClientIdProvider } from '@/lib/client-context';
 import '@/styles/admin-dashboard.css';
 import {
-  Search, Bell, LogOut, Check,
+  Search, Bell, LogOut, Check, Menu, X, Moon, Sun,
   LayoutDashboard, FileText, FolderKanban, ShoppingBag,
   Newspaper, KanbanSquare, Wrench, Palette, Settings, ExternalLink, Inbox
 } from 'lucide-react';
@@ -36,9 +36,36 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
   const [notifOpen, setNotifOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const notifRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
+
+  // Initialize dark mode from localStorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('cms-theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  // Update dark mode in DOM when state changes
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('cms-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('cms-theme', 'light');
+    }
+  }, [darkMode]);
+
+  // Close sidebar on navigation
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   // Close menus on outside click
   useEffect(() => {
@@ -140,6 +167,14 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
     <div className="custom-widget ws" style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Top bar */}
       <div className="ws-top">
+        <button 
+          className="ws-hamburger"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: '6px 12px', color: 'rgba(255,255,255,0.8)' }}
+        >
+          {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
         <div className="ws-top__brand">
           <span className="da-pulse" style={{ borderColor: 'rgba(255,255,255,.4)' }}></span>
           <span className="ws-top__name">{businessName}</span>
@@ -183,6 +218,14 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
             style={{ background: 'rgba(255,255,255,.06)', borderColor: 'rgba(255,255,255,.16)', color: '#fff', width: '260px', padding: '6px 10px 6px 30px', fontSize: '12px' }} 
           />
         </div>
+
+        <button 
+          className="ws-cmd btn btn--outline"
+          onClick={() => setDarkMode(!darkMode)}
+          style={{ minWidth: 'auto', padding: '6px 12px', position: 'relative', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+        >
+          {darkMode ? <Sun size={14} style={{ color: 'rgba(255,255,255,0.8)' }} /> : <Moon size={14} style={{ color: 'rgba(255,255,255,0.8)' }} />}
+        </button>
 
         <div style={{ position: 'relative' }} ref={notifRef}>
           <button 
@@ -232,9 +275,18 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
         </span>
       </div>
 
+      {/* Sidebar overlay for mobile */}
+      {sidebarOpen && (
+        <div 
+          className="ws-sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 99, top: '52px' }}
+        />
+      )}
+
       {/* Body */}
       <div className="ws-body">
-        <nav className="ws-nav ws-nav--sidebar">
+        <nav className={`ws-nav ws-nav--sidebar ${sidebarOpen ? 'is-open' : ''}`}>
           <div className="ws-nav__group">Modules</div>
           
           {navItems.map((item) => {
