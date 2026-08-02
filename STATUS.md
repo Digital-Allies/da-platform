@@ -5,7 +5,61 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-01 — by Claude Code (Fri review/buffer): Build audit complete—all code changes pushed to main, TypeScript clean, zero errors. Atomic Finds mobile card centering fixed. CMS admin responsive on mobile. Ready for Phase 2 planning. See review findings below.
+**Last updated:** 2026-08-02 — by Claude Code: Hamburger menu + dark mode implemented for mobile CMS. Sidebar becomes drawer <640px. Dark mode toggle added to nav with localStorage persistence. All admin sections (Dashboard, Pages, Collections, etc.) now fully functional on mobile without page reloads. Responsive spacing/layouts for tablet and mobile.
+
+## 2026-08-02 — Mobile CMS: Hamburger menu + Dark mode
+
+### **Implemented: Mobile Hamburger Menu**
+
+**Issue:** CMS admin sidebar took up 40% of mobile screen width, making content area unusable. Split-screen layout impossible to work with on phones/tablets.
+
+**Solution:**
+- ✅ Added hamburger menu toggle in header (visible <640px only)
+- ✅ Sidebar transforms to slide-out drawer on mobile (position: fixed, -100% → 0 on open)
+- ✅ Added semi-transparent overlay behind drawer
+- ✅ Drawer closes automatically on navigation
+- ✅ All admin sections (Dashboard, Messages, Pages, Collections, Showroom, Press Office, Projects, Research, Brand Theme, Settings) fully accessible via hamburger menu
+- ✅ No full page reloads — React navigation preserved
+
+**Code changes:**
+- `AdminShell.tsx`: Added `sidebarOpen` state, hamburger button, overlay, drawer animation
+- `admin-dashboard.css`: New mobile drawer styles, hamburger visibility, overlay
+
+### **Implemented: Dark Mode Toggle**
+
+**Features:**
+- ✅ Moon/Sun toggle icon in top nav (next to notifications)
+- ✅ Dark mode preference saved to localStorage
+- ✅ CSS variables adapted for dark theme: darker backgrounds, lighter text
+- ✅ Persists across sessions
+- ✅ Applies immediately across entire admin interface
+
+**Dark mode colors:**
+- Background: `#1a1a1a` (vs light `#F9F6F0`)
+- Text: `#f0e8d8` (vs light `#2D2D2D`)
+- Accents, borders, grids adapted for contrast
+
+### **Responsive Layout Improvements**
+
+**Mobile (<640px):**
+- ✅ Hamburger menu visible (Search bar hidden, user details hidden, sync indicator hidden)
+- ✅ Top nav reduced to 52px height, condensed padding
+- ✅ All grids/cards full-width single-column
+- ✅ Forms/inputs full-width with increased tap targets (min-height: 48px)
+- ✅ Action buttons stack vertically
+- ✅ Modals full-screen on mobile
+
+**Tablet (641px-900px):**
+- ✅ Search bar reduced width
+- ✅ User details hidden, avatar only
+- ✅ Grids convert to responsive columns
+- ✅ Maintained horizontal layout but with better spacing
+
+**Verified on production:** Tested cms.digitalallies.net on iPhone 375px viewport. Sidebar replaced with hamburger. Navigation works without page reloads. Dark mode toggle visible in header. All sections accessible.
+
+### **Next:** Verify with end users. Monitor for any layout/spacing issues on different clients/screen sizes.
+
+---
 
 ## 2026-08-01 (cont'd) — Mobile card centering fix + CMS admin mobile responsiveness
 

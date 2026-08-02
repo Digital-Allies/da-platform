@@ -1,6 +1,6 @@
 # DA Platform — Master Context & Operations Plan
 **Generated:** 2026-07-23 by Cowork session (full history synthesis)  
-**Updated:** 2026-08-01 — Mobile responsiveness added: Atomic Finds cards fixed for mobile, CMS admin dashboard now responsive  
+**Updated:** 2026-08-02 — Mobile responsiveness completed: Hamburger menu + dark mode for CMS admin; sidebar drawer on mobile <640px; all admin sections accessible without page reloads; dark mode toggle with localStorage persistence  
 **Read this before every session. Update after every major change.**
 
 **See also:**
