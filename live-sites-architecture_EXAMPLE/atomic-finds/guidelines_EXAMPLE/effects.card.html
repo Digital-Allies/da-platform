@@ -1,0 +1,43 @@
+<!-- reference specimen (not a live design-system card) -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 24px; background: #1E1E1E; display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+  .glow-sample { display: flex; flex-direction: column; align-items: center; }
+  .glow-box { width: 80px; height: 80px; border-radius: 12px; background: rgba(245,200,66,0.08); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
+  .glow-sm { box-shadow: 0 0 8px rgba(245,200,66,0.35); }
+  .glow-md { box-shadow: 0 0 16px rgba(245,200,66,0.50); }
+  .glow-lg { box-shadow: 0 0 30px rgba(245,200,66,0.60); }
+  .glow-amber { box-shadow: 0 0 12px rgba(212,130,42,0.55); }
+  .glow-ring { box-shadow: 0 0 12px rgba(245,200,66,0.9), 0 0 32px rgba(212,130,42,0.6); }
+  .glow-label { font-family: var(--font-body); font-size: 11px; color: #9A8F7D; text-align: center; text-transform: uppercase; letter-spacing: 0.1em; }
+  .glow-icon { font-size: 24px; }
+</style>
+</head>
+<body>
+  <div class="glow-sample">
+    <div class="glow-box glow-sm"><img src="../assets/icons/star.png" width="28" height="28" style="opacity:0.7"></div>
+    <div class="glow-label">Small</div>
+  </div>
+  <div class="glow-sample">
+    <div class="glow-box glow-md"><img src="../assets/icons/star.png" width="28" height="28" style="opacity:0.85"></div>
+    <div class="glow-label">Medium</div>
+  </div>
+  <div class="glow-sample">
+    <div class="glow-box glow-lg"><img src="../assets/icons/star.png" width="28" height="28"></div>
+    <div class="glow-label">Large</div>
+  </div>
+  <div class="glow-sample">
+    <div class="glow-box glow-amber"><img src="../assets/icons/sun.png" width="28" height="28"></div>
+    <div class="glow-label">Amber</div>
+  </div>
+  <div class="glow-sample">
+    <div class="glow-box glow-ring"><img src="../assets/icons/planet.png" width="28" height="28"></div>
+    <div class="glow-label">Ring</div>
+  </div>
+</body>
+</html>
