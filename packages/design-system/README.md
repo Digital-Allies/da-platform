@@ -1,54 +1,39 @@
-# Digital Allies CMS — Documentation
+# packages/design-system
 
-**The CMS is one thing: the Connected CMS Dashboard at `dashboard.html`**
-(served by `app.js` + `style.css`). Send developers and collaborators here.
-Earlier prototypes live in `_archive/` for reference only.
+Shared components, tokens, and design/spec reference docs for da-platform.
+This is NOT the CMS. **The real CMS is the Next.js app at
+`tools/build-workflows/src/`** — see the repo root `AGENTS.md` and `STATUS.md`
+for current state.
 
-## What the CMS must include
+## What's actually live (imported by `tools/build-workflows`)
 
-Three core jobs (full detail in the spec):
+- `src/components/LanguageSwitcher.tsx`
+- `src/tokens/index.ts`
 
-1. **Website page editing** — build pages by stacking sections from a
-   component library (hero, departments, field notes, rich text, CTA, …);
-   reorder, edit inline, draft/publish.
-2. **Global design-system editing** — edit the brand tokens the whole site
-   reads (colors, type, spacing) from one place; change once, update every page.
-3. **Blog & article publishing** — The Press Office: write, schedule, and
-   publish posts, press releases, and case studies.
+Everything else in this folder is design reference or spec documentation —
+useful for planning, not wired into any running app.
 
-Plus the content calendar, projects, research, the dev workshop, and settings.
+## Reference docs still current
 
-## Anthony's task tracker
+- `CMS_IMPLEMENTATION_PLAN.html` — spec: what the CMS must include, phased build plan
+- `WIRING_GUIDE.md` — how the site, dashboard, and Supabase connect
+- `INTEGRATION_OVERVIEW.md` — architecture overview
+- `PAGE_EDITOR_SPEC.md` + `page-editor.html` — data model and clickable prototype
+  for the block/section page builder (actively cited as build source, see STATUS.md)
+- `anthony-tasks.html` — Anthony's personal task tracker, synced from
+  `STATUS.md` / `BUILD-SCHEDULE.md`
+- `AF_COLLECTIONS_PAGE_EDITOR_BUILD.md`, `AF_PAGE_EDITOR_BUILD_PLAN.md`,
+  `ATOMIC_FINDS_TOKEN_SYNC_CHECKLIST.md`, `DIGITALALLIES-REBUILD-BRIEF.md` —
+  client-specific planning docs
 
-**`anthony-tasks.html`** — visual check-off list of every open task that
-needs Anthony specifically (Supabase/Vercel/registrar clicks, calls needing
-his judgment), grouped by urgency, synced from `da-platform/STATUS.md` +
-`BUILD-SCHEDULE.md`. Checkbox state persists locally per device. Tell Claude
-what changed in a session and the list gets updated to match.
+## Rule
 
-## Documentation files
-
-- **`../CMS_IMPLEMENTATION_PLAN.html`** — the specification: what the CMS must
-  include + the phased build plan, schema, and API endpoints. **Start here.**
-- **`INTEGRATION_OVERVIEW.md`** — the big picture: public site, admin dashboard, database.
-- **`WIRING_GUIDE.md`** — how to connect website → dashboard → Supabase.
-
-## Build status
-
-`dashboard.html` + `app.js` are a working front-end prototype with in-memory
-sample data — the shell, navigation, and basic create/edit/delete are real and
-clickable. The page builder, the section library, the full design-token editor,
-and live publishing are specified in the plan and get built against a backend.
-
-## What's here
-
-```
-cms/
-├── dashboard.html              # THE CMS — canonical admin dashboard
-├── app.js, style.css           # dashboard logic + styles
-├── README.md                   # this file
-├── INTEGRATION_OVERVIEW.md     # architecture
-├── WIRING_GUIDE.md             # how to connect everything
-├── index.html                  # CMS landing (links here)
-└── _archive/                   # superseded prototypes (reference only)
-```
+Per `AGENTS.md` § "Repository hygiene — non-negotiable": any design export or
+mockup in this folder (Figma Make output, Claude Design handoffs, `.dc.html`
+files) exists only until it's ported into real code in `tools/build-workflows`.
+Once ported and verified, delete the export in the same commit — don't leave
+it here "for reference." This file was previously stale (called a dead HTML
+prototype "THE CMS", pointed at `../CMS_IMPLEMENTATION_PLAN.html` when the
+file is actually a sibling in this same folder, and linked to a `cms/` folder
+structure and `_archive/` directory that never existed at these paths) —
+cleaned up 2026-08-02. Keep it accurate going forward.

@@ -1,8 +1,16 @@
 # Digital Allies — Complete Setup & Integration Guide
 
+> ⚠️ **STALE (flagged 2026-08-02):** This doc describes an older architecture
+> (a separate `Digital-Allies/DigitalAllies` repo with a `cms/` folder,
+> `dashboard.html` as the admin) that no longer matches reality. **The real
+> CMS is the Next.js app in `tools/build-workflows/src/`** in this monorepo —
+> see `AGENTS.md` and `STATUS.md` at the repo root for current architecture.
+> Needs a full rewrite; not done as part of this hygiene pass — content below
+> is historical reference only, verify against the real code before trusting it.
+
 This document ties everything together: design system, CMS, website, and admin dashboard.
 
-> **The CMS is one interface:** the Connected CMS Dashboard at `dashboard.html`. It must do three jobs — website page editing (a section-based page builder), global design-system editing (brand tokens), and blog/article publishing. Full scope: `../CMS_IMPLEMENTATION_PLAN.html`.
+> **The CMS is one interface:** the Connected CMS Dashboard at `dashboard.html`. It must do three jobs — website page editing (a section-based page builder), global design-system editing (brand tokens), and blog/article publishing. Full scope: `CMS_IMPLEMENTATION_PLAN.html`.
 
 ## Repository Structure
 

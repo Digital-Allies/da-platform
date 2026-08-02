@@ -1,8 +1,17 @@
 # CMS Integration Guide — Wiring Your Website to the Backend
 
+> ⚠️ **STALE (flagged 2026-08-02):** This guide's env var names (`VITE_CMS_API_URL`,
+> `REACT_APP_SUPABASE_URL`) and code samples describe an older Vite/CRA-style
+> setup that does not match the real app. **The real CMS is the Next.js app in
+> `tools/build-workflows/src/`**, using `NEXT_PUBLIC_SUPABASE_URL` /
+> `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_SERVICE_ROLE_KEY` — see
+> `tools/build-workflows/.env.local` and `AGENTS.md` for the real setup.
+> Needs a full rewrite; not done as part of this hygiene pass — content below
+> is historical reference only, verify against the real code before trusting it.
+
 This guide explains how to connect your public website (digitalallies.net) to the CMS backend (Supabase) and admin dashboard.
 
-> **Admin UI:** the canonical dashboard is `dashboard.html`. Beyond Tools / Services / Calendar, the CMS also edits **pages** (a section-based page builder), **articles** (the blog), and **design tokens** (global brand). See the collections below and the full scope in `../CMS_IMPLEMENTATION_PLAN.html`.
+> **Admin UI:** the canonical dashboard is `dashboard.html`. Beyond Tools / Services / Calendar, the CMS also edits **pages** (a section-based page builder), **articles** (the blog), and **design tokens** (global brand). See the collections below and the full scope in `CMS_IMPLEMENTATION_PLAN.html`.
 
 ## Architecture Overview
 
