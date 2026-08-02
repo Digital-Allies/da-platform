@@ -5,7 +5,32 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-02 — by Claude Code: Hamburger menu + dark mode implemented for mobile CMS. Sidebar becomes drawer <640px. Dark mode toggle added to nav with localStorage persistence. All admin sections (Dashboard, Pages, Collections, etc.) now fully functional on mobile without page reloads. Responsive spacing/layouts for tablet and mobile.
+**Last updated:** 2026-08-02 — by Claude Code: Full repo hygiene audit + cleanup. Removed 15+ duplicate/stale/orphaned files (dead CMS prototype 4 docs wrongly called "THE CMS", zips next to their own unzipped contents, tracked .DS_Store/__pycache__, a design-export folder used once and never cleaned up). Added permanent hygiene rules to AGENTS.md and a mandatory pre-onboarding hygiene step. Remaining ambiguous items tracked in issue #38 for Anthony's call. Also: hamburger menu + dark mode implemented for mobile CMS.
+
+## 2026-08-02 (cont'd) — Repository hygiene audit + cleanup
+
+**Trigger:** Anthony flagged the repo as "a mess" after reviewing `sites/atomic-finds/` and a locally-created `live-sites-architecture_EXAMPLE/` scratch folder used to work out the correct client-site layout. Concern: onboarding 3 more clients on top of existing clutter would compound the problem.
+
+**What happened, in order:**
+1. Confirmed and deleted `live-sites-architecture_EXAMPLE/` (was a local scratch folder, explicitly for illustration only, no longer needed once the real target path — `tools/build-workflows/sites/<client>/` — was confirmed)
+2. Ran a full read-only audit (Explore agent) across the entire repo for duplicates, orphaned files, and stale docs
+3. Added a permanent **"Repository hygiene — non-negotiable"** section to `AGENTS.md` (= `CLAUDE.md` = `GEMINI.md`, symlinked) — rules against leaving design exports in place after porting, zip-next-to-unzipped duplication, `copy`/`(1)`/`-old` filenames, committed OS artifacts, and undocumented top-level folders
+4. Added a mandatory **Step 6 (repo hygiene pass)** to the weekly infra maintenance routine in `DA-PLATFORM-MASTER-CONTEXT.md` §11 — required before onboarding any new client site
+5. Removed everything confirmed safe (commits `3c1cb6b`, `1ba44b2`):
+   - `packages/design-system/dashboard.html` + `app.js` + `style.css` + `index.html` — a dead pre-Next.js CMS prototype that **4 different docs** (README.md, INTEGRATION_OVERVIEW.md, WIRING_GUIDE.md, CMS_IMPLEMENTATION_PLAN.html) incorrectly called "THE CMS" / "canonical dashboard." The real CMS has been the Next.js app in `tools/build-workflows/src/` for weeks — these docs were actively misleading anyone who read them. `index.html` (a browsable doc hub) additionally had 4+ broken links to paths that don't exist anywhere in the repo.
+   - `packages/design-system/index copy.html`, `dashboard-dark.html` (superseded — dark mode is now live in real code), `SESSION-2026-07-22-STATUS-UPDATE.md` (self-declared "not meant to be kept as a permanent doc," wrong location)
+   - Two redundant `.zip` files sitting next to their own already-unzipped contents, plus `.thumbnail` generator artifacts (`Mobile responsive CMS admin/`, `Dark mode CMS design/`)
+   - `ANTIGRAVITY_HANDOFF_CMS_TEMPLATES.md` (root) — pointed at `packages/20260722-da-design-system/templates/`, which no longer exists
+   - `git-history.txt` (root) — redundant dump of `git log`, unreferenced anywhere
+   - `tools/build-workflows/client-site-template/` — orphaned stray file, unrelated to the same-named external repo `SETUP.md` describes
+   - `sites/healthcare-training-center/archive/index (19).html` — confirmed near-identical duplicate of `archive/index.html`
+   - `sites/digitalallies/__pycache__/*.pyc` and tracked `.DS_Store` files — should never have been committed; added `__pycache__/` + `*.pyc` to root `.gitignore` (wasn't covered before)
+   - `tools/build-workflows/audits/20260706-site-audit.md` — month-old audit against a pre-rebuild version of the dashboard, unreferenced anywhere, superseded by GitHub Issues + this doc
+6. Rewrote `packages/design-system/README.md` to reflect actual current state
+7. Added prominent "stale content" banners to `INTEGRATION_OVERVIEW.md`, `WIRING_GUIDE.md`, `CMS_IMPLEMENTATION_PLAN.html` — these describe an entire older architecture (separate `DigitalAllies` repo with a `cms/` folder, Vite env vars instead of Next.js) that's too large to rewrite blind inside a hygiene pass; banners stop anyone from trusting the stale content by accident, full rewrite is separate follow-up work
+8. Opened **issue #38** for everything that needs Anthony's judgment call rather than an assumption: `CMS Developer Handoff.html` (196K, unreferenced, unclear value), `tasks/antigravity/` (may contain a finished task's leftovers, not deleted), `sites/healthcare-training-center/` internal duplication (155M — hold until HCTC onboarding per the new pre-onboarding rule), `sites/atomic-finds/design_handoff_*` (220M — confirmed only *partially* migrated into `public/atomic-finds/`, must stay until issue #37's migration verifies every asset is ported)
+
+**Not touched, on purpose:** anything still serving as active migration source material for the pending multi-client architecture work (issue #37) or the HCTC/DA onboarding still to come. Hygiene ≠ deleting everything that looks messy — only confirmed-orphaned content was removed.
 
 ## 2026-08-02 — Mobile CMS: Hamburger menu + Dark mode
 
