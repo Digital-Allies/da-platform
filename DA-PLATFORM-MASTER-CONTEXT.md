@@ -422,6 +422,15 @@ Design concept → Asset gen (Canva / Luma Labs) → Canva → Claude Design →
 - Open this file — any resolved bugs to move from §3 to §4?
 - **Rule: verify by loading the URL / reading the code, never by asserting what the doc already says**
 
+### Step 6 — Repo hygiene pass (10 min)
+Full rules in `AGENTS.md` § "Repository hygiene — non-negotiable." Quick checklist:
+- Any design-export folder (zips, `.dc.html`, `_ds/` bundles) that's already been ported into real code and is just sitting there? Delete it.
+- Any `.zip` file still present next to its own already-unzipped contents? Delete the zip.
+- Any `" copy"`, `"(1)"`, `"-old"`, `"-backup"` filenames anywhere? Rename or delete.
+- `git status` clean of `.DS_Store` / `__pycache__` / `*.pyc`? If any got committed, `git rm --cached` them.
+- Any doc referencing a path that no longer exists? Fix or delete it now, don't leave it for the next session.
+- **Mandatory before onboarding any new client site** — don't start client #2/3/4 with existing clutter still unresolved.
+
 ---
 
 ## 12. TWICE-DAILY CONTEXT BRIEFING ROUTINE (new)

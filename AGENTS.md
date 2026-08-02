@@ -28,6 +28,22 @@ sites/healthcare-training-center/  ← reference only
 - Shared components live in `packages/design-system`. Never copy them into a site directory.
 - All live deployments use `tools/build-workflows` as their Vercel root directory.
 - `sites/*` are frozen historical imports. The live DA site deploys from a separate repo: `Digital-Allies/DigitalAllies`.
+- **In progress:** migrating each client's real working assets/components into `tools/build-workflows/sites/<client>/` (nested inside the deployed root, not the top-level `sites/` above — that folder stays frozen reference). Tracked in issue #37. Until that migration lands, the top-level `sites/*` folders remain reference-only per the line above; do not treat them as live.
+
+---
+
+## Repository hygiene — non-negotiable
+
+This repo accumulated real clutter — duplicate `.zip` files sitting next to their own already-unzipped contents, design mockups left in place indefinitely after being ported to real code, stale docs pointing at folders that no longer exist, committed `.DS_Store`/`__pycache__` files. A full audit and cleanup happened 2026-08-02. Do not let it happen again — these rules are not optional.
+
+- **Design/reference exports are temporary by construction.** Anything imported from Figma Make, Claude Design, or a design handoff (zips, `.dc.html` files, `_ds/` bundles, standalone `index.html` previews) exists ONLY to be ported into real code. The moment the port is verified working, **delete the export in the same commit/PR that completes the port.** Don't leave it "for reference" — the real code is the reference from that point on.
+- **Never commit an archive next to its own unzipped contents.** If you extract a `.zip`, delete the `.zip`. A zip sitting beside its own extracted folder is duplication, not a backup — git history is the backup.
+- **No `" copy"`, `"(1)"`, `"-old"`, `"-backup"`, `"_v2"` filenames, ever.** Need a second version of a file? Either replace the original (git keeps history) or give it a real, permanent, descriptive name. A file named `index copy.html` sitting next to `index.html` means one of them shouldn't exist.
+- **One canonical location per concern.** Session logs live in `sessions/` — nowhere else. Don't create a second "status update" doc in a different folder because it was convenient in the moment.
+- **Never commit OS/tool artifacts.** `.DS_Store`, `__pycache__/`, `*.pyc`, and equivalents must be covered by the root `.gitignore` (not just a per-folder one) and must never be `git add`-ed, even by accident. If one slips through, `git rm --cached` it — don't just delete it from disk, or git keeps tracking it.
+- **Every new top-level folder needs a one-line reason in `STATUS.md` or `DA-PLATFORM-MASTER-CONTEXT.md` the same session it's created.** If you can't explain what it's for and whether it's temporary in one line, it shouldn't exist yet.
+- **Stale docs are worse than no docs.** If a doc references a path, tool, or folder that no longer exists, fix or delete the doc the same session you notice it — don't leave a trap for the next agent (human or AI).
+- **Before onboarding each new client site, run a hygiene pass first.** Confirm no leftover design exports, duplicate folders, or orphaned reference docs from the previous client's onboarding are still sitting around before adding a new one.
 
 ---
 

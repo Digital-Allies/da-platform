@@ -3,3 +3,5 @@ node_modules/
 *.log
 .sync.lock
 cms-suite/
+__pycache__/
+*.pyc
