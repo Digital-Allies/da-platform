@@ -381,7 +381,7 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   .form-actions { flex-direction: column; }
   .btn { min-width: auto; width: 100%; }
   .content-filters, .dev-filters { flex-direction: column; gap: 10px; }
-  .pe-preview-toolbar { padding: 8px 12px; }
+  .pe-preview-toolbar { padding: 8px 12px !important; }
   .contact-cards { grid-template-columns: 1fr; gap: 12px; }
   .contact-form { padding: 20px; }
   .contact-form h3 { font-size: 18px; }
