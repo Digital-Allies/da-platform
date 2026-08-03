@@ -5,7 +5,23 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-02 — by Claude Code: Full repo hygiene audit + cleanup. Removed 15+ duplicate/stale/orphaned files (dead CMS prototype 4 docs wrongly called "THE CMS", zips next to their own unzipped contents, tracked .DS_Store/__pycache__, a design-export folder used once and never cleaned up). Added permanent hygiene rules to AGENTS.md and a mandatory pre-onboarding hygiene step. Remaining ambiguous items tracked in issue #38 for Anthony's call. Also: hamburger menu + dark mode implemented for mobile CMS.
+**Last updated:** 2026-08-02 — by Claude Code: Merged PR #39 (Phase 1 of #37 — Atomic Finds components/styles moved to `tools/build-workflows/sites/atomic-finds/`) and PR #40 (icon artwork refresh, dark-mode color consistency) to `main`, both verified on merged state. Anthony decided the current public-asset path system (`public/<client>/`, unmoved) stays permanent — no Supabase `products.image_url` migration needed. See entry below for full detail.
+
+## 2026-08-02 (cont'd) — Atomic Finds Phase 1 merged + asset-path decision closed out
+
+**Merged to `main`:**
+- **PR #39** — moved `AtomicFindsHomepage.tsx`, `AtomicNav.tsx`, `AtomicContactForm.tsx`, `Starfield.tsx`, and `atomic-finds.css` from the shared `src/` tree into `tools/build-workflows/sites/atomic-finds/`. Added a `@sites/*` tsconfig path alias. Verified: `tsc --noEmit` clean, `npm run build` clean, live browser render with real Supabase data (Atomic Finds client ID), zero 404s, zero console errors — both before merge and again on the merged `main` state.
+- **PR #40** — replaced the artwork (not paths) of the 9 live Atomic Finds icons (Cart, Contact, Made in Austin, Search, Shop, Sustainability, delivery, restoration, star) with updated versions from `sites/atomic-finds/assets/custom-icons/`. Both old and new were already transparent-background line art; the real change is color, shifting from a duller brown to the brand's actual amber-orange (`#D4822A`) for dark-mode consistency. Filenames and location unchanged — no code changes needed.
+
+**Decision (Anthony, 2026-08-02): public asset paths stay where they are, permanently.**
+During PR #39 testing, found that live Supabase `products` rows store `image_url` as absolute paths pointing at `/atomic-finds/products/...`. Moving `public/atomic-finds/` into the new `sites/atomic-finds/` structure would have required a coordinated `UPDATE` against the shared production Supabase project. Asked Anthony; decision is to keep the current system — `public/<client>/` stays a sibling of `sites/<client>/`, not nested inside it, for every client going forward. This is now documented as the permanent pattern in `AGENTS.md`, not a temporary gap. No Supabase migration work is planned or needed.
+
+**What this means for issue #37 (multi-client architecture):**
+- Phase 1 (component/style isolation) — ✅ done for Atomic Finds, pattern established for the next 3 clients
+- Public asset path migration — ✅ closed, not needed (see decision above)
+- Phase 2 (site-loader abstraction) scope is now smaller than originally estimated: it only needs to dynamically load per-client components/styles, not also solve asset-path relocation
+
+**Cleanup:** both feature branches (`refactor/atomic-finds-sites-directory`, `chore/atomic-finds-icon-refresh`) deleted after merge, local `main` fast-forwarded and re-verified (`tsc --noEmit` clean on the combined merged state).
 
 ## 2026-08-02 (cont'd) — Repository hygiene audit + cleanup
 

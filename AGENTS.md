@@ -18,17 +18,20 @@ One Next.js codebase, one Supabase project, three client sites — all isolated 
 ## Directory rules
 
 ```
-packages/design-system/            ← shared components, tokens, styles ONLY
-tools/build-workflows/             ← the CMS engine (Next.js app, admin, API)
-sites/digitalallies/               ← frozen import, not the live site
-sites/atomic-finds/                ← reference only
-sites/healthcare-training-center/  ← reference only
+packages/design-system/                    ← shared components, tokens, styles ONLY
+tools/build-workflows/                     ← the CMS engine (Next.js app, admin, API)
+tools/build-workflows/sites/<client>/      ← per-client components + styles (real, live)
+tools/build-workflows/public/<client>/     ← per-client static assets (real, live — see note below)
+sites/digitalallies/                       ← frozen import, not the live site
+sites/atomic-finds/                        ← reference only
+sites/healthcare-training-center/          ← reference only
 ```
 
 - Shared components live in `packages/design-system`. Never copy them into a site directory.
 - All live deployments use `tools/build-workflows` as their Vercel root directory.
-- `sites/*` are frozen historical imports. The live DA site deploys from a separate repo: `Digital-Allies/DigitalAllies`.
-- **In progress:** migrating each client's real working assets/components into `tools/build-workflows/sites/<client>/` (nested inside the deployed root, not the top-level `sites/` above — that folder stays frozen reference). Tracked in issue #37. Until that migration lands, the top-level `sites/*` folders remain reference-only per the line above; do not treat them as live.
+- Top-level `sites/*` (repo root, not nested under `tools/build-workflows`) are frozen historical imports/reference only — do not treat them as live. The live DA site deploys from a separate repo: `Digital-Allies/DigitalAllies`.
+- **Per-client source lives at `tools/build-workflows/sites/<client>/`** (components + styles) — Atomic Finds migrated 2026-08-02 (PR #39). Add new clients here going forward, not back into the shared `src/` tree.
+- **Per-client static assets stay at `tools/build-workflows/public/<client>/`** (e.g. `public/atomic-finds/`) — deliberately NOT nested under `sites/<client>/`, and not planned to move. Decision (2026-08-02, Anthony): the current asset-path system is fine as-is; product `image_url` values in the shared Supabase `products` table are absolute paths pointing here, so relocating this folder would require a coordinated production data migration that isn't worth doing. New clients follow the same pattern: `public/<client-slug>/`.
 
 ---
 
