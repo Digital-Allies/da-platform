@@ -19,7 +19,7 @@ export function MediaUploader({
   onChange,
   label,
   hint,
-  bucket = 'Client Assets',
+  bucket = 'client-assets',
   accept = 'image/*',
 }: MediaUploaderProps) {
   const [uploading, setUploading] = useState(false);
@@ -36,7 +36,14 @@ export function MediaUploader({
       const fileExt = file.name.split('.').pop() || 'png';
       const cleanName = file.name.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
       const fileName = `${Date.now()}_${cleanName}.${fileExt}`;
-      const filePath = `${clientId || 'default'}/${fileName}`;
+
+      // Map client IDs to client slugs (e.g., "atomic-finds")
+      // For unknown clients, use first 8 chars of UUID
+      const clientSlugs: Record<string, string> = {
+        '443936d5-f92e-480b-b206-c65cfb52bdfc': 'atomic-finds',
+      };
+      const clientSlug = clientSlugs[clientId || ''] || (clientId?.slice(0, 8) ?? 'default');
+      const filePath = `${clientSlug}/${fileName}`;
 
       const { data, error } = await supabase.storage
         .from(bucket)
