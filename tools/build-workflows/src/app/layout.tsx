@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import { getSiteSettings } from '@/lib/data'
 import AuthListener from '@/components/AuthListener'
 import FacebookSdk from '@/components/FacebookSdk'
+import { Analytics } from '@vercel/analytics/react'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
@@ -35,6 +36,7 @@ export default async function RootLayout({
       >
         <AuthListener />
         <FacebookSdk appId={settings.facebook_app_id} />
+        <Analytics />
         {children}
       </body>
     </html>
