@@ -457,7 +457,7 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
           </div>
         </>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', minHeight: '600px' }}>
+        <div className="pe-split-grid">
           {/* Left panel: editor form */}
           <div className="dev-task-form" style={{ background: 'var(--bg)', border: 'var(--border-1)', padding: '24px', width: '100%', maxWidth: 'none', margin: '0' }}>
             <form onSubmit={handleSubmit}>
@@ -641,8 +641,8 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
           </div>
 
           {/* Right panel: visual preview with responsive viewport toggle */}
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100%', border: 'var(--border-1)', background: '#fff' }}>
-            <div style={{ background: 'var(--bg-alt)', borderBottom: 'var(--border-1)', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div className="pe-preview-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', border: 'var(--border-1)', background: '#fff' }}>
+            <div className="pe-preview-toolbar" style={{ background: 'var(--bg-alt)', borderBottom: 'var(--border-1)', padding: '10px 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ fontSize: '12px', fontWeight: 'bold' }}>Live Dynamic Preview</span>
                 <span className={`status status--${formData.status}`}>{formData.status}</span>
@@ -666,11 +666,12 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
                 </button>
               </div>
             </div>
-            <div style={{ flex: '1', display: 'flex', justifyContent: 'center', background: '#EAE7E0', padding: previewViewport === 'mobile' ? '20px 0' : '0', overflowY: 'auto' }}>
+            <div style={{ flex: '1', display: 'flex', justifyContent: 'center', background: '#EAE7E0', padding: previewViewport === 'mobile' ? '20px 0' : '0', overflowY: 'auto', overflowX: 'hidden' }}>
               <iframe
                 srcDoc={generatePreviewHtml()}
                 style={{
                   width: previewViewport === 'mobile' ? '375px' : '100%',
+                  maxWidth: '100%',
                   height: previewViewport === 'mobile' ? '667px' : '100%',
                   border: previewViewport === 'mobile' ? '2px solid var(--charcoal)' : 'none',
                   borderRadius: previewViewport === 'mobile' ? '12px' : '0',

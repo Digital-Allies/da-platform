@@ -239,7 +239,7 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
 .deadline-item { display: flex; gap: 16px; font-size: 13px; border-left: 4px solid var(--accent); padding-left: 12px; }
 .deadline-item.priority-high { border-left-color: var(--signal); }
 
-.quick-actions { display: flex; gap: 16px; }
+.quick-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 
 /* Tabs */
 .content-tabs, .dev-tabs { display: flex; gap: 8px; margin-bottom: 32px; border-bottom: var(--border-1); }
@@ -251,6 +251,9 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
+
+/* Page Editor — split grid (editor form + live preview) */
+.pe-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; min-height: 600px; }
 
 /* Content Library */
 .content-filters, .dev-filters { display: flex; gap: 16px; margin-bottom: 24px; }
@@ -342,6 +345,11 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   .content-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-cards { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  /* Page editor: stack the edit form above the live preview instead of
+     forcing two columns — the preview's own Desktop/Mobile toggle is
+     what should control simulated viewport width, not the CMS layout. */
+  .pe-split-grid { grid-template-columns: 1fr; gap: 20px; }
+  .pe-preview-panel { min-height: 400px; }
 }
 
 @media (max-width: 640px) {
@@ -354,6 +362,8 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   .ws-stat__label { font-size: 11px; }
   .widget-grid { grid-template-columns: 1fr; gap: 16px; }
   .widget { padding: 16px; }
+  .quick-actions { flex-direction: column; gap: 10px; }
+  .quick-action-btn { width: 100%; min-width: 0; }
   .kanban-board { grid-template-columns: 1fr; gap: 16px; }
   .kanban-column { min-height: 300px; padding: 12px; }
   .kanban-column__title { font-size: 12px; }
@@ -370,6 +380,8 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   .content-form { padding: 20px; }
   .form-actions { flex-direction: column; }
   .btn { min-width: auto; width: 100%; }
+  .content-filters, .dev-filters { flex-direction: column; gap: 10px; }
+  .pe-preview-toolbar { padding: 8px 12px !important; }
   .contact-cards { grid-template-columns: 1fr; gap: 12px; }
   .contact-form { padding: 20px; }
   .contact-form h3 { font-size: 18px; }

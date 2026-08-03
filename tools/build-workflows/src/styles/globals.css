@@ -123,7 +123,15 @@
 
   /* Section wrapper */
   .section {
-    @apply py-20 px-6 md:px-10;
+    /* Note: this project's Tailwind config overrides the default spacing
+       scale (see tailwind.config.js `theme.extend.spacing`) — px-6 here
+       means 64px, not Tailwind's default 24px. That's fine on desktop but
+       was applied with no smaller mobile step, putting 128px of combined
+       horizontal padding on every phone regardless of width and squeezing
+       any minmax()-based grid inside narrower than its own minimum column
+       size — the exact cause of ProductGrid cards clipping/overflowing on
+       mobile. Fixed 2026-08-03: real mobile-first padding below md. */
+    @apply py-20 px-2 md:px-10;
   }
 
   .section-inner {
