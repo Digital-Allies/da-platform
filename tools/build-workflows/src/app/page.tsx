@@ -10,7 +10,7 @@ import {
   BlockRenderer,
 } from '@/components/site'
 import SiteTheme from '@/components/site/SiteTheme'
-import AtomicFindsHomepage from '@/components/site/atomic-finds/AtomicFindsHomepage'
+import AtomicFindsHomepage from '@sites/atomic-finds/components/AtomicFindsHomepage'
 import { getSiteSettings, getServices, getTestimonials, getPageBySlug, getProducts, getFeaturedReviews, getCollections, getPublishedPages } from '@/lib/data'
 import { ATOMIC_FINDS_CLIENT_ID } from '@/lib/theme'
 
