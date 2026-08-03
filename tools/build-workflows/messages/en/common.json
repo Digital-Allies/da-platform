@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "contact": "Contact",
+    "admin": "Admin",
+    "language": "Language",
+    "english": "English",
+    "spanish": "Español"
+  },
+  "footer": {
+    "company": "Company",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "accessibility": "Accessibility",
+    "useOfAI": "Use of AI",
+    "sitemap": "Sitemap",
+    "followUs": "Follow Us",
+    "contact": "Contact",
+    "copyright": "© {year} {siteName}. All rights reserved."
+  },
+  "buttons": {
+    "learnMore": "Learn More",
+    "shopNow": "Shop Now",
+    "contactUs": "Contact Us",
+    "viewProducts": "View Products",
+    "back": "Back",
+    "next": "Next",
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Information"
+  }
+}

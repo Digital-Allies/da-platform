@@ -1,0 +1,20 @@
+{
+  "siteName": "Atomic Finds ATX",
+  "siteDescription": "Curated vintage pieces and restoration services in Austin, Texas",
+  "home": {
+    "title": "Atomic Finds ATX | Vintage & Restoration",
+    "description": "Discover unique vintage finds and professional restoration services. Curated collections for Austin's vintage enthusiasts."
+  },
+  "about": {
+    "title": "About Atomic Finds ATX",
+    "description": "Learn about our mission to curate and restore vintage pieces for Austin's community."
+  },
+  "products": {
+    "title": "Products | Atomic Finds ATX",
+    "description": "Browse our collection of vintage finds and restored pieces."
+  },
+  "contact": {
+    "title": "Contact Atomic Finds ATX",
+    "description": "Get in touch with us about our products and services."
+  }
+}

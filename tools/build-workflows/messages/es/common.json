@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "products": "Productos",
+    "contact": "Contacto",
+    "admin": "Administrador",
+    "language": "Idioma",
+    "english": "English",
+    "spanish": "Español"
+  },
+  "footer": {
+    "company": "Empresa",
+    "legal": "Legal",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "cookies": "Política de Cookies",
+    "accessibility": "Accesibilidad",
+    "useOfAI": "Uso de IA",
+    "sitemap": "Mapa del Sitio",
+    "contact": "Contacto",
+    "copyright": "© {year} {siteName}. Todos los derechos reservados."
+  },
+  "buttons": {
+    "learnMore": "Más Información",
+    "shopNow": "Comprar Ahora",
+    "contactUs": "Contáctanos",
+    "viewProducts": "Ver Productos",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "submit": "Enviar",
+    "cancel": "Cancelar"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información"
+  }
+}

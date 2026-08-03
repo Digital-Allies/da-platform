@@ -1,0 +1,31 @@
+{
+  "home": {
+    "title": "Atomic Finds ATX",
+    "subtitle": "Curated Vintage & Restoration",
+    "heroTitle": "Discover Unique Finds",
+    "heroSubtitle": "Handpicked vintage pieces and restoration services",
+    "cta": "Explore Our Collection"
+  },
+  "about": {
+    "title": "About Atomic Finds ATX",
+    "subtitle": "Our Story",
+    "heading": "Who We Are"
+  },
+  "products": {
+    "title": "Our Products",
+    "subtitle": "Browse our curated collection",
+    "noProducts": "No products available",
+    "price": "Price",
+    "addToCart": "Add to Cart"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "We'd love to hear from you",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "phone": "Phone",
+    "address": "Address",
+    "submit": "Send Message"
+  }
+}

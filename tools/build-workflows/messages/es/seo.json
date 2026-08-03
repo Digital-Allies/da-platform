@@ -1,0 +1,20 @@
+{
+  "siteName": "Atomic Finds ATX",
+  "siteDescription": "Piezas vintage seleccionadas y servicios de restauración en Austin, Texas",
+  "home": {
+    "title": "Atomic Finds ATX | Vintage y Restauración",
+    "description": "Descubre hallazgos vintage únicos y servicios profesionales de restauración. Colecciones seleccionadas para los entusiastas de lo vintage en Austin."
+  },
+  "about": {
+    "title": "Acerca de Atomic Finds ATX",
+    "description": "Aprende sobre nuestra misión de seleccionar y restaurar piezas vintage para la comunidad de Austin."
+  },
+  "products": {
+    "title": "Productos | Atomic Finds ATX",
+    "description": "Explora nuestra colección de hallazgos vintage y piezas restauradas."
+  },
+  "contact": {
+    "title": "Contacta a Atomic Finds ATX",
+    "description": "Ponte en contacto con nosotros sobre nuestros productos y servicios."
+  }
+}
