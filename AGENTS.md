@@ -11,7 +11,7 @@ One Next.js codebase, one Supabase project, three client sites — all isolated 
 
 **Sites:** Digital Allies (digitalallies.net) · Atomic Finds ATX (atomicfindsatx.store) · Healthcare Training Center  
 **CMS admin:** cms.digitalallies.net (deployed from `tools/build-workflows`)  
-**Repo:** Digital-Allies/da-platform (private)
+**Repo:** Digital-Allies/da-platform (public)
 
 ---
 
