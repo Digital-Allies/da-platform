@@ -5,7 +5,21 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-03 — by Claude Code (daily build session): schedule has nothing new to build today; fixed one real Copilot-flagged bug on the already-open PR #41; flagged 4 new P0/P1 issues (#33–36) from Anthony's 2026-08-02 audit that aren't on `BUILD-SCHEDULE.md` yet. See entry below for full detail.
+**Last updated:** 2026-08-04 — by Claude Code (daily build session): schedule still exhausted, build health confirmed green, PR #41 merged since yesterday, nothing else changed. See entry below.
+
+## 2026-08-04 — daily build session: schedule still exhausted, build health check only
+
+**Schedule order followed:** today (Tue Aug 4) is still inside `BUILD-SCHEDULE.md`'s Mon–Tue Aug 3–4 slot (`/admin/content`) — the same slot 2026-08-03's session was in. That slot was investigated and answered 2026-07-23: templates + data-layer in this repo are fine, the one real remaining fix is a one-line bug in the separate `Digital-Allies/DigitalAllies` repo, out of this scheduled task's scope. Wed–Thu Aug 5–6 is done (PR #10). Fri Aug 7 (review/buffer) isn't due yet. Checked `BUILD-SCHEDULE.md` for anything dated past Aug 7 — still nothing. **Nothing new and in-scope to build today.**
+
+**What changed since yesterday's entry:** PR #41 was merged by Anthony (`d0953a1`, includes the `!important` fix pushed 2026-08-03). Anthony also flipped the repo to public and updated the one "private" reference in `AGENTS.md` (`6fc852a`) — a `[Anthony]`-only GitHub setting, not a code change; already consistent with `CLAUDE.md` since that file is a symlink to `AGENTS.md`. No other commits landed besides the recurring background `chore: sync MM23` snapshots.
+
+**Build health check:** `git status` clean on `main`, `npx tsc --noEmit` clean in `tools/build-workflows`, all 3 GitHub status checks (both Vercel projects + Vercel Deployments umbrella check) green on `main`'s HEAD (`6fc852a`). No open PRs.
+
+**Issues #33–36 (flagged 2026-08-02, not yet on `BUILD-SCHEDULE.md`) are all still open** — #33 (P0, base64 asset upload regression) in particular hasn't moved. Not picked up this session, same reasoning as yesterday: this task's instructions are to work `BUILD-SCHEDULE.md` items in order, not GitHub issues directly, and these aren't scheduled yet. Repeating yesterday's recommendation: Anthony should either add them to `BUILD-SCHEDULE.md` or explicitly scope a session to them — #33 is CRITICAL and blocks the Atomic Finds/Jennyfer handoff.
+
+**What's next:** re-check `BUILD-SCHEDULE.md` for dated entries past Aug 7 or for #33–36 being added; Fri Aug 7's review/buffer slot is the next dated item otherwise.
+
+---
 
 ## 2026-08-03 — daily build session: schedule exhausted for today, fixed a real bug on open PR #41, flagged unscheduled P0/P1 issues
 
