@@ -1,14 +1,18 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { useLocaleSwitcher } from '@/components/IntlProvider';
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  /** Swaps in light-on-dark styling for dark navs (e.g. Atomic Finds) */
+  variant?: 'light' | 'dark';
+}
+
+export function LanguageSwitcher({ variant = 'light' }: LanguageSwitcherProps) {
   const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
+  const { changeLocale } = useLocaleSwitcher();
   const t = useTranslations('nav');
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,48 +22,73 @@ export function LanguageSwitcher() {
   ];
 
   const handleLanguageChange = (newLocale: string) => {
-    if (newLocale === locale) {
-      setIsOpen(false);
-      return;
-    }
-
-    const segments = pathname.split('/');
-    segments[1] = newLocale;
-    const newPathname = segments.join('/');
-    router.push(newPathname);
     setIsOpen(false);
+    if (newLocale === locale) return;
+    changeLocale(newLocale);
   };
 
   const currentLanguage = languages.find(lang => lang.code === locale);
+  const isDark = variant === 'dark';
 
   return (
-    <div className="relative">
+    <div style={{ position: 'relative' }}>
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium
-                   rounded-md border border-charcoal
-                   hover:bg-neutral-100 transition-colors"
+        type="button"
+        onClick={() => setIsOpen(v => !v)}
         aria-label={t('language')}
+        aria-expanded={isOpen}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          padding: '6px 10px',
+          fontSize: '12px',
+          fontWeight: 600,
+          borderRadius: isDark ? '999px' : '6px',
+          border: isDark ? '1px solid rgba(255,255,255,0.22)' : '1px solid var(--charcoal, #2D2D2D)',
+          background: isDark ? 'rgba(255,255,255,0.06)' : 'transparent',
+          color: isDark ? 'var(--bone-white, #F9F6F0)' : 'var(--charcoal, #2D2D2D)',
+          cursor: 'pointer',
+        }}
       >
         <span>{currentLanguage?.label || locale.toUpperCase()}</span>
-        <ChevronDown size={16} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown size={14} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms' }} />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-1 w-32 bg-white border border-charcoal
-                        rounded-md shadow-lg z-50">
+        <div
+          style={{
+            position: 'absolute',
+            right: 0,
+            marginTop: '4px',
+            width: '120px',
+            background: isDark ? 'rgba(52,40,24,0.98)' : '#fff',
+            border: isDark ? '1px solid rgba(245,200,66,0.22)' : '1px solid var(--charcoal, #2D2D2D)',
+            borderRadius: '6px',
+            boxShadow: '0 8px 20px rgba(0,0,0,0.15)',
+            zIndex: 50,
+            overflow: 'hidden',
+          }}
+        >
           {languages.map(lang => (
             <button
               key={lang.code}
+              type="button"
               onClick={() => handleLanguageChange(lang.code)}
-              className={`w-full px-4 py-2 text-sm text-left transition-colors
-                          ${locale === lang.code
-                            ? 'bg-brand text-white font-medium'
-                            : 'hover:bg-neutral-100'
-                          }
-                          ${lang.code === languages[0].code ? 'rounded-t-md' : ''}
-                          ${lang.code === languages[languages.length - 1].code ? 'rounded-b-md' : ''}
-                          `}
+              style={{
+                display: 'block',
+                width: '100%',
+                textAlign: 'left',
+                padding: '8px 12px',
+                fontSize: '12px',
+                fontWeight: locale === lang.code ? 700 : 500,
+                background: locale === lang.code ? (isDark ? 'rgba(245,200,66,0.16)' : 'var(--brand, #C5301A)') : 'transparent',
+                color: locale === lang.code
+                  ? (isDark ? 'var(--celestial-yellow, #F5C842)' : '#fff')
+                  : (isDark ? 'var(--bone-white, #F9F6F0)' : 'var(--charcoal, #2D2D2D)'),
+                border: 'none',
+                cursor: 'pointer',
+              }}
             >
               {lang.label}
             </button>

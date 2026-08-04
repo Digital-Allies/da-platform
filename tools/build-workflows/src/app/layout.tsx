@@ -4,6 +4,7 @@ import { getSiteSettings } from '@/lib/data'
 import AuthListener from '@/components/AuthListener'
 import FacebookSdk from '@/components/FacebookSdk'
 import { Analytics } from '@vercel/analytics/react'
+import { IntlProvider } from '@/components/IntlProvider'
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings()
@@ -34,10 +35,12 @@ export default async function RootLayout({
         className="min-h-screen"
         style={{ '--brand': settings.brand_color } as React.CSSProperties}
       >
-        <AuthListener />
-        <FacebookSdk appId={settings.facebook_app_id} />
-        <Analytics />
-        {children}
+        <IntlProvider>
+          <AuthListener />
+          <FacebookSdk appId={settings.facebook_app_id} />
+          <Analytics />
+          {children}
+        </IntlProvider>
       </body>
     </html>
   )

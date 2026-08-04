@@ -8,6 +8,7 @@
 // it was never given room for.
 
 import { useState } from 'react'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 const ASSET = '/atomic-finds'
 
@@ -53,6 +54,10 @@ export default function AtomicNav({ logoUrl }: AtomicNavProps) {
             <img src={`${ASSET}/icons/${l.icon}`} alt="" />{l.label}
           </a>
         ))}
+        <div className="af-nav-lang">
+          <LanguageSwitcher variant="dark" />
+        </div>
+
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <a className="af-nav-cta" href="#shop" onClick={() => setOpen(false)}>
           <img src={`${ASSET}/icons/Cart.png`} alt="" />Shop Now

@@ -76,6 +76,7 @@
 .af-nav-cta img { width: 14px; height: 14px; object-fit: contain; }
 .af-nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; z-index: 101; }
 .af-nav-toggle-bar { width: 24px; height: 2px; background: var(--bone-white); transition: all 300ms ease-out; }
+.af-nav-lang { display: flex; align-items: center; }
 
 @media (max-width: 768px) {
   .af-nav { padding: 12px 20px; }
@@ -84,6 +85,7 @@
   .af-nav-links--open { max-height: 400px; padding: 16px 0; }
   .af-nav-link { justify-content: center; font-size: 11px; padding: 12px 0; border-bottom: 1px solid rgba(245,200,66,0.08); flex-grow: 1; }
   .af-nav-cta { width: 90%; margin: 12px auto 0; text-align: center; padding: 12px; font-size: 11px; justify-content: center; }
+  .af-nav-lang { justify-content: center; padding: 12px 0; }
 }
 
 /* ---- HERO ---- */
