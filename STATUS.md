@@ -5,7 +5,21 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-04 — by Claude Code (daily build session): schedule still exhausted, build health confirmed green, PR #41 merged since yesterday, nothing else changed. See entry below.
+**Last updated:** 2026-08-05 — by Claude Code (daily build session): schedule still exhausted, build health confirmed green, nothing changed since yesterday. See entry below.
+
+## 2026-08-05 — daily build session: schedule still exhausted, build health check only
+
+**Schedule order followed:** today (Wed Aug 5) is still inside `BUILD-SCHEDULE.md`'s Wed–Thu Aug 5–6 slot (`/admin/pages`) — already marked done (PR #10, merged 2026-07-30). Mon–Tue Aug 3–4 (`/admin/content`) remains investigated-and-answered (2026-07-23), with its real fix out of this repo's scope. Fri Aug 7 (review/buffer) isn't due yet. No dated entries past Aug 7 exist. **Nothing new and in-scope to build today.**
+
+**What changed since yesterday's entry:** nothing. `git log` shows no commits since `0b215bf` (yesterday's own log entry). No open PRs (`gh pr list` empty). No new GitHub issues.
+
+**Build health check:** `git status` clean on `main`, `npx tsc --noEmit` clean in `tools/build-workflows`, all 3 GitHub status checks (both Vercel projects + Vercel Deployments umbrella check) green on `main`'s HEAD (`0b215bf`).
+
+**Issues #33–36 (flagged 2026-08-02, still not on `BUILD-SCHEDULE.md`) are all still open** — #33 (P0, CRITICAL, base64 asset upload regression) hasn't moved, third session in a row noting this. Not picked up: same reasoning as the past two sessions — this task works `BUILD-SCHEDULE.md` items in order, not GitHub issues directly, and these aren't scheduled yet. Repeating the recommendation: Anthony should either add #33–36 to `BUILD-SCHEDULE.md` or explicitly scope a session to them — #33 blocks the Atomic Finds/Jennyfer handoff and has now sat unaddressed for 3 days.
+
+**What's next:** re-check `BUILD-SCHEDULE.md` for dated entries past Aug 7 or for #33–36 being added; Fri Aug 7's review/buffer slot is the next dated item otherwise.
+
+---
 
 ## 2026-08-04 — daily build session: schedule still exhausted, build health check only
 
