@@ -70,7 +70,7 @@
 .af-nav-logo:hover .af-nav-logo-mark { filter: drop-shadow(0 0 7px rgba(245,200,66,0.45)); transform: scale(1.04); }
 .af-nav-links { display: flex; align-items: center; gap: 28px; }
 .af-nav-link { font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--bone-white); text-decoration: none; transition: all 300ms ease-out; display: flex; align-items: center; gap: 6px; }
-.af-nav-link img { width: 16px; height: 16px; object-fit: contain; opacity: 0.85; }
+.af-nav-link img { width: 18px; height: 18px; object-fit: contain; opacity: 0.95; border-radius: 50%; background: rgba(255, 255, 255, 0.9); padding: 2px; box-shadow: 0 0 6px rgba(245, 200, 66, 0.4); mix-blend-mode: multiply; }
 .af-nav-link:hover { color: var(--celestial-yellow); text-shadow: var(--glow-sm); }
 .af-nav-cta { padding: 10px 22px; background: var(--celestial-yellow); color: #1E1E1E; border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; box-shadow: var(--glow-sm); white-space: nowrap; display: flex; align-items: center; gap: 6px; }
 .af-nav-cta img { width: 14px; height: 14px; object-fit: contain; }

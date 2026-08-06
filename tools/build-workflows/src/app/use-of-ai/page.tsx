@@ -1,33 +1,27 @@
 import React from 'react'
+import ClientPageWrapper from '@/components/site/ClientPageWrapper'
 
 export const metadata = {
-  title: 'AI Usage & Ethics Disclosure | Digital Allies Platform',
-  description: 'Our policy and disclosures regarding artificial intelligence usage across platform content and workflows.',
+  title: 'Use of AI Disclosure | Platform Compliance',
+  description: 'Disclosure on how artificial intelligence is used across site development and content operations.',
 }
 
 export default function UseOfAiPage() {
   return (
-    <main id="main-content" className="section bg-white min-h-screen py-16 px-6" role="main">
-      <article className="max-w-4xl mx-auto prose-da">
-        <h1 className="text-3xl font-bold mb-6" style={{ fontFamily: 'var(--tok-font-heading, sans-serif)' }}>
-          AI Usage & Ethics Disclosure
-        </h1>
-        <p className="text-sm text-neutral-600 mb-8 font-mono">Last Updated: July 26, 2026</p>
+    <ClientPageWrapper title="Use of AI Disclosure" subtitle="Transparency & Human Oversight">
+      <section className="mb-8">
+        <h2 className="text-xl font-bold mb-3">1. Human Control & Oversight</h2>
+        <p className="mb-4">
+          Artificial intelligence tools are utilized to assist with initial code scaffolding, accessibility auditing, and layout design generation. All final code, content, and client site configurations undergo human review and verification.
+        </p>
+      </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-bold mb-3">1. Human Supervision & Verification</h2>
-          <p className="mb-4">
-            Digital Allies utilizes artificial intelligence (AI) to assist with technical development, code auditing, and draft assistance. All client code, technical decisions, and published materials undergo human review and verification.
-          </p>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-bold mb-3">2. Data Privacy & Integrity</h2>
-          <p className="mb-4">
-            No sensitive client data or confidential personal information is used to train public machine learning models.
-          </p>
-        </section>
-      </article>
-    </main>
+      <section className="mb-8">
+        <h2 className="text-xl font-bold mb-3">2. Data Privacy & Integrity</h2>
+        <p className="mb-4">
+          No private client data or confidential database information is fed into public AI training models without explicit consent.
+        </p>
+      </section>
+    </ClientPageWrapper>
   )
 }
