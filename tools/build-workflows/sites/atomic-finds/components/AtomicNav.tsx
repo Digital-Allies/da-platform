@@ -38,7 +38,7 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
 
   return (
     <nav className="af-nav">
-      <a className="af-nav-logo" href="#home">
+      <a className="af-nav-logo" href="/">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="af-nav-logo-mark" src={logoUrl || `${ASSET}/logos/logo-mark-new.png`} alt="Atomic Finds ATX" width={99} height={101} />
       </a>
@@ -56,7 +56,7 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
         <span className="af-nav-toggle-bar" />
       </button>
 
-      <div id="af-nav-panel" className={`af-nav-links${open ? ' af-nav-links--open' : ''}`} aria-hidden={!open} inert={!open}>
+      <div id="af-nav-panel" className={`af-nav-links${open ? ' af-nav-links--open' : ''}`}>
         {LINKS.map((l) => (
           <a
             key={l.href}
