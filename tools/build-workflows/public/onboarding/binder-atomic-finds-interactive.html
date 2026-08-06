@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Finds ATX — CMS Training & Onboarding Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Atomic Finds Color Palette */
+            --primary-bg: #1E1E1E;
+            --alt-bg: #2A2017;
+            --primary: #F5C842;
+            --secondary: #D4822A;
+            --text: #F0E8D8;
+            --accent: #556B4A;
+            --text-dark: #1A1A1A;
+
+            /* Fonts */
+            --heading-font: 'Bagel Fat One', sans-serif;
+            --body-font: 'DM Sans', sans-serif;
+            --accent-font: 'Pacifico', cursive;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            background-color: var(--primary-bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 26, 0.98);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid var(--primary);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav .logo {
+            font-family: var(--heading-font);
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        nav .toc-button {
+            background: var(--primary);
+            color: var(--text-dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        nav .toc-button:hover {
+            opacity: 0.8;
+        }
+
+        nav .dark-mode-toggle {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        /* Sidebar TOC */
+        .toc-sidebar {
+            position: fixed;
+            left: -300px;
+            top: 60px;
+            width: 280px;
+            height: calc(100vh - 60px);
+            background: var(--alt-bg);
+            border-right: 2px solid var(--primary);
+            overflow-y: auto;
+            transition: left 0.3s;
+            z-index: 99;
+            padding: 1.5rem 1rem;
+        }
+
+        .toc-sidebar.open {
+            left: 0;
+        }
+
+        .toc-sidebar h3 {
+            font-family: var(--heading-font);
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .toc-sidebar ul {
+            list-style: none;
+        }
+
+        .toc-sidebar li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-sidebar a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            display: block;
+            padding: 0.3rem 0.5rem;
+            border-left: 3px solid transparent;
+        }
+
+        .toc-sidebar a:hover {
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 80px;
+        }
+
+        h1 {
+            font-family: var(--heading-font);
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            color: var(--primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-family: var(--heading-font);
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            color: var(--secondary);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Cover Section */
+        .cover {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--alt-bg) 0%, var(--primary-bg) 100%);
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .cover h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cover .tagline {
+            font-family: var(--accent-font);
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .cover .subtitle {
+            color: var(--text);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cover .meta {
+            font-size: 0.9rem;
+            color: var(--accent);
+            line-height: 1.8;
+        }
+
+        /* Content Cards */
+        .card {
+            background: var(--alt-bg);
+            border: 1px solid var(--secondary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 200, 66, 0.2);
+        }
+
+        .card.highlight {
+            border-left: 4px solid var(--primary);
+            background: rgba(245, 200, 66, 0.05);
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        table th {
+            background: var(--alt-bg);
+            color: var(--primary);
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 2px solid var(--primary);
+            font-weight: bold;
+        }
+
+        table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--accent);
+        }
+
+        table tr:hover {
+            background: rgba(245, 200, 66, 0.05);
+        }
+
+        /* Tabs */
+        .tab-container {
+            margin: 1.5rem 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: var(--alt-bg);
+            border: 2px solid var(--secondary);
+            color: var(--text);
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            font-family: var(--body-font);
+        }
+
+        .tab-button:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .tab-button.active {
+            background: var(--primary);
+            color: var(--text-dark);
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--alt-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--secondary);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Collapsible */
+        .collapsible {
+            background: var(--alt-bg);
+            border: 1px solid var(--secondary);
+            padding: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .collapsible:hover {
+            background: rgba(245, 200, 66, 0.1);
+        }
+
+        .collapsible h4 {
+            margin: 0;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+
+        .collapsible-content.open {
+            max-height: 2000px;
+            padding: 1rem;
+        }
+
+        /* Step-by-step */
+        .steps {
+            counter-reset: step-counter;
+        }
+
+        .step {
+            counter-increment: step-counter;
+            margin: 1.5rem 0;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary);
+            color: var(--text-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: var(--heading-font);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-right: 0.7rem;
+        }
+
+        /* Colors Palette Display */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .color-swatch {
+            border-radius: 4px;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            border: 1px solid var(--secondary);
+        }
+
+        .color-swatch.dark {
+            color: var(--text);
+        }
+
+        .color-swatch.light {
+            color: var(--text-dark);
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --primary-bg: #1E1E1E;
+            --alt-bg: #2A2017;
+            --text: #F0E8D8;
+        }
+
+        body.light-mode {
+            --primary-bg: #FFFFFF;
+            --alt-bg: #F5F5F5;
+            --text: #1A1A1A;
+            --text-dark: #F0E8D8;
+        }
+
+        body.light-mode nav {
+            background: rgba(255, 255, 255, 0.98);
+            border-bottom-color: var(--secondary);
+        }
+
+        body.light-mode .toc-sidebar {
+            background: var(--alt-bg);
+            border-right-color: var(--secondary);
+        }
+
+        body.light-mode .card {
+            background: var(--alt-bg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .cover {
+                padding: 2rem 1rem;
+            }
+
+            .cover h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                width: 100%;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            nav, .toc-sidebar, .toc-button, .dark-mode-toggle {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+                margin-bottom: 2rem;
+            }
+
+            .card {
+                page-break-inside: avoid;
+            }
+
+            a {
+                color: var(--primary);
+                text-decoration: underline;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--alt-bg);
+            border-top: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--accent);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Code blocks */
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        pre {
+            background: rgba(0,0,0,0.3);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">☄️ Atomic Finds</div>
+        <div>
+            <button class="toc-button" onclick="toggleTOC()">📑 Contents</button>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Dark/Light</button>
+        </div>
+    </nav>
+
+    <!-- Table of Contents Sidebar -->
+    <div class="toc-sidebar" id="toc">
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#welcome">Welcome</a></li>
+            <li><a href="#quick-start">Quick Start</a></li>
+            <li><a href="#login">How to Login</a></li>
+            <li><a href="#dashboard">Your Dashboard</a></li>
+            <li><a href="#products">Products & Showroom</a></li>
+            <li><a href="#collections">Collections & CSV</a></li>
+            <li><a href="#brand">Brand & Design</a></li>
+            <li><a href="#seo">SEO & Copy</a></li>
+            <li><a href="#settings">Settings</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+            <li><a href="#support">Get Help</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <!-- COVER -->
+        <div class="cover">
+            <h1>Atomic Finds ATX</h1>
+            <div class="tagline">Far-out finds, down-to-earth prices</div>
+            <div class="subtitle">CMS Training & Onboarding Guide</div>
+            <div class="meta">
+                Last updated: August 2026<br>
+                <strong>Welcome to your platform</strong>
+            </div>
+        </div>
+
+        <!-- WELCOME -->
+        <section id="welcome">
+            <h2>Welcome, Jennyfer</h2>
+            <div class="card highlight">
+                <p>You now have a professional website platform designed specifically for vintage furniture dealers. This guide will walk you through every feature you need to run Atomic Finds like a pro.</p>
+            </div>
+
+            <h3>What You Can Do</h3>
+            <ul class="checklist">
+                <li>Upload and manage products instantly</li>
+                <li>Organize products into curated collections</li>
+                <li>Bulk-import products via CSV spreadsheet</li>
+                <li>Edit your site copy and brand without coding</li>
+                <li>Track reviews and customer feedback</li>
+                <li>Manage projects and to-dos with your team</li>
+                <li>View real-time analytics of your site</li>
+            </ul>
+
+            <h3>Your Platform URLs</h3>
+            <table>
+                <tr>
+                    <th>What</th>
+                    <th>URL</th>
+                </tr>
+                <tr>
+                    <td><strong>Your Live Website</strong></td>
+                    <td><a href="https://atomicfindsatx.store" target="_blank">atomicfindsatx.store</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Admin Dashboard</strong></td>
+                    <td><a href="https://cms.digitalallies.net/admin" target="_blank">cms.digitalallies.net/admin</a></td>
+                </tr>
+                <tr>
+                    <td><strong>Support Email</strong></td>
+                    <td><a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a></td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- QUICK START -->
+        <section id="quick-start">
+            <h2>First 30 Days Checklist</h2>
+            <div class="card">
+                <h3>Before You Start</h3>
+                <ul class="checklist">
+                    <li>Save your admin login link (check your email)</li>
+                    <li>Test the login on a phone and desktop</li>
+                    <li>Gather 5-10 of your best product photos</li>
+                    <li>Write 2-3 product descriptions to use as templates</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Week 1: Set Up Your Profile</h3>
+                <ul class="checklist">
+                    <li>Update your business name and tagline (Settings)</li>
+                    <li>Add your phone number and email (Settings)</li>
+                    <li>Add your business hours (Settings)</li>
+                    <li>Add at least 3 social media links (Settings)</li>
+                    <li>Review your brand colors (Brand Theme)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Week 2: Populate Your Catalog</h3>
+                <ul class="checklist">
+                    <li>Add 10 products manually (OR use CSV importer)</li>
+                    <li>Create your first collection ("Best Sellers" or "Featured")</li>
+                    <li>Mark 3-5 products as "Featured" for homepage</li>
+                    <li>Test the contact form (send yourself a test message)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Week 3: Go Live & Share</h3>
+                <ul class="checklist">
+                    <li>Review your live site on mobile and desktop</li>
+                    <li>Share the URL with friends and get feedback</li>
+                    <li>Post about your new site on Instagram/Facebook</li>
+                    <li>Invite Anthony to review (email: hello@digitalallies.net)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- LOGIN -->
+        <section id="login">
+            <h2>How to Login</h2>
+
+            <div class="card">
+                <h3>Magic Link Login (Secure & Easy)</h3>
+                <div class="steps">
+                    <div class="step">
+                        <strong>Go to cms.digitalallies.net/admin</strong>
+                        <p>Open the link in your browser (save it as a bookmark)</p>
+                    </div>
+                    <div class="step">
+                        <strong>Enter your email</strong>
+                        <p>The email where you received your welcome message</p>
+                    </div>
+                    <div class="step">
+                        <strong>Check your email</strong>
+                        <p>Look for a message from "Digital Allies" with a login link</p>
+                    </div>
+                    <div class="step">
+                        <strong>Click the link</strong>
+                        <p>This logs you in instantly (link expires after 10 minutes)</p>
+                    </div>
+                    <div class="step">
+                        <strong>You're in!</strong>
+                        <p>You'll see your dashboard with all your products and pages</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card highlight">
+                <h4>💡 Pro Tips</h4>
+                <ul>
+                    <li><strong>Bookmark the admin URL:</strong> cms.digitalallies.net/admin (saves time)</li>
+                    <li><strong>Check spam:</strong> If you don't see the email, check your spam folder</li>
+                    <li><strong>Can't login?</strong> Email Anthony at hello@digitalallies.net</li>
+                    <li><strong>On mobile?</strong> The admin works great on phones too</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section id="dashboard">
+            <h2>Your Admin Dashboard</h2>
+
+            <div class="card">
+                <p>When you log in, you'll see your dashboard — a control center with tabs for different features:</p>
+            </div>
+
+            <h3>Dashboard Sections</h3>
+
+            <div class="card">
+                <h4>📊 Dashboard (Home)</h4>
+                <p>Overview of your site activity and quick links to everything. This is your starting point every time you log in.</p>
+            </div>
+
+            <div class="card">
+                <h4>📦 Showroom (Products)</h4>
+                <p>Your complete product catalog. Add products, edit prices, upload photos, mark items as sold, set which items appear on your homepage.</p>
+            </div>
+
+            <div class="card">
+                <h4>📑 Collections</h4>
+                <p>Organize products into curated groups ("Best Sellers", "Living Room Finds", etc.). Great for helping customers browse by theme or mood.</p>
+            </div>
+
+            <div class="card">
+                <h4>🎨 Brand Theme</h4>
+                <p>Change your brand colors and fonts. Update primary color, text color, background — all changes appear instantly across your site.</p>
+            </div>
+
+            <div class="card">
+                <h4>⚙️ Settings</h4>
+                <p>Business info (name, tagline, phone, email, hours), social links, hero headline. This info appears throughout your site.</p>
+            </div>
+
+            <div class="card">
+                <h4>📝 Content / Press Office</h4>
+                <p>Write blog posts and articles. Published articles appear on your `/learn` page.</p>
+            </div>
+
+            <div class="card">
+                <h4>🛠️ The Workshop</h4>
+                <p>Internal project management (for you and Anthony). Track tasks, photo shoots, new launches, anything you're working on.</p>
+            </div>
+        </section>
+
+        <!-- PRODUCTS -->
+        <section id="products">
+            <h2>Managing Your Products</h2>
+
+            <h3>Adding a Product (Step-by-Step)</h3>
+            <div class="steps">
+                <div class="step">
+                    <strong>Go to Showroom</strong>
+                    <p>Click the "Showroom" tab in your dashboard</p>
+                </div>
+                <div class="step">
+                    <strong>Click "Add Item"</strong>
+                    <p>A form appears where you enter product details</p>
+                </div>
+                <div class="step">
+                    <strong>Fill in the basics:</strong>
+                    <p>
+                        <strong>Title:</strong> "Vintage Rattan Chair | 1970s Boho Seating"<br>
+                        <strong>Price:</strong> 250.00<br>
+                        <strong>Category:</strong> Seating (or Storage, Decor, etc.)<br>
+                        <strong>Description:</strong> 2-3 sentences about the piece
+                    </p>
+                </div>
+                <div class="step">
+                    <strong>Upload an image</strong>
+                    <p>Drag and drop a photo or click to browse. Best size: 600px+ wide</p>
+                </div>
+                <div class="step">
+                    <strong>Set status:</strong>
+                    <p>
+                        <strong>Published:</strong> Check if this item should be visible on your site<br>
+                        <strong>In Stock:</strong> Check if it's available for sale
+                    </p>
+                </div>
+                <div class="step">
+                    <strong>Featured:</strong>
+                    <p>Check to make this product appear on your homepage (only 3-5 items max)</p>
+                </div>
+                <div class="step">
+                    <strong>Save & Publish</strong>
+                    <p>Click "Save Product" — it appears on your site instantly</p>
+                </div>
+            </div>
+
+            <h3>Product Fields Explained</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>What to Put Here</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>Title</strong></td>
+                    <td>Product name + style + era</td>
+                    <td>Vintage Wicker Waterfall Dresser | 1970s Boho Storage</td>
+                </tr>
+                <tr>
+                    <td><strong>Price</strong></td>
+                    <td>Number only (no $ symbol)</td>
+                    <td>285.00</td>
+                </tr>
+                <tr>
+                    <td><strong>Category</strong></td>
+                    <td>Type of item (keep consistent)</td>
+                    <td>Storage, Seating, Decor, Tables</td>
+                </tr>
+                <tr>
+                    <td><strong>Image</strong></td>
+                    <td>Photo of the product</td>
+                    <td>High-quality photo (600px+ wide)</td>
+                </tr>
+                <tr>
+                    <td><strong>Description</strong></td>
+                    <td>Story of the piece, materials, dimensions, condition</td>
+                    <td>Handwoven wicker, honey finish, 4 drawers, 38in W</td>
+                </tr>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td>Published = visible online</td>
+                    <td>Checked (for live products)</td>
+                </tr>
+                <tr>
+                    <td><strong>In Stock</strong></td>
+                    <td>Available for sale</td>
+                    <td>Checked (if not sold)</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- COLLECTIONS & CSV -->
+        <section id="collections">
+            <h2>Collections & CSV Bulk Import</h2>
+
+            <div class="card highlight">
+                <h3>✨ What Are Collections?</h3>
+                <p>Collections let you organize products into themed groups ("Best Sellers", "Living Room Finds", "Under $200", etc.). They help customers browse and make it easy for you to highlight specific products on your homepage.</p>
+            </div>
+
+            <h3>Create a Collection</h3>
+            <div class="steps">
+                <div class="step">
+                    <strong>Go to Collections</strong>
+                    <p>Click the Collections tab</p>
+                </div>
+                <div class="step">
+                    <strong>Click "Create Collection"</strong>
+                    <p>A form appears</p>
+                </div>
+                <div class="step">
+                    <strong>Name it:</strong>
+                    <p>e.g., "Best Sellers", "Daisy's Lounge", "New Arrivals"</p>
+                </div>
+                <div class="step">
+                    <strong>Add products:</strong>
+                    <p>Search for products and add them to the collection</p>
+                </div>
+                <div class="step">
+                    <strong>Toggle "Featured"</strong>
+                    <p>Check this to make the collection appear on your homepage</p>
+                </div>
+                <div class="step">
+                    <strong>Save</strong>
+                    <p>Collection is now live</p>
+                </div>
+            </div>
+
+            <h3>CSV Bulk Import (Add Multiple Products at Once)</h3>
+
+            <div class="card">
+                <h4>Why use CSV?</h4>
+                <p>If you have 20+ products to add, don't do it one-by-one. Use a CSV (spreadsheet) file to bulk-import them in seconds.</p>
+            </div>
+
+            <h4>Step 1: Prepare Your Spreadsheet</h4>
+            <p>Create a Google Sheet or Excel file with these exact columns (in the first row):</p>
+            <pre>Title, Price, Category, Image URL, Description</pre>
+
+            <p>Then add one product per row:</p>
+            <table>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Image URL</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Vintage Rattan Chair</td>
+                    <td>250.00</td>
+                    <td>Seating</td>
+                    <td>https://example.com/chair.jpg</td>
+                    <td>1970s swivel chair, fully restored</td>
+                </tr>
+                <tr>
+                    <td>Wicker Dresser</td>
+                    <td>285.00</td>
+                    <td>Storage</td>
+                    <td>https://example.com/dresser.jpg</td>
+                    <td>Handwoven wicker, honey finish, 4 drawers</td>
+                </tr>
+            </table>
+
+            <div class="card highlight">
+                <h4>💡 Important CSV Tips</h4>
+                <ul>
+                    <li><strong>Prices:</strong> Numbers only (250.00, not $250 or "Two fifty")</li>
+                    <li><strong>Image URLs:</strong> Must start with https:// and be publicly accessible</li>
+                    <li><strong>Categories:</strong> Keep them consistent (no mixing "Chairs" and "Seating")</li>
+                    <li><strong>Export as CSV:</strong> Google Sheets → File → Download → CSV</li>
+                </ul>
+            </div>
+
+            <h4>Step 2: Import into Your Collection</h4>
+            <div class="steps">
+                <div class="step">
+                    <strong>Create or open a collection</strong>
+                    <p>Go to Collections and open the one you want to import into (or create a new one)</p>
+                </div>
+                <div class="step">
+                    <strong>Scroll to "Import Spreadsheet Collection (CSV)"</strong>
+                    <p>You'll see an upload area</p>
+                </div>
+                <div class="step">
+                    <strong>Upload your CSV file</strong>
+                    <p>Drag and drop or click to select</p>
+                </div>
+                <div class="step">
+                    <strong>Review the preview</strong>
+                    <p>The system shows how many products it found</p>
+                </div>
+                <div class="step">
+                    <strong>Click "Execute Import"</strong>
+                    <p>Sit back and wait (usually 30 seconds to 2 minutes)</p>
+                </div>
+                <div class="step">
+                    <strong>Success!</strong>
+                    <p>Your products are now in the catalog and added to the collection</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BRAND & DESIGN -->
+        <section id="brand">
+            <h2>Brand & Design System</h2>
+
+            <div class="card">
+                <h3>Your Brand Identity</h3>
+                <p>Atomic Finds uses a "Celestial '70s Dark Mode" aesthetic that makes your site stand out. Dark charcoal background + Celestial yellow accents = dramatic, luxe, memorable.</p>
+            </div>
+
+            <h3>Your Colors</h3>
+            <div class="color-palette">
+                <div class="color-swatch" style="background: #1E1E1E; color: #F0E8D8; border: 2px solid #F5C842;">
+                    <div><strong>Deep Charcoal</strong></div>
+                    <div>#1E1E1E</div>
+                    <div><small>Background</small></div>
+                </div>
+                <div class="color-swatch" style="background: #F5C842; color: #1A1A1A;">
+                    <div><strong>Celestial Yellow</strong></div>
+                    <div>#F5C842</div>
+                    <div><small>Accents & Titles</small></div>
+                </div>
+                <div class="color-swatch" style="background: #D4822A; color: white;">
+                    <div><strong>Amber Orange</strong></div>
+                    <div>#D4822A</div>
+                    <div><small>Hovers & Details</small></div>
+                </div>
+                <div class="color-swatch" style="background: #2A2017; color: #F0E8D8; border: 2px solid #F5C842;">
+                    <div><strong>Rattan Black</strong></div>
+                    <div>#2A2017</div>
+                    <div><small>Card Backgrounds</small></div>
+                </div>
+                <div class="color-swatch" style="background: #F0E8D8; color: #1A1A1A; border: 2px solid #D4822A;">
+                    <div><strong>Bone White</strong></div>
+                    <div>#F0E8D8</div>
+                    <div><small>Body Text</small></div>
+                </div>
+                <div class="color-swatch" style="background: #556B4A; color: #F0E8D8;">
+                    <div><strong>Woven Moss</strong></div>
+                    <div>#556B4A</div>
+                    <div><small>Accents</small></div>
+                </div>
+            </div>
+
+            <h3>Your Fonts</h3>
+            <table>
+                <tr>
+                    <th>Font</th>
+                    <th>Used For</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong style="font-family: 'Bagel Fat One'">Bagel Fat One</strong></td>
+                    <td>Main titles, headings, product names</td>
+                    <td style="font-family: 'Bagel Fat One'; font-size: 1.3rem;">Vintage Rattan Chair</td>
+                </tr>
+                <tr>
+                    <td><strong style="font-family: 'DM Sans'">DM Sans</strong></td>
+                    <td>Body text, descriptions, all readable copy</td>
+                    <td style="font-family: 'DM Sans';">Handwoven wicker, fully restored...</td>
+                </tr>
+                <tr>
+                    <td><strong style="font-family: 'Pacifico'">Pacifico</strong></td>
+                    <td>Decorative taglines, mood text</td>
+                    <td style="font-family: 'Pacifico';">Far-out finds</td>
+                </tr>
+            </table>
+
+            <h3>Edit Your Brand Colors</h3>
+            <div class="steps">
+                <div class="step">
+                    <strong>Go to Brand Theme</strong>
+                    <p>Click the "Brand Theme" tab in the admin</p>
+                </div>
+                <div class="step">
+                    <strong>Click a color swatch</strong>
+                    <p>A color picker appears</p>
+                </div>
+                <div class="step">
+                    <strong>Pick a new color</strong>
+                    <p>Or paste a hex code (e.g., #F5C842)</p>
+                </div>
+                <div class="step">
+                    <strong>Click Save</strong>
+                    <p>Your site updates within seconds</p>
+                </div>
+            </div>
+
+            <div class="card highlight">
+                <h4>⚠️ Important Note</h4>
+                <p><strong>Don't change your brand colors lightly!</strong> Your color palette is part of your brand identity. Big color changes should feel intentional. Contact Anthony before major rebrand work.</p>
+            </div>
+        </section>
+
+        <!-- SEO & COPY -->
+        <section id="seo">
+            <h2>SEO & How to Write Great Copy</h2>
+
+            <div class="card">
+                <h3>What is SEO?</h3>
+                <p>SEO = Search Engine Optimization. It's how people find you on Google (and other search engines). The platform does most of this automatically. Your job: write great descriptions that help Google (and customers) understand what you're selling.</p>
+            </div>
+
+            <h3>Your Brand Voice</h3>
+            <p>Write like a knowledgeable, approachable curator who genuinely cares about quality vintage design.</p>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="switchTab(event, 'do-tab')">✅ Do's</button>
+                    <button class="tab-button" onclick="switchTab(event, 'dont-tab')">❌ Don'ts</button>
+                </div>
+
+                <div id="do-tab" class="tab-content active">
+                    <ul>
+                        <li>✅ Use conversational language ("This beauty deserves a forever home")</li>
+                        <li>✅ Tell the story ("1970s swivel chair, fully restored...")</li>
+                        <li>✅ Be specific about materials (rattan, bamboo, walnut, teak)</li>
+                        <li>✅ Highlight authenticity ("original hardware", "hand-joinery")</li>
+                        <li>✅ Include dimensions and condition honestly</li>
+                        <li>✅ Sound like yourself (short sentences, genuine enthusiasm)</li>
+                    </ul>
+                </div>
+
+                <div id="dont-tab" class="tab-content">
+                    <ul>
+                        <li>❌ Don't use corporate speak ("curated inventory solutions")</li>
+                        <li>❌ Don't say "pre-owned" — say "handpicked" or "restored"</li>
+                        <li>❌ Don't hide flaws — own them honestly (adds authenticity)</li>
+                        <li>❌ Don't sound generic (every piece is unique)</li>
+                        <li>❌ Don't overuse hype words ("amazing", "revolutionary")</li>
+                        <li>❌ Don't use multiple exclamation points (one max)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>Good Product Copy Example</h3>
+            <div class="card">
+                <strong>Title:</strong> Vintage Wicker Waterfall Dresser | Boho Coastal Rattan Chest | Hand-Restored in Austin, TX
+                <br><br>
+                <strong>Description:</strong> Four-drawer dresser featuring intricate handwoven wicker details in a warm honey finish. Each drawer opens smoothly with original brass hardware. No wobble, fully functional. Dimensions: 38in W x 33in D x 38in H. Patina consistent with age; one corner shows minor water staining (see photos). Restored 2026 in Austin.
+                <br><br>
+                <strong>Why it works:</strong> Specific materials, honest condition, dimensions, location, authentic voice
+            </div>
+
+            <h3>The Four Mascots: Use Them in Your Copy</h3>
+            <p>Organize your thinking around these curator personas when writing descriptions:</p>
+
+            <table>
+                <tr>
+                    <th>Mascot</th>
+                    <th>They Care About</th>
+                    <th>Write Like This</th>
+                </tr>
+                <tr>
+                    <td>🌼 Daisy</td>
+                    <td>Comfort, lounging, effortless style</td>
+                    <td>Warm, inviting, cozy-focused</td>
+                </tr>
+                <tr>
+                    <td>🔧 Milo</td>
+                    <td>Craftsmanship, structure, durability</td>
+                    <td>Technical, appreciative of construction</td>
+                </tr>
+                <tr>
+                    <td>✨ Tatiana</td>
+                    <td>Drama, sculpture, statement pieces</td>
+                    <td>Bold, poetic, design-forward</td>
+                </tr>
+                <tr>
+                    <td>🎉 Malibu</td>
+                    <td>Entertaining, social, gathering</td>
+                    <td>Convivial, event-focused</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="settings">
+            <h2>Settings (Your Business Info)</h2>
+
+            <div class="card">
+                <h3>What Lives in Settings</h3>
+                <p>This tab stores info that appears throughout your site: business name, phone, email, hours, social links, tagline, and hero message.</p>
+            </div>
+
+            <h3>Key Settings to Update</h3>
+            <table>
+                <tr>
+                    <th>Setting</th>
+                    <th>Where It Appears</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>Business Name</strong></td>
+                    <td>Browser tab title, footer, about page</td>
+                    <td>Atomic Finds ATX</td>
+                </tr>
+                <tr>
+                    <td><strong>Tagline</strong></td>
+                    <td>Homepage, footer</td>
+                    <td>Far-out finds, down-to-earth prices</td>
+                </tr>
+                <tr>
+                    <td><strong>Phone Number</strong></td>
+                    <td>Contact page, footer</td>
+                    <td>(512) 555-0123</td>
+                </tr>
+                <tr>
+                    <td><strong>Email Address</strong></td>
+                    <td>Contact page, contact form destination</td>
+                    <td>hello@atomicfinds.com</td>
+                </tr>
+                <tr>
+                    <td><strong>Business Hours</strong></td>
+                    <td>Footer, contact page</td>
+                    <td>Tue-Sat 10am-6pm, Sun 12pm-5pm</td>
+                </tr>
+                <tr>
+                    <td><strong>Instagram / Facebook</strong></td>
+                    <td>Footer social links</td>
+                    <td>@atomicfindsatx</td>
+                </tr>
+                <tr>
+                    <td><strong>Hero Headline</strong></td>
+                    <td>Homepage large text at top</td>
+                    <td>Sourced with an eye. Restored with love.</td>
+                </tr>
+            </table>
+
+            <h3>How to Update a Setting</h3>
+            <div class="steps">
+                <div class="step">
+                    <strong>Go to Settings</strong>
+                    <p>Click the Settings tab</p>
+                </div>
+                <div class="step">
+                    <strong>Find the field you want to change</strong>
+                    <p>Scroll through and find it</p>
+                </div>
+                <div class="step">
+                    <strong>Click the field and edit</strong>
+                    <p>Type the new value</p>
+                </div>
+                <div class="step">
+                    <strong>Click Save</strong>
+                    <p>Changes appear on your live site within seconds</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TROUBLESHOOTING -->
+        <section id="troubleshooting">
+            <h2>Troubleshooting & Common Questions</h2>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>I published something but it's not showing on my site</h4>
+                <span>+</span>
+            </div>
+            <div class="collapsible-content">
+                <p><strong>What to check:</strong></p>
+                <ul>
+                    <li>Give it 10-30 seconds for the cache to update</li>
+                    <li>Refresh your browser (Cmd+R on Mac, Ctrl+R on Windows)</li>
+                    <li>Make sure you clicked "Publish" (not just "Save Draft")</li>
+                    <li>Check that the product's "Published" toggle is ON</li>
+                    <li>If it's a product, check "In Stock" is ON</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>My CSV import failed with an error</h4>
+                <span>+</span>
+            </div>
+            <div class="collapsible-content">
+                <p><strong>Common causes:</strong></p>
+                <ul>
+                    <li><strong>Image URLs are broken</strong> — Test each URL in your browser first</li>
+                    <li><strong>Price column has non-numbers</strong> — No $ symbols or commas (285.00 ✅, $285 ❌)</li>
+                    <li><strong>File encoding is wrong</strong> — Re-export as UTF-8 CSV</li>
+                    <li><strong>Less than 2 rows</strong> — CSV must have header + at least 1 product</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>My images look blurry or stretched</h4>
+                <span>+</span>
+            </div>
+            <div class="collapsible-content">
+                <p><strong>What to do:</strong></p>
+                <ul>
+                    <li>Use high-quality source images (600px+ wide)</li>
+                    <li>Avoid tiny images that get enlarged</li>
+                    <li>For CSV: make sure Image URLs point to good quality</li>
+                    <li>Test on your live site before publishing 5+ items</li>
+                </ul>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>Can I schedule a post to publish later?</h4>
+                <span>+</span>
+            </div>
+            <div class="collapsible-content">
+                <p><strong>Not yet.</strong> Schedule publishing is Phase 2. For now: write in Draft mode, then click Publish when you're ready to go live.</p>
+            </div>
+
+            <div class="collapsible" onclick="toggleCollapsible(this)">
+                <h4>I can't log in / forgot my password</h4>
+                <span>+</span>
+            </div>
+            <div class="collapsible-content">
+                <p><strong>No passwords needed!</strong> Each time you log in:</p>
+                <ol>
+                    <li>Go to cms.digitalallies.net/admin</li>
+                    <li>Enter your email</li>
+                    <li>Check your email for a login link (click it)</li>
+                    <li>You're logged in</li>
+                </ol>
+                <p>If you don't see the email, check your spam folder. If still stuck, email Anthony.</p>
+            </div>
+        </section>
+
+        <!-- SUPPORT -->
+        <section id="support">
+            <h2>Get Help & Support</h2>
+
+            <div class="card highlight">
+                <h3>How to Reach Anthony</h3>
+                <table>
+                    <tr>
+                        <td><strong>Email:</strong></td>
+                        <td><a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Response time:</strong></td>
+                        <td>Within 24 hours (weekdays)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>For urgent issues:</strong></td>
+                        <td>Email subject line: "URGENT - [issue]"</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>This Guide</h3>
+                <p>You're reading it! Bookmark this page or print it for offline reference. Use the Contents menu (top left) to jump to any section.</p>
+            </div>
+
+            <div class="card">
+                <h3>Keep Learning</h3>
+                <p>Once you're comfortable with the basics, reach out to Anthony about advanced topics:</p>
+                <ul>
+                    <li>Advanced collection strategies</li>
+                    <li>Blog/article publishing best practices</li>
+                    <li>SEO optimization deep dives</li>
+                    <li>Project management in The Workshop</li>
+                    <li>Data export & analytics</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Atomic Finds ATX — Built & Maintained by <a href="https://digitalallies.net" target="_blank">Digital Allies</a></p>
+        <p>Questions? Email <a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a></p>
+        <p><small>Last updated: August 2026 | For the most current version, visit cms.digitalallies.net/admin</small></p>
+    </footer>
+
+    <script>
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('open');
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        }
+
+        function switchTab(event, tabName) {
+            // Hide all tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active from all buttons
+            const buttons = event.target.parentElement.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function toggleCollapsible(element) {
+            const content = element.nextElementSibling;
+            content.classList.toggle('open');
+            element.style.background = content.classList.contains('open') ? 'rgba(245, 200, 66, 0.1)' : '';
+        }
+    </script>
+</body>
+</html>
