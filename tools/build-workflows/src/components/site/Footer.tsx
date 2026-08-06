@@ -88,8 +88,15 @@ export default function Footer({ settings }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-neutral-700 mt-10 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-neutral-500">
+        <div className="border-t border-neutral-700 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
           <p>&copy; {year} {settings.site_title}. All rights reserved.</p>
+          <div className="flex flex-wrap gap-4 text-xs text-neutral-400">
+            <Link href="/privacy" className="hover:text-canvas transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-canvas transition-colors">Terms of Service</Link>
+            <Link href="/cookies" className="hover:text-canvas transition-colors">Cookie Policy</Link>
+            <Link href="/accessibility" className="hover:text-canvas transition-colors">Accessibility</Link>
+            <Link href="/use-of-ai" className="hover:text-canvas transition-colors">Use of AI</Link>
+          </div>
           <p>
             Site by{' '}
             <a href="https://digitalallies.net" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-300 transition-colors">

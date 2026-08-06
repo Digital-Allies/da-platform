@@ -41,11 +41,15 @@ export default async function HomePage() {
     getPublishedPages(),
   ])
 
-  // Build dynamic nav items from published pages
-  const pageNavItems = publishedPages.map((page: any) => ({
-    label: page.title,
-    href: `/${page.slug}`,
-  }))
+  const LEGAL_SLUGS = ['privacy', 'terms', 'cookies', 'accessibility', 'use-of-ai', 'legal', 'sitemap']
+
+  // Build dynamic nav items from published pages (excluding legal pages meant for footer)
+  const pageNavItems = publishedPages
+    .filter((page: any) => !LEGAL_SLUGS.includes(page.slug.toLowerCase().trim()))
+    .map((page: any) => ({
+      label: page.title,
+      href: `/${page.slug}`,
+    }))
 
   return (
     <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>

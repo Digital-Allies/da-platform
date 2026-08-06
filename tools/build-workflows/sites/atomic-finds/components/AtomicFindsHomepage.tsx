@@ -318,15 +318,12 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
               <a className="af-footer-link" href="#contact">FAQ</a>
             </div>
             <div className="af-footer-col">
-              <h4>Connect</h4>
-              {settings?.facebook_url && (
-                <a className="af-footer-link" href={settings.facebook_url} target="_blank" rel="noopener noreferrer">Facebook</a>
-              )}
-              {settings?.instagram_url && (
-                <a className="af-footer-link" href={settings.instagram_url} target="_blank" rel="noopener noreferrer">Instagram</a>
-              )}
-              <a className="af-footer-link" href="#reviews">Reviews</a>
-              <a className="af-footer-link" href="#contact">Contact Us</a>
+              <h4>Legal</h4>
+              <a className="af-footer-link" href="/privacy">Privacy Policy</a>
+              <a className="af-footer-link" href="/terms">Terms of Service</a>
+              <a className="af-footer-link" href="/cookies">Cookie Policy</a>
+              <a className="af-footer-link" href="/accessibility">Accessibility</a>
+              <a className="af-footer-link" href="/use-of-ai">Use of AI</a>
             </div>
           </div>
           <div className="af-footer-bottom">

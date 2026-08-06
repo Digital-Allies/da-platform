@@ -56,11 +56,13 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
             <img src={`${ASSET}/icons/${l.icon}`} alt="" />{l.label}
           </a>
         ))}
-        {pages.map((p) => (
-          <a key={p.slug} className="af-nav-link" href={`/${p.slug}`} onClick={() => setOpen(false)}>
-            {p.title}
-          </a>
-        ))}
+        {pages
+          .filter((p) => !['privacy', 'terms', 'cookies', 'accessibility', 'use-of-ai', 'legal', 'sitemap'].includes(p.slug.toLowerCase().trim()))
+          .map((p) => (
+            <a key={p.slug} className="af-nav-link" href={`/${p.slug}`} onClick={() => setOpen(false)}>
+              {p.title}
+            </a>
+          ))}
         <div className="af-nav-lang">
           <LanguageSwitcher variant="dark" />
         </div>
