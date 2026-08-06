@@ -18,7 +18,6 @@ import { type Product, type Review, type SiteSettings } from '@/lib/types'
 import { resolveProductCta } from '@/lib/commerce'
 import { Facebook, Instagram } from 'lucide-react'
 import ProductGrid from '@/components/site/ProductGrid'
-import GalaxyCard from '@/components/site/GalaxyCard'
 import Starfield from './Starfield'
 import AtomicContactForm from './AtomicContactForm'
 import AtomicNav from './AtomicNav'
@@ -74,10 +73,6 @@ interface AtomicFindsHomepageProps {
 }
 
 export default function AtomicFindsHomepage({ products, reviews, logoUrl, collections, pages = [], settings }: AtomicFindsHomepageProps) {
-  // Temporary: photo-less featured products fall back to a "coming soon" state
-  // that doesn't work for the Galaxy Card's hero-image treatment — skip them
-  // until real photography is in, same rule as ProductGrid's standard cards.
-  const featured = products.filter((p) => p.badge === 'featured' && p.image_url).slice(0, 3)
   const heroCta = products[0] ? resolveProductCta(products[0]) : null
 
   return (
@@ -147,23 +142,6 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
                   <div className="af-curator-role">{c.role}</div>
                   <div className="af-curator-bio">{c.bio}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FEATURED GALAXY CARDS */}
-        <section className="af-section" id="featured" style={{ background: 'linear-gradient(180deg, #16140F 0%, #1a160f 100%)' }}>
-          <div className="af-section-inner">
-            <div className="af-section-head">
-              <p className="af-section-eyebrow">✦ Featured Products ✦</p>
-              <h2 className="af-section-title">In the Spotlight</h2>
-              <p className="af-section-script">click to explore each piece</p>
-              <p style={{ fontSize: 16, fontWeight: 600, color: 'var(--amber-orange)', maxWidth: 560, margin: '16px auto 0' }}>Vintage rattan that has already outlasted three generations of trends. Built for another 50 years.</p>
-            </div>
-            <div className="af-featured-root">
-              {featured.map((p, i) => (
-                <GalaxyCard key={p.id} product={p} bg={NEBULA_BACKGROUNDS[i % NEBULA_BACKGROUNDS.length]} />
               ))}
             </div>
           </div>
