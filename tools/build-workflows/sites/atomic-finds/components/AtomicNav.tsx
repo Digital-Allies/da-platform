@@ -13,10 +13,10 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 const ASSET = '/atomic-finds'
 
 const LINKS = [
-  { href: '#shop', icon: 'Shop.png', label: 'Shop' },
-  { href: '#process', icon: 'restoration.png', label: 'How It Works' },
-  { href: '#reviews', icon: 'star.png', label: 'Reviews' },
-  { href: '#contact', icon: 'Contact.png', label: 'Contact' },
+  { href: '#shop', icon: 'nav-shop.png', label: 'Shop' },
+  { href: '#process', icon: 'nav-process.png', label: 'How It Works' },
+  { href: '#reviews', icon: 'nav-reviews.png', label: 'Reviews' },
+  { href: '#contact', icon: 'nav-contact.png', label: 'Contact' },
 ]
 
 interface AtomicNavProps {
@@ -28,6 +28,13 @@ interface AtomicNavProps {
 
 export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
   const [open, setOpen] = useState(false)
+  const [activeRoll, setActiveRoll] = useState<string | null>(null)
+
+  const handlePillClick = (key: string) => {
+    setActiveRoll(key)
+    setTimeout(() => setActiveRoll(null), 650)
+    setOpen(false)
+  }
 
   return (
     <nav className="af-nav">
@@ -51,16 +58,31 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
 
       <div id="af-nav-panel" className={`af-nav-links${open ? ' af-nav-links--open' : ''}`} aria-hidden={!open} inert={!open}>
         {LINKS.map((l) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <a key={l.href} className="af-nav-link" href={l.href} onClick={() => setOpen(false)}>
-            <img src={`${ASSET}/icons/${l.icon}`} alt="" />{l.label}
+          <a
+            key={l.href}
+            className="af-nav-pill"
+            href={l.href}
+            onClick={() => handlePillClick(l.href)}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${ASSET}/icons/${l.icon}`}
+              alt=""
+              className={`af-pill-img${activeRoll === l.href ? ' af-pill-img--rolling' : ''}`}
+            />
+            <span className="af-pill-label">{l.label}</span>
           </a>
         ))}
         {pages
           .filter((p) => !['privacy', 'terms', 'cookies', 'accessibility', 'use-of-ai', 'legal', 'sitemap'].includes(p.slug.toLowerCase().trim()))
           .map((p) => (
-            <a key={p.slug} className="af-nav-link" href={`/${p.slug}`} onClick={() => setOpen(false)}>
-              {p.title}
+            <a
+              key={p.slug}
+              className="af-nav-pill"
+              href={`/${p.slug}`}
+              onClick={() => handlePillClick(p.slug)}
+            >
+              <span className="af-pill-label">{p.title}</span>
             </a>
           ))}
         <div className="af-nav-lang">
@@ -68,8 +90,13 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <a className="af-nav-cta" href="#shop" onClick={() => setOpen(false)}>
-          <img src={`${ASSET}/icons/Cart.png`} alt="" />Shop Now
+        <a className="af-nav-cta" href="#shop" onClick={() => handlePillClick('#shop-cta')}>
+          <img
+            src={`${ASSET}/icons/nav-shop.png`}
+            alt=""
+            className={`af-pill-img${activeRoll === '#shop-cta' ? ' af-pill-img--rolling' : ''}`}
+          />
+          Shop Now
         </a>
       </div>
     </nav>
