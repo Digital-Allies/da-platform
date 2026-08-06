@@ -22,9 +22,11 @@ const LINKS = [
 interface AtomicNavProps {
   /** From settings.logo_url — falls back to the static brand mark when unset */
   logoUrl?: string
+  /** Published CMS pages to render dynamically in navigation */
+  pages?: Array<{ title: string; slug: string }>
 }
 
-export default function AtomicNav({ logoUrl }: AtomicNavProps) {
+export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -52,6 +54,11 @@ export default function AtomicNav({ logoUrl }: AtomicNavProps) {
           // eslint-disable-next-line @next/next/no-img-element
           <a key={l.href} className="af-nav-link" href={l.href} onClick={() => setOpen(false)}>
             <img src={`${ASSET}/icons/${l.icon}`} alt="" />{l.label}
+          </a>
+        ))}
+        {pages.map((p) => (
+          <a key={p.slug} className="af-nav-link" href={`/${p.slug}`} onClick={() => setOpen(false)}>
+            {p.title}
           </a>
         ))}
         <div className="af-nav-lang">

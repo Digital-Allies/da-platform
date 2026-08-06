@@ -22,13 +22,13 @@ export default async function HomePage() {
   // below so layout can match that design exactly. See
   // AtomicFindsHomepage.tsx for why this client is special-cased.
   if (process.env.NEXT_PUBLIC_CLIENT_ID === ATOMIC_FINDS_CLIENT_ID) {
-    const [products, reviews, settings, collections] = await Promise.all([getProducts(), getFeaturedReviews(), getSiteSettings(), getCollections()])
+    const [products, reviews, settings, collections, publishedPages] = await Promise.all([getProducts(), getFeaturedReviews(), getSiteSettings(), getCollections(), getPublishedPages()])
     // SiteTheme still wraps this: it's what supplies the --tok-* variables
     // ProductGrid (a component shared across clients) depends on. The
     // page's own .af-homepage tokens layer on top for the bespoke sections.
     return (
       <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
-        <AtomicFindsHomepage products={products} reviews={reviews} logoUrl={settings.logo_url || undefined} collections={collections} settings={settings} />
+        <AtomicFindsHomepage products={products} reviews={reviews} logoUrl={settings.logo_url || undefined} collections={collections} pages={publishedPages} settings={settings} />
       </SiteTheme>
     )
   }

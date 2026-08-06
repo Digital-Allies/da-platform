@@ -100,7 +100,9 @@ export function MediaUploader({
             </div>
             <div style={{ flex: '1', minWidth: '0' }}>
               <div style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--text-soft, #666)', wordBreak: 'break-all', marginBottom: '6px' }}>
-                {value}
+                {value.startsWith('data:') 
+                  ? `[Embedded Image Asset (${Math.round(value.length / 1024)} KB)]` 
+                  : value.length > 80 ? `${value.slice(0, 77)}...` : value}
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <a href={value} target="_blank" rel="noopener noreferrer" className="btn btn--secondary" style={{ padding: '2px 8px', fontSize: '10px' }}>

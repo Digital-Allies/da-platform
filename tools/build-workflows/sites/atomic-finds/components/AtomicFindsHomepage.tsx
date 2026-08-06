@@ -67,12 +67,13 @@ interface AtomicFindsHomepageProps {
   products: Product[]
   reviews: Review[]
   collections?: any[]
+  pages?: Array<{ title: string; slug: string }>
   /** From settings.logo_url — falls back to the static brand mark when unset */
   logoUrl?: string
   settings?: SiteSettings
 }
 
-export default function AtomicFindsHomepage({ products, reviews, logoUrl, collections, settings }: AtomicFindsHomepageProps) {
+export default function AtomicFindsHomepage({ products, reviews, logoUrl, collections, pages = [], settings }: AtomicFindsHomepageProps) {
   // Temporary: photo-less featured products fall back to a "coming soon" state
   // that doesn't work for the Galaxy Card's hero-image treatment — skip them
   // until real photography is in, same rule as ProductGrid's standard cards.
@@ -85,7 +86,7 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
       <div className="af-weave-fixed" />
       <div className="af-page">
 
-        <AtomicNav logoUrl={logoUrl} />
+        <AtomicNav logoUrl={logoUrl} pages={pages} />
 
         {/* HERO */}
         <section className="af-hero" id="home">
@@ -253,9 +254,21 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
             </div>
             <div className="af-contact-wrap">
               <div className="af-contact-cards">
-                <div className="af-contact-card"><div className="af-c-label">Based In</div><div className="af-c-value">Austin, TX</div><div className="af-c-sub">Local delivery only</div></div>
-                <div className="af-contact-card"><div className="af-c-label">Hours</div><div className="af-c-value">By Appointment</div><div className="af-c-sub">Tue – Sat, 10am – 6pm</div></div>
-                <div className="af-contact-card"><div className="af-c-label">Social</div><div className="af-c-value">Instagram</div><div className="af-c-sub">@atomicfindsatx</div></div>
+                <div className="af-contact-card">
+                  <div className="af-c-label">Based In</div>
+                  <div className="af-c-value">{settings?.address || 'Austin, TX'}</div>
+                  <div className="af-c-sub">{settings?.phone ? `Phone: ${settings.phone}` : 'Local delivery only'}</div>
+                </div>
+                <div className="af-contact-card">
+                  <div className="af-c-label">Hours</div>
+                  <div className="af-c-value">{settings?.business_hours || 'By Appointment'}</div>
+                  <div className="af-c-sub">Tue – Sat, 10am – 6pm</div>
+                </div>
+                <div className="af-contact-card">
+                  <div className="af-c-label">Direct Contact</div>
+                  <div className="af-c-value">{settings?.email || 'Email Us'}</div>
+                  <div className="af-c-sub">{settings?.instagram_url ? '@atomicfindsatx' : 'We reply within 24h'}</div>
+                </div>
               </div>
               <AtomicContactForm />
               <div className="af-social-row">
