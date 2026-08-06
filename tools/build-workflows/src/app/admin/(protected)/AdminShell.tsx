@@ -9,7 +9,7 @@ import '@/styles/admin-dashboard.css';
 import {
   Search, Bell, LogOut, Check, Menu, X, Moon, Sun,
   LayoutDashboard, FileText, FolderKanban, ShoppingBag,
-  Newspaper, KanbanSquare, Wrench, Palette, Settings, ExternalLink, Inbox
+  Newspaper, KanbanSquare, Wrench, Palette, Settings, ExternalLink, Inbox, BookOpen
 } from 'lucide-react';
 
 interface AdminShellProps {
@@ -144,6 +144,7 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
 
   const allNavItems = [
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={16} /> },
+    { label: 'Onboarding', path: '/admin/onboarding', icon: <BookOpen size={16} /> },
     { label: 'Messages', path: '/admin/messages', icon: <Inbox size={16} /> },
     { label: 'Pages', path: '/admin/pages', icon: <FileText size={16} /> },
     { label: 'Collections', path: '/admin/collections', icon: <FolderKanban size={16} /> },

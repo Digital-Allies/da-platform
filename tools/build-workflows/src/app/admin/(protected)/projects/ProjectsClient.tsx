@@ -122,6 +122,55 @@ export default function ProjectsClient({ initialProjects, initialTasks }: { init
           { title: 'Metadata & On-page Optimization', description: 'Audit H1 structures and write descriptions', priority: 'medium', status: 'todo' },
           { title: 'LCP Core Web Vitals Audit', description: 'Analyze largest contentful paint speed in inspector', priority: 'high', status: 'todo' }
         ];
+      } else if (projectForm.template === 'website-launch') {
+        templateTasks = [
+          // PHASE 1: Technical Foundation
+          { title: 'Create Supabase clients row', description: 'Insert row into public.clients table with client_id UUID', priority: 'high', status: 'todo' },
+          { title: 'Seed Supabase settings table', description: 'Run seed-<client-slug>-settings.sql to populate business info', priority: 'high', status: 'todo' },
+          { title: 'Seed design tokens', description: 'Run seed-<client-slug>-design-tokens.sql with brand colors & fonts', priority: 'high', status: 'todo' },
+          { title: 'Create Vercel project', description: 'Create new Vercel project, set root to tools/build-workflows, connect GitHub', priority: 'high', status: 'todo' },
+          { title: 'Set Vercel env vars', description: 'Configure all required env vars (NEXT_PUBLIC_CLIENT_ID, Supabase keys, etc.)', priority: 'high', status: 'todo' },
+          { title: 'Add custom domain in Vercel', description: 'Configure domain nameservers and SSL', priority: 'high', status: 'todo' },
+          { title: 'Update Supabase Auth URL config', description: 'Add new domain to Auth > URL Configuration', priority: 'high', status: 'todo' },
+          { title: 'Verify production deploy is green', description: 'Check Vercel deployment status - no errors', priority: 'high', status: 'todo' },
+          // PHASE 2: Content & Brand
+          { title: 'Verify site title shows correctly', description: 'Not "My Business" - actual business name from settings', priority: 'high', status: 'todo' },
+          { title: 'Upload logo', description: 'Add business logo to settings', priority: 'high', status: 'todo' },
+          { title: 'Set favicon', description: 'Configure site favicon in settings', priority: 'medium', status: 'todo' },
+          { title: 'Enter hero headline & copy', description: 'Fill in homepage headline and tagline', priority: 'high', status: 'todo' },
+          { title: 'Write about page content', description: 'Add business story and values', priority: 'high', status: 'todo' },
+          { title: 'Enter contact info', description: 'Add phone, email, address, business hours', priority: 'high', status: 'todo' },
+          { title: 'Add social media links', description: 'Link Instagram, Facebook, Twitter, etc.', priority: 'medium', status: 'todo' },
+          { title: 'Publish at least 1 product/service', description: 'Add and publish sample content to homepage', priority: 'high', status: 'todo' },
+          // PHASE 3: Required Pages
+          { title: 'Create /terms page', description: 'Terms of Service page with legal language', priority: 'high', status: 'todo' },
+          { title: 'Create /privacy page', description: 'Privacy Policy page', priority: 'high', status: 'todo' },
+          { title: 'Create /cookies page', description: 'Cookie Policy page', priority: 'high', status: 'todo' },
+          { title: 'Create /accessibility page', description: 'Accessibility Statement page', priority: 'high', status: 'todo' },
+          { title: 'Create /use-of-ai page', description: 'AI Disclosure & Usage page', priority: 'high', status: 'todo' },
+          { title: 'Create sitemap page', description: '/sitemap page listing all pages', priority: 'medium', status: 'todo' },
+          { title: 'Verify sitemap.xml exists', description: 'GET /sitemap.xml returns valid XML', priority: 'high', status: 'todo' },
+          { title: 'Verify 404 page renders', description: 'Visit non-existent URL - confirm 404 page', priority: 'medium', status: 'todo' },
+          // PHASE 4: SEO & AEO
+          { title: 'Verify <title> tag', description: 'Homepage title shows business name, not generic text', priority: 'high', status: 'todo' },
+          { title: 'Add meta descriptions', description: 'Set homepage and key page meta descriptions', priority: 'high', status: 'todo' },
+          { title: 'Verify Open Graph tags', description: 'Test social share preview (og:image, og:title, etc.)', priority: 'medium', status: 'todo' },
+          { title: 'Check JSON-LD schema', description: 'Verify LocalBusiness schema on homepage', priority: 'high', status: 'todo' },
+          { title: 'Verify robots.txt & sitemap.xml', description: 'Both files exist and are correct', priority: 'high', status: 'todo' },
+          // PHASE 5: Performance & Accessibility
+          { title: 'Test mobile layout (375px)', description: 'Verify responsive design at smallest breakpoint', priority: 'high', status: 'todo' },
+          { title: 'Test tablet layout (768px)', description: 'Verify responsive design at tablet breakpoint', priority: 'high', status: 'todo' },
+          { title: 'Verify no console errors', description: 'Check browser console - zero errors on page load', priority: 'high', status: 'todo' },
+          { title: 'Check all image alt text', description: 'Every image has descriptive alt text', priority: 'high', status: 'todo' },
+          { title: 'Test contact form submission', description: 'Submit test email - verify delivery', priority: 'high', status: 'todo' },
+          { title: 'Run Lighthouse audit', description: 'Performance ≥80, Accessibility ≥90, check WCAG violations', priority: 'high', status: 'todo' },
+          // PHASE 6: Admin Setup & Handoff
+          { title: 'Client can log in to CMS', description: 'Test login with client email - can access dashboard', priority: 'high', status: 'todo' },
+          { title: 'Dashboard shows client name', description: 'Not "Digital Allies" - actual client name', priority: 'high', status: 'todo' },
+          { title: 'Client can navigate all tabs', description: 'All relevant admin sections are accessible', priority: 'medium', status: 'todo' },
+          { title: 'Client can edit & publish content', description: 'Test editing a product/page and seeing changes live', priority: 'high', status: 'todo' },
+          { title: 'Password reset flow works', description: 'Test magic link login and password reset', priority: 'medium', status: 'todo' },
+        ];
       }
 
       const tasksToInsert = templateTasks.map(t => ({
@@ -332,6 +381,7 @@ export default function ProjectsClient({ initialProjects, initialTasks }: { init
                 <label className="form-label">Initialize Template</label>
                 <select className="form-control" value={projectForm.template} onChange={e => setProjectForm({...projectForm, template: e.target.value})}>
                   <option value="">None (Empty Project)</option>
+                  <option value="website-launch">🚀 Website Launch Checklist</option>
                   <option value="software">Software Launch Template</option>
                   <option value="marketing">Marketing Campaign Template</option>
                   <option value="seo">SEO Audit Template</option>
