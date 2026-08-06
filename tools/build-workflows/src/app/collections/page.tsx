@@ -18,9 +18,9 @@ export default async function CollectionsPage() {
   const clientId = process.env.NEXT_PUBLIC_CLIENT_ID || ATOMIC_FINDS_CLIENT_ID
   const [settings, products, collections, publishedPages] = await Promise.all([
     getSiteSettings(clientId),
-    getProducts(clientId),
-    getCollections(clientId),
-    getPublishedPages(clientId),
+    getProducts(),
+    getCollections(),
+    getPublishedPages(),
   ])
 
   return (
