@@ -380,11 +380,11 @@ export default function ProjectsClient({ initialProjects, initialTasks }: { init
               <div className="form-group">
                 <label className="form-label">Initialize Template</label>
                 <select className="form-control" value={projectForm.template} onChange={e => setProjectForm({...projectForm, template: e.target.value})}>
-                  <option value="">None (Empty Project)</option>
-                  <option value="website-launch">🚀 Website Launch Checklist</option>
-                  <option value="software">Software Launch Template</option>
-                  <option value="marketing">Marketing Campaign Template</option>
-                  <option value="seo">SEO Audit Template</option>
+                  <option value="">No Template</option>
+                  <option value="website-launch">🚀 Website Launch Checklist (New)</option>
+                  <option value="software">Software Development</option>
+                  <option value="marketing">Marketing Campaign</option>
+                  <option value="seo">SEO Project</option>
                 </select>
               </div>
               <div className="form-actions" style={{ justifyContent: 'flex-end', marginTop: '20px' }}>
