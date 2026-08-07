@@ -12,7 +12,7 @@ interface Section {
 const sections: Section[] = [
   {
     id: 'getting-started',
-    title: '🚀 Getting Started',
+    title: 'Getting Started',
     content: (
       <div>
         <h3>Welcome to the DA Platform</h3>
@@ -30,7 +30,7 @@ const sections: Section[] = [
   },
   {
     id: 'dashboard-overview',
-    title: '📊 Dashboard Overview',
+    title: 'Dashboard Overview',
     content: (
       <div>
         <h3>Understanding Your Dashboard</h3>
@@ -51,7 +51,7 @@ const sections: Section[] = [
   },
   {
     id: 'brand-setup',
-    title: '🎨 Setting Up Your Brand',
+    title: 'Setting Up Your Brand',
     content: (
       <div>
         <h3>Make Your Site Look Like You</h3>
@@ -77,7 +77,7 @@ const sections: Section[] = [
   },
   {
     id: 'adding-products',
-    title: '🛍️ Adding Products',
+    title: 'Adding Products',
     content: (
       <div>
         <h3>Publish Your Products</h3>
@@ -103,7 +103,7 @@ const sections: Section[] = [
   },
   {
     id: 'managing-pages',
-    title: '📄 Creating & Editing Pages',
+    title: 'Creating & Editing Pages',
     content: (
       <div>
         <h3>Build Custom Pages</h3>
@@ -130,7 +130,7 @@ const sections: Section[] = [
   },
   {
     id: 'collections',
-    title: '📂 Organizing with Collections',
+    title: 'Organizing with Collections',
     content: (
       <div>
         <h3>Group Related Products</h3>
@@ -151,7 +151,7 @@ const sections: Section[] = [
   },
   {
     id: 'messages-contact',
-    title: '💬 Handling Messages & Contact Submissions',
+    title: 'Handling Messages & Contact Submissions',
     content: (
       <div>
         <h3>Stay Connected with Customers</h3>
@@ -174,7 +174,7 @@ const sections: Section[] = [
   },
   {
     id: 'blog-press',
-    title: '📰 Publishing Blog Posts',
+    title: 'Publishing Blog Posts',
     content: (
       <div>
         <h3>Tell Your Story with Blog Posts</h3>
@@ -201,7 +201,7 @@ const sections: Section[] = [
   },
   {
     id: 'projects-tracking',
-    title: '✅ Using Projects to Track Progress',
+    title: 'Using Projects to Track Progress',
     content: (
       <div>
         <h3>Stay Organized with The Workshop</h3>
@@ -221,7 +221,7 @@ const sections: Section[] = [
   },
   {
     id: 'seo-basics',
-    title: '🔍 SEO Basics for Your Site',
+    title: 'SEO Basics for Your Site',
     content: (
       <div>
         <h3>Get Found by Search Engines</h3>
@@ -251,7 +251,7 @@ const sections: Section[] = [
   },
   {
     id: 'accessibility-wcag',
-    title: '♿ Accessibility & WCAG Compliance',
+    title: 'Accessibility & WCAG Compliance',
     content: (
       <div>
         <h3>Make Your Site Usable for Everyone</h3>
@@ -259,12 +259,12 @@ const sections: Section[] = [
         <p>Web Content Accessibility Guidelines (WCAG 2.1 Level AA) ensure your site works for people with disabilities, including blind/low-vision, deaf/hard of hearing, and those with mobility challenges.</p>
         <h4>What's Included</h4>
         <ul>
-          <li>✅ High contrast text (readable for low-vision users)</li>
-          <li>✅ Alt text on all images (for screen readers)</li>
-          <li>✅ Keyboard navigation (no mouse required)</li>
-          <li>✅ Semantic HTML (proper heading hierarchy, landmarks)</li>
-          <li>✅ Color not alone for meaning (icons + text)</li>
-          <li>✅ Focus indicators (visible outline when tabbing)</li>
+          <li>High contrast text (readable for low-vision users)</li>
+          <li>Alt text on all images (for screen readers)</li>
+          <li>Keyboard navigation (no mouse required)</li>
+          <li>Semantic HTML (proper heading hierarchy, landmarks)</li>
+          <li>Color not alone for meaning (icons + text)</li>
+          <li>Focus indicators (visible outline when tabbing)</li>
         </ul>
         <h4>What You Should Do</h4>
         <ol>
@@ -279,7 +279,7 @@ const sections: Section[] = [
   },
   {
     id: 'troubleshooting',
-    title: '🛠️ Troubleshooting & FAQ',
+    title: 'Troubleshooting & FAQ',
     content: (
       <div>
         <h3>Getting Help</h3>
@@ -292,7 +292,7 @@ const sections: Section[] = [
           <li><strong>"Form submissions aren't coming through"</strong> - Check Messages tab. Emails might be going to your spam.</li>
         </ul>
         <h4>Get Support</h4>
-        <p>Email <strong>support@digitalallies.net</strong> with a screenshot of the issue. We'll help!</p>
+        <p>Email <strong>contact@digitalallies.net</strong> with a screenshot of the issue. We'll help!</p>
       </div>
     ),
   },
@@ -426,8 +426,8 @@ export default function OnboardingClient() {
       >
         <p>
           <strong>Need more help?</strong> Email{' '}
-          <a href="mailto:support@digitalallies.net" style={{ color: 'var(--brand, #C5301A)', textDecoration: 'none' }}>
-            support@digitalallies.net
+          <a href="mailto:contact@digitalallies.net" style={{ color: 'var(--brand, #C5301A)', textDecoration: 'none' }}>
+            contact@digitalallies.net
           </a>{' '}
           or visit{' '}
           <a

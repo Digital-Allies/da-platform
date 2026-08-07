@@ -6,7 +6,7 @@ This directory contains a comprehensive, expandable training system for all DA P
 
 ---
 
-## 📁 Files & How to Use Them
+## Files & How to Use Them
 
 ### 1. **SKILL-EXPANDED.md** (for Claude)
 **What it is:** The expanded `client-onboarding` skill with all three modes (Build Gap Report, Onboarding Binder, Feature Training)
@@ -123,7 +123,7 @@ This directory contains a comprehensive, expandable training system for all DA P
 
 ---
 
-## 🎯 How to Use All This
+## How to Use All This
 
 ### For a New Client Launch (Anthony)
 
@@ -149,7 +149,7 @@ This directory contains a comprehensive, expandable training system for all DA P
 
 ---
 
-## 🚀 Quick Links
+## Quick Links
 
 | Need | File | Format |
 |------|------|--------|
@@ -162,18 +162,18 @@ This directory contains a comprehensive, expandable training system for all DA P
 
 ---
 
-## 📱 Browser & Device Support
+## Browser & Device Support
 
 **binder-atomic-finds-interactive.html** works on:
-- ✅ Desktop browsers (Chrome, Safari, Firefox, Edge)
-- ✅ Mobile phones (iOS Safari, Android Chrome)
-- ✅ Tablets (iPad, Android)
-- ✅ Print (PDF-friendly styling)
-- ✅ Dark/light mode (respects OS preference)
+- Desktop browsers (Chrome, Safari, Firefox, Edge)
+- Mobile phones (iOS Safari, Android Chrome)
+- Tablets (iPad, Android)
+- Print (PDF-friendly styling)
+- Dark/light mode (respects OS preference)
 
 ---
 
-## 🔄 Workflow: Creating Training for Other Clients
+## Workflow: Creating Training for Other Clients
 
 **Template:** Use Atomic Finds version as a starting point. For each new client:
 
@@ -189,7 +189,7 @@ This directory contains a comprehensive, expandable training system for all DA P
 
 ---
 
-## ✨ Features of the Interactive Binder
+## Features of the Interactive Binder
 
 ### Navigation
 - **Sticky header** with logo and action buttons
@@ -218,7 +218,7 @@ This directory contains a comprehensive, expandable training system for all DA P
 
 ---
 
-## 🎨 Customization for New Clients
+## Customization for New Clients
 
 Every new client should get a branded version. Here's what changes:
 
@@ -236,7 +236,7 @@ Every new client should get a branded version. Here's what changes:
 
 ---
 
-## 📊 Project Template Status
+## Project Template Status
 
 The **Website Launch** project template (in ProjectsClient.tsx) includes:
 
@@ -251,7 +251,7 @@ The **Website Launch** project template (in ProjectsClient.tsx) includes:
 
 ---
 
-## 🔗 How These Connect
+## How These Connect
 
 ```
 DA Platform Client (e.g., Atomic Finds)
@@ -269,7 +269,7 @@ DA Platform Client (e.g., Atomic Finds)
 
 ---
 
-## 💡 Pro Tips
+## Pro Tips
 
 1. **Bookmark the binder:** Save it in your browser as a quick reference
 2. **Print if needed:** PDF-friendly styling makes it a great printable guide
@@ -280,7 +280,7 @@ DA Platform Client (e.g., Atomic Finds)
 
 ---
 
-## 📝 Maintenance
+## Maintenance
 
 These files should be updated when:
 - The platform gains new features (add to skill + binder)
@@ -290,7 +290,7 @@ These files should be updated when:
 
 ---
 
-## 🎓 Learning Path
+## Learning Path
 
 **If you're a new Atomic Finds client:**
 1. Start with the binder (5 min overview)
@@ -303,7 +303,7 @@ These files should be updated when:
 1. Log in and poke around
 2. Bookmark the binder
 3. Reference as needed
-4. Email hello@digitalallies.net with questions
+4. Email contact@digitalallies.net with questions
 
 **If you're building this for a new client:**
 1. Read SKILL-EXPANDED.md for the full context
@@ -313,17 +313,17 @@ These files should be updated when:
 
 ---
 
-## 🆘 Need Help?
+## Need Help?
 
 - **Quick question?** Check the binder's troubleshooting section
 - **Building products?** Read the brand guide and CSV uploader guide
-- **Can't log in?** Email support@digitalallies.net
+- **Can't log in?** Email contact@digitalallies.net
 - **Want to dive deeper?** Read platform-architecture.md
 - **Found an error?** Let Anthony know
 
 ---
 
-## 📌 Version History
+## Version History
 
 - **v1.0** (August 2026): Initial Atomic Finds binder + comprehensive skill + all references + implementation plan
 - **v2.0** (TBD): Project template integration live + auto-population feature + dashboard progress card
