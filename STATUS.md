@@ -5,7 +5,36 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-07 — by Claude Code: onboarding integration merged to main; language switcher assessment complete. See entry below.
+**Last updated:** 2026-08-07 (Fri review/buffer session) — by Claude Code: found and fixed a real live bug in yesterday's language-switcher work (wrong deploy path), verified fixed in production. See entry below.
+
+## 2026-08-07 (cont'd) — Fri Aug 7 review/buffer session: language-switcher deploy-path bug found live, fixed, verified
+
+**Schedule order followed:** today is Fri Aug 7, `BUILD-SCHEDULE.md`'s final dated slot (`Fri Aug 7 · Review / buffer`) — currently empty, no bullet items. Per this task's own instructions, a review/buffer day means build-health check + verify recent work, not new feature builds. Checked for anything dated past Aug 7 in `BUILD-SCHEDULE.md` — still nothing.
+
+**Build health check:** `git status` clean before starting, `npx tsc --noEmit` clean in `tools/build-workflows`, both Vercel deploy checks green on `main`'s HEAD (`bdd1aef`) before this session's commit.
+
+**Open PR noted, not touched:** PR #42 (`claude/multi-tenant-repo-structure-ia22r5`, opened 2026-08-06T23:44Z by a prior session) — removes a cross-tenant mock-data fallback in `getProducts()`/`getFeaturedReviews()` (`src/lib/data.ts`). All 3 status checks green, small (16/−197 lines), reads correct and low-risk. Awaiting Anthony's review/merge per this repo's sign-off rules — not merged here.
+
+**Issue #37 (P0 CRITICAL, "multi-client architecture") is now partially stale** — its problem statement describes the pre-PR#39 layout (`src/components/site/atomic-finds/`, `src/styles/atomic-finds.css`), both of which no longer exist; PR #39 (merged 2026-08-03, explicitly "Phase 1 of #37") already did that migration, and the 2026-08-02 asset-path decision closed the other half. The issue is still open and still P0 — worth Anthony re-scoping it to just the remaining Phase 2 (site-loader abstraction for the *next* 3 clients) rather than leaving it read as if Phase 1 never happened.
+
+**Real bug found and fixed while verifying yesterday's language-switcher work (which the 2026-08-06 entry below left as "not yet tested on live"):**
+
+Tried to verify the EN/ES toggle on `atomicfindsatx.store` via the in-app browser first; the browser tool was unresponsive (timed out) — fell back to `curl` against the live production URL and found `layout.tsx`'s `/atomic-finds/language-controller.js` and `/atomic-finds/language-switcher.css` references both 404ing in production, even though the toggle buttons and all 57 `data-en`/`data-es` markup pairs shipped fine in the HTML.
+
+**Root cause:** yesterday's commit (`191370c`) added both files under a repo-root `public/atomic-finds/` directory instead of `tools/build-workflows/public/atomic-finds/` — the path Vercel actually serves static assets from for this project (root directory = `tools/build-workflows`, per `CLAUDE.md`'s own directory rules). The repo-root `public/` was also a brand-new, undocumented top-level folder — a `CLAUDE.md` hygiene-rule violation on its own, separate from the deploy-path bug.
+
+**Fixed (`bc67ace`, pushed directly to `main`** — small, single-concern, low-risk file relocation, no schema/env changes, fits this repo's "small fixes ship straight to main" convention): `git mv`'d both files to the correct `tools/build-workflows/public/atomic-finds/` path, removed the stray root-level `public/` dir. Verified before pushing: files resolve 200 against the local dev server, `npx tsc --noEmit` clean. Verified after pushing: both Vercel deploy checks green on the new HEAD, both files return `200`/`304` on live `atomicfindsatx.store`, and (once the browser tool recovered) confirmed via real network-request logs in-browser — no more 404s for either language-switcher asset, files load and cache correctly (304 on reload).
+
+**Testing checklist from the 2026-08-06 entry below, status now:**
+- [x] Navigate to Atomic Finds site, look for EN/ES buttons in nav — present.
+- [x] Assets (JS/CSS) load without 404 — confirmed fixed this session.
+- [ ] Actually click ES/EN and confirm text swaps, refresh persistence, zero console errors — **not done this session**, the browser tool recovered too late in the session to finish full click-through testing. Next session should pick this up specifically (assets loading is necessary but not sufficient proof the toggle logic itself works end-to-end).
+
+**Found, NOT fixed (out of scope for this fix, flagged as a background-task suggestion for Anthony rather than expanded here):** two unrelated pre-existing 404s in the same page's network log — `GET /Gomez` and a URL that decodes to a raw/truncated JSON fragment (`"Dimensions"":"38in W x 33in D x 19in H""}`), both suggesting a malformed value in a live Atomic Finds `products` row (or the component rendering it) unrelated to today's task. Also noticed in passing: `AtomicFindsHomepage.tsx`'s Jennyfer photo uses a raw `<img>` tag, not `next/image` — a `CLAUDE.md` platform non-negotiable violation, also out of scope today. Both logged for a dedicated follow-up session, not investigated further here to keep this fix single-concern.
+
+**What's next:** finish the language-switcher click-through test (toggle actually swaps text, localStorage persists, zero console errors) with a working browser tool; investigate the `/Gomez` + malformed-JSON 404s; Anthony should review/merge PR #42 and consider re-scoping issue #37. `BUILD-SCHEDULE.md` has nothing dated past today — next daily session should re-check for new dated entries the way every prior "schedule exhausted" session has.
+
+---
 
 ## 2026-08-07 — Onboarding integration completed + language switcher readiness assessment
 

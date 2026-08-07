@@ -290,6 +290,17 @@ block type today.
   Code-view: ✅ (2026-07-28, ungated — tier-gating is separate future work).
 
 ### Fri Aug 7 · Review / buffer
+**Done, 2026-08-07 (daily build session).** Build health green (`tsc` clean,
+both Vercel deploy checks green on `main`'s HEAD before this session).
+Found and fixed a real live bug while verifying the prior day's
+language-switcher work: both its JS/CSS assets were committed to a
+repo-root `public/` instead of `tools/build-workflows/public/`, so they
+404'd in production and the EN/ES toggle had no logic or styling attached.
+Fixed, pushed (`bc67ace`), verified live (200s, no more 404s). Full detail,
+plus two unrelated pre-existing bugs found and flagged (not fixed) along
+the way: `STATUS.md`'s 2026-08-07 (cont'd) entry. Nothing dated past this
+slot in this file — next session should re-check for new entries.
+- Skim the week's commits, confirm deploys are green, no new build prompts.
 
 ## Parallel / not scheduled — blocked on external input
 These move whenever their blocker clears, not on the calendar above:
