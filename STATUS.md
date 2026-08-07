@@ -5,7 +5,36 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-07 (Fri review/buffer session) — by Claude Code: found and fixed a real live bug in yesterday's language-switcher work (wrong deploy path), verified fixed in production. See entry below.
+**Last updated:** 2026-08-07 (cont'd, spawned follow-up session) — by Claude Code: root-caused the two flagged 404s to a real CSV-importer bug that corrupted a live 14-product batch; parser fixed, corrupted rows documented for Anthony to review/re-import. See entry below.
+
+## 2026-08-07 (cont'd) — CSV importer bug root-caused: broke on any unquoted multi-word field or embedded quote, corrupted a live 14-row Atomic Finds import
+
+**Follow-up to this morning's review/buffer session**, which flagged (but didn't investigate) two unrelated 404s spotted while verifying the language-switcher fix: `GET /Gomez` and a URL decoding to a raw JSON-looking fragment (`"Dimensions"":"38in W x 33in D x 19in H""}`).
+
+**Root cause found:** `src/components/admin/CSVCollectionImporter.tsx`'s CSV row parser (the "Import Spreadsheet Collection (CSV)" feature in `/admin/products`) was a naive regex, not a real CSV parser — `lines[i].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g)`. Two independent breakages in it:
+1. Its unquoted-token branch (`[^",\s]+`) splits on **any whitespace**, so an unquoted multi-word value (e.g. a "Seller" column reading `Jennyfer Gomez`) becomes two separate tokens instead of one — shifting every column after it in that row by one position.
+2. Its quoted-field branch (`".*?"`, non-greedy) doesn't unescape doubled quotes (`""`) — the real CSV convention for a literal `"` inside a quoted field (e.g. a dimensions value like `H 58" x W 40"`). It terminates at the *first* embedded quote instead, again misaligning every later column.
+
+Since the code assigns `rowData[header] = cleanValues[idx]` positionally against a fixed header array, either bug alone corrupts every column after the broken one for that row.
+
+**Live blast radius, confirmed by querying the `products` table directly (read-only) via the Supabase MCP tool:** all 14 rows inserted in a single CSV import batch today (`created_at = 2026-08-07 04:34:12.523959+00`, confirmed by the shared timestamp — one `.insert()` call, not 14 separate incidents) have at least one corrupted field:
+- 10 rows: `image_url` (or `external_url`) is the literal string `"Gomez"` or `"rated"` — fragments of a "Seller"/"Rating" column that doesn't exist in the `products` schema, bled in from the shift.
+- 1 row ("Chest"): `image_url` is the mangled dimensions fragment that produced the reported 404.
+- Several rows: `description` truncated to just its last word (e.g. `"beautifully."`, `"shelves."`, `"striking."`) — same word-splitting bug eating everything before the last token.
+- The original shifted-out values are **not recoverable from the database** — only fragments survived.
+- Ruled out as *not* corrupted: 4 earlier rows (Vintage MCM Dining Set, etc.) with `image_url`/`dimensions = null` and `seller_name = 'Jennyfer Gomez'` — these are the original PR #1 seed products, `image_url` intentionally null pending real photos (per `TODO.md` Priority 5), unrelated to today's import.
+
+**Fixed the parser** (same file): replaced the regex with a proper char-by-char CSV parser (`parseCsvLine()`) that tracks quote state, keeps unquoted multi-word fields intact, and correctly unescapes `""` → `"` inside quoted fields. Verified against the exact corruption pattern with a standalone Node repro (old parser reproduces the bug, new parser doesn't) before touching the real component. `npx tsc --noEmit` clean; confirmed `/admin/products` still compiles and redirects correctly for an unauthenticated request (no test credentials available to click through the actual upload UI, same standing constraint noted in multiple past sessions).
+
+**Did NOT touch the live corrupted data** — per `CLAUDE.md`, no write/destructive SQL run directly. Wrote `tools/build-workflows/supabase/review-corrupted-csv-import-20260807.sql` for Anthony: a read-only `SELECT` of the exact 14 rows plus a commented-out `DELETE` scoped to that exact timestamp + `client_id`, to run only after he confirms re-importing (via the now-fixed importer) is the right call rather than hand-fixing fragments that can't be fully reconstructed.
+
+**Shipped directly to `main`** (single-file logic fix, no schema/env changes, matches this repo's "small low-risk fixes" convention) — code fix + the review SQL file in one commit, this doc update in a second.
+
+**Also noted, not fixed (flagged only):** `sites/atomic-finds/components/AtomicFindsHomepage.tsx` uses several raw `<img>` tags instead of `next/image` — a `CLAUDE.md` platform non-negotiable violation, pre-existing, unrelated to this bug, out of scope for a single-concern fix. Worth a dedicated pass.
+
+**What's next:** Anthony should run the `SELECT` in the new review SQL file, decide whether to delete-and-re-import the 14-row batch (recommended) or hand-fix what's recoverable, then re-upload the original CSV once decided. The 4 raw-`<img>` instances in `AtomicFindsHomepage.tsx` remain open for a future session.
+
+---
 
 ## 2026-08-07 (cont'd) — Fri Aug 7 review/buffer session: language-switcher deploy-path bug found live, fixed, verified
 
