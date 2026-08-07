@@ -11,6 +11,41 @@ interface CSVCollectionImporterProps {
   onImportComplete: () => void;
 }
 
+// RFC 4180-style single-line CSV parser: tracks quote state char-by-char so
+// unquoted fields can contain spaces (e.g. "Jennyfer Gomez") without being
+// split into extra columns, and a doubled quote ("") inside a quoted field
+// (e.g. dimensions like H 58" x W 40") is unescaped to a literal " instead
+// of terminating the field early.
+function parseCsvLine(line: string): string[] {
+  const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (inQuotes) {
+      if (char === '"') {
+        if (line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        current += char;
+      }
+    } else if (char === '"') {
+      inQuotes = true;
+    } else if (char === ',') {
+      result.push(current);
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  result.push(current);
+  return result;
+}
+
 export function CSVCollectionImporter({
   collectionId,
   collectionTitle,
@@ -43,13 +78,11 @@ export function CSVCollectionImporter({
       }
 
       // Parse headers
-      const headers = lines[0].split(',').map(h => h.trim().replace(/^["']|["']$/g, '').toLowerCase());
-      
+      const headers = parseCsvLine(lines[0]).map(h => h.trim().replace(/^'|'$/g, '').toLowerCase());
+
       const rows: any[] = [];
       for (let i = 1; i < lines.length; i++) {
-        // Handle CSV comma splitting with quotes
-        const values = lines[i].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || lines[i].split(',');
-        const cleanValues = values.map(v => v.trim().replace(/^["']|["']$/g, ''));
+        const cleanValues = parseCsvLine(lines[i]).map(v => v.trim().replace(/^'|'$/g, ''));
         
         const rowData: any = {};
         headers.forEach((header, idx) => {
