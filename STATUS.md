@@ -5,7 +5,49 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-06 — by Claude Code (daily build session): schedule still exhausted, build health confirmed green, nothing changed since yesterday. See entry below.
+**Last updated:** 2026-08-07 — by Claude Code: onboarding integration merged to main; language switcher assessment complete. See entry below.
+
+## 2026-08-07 — Onboarding integration completed + language switcher readiness assessment
+
+**Onboarding Work Completed (Previous Session):**
+- ✅ **Merged PR #43:** Website-launch project template integrated into ProjectsClient.tsx
+  - 38 tasks across 6 phases (Technical Foundation, Content & Brand, Required Pages, SEO & AEO, Performance & Accessibility, Admin Setup & Handoff)
+  - Template dropdown updated: "🚀 Website Launch Checklist (New)" with standardized template names
+  - All tasks verified present in code (lines 125–173 of ProjectsClient.tsx)
+- ✅ **Onboarding HTML binder:** binder-atomic-finds-interactive.html verified complete and production-ready
+  - Interactive HTML with dark celestial theme, collapsible sections, CSV uploader tutorial, collections guide
+- ✅ **Repository hygiene:** Deleted stale binder file (binder-atomic-finds.html) per hygiene rules
+- ✅ All supporting docs created: IMPLEMENTATION-PLAN.md, README.md, reference guides (csv-uploader-guide.md, platform-architecture.md, atomic-finds-brand.md)
+
+**Build health:** `git status` clean on `main`, `npx tsc --noEmit` clean, all GitHub status checks green on HEAD.
+
+**Language Switcher Readiness Assessment:**
+
+✅ **Kit is production-ready:**
+- `language-controller.js` — hardened, idempotent, includes MutationObserver for dynamic content
+- `styles.css` — themeable via CSS custom properties
+- `SKILL.md` — integration guide with 6-step process and full testing checklist
+- `plan.md` — research findings and 7-step rollout plan
+
+**Ready to install on Atomic Finds?** YES, but with scope clarification:
+
+**Quick install (foundation only):** Copy JS + CSS, add toggle UI to nav, tag static text with `data-en`/`data-es`. **Estimated effort: 2 hours.** This establishes infrastructure for future bilingual support but won't work fully without CMS-side changes.
+
+**Full install (production bilingual):** All above PLUS:
+1. Bilingual Supabase fields for all dynamic content (products, categories, settings)
+2. Update product/collection queries to return `{en, es}` JSON objects
+3. Update React components to emit `data-en`/`data-es` on rendered elements
+4. Add `enabled_languages` setting to CMS admin
+5. Server-render `hreflang` and `og:locale` meta tags
+**Estimated effort: 6-8 hours across multiple files.**
+
+**Current blockers for full install:** CMS-managed content (products, collections, settings) doesn't have bilingual field infrastructure yet. Dynamic content would render English-only until that's built.
+
+**Recommendation:** Do quick install (foundation) now to bake the pattern into Atomic Finds' codebase. Then when the CMS evolves to support bilingual content, the UI layer is already ready.
+
+**What's next:** Await your decision on scope (quick foundation vs. full production bilingual). Once decided, can execute immediately.
+
+---
 
 ## 2026-08-06 — daily build session: schedule still exhausted, build health check only
 

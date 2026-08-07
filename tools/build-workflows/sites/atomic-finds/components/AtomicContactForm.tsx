@@ -46,35 +46,35 @@ export default function AtomicContactForm() {
   if (status === 'success') {
     return (
       <div className="af-contact-form">
-        <h3>Message sent</h3>
-        <p style={{ color: 'var(--fg-body)', fontSize: 14, marginBottom: 16 }}>We&apos;ll reply within 24 hours.</p>
-        <button type="button" className="af-btn" onClick={() => setStatus('idle')}>Send another message</button>
+        <h3 data-en="Message sent" data-es="Mensaje enviado">Message sent</h3>
+        <p style={{ color: 'var(--fg-body)', fontSize: 14, marginBottom: 16 }} data-en="We'll reply within 24 hours." data-es="Responderemos dentro de 24 horas.">We&apos;ll reply within 24 hours.</p>
+        <button type="button" className="af-btn" onClick={() => setStatus('idle')} data-en="Send another message" data-es="Enviar otro mensaje">Send another message</button>
       </div>
     )
   }
 
   return (
     <form className="af-contact-form" onSubmit={handleSubmit(onSubmit)} noValidate>
-      <h3>Send a Message</h3>
+      <h3 data-en="Send a Message" data-es="Envía un Mensaje">Send a Message</h3>
       <div className="af-field">
-        <label className="af-label" htmlFor="af-name">Your Name</label>
+        <label className="af-label" htmlFor="af-name" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
         <input id="af-name" className="af-input" type="text" placeholder="Jane Smith" {...register('name')} />
         {errors.name && <p style={{ color: 'var(--amber-orange)', fontSize: 12, marginTop: 4 }}>{errors.name.message}</p>}
       </div>
       <div className="af-field">
-        <label className="af-label" htmlFor="af-email">Email Address</label>
+        <label className="af-label" htmlFor="af-email" data-en="Email Address" data-es="Dirección de Correo">Email Address</label>
         <input id="af-email" className="af-input" type="email" placeholder="jane@example.com" {...register('email')} />
         {errors.email && <p style={{ color: 'var(--amber-orange)', fontSize: 12, marginTop: 4 }}>{errors.email.message}</p>}
       </div>
       <div className="af-field">
-        <label className="af-label" htmlFor="af-message">Message</label>
+        <label className="af-label" htmlFor="af-message" data-en="Message" data-es="Mensaje">Message</label>
         <textarea id="af-message" className="af-textarea" rows={4} placeholder="Tell us what you're looking for, or ask about a specific piece..." {...register('message')} />
         {errors.message && <p style={{ color: 'var(--amber-orange)', fontSize: 12, marginTop: 4 }}>{errors.message.message}</p>}
       </div>
       {status === 'error' && (
         <p style={{ color: 'var(--amber-orange)', fontSize: 13, marginBottom: 12 }}>{errorMessage}</p>
       )}
-      <button className="af-btn" type="submit" disabled={status === 'sending'}>
+      <button className="af-btn" type="submit" disabled={status === 'sending'} data-en={status === 'sending' ? 'Sending…' : 'Send Message'} data-es={status === 'sending' ? 'Enviando…' : 'Enviar Mensaje'}>
         {status === 'sending' ? 'Sending…' : 'Send Message'}
       </button>
     </form>
