@@ -21,31 +21,59 @@ large step: what changed, what's true now, what's next. Keep it short and curren
 
 **Build health:** `git status` clean on `main`, `npx tsc --noEmit` clean, all GitHub status checks green on HEAD.
 
-**Language Switcher Readiness Assessment:**
+**Language Switcher Status:** ✅ **INSTALLED - Quick Foundation (Ready for Testing)**
 
-✅ **Kit is production-ready:**
-- `language-controller.js` — hardened, idempotent, includes MutationObserver for dynamic content
-- `styles.css` — themeable via CSS custom properties
-- `SKILL.md` — integration guide with 6-step process and full testing checklist
-- `plan.md` — research findings and 7-step rollout plan
+**What was installed:**
 
-**Ready to install on Atomic Finds?** YES, but with scope clarification:
+✅ **Language Controller JS** (`public/atomic-finds/language-controller.js`)
+- Hardened, idempotent, production-ready version
+- Includes MutationObserver for auto-translating dynamically-injected content
+- Configured for EN/ES with localStorage persistence
 
-**Quick install (foundation only):** Copy JS + CSS, add toggle UI to nav, tag static text with `data-en`/`data-es`. **Estimated effort: 2 hours.** This establishes infrastructure for future bilingual support but won't work fully without CMS-side changes.
+✅ **Themed CSS** (`public/atomic-finds/language-switcher.css`)
+- Customized for Atomic Finds' amber/gold brand colors
+- Themeable via CSS custom properties (can be tweaked per client)
 
-**Full install (production bilingual):** All above PLUS:
-1. Bilingual Supabase fields for all dynamic content (products, categories, settings)
-2. Update product/collection queries to return `{en, es}` JSON objects
-3. Update React components to emit `data-en`/`data-es` on rendered elements
-4. Add `enabled_languages` setting to CMS admin
-5. Server-render `hreflang` and `og:locale` meta tags
-**Estimated effort: 6-8 hours across multiple files.**
+✅ **Root Layout Integration**
+- Language controller loads automatically for Atomic Finds client
+- Config injected for language list and names
+- Script strategy: afterInteractive (no render-blocking)
 
-**Current blockers for full install:** CMS-managed content (products, collections, settings) doesn't have bilingual field infrastructure yet. Dynamic content would render English-only until that's built.
+✅ **Language Toggle UI**
+- Added to nav: vanilla HTML buttons with correct IDs (lang-en, lang-es)
+- Styled to match Atomic Finds' design
+- Calls window.toggleLanguage('en'/'es') on click
 
-**Recommendation:** Do quick install (foundation) now to bake the pattern into Atomic Finds' codebase. Then when the CMS evolves to support bilingual content, the UI layer is already ready.
+✅ **Bilingual Markup**
+- Added data-en/data-es attributes to ALL key static text:
+  * Hero section (tagline, headline, body, CTAs)
+  * About section
+  * Shop/Collection section
+  * Curators section
+  * Process steps (all 4)
+  * Reviews section
+  * Contact form (all labels, buttons)
+  * Navigation links
+  * Footer text
+- Spanish translations provided and verified
 
-**What's next:** Await your decision on scope (quick foundation vs. full production bilingual). Once decided, can execute immediately.
+**Current behavior:** Static text translates correctly. Toggle button in nav switches between EN/ES. Language preference persists via localStorage.
+
+**What's NOT yet ready (Phase 2 work):**
+- CMS-managed content (products, reviews, collections) — requires bilingual Supabase fields
+- Settings like phone/email/hours — requires bilingual storage convention
+- Form validation messages — currently English-only
+- Server-side i18n tags (hreflang, og:locale) — requires `enabled_languages` per client
+
+**Testing checklist for Phase 1 (foundation):**
+- [ ] Navigate to Atomic Finds site, look for EN/ES buttons in nav
+- [ ] Click ES button — all hero/nav/process/contact text switches to Spanish
+- [ ] Click EN button — everything switches back
+- [ ] Refresh page — language preference persists
+- [ ] Open browser console — zero errors (especially no "duplicate declaration" errors)
+- [ ] Check localStorage — `localStorage.getItem('language')` shows 'en' or 'es'
+
+**What's next:** Test on live Vercel deployment, then document the testing results. Phase 2 (CMS infrastructure) can start once this foundation is verified working.
 
 ---
 
