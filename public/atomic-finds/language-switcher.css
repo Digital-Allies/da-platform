@@ -1,0 +1,72 @@
+/**
+ * Language switcher styles — themeable via CSS custom properties so
+ * every new client site can restyle without touching structure.
+ * Customized for Atomic Finds: amber/gold primary, dark background.
+ */
+:root {
+  --lang-switcher-gap: 10px;
+  --lang-switcher-padding: 12px 20px;
+  --lang-btn-padding: 8px 16px;
+  --lang-btn-border-width: 2px;
+  --lang-btn-radius: 4px;
+  --lang-btn-font-size: 13px;
+  --lang-btn-font-weight: 600;
+  --lang-btn-color: #D4822A;       /* Atomic Finds amber */
+  --lang-btn-bg: transparent;
+  --lang-btn-active-color: #FFFFFE;
+  --lang-btn-active-bg: #D4822A;
+  --lang-btn-shadow: none;
+  --lang-btn-shadow-active: 0 2px 8px rgba(212, 130, 42, 0.3);
+  --lang-btn-transition: all 0.2s ease;
+}
+
+.language-switcher {
+  display: flex;
+  gap: var(--lang-switcher-gap);
+  padding: var(--lang-switcher-padding);
+  align-items: center;
+}
+
+.lang-btn {
+  padding: var(--lang-btn-padding);
+  border: var(--lang-btn-border-width) solid var(--lang-btn-color);
+  border-radius: var(--lang-btn-radius);
+  background: var(--lang-btn-bg);
+  color: var(--lang-btn-color);
+  font-weight: var(--lang-btn-font-weight);
+  font-size: var(--lang-btn-font-size);
+  cursor: pointer;
+  transition: var(--lang-btn-transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lang-btn:hover {
+  transform: none;
+  background: rgba(212, 130, 42, 0.1);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--lang-btn-color);
+  outline-offset: 2px;
+}
+
+.lang-btn.active {
+  background: var(--lang-btn-active-bg);
+  color: var(--lang-btn-active-color);
+  box-shadow: var(--lang-btn-shadow-active);
+}
+
+/* Visually hidden but screen-reader accessible — used for the ARIA
+   live-region announcement and any other sr-only helper text. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

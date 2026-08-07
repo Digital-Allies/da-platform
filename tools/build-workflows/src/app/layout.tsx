@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import '../styles/globals.css'
 import { getSiteSettings } from '@/lib/data'
 import AuthListener from '@/components/AuthListener'
@@ -29,8 +30,21 @@ export default async function RootLayout({
 }) {
   const settings = await getSiteSettings()
 
+  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
+  const isAtomicFinds = clientId === '443936d5-f92e-480b-b206-c65cfb52bdfc'
+
   return (
     <html lang="en">
+      <head>
+        {isAtomicFinds && (
+          <>
+            <link rel="stylesheet" href="/atomic-finds/language-switcher.css" />
+            <script dangerouslySetInnerHTML={{
+              __html: `window.LANGUAGE_CONTROLLER_CONFIG = { languages: ['en', 'es'], defaultLanguage: 'en', languageNames: { en: 'English', es: 'Español' } };`
+            }} />
+          </>
+        )}
+      </head>
       <body
         className="min-h-screen"
         style={{ '--brand': settings.brand_color } as React.CSSProperties}
@@ -41,6 +55,9 @@ export default async function RootLayout({
           <Analytics />
           {children}
         </IntlProvider>
+        {isAtomicFinds && (
+          <Script src="/atomic-finds/language-controller.js" strategy="afterInteractive" />
+        )}
       </body>
     </html>
   )

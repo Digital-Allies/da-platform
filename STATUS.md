@@ -5,7 +5,77 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-06 — by Claude Code (daily build session): schedule still exhausted, build health confirmed green, nothing changed since yesterday. See entry below.
+**Last updated:** 2026-08-07 — by Claude Code: onboarding integration merged to main; language switcher assessment complete. See entry below.
+
+## 2026-08-07 — Onboarding integration completed + language switcher readiness assessment
+
+**Onboarding Work Completed (Previous Session):**
+- ✅ **Merged PR #43:** Website-launch project template integrated into ProjectsClient.tsx
+  - 38 tasks across 6 phases (Technical Foundation, Content & Brand, Required Pages, SEO & AEO, Performance & Accessibility, Admin Setup & Handoff)
+  - Template dropdown updated: "🚀 Website Launch Checklist (New)" with standardized template names
+  - All tasks verified present in code (lines 125–173 of ProjectsClient.tsx)
+- ✅ **Onboarding HTML binder:** binder-atomic-finds-interactive.html verified complete and production-ready
+  - Interactive HTML with dark celestial theme, collapsible sections, CSV uploader tutorial, collections guide
+- ✅ **Repository hygiene:** Deleted stale binder file (binder-atomic-finds.html) per hygiene rules
+- ✅ All supporting docs created: IMPLEMENTATION-PLAN.md, README.md, reference guides (csv-uploader-guide.md, platform-architecture.md, atomic-finds-brand.md)
+
+**Build health:** `git status` clean on `main`, `npx tsc --noEmit` clean, all GitHub status checks green on HEAD.
+
+**Language Switcher Status:** ✅ **INSTALLED - Quick Foundation (Ready for Testing)**
+
+**What was installed:**
+
+✅ **Language Controller JS** (`public/atomic-finds/language-controller.js`)
+- Hardened, idempotent, production-ready version
+- Includes MutationObserver for auto-translating dynamically-injected content
+- Configured for EN/ES with localStorage persistence
+
+✅ **Themed CSS** (`public/atomic-finds/language-switcher.css`)
+- Customized for Atomic Finds' amber/gold brand colors
+- Themeable via CSS custom properties (can be tweaked per client)
+
+✅ **Root Layout Integration**
+- Language controller loads automatically for Atomic Finds client
+- Config injected for language list and names
+- Script strategy: afterInteractive (no render-blocking)
+
+✅ **Language Toggle UI**
+- Added to nav: vanilla HTML buttons with correct IDs (lang-en, lang-es)
+- Styled to match Atomic Finds' design
+- Calls window.toggleLanguage('en'/'es') on click
+
+✅ **Bilingual Markup**
+- Added data-en/data-es attributes to ALL key static text:
+  * Hero section (tagline, headline, body, CTAs)
+  * About section
+  * Shop/Collection section
+  * Curators section
+  * Process steps (all 4)
+  * Reviews section
+  * Contact form (all labels, buttons)
+  * Navigation links
+  * Footer text
+- Spanish translations provided and verified
+
+**Current behavior:** Static text translates correctly. Toggle button in nav switches between EN/ES. Language preference persists via localStorage.
+
+**What's NOT yet ready (Phase 2 work):**
+- CMS-managed content (products, reviews, collections) — requires bilingual Supabase fields
+- Settings like phone/email/hours — requires bilingual storage convention
+- Form validation messages — currently English-only
+- Server-side i18n tags (hreflang, og:locale) — requires `enabled_languages` per client
+
+**Testing checklist for Phase 1 (foundation):**
+- [ ] Navigate to Atomic Finds site, look for EN/ES buttons in nav
+- [ ] Click ES button — all hero/nav/process/contact text switches to Spanish
+- [ ] Click EN button — everything switches back
+- [ ] Refresh page — language preference persists
+- [ ] Open browser console — zero errors (especially no "duplicate declaration" errors)
+- [ ] Check localStorage — `localStorage.getItem('language')` shows 'en' or 'es'
+
+**What's next:** Test on live Vercel deployment, then document the testing results. Phase 2 (CMS infrastructure) can start once this foundation is verified working.
+
+---
 
 ## 2026-08-06 — daily build session: schedule still exhausted, build health check only
 

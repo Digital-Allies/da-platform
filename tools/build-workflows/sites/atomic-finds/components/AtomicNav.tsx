@@ -8,15 +8,14 @@
 // it was never given room for.
 
 import { useState } from 'react'
-import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 const ASSET = '/atomic-finds'
 
 const LINKS = [
-  { href: '#shop', icon: 'nav-shop.png', label: 'Shop' },
-  { href: '#process', icon: 'nav-process.png', label: 'How It Works' },
-  { href: '#reviews', icon: 'nav-reviews.png', label: 'Reviews' },
-  { href: '#contact', icon: 'nav-contact.png', label: 'Contact' },
+  { href: '#shop', icon: 'nav-shop.png', label: 'Shop', labelEs: 'Tienda' },
+  { href: '#process', icon: 'nav-process.png', label: 'How It Works', labelEs: 'Cómo Funciona' },
+  { href: '#reviews', icon: 'nav-reviews.png', label: 'Reviews', labelEs: 'Reseñas' },
+  { href: '#contact', icon: 'nav-contact.png', label: 'Contact', labelEs: 'Contacto' },
 ]
 
 interface AtomicNavProps {
@@ -70,7 +69,7 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
               alt=""
               className={`af-pill-img${activeRoll === l.href ? ' af-pill-img--rolling' : ''}`}
             />
-            <span className="af-pill-label">{l.label}</span>
+            <span className="af-pill-label" data-en={l.label} data-es={l.labelEs}>{l.label}</span>
           </a>
         ))}
         {pages
@@ -85,8 +84,27 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
               <span className="af-pill-label">{p.title}</span>
             </a>
           ))}
-        <div className="af-nav-lang">
-          <LanguageSwitcher variant="dark" />
+        <div className="af-nav-lang language-switcher">
+          <button
+            id="lang-en"
+            className="lang-btn active"
+            type="button"
+            onClick={() => (window as any).toggleLanguage?.('en')}
+            aria-pressed="true"
+            title="English"
+          >
+            EN
+          </button>
+          <button
+            id="lang-es"
+            className="lang-btn"
+            type="button"
+            onClick={() => (window as any).toggleLanguage?.('es')}
+            aria-pressed="false"
+            title="Español"
+          >
+            ES
+          </button>
         </div>
 
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -96,7 +114,7 @@ export default function AtomicNav({ logoUrl, pages = [] }: AtomicNavProps) {
             alt=""
             className={`af-pill-img${activeRoll === '#shop-cta' ? ' af-pill-img--rolling' : ''}`}
           />
-          Shop Now
+          <span data-en="Shop Now" data-es="Compra Ahora">Shop Now</span>
         </a>
       </div>
     </nav>
