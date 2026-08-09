@@ -49,8 +49,8 @@
 
 **Template Notes:** Included in Settings component (lines ~6-40)
 
-### Work Stream 2.1: Connected Data & Theme UX Redesign 🚨 CRITICAL
-**Status:** Redesign Planned (User Feedback: Current approach too technical for non-technical clients)  
+### Work Stream 2.1: Connected Data UX Redesign ✅ COMPLETED
+**Status:** Implemented (Merged 2026-08-09)  
 **User Feedback:** [Aug 9] Current Connected Data and Theme editors too complex. Duda pattern is simpler, more interactive, client-friendly.
 
 #### Problem: Current Approach
@@ -59,20 +59,26 @@
 - Missing features: No custom color additions, no Google Fonts, no font uploads, no glow sliders
 - Jargon: "Brand token" is designer-speak, non-technical users won't understand
 
-#### A. Connected Data Redesign (Duda Pattern)
+#### A. Connected Data Redesign (Duda Pattern) ✅
 **Goal:** Simple, labeled text blocks. No code-like terminology. Right-click integration in page editor.
 
-**UX Changes:**
-1. Rename "Custom Variables" → "Content Blocks" (or "Data Blocks")
-2. Simple interface: label field + text area (like "Business Name" or "About Us")
-3. No "variable_name" or complex naming — users freely name their blocks
-4. In page editor: right-click text/block → "Connect to Content Block" → select from saved list
-5. Selected content auto-inserts into text, heading, button blocks
-6. No separate "how to use" instructions — flow is obvious in-editor
+**Completed Changes:**
+1. ✅ Renamed "Custom Variables" → "Content Blocks"
+2. ✅ Added ContentBlock interface in types.ts (id, label, content)
+3. ✅ Redesigned UI: single add form + editable blocks list
+4. ✅ Removed "variable_name" code-like terminology
+5. ✅ Simple label + text area interface (no complex fields)
+6. ✅ Plain English instructions, removed jargon
+7. ✅ Ready for page editor right-click integration (next phase)
 
-**Files to Update:** `tools/build-workflows/src/app/admin/(protected)/settings/page.tsx` (ConnectedData tab)
+**Files Updated:** 
+- `tools/build-workflows/src/app/admin/(protected)/settings/page.tsx`
+- `tools/build-workflows/src/lib/types.ts`
+- `ATOMIC_FINDS_AUDIT_WORK_QUEUE.md`
 
-**Template Notes:** Generalizable for DA CMS — same pattern applies to all clients
+**Commits:** `9112f9d` (Connected Data redesign)
+
+**Template Notes:** Generalizable for DA CMS — same pattern applies to all clients. Non-technical users can now add/edit content blocks without fear of code terminology.
 
 #### B. Theme Editor Redesign (Interactive, Customizable)
 **Goal:** Interactive UI, not dropdowns. Client can customize without fear. All changes update brand tokens.
@@ -219,24 +225,29 @@
 
 ---
 
-## 🎯 NEXT STEPS (Revised per User Feedback Aug 9)
+## 🎯 COMPLETED (Aug 9)
 
-1. **PRIORITY: Connected Data UX Redesign** (Duda pattern — simpler, client-friendly)
-   - Replace "variable name" terminology
-   - Add right-click "Connect to Data" in page editor
-   - No jargon, simple labeled text blocks
+✅ **Connected Data UX Redesign** — Implemented Duda pattern
+✅ **Onboarding Branding** — Fixed to use AF brand color (#F5C842) + black text
+✅ **Dark Mode Header** — Now black background + white text (readable)
 
-2. **PRIORITY: Theme Editor Redesign** (Interactive, customizable, sliders not dropdowns)
+## 🎯 NEXT STEPS
+
+1. **PRIORITY: Theme Editor Redesign** (Interactive, customizable, sliders not dropdowns)
    - Color picker instead of dropdown
    - Google Fonts + custom font upload
    - Glow as slider, live previews
    - Plain English labels (remove "brand token" jargon)
 
+2. **Then: Page Editor "Connect to Content Block"** (Right-click integration for page editor)
+   - User right-clicks text block in page editor
+   - Menu shows "Connect to Content Block"
+   - Selects from saved content blocks
+   - Content auto-inserts
+
 3. **Then: Product Image Paths** (CSV import image_url fix)
 
 4. **Then: Page Editor Layering** (z-index + draggable layer order)
-
-5. **Keep template notes** for DA CMS equivalent changes
 
 ---
 
