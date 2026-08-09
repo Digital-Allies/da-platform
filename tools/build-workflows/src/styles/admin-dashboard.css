@@ -113,7 +113,7 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   color: var(--fg-on-dark); padding: 6px 10px; border-radius: var(--radius-1);
   transition: background var(--dur-quick);
 }
-.ws-client__btn:hover { background: rgba(255,255,255,.12); }
+.ws-client__btn:hover { background: rgba(255,255,255,.12); color: rgba(255,255,255, 0.9); }
 .ws-avatar {
   width: 24px; height: 24px; border-radius: var(--radius-pill);
   display: grid; place-items: center; flex: 0 0 auto;
@@ -137,7 +137,7 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   padding: 10px 12px; background: none; border: 0; border-bottom: var(--border-hairline);
   text-align: left; transition: background var(--dur-quick);
 }
-.ws-client__opt:hover { background: var(--accent-soft); }
+.ws-client__opt:hover { background: var(--accent-soft); color: #000000; }
 .ws-client__opt.is-on { background: var(--bg-alt); }
 .ws-client__opt-meta { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
 .ws-client__opt-name { font-family: var(--font-headers); font-weight: 600; font-size: 13px; color: var(--fg); }
@@ -181,7 +181,7 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   color: var(--fg); text-align: left; font-size: 13px; position: relative;
   transition: background var(--dur-quick), border-color var(--dur-quick);
 }
-.ws-navitem:hover { background: var(--accent-soft); }
+.ws-navitem:hover { background: var(--accent-soft); color: #000000; }
 .ws-navitem.is-active { background: var(--bg); border-left-color: var(--signal); font-weight: 600; }
 .ws-navitem__label { flex: 1; }
 .ws-nav__foot { margin-top: auto; padding: var(--space-3) var(--space-5); }
@@ -223,9 +223,9 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
 .btn--primary { background: var(--accent); color: white; border-color: var(--accent); }
 .btn--primary:hover { background: #2f65b0; border-color: #2f65b0; }
 .btn--secondary { background: var(--bg-alt); border-color: var(--charcoal); color: var(--charcoal); }
-.btn--secondary:hover { background: var(--accent-soft); }
+.btn--secondary:hover { background: var(--accent-soft); color: #000000; }
 .btn--outline { background: transparent; border-color: var(--charcoal); }
-.btn--outline:hover { background: var(--accent-soft); }
+.btn--outline:hover { background: var(--accent-soft); color: #000000; }
 
 .form-control {
   display: block; width: 100%; padding: 10px 12px; font-size: 13px; font-family: var(--font-body);
