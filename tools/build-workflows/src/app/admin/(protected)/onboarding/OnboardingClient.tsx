@@ -611,7 +611,7 @@ export default function OnboardingClient() {
         style={{
           marginTop: '32px',
           padding: '16px',
-          background: 'linear-gradient(135deg, var(--tok-primary, #F5C842) 0%, rgba(245, 200, 66, 0.1) 100%)',
+          background: '#ffffff',
           border: '1px solid var(--tok-primary, #F5C842)',
           borderRadius: '6px',
           fontSize: '13px',

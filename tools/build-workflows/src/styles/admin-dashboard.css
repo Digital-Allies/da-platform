@@ -429,7 +429,7 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   --bone-white:    #1a1a1a;
   --charcoal:      #f0e8d8;
   --pulse-blue:    #5ba3e8;
-  --light-pink:    #2d2416;
+  --light-pink:    #FADEEB;  /* Light pink accent per spec */
   --signal-red:    #d64a2d;
   --pinned-note:   #242420;
 
@@ -444,12 +444,15 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   --fg-muted:      var(--text-muted);
   --fg-soft:       var(--text-soft);
   --fg-on-dark:    var(--bone-white);
+
+  --accent:        var(--light-pink);  /* Light pink as accent in dark mode */
+  --accent-soft:   var(--light-pink);
 }
 
-/* Dark mode header — use spec colors */
+/* Dark mode header — dark background with white text */
 :root.dark .ws-top {
-  background: var(--fg);
-  color: var(--fg-on-dark);
+  background: var(--bg);
+  color: #ffffff;
   border-bottom-color: var(--hairline);
 }
 
@@ -465,11 +468,13 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   border-right-color: rgba(255, 255, 255, 0.14);
 }
 
-/* Dark mode body grid */
+/* Dark mode body grid - light pink (#FADEEB) subtle grid lines */
 :root.dark body {
+  background-color: var(--bg);
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px);
+    linear-gradient(rgba(250, 222, 235, 0.08) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, rgba(250, 222, 235, 0.08) 0.5px, transparent 0.5px);
+  background-size: var(--lace-step) var(--lace-step);
 }
 
 /* Tab styling — bold text for better contrast */
