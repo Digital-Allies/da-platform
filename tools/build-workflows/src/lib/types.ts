@@ -203,6 +203,12 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   custom_code_body: '',
 }
 
+export interface ContentBlock {
+  id: string
+  label: string
+  content: string
+}
+
 // Convert flat settings array → object
 export function parseSettings(rows: Setting[]): SiteSettings {
   const map: Record<string, string> = {}

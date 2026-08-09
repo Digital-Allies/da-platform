@@ -45,7 +45,7 @@ import { useEffect, useState } from 'react';
 import { Save, Upload, Database, Palette, CheckCircle, Plus, Trash2, Eye, AlertCircle } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
-import { DEFAULT_SETTINGS, type SiteSettings } from '@/lib/types';
+import { DEFAULT_SETTINGS, type SiteSettings, type ContentBlock } from '@/lib/types';
 import MediaUploader from '@/components/admin/MediaUploader';
 import ThemeClient from '../theme/ThemeClient';
 
@@ -55,9 +55,9 @@ export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>('site_info');
   const [settings, setSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
   const [originalSettings, setOriginalSettings] = useState<SiteSettings>(DEFAULT_SETTINGS);
-  const [customDataKeys, setCustomDataKeys] = useState<Array<{ key: string; value: string }>>([]);
-  const [newKeyName, setNewKeyName] = useState('');
-  const [newKeyValue, setNewKeyValue] = useState('');
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([]);
+  const [newBlockLabel, setNewBlockLabel] = useState('');
+  const [newBlockContent, setNewBlockContent] = useState('');
   const [customCodeHead, setCustomCodeHead] = useState('');
   const [customCodeBody, setCustomCodeBody] = useState('');
 
@@ -92,12 +92,12 @@ export default function SettingsPage() {
           if (row.key) loaded[row.key] = row.value ?? '';
         });
 
-        if (loaded.custom_data) {
+        if (loaded.content_blocks) {
           try {
-            const parsed = JSON.parse(loaded.custom_data);
-            if (Array.isArray(parsed)) setCustomDataKeys(parsed);
+            const parsed = JSON.parse(loaded.content_blocks);
+            if (Array.isArray(parsed)) setContentBlocks(parsed);
           } catch (e) {
-            console.error('Failed to parse custom_data', e);
+            console.error('Failed to parse content_blocks', e);
           }
         }
 
@@ -133,16 +133,28 @@ export default function SettingsPage() {
     setSavedSuccess(false);
   };
 
-  const handleAddCustomDataKey = () => {
-    if (!newKeyName.trim()) return;
-    const cleanKey = newKeyName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '_');
-    setCustomDataKeys(prev => [...prev, { key: cleanKey, value: newKeyValue }]);
-    setNewKeyName('');
-    setNewKeyValue('');
+  const handleAddContentBlock = () => {
+    if (!newBlockLabel.trim()) return;
+    const block: ContentBlock = {
+      id: `block-${Date.now()}`,
+      label: newBlockLabel.trim(),
+      content: newBlockContent,
+    };
+    setContentBlocks(prev => [...prev, block]);
+    setNewBlockLabel('');
+    setNewBlockContent('');
   };
 
-  const handleRemoveCustomDataKey = (index: number) => {
-    setCustomDataKeys(prev => prev.filter((_, i) => i !== index));
+  const handleRemoveContentBlock = (id: string) => {
+    setContentBlocks(prev => prev.filter(block => block.id !== id));
+  };
+
+  const handleUpdateContentBlock = (id: string, field: 'label' | 'content', value: string) => {
+    setContentBlocks(prev =>
+      prev.map(block =>
+        block.id === id ? { ...block, [field]: value } : block
+      )
+    );
   };
 
   const handleSubmitSettings = async (e: React.FormEvent) => {
@@ -174,11 +186,11 @@ export default function SettingsPage() {
         updated_at: new Date().toISOString(),
       });
 
-      // Add custom_data json row
+      // Add content_blocks json row
       rows.push({
         client_id: clientId,
-        key: 'custom_data',
-        value: JSON.stringify(customDataKeys),
+        key: 'content_blocks',
+        value: JSON.stringify(contentBlocks),
         updated_at: new Date().toISOString(),
       });
 
@@ -189,7 +201,7 @@ export default function SettingsPage() {
       if (settingsError) {
         await supabase
           .from('site_settings')
-          .upsert({ ...settings, client_id: clientId, custom_data: customDataKeys, custom_code_head: customCodeHead, custom_code_body: customCodeBody }, { onConflict: 'client_id' });
+          .upsert({ ...settings, client_id: clientId, content_blocks: contentBlocks, custom_code_head: customCodeHead, custom_code_body: customCodeBody }, { onConflict: 'client_id' });
       }
 
       setOriginalSettings(settings);
@@ -214,7 +226,7 @@ export default function SettingsPage() {
     { id: 'contact' as SettingsTab, label: 'Contact', icon: '📞' },
     { id: 'analytics' as SettingsTab, label: 'Analytics', icon: '📊' },
     { id: 'advanced' as SettingsTab, label: 'Advanced', icon: '⚙️' },
-    { id: 'connected_data' as SettingsTab, label: 'Custom Variables', icon: '🔗' },
+    { id: 'connected_data' as SettingsTab, label: 'Content Blocks', icon: '📝' },
     { id: 'site_theme' as SettingsTab, label: 'Theme', icon: '🎨' },
   ];
 
@@ -527,79 +539,113 @@ export default function SettingsPage() {
         </form>
       )}
 
-      {/* Tab: Connected Data (Simplified) */}
+      {/* Tab: Content Blocks (Duda-inspired pattern) */}
       {activeTab === 'connected_data' && (
-        <form onSubmit={handleSubmitSettings} style={{ maxWidth: '800px' }}>
+        <form onSubmit={handleSubmitSettings} style={{ maxWidth: '900px' }}>
           <div style={{ marginBottom: '20px', padding: '16px', background: 'var(--bg-alt, #fafafa)', border: '1px solid var(--border-color, #eee)', fontSize: '13px', lineHeight: 1.6 }}>
-            <strong>Custom Variables</strong> — Add reusable copy snippets and values available in any page builder block. Examples: promo codes, shipping thresholds, custom messaging.
+            <strong>Content Blocks</strong> — Add labeled text blocks for content you use across your site. Name them however you like (e.g., "About Us", "Shipping Policy", "Newsletter Copy"). In the page editor, right-click any text block to connect it to a Content Block.
           </div>
-          <p style={{ marginBottom: '16px', fontSize: '13px', lineHeight: 1.6 }}>
-            Example use: Add a variable <code>free_shipping_threshold</code> with value <code>$100</code>, then reference it in any page block. Changes here update everywhere.
-          </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr auto', gap: '8px', marginBottom: '12px', alignItems: 'flex-end' }}>
-            <div>
-              <label style={{ fontSize: '11px', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>Variable Name</label>
+          {/* Add New Block Form */}
+          <div style={{ marginBottom: '32px', padding: '20px', border: '1px solid var(--border-color, #ddd)', borderRadius: '6px', background: 'var(--bg-alt, #fafafa)' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '16px' }}>Add New Content Block</h3>
+
+            <div className="form-group mb-4">
+              <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Block Name</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="e.g. promo_code"
-                value={newKeyName}
-                onChange={e => setNewKeyName(e.target.value)}
-                style={{ fontSize: '12px' }}
+                placeholder="e.g. About Us, Shipping Policy, Welcome Message"
+                value={newBlockLabel}
+                onChange={e => setNewBlockLabel(e.target.value)}
               />
+              <p style={{ fontSize: '12px', color: 'var(--text-soft, #666)', marginTop: '4px' }}>
+                Name this however you like. This is just for you to identify it.
+              </p>
             </div>
-            <div>
-              <label style={{ fontSize: '11px', fontWeight: 'bold', display: 'block', marginBottom: '4px' }}>Value</label>
-              <input
-                type="text"
+
+            <div className="form-group mb-4">
+              <label className="form-label font-bold text-xs uppercase tracking-wider mb-1 block">Content</label>
+              <textarea
                 className="form-control"
-                placeholder="e.g. SUMMER20"
-                value={newKeyValue}
-                onChange={e => setNewKeyValue(e.target.value)}
-                style={{ fontSize: '12px' }}
+                rows={4}
+                placeholder="Enter the text, HTML, or content for this block..."
+                value={newBlockContent}
+                onChange={e => setNewBlockContent(e.target.value)}
               />
             </div>
+
             <button
               type="button"
               className="btn btn--secondary"
-              onClick={handleAddCustomDataKey}
-              style={{ fontSize: '12px', whiteSpace: 'nowrap' }}
+              onClick={handleAddContentBlock}
+              style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
             >
-              <Plus size={12} /> Add
+              <Plus size={16} /> Add Content Block
             </button>
           </div>
 
-          {customDataKeys.length > 0 && (
-            <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--bg-alt, #fafafa)', borderRadius: '4px' }}>
-              <p style={{ fontSize: '12px', fontWeight: 'bold', marginBottom: '12px' }}>Active Variables:</p>
-              {customDataKeys.map((item, idx) => (
-                <div key={idx} style={{ display: 'flex', gap: '8px', marginBottom: '8px', alignItems: 'center' }}>
-                  <code style={{ fontSize: '12px', fontWeight: 'bold', flex: 1, background: '#fff', padding: '4px 8px', borderRadius: '2px' }}>
-                    {item.key}
-                  </code>
-                  <span style={{ fontSize: '12px', color: 'var(--text-soft, #666)', flex: 2 }}>
-                    {item.value}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveCustomDataKey(idx)}
-                    style={{ padding: '4px 8px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--signal, #C5301A)' }}
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              ))}
+          {/* Existing Blocks */}
+          {contentBlocks.length > 0 && (
+            <div style={{ marginBottom: '24px' }}>
+              <h3 style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '16px' }}>Your Content Blocks</h3>
+              <div style={{ display: 'grid', gap: '16px' }}>
+                {contentBlocks.map(block => (
+                  <div key={block.id} style={{ padding: '16px', border: '1px solid var(--border-color, #ddd)', borderRadius: '6px', background: '#fff' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+                      <div style={{ flex: 1 }}>
+                        <label style={{ fontSize: '11px', fontWeight: 'bold', display: 'block', marginBottom: '4px', textTransform: 'uppercase', color: 'var(--text-soft, #666)' }}>
+                          Block Name
+                        </label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={block.label}
+                          onChange={e => handleUpdateContentBlock(block.id, 'label', e.target.value)}
+                          style={{ fontSize: '14px', fontWeight: 'bold' }}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveContentBlock(block.id)}
+                        style={{ padding: '8px 12px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--signal, #C5301A)', marginLeft: '12px' }}
+                        title="Delete this block"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+
+                    <div>
+                      <label style={{ fontSize: '11px', fontWeight: 'bold', display: 'block', marginBottom: '4px', textTransform: 'uppercase', color: 'var(--text-soft, #666)' }}>
+                        Content
+                      </label>
+                      <textarea
+                        className="form-control"
+                        rows={3}
+                        value={block.content}
+                        onChange={e => handleUpdateContentBlock(block.id, 'content', e.target.value)}
+                        style={{ fontSize: '13px', fontFamily: 'inherit' }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
-          <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {contentBlocks.length === 0 && (
+            <div style={{ padding: '24px', background: 'var(--bg-alt, #fafafa)', borderRadius: '6px', textAlign: 'center', color: 'var(--text-soft, #666)', marginBottom: '24px' }}>
+              <p style={{ fontSize: '13px' }}>No content blocks yet. Add your first one above!</p>
+            </div>
+          )}
+
+          <div style={{ marginTop: '24px', display: 'flex', gap: '16px', alignItems: 'center' }}>
             <button type="submit" className="btn btn--primary" disabled={saving}>
-              <Save size={16} /> {saving ? 'Saving Data...' : 'Save Connected Data'}
+              <Save size={16} /> {saving ? 'Saving...' : 'Publish Content Blocks'}
             </button>
             {savedSuccess && (
               <span style={{ color: '#155724', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <CheckCircle size={16} /> Connected data saved & synced!
+                <CheckCircle size={16} /> Content blocks saved!
               </span>
             )}
           </div>

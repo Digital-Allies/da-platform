@@ -2,7 +2,8 @@
 
 **Date:** 2026-08-08  
 **Status:** In Progress  
-**Approach:** Batch edits with template notes for DA CMS replication
+**Approach:** Batch edits with template notes for DA CMS replication  
+**Key Principle:** Client-friendly UX, not designer-technical. Interactive UI, not dropdowns/lists.
 
 ---
 
@@ -47,6 +48,64 @@
 - Connected data examples for Curator system variables
 
 **Template Notes:** Included in Settings component (lines ~6-40)
+
+### Work Stream 2.1: Connected Data & Theme UX Redesign 🚨 CRITICAL
+**Status:** Redesign Planned (User Feedback: Current approach too technical for non-technical clients)  
+**User Feedback:** [Aug 9] Current Connected Data and Theme editors too complex. Duda pattern is simpler, more interactive, client-friendly.
+
+#### Problem: Current Approach
+- Connected Data: "variable name" + "value" pattern scares non-technical users (like Jenny)
+- Theme: Dropdown menus for colors + separate preview panel = clunky, not interactive
+- Missing features: No custom color additions, no Google Fonts, no font uploads, no glow sliders
+- Jargon: "Brand token" is designer-speak, non-technical users won't understand
+
+#### A. Connected Data Redesign (Duda Pattern)
+**Goal:** Simple, labeled text blocks. No code-like terminology. Right-click integration in page editor.
+
+**UX Changes:**
+1. Rename "Custom Variables" → "Content Blocks" (or "Data Blocks")
+2. Simple interface: label field + text area (like "Business Name" or "About Us")
+3. No "variable_name" or complex naming — users freely name their blocks
+4. In page editor: right-click text/block → "Connect to Content Block" → select from saved list
+5. Selected content auto-inserts into text, heading, button blocks
+6. No separate "how to use" instructions — flow is obvious in-editor
+
+**Files to Update:** `tools/build-workflows/src/app/admin/(protected)/settings/page.tsx` (ConnectedData tab)
+
+**Template Notes:** Generalizable for DA CMS — same pattern applies to all clients
+
+#### B. Theme Editor Redesign (Interactive, Customizable)
+**Goal:** Interactive UI, not dropdowns. Client can customize without fear. All changes update brand tokens.
+
+**UX Changes:**
+
+**Colors:**
+- Replace dropdown with color picker (hex/RGB/color wheel)
+- Show all 4 default colors as interactive boxes (click to edit)
+- "Add Color +" button to add unlimited custom colors
+- Each color updates a brand token automatically (--tok-primary, --tok-secondary, etc.)
+
+**Typography:**
+- Support Google Fonts dropdown (integrate GF API)
+- "Upload Custom Font" button (for OTF/TTF files)
+- Show live preview of each font selection (in actual UI)
+- Select from uploaded + Google Fonts simultaneously
+- All font choices update brand tokens (--tok-heading-font, --tok-body-font, etc.)
+
+**Buttons/Glow:**
+- Live preview of button styles directly in settings (not separate list)
+- Users interact with actual button UI to see changes in real-time
+- Glow effect: slider (0-100) instead of dropdown
+- See preview of glow strength as slider moves
+- All changes update brand tokens instantly
+
+**Language:**
+- Remove "brand token" → use plain English labels: "Primary Color", "Heading Font", "Glow Strength"
+- Users should feel empowered to change anything, anytime
+
+**Files to Update:** `tools/build-workflows/src/app/admin/(protected)/settings/page.tsx` (Theme tab)
+
+**Template Notes:** Generalizable for DA CMS — same interactive pattern, customize tokens per client
 
 ---
 
@@ -160,13 +219,26 @@
 
 ---
 
-## 🎯 NEXT STEPS
+## 🎯 NEXT STEPS (Revised per User Feedback Aug 9)
 
-1. **Start Settings Refactoring** (includes global preview/publish)
-2. **Investigate product image paths** (run SQL query, identify format issue)
-3. **Audit page layout components** (identify formatting root causes)
-4. **Keep template notes** for DA CMS equivalent changes
+1. **PRIORITY: Connected Data UX Redesign** (Duda pattern — simpler, client-friendly)
+   - Replace "variable name" terminology
+   - Add right-click "Connect to Data" in page editor
+   - No jargon, simple labeled text blocks
+
+2. **PRIORITY: Theme Editor Redesign** (Interactive, customizable, sliders not dropdowns)
+   - Color picker instead of dropdown
+   - Google Fonts + custom font upload
+   - Glow as slider, live previews
+   - Plain English labels (remove "brand token" jargon)
+
+3. **Then: Product Image Paths** (CSV import image_url fix)
+
+4. **Then: Page Editor Layering** (z-index + draggable layer order)
+
+5. **Keep template notes** for DA CMS equivalent changes
 
 ---
 
+**Key Philosophy:** CMS should be **client-friendly, not designer-technical**. Interactive UI, not list-based selections. Customizable without fear.  
 **Template Pattern:** Every change documents what's AF-specific vs generalizable, so DA CMS template can adopt the same fixes without rework.
