@@ -155,6 +155,16 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   font-size: 12px; white-space: nowrap; transition: background var(--dur-quick);
 }
 .ws-cmd:hover { background: rgba(255,255,255,.12); }
+
+/* Dark mode header icons — pink with black on hover */
+:root.dark .ws-cmd {
+  color: var(--light-pink);
+}
+:root.dark .ws-cmd:hover {
+  background: var(--light-pink);
+  color: #000000;
+}
+
 .ws-sync { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(255,255,255,.6); }
 .ws-sync--on { color: #fff; }
 
