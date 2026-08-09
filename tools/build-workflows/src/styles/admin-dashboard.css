@@ -413,27 +413,6 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
 }
 
 /* DARK MODE */
-:root.dark {
-  --bone-white:    #1a1a1a;
-  --charcoal:      #f0e8d8;
-  --pulse-blue:    #5ba3e8;
-  --light-pink:    #2d2416;
-  --signal-red:    #d64a2d;
-  --pinned-note:   #242420;
-
-  --grid-line:     rgba(255, 255, 255, 0.05);
-  --hairline:      rgba(255, 255, 255, 0.1);
-  --text-muted:    #b0a9a0;
-  --text-soft:     #8a8580;
-
-  --bg:            var(--bone-white);
-  --bg-alt:        #242420;
-  --fg:            var(--charcoal);
-  --fg-muted:      var(--text-muted);
-  --fg-soft:       var(--text-soft);
-  --fg-on-dark:    var(--bone-white);
-}
-
 /* Dark mode — follow spec from design system */
 :root.dark {
   --bone-white:    #1a1a1a;
