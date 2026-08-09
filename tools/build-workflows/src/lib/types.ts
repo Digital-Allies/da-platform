@@ -164,7 +164,10 @@ export interface SiteSettings {
   return_policy: string
   google_analytics_id: string
   facebook_app_id: string
+  meta_pixel_id: string
   custom_footer_text: string
+  custom_code_head?: string
+  custom_code_body?: string
 }
 
 export const DEFAULT_SETTINGS: SiteSettings = {
@@ -194,7 +197,10 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   return_policy: '',
   google_analytics_id: '',
   facebook_app_id: '',
+  meta_pixel_id: '',
   custom_footer_text: '',
+  custom_code_head: '',
+  custom_code_body: '',
 }
 
 // Convert flat settings array → object
