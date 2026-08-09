@@ -57,7 +57,18 @@
   --lace-step:   20px;
 }
 
-body { margin: 0; padding: 0; background: var(--bg); font-family: var(--font-body); color: var(--fg); overflow: hidden; height: 100vh; }
+body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, var(--grid-line) 0.5px, transparent 0.5px);
+  background-size: var(--lace-step) var(--lace-step);
+  font-family: var(--font-body);
+  color: var(--fg);
+  overflow: hidden;
+  height: 100vh;
+}
 * { box-sizing: border-box; }
 button { font-family: inherit; cursor: pointer; }
 
@@ -413,15 +424,37 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   --fg-on-dark:    var(--bone-white);
 }
 
-/* Dark mode header override */
+/* Dark mode — follow spec from design system */
+:root.dark {
+  --bone-white:    #1a1a1a;
+  --charcoal:      #f0e8d8;
+  --pulse-blue:    #5ba3e8;
+  --light-pink:    #2d2416;
+  --signal-red:    #d64a2d;
+  --pinned-note:   #242420;
+
+  --grid-line:     rgba(255, 255, 255, 0.05);
+  --hairline:      rgba(255, 255, 255, 0.1);
+  --text-muted:    #b0a9a0;
+  --text-soft:     #8a8580;
+
+  --bg:            var(--bone-white);
+  --bg-alt:        #242420;
+  --fg:            var(--charcoal);
+  --fg-muted:      var(--text-muted);
+  --fg-soft:       var(--text-soft);
+  --fg-on-dark:    var(--bone-white);
+}
+
+/* Dark mode header — use spec colors */
 :root.dark .ws-top {
-  background: #0a0a0a;
-  color: #ffffff;
-  border-bottom-color: rgba(255, 255, 255, 0.1);
+  background: var(--fg);
+  color: var(--fg-on-dark);
+  border-bottom-color: var(--hairline);
 }
 
 :root.dark .ws-top__name {
-  color: #ffffff;
+  color: var(--fg-on-dark);
 }
 
 :root.dark .ws-top__tag {
@@ -430,6 +463,25 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
 
 :root.dark .ws-top__brand {
   border-right-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Dark mode body grid */
+:root.dark body {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px);
+}
+
+/* Tab styling — bold text for better contrast */
+.ws-nav__link {
+  font-weight: 600;
+}
+
+/* Tab highlight color in dark mode */
+:root.dark .ws-nav__link[data-active="true"],
+:root.dark .ws-nav__link.is-active {
+  color: var(--accent-soft);
+  border-bottom-color: var(--accent-soft);
 }
 
 /* HAMBURGER MENU (hidden on desktop) */
