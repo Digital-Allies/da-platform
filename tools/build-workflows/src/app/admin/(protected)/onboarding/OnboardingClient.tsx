@@ -516,7 +516,7 @@ export default function OnboardingClient() {
             padding: '8px 16px',
             fontSize: '12px',
             fontWeight: 600,
-            background: 'var(--brand, #C5301A)',
+            background: 'var(--tok-primary, #F5C842)',
             color: '#fff',
             border: 'none',
             borderRadius: '4px',
@@ -594,7 +594,7 @@ export default function OnboardingClient() {
                   {section.content}
                   <style>{`
                     div h3 { margin-top: 16px; margin-bottom: 8px; font-size: 16px; font-weight: 600; }
-                    div h4 { margin-top: 12px; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: var(--brand, #C5301A); }
+                    div h4 { margin-top: 12px; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: var(--tok-primary, #F5C842); }
                     div p { margin-bottom: 10px; }
                     div ol, div ul { margin-left: 20px; margin-bottom: 10px; }
                     div li { margin-bottom: 6px; }
@@ -611,8 +611,8 @@ export default function OnboardingClient() {
         style={{
           marginTop: '32px',
           padding: '16px',
-          background: 'linear-gradient(135deg, var(--brand, #F5C842) 0%, rgba(245, 200, 66, 0.1) 100%)',
-          border: '1px solid var(--brand, #F5C842)',
+          background: 'linear-gradient(135deg, var(--tok-primary, #F5C842) 0%, rgba(245, 200, 66, 0.1) 100%)',
+          border: '1px solid var(--tok-primary, #F5C842)',
           borderRadius: '6px',
           fontSize: '13px',
           color: 'var(--charcoal, #2D2D2D)',
@@ -628,7 +628,7 @@ export default function OnboardingClient() {
           <li><strong>Website Launch Checklist:</strong> Track your progress in{' '}
             <a
               href="/admin/projects"
-              style={{ color: 'var(--brand, #F5C842)', textDecoration: 'underline', fontWeight: 600 }}
+              style={{ color: 'var(--tok-primary, #F5C842)', textDecoration: 'underline', fontWeight: 600 }}
             >
               The Workshop <ExternalLink size={12} style={{ display: 'inline', marginLeft: '4px' }} />
             </a>
@@ -636,7 +636,7 @@ export default function OnboardingClient() {
         </ul>
         <p>
           <strong>Questions?</strong> Email{' '}
-          <a href="mailto:contact@digitalallies.net" style={{ color: 'var(--brand, #F5C842)', textDecoration: 'underline', fontWeight: 600 }}>
+          <a href="mailto:contact@digitalallies.net" style={{ color: 'var(--tok-primary, #F5C842)', textDecoration: 'underline', fontWeight: 600 }}>
             contact@digitalallies.net
           </a>
         </p>

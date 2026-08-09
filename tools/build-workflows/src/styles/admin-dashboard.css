@@ -399,18 +399,37 @@ p { margin: 0 0 16px 0; line-height: 1.6; }
   --light-pink:    #2d2416;
   --signal-red:    #d64a2d;
   --pinned-note:   #242420;
-  
+
   --grid-line:     rgba(255, 255, 255, 0.05);
   --hairline:      rgba(255, 255, 255, 0.1);
   --text-muted:    #b0a9a0;
   --text-soft:     #8a8580;
-  
+
   --bg:            var(--bone-white);
   --bg-alt:        #242420;
   --fg:            var(--charcoal);
   --fg-muted:      var(--text-muted);
   --fg-soft:       var(--text-soft);
   --fg-on-dark:    var(--bone-white);
+}
+
+/* Dark mode header override */
+:root.dark .ws-top {
+  background: #0a0a0a;
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+:root.dark .ws-top__name {
+  color: #ffffff;
+}
+
+:root.dark .ws-top__tag {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:root.dark .ws-top__brand {
+  border-right-color: rgba(255, 255, 255, 0.14);
 }
 
 /* HAMBURGER MENU (hidden on desktop) */
