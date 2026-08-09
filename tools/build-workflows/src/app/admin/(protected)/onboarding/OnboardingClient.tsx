@@ -517,7 +517,7 @@ export default function OnboardingClient() {
             fontSize: '12px',
             fontWeight: 600,
             background: 'var(--tok-primary, #F5C842)',
-            color: '#fff',
+            color: '#1E1E1E',
             border: 'none',
             borderRadius: '4px',
             cursor: 'pointer',
