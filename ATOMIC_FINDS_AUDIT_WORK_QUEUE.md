@@ -17,26 +17,36 @@
 
 ---
 
-## 🚧 IN PROGRESS
+## 🚧 IN PROGRESS / PARTIAL
 
-### Work Stream 2: Settings Refactoring (NEXT)
-**Priority:** HIGH — Blocks workflow (no global preview/publish)  
-**Files:** `tools/build-workflows/src/app/admin/(protected)/settings/`  
-**Goals:**
-- Reorganize fields: backend/SEO/marketing/schema separate from page-specific content
-- Add Advanced Config tab (GA4, Meta Pixel, custom code)
-- Create Custom Connected Data tab with simplified UI + CSV upload
-- Add global "Preview Site with All Settings" + "Publish All Settings" button
-- Move About photo/copy/title to page editor (not settings)
-- Use design tokens, not hardcoded colors
+### Work Stream 2: Settings Refactoring ✅ STRUCTURE COMPLETE
+**Commit:** `28c1919` (2026-08-08)  
+**Status:** 6-tab structure implemented, types updated, compiles successfully  
+**Files Changed:** 
+- `tools/build-workflows/src/app/admin/(protected)/settings/page.tsx` (+581 lines)
+- `tools/build-workflows/src/lib/types.ts` (added meta_pixel_id, custom_code_head/body)
 
-**AF-Specific Changes:**
-- Color scheme: #F5C842 (Celestial), #1E1E1E (Charcoal)
-- Brand fields: Atomic Finds logo, color palette, fonts (Bagel Fat One, DM Sans)
-- Connected data examples: Curator system, product categories
-- Schema: LocalBusiness for Austin pickup, Product schema
+**Completed Goals:**
+- ✅ Reorganized into 6 clear tabs: Site Info, Contact, Analytics, Advanced, Connected Data, Theme
+- ✅ Added Advanced Config tab (GA4, Meta Pixel, custom head/body code)
+- ✅ Simplified Connected Data UI (reusable variables, not confusing key/value)
+- ✅ Removed page-specific fields (hero_*, about_* will move to page editor in future)
+- ✅ Unsaved changes indicator shows which tabs need attention
+- ✅ "Publish All Settings" button structure (global publish logic not yet wired)
 
-**Template Notes Location:** Will add to Settings component comments
+**Pending (Follow-up):**
+- Global "Preview Site with Settings" button → UI scaffolded, modal logic needed
+- Global publish logic → database sync logic needed
+- Custom code injection into page render → head/body code not yet wired to site
+- Move hero/about fields from settings → to page editor
+
+**AF-Specific Implementation:**
+- Color scheme: #F5C842 (Celestial), #1E1E1E (Charcoal) in labels/helpers
+- Meta Pixel ID field added (was missing, critical for AF ad tracking)
+- Custom code sections for CSS glow effects, tracking scripts
+- Connected data examples for Curator system variables
+
+**Template Notes:** Included in Settings component (lines ~6-40)
 
 ---
 
@@ -67,6 +77,28 @@
 - Toast/confirmation showing what changed
 
 **Scope:** Settings refactoring (Work Stream 2) will include this
+
+---
+
+### B. Page Editor Layering (P1 - BLOCKING)
+**Issue:** Custom HTML/code blocks don't support layers — nothing can go on top  
+**Symptoms:**
+- Add custom HTML with particle animation background
+- Try to add text/images/buttons on top → can't layer them
+- Looks "weird" because animated background sits alone
+- No way to compose blocks with custom code as background
+
+**Impact:** Blocks all page creation that uses custom animations or backgrounds  
+
+**Fix Approach:**
+1. Add z-index/stacking order to block system
+2. Show visual layer order (draggable reordering of blocks)
+3. Custom code blocks can set as "background" (lowest z-index)
+4. Text, image, button blocks layer on top
+5. Transparent/semi-transparent blocks work over backgrounds
+
+**AF-Specific:** Celestial Scroll Hero and constellation canvas need background layer with text/CTAs on top  
+**Template Notes:** Block layering is generalizable across all clients
 
 ---
 
