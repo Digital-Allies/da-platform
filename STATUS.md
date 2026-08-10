@@ -5,7 +5,23 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-07 (cont'd, spawned follow-up session) — by Claude Code: root-caused the two flagged 404s to a real CSV-importer bug that corrupted a live 14-product batch; parser fixed, corrupted rows documented for Anthony to review/re-import. See entry below.
+**Last updated:** 2026-08-10 (daily build session) — by Claude Code: schedule still exhausted past Fri Aug 7, build health green, flagged a doc-sync gap and one new unscheduled P1 blocker. See entry below.
+
+## 2026-08-10 — daily build session: schedule still exhausted, build health check only, flagged a doc-sync gap + one new unscheduled P1
+
+**Schedule order followed:** `BUILD-SCHEDULE.md` still has nothing dated past Fri Aug 7's review/buffer slot, which is marked done. Every earlier slot is done or superseded (confirmed by re-reading the whole file, not just the tail). **Nothing new and in-scope to build today** — same situation as every "schedule exhausted" session since 2026-08-03.
+
+**Build health check:** `git status` clean on `main`, `npx tsc --noEmit` clean in `tools/build-workflows`, both Vercel deploy checks green on `main`'s HEAD (`fde0940`). One open PR, unrelated to this task (`#45`, draft, `code-coverage-agent/setup-code-coverage-reporting`, opened 2026-08-08 — CI tooling, not touched).
+
+**Doc-sync gap found: this file hadn't been updated since 2026-08-07, but `git log` shows substantial work landed directly on `main` on 2026-08-08/09** — a Settings-page 6-tab refactor (`28c1919`), a "Connected Data" UX redesign to a client-friendly Duda pattern (`9112f9d`), onboarding branding + dark-mode header/contrast fixes, and a "Technical Lace" grid restoration (`273bfb0` etc.). This wasn't a gap in *this* scheduled task's own work — it's Anthony working directly (with Claude Haiku sessions, per the commit co-authorship) against a **separate tracking doc**, [`ATOMIC_FINDS_AUDIT_WORK_QUEUE.md`](ATOMIC_FINDS_AUDIT_WORK_QUEUE.md) (repo root), not `BUILD-SCHEDULE.md` or this file. Confirmed via `tsc`/Vercel checks above that the resulting `main` state is healthy — not flagging a build problem, just that this file stopped being "the shared source of truth" for two days' worth of real changes. Not merging the two docs myself (that's a workflow decision, Anthony's call) — just noting it here so the next session (human or agent) isn't surprised by code it doesn't recognize from this file's own history.
+
+**One new P1 blocker surfaced in that work queue, not yet on `BUILD-SCHEDULE.md` or a GitHub issue — flagging, not picking up** (same discipline as every prior session's treatment of unscheduled items): **custom HTML/code page-editor blocks can't be layered** — there's no z-index/stacking control, so a custom-code block used as a background (e.g. Atomic Finds' Celestial Scroll Hero / constellation canvas) can't have text, images, or buttons composed on top of it. Blocks any page design that needs a custom-code background layer. Full detail and a proposed fix approach already sketched in `ATOMIC_FINDS_AUDIT_WORK_QUEUE.md`'s "B. Page Editor Layering (P1 - BLOCKING)" section. Recommend Anthony either add this to `BUILD-SCHEDULE.md` as a dated slot or open a GitHub issue for it (same recommendation pattern as the #33–36 issues from early August) — it's real, scoped, and generalizable across clients, just not in this task's current work order.
+
+**Also still open, unchanged, now well into its third week:** GitHub issue #11 (P0, `anthony-action`) — run `20260729000000_security_fixes_public_grant.sql` in the Supabase SQL editor (closes the `get_my_client_id()` anon-execute gap; the fix is a one-line migration already written and waiting, not code work).
+
+**What's next:** re-check `BUILD-SCHEDULE.md` for new dated entries or the Page Editor Layering item being scheduled; if Anthony keeps using `ATOMIC_FINDS_AUDIT_WORK_QUEUE.md` as an active second work queue, future daily sessions should check both files, not just `BUILD-SCHEDULE.md`.
+
+---
 
 ## 2026-08-07 (cont'd) — CSV importer bug root-caused: broke on any unquoted multi-word field or embedded quote, corrupted a live 14-row Atomic Finds import
 
