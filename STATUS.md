@@ -5,7 +5,25 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-13 (daily build session) — by Claude Code: schedule still exhausted past Fri Aug 7, build health green, nothing changed since yesterday's session. See entry below.
+**Last updated:** 2026-08-14 (daily build session) — by Claude Code: schedule still exhausted past Fri Aug 7, build health green, nothing changed since yesterday's session, corrected a drifting "week count" doc error. See entry below.
+
+## 2026-08-14 — daily build session: schedule still exhausted, build health check only, corrected a doc-accuracy drift on issue #11
+
+**Schedule order followed:** `BUILD-SCHEDULE.md` still has nothing dated past Fri Aug 7's review/buffer slot (done) — confirmed via `git log -1 -- BUILD-SCHEDULE.md`, last touched 2026-08-07, and a direct grep for any `Aug 8`–`Aug 2x` heading (none found). Every earlier slot is done or superseded, same as every session since 2026-08-03. **Nothing new and in-scope to build today.**
+
+**No commits landed since yesterday's session** (`git log 0ce20e3..HEAD` empty — `0ce20e3`, yesterday's own doc-sync entry, is still `main`'s HEAD; no direct work from Anthony in the interim).
+
+**Build health check:** `git status` clean on `main`, `npx tsc --noEmit` clean in `tools/build-workflows`. One open PR, unchanged and unrelated (`#45`, draft, `code-coverage-agent/setup-code-coverage-reporting`, last updated 2026-08-08 — CI tooling, not touched). Checked all 21 open GitHub issues: all still `anthony-action` or `blocked` except #20/#21 (`agent-ready`, but explicitly scoped to the separate live `Digital-Allies/DigitalAllies` repo, out of this task's repo scope, same as every prior session's treatment).
+
+**Doc-accuracy correction:** the last several sessions' "issue #11 now into its Nth week open" line has been incrementing by exactly one every session day regardless of actual elapsed time — Aug 10 claimed "third week," Aug 13 claimed "sixth week." Issue #11 was actually opened 2026-07-29 (confirmed via `gh issue list` timestamp), so as of today (2026-08-14, day 16 of it being open) it's genuinely in its **3rd week**, not its 7th. The drift started 2026-08-10 and compounded daily since — likely each session copy-pasted and bumped the prior day's number rather than recomputing from the actual open date. Not treating this as urgent (the underlying blocker is unchanged and still real — see below), just correcting so the count doesn't keep drifting further from reality.
+
+**Still open, unchanged:**
+- GitHub issue #11 (P0, `anthony-action`) — run `20260729000000_security_fixes_public_grant.sql` in the Supabase SQL editor. Genuinely in its **3rd week** open (opened 2026-07-29, 16 days ago) — see correction above.
+- The unscheduled P1 flagged 2026-08-10 onward (custom-code page-editor blocks can't be layered/stacked — blocks any page design needing a custom-code background layer, e.g. Atomic Finds' Celestial Scroll Hero). Detail in `ATOMIC_FINDS_AUDIT_WORK_QUEUE.md`'s "B. Page Editor Layering (P1 - BLOCKING)" section — file unchanged since 2026-08-09 (`git log -1`), confirmed still accurate. Still not on `BUILD-SCHEDULE.md` or a GitHub issue — repeating the recommendation, not picking it up.
+
+**What's next:** re-check `BUILD-SCHEDULE.md` for new dated entries or the Page Editor Layering item being scheduled/issued; keep checking `ATOMIC_FINDS_AUDIT_WORK_QUEUE.md` too in case Anthony resumes using it as an active second queue. If a future session updates the issue #11 age, compute it from the actual 2026-07-29 open date rather than incrementing the previous session's number.
+
+---
 
 ## 2026-08-13 — daily build session: schedule still exhausted, build health check only, no change since yesterday
 
