@@ -1,18 +1,21 @@
 // Server-side data fetching helpers — call from Server Components
+import { cache } from 'react'
 import { createPublicClient } from './supabase-server'
 import { parseSettings, type SiteSettings, type Post, type Service, type Testimonial, type Product, type Review } from './types'
 import { getDesignTokens as getStaticDesignTokens, type DesignTokens } from './theme'
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
 
-export async function getSiteSettings(clientId: string = CLIENT_ID): Promise<SiteSettings> {
+// cache() dedupes this per request — the admin layout's generateMetadata()
+// and its page body both resolve settings for the same logged-in tenant.
+export const getSiteSettings = cache(async (clientId: string = CLIENT_ID): Promise<SiteSettings> => {
   const supabase = createPublicClient()
   const { data } = await supabase
     .from('settings')
     .select('*')
     .eq('client_id', clientId)
   return parseSettings(data ?? [])
-}
+})
 
 export async function getPublishedPosts(): Promise<Post[]> {
   const supabase = createPublicClient()

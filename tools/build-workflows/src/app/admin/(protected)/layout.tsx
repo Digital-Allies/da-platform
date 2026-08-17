@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase-server'
 import { getCurrentClientId } from '@/lib/get-current-client'
@@ -5,6 +6,28 @@ import { getSiteSettings } from '@/lib/data'
 import { getDesignTokens } from '@/lib/theme'
 import AdminShell from './AdminShell'
 import UnlinkedAccount from './UnlinkedAccount'
+
+// The root layout's generateMetadata() resolves settings from the
+// deployment's static NEXT_PUBLIC_CLIENT_ID env var — fine for a
+// single-tenant site, but on the shared cms.digitalallies.net admin every
+// client logs into the same deployment, so the browser tab always showed
+// "Digital Allies" regardless of who was signed in. Override here with the
+// actual signed-in tenant's settings; `title: { absolute }` bypasses the
+// root layout's `%s | ${default}` template instead of appending to it.
+export async function generateMetadata(): Promise<Metadata> {
+  const clientId = await getCurrentClientId()
+  if (!clientId) return {}
+
+  const settings = await getSiteSettings(clientId)
+  return {
+    title: { absolute: `${settings.site_title} Admin` },
+    description: settings.site_description || settings.tagline,
+    openGraph: {
+      siteName: settings.site_title,
+      title: `${settings.site_title} Admin`,
+    },
+  }
+}
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -30,6 +53,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     <AdminShell
       userEmail={user.email ?? ''}
       businessName={settings.site_title}
+      logoUrl={settings.logo_url || undefined}
       accentColor={tokens.colors.primary}
       clientId={clientId}
     >

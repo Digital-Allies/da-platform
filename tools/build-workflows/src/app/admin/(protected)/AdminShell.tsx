@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
 import { ClientIdProvider } from '@/lib/client-context';
@@ -16,6 +17,7 @@ interface AdminShellProps {
   children: React.ReactNode;
   userEmail: string;
   businessName: string;
+  logoUrl?: string;
   accentColor: string;
   clientId: string;
 }
@@ -27,7 +29,7 @@ function initialsFor(name: string): string {
   return (words[0][0] + words[1][0]).toUpperCase();
 }
 
-export default function AdminShell({ children, userEmail, businessName, accentColor, clientId }: AdminShellProps) {
+export default function AdminShell({ children, userEmail, businessName, logoUrl, accentColor, clientId }: AdminShellProps) {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -184,7 +186,11 @@ export default function AdminShell({ children, userEmail, businessName, accentCo
 
         <div className="ws-client" id="da-client-switcher" ref={userMenuRef}>
           <button className="ws-client__btn" id="da-client-btn" onClick={() => setUserMenuOpen(!userMenuOpen)}>
-            <span className="ws-avatar" style={{ background: accentColor }}>{initialsFor(businessName)}</span>
+            {logoUrl ? (
+              <Image src={logoUrl} alt={businessName} width={24} height={24} className="ws-avatar" style={{ objectFit: 'cover' }} />
+            ) : (
+              <span className="ws-avatar" style={{ background: accentColor }}>{initialsFor(businessName)}</span>
+            )}
             <span className="ws-client__meta">
               <span className="ws-client__name">{businessName}</span>
               <span className="ws-client__dom">{userEmail}</span>
