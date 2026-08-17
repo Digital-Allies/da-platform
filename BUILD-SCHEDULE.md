@@ -1,5 +1,12 @@
 # da-platform — Build Schedule (remaining run to Phase 1 launch)
 
+> **⚠ Superseded 2026-08-16.** This file's dated calendar ran out Fri Aug 7 and
+> stayed exhausted through 10+ daily sessions. Anthony retired the daily-standup
+> system that day (`tools/build-workflows/tasks/ARCHIVE-TODO-2026-08-16.md`) and
+> replaced it with a milestone/phase roadmap: **`CMS-90-DAY-ROADMAP-REVISED.md`**
+> (repo root) — "the corrected master truth." Daily sessions should read that file
+> for current work, not this one. Left in place for its historical Jul 6–Aug 7 log.
+
 > **Where this comes from:** the order of operations is `tools/build-workflows/tasks/
 > Claude Code - Build Sequence.md` (the 20-day run) + the backlog in `STATUS.md`.
 > This file is the *dated* version — what to do which day, from where we actually
