@@ -34,12 +34,12 @@ Status: Phase 1 shipped (foundation). Phase 2 completely restructured — focus 
 Every client who logs in should see *their* brand, not Digital Allies.
 
 **Deliverables:**
-- [ ] Admin shell pulls business name/logo/colors from `clients.settings` (currently hardcoded)
-- [ ] `<head>` metadata dynamic per tenant (title, description, favicon request handling)
-- [ ] Browser tab title changes to client name on login (not "Digital Allies CMS")
-- [ ] Sidebar/nav colors match client brand token
-- [ ] Vercel routing: primary domain (`da-webwssite-build-workflows.vercel.app` or `cms.digitalallies.net`) redirects to `/admin/login` (not mock homepage)
-- [ ] After login, admin sees client-specific branding throughout
+- [x] Admin shell pulls business name/logo/colors from `clients.settings` (currently hardcoded)
+- [x] `<head>` metadata dynamic per tenant (title, description, favicon request handling)
+- [x] Browser tab title changes to client name on login (not "Digital Allies CMS")
+- [x] Sidebar/nav colors match client brand token
+- [x] Vercel routing: primary domain (`da-webwssite-build-workflows.vercel.app` or `cms.digitalallies.net`) redirects to `/admin/login` (not mock homepage)
+- [x] After login, admin sees client-specific branding throughout
 
 **Definition of done:**
 - Login as any client → see their logo/name in admin shell
@@ -56,7 +56,7 @@ Every client who logs in should see *their* brand, not Digital Allies.
 Admin dashboard is 6.5/10. Fix the worst usability issues so it's actually usable.
 
 **Deliverables:**
-- [ ] **Dashboard:** Fix INP performance issue (event handler blocking 600ms); remove orphaned "Dev Tasks" references
+- [x] **Dashboard:** Fix INP performance issue (event handler blocking 600ms); remove orphaned "Dev Tasks" references
 - [ ] **Pages module:** Fix "create" tab routing; add batch delete with confirmation
 - [ ] **Collections:** Remove confusing empty state; clarify CSV import workflow (or hide if not ready)
 - [ ] **Showroom (Products):** Add delete confirmation dialogs; add search/filter by name, category, price
