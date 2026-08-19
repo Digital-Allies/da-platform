@@ -87,7 +87,7 @@ export default async function AdminDashboardPage() {
             </Link>
             <Link href="/admin/development" className="ws-stat stat-card" style={{ textDecoration: 'none' }}>
               <div className="ws-stat__top">
-                <span className="ws-stat__label">Dev Tasks</span>
+                <span className="ws-stat__label">The Workshop</span>
               </div>
               <span className="ws-stat__val stat-card__number" id="totalTasks">{totalTasks ?? 0}</span>
             </Link>

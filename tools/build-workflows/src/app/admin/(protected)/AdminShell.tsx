@@ -13,6 +13,11 @@ import {
   Newspaper, KanbanSquare, Wrench, Palette, Settings, ExternalLink, Inbox, BookOpen
 } from 'lucide-react';
 
+// Unread notifications render as a synchronous DOM list on bell click; an
+// unbounded query let this list grow indefinitely. Capped to keep that
+// click handler cheap regardless of how many notifications pile up.
+const NOTIFICATION_CAP = 50;
+
 interface AdminShellProps {
   children: React.ReactNode;
   userEmail: string;
@@ -91,7 +96,8 @@ export default function AdminShell({ children, userEmail, businessName, logoUrl,
         .select('*')
         .eq('client_id', clientId)
         .eq('read_status', false)
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false })
+        .limit(NOTIFICATION_CAP);
 
       if (data) {
         setNotifications(data);
@@ -107,7 +113,7 @@ export default function AdminShell({ children, userEmail, businessName, logoUrl,
         { event: 'INSERT', schema: 'public', table: 'notifications' },
         (payload) => {
           if (payload.new.client_id === clientId) {
-            setNotifications(prev => [payload.new, ...prev]);
+            setNotifications(prev => [payload.new, ...prev].slice(0, NOTIFICATION_CAP));
           }
         }
       )
