@@ -22,6 +22,10 @@ export default async function ThemePage() {
         initialTokens={{
           colors: tokenRow?.colors,
           fonts: tokenRow?.fonts,
+          type_scale: tokenRow?.type_scale,
+          spacing: tokenRow?.spacing,
+          logo: tokenRow?.logo,
+          favicon: tokenRow?.favicon,
           ui_extra: tokenRow?.ui_extra,
         }}
         rowId={tokenRow?.id || null}

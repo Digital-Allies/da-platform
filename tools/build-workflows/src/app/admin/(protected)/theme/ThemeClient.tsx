@@ -23,6 +23,8 @@ interface ThemeTokens {
   button_glow: string;
   card_glow: string;
   section_spacing: string;
+  logo: string;
+  favicon: string;
   custom_tokens: CustomToken[];
 }
 
@@ -38,6 +40,8 @@ const DEFAULT_THEME: ThemeTokens = {
   button_glow: '0 4px 14px rgba(183,121,31,0.3)',
   card_glow: '0 10px 30px rgba(0,0,0,0.06)',
   section_spacing: '80px',
+  logo: '',
+  favicon: '',
   custom_tokens: [],
 };
 
@@ -60,8 +64,17 @@ export default function ThemeClient({
     button_glow: initialTokens?.ui_extra?.button_glow || DEFAULT_THEME.button_glow,
     card_glow: initialTokens?.ui_extra?.card_glow || DEFAULT_THEME.card_glow,
     section_spacing: initialTokens?.ui_extra?.section_spacing || DEFAULT_THEME.section_spacing,
+    logo: initialTokens?.logo || DEFAULT_THEME.logo,
+    favicon: initialTokens?.favicon || DEFAULT_THEME.favicon,
     custom_tokens: initialTokens?.ui_extra?.custom_tokens || [],
   });
+
+  // type_scale/spacing already hold real seeded data (see
+  // seed-atomic-finds-design-tokens.sql) that this editor doesn't expose
+  // controls for yet — round-trip them unmodified on save so a Theme save
+  // here never wipes them out.
+  const passthroughTypeScale = initialTokens?.type_scale ?? undefined;
+  const passthroughSpacing = initialTokens?.spacing ?? undefined;
 
   const [newTokenName, setNewTokenName] = useState('');
   const [newTokenValue, setNewTokenValue] = useState('#000000');
@@ -115,7 +128,7 @@ export default function ThemeClient({
     // numeric spacing scale and a type scale), so stuffing button/glow
     // tokens in there would silently overwrite that on the next save. The
     // dedicated `ui_extra` jsonb column holds them instead.
-    const payload = {
+    const payload: Record<string, any> = {
       client_id: clientId,
       colors: {
         bg: tokens.bg_color,
@@ -128,6 +141,8 @@ export default function ThemeClient({
         heading: tokens.font_header,
         body: tokens.font_body,
       },
+      logo: tokens.logo || null,
+      favicon: tokens.favicon || null,
       ui_extra: {
         button_radius: tokens.button_radius,
         button_glow: tokens.button_glow,
@@ -137,6 +152,15 @@ export default function ThemeClient({
       },
       updated_at: new Date().toISOString(),
     };
+
+    // Only set on INSERT of a brand-new row (an UPDATE never touches columns
+    // it doesn't include, so existing type_scale/spacing survive either way) —
+    // this just seeds sane values instead of leaving them null for a client
+    // that has never had a design_tokens row before.
+    if (!rowId) {
+      if (passthroughTypeScale !== undefined) payload.type_scale = passthroughTypeScale;
+      if (passthroughSpacing !== undefined) payload.spacing = passthroughSpacing;
+    }
 
     if (rowId) {
       const { error } = await supabase
@@ -280,6 +304,28 @@ export default function ThemeClient({
                 className="form-control"
                 value={tokens.font_body}
                 onChange={e => handleFieldChange('font_body', e.target.value)}
+              />
+            </div>
+
+            <h3 style={{ fontSize: '15px', marginTop: '24px', marginBottom: '16px' }}>Logo & Favicon</h3>
+            <div className="form-group" style={{ marginBottom: '16px' }}>
+              <label className="form-label">Logo URL</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="/path/to/logo.png"
+                value={tokens.logo}
+                onChange={e => handleFieldChange('logo', e.target.value)}
+              />
+            </div>
+            <div className="form-group" style={{ marginBottom: '24px' }}>
+              <label className="form-label">Favicon URL</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="/path/to/favicon.ico"
+                value={tokens.favicon}
+                onChange={e => handleFieldChange('favicon', e.target.value)}
               />
             </div>
 

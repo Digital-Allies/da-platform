@@ -45,10 +45,11 @@ export default async function RootLayout({
           </>
         )}
       </head>
-      <body
-        className="min-h-screen"
-        style={{ '--brand': settings.brand_color } as React.CSSProperties}
-      >
+      {/* `--brand` is intentionally NOT set here — it comes from the client's
+          design_tokens/theme.ts primary color via SiteTheme.tsx, which always
+          overrode a body-level value anyway. See lib/types.ts SiteSettings
+          note on the removed `brand_color` field. */}
+      <body className="min-h-screen">
         <IntlProvider>
           <AuthListener />
           <FacebookSdk appId={settings.facebook_app_id} />
