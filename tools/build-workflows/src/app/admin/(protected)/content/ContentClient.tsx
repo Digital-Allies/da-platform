@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
+import { moduleLabel } from '@/lib/module-labels';
 import { useRouter } from 'next/navigation';
 import { Calendar, Layers, FileText, Image as ImageIcon, Search } from 'lucide-react';
 
@@ -283,7 +284,7 @@ export default function ContentClient({ initialArticles, initialCalendar }: { in
       <div className="ws-head">
         <div>
           <div className="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Content</div>
-          <h2>The Press Office</h2>
+          <h2>{moduleLabel('content', clientId)}</h2>
         </div>
         <button className="btn btn--primary" onClick={() => { resetForm(); setActiveTab('create'); }}>+ New Content</button>
       </div>

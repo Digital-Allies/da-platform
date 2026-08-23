@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase';
 import { ClientIdProvider } from '@/lib/client-context';
+import { moduleLabel } from '@/lib/module-labels';
 import '@/styles/admin-dashboard.css';
 import {
   Search, Bell, LogOut, Check, Menu, X, Moon, Sun,
@@ -157,10 +158,10 @@ export default function AdminShell({ children, userEmail, businessName, logoUrl,
     { label: 'Pages', path: '/admin/pages', icon: <FileText size={16} /> },
     { label: 'Collections', path: '/admin/collections', icon: <FolderKanban size={16} /> },
     { label: 'Showroom', path: '/admin/products', icon: <ShoppingBag size={16} /> },
-    { label: 'The Press Office', path: '/admin/content', icon: <Newspaper size={16} /> },
+    { label: moduleLabel('content', clientId), path: '/admin/content', icon: <Newspaper size={16} /> },
     { label: 'Projects', path: '/admin/projects', icon: <KanbanSquare size={16} /> },
     { label: 'Research', path: '/admin/research', icon: <Search size={16} /> },
-    { label: 'The Workshop', path: '/admin/development', icon: <Wrench size={16} />, hideForClient: isAtomicFinds },
+    { label: moduleLabel('development', clientId), path: '/admin/development', icon: <Wrench size={16} />, hideForClient: isAtomicFinds },
     { label: 'Brand Theme', path: '/admin/theme', icon: <Palette size={16} /> },
     { label: 'Settings', path: '/admin/settings', icon: <Settings size={16} /> },
   ];
