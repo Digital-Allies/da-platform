@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Instagram, Facebook, Linkedin } from 'lucide-react'
 import { type SiteSettings } from '@/lib/types'
+import { LanguageSwitcher } from '@design-system/components/LanguageSwitcher'
 
 interface FooterProps {
   settings: SiteSettings
@@ -85,6 +86,12 @@ export default function Footer({ settings }: FooterProps) {
                 )}
               </div>
             )}
+
+            {/* Language switcher — required infra on every DA Platform site
+                (NEW-SITE-SETUP-PROCESS.md §3.2). */}
+            <div className="mt-6">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
 

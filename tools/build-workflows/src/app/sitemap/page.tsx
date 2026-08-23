@@ -1,41 +1,36 @@
 import React from 'react'
-import Link from 'next/link'
+import ClientPageWrapper from '@/components/site/ClientPageWrapper'
+import { Sitemap } from '@design-system/components/Sitemap'
+import { getPublishedPages } from '@/lib/data'
 
 export const metadata = {
   title: 'HTML Sitemap | Digital Allies Platform',
   description: 'Full overview of website pages and navigation structure.',
 }
 
-export default function SitemapPage() {
-  const pages = [
-    { title: 'Home', path: '/' },
-    { title: 'Press Office & Articles', path: '/blog' },
-    { title: 'Terms of Service', path: '/terms' },
-    { title: 'Privacy Policy', path: '/privacy' },
-    { title: 'Cookie Policy', path: '/cookies' },
-    { title: 'Accessibility Statement (WCAG 2.1 AA)', path: '/accessibility' },
-    { title: 'AI Usage & Disclosure', path: '/use-of-ai' },
-    { title: 'XML Sitemap (Search Engines & AI Bots)', path: '/sitemap.xml' },
-  ]
+// Utility/legal routes that are real Next.js routes but not rows in the
+// `pages` table — same slug list ClientPageWrapper.tsx excludes from the
+// main nav so they aren't shown twice.
+const LEGAL_SLUGS = ['privacy', 'terms', 'cookies', 'accessibility', 'use-of-ai', 'legal', 'sitemap']
+
+const STATIC_LINKS = [
+  { title: 'Terms of Service', path: '/terms' },
+  { title: 'Privacy Policy', path: '/privacy' },
+  { title: 'Cookie Policy', path: '/cookies' },
+  { title: 'Accessibility Statement (WCAG 2.1 AA)', path: '/accessibility' },
+  { title: 'Use of AI Disclosure', path: '/use-of-ai' },
+  { title: 'XML Sitemap (search engines & AI bots)', path: '/sitemap.xml' },
+]
+
+export default async function SitemapPage() {
+  const allPages = await getPublishedPages()
+  const pages = allPages
+    .filter((p: any) => !LEGAL_SLUGS.includes(String(p.slug).toLowerCase().trim()))
+    .map((p: any) => ({ title: p.title, slug: p.slug }))
 
   return (
-    <main id="main-content" className="section bg-white min-h-screen py-16 px-6" role="main">
-      <article className="max-w-4xl mx-auto prose-da">
-        <h1 className="text-3xl font-bold mb-6" style={{ fontFamily: 'var(--tok-font-heading, sans-serif)' }}>
-          HTML Sitemap
-        </h1>
-
-        <ul className="space-y-3">
-          {pages.map((p) => (
-            <li key={p.path} className="border-b border-neutral-200 pb-2">
-              <Link href={p.path} className="text-amber-800 font-semibold hover:underline">
-                {p.title}
-              </Link>
-              <span className="text-xs text-neutral-500 font-mono ml-3">{p.path}</span>
-            </li>
-          ))}
-        </ul>
-      </article>
-    </main>
+    <ClientPageWrapper title="Sitemap" subtitle="Every published page on this site">
+      <Sitemap pages={pages} staticLinks={STATIC_LINKS} />
+    </ClientPageWrapper>
   )
 }

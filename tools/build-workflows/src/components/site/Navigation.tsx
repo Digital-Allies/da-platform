@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
+import { LanguageSwitcher } from '@design-system/components/LanguageSwitcher'
 
 interface NavItem {
   label: string
@@ -61,6 +62,13 @@ export default function Navigation({
           ))}
         </nav>
 
+        {/* Language switcher — required infra on every DA Platform site
+            (NEW-SITE-SETUP-PROCESS.md §3.2). English-only today; adding a
+            locale is a data change in LanguageSwitcher.tsx, not a rework. */}
+        <div className="hidden md:block">
+          <LanguageSwitcher />
+        </div>
+
         {/* Desktop CTA */}
         <a
           href={ctaHref}
@@ -101,6 +109,9 @@ export default function Navigation({
             >
               {ctaText}
             </a>
+            <div className="mt-4">
+              <LanguageSwitcher />
+            </div>
           </nav>
         </div>
       )}

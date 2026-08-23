@@ -2,6 +2,7 @@ import React from 'react'
 import { Hero, ThreeColumnGrid, TestimonialCarousel, ContactForm, ProductGrid } from '@/components/site'
 import { getServices, getTestimonials, getProducts, getCollections, getSiteSettings } from '@/lib/data'
 import CTAButton from './CTAButton'
+import { SECTION_REGISTRY } from '@/lib/section-registry'
 
 interface Block {
   type: string
@@ -56,6 +57,9 @@ export default async function BlockRenderer({ blocks }: BlockRendererProps) {
             />
           )
         }
+        const sectionEntry = SECTION_REGISTRY[block.type]
+        if (!sectionEntry) return null
+
         switch (block.type) {
           case 'hero':
             return (
@@ -129,8 +133,29 @@ export default async function BlockRenderer({ blocks }: BlockRendererProps) {
                 />
               </div>
             )
-          default:
-            return null
+          default: {
+            // Net-new block types (faq/stats/quote/media, and any future
+            // registry entry that doesn't need bespoke JSX here) render
+            // through their registered PublicBlock. Validate against the
+            // type's zod schema first — an editor-authored block that fails
+            // validation (e.g. a media block missing required alt text)
+            // renders nothing rather than crashing the whole page.
+            const PublicBlock = sectionEntry.PublicBlock
+            if (!PublicBlock) return null
+            const parsed = sectionEntry.schema.safeParse(block.data ?? {})
+            if (!parsed.success) return null
+            // Resolve {token} interpolation on top-level string fields only
+            // (title/quote/attribution/caption/etc.) — same scope existing
+            // cases above apply resolveText at, not a deep walk of nested
+            // item arrays like faq.items / stats.stats.
+            const resolvedData = Object.fromEntries(
+              Object.entries(parsed.data as Record<string, unknown>).map(([k, v]) => [
+                k,
+                typeof v === 'string' ? resolveText(v) : v,
+              ])
+            )
+            return <PublicBlock key={index} data={resolvedData} />
+          }
         }
       })}
     </>
