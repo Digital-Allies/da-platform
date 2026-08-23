@@ -1,5 +1,7 @@
 'use client'
 
+// TODO: revisit once the new Atomic Finds design system is attached — bespoke galaxy animation may not survive the rebrand.
+
 // Fixed twinkling starfield background, ported from the design handoff's
 // inline script. Generated client-side after mount (not SSR'd) so the
 // per-star randomness never causes a hydration mismatch — it's purely

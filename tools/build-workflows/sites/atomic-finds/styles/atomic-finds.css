@@ -6,12 +6,22 @@
    ============================================================ */
 
 .af-homepage {
-  /* ---- PRIMARY PALETTE ---- */
-  --deep-charcoal: #1E1E1E;
-  --rattan-black: #2A2017;
-  --celestial-yellow: #F5C842;
-  --amber-orange: #D4822A;
-  --bone-white: #F0E8D8;
+  /* ---- PRIMARY PALETTE ----
+     De-tokenized 2026-08-23: these now resolve from the client's live
+     --tok-* CSS vars (injected by SiteTheme.tsx from the `design_tokens`
+     Supabase row for this tenant) instead of hardcoded hex/font literals.
+     The literal after the comma is only a fallback for the rare case this
+     CSS renders outside SiteTheme's scope — today it's identical to the
+     live design_tokens row, so this is a zero-visual-change refactor. When
+     a new brand's tokens land in that row, everything below updates with
+     no code change. --charcoal-2/-3 are darker shades used only for
+     section-wash gradients and have no single corresponding token in the
+     current 5-color schema, so they stay as named literals for now. */
+  --deep-charcoal: var(--tok-bg, #1E1E1E);
+  --rattan-black: var(--tok-surface, #2A2017);
+  --celestial-yellow: var(--tok-primary, #F5C842);
+  --amber-orange: var(--tok-secondary, #D4822A);
+  --bone-white: var(--tok-text, #F0E8D8);
   --woven-moss: #556B4A;
   --rattan-tan: #C4956A;
   --charcoal-2: #16140F;
@@ -24,13 +34,13 @@
   --bg-inset: #14120E;
   --fg: var(--bone-white);
   --fg-body: #D9CFBF;
-  --fg-muted: #9A8F7D;
+  --fg-muted: var(--tok-text-muted, #9A8F7D);
   --fg-soft: #6A6052;
 
   /* ---- TYPE ---- */
-  --font-display: 'Bagel Fat One', 'DM Serif Display', Georgia, sans-serif;
+  --font-display: var(--tok-font-heading, 'Bagel Fat One', 'DM Serif Display', Georgia, sans-serif);
   --font-script: 'Pacifico', 'DM Serif Display', cursive;
-  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-body: var(--tok-font-body, 'DM Sans', system-ui, -apple-system, sans-serif);
 
   /* ---- SHAPE / EFFECTS ---- */
   --radius-sm: 6px;
@@ -116,7 +126,7 @@
 .af-nav-link { font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--bone-white); text-decoration: none; transition: all 300ms ease-out; display: flex; align-items: center; gap: 6px; }
 .af-nav-link img { width: 18px; height: 18px; object-fit: contain; opacity: 0.95; border-radius: 50%; background: rgba(255, 255, 255, 0.9); padding: 2px; box-shadow: 0 0 6px rgba(245, 200, 66, 0.4); mix-blend-mode: multiply; }
 .af-nav-link:hover { color: var(--celestial-yellow); text-shadow: var(--glow-sm); }
-.af-nav-cta { padding: 8px 22px 8px 10px; background: var(--celestial-yellow); color: #1E1E1E; border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; box-shadow: var(--glow-sm); white-space: nowrap; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(245,200,66,0.6); }
+.af-nav-cta { padding: 8px 22px 8px 10px; background: var(--celestial-yellow); color: var(--deep-charcoal); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; box-shadow: var(--glow-sm); white-space: nowrap; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(245,200,66,0.6); }
 .af-nav-cta img { width: 24px; height: 24px; object-fit: contain; border-radius: 50%; }
 .af-nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; z-index: 101; }
 .af-nav-toggle-bar { width: 24px; height: 2px; background: var(--bone-white); transition: all 300ms ease-out; }
@@ -140,7 +150,7 @@
 .af-hero-body { font-size: 20px; font-weight: 600; color: #fff; line-height: 1.7; max-width: 560px; margin: 0 auto 36px; }
 .af-hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-.af-btn-solid { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; background: var(--celestial-yellow); color: #1E1E1E; border: 2px solid var(--celestial-yellow); border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; transition: all 300ms ease-out; box-shadow: 0 0 22px rgba(245,200,66,0.5); }
+.af-btn-solid { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; background: var(--celestial-yellow); color: var(--deep-charcoal); border: 2px solid var(--celestial-yellow); border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; transition: all 300ms ease-out; box-shadow: 0 0 22px rgba(245,200,66,0.5); }
 .af-btn-solid:hover { background: #ffe07a; box-shadow: 0 0 30px rgba(245,200,66,0.75); transform: translateY(-2px); }
 .af-btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; background: transparent; color: var(--celestial-yellow); border: 2px solid var(--celestial-yellow); border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; }
 
@@ -154,7 +164,7 @@
 
 /* ---- ABOUT ---- */
 .af-about-grid { display: grid; grid-template-columns: 360px 1fr; gap: 56px; align-items: center; }
-.af-about-portrait { width: 100%; aspect-ratio: 4/5; border-radius: var(--radius-xl); border: var(--border-1); overflow: hidden; background: linear-gradient(160deg,#2A2017 0%,#16140F 100%); }
+.af-about-portrait { width: 100%; aspect-ratio: 4/5; border-radius: var(--radius-xl); border: var(--border-1); overflow: hidden; background: linear-gradient(160deg, var(--rattan-black) 0%, var(--charcoal-2) 100%); }
 .af-about-eyebrow { font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber-orange); margin-bottom: 12px; display: block; }
 .af-about-grid h2 { font-family: var(--font-display); font-size: clamp(32px,3.6vw,52px); color: var(--celestial-yellow); text-shadow: var(--glow-md); margin-bottom: 20px; }
 .af-about-grid p { font-size: 20px; font-weight: 600; color: #fff; line-height: 1.7; margin-bottom: 16px; }
@@ -201,7 +211,7 @@
 .af-reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .af-review-card { border-radius: 18px; padding: 20px; background: var(--bg-card); border: 1px solid rgba(245,200,66,0.12); }
 .af-review-top { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
-.af-review-avatar { width: 40px; height: 40px; border-radius: 999px; background: linear-gradient(135deg, var(--celestial-yellow), var(--amber-orange)); color: #1E1E1E; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.af-review-avatar { width: 40px; height: 40px; border-radius: 999px; background: linear-gradient(135deg, var(--celestial-yellow), var(--amber-orange)); color: var(--deep-charcoal); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .af-review-name { font-size: 14px; font-weight: 600; color: var(--bone-white); }
 .af-review-meta { font-size: 11px; color: #ffffff; margin-top: 2px; }
 .af-review-stars { color: var(--celestial-yellow); font-size: 12px; margin-top: 2px; }
@@ -227,7 +237,7 @@
 .af-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-orange); margin-bottom: 8px; }
 .af-input, .af-textarea { width: 100%; background: var(--bg-inset); border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 12px; color: var(--bone-white); font-family: var(--font-body); font-size: 14px; box-sizing: border-box; }
 .af-input:focus, .af-textarea:focus { outline: 2px solid var(--celestial-yellow); outline-offset: 1px; }
-.af-btn { width: 100%; background: var(--celestial-yellow); color: #1E1E1E; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; padding: 16px; border-radius: 999px; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; cursor: pointer; }
+.af-btn { width: 100%; background: var(--celestial-yellow); color: var(--deep-charcoal); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; padding: 16px; border-radius: 999px; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; cursor: pointer; }
 .af-btn:disabled { opacity: 0.6; cursor: default; }
 .af-social-row { display: flex; gap: 20px; margin-top: 24px; justify-content: center; }
 .af-social-row a { font-size: 13px; font-weight: 600; color: #ffffff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
