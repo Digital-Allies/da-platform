@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { Palette, CheckCircle, RefreshCw } from 'lucide-react';
+import { DEFAULT_TYPE_SCALE, DEFAULT_SPACING } from '@/lib/theme';
 
 interface CustomToken {
   name: string;
@@ -141,6 +142,10 @@ export default function ThemeClient({
         heading: tokens.font_header,
         body: tokens.font_body,
       },
+      // `logo` has no editable field on this page (edit it on Settings,
+      // which is the actual consumer for logos today — see the "known gap"
+      // note below) — round-tripped as-is so a Theme save can't null out an
+      // already-seeded design_tokens.logo value (e.g. Atomic Finds').
       logo: tokens.logo || null,
       favicon: tokens.favicon || null,
       ui_extra: {
@@ -155,11 +160,15 @@ export default function ThemeClient({
 
     // Only set on INSERT of a brand-new row (an UPDATE never touches columns
     // it doesn't include, so existing type_scale/spacing survive either way) —
-    // this just seeds sane values instead of leaving them null for a client
-    // that has never had a design_tokens row before.
+    // this seeds sane values instead of leaving them null for a client that
+    // has never had a design_tokens row before. passthroughTypeScale/Spacing
+    // can't actually be defined here (they're read off a tokenRow, and a
+    // tokenRow with type_scale data also has an id), so this always falls
+    // through to the shared default scale — same one getLiveDesignTokens()
+    // uses before a row exists.
     if (!rowId) {
-      if (passthroughTypeScale !== undefined) payload.type_scale = passthroughTypeScale;
-      if (passthroughSpacing !== undefined) payload.spacing = passthroughSpacing;
+      payload.type_scale = passthroughTypeScale ?? DEFAULT_TYPE_SCALE;
+      payload.spacing = passthroughSpacing ?? DEFAULT_SPACING;
     }
 
     if (rowId) {
@@ -307,17 +316,7 @@ export default function ThemeClient({
               />
             </div>
 
-            <h3 style={{ fontSize: '15px', marginTop: '24px', marginBottom: '16px' }}>Logo & Favicon</h3>
-            <div className="form-group" style={{ marginBottom: '16px' }}>
-              <label className="form-label">Logo URL</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="/path/to/logo.png"
-                value={tokens.logo}
-                onChange={e => handleFieldChange('logo', e.target.value)}
-              />
-            </div>
+            <h3 style={{ fontSize: '15px', marginTop: '24px', marginBottom: '16px' }}>Favicon</h3>
             <div className="form-group" style={{ marginBottom: '24px' }}>
               <label className="form-label">Favicon URL</label>
               <input

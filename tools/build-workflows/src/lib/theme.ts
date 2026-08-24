@@ -39,11 +39,11 @@ export interface DesignTokens {
 // design_tokens.type_scale / .spacing (see e.g. Atomic Finds' seeded row) —
 // these are only used until a client has its own design_tokens row, or for
 // any key a client's row doesn't set.
-const DEFAULT_TYPE_SCALE: Record<string, string> = {
+export const DEFAULT_TYPE_SCALE: Record<string, string> = {
   xs: '0.75rem', sm: '0.875rem', base: '1rem', lg: '1.125rem',
   xl: '1.25rem', '2xl': '1.5rem', '3xl': '1.875rem', '4xl': '2.25rem',
 }
-const DEFAULT_SPACING: Record<string, string> = {
+export const DEFAULT_SPACING: Record<string, string> = {
   '1': '4px', '2': '8px', '3': '12px', '4': '16px', '6': '24px',
   '8': '32px', '12': '48px', '16': '64px', '24': '96px',
 }

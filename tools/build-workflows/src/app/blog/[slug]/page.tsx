@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Navigation, Footer } from '@/components/site'
+import SiteTheme from '@/components/site/SiteTheme'
 import { getSiteSettings, getPostBySlug } from '@/lib/data'
 
 export const revalidate = 60
@@ -33,7 +34,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound()
 
   return (
-    <>
+    <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
       <Navigation
         logoUrl={settings.logo_url || undefined}
         siteTitle={settings.site_title}
@@ -84,6 +85,6 @@ export default async function BlogPostPage({ params }: Props) {
       </main>
 
       <Footer settings={settings} />
-    </>
+    </SiteTheme>
   )
 }

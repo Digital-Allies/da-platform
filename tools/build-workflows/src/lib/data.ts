@@ -143,7 +143,7 @@ export async function getCollections(): Promise<any[]> {
 // were previously dropped even though the columns exist and are already
 // seeded with real data for at least one tenant (Atomic Finds), so the app
 // was silently ignoring live data that was already there.
-export async function getLiveDesignTokens(clientId: string | undefined = CLIENT_ID): Promise<DesignTokens> {
+export const getLiveDesignTokens = cache(async (clientId: string | undefined = CLIENT_ID): Promise<DesignTokens> => {
   const base = getStaticDesignTokens(clientId)
   if (!clientId) return base
   const supabase = createPublicClient()
@@ -162,5 +162,5 @@ export async function getLiveDesignTokens(clientId: string | undefined = CLIENT_
     logo: data.logo || base.logo,
     favicon: data.favicon || base.favicon,
   }
-}
+})
 
