@@ -5,7 +5,37 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-19 (daily build session) — by Claude Code: Milestone 1 confirmed complete (checkboxes reconciled), shipped Milestone 2's first item (Dashboard INP fix + stale "Dev Tasks" label). Auto-sync tool pushed the code fix directly to `main` mid-session before this session could commit it itself — third consecutive day, first time with app code. See entry below.
+**Last updated:** 2026-08-24 — by Claude Code: reconciled the Digital Allies Claude Design project (added dark-mode spec, real CMS-architecture schema doc, and a real-login pattern card as guidelines), cleaned up superseded design-export mockups from `packages/design-system`, fixed stale Claude Design project references in `DA-PLATFORM-MASTER-CONTEXT.md`, and logged a concrete design/brand work queue. See entry below.
+
+## 2026-08-24 — design-system audit & reconciliation: Digital Allies Claude Design project fixed, repo hygiene pass, work queue logged
+
+**Task:** user asked for a design-system audit/consolidation covering components, tokens, schema, and dashboard sections, using a "ally cms Design System" Desktop export as a starting point, plus separately confirmed two existing Claude Design projects (Digital Allies, Atomic Finds) needed review.
+
+**Key finding — the Desktop export was not the real source of truth.** `DesignSync(list_projects)` showed two Claude Design projects already exist and are far more built out than the Desktop folder: **"Digital Allies Design System"** (`aca22968-2580-489d-8679-8c886425b06d`, already published live at `brand.digitalallies.net`) and **"Atomic Finds ATX Design System"** (`01147caa-ff0c-4f04-8816-1080d1f20692`). The Desktop folder and the two mockup folders previously in `packages/design-system` (`Dark mode CMS design 2/`, `Mobile responsive CMS admin/`) turned out to be older, partial, parallel exports from a *different* Claude Design project ID (`6119845f-...`, itself stale — see below).
+
+**Verified against production** (Supabase project `auwhvicpyiwsubucanpb`, live sites):
+- Digital Allies (`digitalallies.net` / `cms.digitalallies.net`): brand tokens, admin shell, and light/dark mode are already shipped and match the design system. Real gaps found: the shipped dark-mode CSS doesn't match the locked spec in the (now-deleted) `Dark mode CMS design 2/uploads/SKILL.md` (pulse-blue/signal-red should retire to accentPink/accentBlue in dark mode, headline weight should be semibold not bold, body copy should be pure white not bone); several admin screens (`settings/page.tsx`, `PagesClient.tsx`, `CollectionsClient.tsx`, `MediaUploader.tsx`, `CSVCollectionImporter.tsx`) fall back to a hardcoded gold `var(--tok-primary, #B7791F)` instead of Digital Allies' brand color, because the `design_tokens` table has **zero rows** for Digital Allies to override it; the login page has no logo; the DA Claude Design project's own logo guideline self-flags no dark-background/white-text lockup exists — none of the "ally-cms-*" logo files in the Desktop folder resolve this (checked visually — they're actually mislabeled Atomic Finds logos, not Digital Allies at all). A favicon design **does** exist (`assets/favicon.svg`/`.png` in the DA Claude Design project, a plain Signal-Red circle) but has never been uploaded via `/admin/settings`, so `settings.favicon_url` is still empty.
+- Atomic Finds (`atomicfindsatx.store`): confirmed via screenshot to still be the **old** dark-cosmic/celestial brand (`#1E1E1E` bg, `#F5C842` gold/`#D4822A` orange, DM Sans + Bagel Fat One) — matches the single `design_tokens` row exactly. The **new** cream/burnt-orange/avocado/olive-teal/mustard "1970s boho" brand (Mamba/Poppins/Pacifico) exists only in the Claude Design project. This is a full re-skin, not a token swap — the palette, fonts, and the celestial-hero component all change. **Not attempted this session** — logged as its own future initiative per the "small, scoped PRs" convention.
+
+**Shipped to the Digital Allies Claude Design project** (via `DesignSync`, targeted diff, no bulk resync):
+- `guidelines/dark-mode-spec.html` — transcribes the locked 2026-07-23 dark-mode spec (canvas, accent retirement table, flat card/hover treatment) as the build reference, since it's stricter than what's currently shipped.
+- `guidelines/cms-architecture.html` — real Supabase schema (all 21 `public` tables, RLS + `client_id`-scoped) and the real admin module list from `AdminShell.tsx`'s nav, including the "generic module name, DA jargon is an override" rule.
+- `guidelines/pattern-login-screen.html` — the real, shipped login (tenant-generic, pulse-dot mark, no logo, reset-password flow) rather than the Desktop folder's broken mockup.
+
+**Repo hygiene** (`packages/design-system`): deleted `Dark mode CMS design 2/` and `Mobile responsive CMS admin/` (unique content ported above) and the self-flagged-stale `WIRING_GUIDE.md`/`INTEGRATION_OVERVIEW.md`; updated `README.md`'s doc list accordingly. Left `CMS Developer Handoff.html` and `CMS_IMPLEMENTATION_PLAN.html` alone — both are under open GitHub issue #38, Anthony's call. Fixed `DA-PLATFORM-MASTER-CONTEXT.md`'s stale Claude Design project IDs/paths (the old `6119845f-...` project and the never-existed `packages/20260722-da-design-system/`).
+
+**Explicitly not built this session** (confirmed with the user as a separate, larger future initiative): a live theming/design-system control panel attached to the actual site or admin dashboard (Webflow-style — real UI controls that change how the live site renders, not just Claude Design mockups). This session's work is the clean, correct design system that initiative would need to consume; it does not implement it.
+
+**Work queue — open items, not fixed this session:**
+1. **Atomic Finds rebrand** — live site + `design_tokens` row on the old dark-cosmic brand; new cream/boho brand only in Claude Design. Needs its own scoped initiative (palette, fonts, celestial-hero component all change).
+2. **Dark-mode CSS gap** — `tools/build-workflows` admin dark mode doesn't yet match `guidelines/dark-mode-spec.html` (accent retirement, headline weight, body-copy color).
+3. **`--tok-primary` gold-leak bug** — DA admin screens listed above render `#B7791F` instead of DA's brand color; `design_tokens` has no DA row to override the fallback.
+4. **Favicon not uploaded** — asset exists (`assets/favicon.svg` in the DA Claude Design project), just needs uploading via `/admin/settings`.
+5. **No dark-background logo lockup** — still an open gap; needs a real asset from Anthony, not fabricated from mismatched files.
+
+**What's next:** Milestone 2 continues per the 2026-08-19 entry below (unaffected by this session — no `tools/build-workflows` code was touched). Any of the 5 work-queue items above are candidates for a future scoped session; Atomic Finds' rebrand is the largest and should probably be its own initiative rather than folded into Milestone 2.
+
+---
 
 ## 2026-08-19 — daily build session: Milestone 1 reconciled complete, Milestone 2's Dashboard item shipped, auto-sync tool pushed code mid-session (escalation of the recurring risk)
 

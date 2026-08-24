@@ -45,9 +45,8 @@ Pitch: "I coordinate and execute. I get things done and I don't disappear."
 | Live marketing site | https://digitalallies.net | Separate static repo |
 | Atomic Finds live | https://atomicfindsatx.store | Deploying from `main` ✅; Supabase syncing ✅; **"My Business" title — 3 seeds written, not yet run (see §3 P4)** |
 | Supabase | (login via Supabase dashboard) | Anon key: `sb_publishable_...` format |
-| Claude Design — DA | https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758?via=share | Design system + CMS mocks |
-| Claude Design — Atomic Finds | https://claude.ai/design/p/29110ac3-0a76-4fa1-a322-a78bc212a50d?via=share | Storefront design |
-| CMS design mocks | https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758?file=cms%2Findex.html&via=share | Build process docs live here |
+| Claude Design — DA | https://claude.ai/design/p/aca22968-2580-489d-8679-8c886425b06d | "Digital Allies Design System" — components, tokens, guidelines, CMS admin/website UI kits; published live at brand.digitalallies.net |
+| Claude Design — Atomic Finds | https://claude.ai/design/p/01147caa-ff0c-4f04-8816-1080d1f20692 | "Atomic Finds ATX Design System" — new cream/boho brand; **not yet live** on atomicfindsatx.store or in `design_tokens` (site still on the old dark-cosmic brand) |
 
 ### Three tenants in the CMS
 
@@ -233,15 +232,14 @@ These all exist in `tools/build-workflows` and are working:
 ## 6. DESIGN ASSET INVENTORY
 
 ### Claude Design projects
-- **Digital Allies design system:** https://claude.ai/design/p/6119845f-97e8-4b42-899f-193545fca758?via=share
-  - CMS folder has build process docs and mock UIs (canonical for CMS design work)
-- **Atomic Finds ATX storefront:** https://claude.ai/design/p/29110ac3-0a76-4fa1-a322-a78bc212a50d?via=share
+- **Digital Allies Design System:** https://claude.ai/design/p/aca22968-2580-489d-8679-8c886425b06d — 11 components, full Lexend Deca/JetBrains Mono font files, 16+ brand/voice/spacing guidelines, `cms-admin` + `website` UI kits, 2 page templates. Published live at brand.digitalallies.net. This is the canonical, current design system — the project ID above (`6119845f-...`) previously in this doc, and `packages/20260722-da-design-system/` below, were stale/never-existed references corrected 2026-08-24.
+- **Atomic Finds ATX Design System:** https://claude.ai/design/p/01147caa-ff0c-4f04-8816-1080d1f20692 — extensive templates (homepage, emails, Instagram posts, business card, product cards), new cream/burnt-orange/avocado/olive-teal/mustard "1970s boho" brand (Mamba display font, Pacifico script, Poppins body). **Not yet reflected on the live site** — `atomicfindsatx.store` and its `design_tokens` row are still the old dark-cosmic brand (`#1E1E1E` bg, `#F5C842` gold, DM Sans/Bagel Fat One). Rebuilding/re-skinning the live site to match is its own future initiative, not a token swap — logged in `STATUS.md` 2026-08-24.
   - Homepage handoff: `sites/atomic-finds/design_handoff_homepage/`
   - Product grid handoff: `sites/atomic-finds/design_handoff_product_grid/`
 
 ### Design system files (local)
-- Tokens: `packages/20260722-da-design-system/` — includes `GLOBAL_CONTEXT_FOR_CLAUDE.md` (full brand spec)
-- Brand guide: see `GLOBAL_CONTEXT_FOR_CLAUDE.md` for colors, type, voice, vocabulary
+- Real, live-imported files: `packages/design-system/src/components/LanguageSwitcher.tsx`, `packages/design-system/src/tokens/index.ts` — everything else in that folder is reference/spec docs, not wired into the app. `packages/20260722-da-design-system/` never existed on disk; the design system itself lives in the Claude Design project above, not as local token files.
+- Brand guide: `guidelines/*.html` in the Digital Allies Claude Design project (colors, type, voice, vocabulary, dark mode, CMS architecture)
 
 ### Brand tokens (quick ref)
 - Bone White: `#F9F6F0` | Charcoal: `#2D2D2D` | Pulse Blue: `#3A7BD5` | Signal Red: `#C5301A` | Light Pink: `#FADEEB`
@@ -271,7 +269,7 @@ Design concept → Asset gen (Canva / Luma Labs) → Canva → Claude Design →
 2. `/Users/cuus/Claude/projects/da-platform/BUILD-SCHEDULE.md` — what's next
 3. `/Users/cuus/Claude/projects/da-platform/AGENTS.md` — workspace conventions
 4. `tools/build-workflows/tasks/anthony/TODO.md` — Anthony-only action items
-5. `packages/20260722-da-design-system/GLOBAL_CONTEXT_FOR_CLAUDE.md` — brand spec
+5. Digital Allies Design System (Claude Design, `aca22968-...`) `guidelines/*.html` — brand spec
 6. **This file** — master context
 
 ---

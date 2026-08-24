@@ -16,8 +16,6 @@ useful for planning, not wired into any running app.
 ## Reference docs still current
 
 - `CMS_IMPLEMENTATION_PLAN.html` — spec: what the CMS must include, phased build plan
-- `WIRING_GUIDE.md` — how the site, dashboard, and Supabase connect
-- `INTEGRATION_OVERVIEW.md` — architecture overview
 - `PAGE_EDITOR_SPEC.md` + `page-editor.html` — data model and clickable prototype
   for the block/section page builder (actively cited as build source, see STATUS.md)
 - `anthony-tasks.html` — Anthony's personal task tracker, synced from
@@ -37,3 +35,13 @@ prototype "THE CMS", pointed at `../CMS_IMPLEMENTATION_PLAN.html` when the
 file is actually a sibling in this same folder, and linked to a `cms/` folder
 structure and `_archive/` directory that never existed at these paths) —
 cleaned up 2026-08-02. Keep it accurate going forward.
+
+2026-08-24: removed `Dark mode CMS design 2/` and `Mobile responsive CMS
+admin/` (both design-export mockups) and the self-flagged-stale
+`WIRING_GUIDE.md`/`INTEGRATION_OVERVIEW.md`. Their admin-shell module set was
+already shipped in real code; their one genuinely unique piece — the locked
+dark-mode color/type spec — is now `guidelines/dark-mode-spec.html` in the
+"Digital Allies Design System" Claude Design project (published at
+`brand.digitalallies.net`), alongside a new `guidelines/cms-architecture.html`
+(real Supabase schema + admin module list) and
+`guidelines/pattern-login-screen.html` (the real, shipped login).
