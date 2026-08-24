@@ -1,7 +1,7 @@
 'use client'
 
 // Storefront catalog: category tabs + product cards + quick-view modal.
-// Built from sites/atomic-finds/design_handoff_product_grid (visual spec) with
+// Built from sites/atomic-finds/archive/pre-rebrand/design_handoff_product_grid (visual spec) with
 // the flexible conversion layer from STATUS.md decision #8: the CTA is driven
 // per product by selling_state via resolveProductCta() — never hard-coded.
 // Quick-view modal instead of separate product pages (current direction).

@@ -1,8 +1,9 @@
 /* ============================================================
    Atomic Finds ATX — homepage tokens + section styles
-   Ported from sites/atomic-finds/design_handoff_homepage/{tokens/*.css,
-   index.html's inline <style>} — every rule scoped under .af-homepage so
-   nothing leaks into the shared admin/DA/HCTC styles in globals.css.
+   Ported from sites/atomic-finds/archive/pre-rebrand/design_handoff_homepage/
+   {tokens/*.css, index.html's inline <style>} — every rule scoped under
+   .af-homepage so nothing leaks into the shared admin/DA/HCTC styles in
+   globals.css.
    ============================================================ */
 
 .af-homepage {
@@ -16,8 +17,18 @@
      a new brand's tokens land in that row, everything below updates with
      no code change. --charcoal-2/-3 are darker shades used only for
      section-wash gradients and have no single corresponding token in the
-     current 5-color schema, so they stay as named literals for now. */
+     current 5-color schema, so they stay as named literals for now.
+     --accent-ink is a separate case: it's the dark text color painted on
+     top of the yellow/amber accent buttons/avatars, not a page-background
+     value, so it's deliberately NOT aliased to --tok-bg even though it
+     happens to equal --deep-charcoal today — a future brand with a light
+     --tok-bg would otherwise make that text light-on-light against the
+     still-light accent buttons and fail WCAG contrast with zero code
+     change. Stays a literal (no dedicated token exists for "text on
+     accent" in the current 5-color schema) — worth revisiting when the
+     new brand's tokens land. */
   --deep-charcoal: var(--tok-bg, #1E1E1E);
+  --accent-ink: #1E1E1E;
   --rattan-black: var(--tok-surface, #2A2017);
   --celestial-yellow: var(--tok-primary, #F5C842);
   --amber-orange: var(--tok-secondary, #D4822A);
@@ -126,7 +137,7 @@
 .af-nav-link { font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--bone-white); text-decoration: none; transition: all 300ms ease-out; display: flex; align-items: center; gap: 6px; }
 .af-nav-link img { width: 18px; height: 18px; object-fit: contain; opacity: 0.95; border-radius: 50%; background: rgba(255, 255, 255, 0.9); padding: 2px; box-shadow: 0 0 6px rgba(245, 200, 66, 0.4); mix-blend-mode: multiply; }
 .af-nav-link:hover { color: var(--celestial-yellow); text-shadow: var(--glow-sm); }
-.af-nav-cta { padding: 8px 22px 8px 10px; background: var(--celestial-yellow); color: var(--deep-charcoal); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; box-shadow: var(--glow-sm); white-space: nowrap; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(245,200,66,0.6); }
+.af-nav-cta { padding: 8px 22px 8px 10px; background: var(--celestial-yellow); color: var(--accent-ink); border-radius: 999px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; box-shadow: var(--glow-sm); white-space: nowrap; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(245,200,66,0.6); }
 .af-nav-cta img { width: 24px; height: 24px; object-fit: contain; border-radius: 50%; }
 .af-nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0; z-index: 101; }
 .af-nav-toggle-bar { width: 24px; height: 2px; background: var(--bone-white); transition: all 300ms ease-out; }
@@ -150,7 +161,7 @@
 .af-hero-body { font-size: 20px; font-weight: 600; color: #fff; line-height: 1.7; max-width: 560px; margin: 0 auto 36px; }
 .af-hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-.af-btn-solid { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; background: var(--celestial-yellow); color: var(--deep-charcoal); border: 2px solid var(--celestial-yellow); border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; transition: all 300ms ease-out; box-shadow: 0 0 22px rgba(245,200,66,0.5); }
+.af-btn-solid { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; background: var(--celestial-yellow); color: var(--accent-ink); border: 2px solid var(--celestial-yellow); border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; transition: all 300ms ease-out; box-shadow: 0 0 22px rgba(245,200,66,0.5); }
 .af-btn-solid:hover { background: #ffe07a; box-shadow: 0 0 30px rgba(245,200,66,0.75); transform: translateY(-2px); }
 .af-btn-outline { display: inline-flex; align-items: center; gap: 8px; padding: 16px 34px; background: transparent; color: var(--celestial-yellow); border: 2px solid var(--celestial-yellow); border-radius: 999px; font-family: var(--font-body); font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; }
 
@@ -211,7 +222,7 @@
 .af-reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .af-review-card { border-radius: 18px; padding: 20px; background: var(--bg-card); border: 1px solid rgba(245,200,66,0.12); }
 .af-review-top { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
-.af-review-avatar { width: 40px; height: 40px; border-radius: 999px; background: linear-gradient(135deg, var(--celestial-yellow), var(--amber-orange)); color: var(--deep-charcoal); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.af-review-avatar { width: 40px; height: 40px; border-radius: 999px; background: linear-gradient(135deg, var(--celestial-yellow), var(--amber-orange)); color: var(--accent-ink); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .af-review-name { font-size: 14px; font-weight: 600; color: var(--bone-white); }
 .af-review-meta { font-size: 11px; color: #ffffff; margin-top: 2px; }
 .af-review-stars { color: var(--celestial-yellow); font-size: 12px; margin-top: 2px; }
@@ -237,7 +248,7 @@
 .af-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--amber-orange); margin-bottom: 8px; }
 .af-input, .af-textarea { width: 100%; background: var(--bg-inset); border: 1px solid rgba(245,200,66,0.15); border-radius: 12px; padding: 12px; color: var(--bone-white); font-family: var(--font-body); font-size: 14px; box-sizing: border-box; }
 .af-input:focus, .af-textarea:focus { outline: 2px solid var(--celestial-yellow); outline-offset: 1px; }
-.af-btn { width: 100%; background: var(--celestial-yellow); color: var(--deep-charcoal); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; padding: 16px; border-radius: 999px; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; cursor: pointer; }
+.af-btn { width: 100%; background: var(--celestial-yellow); color: var(--accent-ink); font-weight: 700; font-size: 14px; letter-spacing: 0.04em; padding: 16px; border-radius: 999px; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-transform: uppercase; cursor: pointer; }
 .af-btn:disabled { opacity: 0.6; cursor: default; }
 .af-social-row { display: flex; gap: 20px; margin-top: 24px; justify-content: center; }
 .af-social-row a { font-size: 13px; font-weight: 600; color: #ffffff; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
