@@ -230,8 +230,18 @@ export function LanguageSwitcher({
                     padding: '6px 10px',
                     fontSize: '12px',
                     fontWeight: isActive ? 700 : 500,
-                    background: isActive ? 'var(--tok-primary, #1a6b8a)' : 'transparent',
-                    color: isActive ? '#fff' : 'var(--tok-text, currentColor)',
+                    // Active state uses --tok-primary as text/tint color rather than a
+                    // solid fill — the design_tokens schema has no "text on primary"
+                    // token, so a fixed white fill (as this used to be) fails WCAG AA
+                    // contrast for any client whose primary is light (e.g. Atomic
+                    // Finds' gold, #F5C842). Coloring text with the brand color against
+                    // a light tint of it matches this repo's existing convention for
+                    // exactly this problem (see globals.css's `.prose-da a` /
+                    // `color-mix(in srgb, var(--brand) ...)` uses).
+                    background: isActive
+                      ? 'color-mix(in srgb, var(--tok-primary, #1a6b8a) 15%, transparent)'
+                      : 'transparent',
+                    color: isActive ? 'var(--tok-primary, #1a6b8a)' : 'var(--tok-text, currentColor)',
                     border: 'none',
                     borderRadius: '4px',
                     cursor: 'pointer',

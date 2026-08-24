@@ -54,7 +54,11 @@ export interface SectionRegistryEntry<T = any> {
    * rendering stays inline in BlockRenderer.tsx to guarantee zero visual
    * change for existing tenants. Required in practice for every net-new type.
    */
-  PublicBlock?: ComponentType<{ data: T }>
+  // blockIndex: this block's position in the page's blocks array — pass
+  // through to any DOM ids a block generates (e.g. FaqBlock's per-item
+  // aria-controls ids) so two instances of the same block type on one page
+  // don't collide on duplicate ids.
+  PublicBlock?: ComponentType<{ data: T; blockIndex?: number }>
   /** Generic admin field list (flat scalar `data`, no repeatable items). */
   adminFields?: SectionAdminField[]
   /** Full custom admin editor, for block types with repeatable sub-items. */
@@ -239,7 +243,12 @@ export const SECTION_REGISTRY: Record<string, SectionRegistryEntry> = {
   media: {
     label: 'Media',
     schema: MediaBlockSchema,
-    defaultContent: { mediaType: 'image', src: '', alt: '', caption: '' },
+    // alt can't default to '' — MediaBlockSchema requires it non-empty for
+    // mediaType: 'image', and BlockRenderer's safeParse silently drops any
+    // block that fails validation. A placeholder here means a freshly-added
+    // block renders (with a visible cue to replace it) instead of vanishing
+    // the moment an admin adds one.
+    defaultContent: { mediaType: 'image', src: '', alt: 'Add descriptive alt text', caption: '' },
     PublicBlock: MediaBlock,
     adminFields: [
       { key: 'mediaType', label: 'Media Type', kind: 'select', options: [{ value: 'image', label: 'Image' }, { value: 'video', label: 'Video' }] },

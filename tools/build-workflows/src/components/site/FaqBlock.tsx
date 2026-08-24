@@ -15,9 +15,10 @@ import type { FaqBlockData } from '@/lib/section-registry'
 
 interface FaqBlockProps {
   data: FaqBlockData
+  blockIndex?: number
 }
 
-export default function FaqBlock({ data }: FaqBlockProps) {
+export default function FaqBlock({ data, blockIndex = 0 }: FaqBlockProps) {
   const items = data?.items || []
   const [openIndex, setOpenIndex] = useState<number | null>(items.length > 0 ? 0 : null)
 
@@ -34,8 +35,8 @@ export default function FaqBlock({ data }: FaqBlockProps) {
         <div style={{ borderTop: '1px solid var(--tok-border)' }}>
           {items.map((item, i) => {
             const isOpen = openIndex === i
-            const buttonId = `faq-question-${i}`
-            const panelId = `faq-answer-${i}`
+            const buttonId = `faq-question-${blockIndex}-${i}`
+            const panelId = `faq-answer-${blockIndex}-${i}`
             return (
               <div key={i} style={{ borderBottom: '1px solid var(--tok-border)' }}>
                 <h3 className="m-0">

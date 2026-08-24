@@ -154,7 +154,7 @@ export default async function BlockRenderer({ blocks }: BlockRendererProps) {
                 typeof v === 'string' ? resolveText(v) : v,
               ])
             )
-            return <PublicBlock key={index} data={resolvedData} />
+            return <PublicBlock key={index} data={resolvedData} blockIndex={index} />
           }
         }
       })}
