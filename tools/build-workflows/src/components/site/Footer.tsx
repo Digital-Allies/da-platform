@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Instagram, Facebook, Linkedin } from 'lucide-react'
 import { type SiteSettings } from '@/lib/types'
-import { LanguageSwitcher } from '@design-system/components/LanguageSwitcher'
+import { LanguageSwitcher } from '@da-platform/design-system/components/LanguageSwitcher'
 
 interface FooterProps {
   settings: SiteSettings

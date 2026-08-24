@@ -1,6 +1,6 @@
 import React from 'react'
 import ClientPageWrapper from '@/components/site/ClientPageWrapper'
-import { Sitemap } from '@design-system/components/Sitemap'
+import { Sitemap } from '@da-platform/design-system/components/Sitemap'
 import { getPublishedPages } from '@/lib/data'
 
 export const metadata = {

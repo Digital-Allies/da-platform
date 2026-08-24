@@ -1,6 +1,6 @@
 import React from 'react'
 import ClientPageWrapper from '@/components/site/ClientPageWrapper'
-import { AccessibilityStatement } from '@design-system/components/AccessibilityStatement'
+import { AccessibilityStatement } from '@da-platform/design-system/components/AccessibilityStatement'
 import { getSiteSettings } from '@/lib/data'
 
 export const metadata = {

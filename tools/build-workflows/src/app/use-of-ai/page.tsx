@@ -1,6 +1,6 @@
 import React from 'react'
 import ClientPageWrapper from '@/components/site/ClientPageWrapper'
-import { UseOfAI } from '@design-system/components/UseOfAI'
+import { UseOfAI } from '@da-platform/design-system/components/UseOfAI'
 import { getSiteSettings } from '@/lib/data'
 
 export const metadata = {

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
-import { LanguageSwitcher } from '@design-system/components/LanguageSwitcher'
+import { LanguageSwitcher } from '@da-platform/design-system/components/LanguageSwitcher'
 
 interface NavItem {
   label: string
