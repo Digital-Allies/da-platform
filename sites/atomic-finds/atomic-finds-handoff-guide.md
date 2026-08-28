@@ -81,7 +81,7 @@
 - **Status:** ❌ NOT STARTED
 - **Issue:** Contact form shows "facebook_url" text instead of icons
 - **Blocks:** Social links non-functional; looks broken
-- **File to modify:** `src/components/site/atomic-finds/AtomicContactForm.tsx`
+- **File to modify:** `tools/build-workflows/sites/atomic-finds/components/AtomicContactForm.tsx`
 - **Implementation:**
   1. Import icon components (check what's available in design-system)
   2. Replace text display with icon rendering
@@ -102,7 +102,7 @@
 - **Files to modify:**
   - `src/components/site/Navigation.tsx`
   - `src/components/site/Footer.tsx`
-  - `src/components/site/atomic-finds/AtomicContactForm.tsx`
+  - `tools/build-workflows/sites/atomic-finds/components/AtomicContactForm.tsx`
 - **Current status:** Settings are fetched in page.tsx (line 25) but not used everywhere
 - **Test:** After Jennyfer updates phone number in `/admin/settings`, it should appear on live site within 60s (ISR)
 
