@@ -100,8 +100,8 @@
   - `address` → Footer
   - `business_hours` → Footer or contact section
 - **Files to modify:**
-  - `src/components/site/Navigation.tsx`
-  - `src/components/site/Footer.tsx`
+  - `tools/build-workflows/src/components/site/Navigation.tsx`
+  - `tools/build-workflows/src/components/site/Footer.tsx`
   - `tools/build-workflows/sites/atomic-finds/components/AtomicContactForm.tsx`
 - **Current status:** Settings are fetched in page.tsx (line 25) but not used everywhere
 - **Test:** After Jennyfer updates phone number in `/admin/settings`, it should appear on live site within 60s (ISR)
