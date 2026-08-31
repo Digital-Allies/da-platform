@@ -5,7 +5,27 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-08-28 — by Claude Code (scheduled weekly maintenance): build health clean, 7 open PRs triaged (all green, all awaiting Anthony's review/merge — none merged here), 6 stale orphan branches flagged, one small stale-doc fix shipped as PR #53, a much bigger hygiene backlog found in `sites/healthcare-training-center/` and flagged (not fixed). **Flagging urgent: GitHub issue #11's P0 security gap is confirmed still live in production after a full month open** — see top of entry below.
+**Last updated:** 2026-08-31 — by Claude Code (scheduled weekly maintenance): quiet week — build still clean, all 8 open PRs (including this session's own #53) still sitting unreviewed/unmerged exactly as of Friday, same 6 stale branches, no new hygiene violations. **Still urgent: GitHub issue #11's P0 security gap is now 33 days open and confirmed still live** — see top of entry below.
+
+## 2026-08-31 — weekly maintenance pass: no change since Friday, nothing new to fix, P0 security gap now 33 days open
+
+**🚨 Urgent, unchanged from last entry — needs Anthony's action:** GitHub issue #11 (P0, opened 2026-07-29) is now **33 days open**. Re-ran the same read-only check against production (`auwhvicpyiwsubucanpb`) as last session: `SELECT has_function_privilege('anon', 'get_my_client_id()', 'execute')` → still **`true`**. Nothing has changed about this — the one-line fix is still sitting in `tools/build-workflows/supabase/migrations/20260729000000_security_fixes_public_grant.sql`, waiting for Anthony to run it in the Supabase SQL Editor. Sending a push notification again alongside this update, same as Friday, since this keeps getting older without anyone acting on it.
+
+**Setup this session:** repo was still attached from Friday's firing (same container/session) — skipped straight to the checklist per this task's own instructions.
+
+**1. Build health check:** `git status` clean on `main` (`6eb44b7`, Friday's own STATUS.md commit — no new commits from Anthony or anyone else since). `npm install` no-op this time (no lockfile drift like last session), `npx tsc --noEmit` clean.
+
+**2. Open PR triage:** all 8 open PRs (#45–53) are in the exact same state as Friday's entry — same CI-green status, same `mergeable_state: clean`, zero new human reviews or comments on any of them (checked #53 specifically since it's the one from last session: still just the Claude-bot "overage limit" auto-comment, this session's own review-summary comment, and Vercel's preview-deploy comment — nothing from Anthony). Not re-listing each one individually here since nothing changed — see the 2026-08-28 entry below for the full per-PR breakdown, still accurate. Still none merged; still not this session's call to merge.
+
+**3. Branch check:** same 6 orphan branches from Friday, unchanged, now 3–5+ weeks old — still flagging for Anthony to confirm dead/safe to delete, still not deleting them without his go-ahead.
+
+**4. Hygiene check:** re-scanned for zips-next-to-unzipped-contents, `.dc.html`/`_ds/` bundles, `copy`/`-old`/`-backup`/`_v2` filenames, and tracked `.DS_Store`/`__pycache__` — identical results to Friday, nothing new. `sites/healthcare-training-center/`'s bigger backlog (flagged, not fixed, in the 2026-08-28 entry) is untouched — still there, still not urgent enough to justify scope-creeping this pass. Also checked `packages/skills/da-legal-compliance-checklist.zip` (not investigated last session) — it sits next to a `client-onboarding.skill` file, not an unzipped duplicate of itself, so it's a legitimate packaged artifact, not clutter.
+
+**5. Code review:** no code or file changes made this session — nothing to review.
+
+**What's next:** same as Friday — Anthony to (1) run the issue #11 SQL fix (most urgent, and the clock is the only thing that's changed on it), (2) review/merge the 8 pending PRs, (3) decide on the 6 stale branches, (4) decide if/when `sites/healthcare-training-center/`'s hygiene backlog gets a dedicated session. Next maintenance firing should keep re-checking issue #11 first and watch for whether PR #53 (or any of #45–52) finally gets reviewed.
+
+---
 
 ## 2026-08-28 — weekly maintenance pass: build/PR/branch/hygiene checks, one stale-doc fix shipped, month-old P0 security gap re-confirmed still live
 
