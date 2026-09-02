@@ -1,5 +1,17 @@
 # Theme Engine — Scope
 
+> **SUPERSEDED (2026-08).** This plan predates the `design_tokens` Supabase
+> table and was never built. `design_tokens` (colors/fonts/type_scale/
+> spacing/logo/favicon columns) + `lib/theme.ts`'s `getLiveDesignTokens()` /
+> `tokensToCssVars()` is now the implemented, live theming path, edited via
+> `/admin/theme` (`ThemeClient.tsx`). **Do not implement the
+> `settings.theme_*` proposal below** — it would add a second, competing
+> source of truth for exactly the data `design_tokens` already owns. The
+> `/admin/settings` `brand_color` field this doc describes has also been
+> removed (it never had a live effect — see `lib/types.ts`). The rest of
+> this document is kept for historical context on how the two mechanisms
+> were audited, not as a spec to build.
+
 Not built yet. This is the plan for making each client's site theme
 admin-editable instead of hardcoded, per Anthony's 2026-07-21 direction
 ("the design system should eventually act as a live plugin for the admin

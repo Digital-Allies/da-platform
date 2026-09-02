@@ -1,14 +1,23 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
 import '../styles/globals.css'
-import { getSiteSettings } from '@/lib/data'
+import { getSiteSettings, getLiveDesignTokens } from '@/lib/data'
 import AuthListener from '@/components/AuthListener'
 import FacebookSdk from '@/components/FacebookSdk'
 import { Analytics } from '@vercel/analytics/react'
 import { IntlProvider } from '@/components/IntlProvider'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const settings = await getSiteSettings()
+  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID
+  const [settings, tokens] = await Promise.all([
+    getSiteSettings(),
+    getLiveDesignTokens(clientId),
+  ])
+  // design_tokens.favicon (Brand Theme) takes priority over settings.favicon_url
+  // (Settings) — same precedence SiteTheme.tsx already gives design_tokens for
+  // every other brand value. Falls back to Settings for a client that's only
+  // ever set it there.
+  const faviconUrl = tokens.favicon || settings.favicon_url
   return {
     title: {
       default: settings.site_title,
@@ -19,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: settings.site_title,
       type: 'website',
     },
-    ...(settings.favicon_url && { icons: { icon: settings.favicon_url } }),
+    ...(faviconUrl && { icons: { icon: faviconUrl } }),
   }
 }
 
@@ -45,10 +54,11 @@ export default async function RootLayout({
           </>
         )}
       </head>
-      <body
-        className="min-h-screen"
-        style={{ '--brand': settings.brand_color } as React.CSSProperties}
-      >
+      {/* `--brand` is intentionally NOT set here — it comes from the client's
+          design_tokens/theme.ts primary color via SiteTheme.tsx, which always
+          overrode a body-level value anyway. See lib/types.ts SiteSettings
+          note on the removed `brand_color` field. */}
+      <body className="min-h-screen">
         <IntlProvider>
           <AuthListener />
           <FacebookSdk appId={settings.facebook_app_id} />

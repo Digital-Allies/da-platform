@@ -134,16 +134,22 @@ export async function getCollections(): Promise<any[]> {
 
 // The public site's actual theme: the client's static brand defaults (see
 // lib/theme.ts) with any row saved via the admin Theme Customizer
-// (design_tokens.colors / .fonts) layered on top. Before this, SiteTheme.tsx
-// called the static getDesignTokens() directly, so the Theme Customizer's
-// Save button had zero effect on the live site no matter what was saved.
-export async function getLiveDesignTokens(clientId: string | undefined = CLIENT_ID): Promise<DesignTokens> {
+// (design_tokens.colors / .fonts / .type_scale / .spacing / .logo / .favicon)
+// layered on top. Before this, SiteTheme.tsx called the static
+// getDesignTokens() directly, so the Theme Customizer's Save button had zero
+// effect on the live site no matter what was saved.
+//
+// type_scale/spacing/logo/favicon are selected and merged here too — they
+// were previously dropped even though the columns exist and are already
+// seeded with real data for at least one tenant (Atomic Finds), so the app
+// was silently ignoring live data that was already there.
+export const getLiveDesignTokens = cache(async (clientId: string | undefined = CLIENT_ID): Promise<DesignTokens> => {
   const base = getStaticDesignTokens(clientId)
   if (!clientId) return base
   const supabase = createPublicClient()
   const { data } = await supabase
     .from('design_tokens')
-    .select('colors, fonts')
+    .select('colors, fonts, type_scale, spacing, logo, favicon')
     .eq('client_id', clientId)
     .maybeSingle()
   if (!data) return base
@@ -151,6 +157,10 @@ export async function getLiveDesignTokens(clientId: string | undefined = CLIENT_
     ...base,
     colors: { ...base.colors, ...(data.colors ?? {}) },
     fonts: { ...base.fonts, ...(data.fonts ?? {}) },
+    typeScale: { ...base.typeScale, ...(data.type_scale ?? {}) },
+    spacing: { ...base.spacing, ...(data.spacing ?? {}) },
+    logo: data.logo || base.logo,
+    favicon: data.favicon || base.favicon,
   }
-}
+})
 
