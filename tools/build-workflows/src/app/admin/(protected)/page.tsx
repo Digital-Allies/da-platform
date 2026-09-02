@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase-server'
 import { getCurrentClientId } from '@/lib/get-current-client'
+import { moduleLabel } from '@/lib/module-labels'
 
 export const dynamic = 'force-dynamic'
 
@@ -87,7 +88,7 @@ export default async function AdminDashboardPage() {
             </Link>
             <Link href="/admin/development" className="ws-stat stat-card" style={{ textDecoration: 'none' }}>
               <div className="ws-stat__top">
-                <span className="ws-stat__label">The Workshop</span>
+                <span className="ws-stat__label">{moduleLabel('development', CLIENT_ID)}</span>
               </div>
               <span className="ws-stat__val stat-card__number" id="totalTasks">{totalTasks ?? 0}</span>
             </Link>

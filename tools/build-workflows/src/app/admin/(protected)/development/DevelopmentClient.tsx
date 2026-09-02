@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
+import { moduleLabel } from '@/lib/module-labels';
 import { useRouter } from 'next/navigation';
 import { Plus, Trash, Edit, Calendar, CheckSquare } from 'lucide-react';
 
@@ -126,7 +127,7 @@ export default function DevelopmentClient({ initialTasks }: { initialTasks: DevT
       <div className="ws-head">
         <div>
           <div className="ws-head__eyebrow da-eyebrow da-eyebrow--muted">Development Tracker</div>
-          <h2>The Workshop</h2>
+          <h2>{moduleLabel('development', clientId)}</h2>
         </div>
         <button className="btn btn--primary" onClick={handleOpenCreateModal}>+ New Task</button>
       </div>
