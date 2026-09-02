@@ -1,8 +1,9 @@
 'use client'
 
 // Same /api/contact endpoint + validation as the generic ContactForm, styled
-// to match the Atomic Finds ATX design (design_handoff_homepage's contact
-// form markup) instead of the DA-generic .field/.btn classes.
+// to match the Atomic Finds ATX design (archive/pre-rebrand/design_handoff_homepage's
+// contact form markup) instead of the DA-generic .field/.btn classes. Colors
+// come from ../styles/atomic-finds.css's --tok-*-backed vars, not literals here.
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'

@@ -1,10 +1,11 @@
 // Atomic Finds ATX — full homepage, ported section-for-section from
-// sites/atomic-finds/design_handoff_homepage/index.html (the approved
-// design, Claude Design project 29110ac3). Matches that design as closely
-// as this stack allows — the only intentional departure is CTA text, which
-// resolves per-product through src/lib/commerce.ts's resolveProductCta()
-// instead of the handoff's hard-coded "Add to Cart"/"View Details"
-// (STATUS.md decision #8: flexible conversion layer).
+// sites/atomic-finds/archive/pre-rebrand/design_handoff_homepage/index.html
+// (the approved pre-rebrand design, Claude Design project 29110ac3).
+// Matches that design as closely as this stack allows — the only
+// intentional departure is CTA text, which resolves per-product through
+// src/lib/commerce.ts's resolveProductCta() instead of the handoff's
+// hard-coded "Add to Cart"/"View Details" (STATUS.md decision #8: flexible
+// conversion layer).
 //
 // This is a bespoke page for this one client, not a generic block — it
 // bypasses BlockRenderer so the layout can match the approved design
@@ -12,6 +13,12 @@
 // and passed in; content that's fixed brand copy (curators, process steps,
 // About/Meet Jennyfer bio) is real copy from the design handoff, not
 // placeholder text.
+//
+// 2026-08-23: de-hardcoded for the upcoming rebrand — colors/fonts here and
+// in ../styles/atomic-finds.css now resolve from the client's --tok-* CSS
+// vars (SiteTheme.tsx, sourced from the live `design_tokens` Supabase row)
+// instead of literal hex/font-name values. No visual change today; a future
+// design system only requires updating that Supabase row.
 
 import '../styles/atomic-finds.css'
 import { type Product, type Review, type SiteSettings } from '@/lib/types'
@@ -127,7 +134,7 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
         </section>
 
         {/* THE CURATORS */}
-        <section className="af-section" style={{ background: 'linear-gradient(180deg, #211C14 0%, #1E1E1E 55%, #16140F 100%)' }}>
+        <section className="af-section" style={{ background: 'linear-gradient(180deg, var(--charcoal-3) 0%, var(--deep-charcoal) 55%, var(--charcoal-2) 100%)' }}>
           <div className="af-section-inner">
             <div className="af-section-head">
               <p className="af-section-eyebrow" data-en="Meet the Mascots" data-es="Conoce a las Mascotas">Meet the Mascots</p>
@@ -196,7 +203,7 @@ export default function AtomicFindsHomepage({ products, reviews, logoUrl, collec
         </section>
 
         {/* REVIEWS */}
-        <section className="af-section" id="reviews" style={{ background: 'linear-gradient(180deg, #16140F 0%, #1a160f 100%)' }}>
+        <section className="af-section" id="reviews" style={{ background: 'linear-gradient(180deg, var(--charcoal-2) 0%, #1a160f 100%)' }}>
           <div className="af-section-inner">
             <div className="af-section-head">
               <p className="af-section-eyebrow" data-en="Customer Reviews" data-es="Reseñas de Clientes">Customer Reviews</p>
