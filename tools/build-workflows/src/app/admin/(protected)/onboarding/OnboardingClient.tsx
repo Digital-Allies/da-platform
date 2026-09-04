@@ -13,371 +13,62 @@ const sections: Section[] = [
   {
     id: 'getting-started',
     title: 'Getting Started',
-    content: (
-      <div>
-        <h3>Welcome to Your Dashboard</h3>
-        <p>[Content to be added]</p>
-        <h4>Quick Start:</h4>
-        <ol>
-          <li><strong>Set Your Brand:</strong> Brand Theme configuration</li>
-          <li><strong>Add Your First Product:</strong> Showroom product management</li>
-          <li><strong>Organize with Collections:</strong> Categories and organization</li>
-          <li><strong>Review Messages:</strong> Customer inquiries and communications</li>
-        </ol>
-      </div>
-    ),
+    content: <div />,
   },
   {
     id: 'dashboard-overview',
     title: 'Dashboard Overview',
-    content: (
-      <div>
-        <h3>Dashboard Navigation</h3>
-        <p>[Content to be added]</p>
-        <p><strong>Main Modules:</strong></p>
-        <ul>
-          <li><strong>Messages</strong></li>
-          <li><strong>Pages</strong></li>
-          <li><strong>Collections</strong></li>
-          <li><strong>Showroom</strong></li>
-          <li><strong>Content</strong></li>
-          <li><strong>Projects</strong></li>
-          <li><strong>Brand Theme</strong></li>
-          <li><strong>Settings</strong></li>
-        </ul>
-      </div>
-    ),
-  },
-  {
-    id: 'brand-setup',
-    title: 'Brand Theme Configuration',
-    content: (
-      <div>
-        <h3>Brand Setup</h3>
-        <p>[Content to be added]</p>
-        <h4>Brand Theme Elements</h4>
-        <ul>
-          <li><strong>Colors:</strong> Primary, accent, and background colors</li>
-          <li><strong>Fonts:</strong> Heading and body font families</li>
-          <li><strong>Logo:</strong> Upload your brand logo</li>
-        </ul>
-        <h4>Settings & Contact Info</h4>
-        <ul>
-          <li>Business information</li>
-          <li>Contact details</li>
-          <li>Social media links</li>
-        </ul>
-      </div>
-    ),
+    content: <div />,
   },
   {
     id: 'adding-products',
     title: 'Products & Showroom',
-    content: (
-      <div>
-        <h3>Product Management</h3>
-        <p>[Content to be added]</p>
-        <h4>Adding Products</h4>
-        <ul>
-          <li>Product details and information</li>
-          <li>Image management</li>
-          <li>Collection assignment</li>
-          <li>Publishing and status</li>
-        </ul>
-        <h4>Bulk Operations</h4>
-        <ul>
-          <li>CSV import for multiple products</li>
-          <li>Batch operations</li>
-        </ul>
-      </div>
-    ),
-  },
-  {
-    id: 'managing-pages',
-    title: 'Pages Management',
-    content: (
-      <div>
-        <h3>Custom Pages</h3>
-        <p>[Content to be added]</p>
-        <h4>Creating Pages</h4>
-        <ul>
-          <li>Page creation and editing</li>
-          <li>Content blocks and formatting</li>
-          <li>Featured images</li>
-          <li>Publishing and URL configuration</li>
-        </ul>
-        <h4>Required Pages</h4>
-        <ul>
-          <li>Privacy Policy</li>
-          <li>Terms of Service</li>
-          <li>Accessibility Statement</li>
-          <li>AI Disclosure</li>
-        </ul>
-      </div>
-    ),
+    content: <div />,
   },
   {
     id: 'collections',
     title: 'Collections & Categories',
-    content: (
-      <div>
-        <h3>Collection Management</h3>
-        <p>[Content to be added]</p>
-        <h4>Collection Structure</h4>
-        <p>Use collections to organize products by category.</p>
-        <h4>Create a Collection</h4>
-        <ul>
-          <li>Collection name</li>
-          <li>Collection description</li>
-          <li>Associated products</li>
-        </ul>
-        <h4>Assign Products</h4>
-        <p>Assign products to appropriate collections during product creation or editing.</p>
-      </div>
-    ),
+    content: <div />,
   },
   {
     id: 'messages-contact',
     title: 'Messages & Communications',
-    content: (
-      <div>
-        <h3>Managing Messages</h3>
-        <p>[Content to be added]</p>
-        <h4>Message Overview</h4>
-        <ul>
-          <li>Contact form submissions</li>
-          <li>Message details and history</li>
-          <li>Response management</li>
-        </ul>
-        <h4>Responding to Messages</h4>
-        <ul>
-          <li>Reading and tracking messages</li>
-          <li>Email responses</li>
-          <li>Status tracking</li>
-        </ul>
-      </div>
-    ),
+    content: <div />,
   },
   {
     id: 'csv-uploader',
     title: 'Bulk Import (CSV)',
-    content: (
-      <div>
-        <h3>CSV Import for Bulk Operations</h3>
-        <p>[Content to be added]</p>
-        <h4>CSV Format</h4>
-        <p>Prepare a CSV file with appropriate columns for your product data.</p>
-        <h4>Import Process</h4>
-        <ul>
-          <li>File preparation</li>
-          <li>Upload and preview</li>
-          <li>Validation and confirmation</li>
-          <li>Processing and completion</li>
-        </ul>
-      </div>
-    ),
+    content: <div />,
   },
   {
-    id: 'the-curators',
-    title: 'The Curators System',
-    content: (
-      <div>
-        <h3>Meet Your Four Guides</h3>
-        <p>The Curators are playful characters who help customers discover products by feeling, function, and personality. Each has a specialty and voice. Assign one Curator to every product.</p>
-        <h4>Daisy — The Laid-Back Tastemaker</h4>
-        <ul>
-          <li><strong>Specialty:</strong> Comfort. Lounge chairs, peacock chairs, any hero seating you sink into.</li>
-          <li><strong>Voice:</strong> "If it makes you exhale, it's the one."</li>
-          <li><strong>On Product Cards:</strong> "Trust me—this one just wants to be your favorite spot in the house."</li>
-          <li><strong>Assign to:</strong> Lounge chairs, relaxed seating, comfort-first pieces</li>
-        </ul>
-        <h4>Milo — The Detail Nerd</h4>
-        <ul>
-          <li><strong>Specialty:</strong> Craftsmanship. He reads joinery like star charts. Rattan, bamboo, solid construction.</li>
-          <li><strong>Voice:</strong> "The good stuff is in the construction."</li>
-          <li><strong>On Product Cards:</strong> "Hand-woven rattan, restored joints, built to outlast us both. I checked."</li>
-          <li><strong>Assign to:</strong> Woven pieces, craftsmanship-forward, restoration stories, high-quality materials</li>
-        </ul>
-        <h4>Tatiana — The Bold One</h4>
-        <ul>
-          <li><strong>Specialty:</strong> Drama and sculptural silhouettes. Bold, conversation-starting pieces.</li>
-          <li><strong>Voice:</strong> "Play it safe? In this economy? No."</li>
-          <li><strong>On Product Cards:</strong> "This is the piece people ask about at every party. Be the person with the answer."</li>
-          <li><strong>Assign to:</strong> Statement pieces, unusual forms, arched shelves, showstoppers</li>
-        </ul>
-        <h4>Malibu — The Host With the Most</h4>
-        <ul>
-          <li><strong>Specialty:</strong> Entertaining and gathering. Bar carts, dining tables, social pieces.</li>
-          <li><strong>Voice:</strong> "Make room for a good time."</li>
-          <li><strong>On Product Cards:</strong> "Picture it: friends, this cart, golden hour. You're welcome."</li>
-          <li><strong>Assign to:</strong> Bar carts, dining sets, entertaining furniture, social seating</li>
-        </ul>
-        <p><strong>Why Curators matter:</strong> They give your site personality. Customers feel guided, not just browsing. Each character is a lens for discovery.</p>
-      </div>
-    ),
+    id: 'personas',
+    title: 'Brand Personas & Guides',
+    content: <div />,
   },
   {
-    id: 'blog-press',
-    title: 'Publishing in The Journal',
-    content: (
-      <div>
-        <h3>Build Authority with Original Content</h3>
-        <p>The Journal (Press Office) is where you share restoration stories, care tips, Austin vintage guides, and styling features. This content drives organic traffic and builds trust.</p>
-        <h4>Types of Content That Work</h4>
-        <ul>
-          <li><strong>Restoration Stories:</strong> "How I Revived This 1970s Rattan Lounge Chair"</li>
-          <li><strong>Care Guides:</strong> "How to Clean and Maintain Vintage Rattan"</li>
-          <li><strong>Austin Vintage Culture:</strong> "Where to Find Vintage Furniture in South Austin"</li>
-          <li><strong>Styling Features:</strong> "Rattan in Modern Homes: 5 Ways to Style Vintage Pieces"</li>
-          <li><strong>Product Spotlights:</strong> "This 1970s Credenza Changed Everything" (with photos, story, why it's special)</li>
-        </ul>
-        <h4>How to Publish</h4>
-        <ol>
-          <li>Go to "The Press Office" in the left menu</li>
-          <li>Click "New Post"</li>
-          <li>Title (SEO-friendly: include era, material, or keyword)</li>
-          <li>Write your content. Use the block editor to add text, images, sections</li>
-          <li>Add a featured image (this shows on social, collections pages, and search results)</li>
-          <li>Set publish date (can be future-dated to schedule)</li>
-          <li>Add tags (restoration, rattan, 1970s, austin-vintage, etc.)</li>
-          <li>Publish</li>
-        </ol>
-        <p><strong>Pro tip:</strong> Publish 2–4 posts per month. Blog posts rank for "vintage furniture Austin" + build customer loyalty. Every post is SEO gold.</p>
-      </div>
-    ),
+    id: 'content-publishing',
+    title: 'Content & Publishing',
+    content: <div />,
   },
   {
     id: 'projects-tracking',
-    title: 'Using Projects to Track Progress',
-    content: (
-      <div>
-        <h3>Stay Organized with The Workshop</h3>
-        <h4>What Are Projects?</h4>
-        <p>Projects help you track your site build checklist. Each project has tasks that you move through stages: To Do → In Progress → Review → Done</p>
-        <h4>Using Your Website Launch Checklist</h4>
-        <ol>
-          <li>Go to "Projects" (or "The Workshop" for admins)</li>
-          <li>You'll see "Website Launch Checklist"</li>
-          <li>It's organized into 6 phases: Technical, Brand, Pages, SEO, Performance, Admin Setup</li>
-          <li>Drag tasks between columns as you progress</li>
-          <li>The checklist helps you know exactly what's left to do</li>
-        </ol>
-        <p><strong>💡 Tip:</strong> Completing this checklist ensures your site is launch-ready!</p>
-      </div>
-    ),
+    title: 'Projects & Workflow Tracking',
+    content: <div />,
   },
   {
     id: 'seo-basics',
-    title: 'SEO Basics for Vintage Discovery',
-    content: (
-      <div>
-        <h3>Get Found by Customers Searching for Vintage</h3>
-        <p>Austin customers search for "vintage rattan furniture," "1970s bamboo," and "vintage furniture Austin." Your titles and descriptions should answer these searches naturally.</p>
-        <h4>Title & Meta Descriptions</h4>
-        <p>Every product needs both:</p>
-        <ul>
-          <li><strong>Product Title (50-60 chars):</strong> Era + Material + Item. Keyword-rich but natural. Example: "1970s Rattan Coffee Table with Glass Top"</li>
-          <li><strong>Meta Description (150-160 chars):</strong> What makes this piece special? Who is it for? Example: "Authentic 1970s rattan coffee table. Hand-cleaned, reinforced joints, ready for a new home in Austin."</li>
-        </ul>
-        <h4>High-Impact Keywords for Atomic Finds</h4>
-        <ul>
-          <li>Vintage rattan furniture, vintage bamboo furniture, mid-century modern seating</li>
-          <li>Vintage furniture Austin, rattan furniture Austin, 1970s vintage</li>
-          <li>Sustainable vintage, authentic vintage, restored vintage</li>
-          <li>Boho vintage, retro furniture, woven furniture</li>
-        </ul>
-        <h4>Where Keywords Go</h4>
-        <ul>
-          <li>Product titles (most important)</li>
-          <li>Meta descriptions</li>
-          <li>Product tags (rattan, 1970s, boho, austin-vintage)</li>
-          <li>Blog posts and Journal content</li>
-          <li>Image alt text (describe the piece, include materials)</li>
-        </ul>
-        <h4>What We Handle Automatically</h4>
-        <ul>
-          <li>XML Sitemap (Google knows every product, page, blog post)</li>
-          <li>robots.txt (tells search engines what to crawl)</li>
-          <li>Schema markup (Google understands product info: price, condition, images)</li>
-          <li>Mobile-responsive design (no mobile penalty)</li>
-          <li>Fast page speeds (we optimize automatically)</li>
-        </ul>
-        <p><strong>Pro tip:</strong> You don't need to stuff keywords. Write naturally for customers. "Vintage Rattan Coffee Table for Living Rooms" beats "rattan rattan rattan coffee table."</p>
-      </div>
-    ),
+    title: 'SEO & Discovery',
+    content: <div />,
   },
   {
     id: 'accessibility-wcag',
-    title: 'Accessibility & WCAG Compliance',
-    content: (
-      <div>
-        <h3>Make Your Site Usable for Everyone</h3>
-        <h4>What Is WCAG?</h4>
-        <p>Web Content Accessibility Guidelines (WCAG 2.1 Level AA) ensure your site works for people with disabilities, including blind/low-vision, deaf/hard of hearing, and those with mobility challenges.</p>
-        <h4>What's Included</h4>
-        <ul>
-          <li>High contrast text (readable for low-vision users)</li>
-          <li>Alt text on all images (for screen readers)</li>
-          <li>Keyboard navigation (no mouse required)</li>
-          <li>Semantic HTML (proper heading hierarchy, landmarks)</li>
-          <li>Color not alone for meaning (icons + text)</li>
-          <li>Focus indicators (visible outline when tabbing)</li>
-        </ul>
-        <h4>What You Should Do</h4>
-        <ol>
-          <li>Write good alt text for every image (describe what's in it, not "image of product")</li>
-          <li>Use descriptive link text ("Learn more about returns" vs "Click here")</li>
-          <li>Keep color contrast high (light text on dark, or vice versa)</li>
-          <li>Don't rely on color alone to convey information</li>
-        </ol>
-        <p><strong>💡 Tip:</strong> We audited your site to WCAG 2.1 AA and fixed what needed fixing. Check the /accessibility page for our statement.</p>
-      </div>
-    ),
+    title: 'Accessibility & Compliance',
+    content: <div />,
   },
   {
     id: 'troubleshooting',
-    title: 'Troubleshooting & FAQ',
-    content: (
-      <div>
-        <h3>Common Questions & Quick Fixes</h3>
-        <h4>Products & Publishing</h4>
-        <ul>
-          <li><strong>"Changes aren't showing on the site"</strong> - Always click "Publish" when you're done editing. Drafts stay hidden. Wait 30 seconds for updates to appear live.</li>
-          <li><strong>"Image won't upload"</strong> - Check file size (under 5MB). Use JPG or PNG. Ensure the image is not corrupted. Retry.</li>
-          <li><strong>"Product won't appear on its collection page"</strong> - Make sure it's published (not draft) AND assigned to a collection. Both are required.</li>
-          <li><strong>"Bulk CSV import failed"</strong> - Check your spreadsheet columns match the format (name, price, description, collection, curator, image_url, tags). Preview errors before confirming.</li>
-        </ul>
-        <h4>Account & Access</h4>
-        <ul>
-          <li><strong>"Can't log in"</strong> - Check your email for the magic login link. (Check spam folder!) If nothing arrives, wait a few minutes and try again.</li>
-          <li><strong>"I forgot my password"</strong> - No password to forget! We use magic links. Just click the link in your email. If you didn't get it, request a new one.</li>
-        </ul>
-        <h4>Messages & Customer Contact</h4>
-        <ul>
-          <li><strong>"Customer messages aren't showing up"</strong> - Check the Messages tab. Make sure your contact form is published and linked on your site. Emails might go to spam—check there too.</li>
-          <li><strong>"I want to respond to a message"</strong> - Click the message, copy the customer's email, and reply directly from your email. Or use our Reply feature if available.</li>
-        </ul>
-        <h4>Brand & Design</h4>
-        <ul>
-          <li><strong>"Logo is huge/tiny on the site"</strong> - Check Brand Theme. Logo size is set there. Resize and re-upload if needed.</li>
-          <li><strong>"Colors look wrong"</strong> - Brand Theme controls all colors. Make sure you've set Primary (#F5C842 for Atomic Finds), Background (#1E1E1E), and Accent colors.</li>
-          <li><strong>"Font isn't what I chose"</strong> - Fonts are set in Brand Theme. If changes don't show, clear your browser cache (Ctrl+Shift+Del or Cmd+Shift+Del) and refresh.</li>
-        </ul>
-        <h4>Performance & Issues</h4>
-        <ul>
-          <li><strong>"Site feels slow"</strong> - Large images slow everything down. Compress photos before uploading (1–2MB is ideal). We optimize automatically, but smaller is faster.</li>
-          <li><strong>"Mobile site looks broken"</strong> - We auto-responsive, but check on your phone. Let us know what's off and send a screenshot.</li>
-        </ul>
-        <h4>Get Support</h4>
-        <p>Email <strong>contact@digitalallies.net</strong> with:</p>
-        <ul>
-          <li>A clear description of what's happening</li>
-          <li>A screenshot if possible</li>
-          <li>The exact product or page affected</li>
-        </ul>
-        <p>We aim to respond within 24 hours.</p>
-      </div>
-    ),
+    title: 'Troubleshooting & Support',
+    content: <div />,
   },
 ];
 
