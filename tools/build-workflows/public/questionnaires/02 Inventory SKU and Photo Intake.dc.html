@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/colors.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/typography.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap">
+<script src="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/_ds_bundle.js"></script>
+<script src="doc-page.js"></script>
+<style>
+@font-face{font-family:"Mamba";src:url("assets/fonts/Mamba.otf") format("opentype");font-display:swap}
+doc-page:not(:defined){visibility:hidden}
+body{margin:0;font-family:"Poppins",sans-serif;color:#241D13;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:#9C4A20;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#C1602C}
+input,textarea,button,select{font:inherit;color:inherit}
+input[type=text],input[type=date],textarea{width:100%;box-sizing:border-box;background:transparent;border:0;border-bottom:1.5px dashed #A6AD73;padding:4px 2px;font-size:13px;outline:none;font-family:"Poppins",sans-serif}
+input[type=text]:focus,input[type=date]:focus,textarea:focus{border-bottom-color:#C1602C;background:#F7F0DC}
+textarea{border:1.5px dashed #A6AD73;border-radius:8px;padding:8px;resize:vertical;line-height:1.6}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:15px;height:15px;min-width:15px;border:2px solid #241D13;border-radius:3px;background:#FBF6E8;margin:2px 0 0;cursor:pointer;print-color-adjust:exact}
+input[type=checkbox]:checked{background:#C1602C;box-shadow:inset 0 0 0 2px #FBF6E8}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #C9BE9C;padding:6px 9px;text-align:left;font-size:12.5px;vertical-align:top;line-height:1.45}
+th{background:#EFE4C4;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;print-color-adjust:exact}
+@media print{[data-noprint]{display:none!important}}
+</style>
+</helmet>
+<doc-page margin="0.7in" style="background:#FBF6E8">
+<div slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1.5px solid #C9BE9C;padding-top:7px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#5C7367">
+<span style="display:flex;align-items:center;gap:7px"><img src="assets/af-mark.png" alt="Atomic Finds ATX" style="width:17px;height:17px;display:block"><span style="font-weight:600">Atomic Finds ATX</span></span>
+<span>Inventory, SKU &amp; Photo Intake &middot; DRAFT &middot; Finish by 2026-09-12</span>
+</div>
+
+<div onInput="{{ onEdit }}" onChange="{{ onEdit }}">
+
+<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:6px">
+<img src="assets/af-mark.png" alt="" style="width:56px;height:56px;display:block;flex:none">
+<div style="padding-top:4px">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Atomic Finds ATX &middot; Owner Questionnaire 2 of 4</p>
+<h1 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:34px;line-height:1.08;margin:6px 0 8px;max-width:16ch">Inventory, SKU &amp; Photo Intake</h1>
+<p style="margin:0;font-size:12.5px;font-weight:600;color:#3B2F1E">Status: DRAFT &nbsp;&middot;&nbsp; Suggested finish-by: 2026-09-12</p>
+</div>
+</div>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:14px 16px;margin:16px 0 4px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 6px;font-size:13px;line-height:1.55"><strong>For:</strong> Jennyfer, owner of Atomic Finds ATX</p>
+<p style="margin:0 0 6px;font-size:13px;line-height:1.55"><strong>Purpose:</strong> Establish one reliable record for each physical item before it is listed, published, or promoted.</p>
+<p style="margin:0;font-size:13px;line-height:1.55"><strong>Prepared by:</strong> Anthony / Digital Allies</p>
+</div>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:18px 20px;margin:24px 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 6px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Opening principle</p>
+<p style="margin:0 0 10px;font-family:Mamba,Poppins,sans-serif;font-size:22px;line-height:1.2">One physical piece = one inventory record = one SKU.</p>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Public website, Marketplace, and Instagram details must come from the verified item record &mdash; not memory, an old caption, an AI guess, or a photo alone.</p>
+<p style="margin:0;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">This principle anchors every section that follows. When in doubt, return to it.</p>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:30px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 1</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 12px;break-after:avoid">Inventory Home and Ownership</h2>
+
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Where does the master record live? (Phase 1)</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="home_cms"><span>CMS Suite</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="home_sheet"><span>Spreadsheet feeding the CMS Suite</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="home_other"><span>Other:</span></label><input type="text" name="home_other_text"></div>
+</div>
+
+<p style="margin:20px 0 6px;font-size:13.5px;font-weight:600">Where do original/source photos live?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="photos_drive"><span>Google Drive</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="photos_cms"><span>CMS media library</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="photos_both"><span>Both</span></label>
+</div>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-top:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="photos_other"><span>Other:</span></label><input type="text" name="photos_other_text"></div>
+
+<p style="margin:20px 0 6px;font-size:13.5px;font-weight:600">If both are used, which is the source of truth?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:6px"><input type="checkbox" name="sot_drive"><span>Google Drive is the original-photo source; CMS contains approved web copies</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:6px"><input type="checkbox" name="sot_cms"><span>CMS is the source</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="sot_other"><span>Other:</span></label><input type="text" name="sot_other_text"></div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 4px;break-after:avoid">Who may do each job?</h3>
+<table>
+<thead><tr><th style="width:40%">Task</th><th>Jennyfer</th><th>Anthony / Digital Allies</th><th>Other</th></tr></thead>
+<tbody>
+<tr><td>Create draft record</td><td style="text-align:center"><input type="checkbox" name="job_create_j"></td><td style="text-align:center"><input type="checkbox" name="job_create_a"></td><td style="text-align:center"><input type="checkbox" name="job_create_o"></td></tr>
+<tr><td>Assign SKU</td><td style="text-align:center"><input type="checkbox" name="job_sku_j"></td><td style="text-align:center"><input type="checkbox" name="job_sku_a"></td><td style="text-align:center"><input type="checkbox" name="job_sku_o"></td></tr>
+<tr><td>Add source photos</td><td style="text-align:center"><input type="checkbox" name="job_photos_j"></td><td style="text-align:center"><input type="checkbox" name="job_photos_a"></td><td style="text-align:center"><input type="checkbox" name="job_photos_o"></td></tr>
+<tr><td>Verify measurements &amp; condition</td><td style="text-align:center"><input type="checkbox" name="job_verify_j"></td><td style="text-align:center"><input type="checkbox" name="job_verify_a"></td><td style="text-align:center"><input type="checkbox" name="job_verify_o"></td></tr>
+<tr><td>Confirm price</td><td style="text-align:center"><input type="checkbox" name="job_price_j"></td><td style="text-align:center"><input type="checkbox" name="job_price_a"></td><td style="text-align:center"><input type="checkbox" name="job_price_o"></td></tr>
+<tr><td>Change availability/status</td><td style="text-align:center"><input type="checkbox" name="job_status_j"></td><td style="text-align:center"><input type="checkbox" name="job_status_a"></td><td style="text-align:center"><input type="checkbox" name="job_status_o"></td></tr>
+<tr><td>Publish to website</td><td style="text-align:center"><input type="checkbox" name="job_publish_j"></td><td style="text-align:center"><input type="checkbox" name="job_publish_a"></td><td style="text-align:center"><input type="checkbox" name="job_publish_o"></td></tr>
+<tr><td>Archive after sale</td><td style="text-align:center"><input type="checkbox" name="job_archive_j"></td><td style="text-align:center"><input type="checkbox" name="job_archive_a"></td><td style="text-align:center"><input type="checkbox" name="job_archive_o"></td></tr>
+</tbody>
+</table>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 2</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">SKU Control</h2>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 12px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">SKU range <strong>0000&ndash;0049</strong> is permanently assigned. New physical inventory begins at <strong>0050</strong> and increments upward. A SKU is never reused &mdash; including after an item is sold, archived, removed from the website, or no longer active.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-bottom:6px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="sku_approved"><span>Approved</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="sku_revise"><span>Revise:</span></label>
+<input type="text" name="sku_revise_text">
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-top:18px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Who assigns a SKU?</p><input type="text" name="sku_who"></div>
+<div>
+<p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">At what moment is it assigned?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="sku_when_acq"><span>At acquisition</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="sku_when_record"><span>When the inventory record is created</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="sku_when_other"><span>Other:</span></label><input type="text" name="sku_when_other_text"></div>
+</div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Where is &ldquo;next available SKU&rdquo; maintained?</p><input type="text" name="sku_where"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Who updates it when a new batch is added?</p><input type="text" name="sku_updater"></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 3</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Practical Intake Record</h2>
+
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Which information can you realistically capture at acquisition?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_date"><span>Date acquired</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_seller"><span>Seller/source name or listing link</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_price"><span>Acquisition price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_desc"><span>Original seller description</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_screens"><span>Original listing screenshots/photos</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_label"><span>Maker label, stamp, tag, or marking</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_cond"><span>Initial condition photos</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="in_source"><span>Approximate source type without private details</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;grid-column:span 2"><input type="checkbox" name="in_prov"><span>Known age/provenance claim (clearly marked as unverified until supported)</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="in_other"><span>Other:</span></label><input type="text" name="in_other_text"></div>
+</div>
+
+<p style="margin:20px 0 4px;font-size:13.5px;font-weight:600">What must be photographed immediately &mdash; before cleaning, repairs, styling, or moving the piece?</p>
+<textarea name="photo_immediate" rows="2"></textarea>
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">Who uploads intake photos, and where &mdash; on the same day?</p>
+<textarea name="photo_uploader" rows="2"></textarea>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 4</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Photos and Asset Format</h2>
+
+<p style="margin:0 0 8px;font-size:13.5px;font-weight:600">Confirm the final project-asset rule:</p>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">Source images may arrive in their original format. Before an asset enters the approved project library, website, Marketplace export set, or marketing-asset system, save the final project asset as a <strong>PNG</strong>.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="png_approved"><span>Approved</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="png_revise"><span>Revise:</span></label>
+<input type="text" name="png_revise_text">
+</div>
+
+<p style="margin:22px 0 6px;font-size:13.5px;font-weight:600">Confirm filename rule:</p>
+<p style="margin:0 0 6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;letter-spacing:.02em;color:#9C4A20">{slug}-{tag}-{number}.png</p>
+<table>
+<thead><tr><th style="width:26%">Part</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td>Item slug</td><td>Lowercase kebab-case nickname; otherwise a short descriptive slug</td></tr>
+<tr><td>Product-photo tag</td><td>4-digit SKU</td></tr>
+<tr><td>Marketing-asset tag</td><td>Short tag: insta-post, website-banner, flyer, holiday2026</td></tr>
+<tr><td>Number</td><td>Begins at 1, increments per slug + tag pair</td></tr>
+</tbody>
+</table>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-top:8px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="fname_approved"><span>Approved</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="fname_revise"><span>Revise:</span></label>
+<input type="text" name="fname_revise_text">
+</div>
+
+<p style="margin:22px 0 6px;font-size:13.5px;font-weight:600">Minimum photos required before listing:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="min_front"><span>Overall front</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="min_side"><span>Overall side/back</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="min_texture"><span>Material/texture detail</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="min_wear"><span>Wear, repair, or condition detail</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="min_meas"><span>Measurements</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="min_staged"><span>Staged/context image</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="min_other"><span>Other:</span></label><input type="text" name="min_other_text"></div>
+</div>
+
+<p style="margin:20px 0 4px;font-size:13.5px;font-weight:600">Special photo requirements for large, fragile, upholstered, glass, outdoor, or woven pieces?</p>
+<textarea name="special_photos" rows="2"></textarea>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 5</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Incomplete-Record Rule</h2>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">An incomplete item remains <strong>Acquired</strong> or <strong>In Prep</strong>. It may not become <strong>Available</strong> or be promoted as available.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-bottom:14px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="incomplete_approved"><span>Approved</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="incomplete_revise"><span>Revise:</span></label>
+<input type="text" name="incomplete_revise_text">
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;break-inside:avoid">
+<div style="border:2px solid #5C7367;border-radius:14px;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5C7367">Acquired / In Prep</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5">Incomplete record; not listable</p>
+</div>
+<div style="border:2px solid #7D8347;border-radius:14px;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Available</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5">Complete record with photos and SKU</p>
+</div>
+</div>
+<p style="margin:20px 0 4px;font-size:13.5px;font-weight:600">Which details are usually hardest to capture &mdash; and what would make collection easier?</p>
+<textarea name="hardest" rows="3"></textarea>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#F7F0DC;padding:18px 20px;margin:30px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 6px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Final principle</p>
+<p style="margin:0 0 8px;font-family:Mamba,Poppins,sans-serif;font-size:22px;line-height:1.2">When in doubt, leave it blank.</p>
+<p style="margin:0 0 12px;font-size:13px;line-height:1.55">An unknown field should be left blank, marked unknown, or kept internal. It should never be filled with a guess.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+<div><p style="margin:0 0 3px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Blank</p><p style="margin:0;font-size:12px;line-height:1.5">Leave the field empty until the correct information is confirmed.</p></div>
+<div><p style="margin:0 0 3px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Unknown</p><p style="margin:0;font-size:12px;line-height:1.5">Mark it explicitly so everyone knows it still needs verification.</p></div>
+<div><p style="margin:0 0 3px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Internal</p><p style="margin:0;font-size:12px;line-height:1.5">Keep sensitive or unverified details out of public-facing records.</p></div>
+</div>
+</div>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:18px 20px;margin:24px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 3px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Final step</p>
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:21px;margin:0 0 12px">Signature of Approval</h3>
+<p style="margin:0 0 16px;font-size:12.5px;line-height:1.55;color:#3B2F1E">By signing below, Jennyfer approves the answers recorded in this questionnaire as the operating standard for Atomic Finds ATX until revised in writing.</p>
+<div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr;gap:10px 22px">
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Signature</p><input type="text" name="sig_signature" style="font-family:Pacifico,cursive;font-size:17px;border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Printed name</p><input type="text" name="sig_name" value="Jennyfer" style="border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Date (YYYY-MM-DD)</p><input type="date" name="sig_date" style="border-bottom-color:#241D13"></div>
+</div>
+</div>
+
+<div data-noprint style="margin-top:20px;border:2px dashed #7D8347;border-radius:14px;background:#F7F0DC;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+<div style="flex:1;min-width:240px">
+<p style="margin:0 0 4px;font-family:Mamba,Poppins,sans-serif;font-size:17px">Send it back</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Submit saves a filled PDF of this questionnaire, then opens an email draft to <a href="mailto:ac@digitalallies.net">ac@digitalallies.net</a>. Attach the PDF you just saved and hit send &mdash; no need to save and resend the file separately.</p>
+</div>
+<button type="button" onClick="{{ submit }}" style="flex:none;font-family:Poppins,sans-serif;font-size:13px;font-weight:600;background:#C1602C;color:#FBF6E8;border:2px solid #241D13;border-radius:999px;padding:11px 22px;cursor:pointer;box-shadow:0 3px 0 #241D13" style-hover="background:#9C4A20;transform:translateY(-1px)">Save PDF &amp; draft email</button>
+</div>
+<p data-noprint style="margin:8px 0 0;font-size:12px;color:#5F6836;min-height:16px">{{ status }}</p>
+
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;recipientEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ac@digitalallies.net&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Submit&quot;}}">
+const KEY = 'af-doc-inventory-sku-photo';
+const TITLE = 'Inventory, SKU & Photo Intake';
+
+class Component extends DCLogic {
+  state = { status: '' };
+
+  componentDidMount() {
+    setTimeout(() => this.restore(), 60);
+  }
+
+  fields() {
+    return Array.from(document.querySelectorAll('[name]'));
+  }
+
+  restore() {
+    let data;
+    try { data = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return; }
+    this.fields().forEach(el => {
+      if (!(el.name in data)) return;
+      if (el.type === 'checkbox') el.checked = !!data[el.name];
+      else el.value = data[el.name];
+    });
+  }
+
+  renderVals() {
+    return {
+      status: this.state.status,
+      onEdit: () => {
+        const data = {};
+        this.fields().forEach(el => { data[el.name] = el.type === 'checkbox' ? el.checked : el.value; });
+        try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+      },
+      submit: () => {
+        this.setState({ status: 'Saving PDF — choose "Save as PDF" as the destination…' });
+        const get = n => { const el = document.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
+        const sig = get('sig_signature') || 'Jennyfer';
+        const date = get('sig_date') || '';
+        const subject = 'Completed questionnaire — ' + TITLE + ' (Atomic Finds ATX)';
+        const body = [
+          'Hi Anthony,',
+          '',
+          'My completed "' + TITLE + '" questionnaire is attached as a PDF.',
+          '',
+          'Signed: ' + sig,
+          'Date: ' + date,
+          '',
+          '— Jennyfer, Atomic Finds ATX',
+          'atomicfindsatx@gmail.com',
+          '',
+          '(Attach the PDF you just saved before sending.)'
+        ].join('\n');
+        const url = 'mailto:' + (this.props.recipientEmail || 'ac@digitalallies.net') + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        try { window.print(); } catch (e) {}
+        setTimeout(() => {
+          const w = window.open(url, '_blank');
+          if (!w) { try { window.top.location.href = url; } catch (e) { window.location.href = url; } }
+          this.setState({ status: 'Email draft opened for ac@digitalallies.net — attach the PDF you just saved, then send.' });
+        }, 1200);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

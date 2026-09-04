@@ -1,0 +1,12 @@
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;
+--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;
+
+--radius-sm:6px;--radius-md:14px;--radius-lg:24px;--radius-pill:999px;
+--radius-stamp:50%;
+
+--shadow-card:0 6px 0 var(--ink-900);
+--shadow-card-soft:0 4px 14px rgba(36,29,19,0.16);
+--shadow-lift:0 10px 24px rgba(36,29,19,0.22);
+--border-w:2px;--border-w-thick:3px;
+}

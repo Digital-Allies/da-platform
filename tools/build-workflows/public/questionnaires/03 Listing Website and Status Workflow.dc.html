@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/colors.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/typography.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap">
+<script src="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/_ds_bundle.js"></script>
+<script src="doc-page.js"></script>
+<style>
+@font-face{font-family:"Mamba";src:url("assets/fonts/Mamba.otf") format("opentype");font-display:swap}
+doc-page:not(:defined){visibility:hidden}
+body{margin:0;font-family:"Poppins",sans-serif;color:#241D13;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:#9C4A20;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#C1602C}
+input,textarea,button,select{font:inherit;color:inherit}
+input[type=text],input[type=date],textarea{width:100%;box-sizing:border-box;background:transparent;border:0;border-bottom:1.5px dashed #A6AD73;padding:4px 2px;font-size:13px;outline:none;font-family:"Poppins",sans-serif}
+input[type=text]:focus,input[type=date]:focus,textarea:focus{border-bottom-color:#C1602C;background:#F7F0DC}
+textarea{border:1.5px dashed #A6AD73;border-radius:8px;padding:8px;resize:vertical;line-height:1.6}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:15px;height:15px;min-width:15px;border:2px solid #241D13;border-radius:3px;background:#FBF6E8;margin:2px 0 0;cursor:pointer;print-color-adjust:exact}
+input[type=checkbox]:checked{background:#C1602C;box-shadow:inset 0 0 0 2px #FBF6E8}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #C9BE9C;padding:6px 9px;text-align:left;font-size:12.5px;vertical-align:top;line-height:1.45}
+th{background:#EFE4C4;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;print-color-adjust:exact}
+@media print{[data-noprint]{display:none!important}}
+</style>
+</helmet>
+<doc-page margin="0.7in" style="background:#FBF6E8">
+<div slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1.5px solid #C9BE9C;padding-top:7px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#5C7367">
+<span style="display:flex;align-items:center;gap:7px"><img src="assets/af-mark.png" alt="Atomic Finds ATX" style="width:17px;height:17px;display:block"><span style="font-weight:600">Atomic Finds ATX</span></span>
+<span>Listing, Website &amp; Status Workflow &middot; DRAFT &middot; Finish by 2026-09-16</span>
+</div>
+
+<div onInput="{{ onEdit }}" onChange="{{ onEdit }}">
+
+<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:6px">
+<img src="assets/af-mark.png" alt="" style="width:56px;height:56px;display:block;flex:none">
+<div style="padding-top:4px">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Atomic Finds ATX &middot; Owner Questionnaire 3 of 4</p>
+<h1 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:34px;line-height:1.08;margin:6px 0 8px;max-width:16ch">Listing, Website &amp; Status Workflow</h1>
+<p style="margin:0;font-size:12.5px;font-weight:600;color:#3B2F1E">Status: DRAFT &nbsp;&middot;&nbsp; Suggested finish-by: 2026-09-16</p>
+</div>
+</div>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:14px 16px;margin:16px 0 4px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55"><strong>Audience:</strong> Jennyfer, owner of Atomic Finds ATX</p>
+<p style="margin:0 0 8px;font-size:13.5px;line-height:1.55;font-weight:600">An item is shown publicly only when its record is accurate, its status is current, and a buyer has one verified next step.</p>
+<p style="margin:0;font-size:12.5px;line-height:1.55;color:#3B2F1E">This questionnaire defines the safe path from intake to live listing, website display, pending status, and sold/archive handling. Review each section, check your answers, and return by the date above.</p>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:30px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 1</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Status Vocabulary</h2>
+<p style="margin:0 0 4px;font-size:13px;line-height:1.55">These terms must remain exactly as written for consistency across your inventory, website, and Marketplace. Please review and confirm or note revisions below.</p>
+<table>
+<thead><tr><th style="width:26%">Status</th><th>Definition</th></tr></thead>
+<tbody>
+<tr><td><strong>Acquired</strong></td><td>Internal only; not ready for public promotion.</td></tr>
+<tr><td><strong>In Prep</strong></td><td>Being cleaned, assessed, repaired, or staged.</td></tr>
+<tr><td><strong>Ready to List</strong></td><td>Record and photo set complete; not live yet.</td></tr>
+<tr><td><strong>Available</strong></td><td>Owner-approved and has a verified buyer path: either a current item-specific Marketplace URL or a tested product-specific inquiry route.</td></tr>
+<tr><td><strong>Pending</strong></td><td>Buyer, hold, or deposit process in progress; no immediate-purchase invitation.</td></tr>
+<tr><td><strong>Adopted</strong></td><td>Confirmed sold; remove price and purchase CTA.</td></tr>
+<tr><td><strong>Archived</strong></td><td>Not for sale and not necessarily sold; may be withdrawn, retained, duplicate, or a portfolio/story record.</td></tr>
+<tr><td><strong>Needs Verification</strong></td><td>Facts, ownership, or source evidence are unresolved.</td></tr>
+<tr><td><strong>HOLD</strong></td><td>Blocked pending owner decision or missing source material.</td></tr>
+</tbody>
+</table>
+
+<p style="margin:16px 0 6px;font-size:13.5px;font-weight:600">Vocabulary approval:</p>
+<div style="display:flex;gap:28px;margin-bottom:10px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="vocab_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="vocab_revise"><span>Revise (please note changes below)</span></label>
+</div>
+<p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Notes</p>
+<textarea name="vocab_notes" rows="2"></textarea>
+
+<p style="margin:20px 0 6px;font-size:13.5px;font-weight:600">Timing question: How quickly must an item change from Available to Pending or Adopted once you know its status has changed?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="timing_same"><span>Same day</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="timing_24"><span>Within 24 hours</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="timing_2bd"><span>Within 2 business days</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="timing_other"><span>Other:</span></label><input type="text" name="timing_other_text"></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 2</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Readiness &amp; Listing Sequence</h2>
+<p style="margin:0 0 12px;font-size:13px;line-height:1.55">Please confirm this is the order you want to follow from intake to live listing:</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:10px;break-inside:avoid">
+<div style="display:flex;gap:14px;border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<span style="flex:none;width:26px;height:26px;border-radius:999px;background:#C1602C;color:#FBF6E8;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;print-color-adjust:exact">1</span>
+<div><p style="margin:0 0 2px;font-size:13.5px;font-weight:600">Intake &amp; Record</p><p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Assign SKU &middot; Create inventory record &middot; Capture source/intake evidence</p></div>
+</div>
+<div style="display:flex;gap:14px;border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<span style="flex:none;width:26px;height:26px;border-radius:999px;background:#C1602C;color:#FBF6E8;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;print-color-adjust:exact">2</span>
+<div><p style="margin:0 0 2px;font-size:13.5px;font-weight:600">Prepare &amp; Photograph</p><p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Research &middot; Clean/repair &middot; Photograph &amp; save approved PNG assets &middot; Measure</p></div>
+</div>
+<div style="display:flex;gap:14px;border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<span style="flex:none;width:26px;height:26px;border-radius:999px;background:#C1602C;color:#FBF6E8;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;print-color-adjust:exact">3</span>
+<div><p style="margin:0 0 2px;font-size:13.5px;font-weight:600">Write &amp; Approve</p><p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Write listing draft from verified facts &middot; You approve facts, condition, price, and policy language</p></div>
+</div>
+<div style="display:flex;gap:14px;border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<span style="flex:none;width:26px;height:26px;border-radius:999px;background:#C1602C;color:#FBF6E8;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;print-color-adjust:exact">4</span>
+<div><p style="margin:0 0 2px;font-size:13.5px;font-weight:600">Publish &amp; Promote</p><p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Publish Marketplace listing &middot; Save exact URL to record &middot; Activate website item or inquiry path &middot; Instagram content if appropriate</p></div>
+</div>
+</div>
+<div style="display:flex;gap:28px;margin:14px 0 10px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="seq_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="seq_revise"><span>Revise (please note changes below)</span></label>
+</div>
+<textarea name="seq_notes" rows="2"></textarea>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 3</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Minimum Requirements for &ldquo;Available&rdquo;</h2>
+<p style="margin:0 0 12px;font-size:13px;line-height:1.55"><strong>Rule:</strong> An item may only carry Available status when all of the following are confirmed:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;break-inside:avoid">
+<div>
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Identity</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_sku"><span>SKU assigned</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_name"><span>Public name or descriptive title</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_cat"><span>Category</span></label>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Provenance</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_source"><span>Source &amp; date acquired</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_mat"><span>Materials when stated</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_dim"><span>Dimensions</span></label>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Condition</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_cond"><span>Accurate condition notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_wear"><span>Wear notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_photos"><span>Current approved photos</span></label>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Approval &amp; Path</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_price"><span>Price confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_approval"><span>Owner approval on record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="av_route"><span>One verified conversion route</span></label>
+</div>
+</div>
+<div style="display:flex;gap:28px;margin:14px 0 0">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="av_rule_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="av_rule_revise"><span>Revise (please note changes below)</span></label>
+</div>
+
+<p style="margin:20px 0 6px;font-size:13.5px;font-weight:600">Marketplace URL question: Does every Available website item need an item-specific Marketplace URL?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:6px"><input type="checkbox" name="mkt_yes"><span>Yes &mdash; hide &ldquo;View on Marketplace&rdquo; CTA until it exists</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="mkt_no"><span>No &mdash; a product-specific inquiry can be the active path</span></label>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:18px 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55"><strong>General link rule:</strong> A general Marketplace profile link may not appear as &ldquo;View on Marketplace&rdquo; for an individual item.</p>
+<div style="display:flex;gap:28px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="gen_confirmed"><span>Confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="gen_revise"><span>Revise</span></label>
+</div>
+</div>
+
+<p style="margin:18px 0 4px;font-size:13.5px;font-weight:600">Who verifies a Marketplace item link is active before website publication?</p>
+<input type="text" name="verify_who">
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">Where is that verification recorded?</p>
+<input type="text" name="verify_where">
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 4</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 6px;break-after:avoid">Website Behavior by Status</h2>
+<p style="margin:0 0 4px;font-size:13px;line-height:1.55">Please confirm how each status should appear on your website. Check each row to approve or note a revision.</p>
+<table>
+<thead><tr><th style="width:22%">Status</th><th>Website Behavior</th><th style="width:12%">Confirmed</th><th style="width:10%">Revise</th></tr></thead>
+<tbody>
+<tr><td><strong>Available</strong></td><td>Show &ldquo;Ask About This Find.&rdquo; Show &ldquo;View on Marketplace&rdquo; only with an active, verified item-specific Marketplace URL.</td><td style="text-align:center"><input type="checkbox" name="wb_av_c"></td><td style="text-align:center"><input type="checkbox" name="wb_av_r"></td></tr>
+<tr><td><strong>Pending</strong></td><td>Show &ldquo;Currently Pending.&rdquo; Remove immediate-purchase invitation.</td><td style="text-align:center"><input type="checkbox" name="wb_pd_c"></td><td style="text-align:center"><input type="checkbox" name="wb_pd_r"></td></tr>
+<tr><td><strong>Adopted / Archived</strong></td><td>Remove price and purchase CTA. Use &ldquo;Adopted&rdquo; or &ldquo;Archive&rdquo; label. &ldquo;See Similar Finds&rdquo; may appear.</td><td style="text-align:center"><input type="checkbox" name="wb_ad_c"></td><td style="text-align:center"><input type="checkbox" name="wb_ad_r"></td></tr>
+<tr><td><strong>Acquired, In Prep, Ready to List, Needs Verification, HOLD</strong></td><td>Do not present publicly as available.</td><td style="text-align:center"><input type="checkbox" name="wb_int_c"></td><td style="text-align:center"><input type="checkbox" name="wb_int_r"></td></tr>
+</tbody>
+</table>
+<p style="margin:12px 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Revision notes</p>
+<textarea name="wb_notes" rows="2"></textarea>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 5</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Sold &amp; Archive Process</h2>
+<p style="margin:0 0 10px;font-size:13.5px;font-weight:600">Sequence when an item sells &mdash; confirm or revise:</p>
+<div style="display:grid;grid-template-columns:1fr;gap:8px;break-inside:avoid">
+<div style="display:flex;gap:12px;align-items:baseline;border-bottom:1.5px dashed #C9BE9C;padding-bottom:7px"><span style="flex:none;font-size:11px;font-weight:700;color:#C1602C;letter-spacing:.08em">01</span><p style="margin:0;font-size:13px;line-height:1.5"><strong>Mark Marketplace sold</strong> &mdash; mark the Marketplace item sold or remove it.</p></div>
+<div style="display:flex;gap:12px;align-items:baseline;border-bottom:1.5px dashed #C9BE9C;padding-bottom:7px"><span style="flex:none;font-size:11px;font-weight:700;color:#C1602C;letter-spacing:.08em">02</span><p style="margin:0;font-size:13px;line-height:1.5"><strong>Update inventory</strong> &mdash; change inventory status to Adopted. Record date sold.</p></div>
+<div style="display:flex;gap:12px;align-items:baseline;border-bottom:1.5px dashed #C9BE9C;padding-bottom:7px"><span style="flex:none;font-size:11px;font-weight:700;color:#C1602C;letter-spacing:.08em">03</span><p style="margin:0;font-size:13px;line-height:1.5"><strong>Update website</strong> &mdash; remove website price and buying CTA.</p></div>
+<div style="display:flex;gap:12px;align-items:baseline;border-bottom:1.5px dashed #C9BE9C;padding-bottom:7px"><span style="flex:none;font-size:11px;font-weight:700;color:#C1602C;letter-spacing:.08em">04</span><p style="margin:0;font-size:13px;line-height:1.5"><strong>Archive if approved</strong> &mdash; move to Adopted Finds or Archive only if approved.</p></div>
+<div style="display:flex;gap:12px;align-items:baseline"><span style="flex:none;font-size:11px;font-weight:700;color:#C1602C;letter-spacing:.08em">05</span><p style="margin:0;font-size:13px;line-height:1.5"><strong>Social update</strong> &mdash; update Instagram/highlights only if appropriate.</p></div>
+</div>
+<div style="display:flex;gap:28px;margin:14px 0 10px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="sold_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="sold_revise"><span>Revise (please note changes below)</span></label>
+</div>
+<textarea name="sold_notes" rows="2"></textarea>
+
+<p style="margin:20px 0 6px;font-size:13.5px;font-weight:600">What may an Adopted item retain publicly? (select all that apply)</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="ret_name"><span>Public name and photos</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="ret_mat"><span>Verified materials/era only</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="ret_story"><span>Condition/story/preparation notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="ret_similar"><span>&ldquo;See Similar Finds&rdquo;</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="ret_other"><span>Other:</span></label><input type="text" name="ret_other_text"></div>
+</div>
+<p style="margin:10px 0 0;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">Note: Sale price is not offered as a default public option.</p>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:18px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55"><strong>Exception rule:</strong> If the Marketplace listing, price, photos, or availability conflicts with the inventory record or website, immediately change the website item to Pending, Needs Verification, or hidden until it is reconciled. Do not leave it shown as Available.</p>
+<div style="display:flex;gap:28px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="exc_confirmed"><span>Confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="exc_revise"><span>Revise</span></label>
+</div>
+</div>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#F7F0DC;padding:18px 20px;margin:30px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 6px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Closing principle</p>
+<p style="margin:0 0 10px;font-family:Mamba,Poppins,sans-serif;font-size:22px;line-height:1.2">The website is a curated showroom, not a promise of a complete real-time catalog.</p>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Thank you for taking the time to define these workflows. Clear status and process protect both your reputation and your buyers' trust.</p>
+<p style="margin:0;font-size:12.5px;line-height:1.55;color:#3B2F1E">Please return this completed questionnaire by 2026-09-16. Once returned, these decisions become the operating standard for Atomic Finds ATX listings, website display, and inventory management.</p>
+</div>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:18px 20px;margin:24px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 3px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Final step</p>
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:21px;margin:0 0 12px">Signature of Approval</h3>
+<p style="margin:0 0 16px;font-size:12.5px;line-height:1.55;color:#3B2F1E">By signing below, Jennyfer approves the answers recorded in this questionnaire as the operating standard for Atomic Finds ATX until revised in writing.</p>
+<div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr;gap:10px 22px">
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Signature</p><input type="text" name="sig_signature" style="font-family:Pacifico,cursive;font-size:17px;border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Printed name</p><input type="text" name="sig_name" value="Jennyfer" style="border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Date (YYYY-MM-DD)</p><input type="date" name="sig_date" style="border-bottom-color:#241D13"></div>
+</div>
+</div>
+
+<div data-noprint style="margin-top:20px;border:2px dashed #7D8347;border-radius:14px;background:#F7F0DC;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+<div style="flex:1;min-width:240px">
+<p style="margin:0 0 4px;font-family:Mamba,Poppins,sans-serif;font-size:17px">Send it back</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Submit saves a filled PDF of this questionnaire, then opens an email draft to <a href="mailto:ac@digitalallies.net">ac@digitalallies.net</a>. Attach the PDF you just saved and hit send &mdash; no need to save and resend the file separately.</p>
+</div>
+<button type="button" onClick="{{ submit }}" style="flex:none;font-family:Poppins,sans-serif;font-size:13px;font-weight:600;background:#C1602C;color:#FBF6E8;border:2px solid #241D13;border-radius:999px;padding:11px 22px;cursor:pointer;box-shadow:0 3px 0 #241D13" style-hover="background:#9C4A20;transform:translateY(-1px)">Save PDF &amp; draft email</button>
+</div>
+<p data-noprint style="margin:8px 0 0;font-size:12px;color:#5F6836;min-height:16px">{{ status }}</p>
+
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;recipientEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ac@digitalallies.net&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Submit&quot;}}">
+const KEY = 'af-doc-listing-website-status';
+const TITLE = 'Listing, Website & Status Workflow';
+
+class Component extends DCLogic {
+  state = { status: '' };
+
+  componentDidMount() {
+    setTimeout(() => this.restore(), 60);
+  }
+
+  fields() {
+    return Array.from(document.querySelectorAll('[name]'));
+  }
+
+  restore() {
+    let data;
+    try { data = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return; }
+    this.fields().forEach(el => {
+      if (!(el.name in data)) return;
+      if (el.type === 'checkbox') el.checked = !!data[el.name];
+      else el.value = data[el.name];
+    });
+  }
+
+  renderVals() {
+    return {
+      status: this.state.status,
+      onEdit: () => {
+        const data = {};
+        this.fields().forEach(el => { data[el.name] = el.type === 'checkbox' ? el.checked : el.value; });
+        try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+      },
+      submit: () => {
+        this.setState({ status: 'Saving PDF — choose "Save as PDF" as the destination…' });
+        const get = n => { const el = document.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
+        const sig = get('sig_signature') || 'Jennyfer';
+        const date = get('sig_date') || '';
+        const subject = 'Completed questionnaire — ' + TITLE + ' (Atomic Finds ATX)';
+        const body = [
+          'Hi Anthony,',
+          '',
+          'My completed "' + TITLE + '" questionnaire is attached as a PDF.',
+          '',
+          'Signed: ' + sig,
+          'Date: ' + date,
+          '',
+          '— Jennyfer, Atomic Finds ATX',
+          'atomicfindsatx@gmail.com',
+          '',
+          '(Attach the PDF you just saved before sending.)'
+        ].join('\n');
+        const url = 'mailto:' + (this.props.recipientEmail || 'ac@digitalallies.net') + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        try { window.print(); } catch (e) {}
+        setTimeout(() => {
+          const w = window.open(url, '_blank');
+          if (!w) { try { window.top.location.href = url; } catch (e) { window.location.href = url; } }
+          this.setState({ status: 'Email draft opened for ac@digitalallies.net — attach the PDF you just saved, then send.' });
+        }, 1200);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

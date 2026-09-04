@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/colors.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/typography.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap">
+<script src="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/_ds_bundle.js"></script>
+<script src="doc-page.js"></script>
+<style>
+@font-face{font-family:"Mamba";src:url("assets/fonts/Mamba.otf") format("opentype");font-display:swap}
+doc-page:not(:defined){visibility:hidden}
+body{margin:0;font-family:"Poppins",sans-serif;color:#241D13;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:#9C4A20;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#C1602C}
+input,textarea,button,select{font:inherit;color:inherit}
+input[type=text],input[type=date],textarea{width:100%;box-sizing:border-box;background:transparent;border:0;border-bottom:1.5px dashed #A6AD73;padding:4px 2px;font-size:13px;outline:none;font-family:"Poppins",sans-serif}
+input[type=text]:focus,input[type=date]:focus,textarea:focus{border-bottom-color:#C1602C;background:#F7F0DC}
+textarea{border:1.5px dashed #A6AD73;border-radius:8px;padding:8px;resize:vertical;line-height:1.6}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:15px;height:15px;min-width:15px;border:2px solid #241D13;border-radius:3px;background:#FBF6E8;margin:2px 0 0;cursor:pointer;print-color-adjust:exact}
+input[type=checkbox]:checked{background:#C1602C;box-shadow:inset 0 0 0 2px #FBF6E8}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #C9BE9C;padding:6px 9px;text-align:left;font-size:12.5px;vertical-align:top;line-height:1.45}
+th{background:#EFE4C4;font-weight:600;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;print-color-adjust:exact}
+@media print{[data-noprint]{display:none!important}}
+</style>
+</helmet>
+<doc-page margin="0.7in" style="background:#FBF6E8">
+<div slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1.5px solid #C9BE9C;padding-top:7px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#5C7367">
+<span style="display:flex;align-items:center;gap:7px"><img src="assets/af-mark.png" alt="Atomic Finds ATX" style="width:17px;height:17px;display:block"><span style="font-weight:600">Atomic Finds ATX</span></span>
+<span>Operating Model &amp; Public Boundaries &middot; DRAFT &middot; Finish by 2026-09-08</span>
+</div>
+
+<div onInput="{{ onEdit }}" onChange="{{ onEdit }}">
+
+<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:6px">
+<img src="assets/af-mark.png" alt="" style="width:56px;height:56px;display:block;flex:none">
+<div style="padding-top:4px">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Atomic Finds ATX &middot; Owner Questionnaire 1 of 4</p>
+<h1 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:34px;line-height:1.08;margin:6px 0 8px;max-width:15ch">Operating Model &amp; Public Boundaries</h1>
+<p style="margin:0;font-size:12.5px;font-weight:600;color:#3B2F1E">Status: DRAFT &nbsp;&middot;&nbsp; Suggested finish-by: 2026-09-08</p>
+</div>
+</div>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:14px 16px;margin:16px 0 4px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55"><strong>Audience:</strong> Jennyfer, owner of Atomic Finds ATX. <strong>Purpose:</strong> Confirm only the business decisions needed to keep the Phase 1 website accurate and usable.</p>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Atomic Finds ATX's Phase 1 website is a curated showroom and selected-inventory preview. Facebook Marketplace remains the current live-listing and sales channel. The website may direct a buyer to an exact active Marketplace listing or a product-specific inquiry path.</p>
+<p style="margin:0;font-size:12.5px;line-height:1.55;color:#3B2F1E;font-style:italic">Write in warm, clear, plain English. No technical CMS, database, AI, design-system, or implementation questions are included here &mdash; just the business decisions that matter.</p>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:30px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 1</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Confirm the Customer Flow</h2>
+
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Confirm this default flow: <strong>Website &rarr; item-specific Marketplace listing or product-specific inquiry &rarr; Jennyfer confirms availability &rarr; Austin pickup by arrangement.</strong></p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px;margin:10px 0">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="flow_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="flow_revise"><span>Revise</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="flow_different"><span>Different preferred flow</span></label>
+</div>
+<p style="margin:12px 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">If revising or different, please describe your preferred flow</p>
+<textarea name="flow_notes" rows="3"></textarea>
+
+<p style="margin:22px 0 6px;font-size:13.5px;font-weight:600">For an Available item, choose the preferred next step</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="next_mkt"><span>Exact, verified Facebook Marketplace listing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="next_inquiry"><span>Product-specific website inquiry</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="next_both_mkt"><span>Both, Marketplace first</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="next_both_inq"><span>Both, inquiry first</span></label>
+</div>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-top:10px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="next_other"><span>Other:</span></label>
+<input type="text" name="next_other_text">
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:28px 0 8px;break-after:avoid">Status &amp; Update Responsibilities</h3>
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">Who is responsible for changing an item's price, Available, Pending, Adopted, or removed status?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Primary owner</p><input type="text" name="status_primary"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Backup owner, if any</p><input type="text" name="status_backup"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Where should that update be recorded first?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="rec_inv"><span>Inventory record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="rec_cms"><span>CMS</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="rec_msg"><span>Message to Anthony / Digital Allies</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="rec_other"><span>Other:</span></label><input type="text" name="rec_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">When an item sells or becomes pending, what is the realistic update expectation?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="time_same"><span>Same day</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="time_24"><span>Within 24 hours</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="time_2bd"><span>Within 2 business days</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="time_other"><span>Other:</span></label><input type="text" name="time_other_text"></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 2</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Public Pickup and Policy Boundaries</h2>
+
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">Confirm this approved pickup language:</p>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 18px;margin:0 0 12px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-family:Pacifico,cursive;font-size:17px;line-height:1.5;color:#3B2F1E">&ldquo;Austin pickup by arrangement. Message Jennyfer to confirm availability and coordinate pickup details.&rdquo;</p>
+</div>
+<div style="display:flex;gap:28px;margin:0 0 10px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="pickup_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="pickup_revise"><span>Revise</span></label>
+</div>
+<p style="margin:12px 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Revised language</p>
+<textarea name="pickup_revised" rows="2"></textarea>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:28px 0 8px;break-after:avoid">Confirm the website should not state or imply any of the following</h3>
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">Unless Jennyfer supplies a written approved policy, the website should not state or imply any of the following. Please confirm or add a boundary:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_delivery"><span>Delivery or white-glove delivery</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_address"><span>Pickup address or precise pickup location</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_hours"><span>Public hours</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_money"><span>Deposits, holds, payment plans, refunds, returns, or exchanges</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_phone"><span>Phone number or alternate contact method</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_movers"><span>Mover recommendations or moving-service promises</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_restored"><span>Blanket &ldquo;fully restored&rdquo; or &ldquo;professionally restored&rdquo; claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="b_reviews"><span>Ratings, testimonials, or &ldquo;Verified Buyer&rdquo; claims without source evidence</span></label>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-top:14px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="b_confirmed"><span>Confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="b_add"><span>Add a boundary:</span></label>
+<input type="text" name="b_add_text">
+</div>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:14px 16px;margin:26px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 6px;font-family:Mamba,Poppins,sans-serif;font-size:17px">&ldquo;Is there anything Atomic Finds ATX should never say, imply, or promise publicly?&rdquo;</p>
+<p style="margin:0 0 10px;font-size:12.5px;line-height:1.55;color:#3B2F1E">Please use the space below to share anything that should be off-limits for the website &mdash; words, claims, promises, or implications you'd never want a customer to see.</p>
+<textarea name="never_say" rows="5" style="background:#FBF6E8"></textarea>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 3</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Public Contact and Website Readiness</h2>
+
+<p style="margin:0 0 8px;font-size:13.5px;font-weight:600">Is the product-specific inquiry form ready to route messages to a monitored destination?</p>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:6px"><input type="checkbox" name="form_yes"><span>Yes; destination:</span><input type="text" name="form_dest" style="flex:1"></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:6px"><input type="checkbox" name="form_testing"><span>Needs testing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="form_defer"><span>Not yet; hide/defer item inquiry CTA until ready</span></label>
+
+<p style="margin:20px 0 6px;font-size:13.5px;font-weight:600">Is the public email <a href="mailto:atomicfindsatx@gmail.com">atomicfindsatx@gmail.com</a> approved for public use?</p>
+<div style="display:flex;gap:28px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="email_yes"><span>Yes</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="email_no"><span>No</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="email_undecided"><span>Not decided</span></label>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 8px;break-after:avoid">Newsletter Readiness</h3>
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">Is the newsletter ready to publish with a real email connection, consent language, privacy-policy link, success/error states, a defined list, and a basic welcome/confirmation?</p>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="news_yes"><span>Yes</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="news_no"><span>No; use social-follow CTA instead</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="news_later"><span>Later</span></label>
+</div>
+<p style="margin:16px 0 0;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">Anything not decided will remain internal or neutral until confirmed. No customer-facing claim should be guessed.</p>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:18px 20px;margin:32px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 3px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Final step</p>
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:21px;margin:0 0 12px">Signature of Approval</h3>
+<p style="margin:0 0 16px;font-size:12.5px;line-height:1.55;color:#3B2F1E">By signing below, Jennyfer approves the answers recorded in this questionnaire as the operating standard for Atomic Finds ATX until revised in writing.</p>
+<div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr;gap:10px 22px">
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Signature</p><input type="text" name="sig_signature" style="font-family:Pacifico,cursive;font-size:17px;border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Printed name</p><input type="text" name="sig_name" value="Jennyfer" style="border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Date (YYYY-MM-DD)</p><input type="date" name="sig_date" style="border-bottom-color:#241D13"></div>
+</div>
+</div>
+
+<div data-noprint style="margin-top:20px;border:2px dashed #7D8347;border-radius:14px;background:#F7F0DC;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+<div style="flex:1;min-width:240px">
+<p style="margin:0 0 4px;font-family:Mamba,Poppins,sans-serif;font-size:17px">Send it back</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Submit saves a filled PDF of this questionnaire, then opens an email draft to <a href="mailto:ac@digitalallies.net">ac@digitalallies.net</a>. Attach the PDF you just saved and hit send &mdash; no need to save and resend the file separately.</p>
+</div>
+<button type="button" onClick="{{ submit }}" style="flex:none;font-family:Poppins,sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em;background:#C1602C;color:#FBF6E8;border:2px solid #241D13;border-radius:999px;padding:11px 22px;cursor:pointer;box-shadow:0 3px 0 #241D13" style-hover="background:#9C4A20;transform:translateY(-1px)">Save PDF &amp; draft email</button>
+</div>
+<p data-noprint style="margin:8px 0 0;font-size:12px;color:#5F6836;min-height:16px">{{ status }}</p>
+
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;recipientEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ac@digitalallies.net&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Submit&quot;}}">
+const KEY = 'af-doc-operating-model';
+const TITLE = 'Operating Model & Public Boundaries';
+
+class Component extends DCLogic {
+  state = { status: '' };
+
+  componentDidMount() {
+    setTimeout(() => this.restore(), 60);
+  }
+
+  fields() {
+    return Array.from(document.querySelectorAll('[name]'));
+  }
+
+  restore() {
+    let data;
+    try { data = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return; }
+    this.fields().forEach(el => {
+      if (!(el.name in data)) return;
+      if (el.type === 'checkbox') el.checked = !!data[el.name];
+      else el.value = data[el.name];
+    });
+  }
+
+  renderVals() {
+    return {
+      status: this.state.status,
+      onEdit: () => {
+        const data = {};
+        this.fields().forEach(el => { data[el.name] = el.type === 'checkbox' ? el.checked : el.value; });
+        try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+      },
+      submit: () => {
+        this.setState({ status: 'Saving PDF — choose "Save as PDF" as the destination…' });
+        const get = n => { const el = document.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
+        const sig = get('sig_signature') || 'Jennyfer';
+        const date = get('sig_date') || '';
+        const subject = 'Completed questionnaire — ' + TITLE + ' (Atomic Finds ATX)';
+        const body = [
+          'Hi Anthony,',
+          '',
+          'My completed "' + TITLE + '" questionnaire is attached as a PDF.',
+          '',
+          'Signed: ' + sig,
+          'Date: ' + date,
+          '',
+          '— Jennyfer, Atomic Finds ATX',
+          'atomicfindsatx@gmail.com',
+          '',
+          '(Attach the PDF you just saved before sending.)'
+        ].join('\n');
+        const url = 'mailto:' + (this.props.recipientEmail || 'ac@digitalallies.net') + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        try { window.print(); } catch (e) {}
+        setTimeout(() => {
+          const w = window.open(url, '_blank');
+          if (!w) { try { window.top.location.href = url; } catch (e) { window.location.href = url; } }
+          this.setState({ status: 'Email draft opened for ac@digitalallies.net — attach the PDF you just saved, then send.' });
+        }, 1200);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/cards/**",
+              "components/core/**",
+              "components/feedback/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Mamba|Pacifico|Poppins))/i]",
+        "message": "Font not provided by the design system. Available: Mamba, Pacifico, Poppins."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|variant|size|icon|onClick|disabled|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: children, variant, size, icon, onClick, disabled."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CuratorCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:name|role|bio|quote|stampSrc|key|ref|className|style|children)$/]",
+        "message": "<CuratorCard> doesn't accept that prop. Declared props: name, role, bio, quote, stampSrc."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='InspectionStamp'] > JSXAttribute > JSXIdentifier[name!=/^(?:inspector|label|passed|size|key|ref|className|style|children)$/]",
+        "message": "<InspectionStamp> doesn't accept that prop. Declared props: inspector, label, passed, size."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='InspectionStamp'] > JSXAttribute[name.name='inspector'] > Literal[value!=/^(?:Milo|Daisy|Malibu|Tatiana)$/]",
+        "message": "<InspectionStamp> inspector must be one of 'Milo' | 'Daisy' | 'Malibu' | 'Tatiana'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ProductCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:image|name|era|materials|price|status|curator|key|ref|className|style|children)$/]",
+        "message": "<ProductCard> doesn't accept that prop. Declared props: image, name, era, materials, price, status, curator."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ProductCard'] > JSXAttribute[name.name='status'] > Literal[value!=/^(?:available|sold)$/]",
+        "message": "<ProductCard> status must be one of 'available' | 'sold'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tag'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|tone|key|ref|className|style|children)$/]",
+        "message": "<Tag> doesn't accept that prop. Declared props: children, tone."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Tag'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:cream|mustard|avocado|orange)$/]",
+        "message": "<Tag> tone must be one of 'cream' | 'mustard' | 'avocado' | 'orange'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Button": {
+        "replaces": []
+      },
+      "CuratorCard": {
+        "replaces": []
+      },
+      "InspectionStamp": {
+        "replaces": []
+      },
+      "ProductCard": {
+        "replaces": []
+      },
+      "Tag": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent-mustard",
+      "--accent-pink",
+      "--avocado-300",
+      "--avocado-600",
+      "--avocado-700",
+      "--border-default",
+      "--border-soft",
+      "--border-w",
+      "--border-w-thick",
+      "--brand-primary",
+      "--brand-primary-hover",
+      "--brand-secondary",
+      "--brand-secondary-hover",
+      "--brand-tertiary",
+      "--burnt-orange-300",
+      "--burnt-orange-600",
+      "--burnt-orange-700",
+      "--cream-100",
+      "--cream-200",
+      "--cream-300",
+      "--cream-50",
+      "--font-body",
+      "--font-display",
+      "--font-script",
+      "--ink-700",
+      "--ink-900",
+      "--leading-normal",
+      "--leading-snug",
+      "--leading-tight",
+      "--mustard-300",
+      "--mustard-500",
+      "--mustard-600",
+      "--olive-teal-600",
+      "--olive-teal-700",
+      "--pink-accent-400",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-pill",
+      "--radius-sm",
+      "--radius-stamp",
+      "--shadow-card",
+      "--shadow-card-soft",
+      "--shadow-lift",
+      "--space-1",
+      "--space-10",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--surface-card",
+      "--surface-card-alt",
+      "--surface-inverse",
+      "--surface-page",
+      "--text-body-lg",
+      "--text-body-md",
+      "--text-body-sm",
+      "--text-display-lg",
+      "--text-display-md",
+      "--text-display-xl",
+      "--text-heading-lg",
+      "--text-heading-md",
+      "--text-inverse",
+      "--text-label",
+      "--text-muted",
+      "--text-primary",
+      "--text-script-lg",
+      "--text-script-md",
+      "--tracking-label",
+      "--tracking-wide"
+    ],
+    "tokenKinds": {
+      "--cream-50": "color",
+      "--cream-100": "color",
+      "--cream-200": "color",
+      "--cream-300": "color",
+      "--ink-900": "color",
+      "--ink-700": "color",
+      "--burnt-orange-600": "color",
+      "--burnt-orange-700": "color",
+      "--burnt-orange-300": "color",
+      "--avocado-600": "color",
+      "--avocado-700": "color",
+      "--avocado-300": "color",
+      "--olive-teal-600": "color",
+      "--olive-teal-700": "color",
+      "--mustard-500": "color",
+      "--mustard-600": "color",
+      "--mustard-300": "color",
+      "--pink-accent-400": "color",
+      "--surface-page": "color",
+      "--surface-card": "color",
+      "--surface-card-alt": "color",
+      "--surface-inverse": "color",
+      "--text-primary": "font",
+      "--text-inverse": "font",
+      "--text-muted": "font",
+      "--brand-primary": "color",
+      "--brand-primary-hover": "color",
+      "--brand-secondary": "color",
+      "--brand-secondary-hover": "color",
+      "--brand-tertiary": "color",
+      "--accent-mustard": "color",
+      "--accent-pink": "color",
+      "--border-default": "color",
+      "--border-soft": "color",
+      "--font-display": "font",
+      "--font-script": "font",
+      "--font-body": "font",
+      "--text-display-xl": "font",
+      "--text-display-lg": "font",
+      "--text-display-md": "font",
+      "--text-heading-lg": "font",
+      "--text-heading-md": "font",
+      "--text-script-lg": "font",
+      "--text-script-md": "font",
+      "--text-body-lg": "font",
+      "--text-body-md": "font",
+      "--text-body-sm": "font",
+      "--text-label": "font",
+      "--leading-tight": "font",
+      "--leading-snug": "font",
+      "--leading-normal": "font",
+      "--tracking-wide": "font",
+      "--tracking-label": "font",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--space-10": "spacing",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-pill": "radius",
+      "--radius-stamp": "radius",
+      "--shadow-card": "shadow",
+      "--shadow-card-soft": "shadow",
+      "--shadow-lift": "shadow",
+      "--border-w": "spacing",
+      "--border-w-thick": "spacing"
+    },
+    "fontFamilies": [
+      "Mamba",
+      "Pacifico",
+      "Poppins"
+    ]
+  }
+}

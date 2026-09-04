@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/colors.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/tokens/typography.css">
+<link rel="stylesheet" href="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap">
+<script src="_ds/atomic-finds-atx-design-system-01147caa-ff0c-4f04-8816-1080d1f20692/_ds_bundle.js"></script>
+<script src="doc-page.js"></script>
+<style>
+@font-face{font-family:"Mamba";src:url("assets/fonts/Mamba.otf") format("opentype");font-display:swap}
+doc-page:not(:defined){visibility:hidden}
+body{margin:0;font-family:"Poppins",sans-serif;color:#241D13;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+a{color:#9C4A20;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#C1602C}
+input,textarea,button,select{font:inherit;color:inherit}
+input[type=text],input[type=date],textarea{width:100%;box-sizing:border-box;background:transparent;border:0;border-bottom:1.5px dashed #A6AD73;padding:4px 2px;font-size:13px;outline:none;font-family:"Poppins",sans-serif}
+input[type=text]:focus,input[type=date]:focus,textarea:focus{border-bottom-color:#C1602C;background:#F7F0DC}
+textarea{border:1.5px dashed #A6AD73;border-radius:8px;padding:8px;resize:vertical;line-height:1.6}
+input[type=checkbox]{appearance:none;-webkit-appearance:none;width:15px;height:15px;min-width:15px;border:2px solid #241D13;border-radius:3px;background:#FBF6E8;margin:2px 0 0;cursor:pointer;print-color-adjust:exact}
+input[type=checkbox]:checked{background:#C1602C;box-shadow:inset 0 0 0 2px #FBF6E8}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #C9BE9C;padding:6px 9px;text-align:left;font-size:12px;vertical-align:top;line-height:1.45}
+th{background:#EFE4C4;font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;print-color-adjust:exact}
+@media print{[data-noprint]{display:none!important}}
+</style>
+</helmet>
+<doc-page margin="0.7in" style="background:#FBF6E8">
+<div slot="footer" style="display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1.5px solid #C9BE9C;padding-top:7px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#5C7367">
+<span style="display:flex;align-items:center;gap:7px"><img src="assets/af-mark.png" alt="Atomic Finds ATX" style="width:17px;height:17px;display:block"><span style="font-weight:600">Atomic Finds ATX</span></span>
+<span>Operations, Inventory &amp; AI Workflow Questionnaire &middot; DRAFT</span>
+</div>
+
+<div onInput="{{ onEdit }}" onChange="{{ onEdit }}">
+
+<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:6px">
+<img src="assets/af-mark.png" alt="" style="width:56px;height:56px;display:block;flex:none">
+<div style="padding-top:4px">
+<p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Atomic Finds ATX &middot; Master Working Document</p>
+<h1 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:33px;line-height:1.08;margin:6px 0 8px;max-width:20ch">Operations, Inventory &amp; AI Workflow Questionnaire</h1>
+<p style="margin:0;font-size:12.5px;font-weight:600;color:#3B2F1E">Status: DRAFT &nbsp;&middot;&nbsp; Primary use: Internal implementation and governance record</p>
+</div>
+</div>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:14px 16px;margin:16px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55"><strong>Purpose:</strong> This is the primary working questionnaire for setting up a repeatable, accurate Atomic Finds ATX operating system. It assumes the brand direction and Phase 1 website model are already established: a curated showroom and inquiry hub that bridges to Facebook Marketplace, rather than a full ecommerce store.</p>
+<p style="margin:0;font-size:13px;line-height:1.55"><strong>How to complete:</strong> Short answers are welcome. Check boxes where useful. If something is undecided, write <em>Not decided</em> &mdash; the workflow will keep that field internal or neutral until Jennyfer confirms it. Do not enter a guess for an item's history, maker, era, condition, price, dimensions, or availability.</p>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:24px 0 6px;break-after:avoid">Owner decision inputs</h3>
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">Owner decision inputs are collected through four shorter questionnaires. Use this master to consolidate confirmed answers, configure the CMS, create templates, and run the first real-item test batch.</p>
+<table>
+<thead><tr><th style="width:6%">#</th><th>Questionnaire</th><th style="width:24%">Suggested finish-by</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Operating Model &amp; Public Boundaries</td><td>2026-09-08</td></tr>
+<tr><td>2</td><td>Inventory, SKU &amp; Photo Intake</td><td>2026-09-12</td></tr>
+<tr><td>3</td><td>Listing, Website &amp; Status Workflow</td><td>2026-09-16</td></tr>
+<tr><td>4</td><td>AI, Permissions &amp; Working Handoff</td><td>2026-09-19</td></tr>
+</tbody>
+</table>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 10px;break-after:avoid">Platforms &amp; Tools</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://pilot.atomicfindsatx.store/design-system/" target="_blank" rel="noopener">Design System</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Reference for approved website components, content patterns, labels, and visual implementation</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://pilot.atomicfindsatx.store/" target="_blank" rel="noopener">Pilot Website</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Current Phase 1 showroom and Marketplace-bridge experience</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://github.com/Atomic-Finds-ATX/ds" target="_blank" rel="noopener">GitHub Repository</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Website source, design-system implementation, and change tracking</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://claude.ai/join/org#RIYJn4omA9Z04v1OZdtGIw" target="_blank" rel="noopener">Claude Tools</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Research, drafting, structured extraction, workflow assistance, and review &mdash; always with owner verification</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://www.canva.com/brand/join?token=KSZxirwRxdfl1fK8TDu3AA&amp;invitationDestinationType=group" target="_blank" rel="noopener">Canva Tools</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Brand-aligned marketing graphics and editable templates</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://cms.digitalallies.net/admin/login" target="_blank" rel="noopener">CMS Suite</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Website content, product records, and publishing workflow</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://www.instagram.com/atomicfindsatx" target="_blank" rel="noopener">Instagram</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Discovery, storytelling, real inventory/process content, and repeat attention</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="https://www.facebook.com/marketplace/profile/100050731036665" target="_blank" rel="noopener">Facebook Marketplace</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Current live-listing and buyer-conversion channel</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:13.5px;font-weight:600;line-height:1.3"><a href="mailto:atomicfindsatx@gmail.com">Public Email</a></p>
+<p style="margin:0;font-size:11.5px;line-height:1.5;color:#3B2F1E">Use only if Jennyfer confirms it remains approved for public contact</p>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 1</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 6px;break-after:avoid">Confirm the Operating Model</h2>
+<p style="margin:0 0 14px;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">These answers define what the team builds around. They do not reopen the brand direction.</p>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 8px;break-after:avoid">1.1 Phase 1 Customer Flow</h3>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Is this the correct default customer flow? <strong>Website &rarr; item-specific Marketplace listing or item-specific inquiry &rarr; Jennyfer confirms availability &rarr; Austin pickup by arrangement.</strong></p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_flow_yes"><span>Yes &mdash; approved as described</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:5px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_flow_mostly"><span>Mostly; revise:</span></label><input type="text" name="m_flow_mostly_text"></div>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_flow_no"><span>No; preferred flow:</span></label><input type="text" name="m_flow_no_text"></div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">For an Available item, which next step should be the default?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_next_mkt"><span>Open the exact, verified Facebook Marketplace listing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_next_inq"><span>Open a product-specific website inquiry</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_next_both_mkt"><span>Offer both, with Marketplace first</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_next_both_inq"><span>Offer both, with inquiry first</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_next_other"><span>Other:</span></label><input type="text" name="m_next_other_text"></div>
+</div>
+
+<p style="margin:18px 0 8px;font-size:13.5px;font-weight:600">Who is responsible for changing item status after an item is listed, becomes pending, changes price, sells, or is removed?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Primary owner</p><input type="text" name="m_status_primary"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Backup owner</p><input type="text" name="m_status_backup"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Where reported first (CMS / sheet / message / other)</p><input type="text" name="m_status_where"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Expected update timing after a sale</p><input type="text" name="m_status_timing"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 8px;break-after:avoid">1.2 Confirmed Public Boundaries</h3>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Confirm this approved pickup language, or revise it:</p>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 18px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-family:Pacifico,cursive;font-size:16px;line-height:1.5;color:#3B2F1E">Austin pickup by arrangement. Message Jennyfer to confirm availability and coordinate pickup details.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-bottom:14px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_pickup_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_pickup_revise"><span>Revise:</span></label>
+<input type="text" name="m_pickup_revise_text">
+</div>
+
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Confirm each item below remains <strong>not public</strong> unless Jennyfer supplies an approved policy or current source record:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_delivery"><span>Delivery or white-glove delivery claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_address"><span>Pickup address or precise pickup location</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_hours"><span>Public business hours</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_deposits"><span>Deposits, holds, payment plans, or refunds</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_returns"><span>Returns or exchange promises</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_phone"><span>Phone number or any alternate contact method</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_movers"><span>Mover recommendations or service promises</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_b_restored"><span>&ldquo;Fully restored,&rdquo; &ldquo;professionally restored,&rdquo; or equivalent blanket claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;grid-column:span 2"><input type="checkbox" name="m_b_reviews"><span>Ratings, review totals, &ldquo;Verified Buyer,&rdquo; or testimonial claims without source evidence</span></label>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Are there new operational boundaries the website, CMS, Marketplace templates, AI tools, or contractors must never imply?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_b_none"><span>No additions</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:6px"><input type="checkbox" name="m_b_yes"><span>Yes; list the wording or behavior to avoid:</span></label>
+<textarea name="m_b_yes_text" rows="2"></textarea>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 2</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Inventory Source of Truth Rule</h2>
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:16px 18px;margin:0 0 16px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 6px;font-family:Mamba,Poppins,sans-serif;font-size:19px;line-height:1.2">One physical piece = one inventory record = one SKU.</p>
+<p style="margin:0;font-size:13px;line-height:1.55">Public content must be generated from the verified record, not from memory, an old caption, an AI guess, or a photo alone.</p>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 8px;break-after:avoid">2.1 Inventory Home and Ownership</h3>
+<p style="margin:0 0 4px;font-size:13.5px;font-weight:600">Where is the master inventory record maintained today?</p>
+<textarea name="m_home_today" rows="2"></textarea>
+<p style="margin:16px 0 6px;font-size:13.5px;font-weight:600">Which system should become the authoritative record for Phase 1?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_auth_cms"><span>CMS Suite</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_auth_sheet"><span>Spreadsheet feeding CMS Suite</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_auth_other"><span>Other:</span></label><input type="text" name="m_auth_other_text"></div>
+</div>
+
+<p style="margin:18px 0 0;font-size:13.5px;font-weight:600">Who may create, edit, approve, and publish an inventory record?</p>
+<table>
+<thead><tr><th style="width:34%">Action</th><th>Jennyfer</th><th>Anthony / Digital Allies</th><th style="width:26%">Other notes</th></tr></thead>
+<tbody>
+<tr><td>Create draft record</td><td style="text-align:center"><input type="checkbox" name="m_ac_create_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_create_a"></td><td><input type="text" name="m_ac_create_n"></td></tr>
+<tr><td>Assign SKU</td><td style="text-align:center"><input type="checkbox" name="m_ac_sku_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_sku_a"></td><td><input type="text" name="m_ac_sku_n"></td></tr>
+<tr><td>Add source photos</td><td style="text-align:center"><input type="checkbox" name="m_ac_photos_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_photos_a"></td><td><input type="text" name="m_ac_photos_n"></td></tr>
+<tr><td>Verify measurements and condition</td><td style="text-align:center"><input type="checkbox" name="m_ac_verify_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_verify_a"></td><td><input type="text" name="m_ac_verify_n"></td></tr>
+<tr><td>Confirm price</td><td style="text-align:center"><input type="checkbox" name="m_ac_price_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_price_a"></td><td><input type="text" name="m_ac_price_n"></td></tr>
+<tr><td>Change status</td><td style="text-align:center"><input type="checkbox" name="m_ac_status_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_status_a"></td><td><input type="text" name="m_ac_status_n"></td></tr>
+<tr><td>Publish to website</td><td style="text-align:center"><input type="checkbox" name="m_ac_publish_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_publish_a"></td><td><input type="text" name="m_ac_publish_n"></td></tr>
+<tr><td>Archive after sale</td><td style="text-align:center"><input type="checkbox" name="m_ac_archive_j"></td><td style="text-align:center"><input type="checkbox" name="m_ac_archive_a"></td><td><input type="text" name="m_ac_archive_n"></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">2.2 Required Record Fields</h3>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">Before an item can move to <strong>Ready to List</strong>, can the record contain all required fields below?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_sku"><span>SKU</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_name"><span>Public name or working descriptive name</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_status"><span>Status</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_cat"><span>Category</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_source"><span>Source and date acquired</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_era"><span>Approximate era and era confidence</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_maker"><span>Maker or designer, if verified</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_mat"><span>Materials</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_dim"><span>Dimensions</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_weight"><span>Weight or loading notes, if applicable</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_cond"><span>Condition summary</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_wear"><span>Detailed wear notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_prep"><span>Preparation notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_resto"><span>Restoration notes, if work occurred</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_acq"><span>Acquisition notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_price"><span>Price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_mkturl"><span>Specific Marketplace URL, if listed</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_weburl"><span>Website publishing status/URL</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_ig"><span>Instagram status/URL, if posted</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_images"><span>Primary image and gallery folder</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_dates"><span>Date listed and date sold, when applicable</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_release"><span>Customer-photo release status, if applicable</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_f_internal"><span>Internal notes</span></label>
+</div>
+
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">Which fields are most likely to be missing at first? What would make them easier to collect?</p>
+<textarea name="m_f_missing" rows="2"></textarea>
+<p style="margin:16px 0 6px;font-size:13.5px;font-weight:600">What should happen when a record is incomplete?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_inc_keep"><span>Keep it in Acquired or In Prep until complete</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_inc_allow"><span>Allow Ready to List with an internal follow-up task</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_inc_other"><span>Other:</span></label><input type="text" name="m_inc_other_text"></div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">2.3 Exact Status Rules</h3>
+<p style="margin:0 0 4px;font-size:13px;line-height:1.55">Confirm the status vocabulary below. These labels must be used exactly in the inventory system and should control website behavior.</p>
+<table>
+<thead><tr><th style="width:18%">Status</th><th style="width:40%">Meaning</th><th>Website behavior</th></tr></thead>
+<tbody>
+<tr><td><strong>Acquired</strong></td><td>Internal only; not ready for public promotion</td><td>Do not publish</td></tr>
+<tr><td><strong>In Prep</strong></td><td>Being cleaned, assessed, repaired, or staged</td><td>Do not publish as available</td></tr>
+<tr><td><strong>Ready to List</strong></td><td>Record and photo set complete; not live yet</td><td>Do not publish as available</td></tr>
+<tr><td><strong>Available</strong></td><td>Active Marketplace listing or confirmed inquiry path</td><td>Show &ldquo;Ask About This Find&rdquo;; show &ldquo;View on Marketplace&rdquo; only for a verified item-specific link</td></tr>
+<tr><td><strong>Pending</strong></td><td>Buyer, hold, or deposit process in progress</td><td>Show &ldquo;Currently Pending&rdquo;; no immediate purchase invitation</td></tr>
+<tr><td><strong>Adopted</strong></td><td>Sold</td><td>Remove price and purchase CTA; may move to sold archive</td></tr>
+<tr><td><strong>Archived</strong></td><td>Portfolio/story record only</td><td>Not available; may show as archive</td></tr>
+<tr><td><strong>Needs Verification</strong></td><td>Facts, ownership, or source evidence are unresolved</td><td>Do not publish as active</td></tr>
+<tr><td><strong>HOLD</strong></td><td>Blocked pending owner decision or source material</td><td>Do not publish as active</td></tr>
+</tbody>
+</table>
+<div style="display:flex;align-items:flex-end;gap:24px;margin:8px 0 0">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_vocab_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_vocab_revise"><span>Revise:</span></label>
+<input type="text" name="m_vocab_revise_text">
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">How quickly must an item change from Available to Pending or Adopted after Jennyfer knows its status has changed?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_t_same"><span>Same day</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_t_24"><span>Within 24 hours</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_t_2bd"><span>Within 2 business days</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_t_other"><span>Other:</span></label><input type="text" name="m_t_other_text"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 8px;break-after:avoid">2.5 Data-Quality Controls</h3>
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">The following rules apply to all inventory records, public content, and any system or tool that reads from or writes to the inventory.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">SKU</p><p style="margin:0;font-size:12px;line-height:1.5">Must be unique and exactly four digits. No duplicates permitted.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Status</p><p style="margin:0;font-size:12px;line-height:1.5">Must use only the exact approved status vocabulary defined in section 2.3. No freeform or alternate labels.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Dates</p><p style="margin:0;font-size:12px;line-height:1.5">All dates use YYYY-MM-DD format throughout the inventory system and any export or template.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Price</p><p style="margin:0;font-size:12px;line-height:1.5">Uses a consistent currency format. Remains internal until Jennyfer has approved it for public display.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Marketplace URL</p><p style="margin:0;font-size:12px;line-height:1.5">Must be item-specific before it can trigger a &ldquo;View on Marketplace&rdquo; CTA on the website. Generic or storefront-level URLs do not qualify.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Unknown factual fields</p><p style="margin:0;font-size:12px;line-height:1.5">Must be left blank, marked unknown, or retained as an internal verification task. They may never be guessed, inferred from a photo alone, or filled by an AI without a verified source.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Public fields</p><p style="margin:0;font-size:12px;line-height:1.5">Must match verified inventory data exactly. No public-facing copy may be written from memory, an old caption, or an unverified source.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Product photos &amp; marketing assets</p><p style="margin:0;font-size:12px;line-height:1.5">Must be final PNG files following the approved naming rule before they can be used in any public-facing context.</p></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 3</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">SKU, Naming &amp; Files</h2>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 8px;break-after:avoid">3.1 SKU Control</h3>
+<p style="margin:0 0 6px;font-size:13px;line-height:1.55">Confirm the next new physical-inventory SKU begins at <strong>0050</strong>.</p>
+<div style="display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:12px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_sku_confirmed"><span>Confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_sku_audit"><span>Needs audit before use</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_sku_revised"><span>Revised next SKU:</span></label>
+<input type="text" name="m_sku_revised_text" style="flex:1;min-width:120px">
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">SKU range 0000&ndash;0049 is already assigned. New physical inventory begins at 0050 and increments upward. A SKU is never reused, including after an item is sold or archived.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_skurule_approved"><span>Approved</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_skurule_revise"><span>Revise:</span></label>
+<input type="text" name="m_skurule_revise_text">
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;margin-top:18px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Assigned by</p><input type="text" name="m_sku_by"></div>
+<div>
+<p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Trigger</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_sku_trig_buy"><span>When purchased/acquired</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_sku_trig_photo"><span>When first photographed</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_sku_trig_record"><span>When entering the inventory record</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_sku_trig_other"><span>Other:</span></label><input type="text" name="m_sku_trig_other_text"></div>
+</div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Who updates the SKU naming-system document</p><input type="text" name="m_sku_doc_owner"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Where the current document is kept</p><input type="text" name="m_sku_doc_where"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">3.2 Public Names and Descriptive Titles</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">How should a public name be created?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_name_all"><span>Jennyfer names every piece</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_name_some"><span>Jennyfer names selected pieces; other titles stay descriptive</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_name_ai"><span>AI proposes options; Jennyfer approves one</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_name_desc"><span>Use descriptive names only</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_name_other"><span>Other:</span></label><input type="text" name="m_name_other_text"></div>
+
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">If a name repeats, how should the public title distinguish the physical item?</p>
+<p style="margin:0 0 6px;font-size:12.5px;line-height:1.5;font-style:italic;color:#3B2F1E">Example: &ldquo;Ramona Rattan Shelf&rdquo; and &ldquo;Ramona Bamboo Shelf.&rdquo;</p>
+<input type="text" name="m_name_pattern">
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">What naming tone should be avoided?</p>
+<p style="margin:0 0 6px;font-size:12.5px;line-height:1.5;color:#3B2F1E">List names, themes, puns, or language that are off-brand, confusing, too precious, culturally inaccurate, or difficult to search.</p>
+<textarea name="m_name_avoid" rows="2"></textarea>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">3.3 File and Asset Standards</h3>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">Source images may arrive in native capture or downloaded formats. Before an image becomes a final approved project asset, web asset, Marketplace export asset, or marketing asset, save it as <strong>PNG</strong> and apply the approved filename pattern.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-bottom:16px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_png_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_png_revise"><span>Revisions needed:</span></label>
+<input type="text" name="m_png_revise_text">
+</div>
+
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Confirm this required filename pattern:</p>
+<p style="margin:0 0 8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:#9C4A20">{slug}-{tag}-{number}.png</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;margin-bottom:10px">
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>slug</strong> &mdash; lowercase kebab-case item nickname when unique; otherwise a short descriptive slug</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>tag</strong> (product photos) &mdash; the 4-digit SKU</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>tag</strong> (non-product assets) &mdash; a short descriptive tag, such as insta-post, website-banner, flyer, or holiday2026</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>number</strong> &mdash; begins at 1 and increments for each slug + tag pair</p>
+</div>
+<div style="border:1.5px dashed #A6AD73;border-radius:10px;padding:10px 12px;margin-bottom:10px;break-inside:avoid">
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Examples</p>
+<p style="margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.7">ramona-0008-1.png<br>ramona-0008-2.png<br>atomicfindsatx-insta-post-3.png<br>fall-drop-website-banner-1.png</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_fname_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_fname_revise"><span>Revisions needed:</span></label>
+<input type="text" name="m_fname_revise_text">
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Where should the approved source-photo folder for each item live?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_folder_drive"><span>Google Drive</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_folder_cms"><span>CMS Suite media library</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:5px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_folder_both"><span>Both; explain source-of-truth order:</span></label><input type="text" name="m_folder_both_text"></div>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_folder_other"><span>Other:</span></label><input type="text" name="m_folder_other_text"></div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What minimum photos are needed before a piece can be listed?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_min_front"><span>Overall front</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_min_side"><span>Overall side/back</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_min_texture"><span>Material/texture detail</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_min_wear"><span>Wear, repairs, or condition detail</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_min_meas"><span>Measurements</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_min_staged"><span>Staged/context photo</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_min_other"><span>Other:</span></label><input type="text" name="m_min_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Is there a separate photo checklist for fragile, large, upholstered, glass, or outdoor pieces?</p>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:5px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_special_yes"><span>Yes:</span></label><input type="text" name="m_special_text"></div>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="m_special_no"><span>No</span></label>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 4</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Sourcing, Intake &amp; Research</h2>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 6px;break-after:avoid">4.1 Intake at Acquisition</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Where does new inventory usually come from? Check all that apply.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_estate"><span>Estate sales</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_auction"><span>Auctions</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_fb"><span>Facebook Marketplace or private sellers</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_thrift"><span>Thrift stores</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_flea"><span>Flea markets or antique malls</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_private"><span>Private collections</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_trade"><span>Trade or referrals</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_src_curb"><span>Curbside/free finds</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_src_other"><span>Other:</span></label><input type="text" name="m_src_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What information can realistically be captured at acquisition?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_seller"><span>Seller/source name or listing link</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_date"><span>Date acquired</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_price"><span>Acquisition price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_desc"><span>Original seller description</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_photos"><span>Original photos/screenshots</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_loc"><span>Approximate location/source type without private customer details</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_labels"><span>Maker labels, stamps, tags, or markings</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_prov"><span>Known age, provenance, or prior ownership claim</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_acq_cond"><span>Initial condition photos</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_acq_other"><span>Other:</span></label><input type="text" name="m_acq_other_text"></div>
+</div>
+
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">What should be recorded immediately, before cleaning, repairs, styling, or moving the piece?</p>
+<textarea name="m_acq_immediate" rows="2"></textarea>
+<p style="margin:14px 0 4px;font-size:13.5px;font-weight:600">Who takes intake photos, and where are they uploaded on the same day?</p>
+<textarea name="m_acq_uploader" rows="2"></textarea>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">4.2 Research Standards</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Which research questions should be answered before a listing is written?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_type"><span>Identify furniture type and likely materials</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_labels"><span>Transcribe labels, stamps, tags, or model information</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_era"><span>Estimate era</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_maker"><span>Identify maker/designer only when supportable</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_construction"><span>Compare construction details to credible references</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_safety"><span>Identify replacement or safety concerns</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_dims"><span>Confirm dimensions and loading considerations</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rq_care"><span>Research care guidance for material-specific preparation</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_rq_other"><span>Other:</span></label><input type="text" name="m_rq_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What sources count as acceptable support for public claims about age, maker, origin, material, or provenance?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ev_label"><span>Original maker label, stamp, tag, or documentation</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ev_seller"><span>Original seller/auction documentation retained in the record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ev_dealer"><span>Reputable auction-house or established dealer reference</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ev_museum"><span>Museum, manufacturer, library, archive, or published design reference</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ev_comps"><span>Multiple comparable listings, labeled as an estimate rather than fact</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ev_jenny"><span>Jennyfer's direct knowledge, documented in the record</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_ev_other"><span>Other:</span></label><input type="text" name="m_ev_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What evidence is not sufficient on its own for a public claim?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ns_ai"><span>AI output</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ns_image"><span>An unverified image-search match</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ns_listing"><span>A single resale listing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ns_resemble"><span>Visual resemblance alone</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ns_memory"><span>Memory without a source record</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_ns_other"><span>Other:</span></label><input type="text" name="m_ns_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">When research is uncertain, which wording should be used?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_unc_approx"><span>&ldquo;Approximate era&rdquo; or &ldquo;estimated&rdquo;</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_unc_unknown"><span>&ldquo;Maker unknown&rdquo;</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_unc_internal"><span>&ldquo;Unverified attribution&rdquo; kept internal only</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_unc_omit"><span>Do not mention it publicly</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_unc_other"><span>Other approved phrasing:</span></label><input type="text" name="m_unc_other_text"></div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:16px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Final approver for a public claim</p><input type="text" name="m_claim_approver"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Required evidence location</p><input type="text" name="m_claim_evidence"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">4.3 Condition and Preparation Truth</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">What preparation is routinely performed before listing? Check only what happens consistently.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_struct"><span>Structural inspection</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_clean"><span>Surface cleaning</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_oil"><span>Conditioning/oiling wood, rattan, bamboo, or cane</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_light"><span>Light repair</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_deep"><span>Deep repair</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_refinish"><span>Refinishing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_paint"><span>Paint</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_upholstery"><span>Reupholstery</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_hardware"><span>Hardware replacement</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_odor"><span>Odor/smoke/pet assessment</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_staging"><span>Staging and photography</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pr_varies"><span>It varies by item; document only item-specific work</span></label>
+</div>
+
+<p style="margin:18px 0 8px;font-size:13.5px;font-weight:600">Confirm this default public language unless a verified item record supports something more specific:</p>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">Each find is carefully selected, inspected, and prepared for its next home. Condition, vintage wear, cleaning, repairs, and restoration work are noted on each individual listing.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_cond_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_cond_revise"><span>Revise:</span></label>
+<input type="text" name="m_cond_revise_text">
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What conditions must always be photographed and disclosed before a listing can go live?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_struct"><span>Structural instability</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_cracks"><span>Cracks, breaks, or repairs</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_missing"><span>Missing parts or hardware</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_finish"><span>Scratches, stains, fading, or finish loss</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_weave"><span>Cane/rattan/bamboo breaks or loose weaving</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_uph"><span>Upholstery wear, odors, smoke, pet exposure, or staining</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_dc_glass"><span>Glass/chip/crack issues</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_dc_other"><span>Other:</span></label><input type="text" name="m_dc_other_text"></div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 5</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Listing, Publishing &amp; Archive Workflow</h2>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 6px;break-after:avoid">5.1 Marketplace Listing Setup</h3>
+<p style="margin:0 0 8px;font-size:13px;line-height:1.55">What is the required order of work for a new item? Number these steps, or write your preferred order:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin-bottom:12px">
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>01</strong> Assign SKU</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>02</strong> Create inventory record</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>03</strong> Capture intake/source evidence</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>04</strong> Research item</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>05</strong> Clean/prepare/repair</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>06</strong> Photograph and save PNG assets</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>07</strong> Measure item</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>08</strong> Write listing draft</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>09</strong> Jennyfer approves facts, condition, price, and policy language</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>10</strong> Publish Facebook Marketplace listing</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>11</strong> Save item-specific Marketplace URL to record</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>12</strong> Publish/activate website item or inquiry path</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5;grid-column:span 2"><strong>13</strong> Create Instagram post/story if appropriate</p>
+</div>
+<p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Preferred order, if different</p>
+<textarea name="m_order_notes" rows="2"></textarea>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Does every Available website item need a current, item-specific Marketplace URL?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_url_yes"><span>Yes; hide Marketplace CTA until it exists</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_url_no"><span>No; a product-specific inquiry may be the active path</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_url_other"><span>Other:</span></label><input type="text" name="m_url_other_text"></div>
+
+<p style="margin:18px 0 6px;font-size:13px;line-height:1.55"><strong>Confirm:</strong> a general Marketplace profile link must not appear as &ldquo;View on Marketplace&rdquo; for a specific product.</p>
+<div style="display:flex;align-items:flex-end;gap:24px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_gen_confirmed"><span>Confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_gen_exception"><span>Exception or revision:</span></label>
+<input type="text" name="m_gen_exception_text">
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:16px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Who verifies a Marketplace link is still active</p><input type="text" name="m_link_owner"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Verification step/location</p><input type="text" name="m_link_where"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">5.2 Listing Content and Approvals</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Which information must appear in every Marketplace listing?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_title"><span>Searchable furniture-type title</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_name"><span>Public item name, if used</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_price"><span>Price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_era"><span>Approximate era only when sourced/appropriately qualified</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_mat"><span>Materials</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_dim"><span>Dimensions</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_cond"><span>Condition summary and detailed wear notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_prep"><span>Item-specific preparation/restoration notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_pickup"><span>Approved pickup language</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_load"><span>Loading/vehicle note when applicable</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ml_photos"><span>Specific current photos</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_ml_other"><span>Other:</span></label><input type="text" name="m_ml_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Which information may appear on the website only after it is verified in the inventory record?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_price"><span>Price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_era"><span>Era or age</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_maker"><span>Maker/designer</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_mat"><span>Materials</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_dim"><span>Dimensions</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_cond"><span>Condition/wear</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_work"><span>Work completed</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_url"><span>Marketplace URL</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_avail"><span>Availability</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_wv_all"><span>All of the above</span></label>
+</div>
+
+<p style="margin:18px 0 0;font-size:13.5px;font-weight:600">Who approves each draft before it is public?</p>
+<table>
+<thead><tr><th style="width:28%">Item</th><th>Content drafter</th><th>Fact checker</th><th>Final publisher</th></tr></thead>
+<tbody>
+<tr><td>Inventory record</td><td><input type="text" name="m_ap_inv_d"></td><td><input type="text" name="m_ap_inv_f"></td><td><input type="text" name="m_ap_inv_p"></td></tr>
+<tr><td>Marketplace listing</td><td><input type="text" name="m_ap_mkt_d"></td><td><input type="text" name="m_ap_mkt_f"></td><td><input type="text" name="m_ap_mkt_p"></td></tr>
+<tr><td>Website card/page</td><td><input type="text" name="m_ap_web_d"></td><td><input type="text" name="m_ap_web_f"></td><td><input type="text" name="m_ap_web_p"></td></tr>
+<tr><td>Instagram caption</td><td><input type="text" name="m_ap_ig_d"></td><td><input type="text" name="m_ap_ig_f"></td><td><input type="text" name="m_ap_ig_p"></td></tr>
+<tr><td>Archive/Adopted story</td><td><input type="text" name="m_ap_arc_d"></td><td><input type="text" name="m_ap_arc_f"></td><td><input type="text" name="m_ap_arc_p"></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">5.3 Sold and Archive Workflow</h3>
+<p style="margin:0 0 8px;font-size:13.5px;font-weight:600">When an item sells, what is the correct sequence?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 22px;margin-bottom:14px">
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>01</strong> Mark Marketplace listing sold/remove it</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>02</strong> Change inventory status to Adopted</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>03</strong> Remove price and buying CTA from website</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>04</strong> Move item to Adopted Finds or Archive, if approved</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>05</strong> Update social status/Highlight, if appropriate</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>06</strong> Record date sold</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;break-inside:avoid">
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Adopted</p>
+<p style="margin:0;font-size:12px;line-height:1.5">Confirmed sold. Remove price and purchase CTA. The item may appear in an Adopted archive if approved.</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 4px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Archived</p>
+<p style="margin:0;font-size:12px;line-height:1.5">Not for sale and not necessarily sold. Use for withdrawn items, retained items, duplicate/merged records, or portfolio/story-only records. Do not present it as available.</p>
+</div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Should adopted items retain any of the following?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_adopt_name"><span>Public name and photos</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_adopt_era"><span>Approximate era/materials only when verified</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_adopt_story"><span>Condition/story/preparation notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_adopt_similar"><span>&ldquo;See Similar Finds&rdquo; CTA</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_adopt_price"><span>Sale price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_adopt_buyer"><span>Buyer name, home, or testimonial only with documented permission</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_adopt_other"><span>Other:</span></label><input type="text" name="m_adopt_other_text"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">5.4 Marketplace Mismatch Procedure</h3>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 12px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">If the Marketplace listing, price, photos, or availability conflicts with the inventory record or the website, immediately change the website item to Pending, Needs Verification, or hidden until reconciliation is complete. Do not leave an item shown as Available while a conflict remains unresolved.</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-bottom:16px">
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Responsible party</p><input type="text" name="m_mm_owner"></div>
+<div><p style="margin:0 0 2px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Resolution documented in</p><input type="text" name="m_mm_where"></div>
+</div>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">What triggers a mismatch check?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_mm_price"><span>Price change on Marketplace not reflected on website</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_mm_sold"><span>Listing removed or marked sold on Marketplace but website still shows Available</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_mm_photos"><span>Photos updated on one platform but not the other</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_mm_status"><span>Inventory record status differs from any published listing</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_mm_other"><span>Other:</span></label><input type="text" name="m_mm_other_text"></div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 6</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">AI-Assisted Workflow Setup</h2>
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:16px 18px;margin:0 0 16px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 4px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C">Operating principle</p>
+<p style="margin:0;font-size:13px;line-height:1.55">AI can organize, transcribe, summarize, draft, classify, research leads, and generate internal options. AI must not invent product facts, publish unsourced claims, make final pricing/condition decisions, or use private customer information without permission.</p>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 8px;break-after:avoid">6.1 Approved AI Jobs</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+<div>
+<p style="margin:0 0 6px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">AI may assist with</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_record"><span>Turn intake notes into a draft inventory record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_transcribe"><span>Transcribe tags, labels, measurements, and handwritten notes from photos</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_measure"><span>Convert measurements into consistent format</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_names"><span>Propose descriptive public-name options</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_mkt"><span>Draft Marketplace listings from a verified record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_web"><span>Draft website copy from a verified record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_ig"><span>Draft Instagram captions from verified facts</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_disclosure"><span>Create condition-disclosure wording from approved notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_research"><span>Create research checklists and search queries</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_summarize"><span>Summarize saved research sources without adding claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_compare"><span>Compare public copy against a verified record to flag mismatches</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_filenames"><span>Create file names according to the PNG/SKU standard</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_tasks"><span>Create internal task lists/status-change reminders</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_canva"><span>Create Canva copy/briefs for real-item marketing assets</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_aij_spanish"><span>Translate finalized, approved English factual copy into Spanish for review</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:12.5px;white-space:nowrap"><input type="checkbox" name="m_aij_other"><span>Other:</span></label><input type="text" name="m_aij_other_text"></div>
+</div>
+<div>
+<p style="margin:0 0 6px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9C4A20">Must remain human-only</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_accept"><span>Final acceptance/rejection of inventory</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_sku"><span>SKU assignment</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_price"><span>Pricing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_cond"><span>Condition and safety assessment</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_repair"><span>Repairs/restoration claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_prov"><span>Maker/designer/era/provenance approval</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_publish"><span>Marketplace publishing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_status"><span>Availability/pending/sold status changes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_commit"><span>Customer-message commitments, deposits, pickup details, or refunds</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_ho_perm"><span>Permission decisions for customer photos/reviews</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:12.5px;white-space:nowrap"><input type="checkbox" name="m_ho_other"><span>Other:</span></label><input type="text" name="m_ho_other_text"></div>
+</div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 8px;break-after:avoid">6.2 Source and Verification Gate</h3>
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:0 0 10px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0;font-size:13px;line-height:1.55">Every factual claim in public inventory copy must trace back to a field or source stored in the item's inventory record. If the record does not support a claim, AI must label it as a question, omit it, or use approved uncertainty language.</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-bottom:16px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_gate_approved"><span>Approved</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_gate_revise"><span>Revise:</span></label>
+<input type="text" name="m_gate_revise_text">
+</div>
+
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">For AI research, where should source links, screenshots, quotations, and notes be stored?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_res_cms"><span>In the CMS item record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_res_drive"><span>Google Drive research folder linked from the item record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_res_sheet"><span>Spreadsheet research column</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_res_other"><span>Other:</span></label><input type="text" name="m_res_other_text"></div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What needs a human review before AI output can be published?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_desc"><span>Every customer-facing item description</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_title"><span>Every Marketplace title and price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_cond"><span>Every condition statement</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_claim"><span>Every era, maker, materials, or provenance claim</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_caption"><span>Every caption with factual claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_spanish"><span>Every Spanish translation</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_hrv_image"><span>Every image/graphic before upload</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_hrv_other"><span>Other:</span></label><input type="text" name="m_hrv_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">When AI cannot verify a fact, which behavior should it take?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_nv_placeholder"><span>Leave a clearly marked placeholder such as [verify material]</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_nv_ask"><span>Ask a targeted follow-up question</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_nv_neutral"><span>Use neutral copy that does not make the claim</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_nv_move"><span>Move the record to Needs Verification</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_nv_other"><span>Other:</span></label><input type="text" name="m_nv_other_text"></div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">6.3 Privacy, Permissions, and Customer Content</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">What information must never be pasted into a general AI chat or shared outside approved systems?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pv_names"><span>Buyer full names, addresses, or precise pickup locations</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pv_msgs"><span>Private messages without permission</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pv_phone"><span>Phone numbers and private email addresses</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pv_pay"><span>Payment details</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_pv_homes"><span>Customer-home images without documented release</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_pv_other"><span>Other:</span></label><input type="text" name="m_pv_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">For a customer photo, quote, review, or social message to be used publicly, confirm the required record includes:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_owner"><span>Content owner/contact</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_folder"><span>Asset folder or item reference</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_date"><span>Permission date</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_channels"><span>Allowed channels</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_credit"><span>Credit/tagging preference</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_restrict"><span>Restrictions</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_revoke"><span>Revocation/follow-up notes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cc_review"><span>Original review source, date, exact quote, and evidence</span></label>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Do you want AI to help draft photo-use permission requests and review-approval requests?</p>
+<div style="display:flex;gap:28px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="m_perm_yes"><span>Yes</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="m_perm_no"><span>No</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="m_perm_later"><span>Later</span></label>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 0;break-after:avoid">6.4 Tool Access and Handoff</h3>
+<table>
+<thead><tr><th style="width:26%">Tool</th><th>Jennyfer</th><th>Anthony / Digital Allies</th><th style="width:28%">Other notes / permission level</th></tr></thead>
+<tbody>
+<tr><td>Claude Tools</td><td style="text-align:center"><input type="checkbox" name="m_tool_claude_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_claude_a"></td><td><input type="text" name="m_tool_claude_n"></td></tr>
+<tr><td>Canva Tools</td><td style="text-align:center"><input type="checkbox" name="m_tool_canva_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_canva_a"></td><td><input type="text" name="m_tool_canva_n"></td></tr>
+<tr><td>CMS Suite</td><td style="text-align:center"><input type="checkbox" name="m_tool_cms_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_cms_a"></td><td><input type="text" name="m_tool_cms_n"></td></tr>
+<tr><td>GitHub Repository</td><td style="text-align:center"><input type="checkbox" name="m_tool_gh_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_gh_a"></td><td><input type="text" name="m_tool_gh_n"></td></tr>
+<tr><td>Google Drive inventory/photo folders</td><td style="text-align:center"><input type="checkbox" name="m_tool_drive_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_drive_a"></td><td><input type="text" name="m_tool_drive_n"></td></tr>
+<tr><td>Facebook Marketplace</td><td style="text-align:center"><input type="checkbox" name="m_tool_fb_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_fb_a"></td><td><input type="text" name="m_tool_fb_n"></td></tr>
+<tr><td>Instagram</td><td style="text-align:center"><input type="checkbox" name="m_tool_ig_j"></td><td style="text-align:center"><input type="checkbox" name="m_tool_ig_a"></td><td><input type="text" name="m_tool_ig_n"></td></tr>
+</tbody>
+</table>
+
+<p style="margin:16px 0 6px;font-size:13.5px;font-weight:600">What is the preferred handoff method when AI produces a draft?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_hand_shared"><span>AI draft &rarr; Jennyfer reviews in a shared document</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_hand_cms"><span>AI draft &rarr; Anthony formats in CMS &rarr; Jennyfer approves</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_hand_record"><span>AI draft &rarr; inventory record receives review status</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_hand_other"><span>Other:</span></label><input type="text" name="m_hand_other_text"></div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What does &ldquo;approved&rdquo; look like for an AI-assisted listing or post?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_appr_writing"><span>Jennyfer responds in writing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_appr_status"><span>Jennyfer changes the status to APPROVED</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_appr_publish"><span>Jennyfer publishes it herself</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_appr_other"><span>Other:</span></label><input type="text" name="m_appr_other_text"></div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 8px;break-after:avoid">6.5 Ownership Defaults (Recommended, Awaiting Confirmation)</h3>
+<p style="margin:0 0 12px;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">Recommended defaults awaiting Jennyfer confirmation. These role assignments reflect the intended operating model and should be reviewed and confirmed before going live.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;break-inside:avoid">
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Jennyfer owns</p>
+<p style="margin:0;font-size:12px;line-height:1.6">Product facts, price, condition, availability<br>Marketplace publishing<br>Buyer commitments<br>Permissions<br>Final approval</p>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Anthony / Digital Allies owns</p>
+<p style="margin:0;font-size:12px;line-height:1.6">System configuration<br>Content structure<br>Templates<br>Draft formatting<br>Website implementation<br>Status-aware website behavior<br>QA</p>
+</div>
+<div style="border:2px solid #C1602C;border-radius:14px;background:#F7F0DC;padding:12px 14px;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9C4A20">AI creates</p>
+<p style="margin:0;font-size:12px;line-height:1.6">Drafts and verification flags only<br>Has no approval or publishing authority</p>
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 7</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 6px;break-after:avoid">CMS, Website &amp; Design-System Controls</h2>
+<p style="margin:0 0 14px;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">The current website is governed by the design system, so new inventory and operational content should use approved patterns rather than one-off layouts or invented CTAs.</p>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:0 0 8px;break-after:avoid">7.1 Content Controls</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+<div>
+<p style="margin:0 0 6px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Jennyfer can edit in CMS without developer support</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_status"><span>Item status</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_price"><span>Price</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_url"><span>Marketplace URL</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_name"><span>Public item name</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_cond"><span>Condition summary</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_photos"><span>Photos/gallery</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_desc"><span>Product description</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_featured"><span>Featured/not featured setting</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_cc_story"><span>Archive/Adopted story</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:12.5px;white-space:nowrap"><input type="checkbox" name="m_cc_other"><span>Other:</span></label><input type="text" name="m_cc_other_text"></div>
+</div>
+<div>
+<p style="margin:0 0 6px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9C4A20">Requires Anthony / Digital Allies review before publishing</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_rv_component"><span>New design-system component or page type</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_rv_flow"><span>Changes to buyer flow or CTA behavior</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_rv_policy"><span>New policy or fulfillment language</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_rv_brand"><span>Design/branding changes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_rv_trans"><span>Translation changes</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45;margin-bottom:4px"><input type="checkbox" name="m_rv_forms"><span>Newsletter or form behavior</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:12.5px;white-space:nowrap"><input type="checkbox" name="m_rv_other"><span>Other:</span></label><input type="text" name="m_rv_other_text"></div>
+</div>
+</div>
+
+<p style="margin:18px 0 0;font-size:13.5px;font-weight:600">Which product-card information is required for each public status?</p>
+<table>
+<thead><tr><th style="width:16%">Public status</th><th>Required display</th><th>Forbidden display</th></tr></thead>
+<tbody>
+<tr><td><strong>Available</strong></td><td>Verified public name; current status; approved price only if enabled; approved key details; &ldquo;Ask About This Find&rdquo;; Marketplace CTA only with verified active item-specific URL.</td><td>General Marketplace profile as item CTA; expired Marketplace link; unsourced claims; delivery/white-glove claims.</td></tr>
+<tr><td><strong>Pending</strong></td><td>&ldquo;Currently Pending.&rdquo;</td><td>Price if it implies immediate availability; purchase CTA; &ldquo;View on Marketplace&rdquo; unless confirmed appropriate.</td></tr>
+<tr><td><strong>Adopted</strong></td><td>&ldquo;Adopted&rdquo;; optional approved archive/story content; optional &ldquo;See Similar Finds.&rdquo;</td><td>Price; purchase CTA; buyer identity, home, or testimonial without documented permission.</td></tr>
+<tr><td><strong>Archived</strong></td><td>&ldquo;Archive&rdquo;; optional approved archive/story content.</td><td>Availability claim; current price; purchase CTA.</td></tr>
+</tbody>
+</table>
+
+<p style="margin:16px 0 8px;font-size:13.5px;font-weight:600">Confirm the product CTA rules:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;break-inside:avoid">
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Available</p><p style="margin:0;font-size:12px;line-height:1.5">&ldquo;Ask About This Find.&rdquo; &ldquo;View on Marketplace&rdquo; appears only with a verified active, item-specific Marketplace URL.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Pending</p><p style="margin:0;font-size:12px;line-height:1.5">&ldquo;Currently Pending.&rdquo; No immediate-purchase invitation.</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Adopted / Archived</p><p style="margin:0;font-size:12px;line-height:1.5">Remove price and purchase CTA; use &ldquo;Adopted&rdquo; or &ldquo;Archive,&rdquo; optionally &ldquo;See Similar Finds.&rdquo;</p></div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;print-color-adjust:exact"><p style="margin:0 0 3px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Acquired / In Prep / Ready to List / Needs Verification / HOLD</p><p style="margin:0;font-size:12px;line-height:1.5">Do not present publicly as available.</p></div>
+</div>
+<div style="display:flex;align-items:flex-end;gap:24px;margin-top:10px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_cta_approved"><span>Approved as written</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_cta_revise"><span>Revise:</span></label>
+<input type="text" name="m_cta_revise_text">
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:17px;margin:24px 0 6px;break-after:avoid">7.2 Forms, Social, and Translation</h3>
+<p style="margin:0 0 6px;font-size:13.5px;font-weight:600">Is the contact/inquiry form ready to route product-specific questions to a monitored destination?</p>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:5px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_form_yes"><span>Yes; destination:</span></label><input type="text" name="m_form_dest"></div>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_form_defer"><span>Not yet; hide or defer item inquiry CTA until ready</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_form_testing"><span>Needs testing</span></label>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">Is the newsletter form ready to publish?</p>
+<p style="margin:0 0 8px;font-size:12.5px;line-height:1.55;color:#3B2F1E">It may be public only when it has a real email-platform connection, consent language, privacy-policy link, success/error states, a defined list destination, and a basic welcome/confirmation workflow.</p>
+<div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:5px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_news_yes"><span>Yes; system and owner:</span></label><input type="text" name="m_news_yes_text"></div>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_news_no"><span>No; use social-follow CTA instead</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_news_later"><span>Later</span></label>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">How should any Instagram section be presented?</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_ig_live"><span>Live integration with verified real posts</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45;margin-bottom:5px"><input type="checkbox" name="m_ig_curated"><span>Curated gallery clearly labeled as non-live</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_ig_none"><span>Not included for Phase 1</span></label>
+
+<p style="margin:18px 0 8px;font-size:13.5px;font-weight:600">Confirm translation workflow:</p>
+<div style="display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:8px">
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>01</strong> Finalize English factual copy first</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>02</strong> Use AI only to draft Spanish after English approval</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5"><strong>03</strong> Human review confirms the two versions match in meaning, policy, and purchase instructions</p>
+</div>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_trans_other"><span>Other:</span></label><input type="text" name="m_trans_other_text"></div>
+<p style="margin:14px 0 0;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">Once Jennyfer communicates a live-item status change, the master inventory record is updated immediately and the website is reconciled within the owner-approved timing target.</p>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 8</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 6px;break-after:avoid">Master Decision Log</h2>
+<p style="margin:0 0 0;font-size:13px;line-height:1.55">Use this table to track all confirmed operational decisions, their owners, and implementation status.</p>
+<table>
+<thead><tr><th style="width:16%">Decision area</th><th>Confirmed decision</th><th style="width:11%">Owner</th><th style="width:11%">Confirmation date</th><th style="width:11%">Evidence/link</th><th style="width:12%">Implementation status</th><th style="width:11%">Notes</th></tr></thead>
+<tbody>
+<tr><td>Operating Model</td><td><input type="text" name="m_dl_om_d"></td><td><input type="text" name="m_dl_om_o"></td><td><input type="text" name="m_dl_om_c"></td><td><input type="text" name="m_dl_om_e"></td><td><input type="text" name="m_dl_om_i"></td><td><input type="text" name="m_dl_om_n"></td></tr>
+<tr><td>Inventory Home</td><td><input type="text" name="m_dl_ih_d"></td><td><input type="text" name="m_dl_ih_o"></td><td><input type="text" name="m_dl_ih_c"></td><td><input type="text" name="m_dl_ih_e"></td><td><input type="text" name="m_dl_ih_i"></td><td><input type="text" name="m_dl_ih_n"></td></tr>
+<tr><td>SKU Rule</td><td><input type="text" name="m_dl_sku_d"></td><td><input type="text" name="m_dl_sku_o"></td><td><input type="text" name="m_dl_sku_c"></td><td><input type="text" name="m_dl_sku_e"></td><td><input type="text" name="m_dl_sku_i"></td><td><input type="text" name="m_dl_sku_n"></td></tr>
+<tr><td>Public Boundaries</td><td><input type="text" name="m_dl_pb_d"></td><td><input type="text" name="m_dl_pb_o"></td><td><input type="text" name="m_dl_pb_c"></td><td><input type="text" name="m_dl_pb_e"></td><td><input type="text" name="m_dl_pb_i"></td><td><input type="text" name="m_dl_pb_n"></td></tr>
+<tr><td>Listing Workflow</td><td><input type="text" name="m_dl_lw_d"></td><td><input type="text" name="m_dl_lw_o"></td><td><input type="text" name="m_dl_lw_c"></td><td><input type="text" name="m_dl_lw_e"></td><td><input type="text" name="m_dl_lw_i"></td><td><input type="text" name="m_dl_lw_n"></td></tr>
+<tr><td>Marketplace Mismatch</td><td><input type="text" name="m_dl_mm_d"></td><td><input type="text" name="m_dl_mm_o"></td><td><input type="text" name="m_dl_mm_c"></td><td><input type="text" name="m_dl_mm_e"></td><td><input type="text" name="m_dl_mm_i"></td><td><input type="text" name="m_dl_mm_n"></td></tr>
+<tr><td>AI Permissions</td><td><input type="text" name="m_dl_ai_d"></td><td><input type="text" name="m_dl_ai_o"></td><td><input type="text" name="m_dl_ai_c"></td><td><input type="text" name="m_dl_ai_e"></td><td><input type="text" name="m_dl_ai_i"></td><td><input type="text" name="m_dl_ai_n"></td></tr>
+<tr><td>CMS Controls</td><td><input type="text" name="m_dl_cms_d"></td><td><input type="text" name="m_dl_cms_o"></td><td><input type="text" name="m_dl_cms_c"></td><td><input type="text" name="m_dl_cms_e"></td><td><input type="text" name="m_dl_cms_i"></td><td><input type="text" name="m_dl_cms_n"></td></tr>
+<tr><td>Status Timing</td><td><input type="text" name="m_dl_st_d"></td><td><input type="text" name="m_dl_st_o"></td><td><input type="text" name="m_dl_st_c"></td><td><input type="text" name="m_dl_st_e"></td><td><input type="text" name="m_dl_st_i"></td><td><input type="text" name="m_dl_st_n"></td></tr>
+<tr><td>Photo Format</td><td><input type="text" name="m_dl_pf_d"></td><td><input type="text" name="m_dl_pf_o"></td><td><input type="text" name="m_dl_pf_c"></td><td><input type="text" name="m_dl_pf_e"></td><td><input type="text" name="m_dl_pf_i"></td><td><input type="text" name="m_dl_pf_n"></td></tr>
+<tr><td>Ownership Defaults</td><td><input type="text" name="m_dl_od_d"></td><td><input type="text" name="m_dl_od_o"></td><td><input type="text" name="m_dl_od_c"></td><td><input type="text" name="m_dl_od_e"></td><td><input type="text" name="m_dl_od_i"></td><td><input type="text" name="m_dl_od_n"></td></tr>
+<tr><td>Other</td><td><input type="text" name="m_dl_ot_d"></td><td><input type="text" name="m_dl_ot_o"></td><td><input type="text" name="m_dl_ot_c"></td><td><input type="text" name="m_dl_ot_e"></td><td><input type="text" name="m_dl_ot_i"></td><td><input type="text" name="m_dl_ot_n"></td></tr>
+</tbody>
+</table>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 6px;break-after:avoid">Reusable Templates Needed</h3>
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55">Check the templates that should be created first. These templates must pull from verified record fields, not prompt AI to invent missing details.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_intake"><span>Inventory intake form</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_research"><span>Research evidence log</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_cond"><span>Condition and measurements checklist</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_mkt"><span>Marketplace listing template</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_card"><span>Website product-card/page template</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_inquiry"><span>Product-specific inquiry response template</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_iglaunch"><span>Instagram launch caption template</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_igsold"><span>Instagram sold/adopted caption template</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_shot"><span>Photo-shot checklist</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_png"><span>PNG export and file-naming checklist</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_photoperm"><span>Customer photo-use permission request</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_review"><span>Testimonial/review verification record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_weekly"><span>Weekly availability audit checklist</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_monthly"><span>Monthly archive/content refresh checklist</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_aiprompt"><span>AI prompt template for a verified inventory record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_tp_airesearch"><span>AI prompt template for research questions only</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:12.5px;white-space:nowrap"><input type="checkbox" name="m_tp_other"><span>Other:</span></label><input type="text" name="m_tp_other_text"></div>
+</div>
+<p style="margin:14px 0 4px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Rank the top three needed first</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+<div style="display:flex;align-items:flex-end;gap:8px"><span style="font-size:13px;font-weight:600">1.</span><input type="text" name="m_tp_rank1"></div>
+<div style="display:flex;align-items:flex-end;gap:8px"><span style="font-size:13px;font-weight:600">2.</span><input type="text" name="m_tp_rank2"></div>
+<div style="display:flex;align-items:flex-end;gap:8px"><span style="font-size:13px;font-weight:600">3.</span><input type="text" name="m_tp_rank3"></div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 6px;break-after:avoid">First Implementation Batch</h3>
+<p style="margin:0 0 0;font-size:13px;line-height:1.55">Choose a small first batch so the system is tested with real records before scaling. Which 3&ndash;6 real pieces should become the first verified inventory records?</p>
+<table>
+<thead><tr><th>Working name</th><th style="width:9%">SKU</th><th style="width:13%">Current status</th><th style="width:15%">Source link/folder</th><th style="width:18%">Missing information</th><th style="width:16%">Owner / target date</th></tr></thead>
+<tbody>
+<tr><td><input type="text" name="m_fb1_n"></td><td><input type="text" name="m_fb1_s"></td><td><input type="text" name="m_fb1_st"></td><td><input type="text" name="m_fb1_l"></td><td><input type="text" name="m_fb1_m"></td><td><input type="text" name="m_fb1_o"></td></tr>
+<tr><td><input type="text" name="m_fb2_n"></td><td><input type="text" name="m_fb2_s"></td><td><input type="text" name="m_fb2_st"></td><td><input type="text" name="m_fb2_l"></td><td><input type="text" name="m_fb2_m"></td><td><input type="text" name="m_fb2_o"></td></tr>
+<tr><td><input type="text" name="m_fb3_n"></td><td><input type="text" name="m_fb3_s"></td><td><input type="text" name="m_fb3_st"></td><td><input type="text" name="m_fb3_l"></td><td><input type="text" name="m_fb3_m"></td><td><input type="text" name="m_fb3_o"></td></tr>
+<tr><td><input type="text" name="m_fb4_n"></td><td><input type="text" name="m_fb4_s"></td><td><input type="text" name="m_fb4_st"></td><td><input type="text" name="m_fb4_l"></td><td><input type="text" name="m_fb4_m"></td><td><input type="text" name="m_fb4_o"></td></tr>
+<tr><td><input type="text" name="m_fb5_n"></td><td><input type="text" name="m_fb5_s"></td><td><input type="text" name="m_fb5_st"></td><td><input type="text" name="m_fb5_l"></td><td><input type="text" name="m_fb5_m"></td><td><input type="text" name="m_fb5_o"></td></tr>
+<tr><td><input type="text" name="m_fb6_n"></td><td><input type="text" name="m_fb6_s"></td><td><input type="text" name="m_fb6_st"></td><td><input type="text" name="m_fb6_l"></td><td><input type="text" name="m_fb6_m"></td><td><input type="text" name="m_fb6_o"></td></tr>
+</tbody>
+</table>
+
+<p style="margin:14px 0 6px;font-size:13.5px;font-weight:600">For this test batch, which success checks must pass before the workflow is reused?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_sku"><span>Each physical piece has one SKU and one inventory record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_facts"><span>Required facts are verified and sourced</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_png"><span>Product photos are PNG and follow the filename pattern</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_status"><span>Status correctly controls what appears on the website</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_cta"><span>Marketplace CTA links to the exact active item or is hidden</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_ai"><span>AI drafts match the verified record and contain no unsupported claims</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_friction"><span>Jennyfer can approve/update the record without friction</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.45"><input type="checkbox" name="m_sc_timing"><span>A sold/pending update can be completed within the agreed timing</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:12.5px;white-space:nowrap"><input type="checkbox" name="m_sc_other"><span>Other:</span></label><input type="text" name="m_sc_other_text"></div>
+</div>
+<p style="margin:14px 0 4px;font-size:13.5px;font-weight:600">What would make the workflow too burdensome? What can be simplified without sacrificing accuracy?</p>
+<textarea name="m_burden" rows="3"></textarea>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 8px;break-after:avoid">First-Batch Readiness Gate</h3>
+<p style="margin:0 0 12px;font-size:13px;line-height:1.55">The workflow may be reused and scaled only after 3&ndash;6 real test items demonstrate all of the following:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Inventory &amp; SKU</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_sku1"><span>Unique SKU assigned to each physical item</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_sku2"><span>One inventory record per physical item</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_sku3"><span>All applicable required fields completed</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Content &amp; claims</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_c1"><span>All public claims are verified or appropriately neutral</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_c2"><span>No unsupported AI-generated claims in public-facing copy</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_c3"><span>Maker, era, and provenance claims are sourced and approved</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Assets &amp; files</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_a1"><span>Approved PNG assets created and named correctly</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_a2"><span>Filenames follow the {slug}-{tag}-{number}.png pattern</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_a3"><span>Source photos and final assets organized and linked</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Website behavior</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_w1"><span>Correct website behavior by status (Available, Pending, Adopted, Archived)</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_w2"><span>No items shown as Available without a verified buyer path</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_w3"><span>Status changes reflected on website within the approved timing</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Buyer paths</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_b1"><span>Exact active Marketplace link verified and saved to record, OR</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_b2"><span>Product-specific inquiry route tested and working</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Approval &amp; governance</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_ap1"><span>Owner approval captured in the record</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_ap2"><span>Fact review status marked APPROVED</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_ap3"><span>Owner approval status marked APPROVED</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Status transitions</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_s1"><span>Successful Pending or Adopted update within the chosen timing</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_s2"><span>Marketplace listing reconciled with website</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_s3"><span>No conflicts between platforms</span></label>
+</div>
+<div style="border:2px solid #241D13;border-radius:14px;background:#F7F0DC;padding:11px 13px;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 5px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5F6836">Scope boundaries</p>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_sb1"><span>No full ecommerce features introduced</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_sb2"><span>No delivery, deposits, public hours, or public address</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_sb3"><span>No phone number, email, or customer testimonials as defaults</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45;margin-bottom:3px"><input type="checkbox" name="m_g_sb4"><span>No maker/era claims without verified sources</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;line-height:1.45"><input type="checkbox" name="m_g_sb5"><span>All conditional features remain conditional on owner approval</span></label>
+</div>
+</div>
+<p style="margin:12px 0 0;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">Once all gates pass, the workflow is approved for ongoing use with real inventory.</p>
+
+<div style="display:flex;align-items:center;gap:12px;margin:34px 0 4px;break-after:avoid">
+<span style="font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C1602C;border:1.5px solid #C1602C;border-radius:999px;padding:3px 10px;print-color-adjust:exact">Section 9</span>
+<span style="flex:1;height:2px;background:repeating-linear-gradient(90deg,#C9BE9C 0 6px,transparent 6px 12px)"></span>
+</div>
+<h2 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:23px;line-height:1.15;margin:0 0 10px;break-after:avoid">Final Operating Agreement</h2>
+<p style="margin:0 0 4px;font-size:13.5px;font-weight:600">List anything Atomic Finds ATX should never say, imply, publish, automate, or let AI assume.</p>
+<textarea name="m_never" rows="3"></textarea>
+<p style="margin:16px 0 4px;font-size:13.5px;font-weight:600">What is the one operational change that would save Jennyfer the most time each week?</p>
+<textarea name="m_timesaver" rows="2"></textarea>
+
+<p style="margin:16px 0 6px;font-size:13.5px;font-weight:600">What is the one reporting view Jennyfer needs to understand inventory at a glance?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_avail"><span>Available now</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_prep"><span>In Prep</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_needs"><span>Needs Verification</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_ready"><span>Ready to List</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_pending"><span>Pending</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_adopted"><span>Adopted this month</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_rep_missing"><span>Missing photos/details</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_rep_other"><span>Other:</span></label><input type="text" name="m_rep_other_text"></div>
+</div>
+
+<p style="margin:18px 0 6px;font-size:13.5px;font-weight:600">What recurring review cadence is realistic?</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px">
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cad_daily"><span>Daily 5-minute status check</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cad_twice"><span>Twice-weekly inventory/website check</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cad_weekly"><span>Weekly update session</span></label>
+<label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.45"><input type="checkbox" name="m_cad_monthly"><span>Monthly content/archive review</span></label>
+<div style="display:flex;align-items:flex-end;gap:10px;grid-column:span 2"><label style="display:flex;gap:8px;align-items:center;font-size:13px;white-space:nowrap"><input type="checkbox" name="m_cad_other"><span>Other:</span></label><input type="text" name="m_cad_other_text"></div>
+</div>
+
+<div style="border:2px solid #241D13;border-radius:14px;background:#EFE4C4;padding:14px 16px;margin:20px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 10px;font-size:13px;line-height:1.55"><strong>Final confirmation:</strong> Atomic Finds ATX will favor accuracy, traceable product evidence, and practical upkeep over a larger catalog or faster publishing.</p>
+<div style="display:flex;gap:28px">
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="m_final_confirmed"><span>Confirmed</span></label>
+<label style="display:flex;gap:8px;align-items:center;font-size:13px"><input type="checkbox" name="m_final_discuss"><span>Discuss</span></label>
+</div>
+</div>
+
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:19px;margin:26px 0 6px;break-after:avoid">Internal Implementation Notes</h3>
+<p style="margin:0 0 8px;font-size:12.5px;line-height:1.55;font-style:italic;color:#3B2F1E">For Anthony / Digital Allies after questionnaire completion:</p>
+<div style="border:1.5px dashed #A6AD73;border-radius:12px;padding:14px 16px;break-inside:avoid">
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Convert confirmed answers into the inventory schema, CMS field permissions, publishing checklist, and reusable templates.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Preserve one record per physical item and use the approved statuses exactly.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Do not publish incomplete inventory as available.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Do not publish a general Marketplace profile link as an individual item CTA.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Keep public pickup language neutral unless policy details are confirmed.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Use only verified, approved reviews, customer content, prices, dimensions, condition statements, restoration notes, and listing URLs.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Treat AI output as a draft. It can assist with extraction, organization, formatting, research leads, and copy &mdash; but it cannot supply missing facts or override owner approval.</p>
+<p style="margin:0 0 7px;font-size:12.5px;line-height:1.55">Keep English factual copy as the source version. Draft Spanish only after English approval and verify both versions stay aligned.</p>
+<p style="margin:0;font-size:12.5px;line-height:1.55">Save final product and marketing image assets as PNG using {slug}-{tag}-{number}.png.</p>
+</div>
+
+<div style="border:3px solid #241D13;border-radius:14px;background:#EFE4C4;padding:18px 20px;margin:26px 0 0;break-inside:avoid;print-color-adjust:exact">
+<p style="margin:0 0 3px;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C1602C">Final step</p>
+<h3 style="font-family:Mamba,Poppins,sans-serif;font-weight:400;font-size:21px;margin:0 0 12px">Signature of Approval</h3>
+<p style="margin:0 0 16px;font-size:12.5px;line-height:1.55;color:#3B2F1E">By signing below, Jennyfer approves the answers recorded in this questionnaire as the operating standard for Atomic Finds ATX until revised in writing.</p>
+<div style="display:grid;grid-template-columns:1.6fr 1.2fr 1fr;gap:10px 22px">
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Signature</p><input type="text" name="sig_signature" style="font-family:Pacifico,cursive;font-size:17px;border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Printed name</p><input type="text" name="sig_name" value="Jennyfer" style="border-bottom-color:#241D13"></div>
+<div><p style="margin:0 0 2px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#5C7367">Date (YYYY-MM-DD)</p><input type="date" name="sig_date" style="border-bottom-color:#241D13"></div>
+</div>
+</div>
+
+<div data-noprint style="margin-top:20px;border:2px dashed #7D8347;border-radius:14px;background:#F7F0DC;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+<div style="flex:1;min-width:240px">
+<p style="margin:0 0 4px;font-family:Mamba,Poppins,sans-serif;font-size:17px">Send it back</p>
+<p style="margin:0;font-size:12.5px;line-height:1.5;color:#3B2F1E">Submit saves a filled PDF of this questionnaire, then opens an email draft to <a href="mailto:ac@digitalallies.net">ac@digitalallies.net</a>. Attach the PDF you just saved and hit send &mdash; no need to save and resend the file separately.</p>
+</div>
+<button type="button" onClick="{{ submit }}" style="flex:none;font-family:Poppins,sans-serif;font-size:13px;font-weight:600;background:#C1602C;color:#FBF6E8;border:2px solid #241D13;border-radius:999px;padding:11px 22px;cursor:pointer;box-shadow:0 3px 0 #241D13" style-hover="background:#9C4A20;transform:translateY(-1px)">Save PDF &amp; draft email</button>
+</div>
+<p data-noprint style="margin:8px 0 0;font-size:12px;color:#5F6836;min-height:16px">{{ status }}</p>
+
+</div>
+</doc-page>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;recipientEmail&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ac@digitalallies.net&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Submit&quot;}}">
+const KEY = 'af-doc-master-questionnaire';
+const TITLE = 'Operations, Inventory & AI Workflow Questionnaire';
+
+class Component extends DCLogic {
+  state = { status: '' };
+
+  componentDidMount() {
+    setTimeout(() => this.restore(), 60);
+  }
+
+  fields() {
+    return Array.from(document.querySelectorAll('[name]'));
+  }
+
+  restore() {
+    let data;
+    try { data = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return; }
+    this.fields().forEach(el => {
+      if (!(el.name in data)) return;
+      if (el.type === 'checkbox') el.checked = !!data[el.name];
+      else el.value = data[el.name];
+    });
+  }
+
+  renderVals() {
+    return {
+      status: this.state.status,
+      onEdit: () => {
+        const data = {};
+        this.fields().forEach(el => { data[el.name] = el.type === 'checkbox' ? el.checked : el.value; });
+        try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+      },
+      submit: () => {
+        this.setState({ status: 'Saving PDF — choose "Save as PDF" as the destination…' });
+        const get = n => { const el = document.querySelector('[name="' + n + '"]'); return el ? el.value : ''; };
+        const sig = get('sig_signature') || 'Jennyfer';
+        const date = get('sig_date') || '';
+        const subject = 'Completed questionnaire — ' + TITLE + ' (Atomic Finds ATX)';
+        const body = [
+          'Hi Anthony,',
+          '',
+          'My completed "' + TITLE + '" is attached as a PDF.',
+          '',
+          'Signed: ' + sig,
+          'Date: ' + date,
+          '',
+          '— Jennyfer, Atomic Finds ATX',
+          'atomicfindsatx@gmail.com',
+          '',
+          '(Attach the PDF you just saved before sending.)'
+        ].join('\n');
+        const url = 'mailto:' + (this.props.recipientEmail || 'ac@digitalallies.net') + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        try { window.print(); } catch (e) {}
+        setTimeout(() => {
+          const w = window.open(url, '_blank');
+          if (!w) { try { window.top.location.href = url; } catch (e) { window.location.href = url; } }
+          this.setState({ status: 'Email draft opened for ac@digitalallies.net — attach the PDF you just saved, then send.' });
+        }, 1200);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -12,20 +12,18 @@ interface Section {
 const sections: Section[] = [
   {
     id: 'getting-started',
-    title: 'Getting Started with Atomic Finds',
+    title: 'Getting Started',
     content: (
       <div>
-        <h3>Welcome to Your Atomic Finds Dashboard</h3>
-        <p>This is your command center for managing your vintage collection, product catalog, and customer communications. From here, you control everything your customers see on atomicfindsatx.store.</p>
-        <h4>Quick Start (5 minutes):</h4>
+        <h3>Welcome to Your Dashboard</h3>
+        <p>[Content to be added]</p>
+        <h4>Quick Start:</h4>
         <ol>
-          <li><strong>Set Your Brand:</strong> Go to Brand Theme and set the Atomic Finds color palette (Celestial Yellow, Deep Charcoal)</li>
-          <li><strong>Add Your First Product:</strong> Use Showroom to add a vintage piece with detailed photos and description</li>
-          <li><strong>Organize with Collections:</strong> Collections help customers discover by category (Seating, Tables, Storage, etc.)</li>
-          <li><strong>Meet The Curators:</strong> These four characters help guide customers—learn how they assign to products below</li>
-          <li><strong>Review Messages:</strong> Customer inquiries appear in Messages—respond within 24 hours</li>
+          <li><strong>Set Your Brand:</strong> Brand Theme configuration</li>
+          <li><strong>Add Your First Product:</strong> Showroom product management</li>
+          <li><strong>Organize with Collections:</strong> Categories and organization</li>
+          <li><strong>Review Messages:</strong> Customer inquiries and communications</li>
         </ol>
-        <p><strong>Key insight:</strong> Your success depends on authentic product descriptions and high-quality photos. Vintage furniture sells on detail and story.</p>
       </div>
     ),
   },
@@ -34,213 +32,148 @@ const sections: Section[] = [
     title: 'Dashboard Overview',
     content: (
       <div>
-        <h3>Understanding Your Dashboard</h3>
-        <p><strong>Left Sidebar:</strong> Navigate between all major sections</p>
+        <h3>Dashboard Navigation</h3>
+        <p>[Content to be added]</p>
+        <p><strong>Main Modules:</strong></p>
         <ul>
-          <li><strong>Messages</strong> - Contact form submissions</li>
-          <li><strong>Pages</strong> - Custom pages (About, Contact, Terms, Privacy, etc.)</li>
-          <li><strong>Collections</strong> - Product categories</li>
-          <li><strong>Showroom</strong> - Your products/inventory</li>
-          <li><strong>The Press Office</strong> - Blog posts and content</li>
-          <li><strong>Projects</strong> - Track your build checklist (The Workshop for dev only)</li>
-          <li><strong>Brand Theme</strong> - Logo, colors, fonts</li>
-          <li><strong>Settings</strong> - Business info, contact details, social links</li>
+          <li><strong>Messages</strong></li>
+          <li><strong>Pages</strong></li>
+          <li><strong>Collections</strong></li>
+          <li><strong>Showroom</strong></li>
+          <li><strong>Content</strong></li>
+          <li><strong>Projects</strong></li>
+          <li><strong>Brand Theme</strong></li>
+          <li><strong>Settings</strong></li>
         </ul>
-        <p><strong>Top Right:</strong> Your account menu (logout, settings)</p>
       </div>
     ),
   },
   {
     id: 'brand-setup',
-    title: 'Setting Up the Atomic Finds Aesthetic',
+    title: 'Brand Theme Configuration',
     content: (
       <div>
-        <h3>Make Your Site Match Your Brand</h3>
-        <h4>Brand Theme Colors</h4>
-        <p>Atomic Finds uses a celestial 1970s aesthetic with specific colors that drive brand recognition:</p>
+        <h3>Brand Setup</h3>
+        <p>[Content to be added]</p>
+        <h4>Brand Theme Elements</h4>
         <ul>
-          <li><strong>Primary (Celestial Yellow):</strong> #F5C842 — buttons, highlights, the cosmic energy</li>
-          <li><strong>Dark Background (MCM Charcoal):</strong> #1E1E1E — elegant depth for product display</li>
-          <li><strong>Accent (Warm Gold):</strong> Used for glows and orbital effects on product cards</li>
+          <li><strong>Colors:</strong> Primary, accent, and background colors</li>
+          <li><strong>Fonts:</strong> Heading and body font families</li>
+          <li><strong>Logo:</strong> Upload your brand logo</li>
         </ul>
-        <h4>Step 1: Set Your Brand Theme</h4>
-        <ol>
-          <li>Click "Brand Theme" in the left menu</li>
-          <li>Upload the Atomic Finds logo (mark.svg)</li>
-          <li>Set primary color to #F5C842 (Celestial Yellow)</li>
-          <li>Set background to #1E1E1E (MCM Charcoal)</li>
-          <li>Choose fonts: headings (Bagel Fat One), body (DM Sans)</li>
-          <li>Save</li>
-        </ol>
-        <h4>Step 2: Contact Info & Social</h4>
-        <ol>
-          <li>Click "Settings"</li>
-          <li>Business name: "Atomic Finds ATX"</li>
-          <li>Hours: Pickup by appointment</li>
-          <li>Phone: [Your number]</li>
-          <li>Email: atomicfindsatx@gmail.com</li>
-          <li>Link Instagram, Facebook (where customers see your new finds)</li>
-          <li>Save</li>
-        </ol>
-        <p><strong>Why this matters:</strong> Consistent branding builds trust. Customers should feel the vintage, cosmic vibe across every touchpoint.</p>
+        <h4>Settings & Contact Info</h4>
+        <ul>
+          <li>Business information</li>
+          <li>Contact details</li>
+          <li>Social media links</li>
+        </ul>
       </div>
     ),
   },
   {
     id: 'adding-products',
-    title: 'Adding Products to Your Collection',
+    title: 'Products & Showroom',
     content: (
       <div>
-        <h3>Publish Your Vintage Finds</h3>
-        <p>Every product tells a story. Your descriptions are the difference between a browser and a buyer.</p>
-        <h4>Add a Product One at a Time</h4>
-        <ol>
-          <li>Go to "Showroom" in the left menu</li>
-          <li>Click "Add Product"</li>
-          <li>Fill in the essentials:
-            <ul style={{ marginTop: '8px' }}>
-              <li><strong>Title:</strong> Era + Material + Item. Example: "1970s Rattan Coffee Table with Glass Top"</li>
-              <li><strong>Description:</strong> Tell the story. Why is this piece special? What's the condition? Any restoration?</li>
-              <li><strong>Price:</strong> Your asking price</li>
-              <li><strong>Collection:</strong> Assign to Seating, Tables, Storage, etc.</li>
-              <li><strong>Curator:</strong> Which character guides this? (Daisy for comfort, Milo for craftsmanship, Tatiana for drama, Malibu for gatherings)</li>
-            </ul>
-          </li>
-          <li>Upload photos (minimum 3–4 angles, high resolution)</li>
-          <li>Click "Publish"</li>
-        </ol>
-        <h4>Product Description Formula</h4>
-        <p>Use this template: [Era] [Material] [Style] | [Unique Feature] | [Condition/Restoration] | [Who It's For]</p>
-        <p><strong>Example:</strong> "1970s rattan coffee table with natural woven base and glass top. Brings warmth and texture without feeling precious. Cleaned and reinforced. Perfect for any living room that needs character."</p>
-        <h4>Bulk Import (CSV)</h4>
-        <ol>
-          <li>Go to "Collections" in the left menu</li>
-          <li>Select a collection (e.g., "Seating")</li>
-          <li>Click "Import CSV"</li>
-          <li>Upload a spreadsheet with columns: name, price, description, collection, curator, image_url</li>
-          <li>Review the preview and confirm</li>
-        </ol>
-        <p><strong>Pro tip:</strong> Authentic, detailed descriptions convert. Don't skip condition notes or measurements. Collectors want to know exactly what they're buying.</p>
+        <h3>Product Management</h3>
+        <p>[Content to be added]</p>
+        <h4>Adding Products</h4>
+        <ul>
+          <li>Product details and information</li>
+          <li>Image management</li>
+          <li>Collection assignment</li>
+          <li>Publishing and status</li>
+        </ul>
+        <h4>Bulk Operations</h4>
+        <ul>
+          <li>CSV import for multiple products</li>
+          <li>Batch operations</li>
+        </ul>
       </div>
     ),
   },
   {
     id: 'managing-pages',
-    title: 'Creating & Editing Pages',
+    title: 'Pages Management',
     content: (
       <div>
-        <h3>Build Your Story with Custom Pages</h3>
-        <h4>Key Atomic Finds Pages</h4>
-        <p>These pages are essential to your brand. Write them in your voice, with specific details:</p>
+        <h3>Custom Pages</h3>
+        <p>[Content to be added]</p>
+        <h4>Creating Pages</h4>
         <ul>
-          <li><strong>About Jennyfer:</strong> Your sourcing story. Why vintage? What drives you? Builds trust and connection.</li>
-          <li><strong>The Curators:</strong> Introduce Daisy, Milo, Tatiana, Malibu. Let customers pick their guide.</li>
-          <li><strong>How It Works:</strong> From browse to pickup. Clear expectations = happy customers.</li>
-          <li><strong>Contact:</strong> Make it easy to reach you. Questions about condition, pickup, delivery—answer them proactively.</li>
-          <li><strong>Journal / Blog:</strong> Restoration stories, care tips, Austin vintage guides. Builds SEO + authority.</li>
+          <li>Page creation and editing</li>
+          <li>Content blocks and formatting</li>
+          <li>Featured images</li>
+          <li>Publishing and URL configuration</li>
         </ul>
-        <h4>How to Create a Page</h4>
-        <ol>
-          <li>Go to "Pages" in the left menu</li>
-          <li>Click "New Page"</li>
-          <li>Title (e.g., "About Jennyfer")</li>
-          <li>Write your content. Use the block editor to add text, images, sections</li>
-          <li>Add a featured image (shows on collections pages, social shares)</li>
-          <li>Set the slug (URL path, e.g., /about-jennyfer)</li>
-          <li>Publish</li>
-        </ol>
-        <h4>Required Pages (Auto-Generated)</h4>
+        <h4>Required Pages</h4>
         <ul>
-          <li>Privacy Policy, Terms of Service, Cookie Policy</li>
-          <li>Accessibility Statement, AI Disclosure</li>
-          <li>These are legal + compliance—we provide templates. Customize minimally.</li>
+          <li>Privacy Policy</li>
+          <li>Terms of Service</li>
+          <li>Accessibility Statement</li>
+          <li>AI Disclosure</li>
         </ul>
       </div>
     ),
   },
   {
     id: 'collections',
-    title: 'Organizing with Collections',
+    title: 'Collections & Categories',
     content: (
       <div>
-        <h3>Help Customers Find What They Love</h3>
-        <h4>Atomic Finds Collection Structure</h4>
-        <p>Collections are how customers browse. Use these primary categories:</p>
-        <ul>
-          <li><strong>Seating:</strong> Lounge chairs, barrel chairs, dining chairs, statement seats</li>
-          <li><strong>Tables:</strong> Coffee tables, side tables, dining tables, glass-topped finds</li>
-          <li><strong>Storage & Shelving:</strong> Étagères, cabinets, credenzas, shelving units</li>
-          <li><strong>Dining & Entertaining:</strong> Bar carts, dining sets, party-ready pieces</li>
-          <li><strong>Bedroom:</strong> Dressers, nightstands, soft-textured finds</li>
-          <li><strong>Plant & Decor:</strong> Plant stands, mirrors, lighting, character pieces</li>
-          <li><strong>New Arrivals:</strong> Auto-tag recent finds so customers see what's fresh</li>
-          <li><strong>Statement Pieces:</strong> Your showstoppers—dramatic silhouettes, conversation starters</li>
-        </ul>
+        <h3>Collection Management</h3>
+        <p>[Content to be added]</p>
+        <h4>Collection Structure</h4>
+        <p>Use collections to organize products by category.</p>
         <h4>Create a Collection</h4>
-        <ol>
-          <li>Go to "Collections" in the left menu</li>
-          <li>Click "New Collection"</li>
-          <li>Name: (e.g., "Seating")</li>
-          <li>Description: Write what customers will see. Example: "Lounge-worthy seating, sculptural frames, and statement seats that make people linger."</li>
-          <li>Save</li>
-        </ol>
-        <h4>Assign Products to Collections</h4>
-        <p>When creating a product, select its primary collection. A rattan lounge chair goes in Seating. A bar cart goes in Dining & Entertaining. Collections help customers navigate and improve SEO.</p>
+        <ul>
+          <li>Collection name</li>
+          <li>Collection description</li>
+          <li>Associated products</li>
+        </ul>
+        <h4>Assign Products</h4>
+        <p>Assign products to appropriate collections during product creation or editing.</p>
       </div>
     ),
   },
   {
     id: 'messages-contact',
-    title: 'Handling Messages & Contact Submissions',
+    title: 'Messages & Communications',
     content: (
       <div>
-        <h3>Stay Connected with Customers</h3>
-        <h4>Where Messages Appear</h4>
-        <ol>
-          <li>Go to "Messages" tab</li>
-          <li>You'll see all contact form submissions here</li>
-          <li>Each message shows: name, email, phone, message, date</li>
-        </ol>
-        <h4>Responding</h4>
-        <ol>
-          <li>Click on a message</li>
-          <li>Read the full submission</li>
-          <li>Reply via email (copy their email address from the message)</li>
-          <li>Or mark as handled when done</li>
-        </ol>
-        <p><strong>💡 Tip:</strong> Respond promptly (within 24 hours). First impression matters!</p>
+        <h3>Managing Messages</h3>
+        <p>[Content to be added]</p>
+        <h4>Message Overview</h4>
+        <ul>
+          <li>Contact form submissions</li>
+          <li>Message details and history</li>
+          <li>Response management</li>
+        </ul>
+        <h4>Responding to Messages</h4>
+        <ul>
+          <li>Reading and tracking messages</li>
+          <li>Email responses</li>
+          <li>Status tracking</li>
+        </ul>
       </div>
     ),
   },
   {
     id: 'csv-uploader',
-    title: 'CSV Bulk Imports (Advanced)',
+    title: 'Bulk Import (CSV)',
     content: (
       <div>
-        <h3>Import Multiple Products at Once</h3>
-        <p>For larger inventories or updates, CSV import saves time. This guide covers the Atomic Finds-specific workflow.</p>
+        <h3>CSV Import for Bulk Operations</h3>
+        <p>[Content to be added]</p>
         <h4>CSV Format</h4>
-        <p>Create a spreadsheet (Google Sheets or Excel) with these columns:</p>
-        <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
-          <li><code>name</code> — Product title (e.g., "1970s Rattan Coffee Table with Glass Top")</li>
-          <li><code>price</code> — Asking price (numeric, no $ symbol)</li>
-          <li><code>description</code> — Full description with era, materials, condition, restoration notes</li>
-          <li><code>collection</code> — Primary category (Seating, Tables, Storage, etc.)</li>
-          <li><code>curator</code> — Assigned character (Daisy, Milo, Tatiana, or Malibu)</li>
-          <li><code>image_url</code> — URL to the product photo (must be publicly accessible)</li>
-          <li><code>tags</code> — Comma-separated keywords (rattan, vintage, 1970s, boho, living-room)</li>
+        <p>Prepare a CSV file with appropriate columns for your product data.</p>
+        <h4>Import Process</h4>
+        <ul>
+          <li>File preparation</li>
+          <li>Upload and preview</li>
+          <li>Validation and confirmation</li>
+          <li>Processing and completion</li>
         </ul>
-        <h4>How to Import</h4>
-        <ol>
-          <li>Prepare your CSV file with the columns above</li>
-          <li>Go to "Collections" → select a collection</li>
-          <li>Click "Import CSV"</li>
-          <li>Upload your file</li>
-          <li>Review the preview (check for errors)</li>
-          <li>Click "Confirm"</li>
-          <li>Wait for processing (usually 1–2 minutes)</li>
-        </ol>
-        <p><strong>Pro tip:</strong> Test with 3–5 products first. Once you're confident, do larger batches. Always review the preview before confirming.</p>
       </div>
     ),
   },
