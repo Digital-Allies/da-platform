@@ -153,6 +153,7 @@ export default function AdminShell({ children, userEmail, businessName, logoUrl,
   const allNavItems = [
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={16} /> },
     { label: 'Onboarding', path: '/admin/onboarding', icon: <BookOpen size={16} /> },
+    { label: 'Questionnaires', path: '/admin/questionnaires', icon: <FileText size={16} /> },
     { label: 'Messages', path: '/admin/messages', icon: <Inbox size={16} /> },
     { label: 'Pages', path: '/admin/pages', icon: <FileText size={16} /> },
     { label: 'Collections', path: '/admin/collections', icon: <FolderKanban size={16} /> },
