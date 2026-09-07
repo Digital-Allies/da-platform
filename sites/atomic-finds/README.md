@@ -66,12 +66,36 @@ below referenced any of it). What's left is current:
 - `CLAUDE.md` — **current** design tokens, type, spacing, motion, voice, and commerce rules (read this first)
 - `Master Setup Guide_ Atomic Finds Digital Destination (1).txt` — early strategy doc; has real owner contact info and review themes, technical instructions are stale (describes a different, never-used platform) — worth a human skim to extract anything still useful, otherwise safe to remove
 
-### Claude Design handoffs (source of the live build)
-- `design_handoff_homepage/` — full homepage HTML/CSS/tokens/fonts pulled from the approved Claude Design project (`29110ac3-0a76-4fa1-a322-a78bc212a50d`), plus `products-catalog.json` / `reviews-catalog.json` reference data. Includes the `GalaxyCard` reference component — this is the current source for `GalaxyCard.tsx`, not the old standalone prototype (removed).
-- `design_handoff_product_grid/` — ProductCard/ProductGrid reference components and prompt, updated to match the shipped `resolveProductCta()` contract
+### Pre-rebrand archive (2026-08-23)
+Atomic Finds ATX is doing a full rebrand — the "Galaxy Night Market" concept
+below was never finalized/locked, and a new design system has not been
+attached yet. The old planning/design-handoff material was moved (not
+deleted, `git mv`) to `archive/pre-rebrand/`, preserving its structure, so it
+stays available for reference without cluttering the live folder:
+- `archive/pre-rebrand/design_handoff_homepage/` (was `design_handoff_homepage/`)
+- `archive/pre-rebrand/design_handoff_product_grid/` (was `design_handoff_product_grid/`)
+- `archive/pre-rebrand/ATOMIC_FINDS_TOKEN_SYNC_CHECKLIST.md` (was in `packages/design-system/`)
+- `archive/pre-rebrand/ATOMIC_FINDS_AUDIT_WORK_QUEUE.md` (was at repo root)
+- `archive/pre-rebrand/assets/{cards,curator-section,custom-icons,glaxy-featured-card-design-guide,logo-variations,patterns,product-card-design-guides,section-design-guides}/` (were under `assets/`)
+
+Real business data was NOT touched: `assets/products/` (real product
+photography backing live `products.image_url` values), the `products`,
+`reviews`, and `clients` Supabase rows, and real settings/contact info all
+stay exactly where they were.
+
+The live components (`tools/build-workflows/sites/atomic-finds/components/*`)
+were refactored in the same PR to read colors/fonts from the site's
+`--tok-*` CSS variables instead of hardcoding the old tokens inline — so
+attaching a new design system later is a `design_tokens` data update, not a
+code rewrite. See that directory's components for details.
+
+### Claude Design handoffs (source of the live build — pre-rebrand, archived)
+- `archive/pre-rebrand/design_handoff_homepage/` — full homepage HTML/CSS/tokens/fonts pulled from the approved Claude Design project (`29110ac3-0a76-4fa1-a322-a78bc212a50d`), plus `products-catalog.json` / `reviews-catalog.json` reference data. Includes the `GalaxyCard` reference component — this was the source for `GalaxyCard.tsx`.
+- `archive/pre-rebrand/design_handoff_product_grid/` — ProductCard/ProductGrid reference components and prompt, updated to match the shipped `resolveProductCta()` contract
 
 ### Assets
-- `assets/` — fonts, raw Marketplace product photos (still needed for `products.image_url`, currently null on several rows), curator character art, patterns, logo variations. Some subfolders here (pattern/icon/logo variants, design-guide reference screenshots) look like exploratory leftovers rather than shipped assets — flagged for a closer pass, not yet touched.
+- `assets/products/` — raw Marketplace product photos, still needed for `products.image_url` (currently null on several rows). This is real business data — not moved.
+- Old-brand decorative/reference assets (curator character art, patterns, icons, logo variants, design-guide reference screenshots) were exploratory leftovers from the pre-rebrand concept — archived to `archive/pre-rebrand/assets/`, see above.
 
 ## Status
 

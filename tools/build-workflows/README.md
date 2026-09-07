@@ -92,7 +92,7 @@ For **Templated-tier** clients, this app also renders their public site: block-b
 
 **To apply after merge** (nothing touches the live DB automatically): Supabase Dashboard → Atomic Finds ATX project → SQL Editor → paste + Run the migration file, then the seed file. Verify 4 rows in Table Editor → `products`.
 
-**Design handoff is in the repo:** `sites/atomic-finds/design_handoff_homepage/` — full brand system (tokens, component references incl. `ProductCard`/`ProductGrid`, guidelines), the production homepage as self-contained HTML, real product photography, and `products-catalog.json` with the real catalog (SKUs, categories, priced items). Note: the handoff's catalog JSON carries fields the live table doesn't have yet (`sku`, `category`, `badge`, `in_stock`, `origin/era/dimensions`) — a follow-up migration reconciles this before the storefront wiring lands.
+**Design handoff is in the repo:** `sites/atomic-finds/archive/pre-rebrand/design_handoff_homepage/` — full brand system (tokens, component references incl. `ProductCard`/`ProductGrid`, guidelines), the production homepage as self-contained HTML, real product photography, and `products-catalog.json` with the real catalog (SKUs, categories, priced items). Note: the handoff's catalog JSON carries fields the live table doesn't have yet (`sku`, `category`, `badge`, `in_stock`, `origin/era/dimensions`) — a follow-up migration reconciles this before the storefront wiring lands.
 
 **Still to build (reusable-first):**
 1. Storefront components from the handoff — product cards, **quick-view modal** (no separate product pages yet), catalog grid with category tabs — plus a `'products'` case in `BlockRenderer.tsx`.

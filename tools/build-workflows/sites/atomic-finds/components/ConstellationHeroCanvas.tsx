@@ -1,5 +1,7 @@
 'use client';
 
+// TODO: revisit once the new Atomic Finds design system is attached — bespoke galaxy animation may not survive the rebrand.
+
 import React, { useEffect, useRef } from 'react';
 
 const SHAPES = [

@@ -4,6 +4,21 @@
 **Owner:** Anthony Cassella / Digital Allies  
 **Based on existing materials:** Product taxonomy, rattan deep-dive, website copy approach
 
+> **⚠ 2026-08-23 — Pre-rebrand flag, human review needed.** Atomic Finds ATX
+> is doing a full rebrand; the old "Galaxy Night Market" visual concept was
+> never finalized/locked and is being retired. This doc mixes two kinds of
+> content and it is NOT this agent's call which parts survive the rebrand —
+> a human should skim and decide:
+> - **Likely superseded (visual-identity specifics tied to the old concept):**
+>   the "celestial yellow" / dark-background color-palette guidance and the
+>   "brand fonts" callout (DM Sans / Bagel Fat One) around line 180 below,
+>   and any other celestial/galaxy/starfield imagery cues.
+> - **Possibly still current (voice/tone/business content):** the mission,
+>   values, tone-of-voice, Curators concept, and Jennyfer's story/authority
+>   framing — none of that is inherently tied to the old visual system.
+>
+> Nothing in this file was moved or deleted — flagging only.
+
 ---
 
 ## Overview

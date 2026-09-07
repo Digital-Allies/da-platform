@@ -1,7 +1,7 @@
 'use client'
 
 // GalaxyCard — Atomic Finds ATX signature featured-product card. Ported from
-// sites/atomic-finds/design_handoff_homepage/components/GalaxyCard.reference.jsx:
+// sites/atomic-finds/archive/pre-rebrand/design_handoff_homepage/components/GalaxyCard.reference.jsx:
 // a tilted 3D orbital ring with an orbiting moon around a nebula-washed product
 // card, hover lift/scale, click opens a detail dialog.
 //
