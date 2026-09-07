@@ -11,12 +11,17 @@ Prerequisite: a complete Build Brief and an approved build on a Vercel preview.
 ## 1. Supabase — create the tenant
 
 - [ ] Generate a UUID for `client_id` (`gen_random_uuid()` or uuidgenerator.net).
-- [ ] Insert the client row:
+- [ ] Insert the client row (the `clients` table is just `id`, `auth_user_id`,
+      `business_name`, `plan`, `created_at` — no `name`/`slug`/`domain`
+      columns; `on conflict` keeps this safe to re-run):
       ```sql
-      insert into clients (id, name, slug, domain)
-      values ('<UUID>', '<Client Name>', '<slug>', '<domain>');
+      insert into clients (id, business_name)
+      values ('<UUID>', '<Client Name>')
+      on conflict (id) do update set business_name = excluded.business_name;
       ```
-- [ ] Insert `settings` rows (site_title, brand_color, hero copy, phone, email).
+- [ ] Insert `settings` rows (site_title, brand_color, hero copy, phone, email) —
+      this is where the site title, domain-facing copy, etc. actually live, not
+      on the `clients` row.
 - [ ] Insert `design_tokens` for the Brand face (colors, fonts, logo).
 - [ ] Seed starter content (services, testimonials, a first page) per the brief.
 - [ ] Write the `client_id` back into the Build Brief §7.

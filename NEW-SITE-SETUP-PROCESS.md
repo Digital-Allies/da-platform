@@ -321,7 +321,7 @@ Referenced by name throughout this process. Load these before working on related
 | `SiteTheme` | `src/components/site/SiteTheme.tsx` | Injects `--tok-*` CSS variables |
 | `RevealOnScroll` | `src/components/site/RevealOnScroll.tsx` | Intersection observer scroll reveals |
 | `CTAButton` | `src/components/site/CTAButton.tsx` | Primary/secondary/ghost button variants |
-| `AtomicFindsHomepage` | `src/components/site/atomic-finds/` | Bespoke AF homepage (client-specific) |
+| `AtomicFindsHomepage` | `tools/build-workflows/sites/atomic-finds/components/AtomicFindsHomepage.tsx` (via the `@sites/atomic-finds/*` alias, see `tools/build-workflows/tsconfig.json`) | Bespoke AF homepage (client-specific) |
 
 ### Components — Required But Not Yet Built
 | Component | Purpose | Priority |
