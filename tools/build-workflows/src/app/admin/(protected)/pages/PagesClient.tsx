@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase';
 import { useClientId } from '@/lib/client-context';
 import { useRouter } from 'next/navigation';
 import { ArrowUp, ArrowDown, Trash, Plus, Zap, Check, Code2 } from 'lucide-react';
+import { SECTION_REGISTRY } from '@/lib/section-registry';
 
 interface Block {
   type: string;
@@ -114,22 +115,10 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
   };
 
   const handleAddBlock = (type: string) => {
-    let defaultData = {};
-    if (type === 'hero') {
-      defaultData = { title: '{hero_title}', subtitle: '{hero_subtitle}', ctaText: 'Shop Collection', ctaLink: '#showroom' };
-    } else if (type === 'richtext') {
-      defaultData = { content: '<p>Welcome to {site_title}. Edit this copy or connect to live data variables.</p>' };
-    } else if (type === 'services') {
-      defaultData = { title: 'Our Services', description: 'Curated solutions' };
-    } else if (type === 'testimonials') {
-      defaultData = { title: 'Customer Reviews', description: 'What buyers say' };
-    } else if (type === 'products') {
-      defaultData = { title: 'Featured Finds Catalog' };
-    } else if (type === 'cta') {
-      defaultData = { title: 'Ready to Order?', subtitle: 'Contact our store team today', buttonText: 'Contact Us', buttonLink: '#contact' };
-    } else if (type === 'contact') {
-      defaultData = { title: 'Get in Touch', subtitle: 'Call us at {phone} or send a message below.' };
-    }
+    const entry = SECTION_REGISTRY[type];
+    // Deep-clone the registry's defaultContent so mutating this block's data
+    // later never mutates the shared registry default.
+    const defaultData = entry ? JSON.parse(JSON.stringify(entry.defaultContent)) : {};
 
     const newBlocks = [...blocks, { type, data: defaultData }];
     setBlocks(newBlocks);
@@ -166,6 +155,15 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
       ...newBlocks[index].data,
       [key]: value
     };
+    setBlocks(newBlocks);
+  };
+
+  // Used by SECTION_REGISTRY[type].AdminForm components (e.g. faq, stats)
+  // that manage a whole sub-object (repeatable items) rather than one field
+  // at a time.
+  const handleBlockDataReplace = (index: number, data: any) => {
+    const newBlocks = [...blocks];
+    newBlocks[index] = { ...newBlocks[index], data };
     setBlocks(newBlocks);
   };
 
@@ -302,6 +300,50 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
                 </div>
                 <div style="display: inline-block; padding: 10px 20px; background: ${primaryColor}; color: white; font-weight: bold; font-family: '${fontBody}', monospace; font-size: 12px; text-transform: uppercase; border-radius: ${buttonRadius}; box-shadow: ${buttonGlow};">Send Message</div>
               </div>
+            </section>
+          `;
+        case 'faq':
+          return `
+            <section style="padding: 45px 20px; max-width: 700px; margin: 0 auto; font-family: '${fontHeading}', sans-serif;">
+              ${block.data.title ? `<h2 style="font-size: 22px; text-align: center; margin-bottom: 20px; color: ${textColor};">${resolveText(block.data.title)}</h2>` : ''}
+              ${(block.data.items || []).map((item: any) => `
+                <div style="border-bottom: 1px solid ${textColor}; padding: 12px 0;">
+                  <div style="font-weight: bold; font-size: 14px; color: ${textColor};">${item.question || 'Question'}</div>
+                  <div style="font-family: '${fontBody}', monospace; font-size: 12px; color: #6b6b6b; margin-top: 6px;">${item.answer || ''}</div>
+                </div>
+              `).join('')}
+            </section>
+          `;
+        case 'stats':
+          return `
+            <section style="padding: 45px 20px; text-align: center; font-family: '${fontHeading}', sans-serif;">
+              ${block.data.title ? `<h2 style="font-size: 22px; margin-bottom: 20px; color: ${textColor};">${resolveText(block.data.title)}</h2>` : ''}
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 16px; max-width: 700px; margin: 0 auto;">
+                ${(block.data.stats || []).map((stat: any) => `
+                  <div>
+                    <div style="font-size: 28px; font-weight: bold; color: ${primaryColor};">${stat.value || '0'}</div>
+                    <div style="font-family: '${fontBody}', monospace; font-size: 11px; color: #6b6b6b;">${stat.label || ''}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </section>
+          `;
+        case 'quote':
+          return `
+            <section style="padding: 45px 20px; max-width: 600px; margin: 0 auto; text-align: center; font-family: '${fontHeading}', sans-serif;">
+              <blockquote style="font-size: 20px; font-style: italic; color: ${textColor}; border-left: 4px solid ${primaryColor}; padding-left: 16px; margin: 0; text-align: left;">
+                "${resolveText(block.data.quote) || 'Quote text goes here.'}"
+              </blockquote>
+              ${block.data.attribution ? `<p style="font-family: '${fontBody}', monospace; font-size: 12px; color: #6b6b6b; margin-top: 12px;">— ${resolveText(block.data.attribution)}</p>` : ''}
+            </section>
+          `;
+        case 'media':
+          return `
+            <section style="padding: 45px 20px; max-width: 700px; margin: 0 auto; text-align: center; font-family: '${fontHeading}', sans-serif;">
+              <div style="width: 100%; aspect-ratio: 16/9; background: #e5e5e5; border-radius: ${buttonRadius}; display: flex; align-items: center; justify-content: center; color: #999; font-family: '${fontBody}', monospace; font-size: 12px;">
+                ${block.data.mediaType === 'video' ? '▶ Video preview' : '🖼 Image preview'}
+              </div>
+              ${block.data.caption ? `<p style="font-family: '${fontBody}', monospace; font-size: 12px; color: #6b6b6b; margin-top: 8px;">${resolveText(block.data.caption)}</p>` : ''}
             </section>
           `;
         default:
@@ -478,13 +520,17 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
               <div style={{ borderTop: 'var(--border-1)', paddingTop: '20px', marginTop: '20px' }}>
                 <h3 style={{ fontSize: '16px', marginBottom: '12px' }}>Component Blocks</h3>
                 <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', flexWrap: 'wrap' }}>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('hero')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> Hero</button>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('richtext')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> Richtext</button>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('services')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> Services</button>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('testimonials')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> Reviews</button>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('products')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> Catalog</button>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('cta')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> CTA</button>
-                  <button type="button" className="btn btn--secondary" onClick={() => handleAddBlock('contact')} style={{ padding: '6px 10px', fontSize: '11px' }}><Plus size={12}/> Contact Form</button>
+                  {Object.entries(SECTION_REGISTRY).map(([type, entry]) => (
+                    <button
+                      key={type}
+                      type="button"
+                      className="btn btn--secondary"
+                      onClick={() => handleAddBlock(type)}
+                      style={{ padding: '6px 10px', fontSize: '11px' }}
+                    >
+                      <Plus size={12} /> {entry.label}
+                    </button>
+                  ))}
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -583,40 +629,50 @@ export default function PagesClient({ initialPages, siteSettings = {}, designTok
                             </div>
                           ) : (
                           <>
-                          {block.type === 'hero' && (
-                            <>
-                              <ConnectedInputField label="Headline" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
-                              <ConnectedInputField label="Subheading" value={block.data.subtitle} onChange={v => handleBlockDataChange(idx, 'subtitle', v)} />
-                              <ConnectedInputField label="CTA Button Text" value={block.data.ctaText} onChange={v => handleBlockDataChange(idx, 'ctaText', v)} />
-                              <ConnectedInputField label="CTA Button Link" value={block.data.ctaLink} onChange={v => handleBlockDataChange(idx, 'ctaLink', v)} />
-                            </>
-                          )}
-                          {block.type === 'richtext' && (
-                            <ConnectedInputField label="HTML / Text Content" isTextarea value={block.data.content} onChange={v => handleBlockDataChange(idx, 'content', v)} />
-                          )}
-                          {block.type === 'services' && (
-                            <ConnectedInputField label="Section Title" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
-                          )}
-                          {block.type === 'testimonials' && (
-                            <ConnectedInputField label="Section Title" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
-                          )}
-                          {block.type === 'products' && (
-                            <ConnectedInputField label="Section Title" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
-                          )}
-                          {block.type === 'cta' && (
-                            <>
-                              <ConnectedInputField label="Headline" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
-                              <ConnectedInputField label="Subheading" value={block.data.subtitle} onChange={v => handleBlockDataChange(idx, 'subtitle', v)} />
-                              <ConnectedInputField label="Button Text" value={block.data.buttonText} onChange={v => handleBlockDataChange(idx, 'buttonText', v)} />
-                              <ConnectedInputField label="Button Link" value={block.data.buttonLink} onChange={v => handleBlockDataChange(idx, 'buttonLink', v)} />
-                            </>
-                          )}
-                          {block.type === 'contact' && (
-                            <>
-                              <ConnectedInputField label="Headline" value={block.data.title} onChange={v => handleBlockDataChange(idx, 'title', v)} />
-                              <ConnectedInputField label="Subheading" value={block.data.subtitle} onChange={v => handleBlockDataChange(idx, 'subtitle', v)} />
-                            </>
-                          )}
+                          {(() => {
+                            const entry = SECTION_REGISTRY[block.type];
+                            if (!entry) return null;
+
+                            // Block types with repeatable sub-items (faq, stats)
+                            // bring their own full editor.
+                            if (entry.AdminForm) {
+                              const Editor = entry.AdminForm;
+                              return (
+                                <Editor
+                                  data={block.data}
+                                  onChange={(newData: any) => handleBlockDataReplace(idx, newData)}
+                                />
+                              );
+                            }
+
+                            // Everything else is a flat set of scalar fields —
+                            // driven generically from SECTION_REGISTRY[type].adminFields
+                            // instead of a hardcoded per-type branch here.
+                            return (entry.adminFields || []).map(field => (
+                              field.kind === 'select' ? (
+                                <div className="form-group" style={{ marginBottom: '12px' }} key={field.key}>
+                                  <label className="form-label font-bold text-xs uppercase tracking-wider">{field.label}</label>
+                                  <select
+                                    className="form-control"
+                                    value={block.data?.[field.key] || ''}
+                                    onChange={e => handleBlockDataChange(idx, field.key, e.target.value)}
+                                  >
+                                    {(field.options || []).map(opt => (
+                                      <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                    ))}
+                                  </select>
+                                </div>
+                              ) : (
+                                <ConnectedInputField
+                                  key={field.key}
+                                  label={field.label}
+                                  isTextarea={field.kind === 'textarea'}
+                                  value={block.data?.[field.key]}
+                                  onChange={v => handleBlockDataChange(idx, field.key, v)}
+                                />
+                              )
+                            ));
+                          })()}
                           </>
                           )}
                         </div>

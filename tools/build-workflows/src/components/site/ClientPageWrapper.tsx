@@ -6,6 +6,7 @@ import AtomicNav from '@sites/atomic-finds/components/AtomicNav';
 import Starfield from '@sites/atomic-finds/components/Starfield';
 import { getSiteSettings, getPublishedPages } from '@/lib/data';
 import { ATOMIC_FINDS_CLIENT_ID } from '@/lib/theme';
+import { RESERVED_PAGE_SLUGS } from '@/lib/reserved-slugs';
 import '@sites/atomic-finds/styles/atomic-finds.css';
 
 interface ClientPageWrapperProps {
@@ -86,9 +87,8 @@ export default async function ClientPageWrapper({
     );
   }
 
-  const LEGAL_SLUGS = ['privacy', 'terms', 'cookies', 'accessibility', 'use-of-ai', 'legal', 'sitemap'];
   const pageNavItems = publishedPages
-    .filter((p: any) => !LEGAL_SLUGS.includes(p.slug.toLowerCase().trim()))
+    .filter((p: any) => !RESERVED_PAGE_SLUGS.includes(p.slug.toLowerCase().trim()))
     .map((p: any) => ({ label: p.title, href: `/${p.slug}` }));
 
   return (

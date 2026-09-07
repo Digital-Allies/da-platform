@@ -1,0 +1,9 @@
+{
+  "name": "da-platform",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "tools/build-workflows",
+    "packages/design-system"
+  ]
+}

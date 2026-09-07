@@ -13,6 +13,7 @@ import SiteTheme from '@/components/site/SiteTheme'
 import AtomicFindsHomepage from '@sites/atomic-finds/components/AtomicFindsHomepage'
 import { getSiteSettings, getServices, getTestimonials, getPageBySlug, getProducts, getFeaturedReviews, getCollections, getPublishedPages } from '@/lib/data'
 import { ATOMIC_FINDS_CLIENT_ID } from '@/lib/theme'
+import { RESERVED_PAGE_SLUGS } from '@/lib/reserved-slugs'
 
 export const revalidate = 60 // ISR — refresh every 60 seconds
 
@@ -41,11 +42,9 @@ export default async function HomePage() {
     getPublishedPages(),
   ])
 
-  const LEGAL_SLUGS = ['privacy', 'terms', 'cookies', 'accessibility', 'use-of-ai', 'legal', 'sitemap']
-
   // Build dynamic nav items from published pages (excluding legal pages meant for footer)
   const pageNavItems = publishedPages
-    .filter((page: any) => !LEGAL_SLUGS.includes(page.slug.toLowerCase().trim()))
+    .filter((page: any) => !RESERVED_PAGE_SLUGS.includes(page.slug.toLowerCase().trim()))
     .map((page: any) => ({
       label: page.title,
       href: `/${page.slug}`,
