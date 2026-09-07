@@ -4,11 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Brand color (set per client via Supabase settings → brand_color) ──────
-   Injected into layout.tsx as a style attribute on <body>:
-   style={{ '--brand': settings.brand_color } as React.CSSProperties}           */
+/* ─── Brand color ────────────────────────────────────────────────────────────
+   Real per-client value comes from Supabase design_tokens.colors.primary
+   (see lib/theme.ts / lib/data.ts getLiveDesignTokens), set as `--brand` by
+   SiteTheme.tsx on its wrapping div. This root default only covers markup
+   rendered outside that wrapper (e.g. admin chrome, which stays DA-branded
+   regardless of client per decision #7). */
 :root {
-  --brand: #C5301A; /* Default Signal Red — overridden per client via Supabase settings.brand_color */
+  --brand: #C5301A; /* Default Signal Red */
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */

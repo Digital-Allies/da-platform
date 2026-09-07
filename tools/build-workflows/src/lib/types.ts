@@ -137,6 +137,13 @@ export interface ContactSubmission {
 // ─── Derived / Helper Types ───────────────────────────────────────────────────
 
 // Settings flattened into a usable object
+//
+// Note: `brand_color` was removed (2026-08) — it was a settings-table key
+// injected as `--brand` on <body> in layout.tsx, but SiteTheme.tsx always
+// overrides `--brand` from the client's real design_tokens/theme.ts primary
+// color, so it had zero live effect and had no admin UI editing it either.
+// Theme colors now live entirely in design_tokens, edited via /admin/theme
+// (ThemeClient.tsx) — see THEME_ENGINE_PLAN.md's superseded note.
 export interface SiteSettings {
   site_title: string
   site_description: string
@@ -144,7 +151,6 @@ export interface SiteSettings {
   phone: string
   email: string
   address: string
-  brand_color: string
   logo_url: string
   favicon_url: string
   instagram_url: string
@@ -177,7 +183,6 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   phone: '',
   email: '',
   address: '',
-  brand_color: '#1A6B8A',
   logo_url: '',
   favicon_url: '',
   instagram_url: '',

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Navigation, Footer } from '@/components/site'
+import SiteTheme from '@/components/site/SiteTheme'
 import { getSiteSettings, getPublishedPosts } from '@/lib/data'
 
 export const revalidate = 60
@@ -11,7 +12,7 @@ export default async function BlogPage() {
   const [settings, posts] = await Promise.all([getSiteSettings(), getPublishedPosts()])
 
   return (
-    <>
+    <SiteTheme clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
       <Navigation
         logoUrl={settings.logo_url || undefined}
         siteTitle={settings.site_title}
@@ -68,6 +69,6 @@ export default async function BlogPage() {
       </main>
 
       <Footer settings={settings} />
-    </>
+    </SiteTheme>
   )
 }
