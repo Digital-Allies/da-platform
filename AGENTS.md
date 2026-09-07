@@ -105,3 +105,21 @@ Everything else — writing files, running shell scripts, installing packages, c
 A bug fix found while doing a task can ship in the same PR if it's small and directly required to make that task's own change work. Once a fix is trending past **~3 commits**, or touches files/systems the original task isn't changing, stop extending the branch — open a new one instead (or log it in `STATUS.md`/a GitHub issue if it's too big to finish now). Anything from the sign-off list above already implies its own PR — don't fold schema/env/prod-merge work into a feature branch.
 
 This applies to every agent working in this repo, scheduled or interactive — PR #10 (2026-07-26 → 2026-07-30) grew across 5 sessions into a mix of unrelated features and got hard to track, which is what this rule is protecting against.
+
+---
+
+## Code review — required after any coding, not optional
+
+GitHub Copilot's automatic PR review isn't available on this account (daily credits run out). Until that's back, every agent working in this repo — scheduled or interactive — is the substitute reviewer, not a nice-to-have:
+
+- **After writing or changing code, before calling a task done, review it** — the `code-review` skill at `high` effort against the diff/branch/PR is the default way to do this. Do this even for a branch someone else (a prior session, a human) wrote, if you're the one pushing/opening the PR for it.
+- **Verify every finding against the real code before fixing it** — don't take a finding at face value or fix on faith. Read the actual call sites, check assumptions (e.g. does this data path really run the way the finding assumes?), and confirm the failure scenario reproduces before spending a fix on it. A finding that doesn't hold up under that check gets dropped, not fixed.
+- **Fix what's real and in scope** (small, directly required, same rules as the PR-scoping section above); flag — don't silently fix — anything that's a genuinely separate concern or bigger than a small fix.
+- **Leave a comment on the PR** summarizing what was found and fixed, same as any other review — this is standing in for Copilot's review comments, not replacing this repo's normal PR conventions.
+- This doesn't replace `npx tsc --noEmit` / build verification — do both.
+
+---
+
+## Weekly maintenance run
+
+A Routine fires into a fresh session weekly to do a maintenance pass: `git status`/`tsc` health check across open branches, open-PR triage (anything red, stale, or waiting past its own norms), a check for repository-hygiene drift (§ above), and a `STATUS.md` update logging what it found. Scoped to `Digital-Allies/da-platform` (attach `Digital-Allies/DigitalAllies` separately if a session needs it). Not a substitute for interactive sessions — it's a floor, not the only time this repo gets looked at.
