@@ -15,8 +15,8 @@ platform) — this folder is not itself a runnable app.
 
 | Piece | Path (in `tools/build-workflows`) |
 |---|---|
-| Bespoke homepage | `src/components/site/atomic-finds/AtomicFindsHomepage.tsx` |
-| Homepage styles | `src/styles/atomic-finds.css` |
+| Bespoke homepage | `sites/atomic-finds/components/AtomicFindsHomepage.tsx` |
+| Homepage styles | `sites/atomic-finds/styles/atomic-finds.css` |
 | Product grid + quick-view modal | `src/components/site/ProductGrid.tsx` |
 | Galaxy Card (signature featured-product component) | `src/components/site/GalaxyCard.tsx` |
 | CTA / selling-state resolver | `src/lib/commerce.ts` (`resolveProductCta`) |
