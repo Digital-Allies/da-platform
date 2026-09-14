@@ -5,7 +5,37 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
-**Last updated:** 2026-09-07 — by Claude Code (scheduled weekly maintenance): build clean, 9 open PRs now (all still unreviewed, 8 of them 2+ weeks old), same 6 stale branches, one new small hygiene fix shipped as PR #54, and real feature work landed on `main` directly this week (Questionnaires admin module) that's worth Anthony's awareness — see entry below. **Still urgent: GitHub issue #11's P0 security gap is now 40 days open and confirmed still live.**
+**Last updated:** 2026-09-14 — by Claude Code (scheduled weekly maintenance): **new live regression found — the MM23 auto-sync tool deleted 4 nav-icon images from `public/atomic-finds/` that `AtomicNav.tsx` still references, and it's been deployed to production for ~15 hours.** Otherwise: build clean, all 10 open PRs unchanged/unreviewed, same 6 stale branches, no new hygiene violations beyond what already has an open PR. **Also still urgent: GitHub issue #11's P0 security gap is now 47 days open and confirmed still live.** See top of entry below for both.
+
+## 2026-09-14 — weekly maintenance pass: live regression found (Atomic Finds nav icons broken on production), P0 security gap now 47 days open, nothing else changed
+
+**🚨 New, urgent — a live production regression, not just a hygiene finding.** This week's `git pull` brought in `c6bd412` ("chore: sync MM23 2026-09-13 16:23", Sun Sep 13 16:23 -0700), the same recurring background auto-commit/auto-push tool this file has flagged as an escalating risk since 2026-08-17. This one deleted 6 image files with no other changes in the commit — 4 of them are **still actively referenced** by `tools/build-workflows/sites/atomic-finds/components/AtomicNav.tsx`:
+- `public/atomic-finds/icons/nav-shop.png`, `nav-process.png`, `nav-reviews.png`, `nav-contact.png` — all four are read via `${ASSET}/icons/${l.icon}` in the nav link loop (line 68) and `nav-shop.png` again directly in the nav CTA pill (line 113). Confirmed by grep, not assumption.
+- The other 2 deletions (`sites/atomic-finds/assets/curator-section/jfg2.png`, and an unused `uploads/mixboard-image (22).png` inside PR #52's already-flagged constellation export) are unreferenced anywhere — those look like legitimate cleanup, not a problem.
+
+Confirmed via the GitHub commit-status API that `c6bd412` deployed successfully to `atomic-finds-atx` on Vercel (`state: success`, ~2026-09-13T23:24 UTC) — this is live now, not just an in-progress branch. Could not directly confirm the broken images by fetching `atomicfindsatx.store` (outbound requests to arbitrary external hosts are blocked from this sandboxed session), but the code path is unambiguous: those exact filenames are gone from the served static path and nothing in the same commit replaced them or updated `AtomicNav.tsx` to stop referencing them. A Next.js build doesn't fail on a missing static asset referenced by a plain string path, which is why `npx tsc --noEmit` (see below) stayed clean despite this.
+
+**Not fixing this myself.** I can mechanically restore the 4 files from git history (they existed at `main`'s previous commit), but I don't know Anthony's intent — this deletion could be accidental (the auto-sync tool sweeping up a local cleanup/reorg before its replacement assets were ready, matching the exact "catches a file mid-edit" failure mode this file has warned about for a month) or the deliberate first step of retiring these icons ahead of the Atomic Finds rebrand (a live initiative per several past entries) with the code update just not done yet. Restoring the old files would be wrong in the second case; leaving them broken is wrong in the first. This needs Anthony's call, not a guess — flagging clearly and sending a push notification instead of picking one.
+
+**Also re-flagging, again:** this is now the **fourth** documented instance of the MM23 tool auto-pushing straight to `main` with a generic message (2026-08-17 docs, 2026-08-18 docs, 2026-08-19 app code, now 2026-09-13 asset deletions that broke something live). Every prior entry recommended Anthony check what triggers/scopes this tool. Repeating that recommendation with more urgency, since this is the first time it's actually caused a live, user-visible break rather than just a close call.
+
+**Still urgent, unrelated, unchanged:** GitHub issue #11 (P0, opened 2026-07-29) is now **47 days open**. Re-ran the same read-only check against production (`auwhvicpyiwsubucanpb`): `SELECT has_function_privilege('anon', 'get_my_client_id()', 'execute')` → still **`true`**. Same one-line fix waiting in `tools/build-workflows/supabase/migrations/20260729000000_security_fixes_public_grant.sql`.
+
+**Setup this session:** repo still attached from last firing — skipped straight to the checklist.
+
+**1. Build health check:** `git status` clean on `main` (`c6bd412`). `npm install` + `npx tsc --noEmit` — clean, zero errors (as expected — this week's regression is a missing static asset, not a type/build error, so a clean `tsc` run doesn't mean the site is healthy; see above).
+
+**2. Open PR triage:** 10 open PRs (#45–54), all unchanged from last week's entry — same CI-green status, zero new human review or comments on any of them. #46–53 now 3+ weeks old, #54 (this Routine's own fix from last week) 1 week old. Full per-PR detail still accurate in the 2026-08-28 entry. Nothing merged; not this session's call.
+
+**3. Branch check:** same 6 stale orphan branches, unchanged, now 5–8+ weeks old.
+
+**4. Hygiene check:** re-scanned for zips-next-to-unzipped-contents, `.dc.html`/`_ds/` bundles, `copy`/`-old`/`-backup`/`_v2`/`(1)` filenames, and tracked `.DS_Store`/`__pycache__` — identical to last week (the `(1)`-suffixed questionnaire PDF still shows in the scan because PR #54, which fixes it, still hasn't merged — not a new instance). `ATOMIC_FINDS_ONBOARDING_BACKUP.md` is also still there, still fine to leave until the new onboarding content is written. `sites/healthcare-training-center/`'s bigger backlog is untouched. No new violations found — this week's real finding is the live regression above, which isn't a hygiene-rule violation, just a break.
+
+**5. Code review:** no code or file changes made this session — nothing to review.
+
+**What's next:** Anthony's attention needed on, in priority order: (1) the broken Atomic Finds nav icons — decide restore-from-git-history vs. finish removing the references, whichever matches actual intent; (2) issue #11's SQL fix, now well past a month and a half open; (3) understand/scope the MM23 auto-sync tool before it causes a bigger live break than this one; (4) the growing pile of 10 pending PRs. Next maintenance firing should check whether the nav icons got fixed (either way) and keep re-checking issue #11.
+
+---
 
 ## 2026-09-07 — weekly maintenance pass: new Questionnaires module landed on main, one hygiene fix shipped (PR #54), P0 security gap now 40 days open
 
