@@ -5,6 +5,23 @@ for Anthony.** Read this first, before doing anything. Update it after every
 large step: what changed, what's true now, what's next. Keep it short and current
 — stale status is worse than none.
 
+**Last updated:** 2026-09-16 — Anthony: Atomic Finds status clarified. Issue #11 re-classified. See corrections below.
+
+---
+
+### 2026-09-16 — STATUS CORRECTIONS (Anthony)
+
+**Atomic Finds ATX — no live site under da-platform. Intentional.**
+No URL is currently connected to Atomic Finds ATX inside da-platform. This is deliberate. Active branding rework is in progress at the `atomic-finds-brand` project. Any Atomic Finds-related files, references, or deletions inside da-platform are part of that rebrand. Do NOT restore the deleted nav-icon images — the agent was correct not to. The `tools/build-workflows/sites/atomic-finds/` directory is legacy rebrand scope, not an active production build.
+
+**Correct path for new live site builds:** `tools/build-workflows/sites/`
+All future site builds go here. The existing atomic-finds directory inside this path is legacy and rebrand-scoped.
+
+**GitHub issue #11 — re-classified: HOLD (not P0).**
+The `anon` execute grant on `get_my_client_id()` is a real gap but is on HOLD: (1) free Supabase account tier restrictions apply, (2) no active clients on the platform. The fix migration is staged at `tools/build-workflows/supabase/migrations/20260729000000_security_fixes_public_grant.sql`. Re-activate when a paying client is onboarded or account tier changes. Do NOT surface this as an open P0 in future maintenance passes.
+
+---
+
 **Last updated:** 2026-09-14 — by Claude Code (scheduled weekly maintenance): **new live regression found — the MM23 auto-sync tool deleted 4 nav-icon images from `public/atomic-finds/` that `AtomicNav.tsx` still references, and it's been deployed to production for ~15 hours.** Otherwise: build clean, all 10 open PRs unchanged/unreviewed, same 6 stale branches, no new hygiene violations beyond what already has an open PR. **Also still urgent: GitHub issue #11's P0 security gap is now 47 days open and confirmed still live.** See top of entry below for both.
 
 ## 2026-09-14 — weekly maintenance pass: live regression found (Atomic Finds nav icons broken on production), P0 security gap now 47 days open, nothing else changed
