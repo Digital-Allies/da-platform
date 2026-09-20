@@ -3,6 +3,7 @@
   "private": true,
   "description": "Digital Allies CMS monorepo — npm workspace root. See AGENTS.md before adding packages.",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "tools/build-workflows"
   ]
 }
