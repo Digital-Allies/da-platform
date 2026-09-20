@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(git -C /Users/cuus/Downloads/DigitalAllies-major-updates status)",
-      "Bash(git clone *)"
-    ]
-  }
-}
