@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Plus, ChevronDown, ChevronUp, Pencil, Trash2, Save } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { useClientId } from '@/lib/client-context'
+import { moduleLabel } from '@/lib/module-labels'
 import { type Service } from '@/lib/types'
 
 type Editing = null | 'new' | Service
@@ -96,7 +97,7 @@ export default function ServicesPage() {
     <div className="apage">
       <div className="apage__head">
         <div>
-          <h1 className="apage__title">The Departments</h1>
+          <h1 className="apage__title">{moduleLabel('services', CLIENT_ID)}</h1>
           <p className="apage__sub">Four distinct operations. One point of contact.</p>
         </div>
         <div className="apage__actions">

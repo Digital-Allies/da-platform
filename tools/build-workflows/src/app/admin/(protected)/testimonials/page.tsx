@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Plus, Save, Pencil } from 'lucide-react'
 import { createClient } from '@/lib/supabase'
 import { useClientId } from '@/lib/client-context'
+import { moduleLabel } from '@/lib/module-labels'
 import { type Testimonial } from '@/lib/types'
 
 type Editing = null | 'new' | Testimonial
@@ -88,7 +89,7 @@ export default function TestimonialsPage() {
     <div className="apage">
       <div className="apage__head">
         <div>
-          <h1 className="apage__title">Field Notes</h1>
+          <h1 className="apage__title">{moduleLabel('testimonials', CLIENT_ID)}</h1>
           <p className="apage__sub">Testimonials from the people you have helped.</p>
         </div>
         <div className="apage__actions">

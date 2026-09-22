@@ -15,7 +15,7 @@ const fmtAgo = (d: string) => {
 const fmtDate = (d: string) =>
   new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 
-export default function CommandCenter({ initialMessages }: { initialMessages: ContactSubmission[] }) {
+export default function CommandCenter({ initialMessages, title }: { initialMessages: ContactSubmission[]; title: string }) {
   const [messages, setMessages] = useState(initialMessages)
   const [openId, setOpenId] = useState<string | null>(initialMessages[0]?.id ?? null)
 
@@ -49,7 +49,7 @@ export default function CommandCenter({ initialMessages }: { initialMessages: Co
     <div className="apage">
       <div className="apage__head">
         <div>
-          <h1 className="apage__title">The Command Center</h1>
+          <h1 className="apage__title">{title}</h1>
           <p className="apage__sub">Transmissions from the contact form arrive here.</p>
         </div>
       </div>
